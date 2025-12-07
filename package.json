@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "crawl:ctworld": "ts-node tools/crawl/crawl-ctworld.ts --base-url https://www.ctworld.org --out data/crawl/crawled-urls.json",
+    "inventory:fs": "ts-node tools/crawl/filesystem-inventory.ts --docroot ./ctworld-docroot --base-url https://www.ctworld.org --out data/crawl/all-files.json",
+    "diff:crawl-vs-fs": "ts-node tools/crawl/diff-crawl-vs-files.ts --crawled data/crawl/crawled-urls.json --files data/crawl/all-files.json --out-dir data/crawl"
   },
   "dependencies": {
     "react": "^19.2.0",

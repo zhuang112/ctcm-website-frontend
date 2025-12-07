@@ -1,101 +1,130 @@
-# CTCM Website Frontend & Content Migration
+# CTCM Website Frontend & Migration
 
-> 中台世界舊站（ctworld.org / ctworld.org.tw） → Headless WordPress + React 的前端專案與內容轉換工具。
+這個 repo 的長期目標是：
 
-本 repo 的目標：
+> 把中台世界舊站（ctworld.org / ctworld.org.tw）的內容，整理成結構化 JSON，匯入 Headless WordPress，最後由 React 前端呈現。
 
-- 將舊站 HTML 轉成統一的 JSON 結構（`AnyContent`，詳見 `docs/CONTENT_SCHEMA.md`）。
-- 提供前端 React / TypeScript 應用程式，透過 Headless WordPress / API 顯示內容。
-- 規劃並落實一條可回溯、可測試的內容遷移與多語內容產線。
+目前包含兩大角色：
 
-本專案是基於 **React + TypeScript + Vite** 模板建立，並在此基礎上擴充為完整的內容遷移與前端專案。
+1. **前端站台**：React + TypeScript + Vite（ctworld 新站的瀏覽介面）。  
+2. **規格與工具**：描述「舊站 → JSON → WP → React」整體流程，並逐步加入工具程式。
 
 ---
 
-## 1. 專案結構概觀（示意）
+## 1. 專案架構（高層）
+
+完整說明請看 `ARCHITECTURE.md`，這裡只有簡要版流程：
 
 ```text
-.
-├─ src/                    # 前端 React / TypeScript 原始碼
-│  └─ App.tsx              # 入口組件
-├─ docs/                   # 規格與設計文件（唯一權威）
-│  ├─ COMPLETE_PROJECT_WORKFLOW.md   # 整體專案流程 vNext
-│  ├─ CONTENT_SCHEMA.md              # AnyContent JSON schema
-│  ├─ HTML_TO_MARKDOWN_RULES_V4.md   # HTML→Markdown + JSON 轉換規格
-│  ├─ ZH_TW_TO_ZH_CN_PIPELINE.md     # 繁→簡 pipeline 規格
-│  └─ 00_windsurf-task-html-to-markdown.md # 給 AI 的開發任務說明
+舊站 HTML
+   ↓
+爬 sitemap / URL 收集 (crawler)
+   ↓
+HTML → AnyContent(JSON, zh-tw)
+   ↓
+zh-tw → zh-cn pipeline
+   ↓
+WordPress 匯入 (post_type + meta + Polylang)
+   ↓
+Fallback 主圖補齊 / 其他後處理
+   ↓
+React 前端 (本 repo) 透過 WP API 讀取
+   ↓
+Redirect: 舊網址 → 新網址
 ```
 
-（視實際情況補上 `src/convert/`、`scripts/` 等目錄）
+關鍵資料結構：
+
+- `AnyContent`：一個 union type，描述所有 post_type 共通的 JSON 結構。
+- `external_id`：每則內容的穩定 ID，多語版本共用同一個 external_id。
+- `Language`：`'zh-tw' | 'zh-cn' | 'en' | 'ja'` 小寫語言碼。
+
+詳細 schema 請看：`docs/CONTENT_SCHEMA.md`。
 
 ---
 
-## 2. HTML → AnyContent JSON（zh-TW）
+## 2. 語言與網址策略（簡述）
 
-舊站 HTML 會先被轉成統一 JSON 結構，作為後續所有流程的基礎。
+- **語言碼（JSON / 內部）**：`'zh-tw' | 'zh-cn' | 'en' | 'ja'`  
+- **URL 語言 segment**：
+  - 預設語言 `zh-tw`：不帶語言段  
+    - `/teaching/heart-sutra-001`
+  - 其他語言：帶語言段  
+    - `/zh-cn/teaching/heart-sutra-001`
+    - `/en/teaching/heart-sutra-001`
 
-- 目標：
-  - 產出符合 `AnyContent` 型別的 JSON（見 `docs/CONTENT_SCHEMA.md`）。
-  - 其中 `body_markdown` 為可閱讀的 Markdown 正文。
-  - 圖片、偈語、meta 等結構化資訊放在 JSON 的 `meta` / `featured_image` / `gallery_items` 等欄位。
-
-- 核心程式（建議結構，詳見 `docs/00_windsurf-task-html-to-markdown.md` 與 `docs/HTML_TO_MARKDOWN_RULES_V4.md`）：
-  - `src/convert/html-to-markdown.ts`：對外入口 `htmlToContentJson()`
-  - `src/convert/classify-url.ts`：URL → `post_type` / `collection_key`
-  - `src/convert/extract-main-content.ts`：從整頁 DOM 找出主內容 container
-  - `src/convert/html-to-markdown-core.ts`：通用 HTML→Markdown 與圖片處理
-  - `src/convert/post-type-adapters/*.ts`：依 `post_type` 組出對應的 meta 與內容
-
-規則來源：
-
-- 全域清理與 HTML→Markdown：`docs/HTML_TO_MARKDOWN_RULES_V4.md`
-- JSON schema 與型別：`docs/CONTENT_SCHEMA.md`
-- 整體流程：`docs/COMPLETE_PROJECT_WORKFLOW.md`
+- slug 不另外存欄位，由 `external_id` 規則推導。
 
 ---
 
-## 3. 繁體（zh-TW）→ 簡體（zh-CN）Pipeline
+## 3. 快速開始（前端開發）
 
-在 HTML→JSON（zh-TW）完成後，會有一條獨立 pipeline 產生 zh-CN JSON。
-
-- 詳細規格：`docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
-- 主要行為：
-  - 讀取 `AnyContent`（zh-TW）JSON。
-  - 對指定欄位做繁→簡轉換（例如 `post_title`, `body_markdown`, 多數 `meta` 中文欄位）。
-  - 不修改 ID / URL / enum 類欄位。
-  - 產生對應 zh-CN JSON 並維持 multilingual 關聯與 redirect 所需資訊。
-
----
-
-## 4. 前端技術棧與開發說明
-
-本專案使用：
-
-- **React**：前端 UI 框架。
-- **TypeScript**：型別系統，確保內容模型與 API 呼叫安全。
-- **Vite**：開發與建置工具，提供快速 HMR 與打包。
-
-此 repo 最初由官方的 React + TypeScript + Vite 模板建立，並移除大部分預設 README 範文，改由本文件與 `docs/*.md` 作為主要說明。Vite、ESLint 等詳細設定可直接參考專案中的設定檔（例如 `vite.config.ts`、`tsconfig*.json`）。
-
-啟動開發伺服器（依實際 `package.json` 調整）：
+> ⚠️ 以下假設已安裝 Node.js（推 NVM 管理）。
 
 ```bash
+# 安裝依賴
 npm install
+
+# 開發模式
 npm run dev
+
+# 編譯
+npm run build
+
+# Lint / 型別檢查（視專案實際 script 調整）
+npm run lint
+npm run typecheck
 ```
+
+前端主要資料來源（未來）：
+
+- Headless WordPress REST API / GraphQL。
+- 或中介層 API，輸入為 `AnyContent` JSON。
 
 ---
 
-## 5. 開發指引與進階主題
+## 4. 規格文件索引
 
-- 內容模型與 schema：
-  - 請參考 `docs/CONTENT_SCHEMA.md`。
-- HTML→Markdown 與內容轉換規則：
-  - 請參考 `docs/HTML_TO_MARKDOWN_RULES_V4.md`。
-- 繁→簡 pipeline：
-  - 請參考 `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`。
-- 更細的程式風格與命名慣例：
-  - 建議放在根目錄的 `ARCHITECTURE.md`、`CONVENTIONS.md`、`CODING_GUIDELINES.md` 中（可依本 README 提到的架構自行建立）。
+這些 docs 檔是整個專案的「權威規格」，也是給 Windsurf / Cursor / AI IDE 看的：
 
-在開始修改或擴充程式碼前，建議先完整閱讀 `docs/` 目錄下的幾份規格，再回來對照本 README，會比較容易掌握整個專案的定位與資料流。
+- `docs/COMPLETE_PROJECT_WORKFLOW.md`  
+  → 全流程：爬蟲 → HTML→JSON → 繁簡 → WP 匯入 → 前端 → Redirect。
+
+- `docs/CONTENT_SCHEMA.md`  
+  → `AnyContent` 型別定義，包含所有 post_type 的 meta。
+
+- `docs/HTML_TO_MARKDOWN_RULES_V4.md`  
+  → HTML→Markdown + 圖片 / 圖說的處理規則。
+
+- `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`  
+  → 繁→簡 pipeline 的欄位白名單與實作原則。
+
+- `ARCHITECTURE.md`  
+  → 系統藍圖與分層設計（crawler / converter / importer / frontend）。
+
+- `CONVENTIONS.md`  
+  → 命名規則、語言碼、URL pattern、前端檔案結構約定。
+
+- `CODING_GUIDELINES.md`  
+  → TypeScript / React / 工具程式的實作風格與測試策略。
+
+---
+
+## 5. 如何閱讀這個 Repo
+
+1. 先看 `ARCHITECTURE.md` 抓整體藍圖。
+2. 再看 `docs/COMPLETE_PROJECT_WORKFLOW.md` 理解 end-to-end 流程。
+3. 需要操作 HTML→JSON 時，看：
+   - `docs/CONTENT_SCHEMA.md`
+   - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
+4. 需要操作繁→簡時，看：
+   - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
+5. 要寫新程式 / Component 時，看：
+   - `CONVENTIONS.md`
+   - `CODING_GUIDELINES.md`
+
+未來所有新工具與 script，都應該：
+
+- 以這些 docs 為唯一真相（Single Source of Truth）。
+- 在程式註解裡標明「對應 docs 的哪一節」。
 
