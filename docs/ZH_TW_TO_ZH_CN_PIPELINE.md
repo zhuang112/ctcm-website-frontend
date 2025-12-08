@@ -1,204 +1,148 @@
-# ZH_TW_TO_ZH_CN_PIPELINE.md (vNext, language + ID updates)
+# ZH_TW_TO_ZH_CN_PIPELINE.md
 
-> 中台世界舊站 → JSON vNext 的繁體（zh-tw）→ 簡體（zh-cn）轉換規格  
-> 本版更新：使用小寫語言碼、external_id 不再加語言後綴，與多語 / Polylang 的關係。
-
----
-
-## 0. 目標與邊界
-
-- 輸入：符合 `AnyContent` 的 zh-tw JSON。  
-- 輸出：對應的 zh-cn JSON：
-  - `language = 'zh-cn'`
-  - `external_id` 與 zh-tw 版本相同。
-  - 指定欄位的中文字串做繁→簡轉換。
-- 不在此階段處理：
-  - HTML→Markdown（已在 HTML 轉換完成）。
-  - 圖片 fallback（在匯入 / 後處理）。
+> 目標：  
+> - 不重抓 `-gb` HTML，只用繁中內容自動生成簡中版本  
+> - 保留所有簡體舊網址（`-gb`）的對應關係與 redirect  
+> - 確保 zh-TW / zh-CN 版本內容一致，只差字形
 
 ---
 
-## 1. 輸入與輸出格式
+## 1. URL 配對規則
 
-### 1.1 輸入（zh-tw）
+從 sitemap / menu 抓到的 URL 可能有兩種版本：
 
-- 檔名示意：
+- 繁體：`https://www.ctworld.org/sutra_stories/story148.htm`
+- 簡體：`https://www.ctworld.org/sutra_stories/story148-gb.htm`
 
-  ```text
-  data/zh-tw/{post_type}/{external_id}.zh-tw.json
-  ```
+處理策略：
 
-- 必備欄位：
-  - `external_id: string`
-  - `language: 'zh-tw'`
-  - `post_type: PostType`
-  - `post_title: string`
-  - `body_markdown: string`
-  - 其他 meta / 圖片欄位依 schema。
+1. 建立 `baseUrl ↔ gbUrl` 配對：
+   - `baseUrl` = 去掉 `-gb` 的 URL
+   - `gbUrl` = 含 `-gb` 的 URL（若存在）
+2. 只抓取 `baseUrl` 的 HTML，`gbUrl` 不抓 HTML，只記錄在 mapping 中。
 
-### 1.2 輸出（zh-cn）
+資料結構示例（Node.js）：
 
-- 檔名示意：
-
-  ```text
-  data/zh-cn/{post_type}/{external_id}.zh-cn.json
-  ```
-
-- 欄位：
-  - `external_id`：**與輸入 zh-tw 完全相同**。
-  - `language: 'zh-cn'`
-  - `post_type`：與 zh-tw 相同。
-  - `old_url`：優先使用 `-gb` 舊網址（若存在）。
-  - 其他欄位與 zh-tw 版結構相同，只有中文字串內容轉為簡體。
-
-> 註：多語關聯時，以 `external_id` 作為 group key，各語言共用。
+```ts
+type UrlPair = {
+  baseUrl: string; // 繁中
+  gbUrl?: string;  // 簡中，有則記錄
+};
+```
 
 ---
 
-## 2. 欄位轉換範圍
+## 2. zh-TW JSON 生成
 
-### 2.1 需要繁→簡的欄位（文字內容）
+對每個 `baseUrl`：
 
-- 頂層：
-  - `post_title`
-  - `post_excerpt`
-  - `body_markdown`
-- `meta` 中的中文描述欄位（視實際 schema）：
-  - `ct_speaker_name`
-  - `ct_location`
-  - `ct_sutra_reference`
-  - `ct_teaching_category`
-  - `ct_verse_block_markdown`
-  - `ct_event_location`
-  - `ct_news_category`
-  - `ct_branch_address`
-  - `ct_branch_city`
-  - `ct_branch_region`
-  - `ct_branch_opening_hours`
-  - `ct_branch_traffic_note`
-  - `ct_gallery_location`
-  - `ct_gallery_event_name`
-  - `ct_resource_category`
-  - `ct_recipe_ingredients_markdown`
-  - `ct_recipe_steps_markdown`
-  - `ct_recipe_total_time`
-  - `ct_index_notes`
-  - `ct_magazine_issue_label`
-  - `ct_magazine_section`
-  - `ct_magazine_type`
-  - `ct_author_name`
-  - `ct_issue_items[].section`
-  - `ct_issue_items[].title`
-  - 其他未來新增的中文描述欄位，原則相同。
-- `seo`：
-  - `seo.meta_title`
-  - `seo.meta_description`
-  - `seo.meta_keywords`
+1. 抓 HTML
+2. 套 `html-to-markdown` + V3 規則
+3. 產出 `language = "zh-TW"` 的 JSON
 
-### 2.2 不需轉換的欄位
+若該 URL 有對應 `gbUrl`：
 
-- ID / code / slug / 數字：
-  - `external_id`
-  - `post_type`
-  - `ct_collection_key`
-  - `ct_collection_order`
-  - `ct_magazine_issue_no`
-  - 年月 / 日期數值等。
-- URL：
-  - `old_url`
-  - `featured_image`
-  - `gallery_items[].url`
-  - 下載檔案 URL 等。
-- 日期字串（若格式固定，不含中文）：
-  - `ct_event_date_start` / `ct_event_date_end` 等，可視實際情況保留。
-- Enum / 狀態：
-  - `language`
-  - `ct_download_type`
-  - `ct_magazine_level`
-  - `MultilingualInfo.status` 等。
-
-> 實作上建議使用「欄位白名單」方式列出需轉換的 key，避免誤改 URL / ID。
+```jsonc
+"multilingual": {
+  "translations": [
+    {
+      "language": "zh-CN",
+      "old_url": "https://www.ctworld.org/sutra_stories/story148-gb.htm",
+      "status": "planned"
+    }
+  ]
+}
+```
 
 ---
 
-## 3. 轉換工具與策略
+## 3. 繁→簡轉換的欄位範圍
 
-### 3.1 使用 OpenCC（或等價工具）
+使用 OpenCC（或等效工具）將 zh-TW JSON 轉成 zh-CN JSON。
 
-- 採用「臺灣正體 → 大陸簡體」配置。
-- 可載入自訂詞庫修正佛教專有名詞。
+**需要轉換的欄位：**
 
-### 3.2 Markdown 與符號
+- `post_title`
+- `post_excerpt`
+- `body_markdown`
+- `meta` 裡的中文 string：
+  - 如：`ct_speaker_name`、`ct_location`、`ct_teaching_category`…
+  - 陣列型欄位（如 `ct_key_concepts`）內部每個中文字串
+- `seo.meta_title`
+- `seo.meta_description`
 
-- `body_markdown`、`ct_verse_block_markdown` 等欄位內含 Markdown 語法：
-  - 轉換器對整段字串運作即可；多數情況下 ASCII 字元不會變動。
-  - 測試時需驗證：`# 標題一` → `# 标题一`，而 `#` 保持不變。
+**不應轉換的欄位：**
 
----
-
-## 4. Pipeline 流程
-
-1. 掃描 zh-tw JSON 目錄。
-2. 逐筆讀取並 parse 成 `AnyContent`。
-3. 建立 zh-cn 版本：
-   - 複製整個物件。
-   - 設定：
-     - `language: 'zh-cn'`
-     - `external_id` 原封不動。
-     - `old_url` 改為對應 `-gb` URL（若有配對表）。
-4. 針對白名單欄位進行繁→簡轉換。
-5. 寫出 zh-cn JSON 檔。
-6. 記錄成功與錯誤 log。
+- URL（`old_url`, `featured_image`, `gallery_items[].url` 等）
+- 檔案路徑、檔名
+- 純英文代碼、ID、日期時間等
 
 ---
 
-## 5. 多語資訊與 `multilingual` 欄位
+## 4. zh-CN JSON 結果格式
 
-- 若 zh-tw JSON 已包含 `multilingual`：
+產出的 zh-CN JSON：
 
-  ```jsonc
+```jsonc
+{
+  "external_id": "teaching_20030315_heart_sutra_001_zh-CN",
+  "language": "zh-CN",
+  "old_url": "https://www.ctworld.org/sutra_stories/story148-gb.htm",
+  "post_title": "無畏自在——從《心经》看放下执著",
+  "post_excerpt": "……（簡體字版）",
+  "body_markdown": "……（簡體字版）",
+  "meta": {
+    "ct_speaker_name": "惟觉安公老和尚",
+    "ct_location": "中台禅寺大殿"
+  },
+  "seo": {
+    "meta_title": "……（簡體版）",
+    "meta_description": "……（簡體版）"
+  },
   "multilingual": {
     "translations": [
-      { "language": "zh-tw", "old_url": "https://www.ctworld.org.tw/...htm", "status": "manual" },
-      { "language": "zh-cn", "status": "planned" }
+      {
+        "language": "zh-CN",
+        "old_url": "https://www.ctworld.org/sutra_stories/story148-gb.htm",
+        "status": "generated"
+      }
     ]
   }
-  ```
-
-- 則 zh-cn 版本應補齊：
-
-  ```jsonc
-  "multilingual": {
-    "translations": [
-      { "language": "zh-tw", "old_url": "https://www.ctworld.org.tw/...htm", "status": "manual" },
-      { "language": "zh-cn", "old_url": "https://www.ctworld.org.tw/...-gb.htm", "status": "generated" }
-    ]
-  }
-  ```
-
-- 若 zh-tw 版本尚未有 `multilingual`：
-  - 建議先在 zh-tw 生成階段就建立基本結構，使 zh-cn pipeline 僅需「填補 zh-cn 那一筆」。
+}
+```
 
 ---
 
-## 6. external_id 與 Polylang 的關係
+## 5. 匯入 WordPress 與 Polylang 對應
 
-- 同一筆內容的多語版本：
-  - `external_id` 相同。
-  - `language` 不同（`zh-tw` / `zh-cn` / `en` / `ja`）。
-- 匯入 WP 時：
-  - 可將 `external_id` 當作 Polylang 的 group key。
-  - 各語言 WP post 透過 WordPress / Polylang API 綁定為互為翻譯。
+建議流程：
+
+1. **第一輪**：匯入所有 zh-TW JSON
+   - 為每篇產生 `post_id_tw`
+   - 設：
+     - Polylang 語言 = `zh-TW`
+     - `ct_external_id = external_id`（例如：`teaching_..._001`）
+
+2. **第二輪**：匯入所有 zh-CN JSON
+   - 為每篇產生 `post_id_cn`
+   - 設：
+     - Polylang 語言 = `zh-CN`
+     - `ct_external_id = external_id`（例如：`teaching_..._001_zh-CN`）
+   - 用 group key（例如從 external_id 去掉 `_zh-CN`）找出對應 zh-TW 一篇
+   - 使用 Polylang API 建立翻譯關係
+
+3. 同時把 `old_url` 存成 post meta（含 `-gb`），供 redirect 使用。
 
 ---
 
-## 7. 錯誤處理與檢查
+## 6. `-gb` 舊網址 redirect
 
-- 若無對應 `-gb` URL：
-  - `old_url` 可保留 zh-tw 的 URL 或設為空，並記錄 warning。
-- 若某欄位在轉換前後出現不預期變化：
-  - 需建立對應 unit test / snapshot，比較前後差異。
+為避免 SEO 損失與 404：
+
+- 將 zh-CN JSON 的 `old_url`（即 `-gb`）：
+  - 存入 WordPress post meta：`_ct_old_url_gb`
+  - 或匯入自訂 redirect 表
+- 使用 redirect 外掛或自寫邏輯：
+  - 讓舊簡體網址（`story148-gb.htm`）→ 301 redirect 到新站對應的 zh-CN URL
 
 ---
-
-（本檔為繁→簡 pipeline vNext 版，更新後請同步調整實作程式與測試。）

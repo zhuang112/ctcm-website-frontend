@@ -1,13 +1,22 @@
 #!/usr/bin/env ts-node
 
 /**
- * 將線上 ctworld 舊站進行 BFS 爬蟲，產生 URL 清單。
+ * 線上 ctworld 網站爬蟲，產生 URL 清單。
  * 對應：docs/crawl-and-inventory.md §2 任務 A
+ *
+ * 使用方式（示例）：
+ *   ts-node tools/crawl/crawl-ctworld.ts \\
+ *     --base-url https://www.ctworld.org \\
+ *     --out data/crawl/crawled-urls.json \\
+ *     --max-depth 3 \\
+ *     --max-urls 500 \\
+ *     --delay-ms 200
  */
 
 import fs from "node:fs";
 import path from "node:path";
 import { URL } from "node:url";
+import * as cheerio from "cheerio";
 
 interface CrawledUrl {
   url: string;
@@ -16,11 +25,18 @@ interface CrawledUrl {
   source?: string;
 }
 
+interface CrawlTask {
+  url: string;
+  depth: number;
+  source: string;
+}
+
 interface CliOptions {
   baseUrl: string;
   outPath: string;
   maxDepth: number;
   delayMs: number;
+  maxUrls: number;
 }
 
 function parseArgs(argv: string[]): CliOptions {
@@ -43,130 +59,9 @@ function parseArgs(argv: string[]): CliOptions {
   const outPath = args.get("out") ?? "data/crawl/crawled-urls.json";
   const maxDepth = Number(args.get("max-depth") ?? "5");
   const delayMs = Number(args.get("delay-ms") ?? "200");
+  const maxUrls = Number(args.get("max-urls") ?? "0"); // 0 代表不限
 
-  return { baseUrl, outPath, maxDepth, delayMs };
-}
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function normalizeUrl(raw: string): string | null {
-  try {
-    const url = new URL(raw);
-    url.hash = ""; // 去掉 fragment
-    return url.toString();
-  } catch {
-    return null;
-  }
-}
-
-function isHtmlContentType(contentType: string | null): boolean {
-  if (!contentType) return false;
-  return contentType.includes("text/html");
-}
-
-function isSameDomain(target: URL, base: URL): boolean {
-  return target.hostname.endsWith("ctworld.org") || target.hostname.endsWith("ctworld.org.tw");
-}
-
-function isDownloadLike(url: URL): boolean {
-  const ext = path.extname(url.pathname).toLowerCase();
-  const skip = [
-    ".pdf",
-    ".zip",
-    ".rar",
-    ".doc",
-    ".docx",
-    ".xls",
-    ".xlsx",
-    ".ppt",
-    ".pptx",
-    ".jpg",
-    ".jpeg",
-    ".png",
-    ".gif",
-    ".webp",
-  ];
-  return skip.includes(ext);
-}
-
-async function crawl(options: CliOptions): Promise<CrawledUrl[]> {
-  const { baseUrl, maxDepth, delayMs } = options;
-  const startUrls = [baseUrl, new URL("/sitemap.htm", baseUrl).toString()];
-  const visited = new Set<string>();
-  const queue: Array<{ url: string; depth: number; source: string }> = [];
-  const results: CrawledUrl[] = [];
-
-  for (const url of startUrls) {
-    const normalized = normalizeUrl(url);
-    if (normalized) {
-      queue.push({ url: normalized, depth: 0, source: "seed" });
-    }
-  }
-
-  const base = new URL(baseUrl);
-
-  while (queue.length > 0) {
-    const { url, depth, source } = queue.shift()!;
-    if (visited.has(url)) continue;
-    visited.add(url);
-
-    let status = 0;
-    let contentType: string | null = null;
-
-    try {
-      const res = await fetch(url, { redirect: "follow" });
-      status = res.status;
-      contentType = res.headers.get("content-type");
-
-      results.push({ url, status, contentType, source });
-
-      if (status === 200 && depth < maxDepth && isHtmlContentType(contentType)) {
-        const html = await res.text();
-        const links = extractLinks(html, url, base);
-        for (const link of links) {
-          if (!visited.has(link)) {
-            queue.push({ url: link, depth: depth + 1, source: "link" });
-          }
-        }
-      }
-    } catch (err) {
-      // 基本錯誤紀錄即可，避免程式直接掛掉
-      results.push({ url, status: status || 0, contentType, source: source ?? "error" });
-      console.error(`Error fetching ${url}:`, (err as Error).message);
-    }
-
-    if (delayMs > 0) {
-      await sleep(delayMs);
-    }
-  }
-
-  return results;
-}
-
-function extractLinks(html: string, currentUrl: string, base: URL): string[] {
-  const links = new Set<string>();
-
-  // 為了避免額外依賴，這裡暫時用簡單 regex 抓 href，若未來需要更完整可改用 cheerio。
-  const hrefRegex = /href\s*=\s*"([^"]+)"/gi;
-  let match: RegExpExecArray | null;
-  while ((match = hrefRegex.exec(html)) !== null) {
-    const rawHref = match[1];
-    try {
-      const resolved = new URL(rawHref, currentUrl);
-      if (!isSameDomain(resolved, base)) continue;
-      if (isDownloadLike(resolved)) continue;
-      const normalized = normalizeUrl(resolved.toString());
-      if (normalized) {
-        links.add(normalized);
-      }
-    } catch {
-      // ignore invalid URLs
-    }
-  }
-
-  return Array.from(links);
+  return { baseUrl, outPath, maxDepth, delayMs, maxUrls };
 }
 
 function ensureDirExists(filePath: string): void {
@@ -176,40 +71,166 @@ function ensureDirExists(filePath: string): void {
   }
 }
 
-function toCsvRows(rows: CrawledUrl[]): string {
+/**
+ * 只允許 ctworld.org / ctworld.org.tw 網域
+ */
+function isSameDomain(targetUrl: string): boolean {
+  try {
+    const u = new URL(targetUrl);
+    const host = u.hostname.toLowerCase();
+    return (
+      host === "ctworld.org" ||
+      host === "www.ctworld.org" ||
+      host === "ctworld.org.tw" ||
+      host === "www.ctworld.org.tw"
+    );
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * 將相對網址轉成絕對網址，基準為 baseUrl
+ */
+function toAbsoluteUrl(href: string, baseUrl: string): string | null {
+  if (!href) return null;
+  href = href.trim();
+  if (!href || href.startsWith("javascript:") || href.startsWith("mailto:") || href.startsWith("tel:")) {
+    return null;
+  }
+  try {
+    const url = new URL(href, baseUrl);
+    return url.toString();
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 從 HTML 中抓出所有 <a href> 連結，轉成絕對網址
+ */
+function getLinksFromHtml(html: string, pageUrl: string): string[] {
+  const $ = cheerio.load(html);
+  const links = new Set<string>();
+
+  $("a[href]").each((_, el) => {
+    const href = $(el).attr("href");
+    const abs = toAbsoluteUrl(href ?? "", pageUrl);
+    if (abs) {
+      links.add(abs);
+    }
+  });
+
+  return Array.from(links);
+}
+
+async function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function fetchPage(url: string): Promise<{ status: number; contentType: string | null; body: string | null }> {
+  try {
+    const res = await fetch(url);
+    const status = res.status;
+    const contentType = res.headers.get("content-type");
+    const isHtml = contentType ? contentType.includes("text/html") : false;
+    const body = isHtml ? await res.text() : null;
+    return { status, contentType, body };
+  } catch (err) {
+    console.error(`Fetch error for ${url}:`, err);
+    return { status: 0, contentType: null, body: null };
+  }
+}
+
+/**
+ * 將 CrawledUrl 陣列轉成 CSV 字串
+ */
+function toCsv(crawled: CrawledUrl[]): string {
   const header = "url,status,contentType,source";
-  const body = rows
-    .map((row) => {
-      const esc = (v: string | number | null | undefined) => {
-        if (v === null || v === undefined) return "";
-        const s = String(v).replace(/"/g, '""');
-        return `"${s}"`;
-      };
-      return [esc(row.url), esc(row.status), esc(row.contentType), esc(row.source)].join(",");
-    })
-    .join("\n");
-  return `${header}\n${body}\n`;
+  const esc = (v: string | number | null | undefined) => {
+    if (v === null || v === undefined) return '""';
+    return '"' + String(v).replace(/"/g, '""') + '"';
+  };
+
+  const rows = crawled.map((c) =>
+    [esc(c.url), esc(c.status), esc(c.contentType ?? ""), esc(c.source ?? "")].join(","),
+  );
+
+  return header + "\n" + rows.join("\n") + "\n";
+}
+
+/**
+ * BFS 爬蟲主流程
+ */
+async function crawl(options: CliOptions): Promise<CrawledUrl[]> {
+  const { baseUrl, maxDepth, delayMs, maxUrls } = options;
+
+  const visited = new Set<string>();
+  const queue: CrawlTask[] = [
+    { url: baseUrl, depth: 0, source: "seed" },
+    { url: new URL("/sitemap.htm", baseUrl).toString(), depth: 0, source: "sitemap-seed" },
+  ];
+
+  const results: CrawledUrl[] = [];
+
+  while (queue.length > 0) {
+    const task = queue.shift()!;
+    const { url, depth, source } = task;
+
+    if (visited.has(url)) continue;
+    visited.add(url);
+
+    if (!isSameDomain(url)) continue;
+    if (depth > maxDepth) continue;
+
+    // 若有設定 maxUrls，且已達上限，就停止爬蟲
+    if (maxUrls > 0 && results.length >= maxUrls) {
+      console.log(`[crawl] Reached maxUrls = ${maxUrls}, stopping.`);
+      break;
+    }
+
+    console.log(`[crawl] (${depth}) ${url}`);
+
+    const { status, contentType, body } = await fetchPage(url);
+    results.push({ url, status, contentType, source });
+
+    // 只在 HTML 頁面上繼續往下抓
+    const isHtml = contentType ? contentType.includes("text/html") : false;
+    if (status === 200 && isHtml && body) {
+      const links = getLinksFromHtml(body, url);
+      for (const link of links) {
+        if (!visited.has(link) && isSameDomain(link)) {
+          queue.push({ url: link, depth: depth + 1, source: "link" });
+        }
+      }
+    }
+
+    if (delayMs > 0) {
+      await delay(delayMs);
+    }
+  }
+
+  return results;
 }
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
 
-  console.log("[crawl-ctworld] options", options);
-  const results = await crawl(options);
+  const crawled = await crawl(options);
 
   ensureDirExists(options.outPath);
-  fs.writeFileSync(options.outPath, JSON.stringify(results, null, 2), "utf-8");
+  fs.writeFileSync(options.outPath, JSON.stringify(crawled, null, 2), "utf-8");
 
   const csvPath = options.outPath.replace(/\.json$/i, ".csv");
-  const csv = toCsvRows(results);
-  fs.writeFileSync(csvPath, csv, "utf-8");
+  fs.writeFileSync(csvPath, toCsv(crawled), "utf-8");
 
-  console.log(`Saved ${results.length} URLs to`);
-  console.log(`  JSON: ${options.outPath}`);
-  console.log(`  CSV : ${csvPath}`);
+  console.log(`Crawled ${crawled.length} URLs.`);
+  console.log(`JSON: ${options.outPath}`);
+  console.log(`CSV : ${csvPath}`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
-  // eslint-disable-next-line @typescript-eslint/no-floating-promises
-  main();
-}
+// 直接執行 main（在 ts-node 環境中）
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

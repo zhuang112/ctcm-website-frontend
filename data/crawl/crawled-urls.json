@@ -1,0 +1,302 @@
+[
+  {
+    "url": "https://www.ctworld.org",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "seed"
+  },
+  {
+    "url": "https://www.ctworld.org/sitemap.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "sitemap-seed"
+  },
+  {
+    "url": "https://www.ctworld.org/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/index-gb.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/english-96/html/index.html",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/jp/",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan/master.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/turn/writings/chungtai/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/turn/sutra/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/turn/lecture/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/turn/chan7/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/turn/blossom/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/turn/chan_talk/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/turn/reply/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan/eye.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/abbot/abbot-1.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/abbot/abbot-2.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chungtai/prinicple/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chungtai/building/index0.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/activities/corporation/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chungtai/tour/tourIndex.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chungtai/plants/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/story/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/meditation/01_frame.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan/chan7/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan/chan7/index02.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan/chan7/index03.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan/chan7/index04.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan/chan7/index05.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan/chan7/index06.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan/chan7/index07.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/history/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan_master/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/dharma-teachings/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/chan_koans/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/sutra_stories/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/buddhism/notes/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/activities/info/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/Buddhist%20e-Books/index.html",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/realtime/index.html",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/dialogue/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/activities/relieve/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/disciple/book-f/index.html",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/disciple/mind/index01.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/disciple/feeling/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/disciple/apocalypse/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/monthly/index12.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/epaper/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/buddaart/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  },
+  {
+    "url": "https://www.ctworld.org/arts/vegetarian/index.htm",
+    "status": 200,
+    "contentType": "text/html",
+    "source": "link"
+  }
+]

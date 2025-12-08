@@ -2,7 +2,7 @@
 
 /**
  * 使用 crawled-urls.json 與 all-files.json 輸出差異報表。
- * 對應：docs/crawl-and-inventory.md §4 任務 C
+ * 對應：crawl-and-inventory.md §4 任務 C
  */
 
 import fs from "node:fs";
@@ -18,6 +18,14 @@ interface CrawledUrl {
 interface FileEntry {
   filePath: string;
   url: string;
+}
+
+interface MissingFromCrawlRow extends FileEntry {
+  notes: string;
+}
+
+interface ExtraFromCrawlRow extends CrawledUrl {
+  notes: string;
 }
 
 interface CliOptions {
@@ -49,106 +57,92 @@ function parseArgs(argv: string[]): CliOptions {
   return { crawledPath, filesPath, outDir };
 }
 
-function ensureDirExists(dirPath: string): void {
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
-  }
-}
-
-function loadJson<T>(filePath: string): T {
-  const raw = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(raw) as T;
-}
-
+/**
+ * 可以在這裡做 URL 正規化（去尾斜線、處理大小寫等）
+ * TODO: 若舊站 query string 規則複雜，可在這裡做 normalization。
+ */
 function normalizeUrl(url: string): string {
-  try {
-    const u = new URL(url);
-    u.hash = "";
-    // TODO: 若舊站 query string 規則複雜，可在這裡做 normalization
-    return u.toString();
-  } catch {
-    return url;
+  let normalized = url.trim();
+  // 移除尾端的斜線（保留根目錄 "/")
+  if (normalized.length > 1 && normalized.endsWith("/")) {
+    normalized = normalized.slice(0, -1);
   }
+  return normalized;
 }
 
-function toMissingFromCrawlCsv(entries: Array<FileEntry & { notes?: string }>): string {
+function toMissingFromCrawlCsv(rows: MissingFromCrawlRow[]): string {
   const header = "url,filePath,notes";
-  const body = entries
-    .map((row) => {
-      const esc = (v: string | number | null | undefined) => {
-        if (v === null || v === undefined) return "";
-        const s = String(v).replace(/"/g, '""');
-        return `"${s}"`;
-      };
-      return [esc(row.url), esc(row.filePath), esc(row.notes)].join(",");
-    })
+  const esc = (v: string) => '"' + v.replace(/"/g, '""') + '"';
+
+  const body = rows
+    .map((row) => [esc(row.url), esc(row.filePath), esc(row.notes)].join(","))
     .join("\n");
-  return `${header}\n${body}\n`;
+
+  return header + "\n" + body + "\n";
 }
 
-function toExtraFromCrawlCsv(entries: Array<CrawledUrl & { notes?: string }>): string {
-  const header = "url,status,source,notes";
-  const body = entries
-    .map((row) => {
-      const esc = (v: string | number | null | undefined) => {
-        if (v === null || v === undefined) return "";
-        const s = String(v).replace(/"/g, '""');
-        return `"${s}"`;
-      };
-      return [esc(row.url), esc(row.status), esc(row.source), esc(row.notes)].join(",");
-    })
+function toExtraFromCrawlCsv(rows: ExtraFromCrawlRow[]): string {
+  const header = "url,status,contentType,source,notes";
+  const esc = (v: string | number | null | undefined) => {
+    if (v === null || v === undefined) return '""';
+    return '"' + String(v).replace(/"/g, '""') + '"';
+  };
+
+  const body = rows
+    .map((row) =>
+      [esc(row.url), esc(row.status), esc(row.contentType), esc(row.source), esc(row.notes)].join(","),
+    )
     .join("\n");
-  return `${header}\n${body}\n`;
+
+  return header + "\n" + body + "\n";
 }
 
-function main() {
+async function main() {
   const options = parseArgs(process.argv.slice(2));
   const { crawledPath, filesPath, outDir } = options;
 
   if (!fs.existsSync(crawledPath)) {
-    console.error(`[diff-crawl-vs-files] crawled json not found: ${crawledPath}`);
-    process.exitCode = 1;
-    return;
+    console.error(`crawled file not found: ${crawledPath}`);
+    process.exit(1);
   }
   if (!fs.existsSync(filesPath)) {
-    console.error(`[diff-crawl-vs-files] files json not found: ${filesPath}`);
-    process.exitCode = 1;
-    return;
+    console.error(`files inventory not found: ${filesPath}`);
+    process.exit(1);
   }
 
-  console.log("[diff-crawl-vs-files] options", options);
+  const crawled: CrawledUrl[] = JSON.parse(fs.readFileSync(crawledPath, "utf-8"));
+  const files: FileEntry[] = JSON.parse(fs.readFileSync(filesPath, "utf-8"));
 
-  const crawled = loadJson<CrawledUrl[]>(crawledPath);
-  const files = loadJson<FileEntry[]>(filesPath);
-
-  const crawledSet = new Map<string, CrawledUrl>();
+  const crawledMap = new Map<string, CrawledUrl>();
   for (const c of crawled) {
-    crawledSet.set(normalizeUrl(c.url), c);
+    crawledMap.set(normalizeUrl(c.url), c);
   }
 
-  const fileSet = new Map<string, FileEntry>();
+  const fileMap = new Map<string, FileEntry>();
   for (const f of files) {
-    fileSet.set(normalizeUrl(f.url), f);
+    fileMap.set(normalizeUrl(f.url), f);
   }
 
-  const missingFromCrawl: Array<FileEntry & { notes?: string }> = [];
-  const extraFromCrawl: Array<CrawledUrl & { notes?: string }> = [];
+  const missingFromCrawl: MissingFromCrawlRow[] = [];
+  const extraFromCrawl: ExtraFromCrawlRow[] = [];
 
   // 檔案有、爬蟲沒有
-  for (const [url, fileEntry] of fileSet.entries()) {
-    if (!crawledSet.has(url)) {
+  for (const [url, fileEntry] of fileMap.entries()) {
+    if (!crawledMap.has(url)) {
       missingFromCrawl.push({ ...fileEntry, notes: "not reached by crawler" });
     }
   }
 
   // 爬蟲有、檔案沒有
-  for (const [url, crawledEntry] of crawledSet.entries()) {
-    if (!fileSet.has(url)) {
+  for (const [url, crawledEntry] of crawledMap.entries()) {
+    if (!fileMap.has(url)) {
       extraFromCrawl.push({ ...crawledEntry, notes: "no matching file in docroot" });
     }
   }
 
-  ensureDirExists(outDir);
+  if (!fs.existsSync(outDir)) {
+    fs.mkdirSync(outDir, { recursive: true });
+  }
 
   const missingPath = path.join(outDir, "missing-from-crawl.csv");
   const extraPath = path.join(outDir, "extra-from-crawl.csv");
@@ -160,6 +154,8 @@ function main() {
   console.log(`Extra from crawl:   ${extraFromCrawl.length} urls → ${extraPath}`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
-  main();
-}
+// 直接執行 main
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
