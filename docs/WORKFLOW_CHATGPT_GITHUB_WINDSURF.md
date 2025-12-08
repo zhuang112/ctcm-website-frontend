@@ -267,6 +267,68 @@ ChatGPT 會：
 > - `Windsurf_ChatGPT_NOTES.md` 是「每個 T 任務的實作日誌」。  
 > - 你只要負責在 ChatGPT 和 Windsurf 之間傳遞「短指令」與「回報摘要」，就能一路推進 T-0001, T-0002, ...。
 
+### 4.y 每個 T 任務完成後的建議 git 流程（Windsurf → 你）
+
+為了讓 GitHub 上的 repo 永遠貼近「最新已完成的 T 任務」，每一個 T-XXXX 任務收尾時，建議由 Windsurf 在回報摘要的最後，自動多附一段「建議 git 指令」，讓你可以在 IDE / 終端機中直接複製執行。
+
+#### 4.y.1 建議的 git 指令區塊格式
+
+Windsurf 在每次任務完成時，回報摘要的結尾多附一段（範例）：
+
+```text
+[建議 git 指令]
+git status
+
+git add <這次變更相關的檔案列表>
+
+git commit -m "feat: T-0005 news meta date/location"
+git push origin <你的目標分支，例如 main>
+```
+
+說明：
+
+- `git status`：讓你快速確認這次任務實際動到哪些檔案。
+- `git add ...`：
+  - 由 Windsurf 列出與本次 T 任務直接相關的檔案（程式檔、測試檔、docs、terminal_logs 等）。
+  - 你可以在執行前再視需要增減檔案（例如再補上忘了 `git add` 的檔案）。
+- `git commit -m "feat: T-0005 news meta date/location"`：
+  - 採用「Conventional Commits + T 任務編號」的格式：
+    - `type`: `feat` / `fix` / `refactor` / `chore` / `docs` 之類。
+    - `T 任務編號`: `T-0005`、`T-0006`...
+    - `簡短描述`: 用英文或中英混合皆可，但盡量精準描述本次 T 任務的重點。
+- `git push origin <branch>`：
+  - 由 Windsurf 用 `<你的目標分支，例如 main>` 作為提示，你在實際執行前可以自行改成目前開發分支名稱。
+
+#### 4.y.2 建議的 commit message 模板
+
+為了讓 commit history 一眼就能對應到 T 任務，建議 Windsurf 一律使用下列格式產生 commit 指令：
+
+```text
+<type>: T-<序號> <簡短說明>
+
+# 範例
+feat: T-0005 news meta date/location
+feat: T-0004 magazine-from-legacy skeleton
+fix: T-0007 sutra verse edge-case handling
+chore: T-0002 anycontent news/magazine types
+docs: T-0001 teaching-from-legacy verses notes
+```
+
+其中：
+
+- `type`：
+  - `feat`: 新功能或新 adapter / 型別骨架。
+  - `fix`: 修正 bug 或錯誤行為。
+  - `refactor`: 重構（不改功能，只整理程式結構）。
+  - `chore`: 工具腳本、設定檔、型別調整等非使用者可見功能。
+  - `docs`: 純文件變更（例如更新 `WORKFLOW_*`、`PROJECT_TODO` 說明）。
+- `T-<序號>`：對應 `docs/PROJECT_TODO.md` 中的 T 任務編號。
+- `<簡短說明>`：一行說清楚這個 T 任務的主要工作（可以搭配 post_type / adapter 名稱）。
+
+> 重點：  
+> - 每個 T 任務理論上對應「至少一個 commit」，但你也可以視情況把多個小 T 任務合併成一個較大的 milestone commit。  
+> - Windsurf 產生的「建議 git 指令」只是模板，你在執行前可以先看 `git status` / `git diff` 再決定要不要調整檔案列表與 commit message。  
+
 ## 5. Windsurf 自動跑 terminal 與「卡關」處理
 
 ### 5.1 Windsurf 可以自行執行的指令
