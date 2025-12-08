@@ -35,4 +35,27 @@ describe("teachingFromLegacy", () => {
     expect(teaching.gallery_items.length).toBe(1);
     expect(teaching.gallery_items[0].url).toContain("story148-2.jpg");
   });
+
+  it("maps verses from htmlToMarkdown into TeachingMeta dharma verse fields", () => {
+    const doc: LegacyHtmlDocument = {
+      url: "https://www.ctworld.org.tw/turn/sutra/example.htm",
+      html: `
+        <html>
+          <body>
+            <p class="word17-coffee">行一<br>行二</p>
+          </body>
+        </html>
+      `,
+    };
+
+    const teaching = teachingFromLegacy(doc, {
+      externalId: "teaching_sutra_example_zh-tw",
+      language: "zh-tw",
+    });
+
+    expect(teaching.meta.ct_has_dharma_verse).toBe("yes");
+    expect(teaching.meta.ct_verse_block_markdown).toBe("> 行一 行二");
+    expect(teaching.meta.ct_verse_type).toBe("sutra");
+    expect(teaching.meta.ct_verse_lang).toBe("zh-tw");
+  });
 });

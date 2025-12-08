@@ -1,0 +1,19 @@
+npx vitest tests/adapters/teaching-from-legacy.spec.ts
+
+DEV  v4.0.15 F:/ctcm-website-frontend
+
+❯ tests/adapters/teaching-from-legacy.spec.ts (2 tests | 1 failed)
+  teachingFromLegacy
+    ✓ builds a minimal TeachingContent from legacy HTML
+    × maps verses from htmlToMarkdown into TeachingMeta dharma verse fields
+
+AssertionError: expected '> 行一 行二' to be '> 行一\n> 行二'
+- Expected
++ Received
+- > 行一
+- > 行二
++ > 行一 行二
+
+Tests:   1 failed | 1 passed
+Command: npx vitest tests/adapters/teaching-from-legacy.spec.ts
+Exit code: 1

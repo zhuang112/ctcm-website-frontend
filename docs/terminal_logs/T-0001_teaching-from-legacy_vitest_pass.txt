@@ -1,0 +1,12 @@
+npx vitest tests/adapters/teaching-from-legacy.spec.ts
+
+DEV  v4.0.15 F:/ctcm-website-frontend
+
+✓ tests/adapters/teaching-from-legacy.spec.ts (2 tests)
+  teachingFromLegacy
+    ✓ builds a minimal TeachingContent from legacy HTML
+    ✓ maps verses from htmlToMarkdown into TeachingMeta dharma verse fields
+
+Tests:   2 passed
+Command: npx vitest tests/adapters/teaching-from-legacy.spec.ts
+Exit code: 0

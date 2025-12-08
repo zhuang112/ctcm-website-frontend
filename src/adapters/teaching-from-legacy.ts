@@ -40,6 +40,8 @@ export function teachingFromLegacy(
   // TODO: 之後可依 HTML 結構與 rules 檔實作更精準的標題與 meta 解析。
   const post_title = fallbackTitle ?? deriveTitleFromUrl(doc.url);
 
+  const verses = mdResult.verses ?? [];
+
   const teaching: TeachingContent = {
     external_id: externalId,
     language,
@@ -55,21 +57,45 @@ export function teachingFromLegacy(
       alt: img.alt ?? null,
       caption: null,
     })),
-    meta: {
-      ct_collection_key: undefined,
-      ct_collection_order: undefined,
-      ct_speaker_name: null,
-      ct_location: null,
-      ct_event_date: null,
-      ct_sutra_reference: null,
-      ct_has_dharma_verse: "no",
-      ct_verse_block_markdown: null,
-      ct_verse_type: null,
-      ct_verse_lang: null,
-    },
+    meta: buildTeachingMetaFromVerses(verses, language),
   };
 
   return teaching;
+}
+
+function buildTeachingMetaFromVerses(
+  verses: string[],
+  language: Language,
+): TeachingMeta {
+  const hasVerses = verses.length > 0;
+
+  const base: TeachingMeta = {
+    ct_collection_key: undefined,
+    ct_collection_order: undefined,
+    ct_speaker_name: null,
+    ct_location: null,
+    ct_event_date: null,
+    ct_sutra_reference: null,
+    ct_has_dharma_verse: "no",
+    ct_verse_block_markdown: null,
+    ct_verse_type: null,
+    ct_verse_lang: null,
+  };
+
+  if (!hasVerses) {
+    return base;
+  }
+
+  // 根據 PROJECT_TODO T-0001 規格：將 verses 映射到 TeachingMeta 偈語欄位
+  const verseBlock = verses.map((line) => `> ${line}`).join("\n");
+
+  return {
+    ...base,
+    ct_has_dharma_verse: "yes",
+    ct_verse_block_markdown: verseBlock,
+    ct_verse_type: "sutra",
+    ct_verse_lang: language === "zh-tw" ? "zh-tw" : null,
+  };
 }
 
 function deriveTitleFromUrl(url: string): string {

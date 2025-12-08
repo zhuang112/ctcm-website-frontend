@@ -205,3 +205,84 @@
    - 預計修改檔案
    - 已完成的實作與測試
 3. 把這個檔案（或其中相關章節）貼給 ChatGPT / AI 助手，讓它快速掌握前情。這樣可以避免重複解釋專案背景與既有約束。
+
+---
+
+## 2025-12-08 任務：T-0001 teaching-from-legacy 偈語欄位映射
+
+### 1. 任務需求總結
+
+- 對應 PROJECT_TODO：
+  - `T-0001 teaching-from-legacy: 將 htmlToMarkdown 的 verses 映射到 TeachingMeta 偈語欄位`
+- 目標：
+  - 不修改 `htmlToMarkdown` 的輸入 / 輸出型別與 verses 產生邏輯。
+  - 僅在 teaching adapter 中，根據 `HtmlToMarkdownResult.verses` 將偈語資訊填入 `TeachingMeta` 偏好欄位。
+
+### 2. 主要實作內容
+
+- 檔案：`src/adapters/teaching-from-legacy.ts`
+
+  - 讀取 `const verses = mdResult.verses ?? [];`.
+  - 新增 helper：`buildTeachingMetaFromVerses(verses, language)`, 回傳 `TeachingMeta`：
+    - 無偈語時（`verses.length === 0`）：
+      - `ct_has_dharma_verse = "no"`
+      - `ct_verse_block_markdown = null`
+      - `ct_verse_type = null`
+      - `ct_verse_lang = null`
+    - 有偈語時（`verses.length >= 1`）：
+      - `ct_has_dharma_verse = "yes"`
+      - `ct_verse_block_markdown = verses.map(line => "> " + line).join("\n")`
+        - 目前 sutra 頁的 verses 會將整段偈語壓成一個元素（例如 `"行一 行二"`），
+          因此實際輸出會是單行 `> 行一 行二`。
+      - `ct_verse_type = "sutra"`
+      - `ct_verse_lang = "zh-tw"`（僅當 `language === "zh-tw"`；其他語言暫時設為 `null`）。
+  - 其餘 TeachingContent 結構（圖片欄位、post_type 等）維持原狀。
+
+- 型別約束：
+  - 未修改 `HtmlToMarkdownResult` 介面（`verses` 仍為選填 `string[] | undefined`）。
+  - 未修改 `src/types/anycontent-teaching.ts` 中 `TeachingMeta` / `TeachingContent` 定義。
+
+### 3. 測試調整
+
+- 檔案：`tests/adapters/teaching-from-legacy.spec.ts`
+
+  - 原有測試：
+    - `builds a minimal TeachingContent from legacy HTML`
+      - 驗證 TeachingContent 的基本欄位與圖片欄位 mapping。
+
+  - 新增測試：`"maps verses from htmlToMarkdown into TeachingMeta dharma verse fields"`
+
+    - 測試輸入：
+
+      ```html
+      <html>
+        <body>
+          <p class="word17-coffee">行一<br>行二</p>
+        </body>
+      </html>
+      ```
+
+    - 預期行為：
+      - sutra 頁的 `htmlToMarkdown` 會將該段偈語轉成：
+        - `verses = ["行一 行二"]`（實際內容由 HTML parser 決定，這裡只依 adapter 規格處理）。
+      - teaching adapter 轉換後：
+        - `meta.ct_has_dharma_verse === "yes"`
+        - `meta.ct_verse_block_markdown === "> 行一 行二"`
+        - `meta.ct_verse_type === "sutra"`
+        - `meta.ct_verse_lang === "zh-tw"`
+
+### 4. 測試方式
+
+- 單檔測試：
+
+  ```bash
+  npx vitest tests/adapters/teaching-from-legacy.spec.ts
+  ```
+
+- 全專案測試：
+
+  ```bash
+  npx vitest
+  ```
+
+- 預期：所有 Vitest 測試通過，未放寬型別或修改既有 contract.
