@@ -30,14 +30,26 @@ export function htmlToMarkdown(
 
   const images: HtmlImageInfo[] = [];
   const anchors: string[] = [];
+  const verses: string[] = [];
+
+  const isSutraPage = doc.url.includes("/turn/sutra/");
+
+  if (isSutraPage) {
+    preprocessSutraDom($, $root);
+  }
 
   // 收集圖片與錨點
   collectImagesAndAnchors($, $root, baseUrl, images, anchors);
 
+  const context: HtmlToMarkdownContext = {
+    isSutraPage,
+    verses,
+  };
+
   // 3. 轉換為 Markdown 文字
   const lines: string[] = [];
   $root.children().each((_, el) => {
-    const block = nodeToMarkdown($, el);
+    const block = nodeToMarkdown($, el, context);
     if (block.trim().length > 0) {
       lines.push(block.trimEnd());
     }
@@ -49,7 +61,7 @@ export function htmlToMarkdown(
     body_markdown,
     images,
     anchors,
-    verses: [], // teaching 規則之後再補強
+    verses, // 規則來源：HTML_TO_MARKDOWN_RULES_V4.md § 經論講解（/turn/sutra/）
   };
 
   return result;
@@ -68,13 +80,14 @@ function cleanupGlobal($: cheerio.CheerioAPI): void {
 }
 
 function collectImagesAndAnchors(
+  $: cheerio.CheerioAPI,
   $root: cheerio.Cheerio<any>,
   baseUrl: string,
   images: HtmlImageInfo[],
   anchors: string[],
 ): void {
   $root.find("img").each((_, img) => {
-    const $img = $root.constructor(img);
+    const $img = $(img);
     const src = $img.attr("src");
     if (!src) return;
 
@@ -87,10 +100,10 @@ function collectImagesAndAnchors(
   });
 
   $root.find("a[name], a[id]").each((_, a) => {
-    const $a = $root.constructor(a);
+    const $a = $(a);
     const name = $a.attr("name");
     const id = $a.attr("id");
-    const candidate = name || id;
+    const candidate = id || name;
     if (candidate && !anchors.includes(candidate)) {
       anchors.push(candidate);
     }
@@ -106,7 +119,16 @@ function toAbsoluteUrl(href: string, baseUrl: string): string {
   }
 }
 
-function nodeToMarkdown($: cheerio.CheerioAPI, el: any): string {
+interface HtmlToMarkdownContext {
+  isSutraPage: boolean;
+  verses: string[];
+}
+
+function nodeToMarkdown(
+  $: cheerio.CheerioAPI,
+  el: any,
+  context: HtmlToMarkdownContext,
+): string {
   const $el = $(el);
   const tag = el.tagName?.toLowerCase();
 
@@ -123,16 +145,46 @@ function nodeToMarkdown($: cheerio.CheerioAPI, el: any): string {
       return "### " + inlineText($, $el) + "\n";
     case "h4":
       return "#### " + inlineText($, $el) + "\n";
-    case "p":
+    case "p": {
+      if (context.isSutraPage && $el.hasClass("word17-coffee")) {
+        // 規則來源：HTML_TO_MARKDOWN_RULES_V4.md § 經論講解（/turn/sutra/）
+        const { lines, combinedText } = sutraParagraphToMarkdownLines($, $el);
+        if (combinedText) {
+          context.verses.push(combinedText);
+        }
+        if (!lines.length) {
+          return "";
+        }
+        return lines.map((line) => `> ${line}`).join("\n");
+      }
       return inlineText($, $el);
+    }
     case "br":
       return "\n";
+    case "a": {
+      const id = $el.attr("id");
+      const href = $el.attr("href");
+      const text = inlineText($, $el);
+
+      if (context.isSutraPage && id && !href && !text) {
+        // sutra 頁的段落錨點需在 markdown 中保留 id
+        // 規則來源：HTML_TO_MARKDOWN_RULES_V4.md § 經論講解（/turn/sutra/）
+        return `<a id="${id}"></a>`;
+      }
+
+      if (href) {
+        const label = text || href;
+        return `[${label}](${href})`;
+      }
+
+      return text;
+    }
     case "ul":
-      return listToMarkdown($, $el, "unordered");
+      return listToMarkdown($, $el, "unordered", context);
     case "ol":
-      return listToMarkdown($, $el, "ordered");
+      return listToMarkdown($, $el, "ordered", context);
     case "blockquote": {
-      const inner = blockChildrenToMarkdown($, $el)
+      const inner = blockChildrenToMarkdown($, $el, context)
         .split("\n")
         .map((line) => (line.length ? "> " + line : ">"))
         .join("\n");
@@ -140,7 +192,7 @@ function nodeToMarkdown($: cheerio.CheerioAPI, el: any): string {
     }
     default:
       // 其他標籤：以其子元素的文字為主，略過標籤本身
-      return blockChildrenToMarkdown($, $el);
+      return blockChildrenToMarkdown($, $el, context);
   }
 }
 
@@ -182,11 +234,14 @@ function listToMarkdown(
   $: cheerio.CheerioAPI,
   $list: cheerio.Cheerio<any>,
   kind: "ordered" | "unordered",
+  context: HtmlToMarkdownContext,
 ): string {
   const lines: string[] = [];
   let index = 1;
   $list.children("li").each((_, li) => {
-    const content = blockChildrenToMarkdown($, $(li)).replace(/\n+/g, " ").trim();
+    const content = blockChildrenToMarkdown($, $(li), context)
+      .replace(/\n+/g, " ")
+      .trim();
     if (!content) return;
     if (kind === "unordered") {
       lines.push("- " + content);
@@ -201,6 +256,7 @@ function listToMarkdown(
 function blockChildrenToMarkdown(
   $: cheerio.CheerioAPI,
   $el: cheerio.Cheerio<any>,
+  context: HtmlToMarkdownContext,
 ): string {
   const parts: string[] = [];
   $el.contents().each((_, child) => {
@@ -208,8 +264,66 @@ function blockChildrenToMarkdown(
       const text = (child.data ?? "").replace(/\s+/g, " ").trim();
       if (text) parts.push(text);
     } else {
-      parts.push(nodeToMarkdown($, child as any));
+      parts.push(nodeToMarkdown($, child as any, context));
     }
   });
   return parts.join(" ").replace(/\s+/g, " ").trim();
+}
+
+function preprocessSutraDom(
+  $: cheerio.CheerioAPI,
+  $root: cheerio.Cheerio<any>,
+): void {
+  // 規則來源：HTML_TO_MARKDOWN_RULES_V4.md § 經論講解（/turn/sutra/）
+  // 1. 正規化段落錨點：優先使用 id，避免 name/id 重複收集
+  $root.find("a[name]").each((_, a) => {
+    const $a = $(a);
+    const name = $a.attr("name");
+    const existingId = $a.attr("id");
+    if (name && !existingId) {
+      $a.attr("id", name);
+    }
+    $a.removeAttr("name");
+  });
+}
+
+function sutraParagraphToMarkdownLines(
+  $: cheerio.CheerioAPI,
+  $el: cheerio.Cheerio<any>,
+): { lines: string[]; combinedText: string } {
+  const rawLines: string[] = [];
+  let current = "";
+
+  $el.contents().each((_, child) => {
+    if (child.type === "text") {
+      current += child.data ?? "";
+      return;
+    }
+
+    const tag = (child as any).tagName?.toLowerCase();
+    if (tag === "br") {
+      const trimmed = current.replace(/\s+/g, " ").trim();
+      if (trimmed) {
+        rawLines.push(trimmed);
+      }
+      current = "";
+      return;
+    }
+
+    const $child = $(child as any);
+    current += inlineText($, $child);
+  });
+
+  const last = current.replace(/\s+/g, " ").trim();
+  if (last) {
+    rawLines.push(last);
+  }
+
+  const lines = rawLines
+    .map((line) => line.replace(/\s+/g, " ").trim())
+    .filter((line) => line.length > 0);
+
+  const combinedText = lines.join(" ");
+
+  return { lines, combinedText };
 }

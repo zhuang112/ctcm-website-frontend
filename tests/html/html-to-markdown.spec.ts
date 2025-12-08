@@ -57,4 +57,36 @@ describe("htmlToMarkdown", () => {
     expect(result.anchors).toContain("item83");
     expect(result.body_markdown).toContain("某一段經文。");
   });
+
+  it("applies sutra-specific rules for word17-coffee paragraphs and anchors", () => {
+    const doc: LegacyHtmlDocument = {
+      url: "https://www.ctworld.org.tw/turn/sutra/example.htm",
+      html: `
+        <html>
+          <body>
+            <a name="item83" class="chinese">
+              （八十三）
+            </a>
+            <p class="word17-coffee">行一<br>行二</p>
+          </body>
+        </html>
+      `,
+    };
+
+    const result = htmlToMarkdown(doc);
+
+    // sutra 經文段落：每一行轉為 blockquote
+    expect(result.body_markdown).toContain("> 行一");
+    expect(result.body_markdown).toContain("> 行二");
+
+    // sutra 經文 verses：收集純文字內容（不含 <br> 標籤）
+    const verses = result.verses ?? [];
+    expect(verses.length).toBeGreaterThan(0);
+    expect(verses[0]).toContain("行一");
+    expect(verses[0]).toContain("行二");
+
+    // 段落錨點：name 正規化為 id，anchors 收錄 id 值
+    expect(result.anchors).toContain("item83");
+    expect(result.body_markdown).toContain('<a id="item83"></a>');
+  });
 });
