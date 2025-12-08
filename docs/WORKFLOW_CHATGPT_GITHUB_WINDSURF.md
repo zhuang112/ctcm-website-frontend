@@ -217,6 +217,56 @@ ChatGPT 會：
 
 ---
 
+
+
+### 4.x T 任務（T-0001, T-0002 …）的 lifecycle
+
+> T-0001, T-0002, ... 是「可以拆給 Windsurf 的最小工作單位」。
+
+1. **定義 T 任務（你 ↔ ChatGPT）**
+   - 你在 ChatGPT 這邊說明想做的事與優先順序。
+   - ChatGPT 會：
+     - 先讀 `docs/PROJECT_TODO.md`、`docs/Windsurf_ChatGPT_NOTES.md`、schema / rules。
+     - 在 `PROJECT_TODO.md` 裡新增一條 `T-XXXX` 任務（含：
+       - 規格來源 docs
+       - 要改的檔案路徑
+       - 允許修改範圍
+       - 驗收方式
+     - 同時幫你想好一段「給 Windsurf 的短指令」。
+
+2. **交辦 T 任務給 Windsurf（你 → Windsurf）**
+   - 你只需要：
+     - 把 ChatGPT 提供的短指令（code block）貼給 Windsurf。
+     - 指令內容通常是：
+       - 「請完成 `docs/PROJECT_TODO.md` 中的 T-000X，依照其中規格修改哪些檔案與跑哪些測試。」
+
+3. **Windsurf 實作與記錄（Windsurf）**
+   - Windsurf 依照 `PROJECT_TODO.md` 中 T-XXXX 的規格：
+     - 修改程式與測試檔（只在允許修改的檔案內動手）。
+     - 執行對應的 `npx vitest` / `npm run typecheck` / `npx tsc --noEmit` 等指令。
+   - 並更新：
+     - `docs/Windsurf_ChatGPT_NOTES.md`：加入本次任務的小節（實作細節、重要 decision）。
+     - `docs/terminal_logs/…`：存放這次任務關鍵的 terminal log（tsc / vitest / 其他工具）。
+
+4. **Windsurf 回報與你轉貼（Windsurf → 你 → ChatGPT）**
+   - Windsurf 給你一段「回報摘要」，例如：
+     - 本次任務代號（T-000X）。
+     - 新增 / 更新的程式檔、測試檔路徑。
+     - 新增的 docs / terminal_logs 路徑。
+     - 測試與型別檢查是否通過。
+   - 你只要把這段摘要貼回 ChatGPT 對話即可。
+
+5. **ChatGPT 收尾與規劃下一步（ChatGPT）**
+   - ChatGPT 會：
+     - 將 `PROJECT_TODO.md` 中對應的 `T-XXXX` 標記為 ✅，並補上結果摘要。
+     - 視需要調整 / 補充其他 docs 的說明（例如 CONTENT_SCHEMA / WORKFLOW）。
+     - 幫你規劃下一個 T 任務（T-XXXX+1），並給出下一輪要貼給 Windsurf 的短指令。
+
+> 總之：  
+> - `PROJECT_TODO.md` 是「T 任務清單 + 狀態」。  
+> - `Windsurf_ChatGPT_NOTES.md` 是「每個 T 任務的實作日誌」。  
+> - 你只要負責在 ChatGPT 和 Windsurf 之間傳遞「短指令」與「回報摘要」，就能一路推進 T-0001, T-0002, ...。
+
 ## 5. Windsurf 自動跑 terminal 與「卡關」處理
 
 ### 5.1 Windsurf 可以自行執行的指令
