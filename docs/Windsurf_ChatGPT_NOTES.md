@@ -286,3 +286,87 @@
   ```
 
 - 預期：所有 Vitest 測試通過，未放寬型別或修改既有 contract.
+
+---
+
+## 2025-12-08 任務：T-0003 news-from-legacy: 建立 NewsContent adapter 骨架（minimal mapping）
+
+### 1. 任務需求總結
+
+- 對應 PROJECT_TODO：
+  - `T-0003 news-from-legacy: 建立 NewsContent adapter 骨架（minimal mapping）`
+- 目標：
+  - 建立第一版 `news-from-legacy` adapter，將 legacy HTML + htmlToMarkdown 輸出轉成最基本的 `NewsContent` 結構，
+    僅實作 minimal mapping，其餘進階欄位留待後續 T 任務處理。
+
+### 2. 主要實作內容
+
+- 檔案：`src/adapters/news-from-legacy.ts`
+
+  - 匯出：
+    - `newsFromLegacy(doc: LegacyHtmlDocument, options: NewsFromLegacyOptions): NewsContent`
+  - `NewsFromLegacyOptions`：
+    - 延伸 `HtmlToMarkdownOptions`，新增：
+      - `externalId: string`
+      - `language: Language`（沿用 AnyContent 的 `Language` union，目前實際測試以 `"zh-tw"` 為主）
+      - `fallbackTitle?: string`
+  - 轉換流程：
+    - 呼叫 `htmlToMarkdown(doc, markdownOptions)` 取得 `mdResult`。
+    - `post_title`：先以 `fallbackTitle ?? deriveTitleFromUrl(doc.url)` 簡單推得，詳細標題規則留待後續任務。
+    - `meta: NewsMeta`：僅建立 skeleton，全部日期 / 地點 / 類別欄位先填 `null`：
+      - `ct_news_date: null`
+      - `ct_event_date_start: null`
+      - `ct_event_date_end: null`
+      - `ct_event_date_raw: null`
+      - `ct_event_location: null`
+      - `ct_news_category: null`
+    - `NewsContent`：
+      - `external_id`：來自 options.externalId。
+      - `language`：來自 options.language。
+      - `post_type: 'news'`.
+      - `old_url: doc.url`.
+      - `post_title` 如上。
+      - `post_excerpt: null`（暫不從 HTML 推導）。
+      - `body_markdown: mdResult.body_markdown`.
+      - `featured_image`：取 `mdResult.images[0]?.src ?? null`.
+      - `featured_image_caption: null`.
+      - `gallery_items`：其餘圖片映射為 `{ url, alt, caption: null }` 陣列。
+
+- 檔案：`tests/adapters/news-from-legacy.spec.ts`
+
+  - 新增測試：`"builds a minimal NewsContent from legacy HTML"`
+  - 測試輸入：一個簡單的 legacy news HTML，包含：
+    - `<h1>重要公告</h1>`
+    - 一段主文 `<p>這是一則新聞內容。</p>`
+    - 兩張圖片：一張主圖、一張 gallery 圖。
+  - 測試斷言：
+    - `news.post_type === 'news'`.
+    - `news.language === 'zh-tw'`.
+    - `news.old_url === doc.url`.
+    - `news.body_markdown` 內含主文文字。
+    - 圖片：
+      - `featured_image` 包含主圖檔名。
+      - `gallery_items.length === 1` 且唯一元素的 `url` 包含 gallery 圖檔名。
+    - `meta` skeleton：
+      - `ct_news_date` / `ct_event_date_start` / `ct_event_date_end` / `ct_event_date_raw` / `ct_event_location` / `ct_news_category` 皆為 `null`.
+
+### 3. 測試與型別檢查
+
+- 型別檢查：
+  - 指令（沿用 T-0002）：
+    - `npx tsc --noEmit`
+
+- 測試：
+  - 單檔：
+
+    ```bash
+    npx vitest tests/adapters/news-from-legacy.spec.ts
+    ```
+
+  - 全專案：
+
+    ```bash
+    npx vitest
+    ```
+
+- 後續若在 news adapter 上新增日期 / 地點 / 類別等邏輯，建議再開新的 T 任務，而不直接更動本小節描述.

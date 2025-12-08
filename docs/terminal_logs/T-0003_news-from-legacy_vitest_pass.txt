@@ -1,0 +1,11 @@
+npx vitest tests/adapters/news-from-legacy.spec.ts
+
+DEV  v4.0.15 F:/ctcm-website-frontend
+
+✓ tests/adapters/news-from-legacy.spec.ts (1 test)
+  newsFromLegacy
+    ✓ builds a minimal NewsContent from legacy HTML
+
+Tests:   1 passed
+Command: npx vitest tests/adapters/news-from-legacy.spec.ts
+Exit code: 0
