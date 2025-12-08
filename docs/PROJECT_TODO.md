@@ -150,14 +150,48 @@
 
 ---
 
-### T-0003 news-from-legacy: 建立 NewsContent adapter 骨架（minimal mapping）
+### ✅ T-0003 news-from-legacy: 建立 NewsContent adapter 骨架（minimal mapping）（已完成）
+
+- 狀態：
+  - 已由 Windsurf 依照 T-0003 規格完成實作，並通過 Vitest 測試。
+- 新增 / 更新的程式檔：
+  - `src/html/html-to-markdown.ts`
+  - `src/html/legacy-html-types.ts`
+  - `src/types/anycontent-teaching.ts`
+  - `src/types/anycontent-news.ts`
+  - `src/types/anycontent-magazine.ts`
+  - `src/types/anycontent.ts`
+  - `src/adapters/teaching-from-legacy.ts`
+  - `src/adapters/news-from-legacy.ts`
+- 新增 / 更新的測試檔：
+  - `tests/html/html-to-markdown.spec.ts`
+  - `tests/adapters/teaching-from-legacy.spec.ts`
+  - `tests/adapters/news-from-legacy.spec.ts`
+- 交接與流程說明檔：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
+  - `docs/PROJECT_TODO.md`
+  - `docs/Windsurf_ChatGPT_NOTES.md`
+- 本次型別檢查與測試 log：
+  - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_fail.txt`
+  - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_pass.txt`
+  - `docs/terminal_logs/T-0002_anycontent_types_tsc_pass.txt`
+  - `docs/terminal_logs/T-0003_news-from-legacy_vitest_pass.txt`
+- 結果摘要：
+  - 已有 minimal 版本的 `news-from-legacy` adapter 與對應測試，能從 legacy HTML + htmlToMarkdownResult 建立基本的 `NewsContent`。
+  - teaching / news / magazine adapter / 型別之間關聯已初步串起，之後可逐步擴充 news 的日期、地點等欄位 mapping。
+
+---
+
+### T-0004 magazine-from-legacy: 建立 MagazineContent adapter 骨架（minimal mapping）
 
 - 目標：
-  - 建立 `news-from-legacy` adapter 的第一版骨架，將 legacy HTML + htmlToMarkdown 的輸出，轉成最基本的 `NewsContent` 結構，作為後續擴充的基礎。
+  - 參考 `news-from-legacy` 的結構，建立 `magazine-from-legacy` adapter 的第一版骨架，
+    讓系統可以從 legacy HTML + htmlToMarkdownResult 建立最基本的 `MagazineContent`，
+    作為後續補齊 issue / section / author 等欄位的基礎。
 
 - 關聯 docs：
   - `docs/CONTENT_SCHEMA.md`
-    - news / NewsMeta / NewsContent 段落
+    - MagazineMeta / MagazineContent 段落
     - AnyContent union
   - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
     - 共用 htmlToMarkdown 輸入 / 輸出說明
@@ -165,12 +199,14 @@
     - HTML → Markdown → AnyContent 流程
   - `docs/PROJECT_STATUS.md`
     - 關於 AnyContent 其他 post_type 的建議
+  - `docs/Windsurf_ChatGPT_NOTES.md`
+    - 若有針對 magazine 的補充說明，可在本任務完成時一併更新
 
 - 要新增 / 更新的檔案（建議命名，實際以現有結構為準）：
-  - `src/adapters/news-from-legacy.ts`
-    - 匯出一個函式，例如：
-      - `newsFromLegacy(doc: LegacyHtmlDocument, md: HtmlToMarkdownResult): NewsContent`
-  - `tests/adapters/news-from-legacy.spec.ts`
+  - `src/adapters/magazine-from-legacy.ts`
+    - 匯出函式，例如：
+      - `magazineFromLegacy(doc: LegacyHtmlDocument, md: HtmlToMarkdownResult): MagazineContent`
+  - `tests/adapters/magazine-from-legacy.spec.ts`
     - 覆蓋 minimal 行為（見下）。
 
 - 規格摘要（本任務只做 minimal mapping）：
@@ -180,28 +216,23 @@
     - `HtmlToMarkdownResult`：
       - 至少包含 `bodyMarkdown`、`images`、`anchors` 等共用欄位。
   - 輸出：
-    - `NewsContent`：
-      - `post_type` 固定為 `'news'`。
+    - `MagazineContent`：
+      - `post_type` 固定為 `'magazine'`。
       - `language` 先只支援 `'zh-tw'`，未來由 zh-TW → zh-CN pipeline 產生其他語言。
       - `old_url` 由 `LegacyHtmlDocument.url` 填入。
       - `post_title`：
-        - 先用一個簡單策略（例如來自 `HtmlToMarkdownResult` 或 placeholder），詳細 title 規則留待之後的 T 任務。
+        - 先用簡單策略（例如 placeholder 或取自 HTML `<title>` / 主要 heading），詳細規則留給之後的 T 任務。
       - `body_markdown`：
         - 直接使用 `HtmlToMarkdownResult.bodyMarkdown`。
-      - `meta: NewsMeta`：
+      - `meta: MagazineMeta`：
         - 目前僅填入最基本欄位，其他維持 `null` / 未填，例如：
-          - `ct_news_date`: `null`
-          - `ct_event_date_start`: `null`
-          - `ct_event_date_end`: `null`
-          - `ct_event_date_raw`: `null`
-          - `ct_event_location`: `null`
-          - `ct_news_category`: `null`
-        - 之後可以用新的 T 任務逐步補齊從 HTML 抽出日期 / 地點 / 類別等邏輯。
+          - 與期數、欄位區塊、作者等有關的欄位先暫時為 `null`。
+        - 之後可以用新的 T 任務逐步補齊從 HTML 抽出 issue / section / author 等邏輯。
       - `featured_image` / `gallery_items`：
         - 目前可以先保持為空或用簡單規則（例如取第一張圖片做 featured），具體實作交給後續 T 任務。
 
 - 允許修改的範圍：
-  - 新增 `news-from-legacy.ts` 與對應測試檔。
+  - 新增 `magazine-from-legacy.ts` 與對應測試檔。
   - 若有集中管理 adapter 的 barrel 檔（例如 `src/adapters/index.ts`），可以在其中 export 新增的 adapter。
   - 不可修改：
     - `Language` union。
@@ -209,15 +240,15 @@
     - 既有 teaching / news / magazine 型別定義（只能引用）。
 
 - 驗收方式：
-  - 新增 `tests/adapters/news-from-legacy.spec.ts`，至少涵蓋：
+  - 新增 `tests/adapters/magazine-from-legacy.spec.ts`，至少涵蓋：
     - 在給定一個最小的 `LegacyHtmlDocument` + `HtmlToMarkdownResult` 時：
-      - 回傳的 `NewsContent.post_type === 'news'`。
+      - 回傳的 `MagazineContent.post_type === 'magazine'`。
       - `old_url` 正確。
       - `body_markdown` 直接來自 `HtmlToMarkdownResult.bodyMarkdown`。
-      - `meta` 欄位存在且為 `NewsMeta` 型別，主要欄位預設為 `null` / 未填。
+      - `meta` 欄位存在且為 `MagazineMeta` 型別，主要欄位預設為 `null` / 未填。
   - 測試指令：
     - 單檔：
-      - `npx vitest tests/adapters/news-from-legacy.spec.ts`
+      - `npx vitest tests/adapters/magazine-from-legacy.spec.ts`
     - 全專案：
       - `npx vitest`
   - TypeScript 型別檢查需通過（依專案實際 script，至少擇一）：
