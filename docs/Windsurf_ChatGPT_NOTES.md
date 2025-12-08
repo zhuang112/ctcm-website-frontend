@@ -1,0 +1,207 @@
+# Windsurf × ChatGPT 協作筆記
+
+> 本檔案給「未來接手的 ChatGPT / AI 助手」閱讀，說明目前專案狀態與已完成的修改。
+>
+> 維護方式建議：每一個明確的開發任務（feature / bugfix）新增一個小節，簡要說明需求與已改動檔案。
+
+---
+
+## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
+
+### 1. 任務需求總結
+
+- 頁面範圍：`/turn/sutra/` 經論講解頁。
+- 目標：在不破壞既有通則與測試的前提下，為經論講解頁實作 **sutra 專用規則 v1**。
+- 型別／結構約束：
+  - 不修改 `src/html/legacy-html-types.ts` 中既有介面名稱與欄位。
+  - `HtmlToMarkdownResult` 結構不變，只是在 `verses` 中填值。
+  - 不修改 `src/types/anycontent-teaching.ts` 與其他 AnyContent 型別檔案。
+
+### 2. 主要實作內容
+
+#### 2.1 sutra 頁判斷與 context
+
+- 檔案：`src/html/html-to-markdown.ts`
+- 新增行為：
+  - 以 `LegacyHtmlDocument.url` 判斷 sutra 頁：
+    - `const isSutraPage = doc.url.includes("/turn/sutra/");`
+  - 建立 `HtmlToMarkdownContext`：
+    - `interface HtmlToMarkdownContext { isSutraPage: boolean; verses: string[]; }`
+  - 在 `htmlToMarkdown` 中建立：
+    - `const verses: string[] = [];`
+    - `const context: HtmlToMarkdownContext = { isSutraPage, verses };`
+  - 轉換主流程改為：
+    - `nodeToMarkdown($, el, context)`（而非舊版無 context 版本）。
+
+#### 2.2 sutra DOM 預處理：錨點正規化
+
+- 新增 `preprocessSutraDom($, $root)`：
+  - 僅在 `isSutraPage` 時呼叫。
+  - 對 `<a name="...">` 做正規化：
+    - 若有 `name` 且沒有 `id`，則設 `id = name`。
+    - 之後 `removeAttr("name")`，避免後續同一錨點以 name/id 重複收集。
+  - 加註註解：
+    - `// 規則來源：HTML_TO_MARKDOWN_RULES_V4.md § 經論講解（/turn/sutra/）`
+
+#### 2.3 collectImagesAndAnchors 調整
+
+- 函式簽名由：
+  - `collectImagesAndAnchors($root, baseUrl, images, anchors)`
+- 調整為：
+  - `collectImagesAndAnchors($, $root, baseUrl, images, anchors)`
+- 錨點收集邏輯：
+  - 掃描 `a[name], a[id]`。
+  - 使用 `const candidate = id || name;`，並以 `!anchors.includes(candidate)` 避免重複。
+  - sutra 頁因已在 `preprocessSutraDom` 將 `name` 正規化為 `id`，最終 anchors 中只會收到一次該 id（例如 `"item83"`）。
+
+#### 2.4 sutra 經文段落：`<p class="word17-coffee">` → blockquote + verses
+
+- 目標：
+  - 在 sutra 頁，將 `<p class="word17-coffee">行一<br>行二</p>` 轉為：
+    - `> 行一`\n`> 行二`
+  - 並把該段經文的純文字加入 `result.verses: string[]`。
+
+- 實作細節：
+  - 在 `nodeToMarkdown` 的 `case "p"` 中：
+    - 若 `context.isSutraPage && $el.hasClass("word17-coffee")`：
+      - 呼叫 `sutraParagraphToMarkdownLines($, $el)` 取得：
+        - `lines: string[]`：每一行經文（已依 `<br>` 切行、整理空白）。
+        - `combinedText: string`：所有行以空白串起來的純文字（例：`"行一 行二"`）。
+      - 若 `combinedText` 非空：`context.verses.push(combinedText);`
+      - 若 `lines` 非空：輸出：
+        - `lines.map((line) => "> " + line).join("\n")`
+      - 若沒有有效文字行：回傳空字串。
+    - 非 sutra 或非 `word17-coffee` 段落仍使用原本的 `inlineText` 規則。
+
+- `sutraParagraphToMarkdownLines` 行為：
+  - 逐一掃描 `<p>` 的子節點：
+    - 文字節點：累加到暫存 `current`。
+    - `<br>`：將 `current` 正規化（收尾 trim 多餘空白）後 push 到 `rawLines`，並清空 `current`。
+    - 其他子元素：呼叫既有的 `inlineText` 抽取純文字並加入 `current`。
+  - 結束後處理最後一行，然後：
+    - `lines`：
+      - 對每行再做一次空白正規化與 trim，過濾空行。
+    - `combinedText = lines.join(" ");`
+
+#### 2.5 sutra 段落錨點：同時保留文字與 `<a id="..."></a>`
+
+- 需求：
+  - sutra 頁 `body_markdown` 中希望有：
+    - `<a id="item83"></a>（八十三）`
+  - 同時維持 anchors 有 `"item83"`。
+
+- `nodeToMarkdown` 的 `case "a"` 調整：
+
+  ```ts
+  case "a": {
+    const id = $el.attr("id");
+    const href = $el.attr("href");
+    const text = inlineText($, $el);
+
+    if (context.isSutraPage && id && !href) {
+      // sutra 頁的段落錨點需在 markdown 中保留 id，並保留原本文字內容
+      // 規則來源：HTML_TO_MARKDOWN_RULES_V4.md § 經論講解（/turn/sutra/）
+      const anchorHtml = `<a id="${id}"></a>`;
+      if (!text) {
+        return anchorHtml;
+      }
+      return `${anchorHtml}${text}`;
+    }
+
+    if (href) {
+      const label = text || href;
+      return `[${label}](${href})`;
+    }
+
+    return text;
+  }
+  ```
+
+- 效果：
+  - 原始 HTML：
+
+    ```html
+    <a name="item83" class="chinese">（八十三）</a>
+    <p class="word17-coffee">行一<br>行二</p>
+    ```
+
+  - sutra 流程：
+    1. `preprocessSutraDom` 將 `name="item83"` 正規化為 `id="item83"`。
+    2. `collectImagesAndAnchors` 將 `"item83"` 收進 `result.anchors`。
+    3. `nodeToMarkdown` 對 `<a>` 輸出：`<a id="item83"></a>（八十三）`。
+    4. `word17-coffee` 段落轉為：
+       - `> 行一`\n`> 行二`。
+
+  - 最終 `body_markdown` 片段類似：
+
+    ```md
+    <a id="item83"></a>（八十三）
+
+    > 行一
+    > 行二
+    ```
+
+#### 2.6 其他通則維持不變
+
+- 原有行為維持：
+  - heading：`h1`–`h4` → `#`～`####`。
+  - 一般段落：`<p>` → `inlineText`。
+  - 列表：`<ul>/<ol>` → `listToMarkdown`（僅多傳入 `context`）。
+  - blockquote：仍使用既有邏輯，僅改為呼叫新版 `blockChildrenToMarkdown($, $el, context)`。
+  - 連結：有 `href` 照舊輸出 `[text](href)`。
+  - 圖片：只從 DOM 中移除並收集到 `images`，不輸出 markdown `![]()`。
+
+---
+
+### 3. 測試調整
+
+- 檔案：`tests/html/html-to-markdown.spec.ts`
+
+#### 3.1 原有三個測試維持
+
+1. `converts simple heading and paragraph`
+   - 驗證 h1 + 段落轉換。
+2. `collects images but does not embed them in markdown`
+   - 驗證 images 被收集、markdown 不含 `![]()`。
+3. `collects anchors like item83 from name/id attributes`
+   - 驗證 anchors 收集 `"item83"`，並保留一般段落文字。
+
+#### 3.2 新增 sutra 專用測試
+
+- 測試名稱：`"applies sutra-specific rules for word17-coffee paragraphs and anchors"`
+- 測試輸入：
+
+  ```html
+  <html>
+    <body>
+      <a name="item83" class="chinese">
+        （八十三）
+      </a>
+      <p class="word17-coffee">行一<br>行二</p>
+    </body>
+  </html>
+  ```
+
+- 測試重點斷言：
+  - blockquote：
+    - `result.body_markdown` 含 `"> 行一"` 與 `"> 行二"`。
+  - verses 收集：
+    - 以 `const verses = result.verses ?? [];` 讀取。
+    - 斷言 `verses.length > 0`，且 `verses[0]` 同時包含 `"行一"`、`"行二"`。
+  - anchors 與 id：
+    - `result.anchors` 包含 `"item83"`。
+    - `body_markdown` 中包含 `<a id="item83"></a>`（而不是只有純文字）。
+
+---
+
+### 4. 之後給 ChatGPT 的使用建議
+
+未來若有其他任務（例如 blossom / reply 等特殊單元）：
+
+1. 在本檔案新增一個新的章節，例如：
+   - `## 2025-12-10 任務：blossom 單元特殊樣式處理`
+2. 簡要列出：
+   - 需求摘要
+   - 預計修改檔案
+   - 已完成的實作與測試
+3. 把這個檔案（或其中相關章節）貼給 ChatGPT / AI 助手，讓它快速掌握前情。這樣可以避免重複解釋專案背景與既有約束。

@@ -166,10 +166,14 @@ function nodeToMarkdown(
       const href = $el.attr("href");
       const text = inlineText($, $el);
 
-      if (context.isSutraPage && id && !href && !text) {
-        // sutra 頁的段落錨點需在 markdown 中保留 id
+      if (context.isSutraPage && id && !href) {
+        // sutra 頁的段落錨點需在 markdown 中保留 id，並保留原本文字內容
         // 規則來源：HTML_TO_MARKDOWN_RULES_V4.md § 經論講解（/turn/sutra/）
-        return `<a id="${id}"></a>`;
+        const anchorHtml = `<a id="${id}"></a>`;
+        if (!text) {
+          return anchorHtml;
+        }
+        return `${anchorHtml}${text}`;
       }
 
       if (href) {
