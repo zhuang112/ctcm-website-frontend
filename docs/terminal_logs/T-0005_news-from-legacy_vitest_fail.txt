@@ -1,0 +1,18 @@
+npx vitest tests/adapters/news-from-legacy.spec.ts
+
+DEV  v4.0.15 F:/ctcm-website-frontend
+
+✗ tests/adapters/news-from-legacy.spec.ts (2 tests | 1 failed)
+  newsFromLegacy
+    ✓ builds a minimal NewsContent from legacy HTML
+    ✗ maps basic date and location fields into NewsMeta when present in HTML (T-0005 v1)
+
+AssertionError: expected '台北講堂 這是一則含有日期與地點資訊的新聞' to be '台北講堂'
+- Expected
++ Received
+- 台北講堂
++ 台北講堂 這是一則含有日期與地點資訊的新聞
+
+Tests:   1 failed | 1 passed
+Command: npx vitest tests/adapters/news-from-legacy.spec.ts
+Exit code: 1

@@ -42,14 +42,16 @@ export function newsFromLegacy(
 
   const post_title = fallbackTitle ?? deriveTitleFromUrl(doc.url);
 
+  const parsed = parseNewsDateAndLocationFromHtml(doc.html);
+
   const meta: NewsMeta = {
     ct_collection_key: undefined,
     ct_collection_order: undefined,
-    ct_news_date: null,
-    ct_event_date_start: null,
-    ct_event_date_end: null,
-    ct_event_date_raw: null,
-    ct_event_location: null,
+    ct_news_date: parsed.newsDate,
+    ct_event_date_start: parsed.eventDateStart,
+    ct_event_date_end: parsed.eventDateEnd,
+    ct_event_date_raw: parsed.eventDateRaw,
+    ct_event_location: parsed.eventLocation,
     ct_news_category: null,
   };
 
@@ -72,6 +74,54 @@ export function newsFromLegacy(
   };
 
   return news;
+}
+
+interface ParsedNewsDateLocation {
+  newsDate: string | null;
+  eventDateStart: string | null;
+  eventDateEnd: string | null;
+  eventDateRaw: string | null;
+  eventLocation: string | null;
+}
+
+function parseNewsDateAndLocationFromHtml(html: string): ParsedNewsDateLocation {
+  // T-0005 v1：僅處理最常見且容易解析的樣板，其他情況維持 null
+  // 策略：
+  // - 先移除 HTML 標籤取得純文字，壓成單行字串。
+  // - 尋找模式：
+  //   - 日期：`日期：YYYY-MM-DD` 或 `日期：YYYY-MM-DD ~ YYYY-MM-DD`
+  //   - 地點：`地點：XXXX`，以句號 / 分號 / 結尾為界。
+
+  const text = html.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ");
+  const normalized = text.replace(/\s+/g, " ").trim();
+
+  const dateRegex = /日期：\s*([0-9]{4}-[0-9]{1,2}-[0-9]{1,2})(?:\s*[~～─-]\s*([0-9]{4}-[0-9]{1,2}-[0-9]{1,2}))?/;
+  const dateMatch = normalized.match(dateRegex);
+
+  const locationRegex = /地點：\s*([^。；;]+)/;
+  const locationMatch = normalized.match(locationRegex);
+
+  const newsDate = dateMatch ? dateMatch[1] : null;
+  const eventDateStart = dateMatch ? dateMatch[1] : null;
+  const eventDateEnd = dateMatch && dateMatch[2] ? dateMatch[2] : null;
+  const eventDateRaw = dateMatch
+    ? (dateMatch[0] ?? "").replace(/^日期：\s*/, "").trim()
+    : null;
+
+  let eventLocation: string | null = null;
+  if (locationMatch) {
+    const locRaw = locationMatch[1].trim();
+    // 只取地點欄位的第一段文字（遇到空白/全形空白後的描述不算在地點內）
+    eventLocation = locRaw.split(/[\s\u3000]+/)[0] || null;
+  }
+
+  return {
+    newsDate,
+    eventDateStart,
+    eventDateEnd,
+    eventDateRaw,
+    eventLocation,
+  };
 }
 
 function deriveTitleFromUrl(url: string): string {

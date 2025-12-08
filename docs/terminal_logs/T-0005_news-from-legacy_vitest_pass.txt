@@ -1,0 +1,12 @@
+npx vitest tests/adapters/news-from-legacy.spec.ts
+
+DEV  v4.0.15 F:/ctcm-website-frontend
+
+✓ tests/adapters/news-from-legacy.spec.ts (2 tests)
+  newsFromLegacy
+    ✓ builds a minimal NewsContent from legacy HTML
+    ✓ maps basic date and location fields into NewsMeta when present in HTML (T-0005 v1)
+
+Tests:   2 passed
+Command: npx vitest tests/adapters/news-from-legacy.spec.ts
+Exit code: 0

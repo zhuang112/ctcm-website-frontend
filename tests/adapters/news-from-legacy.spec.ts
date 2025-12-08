@@ -2,9 +2,9 @@ import { describe, expect, it } from "vitest";
 import { newsFromLegacy } from "../../src/adapters/news-from-legacy";
 import type { LegacyHtmlDocument } from "../../src/html/legacy-html-types";
 
-// news adapter 的 minimal 行為測試：
-// - 能呼叫 htmlToMarkdown 並產出 NewsContent 結構。
-// - post_type / old_url / body_markdown / meta skeleton 正確。
+// news adapter 測試：
+// - minimal mapping：能呼叫 htmlToMarkdown 並產出 NewsContent 結構。
+// - T-0005: 能從 HTML meta 段落中解析日期與地點欄位。
 
 describe("newsFromLegacy", () => {
   it("builds a minimal NewsContent from legacy HTML", () => {
@@ -44,5 +44,32 @@ describe("newsFromLegacy", () => {
     expect(news.meta.ct_event_date_raw).toBeNull();
     expect(news.meta.ct_event_location).toBeNull();
     expect(news.meta.ct_news_category).toBeNull();
+  });
+
+  it("maps basic date and location fields into NewsMeta when present in HTML (T-0005 v1)", () => {
+    const doc: LegacyHtmlDocument = {
+      url: "https://www.ctworld.org.tw/news/2025/event-news.htm",
+      html: `
+        <html>
+          <body>
+            <div class="news-meta">
+              日期：2025-03-14 地點：台北講堂
+            </div>
+            <p>這是一則含有日期與地點資訊的新聞。</p>
+          </body>
+        </html>
+      `,
+    };
+
+    const news = newsFromLegacy(doc, {
+      externalId: "news_event_2025_zh-tw",
+      language: "zh-tw",
+    });
+
+    expect(news.meta.ct_news_date).toBe("2025-03-14");
+    expect(news.meta.ct_event_date_start).toBe("2025-03-14");
+    expect(news.meta.ct_event_date_end).toBeNull();
+    expect(news.meta.ct_event_date_raw).toBe("2025-03-14");
+    expect(news.meta.ct_event_location).toBe("台北講堂");
   });
 });

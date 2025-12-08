@@ -455,8 +455,117 @@
   - 全專案：
 
     ```bash
+- 後續若在 magazine adapter 上新增 issue / section / author 等邏輯，建議再開新的 T 任務，而不直接更動本小節描述。
+
+---
+
+## 2025-12-08 任務：T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
+
+### 1. 任務需求總結
+
+- 對應 PROJECT_TODO：
+  - `T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）`
+- 目標：
+  - 在現有 `news-from-legacy` 骨架上，實作第一版日期與地點欄位 mapping，
+    讓 `NewsMeta` 至少能填入「新聞日期」與「活動日期 / 地點」等基本資訊。
+
+### 2. 主要實作內容
+
+- 檔案：`src/adapters/news-from-legacy.ts`
+
+  - 新增 helper：`parseNewsDateAndLocationFromHtml(html: string)`，回傳：
+
+    ```ts
+    interface ParsedNewsDateLocation {
+      newsDate: string | null;
+      eventDateStart: string | null;
+      eventDateEnd: string | null;
+      eventDateRaw: string | null;
+      eventLocation: string | null;
+    }
+    ```
+
+  - 解析策略（v1）：
+    - 僅針對最簡單且常見的樣板：
+      - 文字中出現：`日期：YYYY-MM-DD`（可選 `~` / `～` / `-` 再接第二個日期）。
+      - 文字中出現：`地點：XXXX`，以 `。` / `；` / `;` 或字串結尾作為終止。
+    - 步驟：
+      1. 將 HTML 中所有標籤移除，取得純文字，並將空白壓成單行字串。
+      2. 使用正則：
+         - 日期：`/日期：\s*([0-9]{4}-[0-9]{1,2}-[0-9]{1,2})(?:\s*[~～─-]\s*([0-9]{4}-[0-9]{1,2}-[0-9]{1,2}))?/`
+         - 地點：`/地點：\s*([^。；;]+)/`
+    - 對應欄位填值：
+      - 若有日期：
+        - `ct_news_date = 第一個日期`
+        - `ct_event_date_start = 第一個日期`
+        - `ct_event_date_end = 第二個日期`（若存在，否則為 `null`）
+        - `ct_event_date_raw = 去掉「日期：」前綴後的原始日期字串`
+      - 若有地點：
+        - `ct_event_location = 地點後方文字（去尾端標點與多餘空白）`
+      - 若無匹配到，保持 `null`。
+
+  - `NewsMeta` 組裝調整：
+
+    ```ts
+    const parsed = parseNewsDateAndLocationFromHtml(doc.html);
+
+    const meta: NewsMeta = {
+      ct_collection_key: undefined,
+      ct_collection_order: undefined,
+      ct_news_date: parsed.newsDate,
+      ct_event_date_start: parsed.eventDateStart,
+      ct_event_date_end: parsed.eventDateEnd,
+      ct_event_date_raw: parsed.eventDateRaw,
+      ct_event_location: parsed.eventLocation,
+      ct_news_category: null,
+    };
+    ```
+
+### 3. 測試調整
+
+- 檔案：`tests/adapters/news-from-legacy.spec.ts`
+
+  - 原有測試：`"builds a minimal NewsContent from legacy HTML"` 維持，用於確認 skeleton 行為仍正確。
+
+  - 新增測試：`"maps basic date and location fields into NewsMeta when present in HTML (T-0005 v1)"`
+
+    - 測試輸入（代表性 news HTML）：
+
+      ```html
+      <html>
+        <body>
+          <div class="news-meta">
+            日期：2025-03-14 地點：台北講堂
+          </div>
+          <p>這是一則含有日期與地點資訊的新聞。</p>
+        </body>
+      </html>
+      ```
+
+    - 預期行為：
+      - `ct_news_date === "2025-03-14"`
+      - `ct_event_date_start === "2025-03-14"`
+      - `ct_event_date_end === null`（因為只出現單一日期）
+      - `ct_event_date_raw === "2025-03-14"`
+      - `ct_event_location === "台北講堂"`
+
+### 4. 測試與型別檢查
+
+- 型別檢查：
+  - 建議指令：
+    - `npx tsc --noEmit`
+
+- 測試：
+  - 單檔：
+
+    ```bash
+    npx vitest tests/adapters/news-from-legacy.spec.ts
+    ```
+
+  - 全專案：
+
+    ```bash
     npx vitest
     ```
 
-- 後續若在 magazine adapter 上新增 issue / section / author 等邏輯，建議再開新的 T 任務，而不直接更動本小節描述。
-
+- 之後若要支援更複雜的日期範圍或多段地點描述，建議再開新 T 任務，並在本檔記錄新的解析策略.
