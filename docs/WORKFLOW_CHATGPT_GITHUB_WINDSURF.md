@@ -52,7 +52,7 @@
 這些檔案是三方協作時會用到的主要文件：
 
 - `docs/COMPLETE_PROJECT_WORKFLOW.md`  
-  舊站 HTML → JSON → zh-CN → WordPress → React 的整體 pipeline。
+  舊站 HTML → JSON → zh-cn → WordPress → React 的整體 pipeline。
 
 - `docs/CONTENT_SCHEMA.md`  
   各 post_type 的 AnyContent schema（欄位與說明）。
@@ -285,6 +285,7 @@ Windsurf 在這些情況會詢問你 / 要你按確認。
 - docs/HTML_TO_MARKDOWN_RULES_V4.md
 - docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md
+- docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md
 
 目前最新任務小節是：
 - docs/Windsurf_ChatGPT_NOTES.md 裡的「YYYY-MM-DD 任務：...」（以及之後的任務，如果有）。

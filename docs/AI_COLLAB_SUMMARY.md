@@ -1,7 +1,7 @@
 # AI 協作摘要（角色、契約、修改範圍）
 
 > 根據：
-> - `docs/AI_COLLAB_WORKFLOW.md`
+> - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
 > - `docs/COMPLETE_PROJECT_WORKFLOW.md`
 > - `docs/CONVENTIONS.md`
 > - `docs/CODING_GUIDELINES.md`
@@ -21,7 +21,7 @@
     - `docs/COMPLETE_PROJECT_WORKFLOW.md`
     - `docs/HTML_TO_MARKDOWN_RULES_*.md`
     - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
-    - `docs/AI_COLLAB_WORKFLOW.md` 等。
+    - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md` 等。
   - 產生骨架程式碼（含 `// TODO`）與函式簽名：
     - 例如 `tools/convert/*.ts`、`tools/crawl/*.ts`、未來的 `html-to-anycontent-*.ts` 等。
   - 在你提供 diff 或檔案內容時，做 **code review**：

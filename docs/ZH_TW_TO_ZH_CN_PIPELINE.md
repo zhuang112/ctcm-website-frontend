@@ -3,7 +3,7 @@
 > 目標：  
 > - 不重抓 `-gb` HTML，只用繁中內容自動生成簡中版本  
 > - 保留所有簡體舊網址（`-gb`）的對應關係與 redirect  
-> - 確保 zh-TW / zh-CN 版本內容一致，只差字形
+> - 確保 zh-tw / zh-cn 版本內容一致，只差字形
 
 ---
 
@@ -32,13 +32,13 @@ type UrlPair = {
 
 ---
 
-## 2. zh-TW JSON 生成
+## 2. zh-tw JSON 生成
 
 對每個 `baseUrl`：
 
 1. 抓 HTML
 2. 套 `html-to-markdown` + V3 規則
-3. 產出 `language = "zh-TW"` 的 JSON
+3. 產出 `language = "zh-tw"` 的 JSON
 
 若該 URL 有對應 `gbUrl`：
 
@@ -46,7 +46,7 @@ type UrlPair = {
 "multilingual": {
   "translations": [
     {
-      "language": "zh-CN",
+      "language": "zh-cn",
       "old_url": "https://www.ctworld.org/sutra_stories/story148-gb.htm",
       "status": "planned"
     }
@@ -58,7 +58,7 @@ type UrlPair = {
 
 ## 3. 繁→簡轉換的欄位範圍
 
-使用 OpenCC（或等效工具）將 zh-TW JSON 轉成 zh-CN JSON。
+使用 OpenCC（或等效工具）將 zh-tw JSON 轉成 zh-cn JSON。
 
 **需要轉換的欄位：**
 
@@ -79,14 +79,14 @@ type UrlPair = {
 
 ---
 
-## 4. zh-CN JSON 結果格式
+## 4. zh-cn JSON 結果格式
 
-產出的 zh-CN JSON：
+產出的 zh-cn JSON：
 
 ```jsonc
 {
-  "external_id": "teaching_20030315_heart_sutra_001_zh-CN",
-  "language": "zh-CN",
+  "external_id": "teaching_20030315_heart_sutra_001_zh-cn",
+  "language": "zh-cn",
   "old_url": "https://www.ctworld.org/sutra_stories/story148-gb.htm",
   "post_title": "無畏自在——從《心经》看放下执著",
   "post_excerpt": "……（簡體字版）",
@@ -102,7 +102,7 @@ type UrlPair = {
   "multilingual": {
     "translations": [
       {
-        "language": "zh-CN",
+        "language": "zh-cn",
         "old_url": "https://www.ctworld.org/sutra_stories/story148-gb.htm",
         "status": "generated"
       }
@@ -117,18 +117,18 @@ type UrlPair = {
 
 建議流程：
 
-1. **第一輪**：匯入所有 zh-TW JSON
+1. **第一輪**：匯入所有 zh-tw JSON
    - 為每篇產生 `post_id_tw`
    - 設：
-     - Polylang 語言 = `zh-TW`
+     - Polylang 語言 = `zh-tw`
      - `ct_external_id = external_id`（例如：`teaching_..._001`）
 
-2. **第二輪**：匯入所有 zh-CN JSON
+2. **第二輪**：匯入所有 zh-cn JSON
    - 為每篇產生 `post_id_cn`
    - 設：
-     - Polylang 語言 = `zh-CN`
-     - `ct_external_id = external_id`（例如：`teaching_..._001_zh-CN`）
-   - 用 group key（例如從 external_id 去掉 `_zh-CN`）找出對應 zh-TW 一篇
+     - Polylang 語言 = `zh-cn`
+     - `ct_external_id = external_id`（例如：`teaching_..._001_zh-cn`）
+   - 用 group key（例如從 external_id 去掉 `_zh-cn`）找出對應 zh-tw 一篇
    - 使用 Polylang API 建立翻譯關係
 
 3. 同時把 `old_url` 存成 post meta（含 `-gb`），供 redirect 使用。
@@ -139,10 +139,10 @@ type UrlPair = {
 
 為避免 SEO 損失與 404：
 
-- 將 zh-CN JSON 的 `old_url`（即 `-gb`）：
+- 將 zh-cn JSON 的 `old_url`（即 `-gb`）：
   - 存入 WordPress post meta：`_ct_old_url_gb`
   - 或匯入自訂 redirect 表
 - 使用 redirect 外掛或自寫邏輯：
-  - 讓舊簡體網址（`story148-gb.htm`）→ 301 redirect 到新站對應的 zh-CN URL
+  - 讓舊簡體網址（`story148-gb.htm`）→ 301 redirect 到新站對應的 zh-cn URL
 
 ---
