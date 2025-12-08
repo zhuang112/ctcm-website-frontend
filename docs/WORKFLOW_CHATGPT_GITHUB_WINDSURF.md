@@ -1,5 +1,7 @@
 # 中台世界專案三方協作工作流程（User / ChatGPT / Windsurf）
 
+> 版本：2025-12-08（由 ChatGPT 更新）
+
 > 目標：讓你只需要做關鍵決策與簡單 copy / paste，  
 > 技術細節與執行由 ChatGPT + Windsurf 自動接力完成。
 
@@ -270,6 +272,8 @@ ChatGPT 會：
 ### 4.y 每個 T 任務完成後的建議 git 流程（Windsurf → 你）
 
 為了讓 GitHub 上的 repo 永遠貼近「最新已完成的 T 任務」，每一個 T-XXXX 任務收尾時，建議由 Windsurf 在回報摘要的最後，自動多附一段「建議 git 指令」，讓你可以在 IDE / 終端機中直接複製執行。
+同時，**Windsurf 不會自動執行任何 `git add` / `git commit` / `git push`**，只會提供建議指令，由你在 IDE / 終端機中手動確認與執行。
+
 
 #### 4.y.1 建議的 git 指令區塊格式
 
