@@ -40,7 +40,7 @@
     - 能在本機成功執行：
       - `npm run crawl:ctworld`
       - `npm run inventory:fs`
-      - `npm run diff:crawl-vs-fs`
+      - `npm run diff:crawl-vs-files`
     - 產出的 JSON / CSV 檔格式符合 `crawl-and-inventory.md` 規格。
   - 負責人：ChatGPT（規格＋骨架）＋ Windsurf（實作）＋ 你（整合與驗收）
 
@@ -129,67 +129,100 @@
 
 ---
 
-### T-0002 AnyContent 其他 post_type 型別：news / magazine contract
+### ✅ T-0002 AnyContent 其他 post_type 型別：news / magazine contract（已完成）
+
+- 狀態：
+  - 已由 Windsurf 依照 T-0002 規格完成實作，並通過 TypeScript 型別檢查。
+- 新增 / 更新的型別檔：
+  - `src/types/anycontent-teaching.ts`
+  - `src/types/anycontent-news.ts`
+  - `src/types/anycontent-magazine.ts`
+  - `src/types/anycontent.ts`
+- 任務規格來源：
+  - `docs/PROJECT_TODO.md`（T-0002 段落）
+  - `docs/CONTENT_SCHEMA.md`
+- 相關說明與紀錄：
+  - `docs/Windsurf_ChatGPT_NOTES.md`
+  - `docs/terminal_logs/T-0002_anycontent_types_tsc_pass.txt`
+- 結果摘要：
+  - AnyContent 的 contract 型別現已包含 teaching / news / magazine 三種 post_type。
+  - news / magazine 的 meta / content 型別已明確定義，未破壞既有 `Language` union 與 `AnyContentBase`。
+
+---
+
+### T-0003 news-from-legacy: 建立 NewsContent adapter 骨架（minimal mapping）
 
 - 目標：
-  - 依照 `docs/CONTENT_SCHEMA.md` 中的定義，為 news / magazine 建立穩定的 AnyContent contract 型別檔，
-    讓之後的 adapter 可以直接依賴這些型別，不需要再改 schema。
+  - 建立 `news-from-legacy` adapter 的第一版骨架，將 legacy HTML + htmlToMarkdown 的輸出，轉成最基本的 `NewsContent` 結構，作為後續擴充的基礎。
 
 - 關聯 docs：
   - `docs/CONTENT_SCHEMA.md`
-    - 0.1 Language
-    - 0.2 BaseMeta / AnyContentBase
-    - 2.x 中與 news / magazine 相關的小節（NewsMeta / MagazineMeta / MagazineContent）
-    - 3. AnyContent union
+    - news / NewsMeta / NewsContent 段落
+    - AnyContent union
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
+    - 共用 htmlToMarkdown 輸入 / 輸出說明
+  - `docs/COMPLETE_PROJECT_WORKFLOW.md`
+    - HTML → Markdown → AnyContent 流程
   - `docs/PROJECT_STATUS.md`
-    - 關於「補 strong contract：AnyContent 其他 post_type 型別」的建議
-  - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
-    - 關於「型別 / contract 不可隨意變動」的原則
+    - 關於 AnyContent 其他 post_type 的建議
 
-- 要新增 / 更新的檔案（實際名稱可依現有風格微調）：
-  - `src/types/anycontent-news.ts`
-    - 匯出：
-      - `interface NewsMeta`
-      - `interface NewsContent extends AnyContentBase`
-  - `src/types/anycontent-magazine.ts`
-    - 匯出：
-      - `interface MagazineMeta`
-      - `interface MagazineContent extends AnyContentBase`
-  - 若有集中管理 AnyContent union 的檔案（例如 `src/types/anycontent.ts` 或類似）：
-    - 將 `NewsContent` / `MagazineContent` 納入 AnyContent union。
+- 要新增 / 更新的檔案（建議命名，實際以現有結構為準）：
+  - `src/adapters/news-from-legacy.ts`
+    - 匯出一個函式，例如：
+      - `newsFromLegacy(doc: LegacyHtmlDocument, md: HtmlToMarkdownResult): NewsContent`
+  - `tests/adapters/news-from-legacy.spec.ts`
+    - 覆蓋 minimal 行為（見下）。
 
-- 規格摘要（概念層級，具體欄位以 `docs/CONTENT_SCHEMA.md` 為準）：
-  - NewsContent：
-    - `post_type` 固定為 `'news'`
-    - `meta: NewsMeta`
-    - `NewsMeta` 至少包含：
-      - `ct_news_date?: string | null`
-      - `ct_event_date_start?: string | null`
-      - `ct_event_date_end?: string | null`
-      - `ct_event_date_raw?: string | null`
-      - `ct_event_location?: string | null`
-      - `ct_news_category?: string | null`
-  - MagazineContent：
-    - `post_type` 固定為 `'magazine'`
-    - `meta: MagazineMeta`
-    - `MagazineMeta` 包含期數與文章區塊相關欄位：
-      - 例如 `ct_issue_items`, `ct_magazine_section`, `ct_magazine_type`, `ct_author_name` 等
-      - 具體名稱與型別以 `docs/CONTENT_SCHEMA.md` 為準。
-  - 不可變動的既有 contract：
-    - `Language` union: `'zh-tw' | 'zh-cn' | 'en' | 'ja'`
-    - `AnyContentBase` 既有欄位與型別
-    - Teaching 相關型別（`TeachingMeta` / `TeachingContent`）
+- 規格摘要（本任務只做 minimal mapping）：
+  - 輸入：
+    - `LegacyHtmlDocument`：
+      - 至少包含 `url` 與原始 `html`。
+    - `HtmlToMarkdownResult`：
+      - 至少包含 `bodyMarkdown`、`images`、`anchors` 等共用欄位。
+  - 輸出：
+    - `NewsContent`：
+      - `post_type` 固定為 `'news'`。
+      - `language` 先只支援 `'zh-tw'`，未來由 zh-TW → zh-CN pipeline 產生其他語言。
+      - `old_url` 由 `LegacyHtmlDocument.url` 填入。
+      - `post_title`：
+        - 先用一個簡單策略（例如來自 `HtmlToMarkdownResult` 或 placeholder），詳細 title 規則留待之後的 T 任務。
+      - `body_markdown`：
+        - 直接使用 `HtmlToMarkdownResult.bodyMarkdown`。
+      - `meta: NewsMeta`：
+        - 目前僅填入最基本欄位，其他維持 `null` / 未填，例如：
+          - `ct_news_date`: `null`
+          - `ct_event_date_start`: `null`
+          - `ct_event_date_end`: `null`
+          - `ct_event_date_raw`: `null`
+          - `ct_event_location`: `null`
+          - `ct_news_category`: `null`
+        - 之後可以用新的 T 任務逐步補齊從 HTML 抽出日期 / 地點 / 類別等邏輯。
+      - `featured_image` / `gallery_items`：
+        - 目前可以先保持為空或用簡單規則（例如取第一張圖片做 featured），具體實作交給後續 T 任務。
+
+- 允許修改的範圍：
+  - 新增 `news-from-legacy.ts` 與對應測試檔。
+  - 若有集中管理 adapter 的 barrel 檔（例如 `src/adapters/index.ts`），可以在其中 export 新增的 adapter。
+  - 不可修改：
+    - `Language` union。
+    - `AnyContentBase`。
+    - 既有 teaching / news / magazine 型別定義（只能引用）。
 
 - 驗收方式：
-  - 型別檢查：
-    - 若專案有對應 script，則執行：
-      - `npm run typecheck`
-    - 若沒有，則執行：
-      - `npx tsc --noEmit`
-  - 測試：
-    - 確保所有既有 Vitest 測試通過：
+  - 新增 `tests/adapters/news-from-legacy.spec.ts`，至少涵蓋：
+    - 在給定一個最小的 `LegacyHtmlDocument` + `HtmlToMarkdownResult` 時：
+      - 回傳的 `NewsContent.post_type === 'news'`。
+      - `old_url` 正確。
+      - `body_markdown` 直接來自 `HtmlToMarkdownResult.bodyMarkdown`。
+      - `meta` 欄位存在且為 `NewsMeta` 型別，主要欄位預設為 `null` / 未填。
+  - 測試指令：
+    - 單檔：
+      - `npx vitest tests/adapters/news-from-legacy.spec.ts`
+    - 全專案：
       - `npx vitest`
-  - 後續當新增 news / magazine 專用 adapter 時，不需修改這兩個型別檔，只需依照 contract 實作 adapter。
+  - TypeScript 型別檢查需通過（依專案實際 script，至少擇一）：
+    - `npm run typecheck`
+    - 或 `npx tsc --noEmit`
 
 ---
 
