@@ -370,3 +370,93 @@
     ```
 
 - 後續若在 news adapter 上新增日期 / 地點 / 類別等邏輯，建議再開新的 T 任務，而不直接更動本小節描述.
+
+---
+
+## 2025-12-08 任務：T-0004 magazine-from-legacy: 建立 MagazineContent adapter 骨架（minimal mapping）
+
+### 1. 任務需求總結
+
+- 對應 PROJECT_TODO：
+  - `T-0004 magazine-from-legacy: 建立 MagazineContent adapter 骨架（minimal mapping）`
+- 目標：
+  - 建立第一版 `magazine-from-legacy` adapter，從 legacy HTML + htmlToMarkdown 輸出建立最基本的 `MagazineContent`，
+    僅實作 minimal mapping，期數 / 區塊 / 作者等進階欄位留給後續 T 任務補強。
+
+### 2. 主要實作內容
+
+- 檔案：`src/adapters/magazine-from-legacy.ts`
+
+  - 匯出：
+    - `magazineFromLegacy(doc: LegacyHtmlDocument, options: MagazineFromLegacyOptions): MagazineContent`
+  - `MagazineFromLegacyOptions`：
+    - 延伸 `HtmlToMarkdownOptions`，新增：
+      - `externalId: string`
+      - `language: Language`（沿用 AnyContent 的 `Language` union，目前實際測試以 `"zh-tw"` 為主）
+      - `fallbackTitle?: string`
+  - 轉換流程：
+    - 呼叫 `htmlToMarkdown(doc, markdownOptions)` 取得 `mdResult`。
+    - `post_title`：先以 `fallbackTitle ?? deriveTitleFromUrl(doc.url)` 簡單推得。
+    - `meta: MagazineMeta`：僅建立 skeleton，issue / article 相關欄位先填 `null` / `undefined`：
+      - `ct_magazine_level: "issue"`（暫定當前頁代表整期雜誌）。
+      - `ct_magazine_issue_no: null`
+      - `ct_magazine_year: null`
+      - `ct_magazine_month: null`
+      - `ct_magazine_issue_label: null`
+      - `ct_issue_items: undefined`
+      - `ct_magazine_section: null`
+      - `ct_magazine_type: null`
+      - `ct_author_name: null`
+    - `MagazineContent`：
+      - `external_id`：來自 options.externalId。
+      - `language`：來自 options.language。
+      - `post_type: 'magazine'`。
+      - `old_url: doc.url`。
+      - `post_title` 如上。
+      - `post_excerpt: null`（暫不從 HTML 推導）。
+      - `body_markdown: mdResult.body_markdown`。
+      - `featured_image`：取 `mdResult.images[0]?.src ?? null`。
+      - `featured_image_caption: null`。
+      - `gallery_items`：其餘圖片映射為 `{ url, alt, caption: null }` 陣列。
+
+- 檔案：`tests/adapters/magazine-from-legacy.spec.ts`
+
+  - 新增測試：`"builds a minimal MagazineContent from legacy HTML"`
+  - 測試輸入：一個簡單的 legacy magazine HTML，包含：
+    - `<h1>雜誌第一期</h1>`
+    - 一段主文 `<p>這是雜誌內容的摘要段落。</p>`
+    - 兩張圖片：一張封面、一張內頁圖。
+  - 測試斷言：
+    - `magazine.post_type === 'magazine'`。
+    - `magazine.language === 'zh-tw'`。
+    - `magazine.old_url === doc.url`。
+    - `magazine.body_markdown` 內含主文文字。
+    - 圖片：
+      - `featured_image` 包含封面檔名。
+      - `gallery_items.length === 1` 且唯一元素的 `url` 包含內頁圖檔名。
+    - `meta` skeleton：
+      - `ct_magazine_issue_no` / `ct_magazine_year` / `ct_magazine_month` / `ct_magazine_issue_label` 為 `null`。
+      - `ct_issue_items` 為 `undefined`。
+      - `ct_magazine_section` / `ct_magazine_type` / `ct_author_name` 為 `null`。
+
+### 3. 測試與型別檢查
+
+- 型別檢查：
+  - 指令（沿用 T-0002）：
+    - `npx tsc --noEmit`
+
+- 測試：
+  - 單檔：
+
+    ```bash
+    npx vitest tests/adapters/magazine-from-legacy.spec.ts
+    ```
+
+  - 全專案：
+
+    ```bash
+    npx vitest
+    ```
+
+- 後續若在 magazine adapter 上新增 issue / section / author 等邏輯，建議再開新的 T 任務，而不直接更動本小節描述。
+
