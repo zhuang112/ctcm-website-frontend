@@ -182,77 +182,93 @@
 
 ---
 
-### T-0004 magazine-from-legacy: 建立 MagazineContent adapter 骨架（minimal mapping）
+### ✅ T-0004 magazine-from-legacy: 建立 MagazineContent adapter 骨架（minimal mapping）（已完成）
+
+- 狀態：
+  - 已由 Windsurf 依照 T-0004 規格完成實作，並通過 TypeScript 型別檢查與 Vitest 測試。
+- 新增 / 更新的程式檔：
+  - `src/html/html-to-markdown.ts`
+  - `src/html/legacy-html-types.ts`
+  - `src/types/anycontent-teaching.ts`
+  - `src/types/anycontent-news.ts`
+  - `src/types/anycontent-magazine.ts`
+  - `src/types/anycontent.ts`
+  - `src/adapters/teaching-from-legacy.ts`
+  - `src/adapters/news-from-legacy.ts`
+  - `src/adapters/magazine-from-legacy.ts`
+- 新增 / 更新的測試檔：
+  - `tests/html/html-to-markdown.spec.ts`
+  - `tests/adapters/teaching-from-legacy.spec.ts`
+  - `tests/adapters/news-from-legacy.spec.ts`
+  - `tests/adapters/magazine-from-legacy.spec.ts`
+- 交接與流程說明檔：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
+  - `docs/PROJECT_TODO.md`
+  - `docs/Windsurf_ChatGPT_NOTES.md`
+- 本次型別檢查與測試 log：
+  - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_fail.txt`
+  - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_pass.txt`
+  - `docs/terminal_logs/T-0002_anycontent_types_tsc_pass.txt`
+  - `docs/terminal_logs/T-0003_news-from-legacy_vitest_pass.txt`
+  - `docs/terminal_logs/T-0004_magazine-from-legacy_tsc_pass.txt`
+  - `docs/terminal_logs/T-0004_magazine-from-legacy_vitest_pass.txt`
+- 結果摘要：
+  - 已有 minimal 版本的 `magazine-from-legacy` adapter 與對應測試，能從 legacy HTML + htmlToMarkdownResult 建立基本的 `MagazineContent`。
+  - teaching / news / magazine 三種 post_type 的 adapter 骨架都已完成，可分別在後續任務中逐步補齊欄位 mapping。
+
+---
+
+### T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
 
 - 目標：
-  - 參考 `news-from-legacy` 的結構，建立 `magazine-from-legacy` adapter 的第一版骨架，
-    讓系統可以從 legacy HTML + htmlToMarkdownResult 建立最基本的 `MagazineContent`，
-    作為後續補齊 issue / section / author 等欄位的基礎。
+  - 在既有 `news-from-legacy` 骨架上，實作第一版的日期與地點欄位 mapping，
+    讓 `NewsMeta` 至少能填入「新聞日期」與「活動日期 / 地點」等基本資訊。
 
 - 關聯 docs：
   - `docs/CONTENT_SCHEMA.md`
-    - MagazineMeta / MagazineContent 段落
-    - AnyContent union
+    - NewsMeta / NewsContent 段落
   - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
-    - 共用 htmlToMarkdown 輸入 / 輸出說明
+    - 與 news 版面相關的 HTML 結構與轉 Markdown 規則（若有）
   - `docs/COMPLETE_PROJECT_WORKFLOW.md`
     - HTML → Markdown → AnyContent 流程
-  - `docs/PROJECT_STATUS.md`
-    - 關於 AnyContent 其他 post_type 的建議
   - `docs/Windsurf_ChatGPT_NOTES.md`
-    - 若有針對 magazine 的補充說明，可在本任務完成時一併更新
+    - 請在本任務完成時補充實際解析到的樣板與 selector
 
-- 要新增 / 更新的檔案（建議命名，實際以現有結構為準）：
-  - `src/adapters/magazine-from-legacy.ts`
-    - 匯出函式，例如：
-      - `magazineFromLegacy(doc: LegacyHtmlDocument, md: HtmlToMarkdownResult): MagazineContent`
-  - `tests/adapters/magazine-from-legacy.spec.ts`
-    - 覆蓋 minimal 行為（見下）。
+- 要更新的檔案：
+  - `src/adapters/news-from-legacy.ts`
+  - `tests/adapters/news-from-legacy.spec.ts`
 
-- 規格摘要（本任務只做 minimal mapping）：
-  - 輸入：
-    - `LegacyHtmlDocument`：
-      - 至少包含 `url` 與原始 `html`。
-    - `HtmlToMarkdownResult`：
-      - 至少包含 `bodyMarkdown`、`images`、`anchors` 等共用欄位。
-  - 輸出：
-    - `MagazineContent`：
-      - `post_type` 固定為 `'magazine'`。
-      - `language` 先只支援 `'zh-tw'`，未來由 zh-TW → zh-CN pipeline 產生其他語言。
-      - `old_url` 由 `LegacyHtmlDocument.url` 填入。
-      - `post_title`：
-        - 先用簡單策略（例如 placeholder 或取自 HTML `<title>` / 主要 heading），詳細規則留給之後的 T 任務。
-      - `body_markdown`：
-        - 直接使用 `HtmlToMarkdownResult.bodyMarkdown`。
-      - `meta: MagazineMeta`：
-        - 目前僅填入最基本欄位，其他維持 `null` / 未填，例如：
-          - 與期數、欄位區塊、作者等有關的欄位先暫時為 `null`。
-        - 之後可以用新的 T 任務逐步補齊從 HTML 抽出 issue / section / author 等邏輯。
-      - `featured_image` / `gallery_items`：
-        - 目前可以先保持為空或用簡單規則（例如取第一張圖片做 featured），具體實作交給後續 T 任務。
+- 規格摘要（v1 範圍）：
+  - 以目前最常見、最容易解析的 news 樣板為主，先支援一小部分範例頁面即可。
+  - 從 legacy HTML 或 htmlToMarkdownResult 中，嘗試解析：
+    - `meta.ct_news_date`
+    - `meta.ct_event_date_start`
+    - `meta.ct_event_date_end`
+    - `meta.ct_event_date_raw`
+    - `meta.ct_event_location`
+  - 具體策略由 Windsurf 在程式中實作並在 `docs/Windsurf_ChatGPT_NOTES.md` 紀錄，例如：
+    - 針對特定 container / class（如 `.news-date` / `.article-info`）解析文字。
+    - 或在 Markdown 中尋找「日期：」「地點：」等前綴行，做簡單的字串切割。
+  - 無法可靠解析的欄位先維持 `null` / 未填，避免亂猜：
+    - 例如只有一行「2022-03-14」時，可以同時填入 `ct_news_date` 與 `ct_event_date_start`，但需在 notes 中說明。
 
 - 允許修改的範圍：
-  - 新增 `magazine-from-legacy.ts` 與對應測試檔。
-  - 若有集中管理 adapter 的 barrel 檔（例如 `src/adapters/index.ts`），可以在其中 export 新增的 adapter。
+  - 僅修改 `news-from-legacy.ts` 內與 `NewsMeta` 欄位相關的邏輯。
+  - 可以為測試新增少量 fixture / helper，用於組裝代表性的 `LegacyHtmlDocument` / `HtmlToMarkdownResult`。
   - 不可修改：
-    - `Language` union。
-    - `AnyContentBase`。
-    - 既有 teaching / news / magazine 型別定義（只能引用）。
+    - `NewsMeta` / `NewsContent` 的欄位名稱與型別。
+    - `Language` union、`AnyContentBase` 結構。
 
 - 驗收方式：
-  - 新增 `tests/adapters/magazine-from-legacy.spec.ts`，至少涵蓋：
-    - 在給定一個最小的 `LegacyHtmlDocument` + `HtmlToMarkdownResult` 時：
-      - 回傳的 `MagazineContent.post_type === 'magazine'`。
-      - `old_url` 正確。
-      - `body_markdown` 直接來自 `HtmlToMarkdownResult.bodyMarkdown`。
-      - `meta` 欄位存在且為 `MagazineMeta` 型別，主要欄位預設為 `null` / 未填。
+  - 新增 / 擴充 `tests/adapters/news-from-legacy.spec.ts`：
+    - 至少加入 1–2 個代表性的 news 測試案例，斷言日期與地點欄位正確填入。
   - 測試指令：
     - 單檔：
-      - `npx vitest tests/adapters/magazine-from-legacy.spec.ts`
+      - `npx vitest tests/adapters/news-from-legacy.spec.ts`
     - 全專案：
       - `npx vitest`
-  - TypeScript 型別檢查需通過（依專案實際 script，至少擇一）：
-    - `npm run typecheck`
+  - TypeScript 型別檢查需通過：
+    - `npm run typecheck`（若存在）
     - 或 `npx tsc --noEmit`
 
 ---
