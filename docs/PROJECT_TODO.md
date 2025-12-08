@@ -109,3 +109,54 @@
    - 若 ChatGPT 做過 code review，可以在這裡附註「已 review」。
 
 你可以持續維護本檔案，讓它成為本專案「人機協作」的任務總覽。
+
+## 任務列表
+
+### T-0001 teaching-from-legacy: 將 htmlToMarkdown 的 verses 映射到 TeachingMeta 偈語欄位
+
+- 關聯 docs：
+  - docs/CONTENT_SCHEMA.md
+    - 0.1 Language
+    - 0.2 BaseMeta / AnyContentBase
+    - 2.1 teaching（TeachingMeta / TeachingContent 偏好欄位）
+  - docs/HTML_TO_MARKDOWN_RULES_V4.md
+    - 有關 teaching / sutra 專用規則與 verses 的描述
+  - docs/COMPLETE_PROJECT_WORKFLOW.md
+    - 4. HTML → Markdown（htmlToMarkdown）
+    - 5. Markdown + metadata → AnyContent JSON（teaching 的位置）
+  - docs/PROJECT_STATUS.md
+    - 「將 verses 寫入 TeachingMeta 偈語欄位」的下一步建議
+  - docs/Windsurf_ChatGPT_NOTES.md
+    - 2025-12-08 /turn/sutra/ 經論講解頁專用規則 v1
+
+- 要修改的檔案：
+  - src/adapters/teaching-from-legacy.ts
+  - tests/adapters/teaching-from-legacy.spec.ts
+
+- 規格摘要：
+  - 不改動 htmlToMarkdown 的輸入 / 輸出 shape，也不修改 verses 的產生邏輯。
+  - 在 teaching-from-legacy adapter 中，根據 HtmlToMarkdownResult.verses 設定 TeachingMeta 的偈語欄位：
+    - 若 verses.length === 0：
+      - meta.ct_has_dharma_verse = 'no'
+      - meta.ct_verse_block_markdown / meta.ct_verse_type / meta.ct_verse_lang 為 null 或未填（依既有風格處理）。
+    - 若 verses.length >= 1：
+      - meta.ct_has_dharma_verse = 'yes'
+      - meta.ct_verse_block_markdown = 每一行 verses 轉為 `> 行文`，以 `\n` 串接（形成一個 blockquote 區塊）。
+      - meta.ct_verse_type = 'sutra'
+      - meta.ct_verse_lang = 'zh-tw'（僅限 zh-tw 來源；未處理 zh-cn）。
+  - 不更動 TeachingMeta / TeachingContent / AnyContentBase 的欄位名稱與型別，只是正確填值。
+
+- 驗收方式：
+  - 新增或擴充 tests/adapters/teaching-from-legacy.spec.ts：
+    - 建立一個包含 verses 的 sutra 測試案例，斷言：
+      - meta.ct_has_dharma_verse === 'yes'
+      - meta.ct_verse_block_markdown 內容與預期一致（`> 行一\n> 行二` 之類）。
+      - meta.ct_verse_type === 'sutra'
+      - meta.ct_verse_lang === 'zh-tw'
+  - 測試指令：
+    - 針對單檔測試：
+      - `npx vitest tests/adapters/teaching-from-legacy.spec.ts`
+    - 全專案測試：
+      - `npx vitest`
+  - 所有既有 Vitest 測試需維持通過，不可為了通過測試而放寬型別或破壞現有 contract。
+
