@@ -569,3 +569,82 @@
     ```
 
 - 之後若要支援更複雜的日期範圍或多段地點描述，建議再開新 T 任務，並在本檔記錄新的解析策略.
+
+---
+
+## 2025-12-08 任務：T-0006 teaching-from-legacy CLI（HTML → AnyContent 範例）
+
+### 1. 任務需求總結
+
+- 對應 PROJECT_TODO（口頭描述）：
+  - `T-0006 teaching-from-legacy CLI（HTML → AnyContent 範例）`
+- 目標：
+  - 提供一支最小可用的 teaching 轉換 CLI，從本機 legacy teaching HTML 檔產生 `TeachingContent` / `AnyContent` JSON，
+    作為日後批次轉換工具與 pipeline 的示範。
+
+### 2. 主要實作內容
+
+- 檔案：`tools/convert/teaching-html-to-anycontent.ts`
+
+  - 功能：
+    - 從本機讀取一個 legacy teaching HTML 檔。
+    - 組裝 `LegacyHtmlDocument`，呼叫 `teachingFromLegacy` adapter（內部會再呼叫 `htmlToMarkdown`）。
+    - 將結果輸出為 JSON（stdout 或指定輸出檔）。
+
+  - CLI 介面（v1）：
+
+    ```bash
+    ts-node tools/convert/teaching-html-to-anycontent.ts \
+      --in path/to/legacy-teaching.html \
+      --external-id teaching_example_0001 \
+      --language zh-tw \
+      --out data/anycontent/teaching/example-0001.json
+    ```
+
+    - 參數說明：
+      - `--in`（必填）：legacy teaching HTML 檔案路徑。
+      - `--external-id`（選填）：預設為輸入檔名；實務上建議由外層 pipeline 決定。
+      - `--language`（選填）：預設 `zh-tw`，需符合 `Language` union。
+      - `--out`（選填）：輸出 JSON 檔案路徑；若未指定，則直接輸出到 stdout。
+      - `--url`（選填）：用於填入 `LegacyHtmlDocument.url`，若未給則使用 `file://<絕對路徑>`。
+
+  - 轉換流程：
+
+    ```ts
+    const doc: LegacyHtmlDocument = {
+      url: url ?? `file://${absInPath.replace(/\\/g, "/")}`,
+      html,
+    };
+
+    const teaching = teachingFromLegacy(doc, {
+      externalId,
+      language,
+    });
+    ```
+
+    - `teachingFromLegacy` 會：
+      - 呼叫 `htmlToMarkdown` 取得 `body_markdown`、`images`、（可能的）`verses`。
+      - 依 T-0001 的規則，將 `verses` 映射到 `TeachingMeta` 偈語欄位。
+      - 組裝 `TeachingContent` 結構（post_type / images / meta 等）。
+
+### 3. 使用與限制說明
+
+- 目前 CLI 僅支援「單一檔案 → 單一 JSON」的使用情境，適合作為：
+  - 手動驗證 teaching adapter 行為。
+  - 示範未來批次轉換工具（例如：讀取一整個 docroot 路徑）。
+
+- URL 欄位：
+  - 若呼叫時未指定 `--url`，則預設使用：
+
+    ```
+    file:///.../absolute/path/to/legacy-teaching.html
+    ```
+
+  - 實際上正式 pipeline 應該由外層流程提供對應的舊站 URL（例如 `https://www.ctworld.org/turn/xxx.htm`）。
+
+- 後續若要擴充：
+  - 可以新增：
+    - `--stdout` / `--pretty` 等旗標。
+    - 以 glob / 目錄為輸入，一次轉多個檔案。
+  - 建議在 `PROJECT_TODO.md` 新增對應 T 任務，而不是直接在本小節擴寫行為。
+
