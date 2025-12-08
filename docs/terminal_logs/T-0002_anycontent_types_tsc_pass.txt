@@ -1,0 +1,4 @@
+npx tsc --noEmit
+
+TypeScript compilation succeeded with no errors.
+Exit code: 0
