@@ -18,6 +18,6 @@
 
 之後每次要開新任務，只要遵守這幾個原則：
 - 所有規則 → 寫進 `docs/*.md`（由 ChatGPT 協助）。
-- 所有技術任務 → 寫進 `PROJECT_TODO.md`。
+- 所有技術任務 → 寫進 `docs/PROJECT_TODO.md`。
 - 所有 code 實作 → 優先交給 Windsurf，照 TODO 做。
 - 你只需要決定方向、檢查結果、在我和 Windsurf 之間傳遞最少量的訊息即可。

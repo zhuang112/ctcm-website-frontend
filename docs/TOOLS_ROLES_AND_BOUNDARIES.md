@@ -77,6 +77,43 @@
 
 ---
 
+
+
+### 2.4 關於 docs snapshot ZIP（給 ChatGPT 用）
+
+- ChatGPT 不會自己存取 GitHub，也看不到 Codex / Windsurf 的 sandbox。
+- 若你希望 ChatGPT 在某次 T 任務完成後，能「完整看到當下的 docs＋terminal logs」：
+  - 請讓實作 Agent 在 repo 根目錄的 `snapshots/` 資料夾中產生一個 docs snapshot ZIP：
+    - 例如：`snapshots/ctworld-docs-T-0005-2025-12-09-v1.zip`
+  - 你只需從本機選擇這個 ZIP，直接上傳到 ChatGPT 對話中。
+- ChatGPT 會在該對話中**以你上傳的 ZIP 內容為唯一真相來源**，來設計接下來的規劃與任務。
+
+### 2.5 Codex（未來主要實作 Agent）的建議設定
+
+> 本節是為了未來正式導入 Codex 作為主要實作 Agent（取代或輔助 Windsurf）時使用。
+
+- 建議模式（Mode）：
+  - 使用「Agent」模式，而非單純 Chat 或完全開放的 full access。
+  - 理由：需要有明確的任務概念（T 任務）、檔案邊界與測試流程，同時保留你對 PR / merge 的最終控制權。
+- 建議模型（Model）：
+  - `GPT-5.1-codex-max` 作為這個專案的主要 Codex 模型。
+  - 理由：專案包含大量 TypeScript / Node / React / WordPress 相關程式碼，需要最強的工程與 repo 協調能力。
+- Reasoning 等級：
+  - 預設使用 **medium**：
+    - 適用於一般 T 任務（adapter mapping、小型 CLI、補測試、更新 docs）。
+  - 僅在以下情境使用 **high**：
+    - 大型重構（例如全面升級 html-to-markdown 規則、跨多 post_type 的重整）。
+    - 跨整個 pipeline 的設計或除錯（舊站 HTML → AnyContent → WordPress → 前端）。
+  - 幾乎不需要刻意使用 low，除非是非常小型、單檔、不牽涉多檔推理的修正。
+
+- 不變的原則：
+  - 不論實際實作者是 Windsurf 還是 Codex，都必須遵守：
+    - 以 `docs/PROJECT_TODO.md` 的 T 任務為單位工作。
+    - 僅在任務允許的檔案與區域內修改程式碼／文件。
+    - 任務結束時更新 `docs/Windsurf_ChatGPT_NOTES.md`、必要時更新 `docs/PROJECT_TODO.md`。
+    - 若有尚未寫入正式 workflow / schema 的設計，先記錄在 `docs/PENDING_DECISIONS.md`，由 ChatGPT 在適當時機協助整理進正式文件。
+
+
 ## 3. Windsurf
 
 ### 3.1 可以做的事

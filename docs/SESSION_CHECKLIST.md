@@ -11,7 +11,7 @@
 ## 跟 ChatGPT 協作
 
 - [ ] 是否需要更新 `docs/*.md` 或新增一份說明？
-- [ ] 是否需要請 ChatGPT 幫忙寫／更新 `PROJECT_TODO.md` 的任務？
+- [ ] 是否需要請 ChatGPT 幫忙寫／更新 `docs/PROJECT_TODO.md` 的任務？
 - [ ] ChatGPT 給的內容，有沒有貼回 repo 並 commit？
 
 ## 跟 Windsurf 協作
@@ -22,13 +22,19 @@
 
 
 - [ ] 是否有清楚指示 Windsurf：
-  - 要看哪些文件（例如：`docs/HTML_TO_MARKDOWN_RULES_V4.md`、`PROJECT_TODO.md`）。
+  - 要看哪些文件（例如：`docs/HTML_TO_MARKDOWN_RULES_V4.md`、`docs/PROJECT_TODO.md`）。
   - 要執行哪一個任務（例如：`[T-002][OPEN][W]`）？
 - [ ] Windsurf 完成後，有沒有簡單看 diff 或結果？
 - [ ] 有需要請 ChatGPT 幫忙 review 或優化嗎？
 
+
+
 ## 收工前
 
 - [ ] 今天完成了哪些任務？（簡短記錄即可）
-- [ ] `PROJECT_TODO.md` 裡，有沒有更新任務狀態？
+- [ ] `docs/PROJECT_TODO.md` 裡，有沒有更新任務狀態？
 - [ ] 是否已經 `git add` ＋ `commit` ＋ `push`？
+- [ ] 如果希望 ChatGPT review 本次變更：
+  - [ ] 是否已由實作 Agent 產生 docs snapshot ZIP（例如：`snapshots/ctworld-docs-T-0005-2025-12-09-v1.zip`）？
+  - [ ] 是否已經決定要不要把尚未定案的規則暫存到 `docs/PENDING_DECISIONS.md`？
+  - [ ] 是否已準備好要上傳給 ChatGPT 的 ZIP 檔，以及對應的 `[Agent 回報摘要]`？

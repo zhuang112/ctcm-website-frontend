@@ -275,6 +275,44 @@
 
 ## 使用方式
 
+
+---
+
+### T-0006 legacy-data-root: 舊站資料盤點與 CTWORLD_LEGACY_ROOT 文件化（待資料取得後執行）
+
+> 狀態：待舊站完整資料備份取得後再執行（目前僅預先登記工作項目）
+
+- 觸發時機：
+  - 已從主機商／舊系統取得完整舊站檔案（HTML / 圖片 / PDF 等）。
+
+- 目標：
+  - 在本機或指定 storage 設定 `CTWORLD_LEGACY_ROOT`（環境變數），作為舊站資料根目錄。
+  - 實際檢視舊站檔案的目錄結構，紀錄「現況」，而不是強迫重構。
+  - 在 docs 中新增一小節，描述：
+    - `CTWORLD_LEGACY_ROOT` 實際對應的路徑（例如本機 / NAS / S3）。
+    - 目前舊站檔案實際的目錄結構（文字描述或範例樹狀圖即可）。
+  - 暫不對舊站檔案做大規模搬移或改名；若未來需要 refactor，另開新的 T 任務處理。
+
+- 關聯 docs：
+  - `docs/COMPLETE_PROJECT_WORKFLOW.md`：補充「legacy 資料來源」相關小節。
+  - `docs/PROJECT_TODO.md`：本任務條目本身。
+  - （選用）若有需要，可新增 `docs/LEGACY_DATA_NOTES.md` 紀錄更細節。
+
+- 建議修改檔案：
+  - `docs/COMPLETE_PROJECT_WORKFLOW.md`：新增／更新一小節描述 `CTWORLD_LEGACY_ROOT` 與實際檔案位置。
+  - `docs/PROJECT_TODO.md`：標記本任務為 ✅ 並補充實際觀察結果摘要。
+  - （選用）`docs/LEGACY_DATA_NOTES.md`：若檔案結構特別複雜，可在此詳述。
+
+- 允許修改的範圍：
+  - 僅限上述 docs，與實作 pipeline 無關的部分。
+  - 不對舊站檔案做自動搬移／重命名；此類操作需另開專門 T 任務。
+
+- 驗收方式：
+  - [ ] 系統中已設定 `CTWORLD_LEGACY_ROOT` 並能在該路徑下列出舊站檔案。
+  - [ ] `docs/COMPLETE_PROJECT_WORKFLOW.md` 中已能看出舊站資料實際來源與存放位置。
+  - [ ] 如有新增 `docs/LEGACY_DATA_NOTES.md`，已簡要記錄目錄結構現況，無強迫重構要求。
+
+
 1. 當你和 ChatGPT 討論出一個新功能：
    - 由 ChatGPT 幫你在這裡新增一條 TODO。
    - 同時產生 / 更新對應的 docs 與骨架程式碼。

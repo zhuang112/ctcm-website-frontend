@@ -1,6 +1,6 @@
-# 中台世界專案三方協作工作流程（User / ChatGPT / Windsurf）
+# 中台世界專案協作工作流程（User / ChatGPT / 實作 Agent）
 
-> 版本：2025-12-08（由 ChatGPT 更新）
+> 版本：2025-12-09（由 ChatGPT 更新）
 
 > 目標：讓你只需要做關鍵決策與簡單 copy / paste，  
 > 技術細節與執行由 ChatGPT + Windsurf 自動接力完成。
@@ -37,6 +37,27 @@
   - 遇到難題時，設計更精細的修改指令。
 
 ### 1.3 Windsurf（實作者＋本機工具）
+
+### 1.4 實作 Agent：Windsurf / Codex 共通規則
+
+> 本文件中提到的「實作 Agent」包含：
+> - 目前的 Windsurf（在你本機 repo 上修改檔案）  
+> - 未來可能加入的 Codex / 其他工程 Agent（通常在雲端 sandbox 上操作，透過 GitHub PR 或 patch 回傳結果）
+
+共通原則：
+
+- 任何實作 Agent **都必須以 GitHub repo 的檔案為準**，不得自行想像檔案內容。
+- ChatGPT **看不到 GitHub / sandbox 內部檔案**，只看得到：
+  - 你貼進聊天視窗的文字片段。
+  - 你上傳給 ChatGPT 的檔案（例如：`docs/` snapshot ZIP、單一 `.md` 檔、log 檔）。
+- 若需要 ChatGPT 針對某次實作給建議或調整：
+  - 請由實作 Agent 在 repo 中更新相關 docs（例如 `docs/Windsurf_ChatGPT_NOTES.md`、`docs/PROJECT_TODO.md`、`docs/PENDING_DECISIONS.md`）。
+  - 由你將更新後的 docs（或打包好的 ZIP）上傳給 ChatGPT。
+- 無論是 Windsurf 還是 Codex，結束任務時都應該：
+  - 更新對應的 T 任務狀態（`docs/PROJECT_TODO.md`）。
+  - 在 notes 中留下清楚的「這次做了什麼」紀錄（`docs/Windsurf_ChatGPT_NOTES.md`）。
+  - 視需要在 `docs/PENDING_DECISIONS.md` 記錄尚未正式寫入 workflow / schema 的暫存決策。
+
 
 - 負責「實際動手」：
   - 編輯程式碼與測試。
@@ -415,6 +436,86 @@ Windsurf 在這些情況會詢問你 / 要你按確認。
 ```
 
 ---
+
+
+---
+
+## 6. ChatGPT 可見範圍與 docs snapshot / ZIP 交接
+
+> 關鍵原則：**ChatGPT 只看得到「對話中貼出的內容」與「你上傳的檔案」。GitHub / Codex / Windsurf 的內部狀態，預設是不可見的。**
+
+### 6.1 ChatGPT 能看到什麼？
+
+ChatGPT 在這個對話中**看不到**：
+
+- GitHub 上的檔案原文（即使 repo 是 public / 已連線）。
+- Codex / Windsurf / 其他 Agent 在自己 sandbox 裡的檔案。
+
+對 ChatGPT 而言，真相來源只有兩種：
+
+1. 你貼進對話的文字（例如完整的 Markdown 段落、程式碼片段、回報摘要）。
+2. 你在對話中上傳的檔案（例如 `docs/` snapshot ZIP、單一 `.md` 檔、log 檔）。
+
+### 6.2 實作 Agent 完成任務後要做什麼？
+
+每一個明確的 T 任務（例如 T-0005）完成後，實作 Agent 應該：
+
+1. 在 repo 中更新對應的 docs：
+   - 在 `docs/Windsurf_ChatGPT_NOTES.md` 新增一節，記錄：
+     - 任務編號與簡述。
+     - 實際修改的檔案與邏輯重點。
+     - 執行過的測試指令與結果。
+     - 若有尚未解決的問題，列在「未解決問題」小節。
+   - 視需要更新 `docs/PROJECT_TODO.md`（將該 T 任務標記為 ✅，或新增後續子任務）。
+   - 若有特殊情況，可更新 `docs/UNRESOLVED_ISSUES.md`。
+   - 若有尚未決定是否寫入正式 workflow 的規則或設計，可以先記錄在 `docs/PENDING_DECISIONS.md`。
+
+2. 在終端機 log 中，保留這次任務相關輸出：
+   - 建議存成 `docs/terminal_logs/T-xxxx_<slug>_<tool>_<result>.txt`。
+   - 例如：`docs/terminal_logs/T-0005_news-from-legacy_vitest_pass.txt`。
+
+3. 若需要讓 ChatGPT 之後查看完整結果（包括 docs + log），請在專案根目錄建立（或重用）`snapshots/` 資料夾，
+   並由實作 Agent 自動產生一個 docs snapshot ZIP（不加入 Git，只存在本機），內容至少包含：
+   - 本次任務有修改的 `docs/*.md` 檔案。
+   - 本次任務新增的 `docs/terminal_logs/*.txt` 檔案。
+
+   建議檔名格式（放在 `snapshots/` 底下）：
+
+   ```text
+   snapshots/ctworld-docs-T-0005-2025-12-09-v1.zip
+   ```
+
+   命名規則說明：
+
+   - `ctworld-docs`：專案代號＋只包含 docs 的 snapshot。
+   - `T-0005`：對應的 T 任務編號。
+   - `2025-12-09`：打包日期（使用當地時間即可）。
+   - `v1`：當日第一次打包；若同一任務需要再次打包，可遞增為 `v2`, `v3`。
+
+4. 產生一段簡短的 `[Windsurf 回報摘要]` 或 `[Agent 回報摘要]`，
+   讓你可以直接貼回 ChatGPT 對話，並在摘要中註明此次 snapshot 檔名，例如：
+
+   ```text
+   本次 docs snapshot：snapshots/ctworld-docs-T-0005-2025-12-09-v1.zip
+   ```
+
+### 6.3 如何讓 ChatGPT 看到完整變更？
+
+當你想讓 ChatGPT「真正看過這次任務的成果與 log」時，建議流程：
+
+1. 確認實作 Agent 已完成 §6.2 的步驟，特別是：
+   - docs 與 `docs/terminal_logs/` 都已更新。
+   - 已在 `snapshots/` 底下產生對應的 docs snapshot ZIP（若該任務需要 ChatGPT 後續指導）。
+
+2. 在本機找到對應的 ZIP 檔案，例如：
+   - `snapshots/ctworld-docs-T-0005-2025-12-09-v1.zip`
+
+3. 在 ChatGPT 對話中上傳該 ZIP，並簡單說明：
+   - 本次任務編號（例如 T-0005）。
+   - 希望 ChatGPT 做什麼（例如：檢查規則是否清楚、設計下一個 T 任務）。
+
+之後 ChatGPT 回應時，會**以你上傳的 ZIP 內容為唯一權威版本**來設計新的任務與規則。
+
 
 ## 7. 總結
 
