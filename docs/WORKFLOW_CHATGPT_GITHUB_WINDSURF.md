@@ -293,7 +293,7 @@ git add package.json package-lock.json tools/docs-snapshot/make-docs-snapshot.ts
 git commit -m "feat: T-0007 docs snapshot CLI"
 git push origin main
 
-
+```
 #### 4.y.2 你在本機的實際操作流程
 
 收到 Windsurf 的回報摘要之後，先大致確認：
