@@ -1,9 +1,8 @@
 # 中台世界專案協作工作流程（User / ChatGPT / 實作 Agent）
 
-> 版本：2025-12-09（由 ChatGPT 更新）
-
-> 目標：讓你只需要做關鍵決策與簡單 copy / paste，  
-> 技術細節與執行由 ChatGPT + Windsurf 自動接力完成。
+> 檔名：`docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`  
+> 版本：2025-12-10（由 ChatGPT 更新）  
+> 目標：讓你只需要做關鍵決策與簡單 copy / paste，技術細節與執行由 ChatGPT + Windsurf 自動接力完成。
 
 ---
 
@@ -12,404 +11,435 @@
 ### 1.1 你（使用者）
 
 - 決定 **做什麼**、**先做哪個**。
-- 在 ChatGPT 與 Windsurf 之間負責「簡單傳遞」：
-  - 把 ChatGPT 給 Windsurf 的指令貼給 Windsurf。
-  - 把 Windsurf 的「回報摘要」貼給 ChatGPT。
-- 偶爾執行本機操作：
-  - `git add / commit / push`
-  - 必要時手動執行 `npm install` 等需要確認的指令。
-- 確保 GitHub repo 永遠是 **唯一真相來源**（程式碼 + docs）。
+- 在 ChatGPT 與 Windsurf 之間負責「簡單傳遞」：  
+  - 把 ChatGPT 給 Windsurf 的指令貼給 Windsurf。  
+  - 把 Windsurf 的「任務回報摘要」貼回 ChatGPT。
+- 負責執行 **有限幾條安全指令**（例：`git status` / `git add` / `git commit` / `git push` / `npm run ...`）。
+- 不需要寫程式、不需要自己 Debug，只要看得懂「任務說明」與「回報摘要」。
 
-### 1.2 ChatGPT（架構師＋規格機）
+### 1.2 ChatGPT（架構師＋文件機器＋任務設計者）
 
-- 負責「設計」與「規格」：
-  - 規劃整體架構、欄位、流程。
-  - 撰寫與更新 `docs/*.md` 規格（大改時會提供 ZIP）。
-- 負責「寫任務說明」：
-  - 對每個任務產生一段 **「可直接貼給 Windsurf 的指令」**（code block）。
-  - 指令包含：
-    - 要看哪些 docs。
-    - 要改哪些檔案。
-    - 不能改動的型別 / 規則。
-    - 要跑哪些測試與預期結果。
-- 負責「技術決策與 debug 指導」：
-  - 閱讀 Windsurf 寫的 notes / 回報，決定下一步。
-  - 遇到難題時，設計更精細的修改指令。
+ChatGPT 負責：
 
-### 1.3 Windsurf（實作者＋本機工具）
+- 設計整體架構與流程（HTML → AnyContent → zh-CN → WordPress → React）。
+- 拆解成一顆一顆的 T 任務（T-0001, T-0002, ...）。
+- 撰寫與維護專案文件：
+  - `docs/COMPLETE_PROJECT_WORKFLOW.md`
+  - `docs/CONTENT_SCHEMA.md`
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
+  - `docs/PROJECT_STATUS.md`
+  - `docs/PROJECT_TODO.md`
+  - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`
+  - `docs/Windsurf_ChatGPT_NOTES.md`
+  - `docs/PENDING_DECISIONS.md` …
+- 為每一個 T 任務寫出「可以直接貼給 Windsurf / Codex 的短指令」。
 
-### 1.4 實作 Agent：Windsurf / Codex 共通規則
+原則：
 
-> 本文件中提到的「實作 Agent」包含：
-> - 目前的 Windsurf（在你本機 repo 上修改檔案）  
-> - 未來可能加入的 Codex / 其他工程 Agent（通常在雲端 sandbox 上操作，透過 GitHub PR 或 patch 回傳結果）
+- **所有長篇規格、思考過程與設計細節，都寫進 `docs/*.md`，不要塞在對話裡。**
+- 對話中保持「摘要＋指令」，讓每個新對話能快速接上。
 
-共通原則：
+### 1.3 Windsurf（本機 IDE 實作 Agent）
 
-- 任何實作 Agent **都必須以 GitHub repo 的檔案為準**，不得自行想像檔案內容。
-- ChatGPT **看不到 GitHub / sandbox 內部檔案**，只看得到：
-  - 你貼進聊天視窗的文字片段。
-  - 你上傳給 ChatGPT 的檔案（例如：`docs/` snapshot ZIP、單一 `.md` 檔、log 檔）。
-- 若需要 ChatGPT 針對某次實作給建議或調整：
-  - 請由實作 Agent 在 repo 中更新相關 docs（例如 `docs/Windsurf_ChatGPT_NOTES.md`、`docs/PROJECT_TODO.md`、`docs/PENDING_DECISIONS.md`）。
-  - 由你將更新後的 docs（或打包好的 ZIP）上傳給 ChatGPT。
-- 無論是 Windsurf 還是 Codex，結束任務時都應該：
-  - 更新對應的 T 任務狀態（`docs/PROJECT_TODO.md`）。
-  - 在 notes 中留下清楚的「這次做了什麼」紀錄（`docs/Windsurf_ChatGPT_NOTES.md`）。
-  - 視需要在 `docs/PENDING_DECISIONS.md` 記錄尚未正式寫入 workflow / schema 的暫存決策。
+Windsurf 在你的本機 repo 中實作：
 
+- 修改 TypeScript / React / 工具程式碼。
+- 維護對應測試（Vitest / typecheck）。
 
-- 負責「實際動手」：
-  - 編輯程式碼與測試。
-  - 儘量自動執行安全的指令（`npx vitest`、`npm run lint`…）。
-- 負責「寫給 ChatGPT 看的說明檔」：
-  - 維護 `docs/Windsurf_ChatGPT_NOTES.md`：
-    - 記錄每次任務的需求摘要、修改內容、測試、遇到的問題。
-- 負責「回報摘要」：
-  - 每次任務結束，輸出一段 **可以給你直接貼回 ChatGPT 的短回報文字**。
+職責：
 
----
+- 依照 ChatGPT 給的任務指令，修改特定檔案。
+- 只在允許的範圍內 refactor，不擅自大改其他模組。
+- 執行測試、產生 terminal log，並把重點結果寫進：
+  - `docs/Windsurf_ChatGPT_NOTES.md`
+  - `docs/terminal_logs/*.txt`
+- 在回報摘要最後提供一段 `[建議 git 指令]`，讓你可以直接 `git add / commit / push`。
 
-## 2. 主要協作文件一覽
+重要限制：
 
-這些檔案是三方協作時會用到的主要文件：
+- Windsurf **不會自動執行 `git add` / `git commit` / `git push`**，只會提供指令給你手動確認。
 
-- `docs/COMPLETE_PROJECT_WORKFLOW.md`  
-  舊站 HTML → JSON → zh-cn → WordPress → React 的整體 pipeline。
+### 1.4 Codex（雲端實作 Agent，未來可選）
 
-- `docs/CONTENT_SCHEMA.md`  
-  各 post_type 的 AnyContent schema（欄位與說明）。
+Codex 的角色類似 Windsurf，但在「雲端」執行：
 
-- `docs/HTML_TO_MARKDOWN_RULES_V4.md`  
-  HTML→Markdown 規則與舊站 class 對應（目前唯一權威版本）。
+- 可以在 GitHub / 雲端環境改 code、跑測試。
+- 適合跑「較大顆」的任務（例如批次格式化、批次轉檔、CI 工具）。
 
-- `docs/PROJECT_TODO.md`  
-  中長期任務清單（T-001, T-002...），**由 ChatGPT 維護**。
+規則與 Windsurf 類似：
 
-- `docs/Windsurf_ChatGPT_NOTES.md`  
-  **三方交接日誌**：每一次 Windsurf 實作的詳細紀錄，  
-  ChatGPT 開新對話時可以讀這個檔案快速接續。
+- 遵守 `docs/TOOLS_ROLES_AND_BOUNDARIES.md`。
+- 所有長規格寫回 docs。
+- 提供 `[Agent 回報摘要]`＋ `[建議 git 指令]`。
 
-- （選用）`docs/UNRESOLVED_ISSUES.md`  
-  Windsurf 解不了的問題集中列出，給 ChatGPT 進一步協助。  
-  若同一時間有多個未解決問題，建議在 UNRESOLVED_ISSUES.md 做列表索引，並連回各自於 `Windsurf_ChatGPT_NOTES.md` 中的任務小節，方便你與 ChatGPT 快速定位。
+目前可以先視為「Windsurf 的擴充」，等未來需要再大量使用。
+
+### 1.5 單一真相來源（Single Source of Truth）
+
+- **GitHub repo 的 `main` 分支 + `docs/*.md`** 是唯一權威來源。
+- ChatGPT / Windsurf / Codex 的說法如果互相衝突，以 **GitHub 上最新的 docs** 為準。
+- 若 ChatGPT / Agent 的回答與 docs 不一致：
+  - 優先更新 docs。
+  - 再請 ChatGPT / Agent 依 docs 調整說法。
 
 ---
 
-> **重要原則：ChatGPT 一律以 GitHub repo 的最新內容為「唯一權威來源」**  
-> - repo：<https://github.com/zhuang112/ctcm-website-frontend>  
-> - 若同時存在使用者提供的本機 zip / snippet，這些僅視為「補充範例」或「暫時 snapshot」，不能覆蓋 GitHub docs 的定義。  
-> - 除非使用者明講「這個 zip 代表一個暫時還沒 push 的 snapshot，請以它為準」，否則 ChatGPT 必須優先閱讀 GitHub 上的 docs（特別是 `PROJECT_TODO.md`、`CONTENT_SCHEMA.md`、`WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`、`Windsurf_ChatGPT_NOTES.md`）。  
+## 2. 檔案與資料夾結構（簡要）
 
-## 3. 大改 vs 小改：什麼時候需要 ZIP？什麼時候用指令？
+> 詳細結構請參考 `ARCHITECTURE.md` 與 `CONTENT_SCHEMA.md`。這裡只列出與協作流程最相關的部分。
 
-### 3.1 大改（spec / workflow / schema）
-
-符合下列任一者視為「大改」：
-
-- 調整 `CONTENT_SCHEMA.md` 結構（新增欄位、改欄位意義）。
-- 大幅更新 `HTML_TO_MARKDOWN_RULES_V4.md` 的規則。
-- 新增新的 post_type 或 pipeline 大架構。
-- 更新協作流程本身（像這份文件）。
-
-**大改流程：**
-
-1. 由 ChatGPT：
-   - 在對話中簡短說明這次大改的重點。
-   - 直接編寫 / 更新對應 `docs/*.md` 的完整內容。
-   - 將相關 docs 打成 ZIP（例如 `ctworld_docs_xxx.zip`）給你下載。
-
-2. 你：
-   - 解壓 ZIP 覆蓋到專案。
-   - `git add / commit / push`。
-   - 告訴 Windsurf：「請閱讀最新的 docs，之後依此為準。」
-
-> 規則：**大改 → ZIP + 規格寫死在 docs 裡**。
+- `src/`：前端 React / TypeScript 程式碼。
+- `tools/`：各種 CLI 與輔助工具（爬蟲、轉檔、docs snapshot 等）。
+- `data/`：後續 AnyContent、zh-tw / zh-cn JSON 等資料存放位置（目前仍在規劃中）。
+- `docs/`：
+  - `COMPLETE_PROJECT_WORKFLOW.md`：專案整體 workflow。
+  - `CONTENT_SCHEMA.md`：AnyContent schema 設計。
+  - `HTML_TO_MARKDOWN_RULES_V4.md`：HTML → markdown 規則 v4。
+  - `PROJECT_STATUS.md`：目前整體進度與下一階段建議。
+  - `PROJECT_TODO.md`：T 任務列表與狀態（✅ 已完成 / ⬜ 未完成）。
+  - `PROJECT_TODO_TEMPLATE.md`：新增 T 任務的模板。
+  - `TOOLS_ROLES_AND_BOUNDARIES.md`：User / ChatGPT / Windsurf / Codex 的角色與邊界。
+  - `Windsurf_ChatGPT_NOTES.md`：每個 T 任務的實作日誌與交接說明。
+  - `PENDING_DECISIONS.md`：尚未決定或未完全定案的設計點。
+  - `SESSION_CHECKLIST.md`：每輪對話的檢查清單。
+  - 其他：爬蟲、zh-CN pipeline、archive 等相關文件。
+- `docs/terminal_logs/`：
+  - 每次執行重要指令（如 `npx vitest`、`npm run snapshot:docs` 等）產生的 log。
+  - 檔名慣例：`T-000X_任務描述_指令說明.txt`。
+- `snapshots/`（不納入 git）：
+  - 給 ChatGPT 用的 docs snapshot ZIP，例如：
+    - `ctworld-docs-T-0007-2025-12-09-v1.zip`
+  - 由 `tools/docs-snapshot/make-docs-snapshot.ts` 產生。
 
 ---
 
-### 3.2 小改（程式、小 bug、局部行為）
+## 3. 一般工作循環（高階流程）
 
-例如：
+這一節描述你 + ChatGPT + Windsurf 之間的一般循環。  
+細節與範例則寫在 `PROJECT_TODO.md` 與 `Windsurf_ChatGPT_NOTES.md` 中。
 
-- sutra 頁 `<a id="item83"></a>` 沒出現在 markdown。
-- 某個 adapter 欄位 mapping 要微調。
-- 新增一個 pipeline helper function。
-- 補一個測試案例。
+### 3.1 ChatGPT 與你：選擇下一個 T 任務
 
-**小改流程：**
+1. 你開啟 ChatGPT 對話（或新對話）時，提供：
+   - GitHub repo 名稱（例如：`zhuang112/ctcm-website-frontend`）。
+   - 最新的 docs snapshot ZIP（或要求 ChatGPT 直接閱讀 GitHub 上的 docs）。
+2. ChatGPT 先閱讀：
+   - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
+   - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`
+   - `docs/PROJECT_STATUS.md`
+   - `docs/PROJECT_TODO.md`
+   - `docs/Windsurf_ChatGPT_NOTES.md`
+3. ChatGPT 將用自己的話：
+   - 重述目前專案狀態與最近完成的 T 任務。
+   - 在 `PROJECT_TODO.md` 中，挑出一個「最適合現在執行的 T 任務」，並說明理由。
+   - 如果有需要新增 T 任務，會先依 `PROJECT_TODO_TEMPLATE.md` 在 docs 中補上架構。
 
-1. 由 ChatGPT：
-   - 產生一段「**給 Windsurf 的任務指令**」（用 code block 包起來）。
-   - 內容包含：
-     - 要讀的 docs（哪一節）。
-     - 要動的檔案路徑。
-     - 限制條件（那些型別／規則不能動）。
-     - 要跑的測試指令＋預期結果。
+### 3.2 ChatGPT → Windsurf：撰寫任務指令（短版）
 
-2. 你：
-   - 只需要 **複製這段指令貼給 Windsurf**。
+對於每一個具體的 T 任務（例如 `T-0003 news-from-legacy: 建立 NewsContent adapter 骨架`），ChatGPT 會：
 
-3. Windsurf：
-   - 根據指令修改程式碼。
-   - 在 terminal 自動跑安全指令（`npx vitest`、`npm run lint`…）。
-   - 更新 `docs/Windsurf_ChatGPT_NOTES.md` 對應小節，記錄：
-     - 任務標題與日期。
-     - 實際修改的檔案與重點邏輯。
-     - 執行了哪些測試／結果如何。
-     - 若有卡關，寫「無法解決的問題」段落。
-   - 最後給你一段「**回報摘要**」，會特別為 ChatGPT 設計成可直接貼的文字。
-
-4. 你：
-   - 把這段回報摘要貼回 ChatGPT。
-   - 覺得 OK 的時候再 `git add / commit / push`。
-
-> 規則：**小改 → ChatGPT 給指令（code block），Windsurf 改程式＋寫 notes，回報摘要給 ChatGPT**。  
-> 不一定要 re-ZIP，只要主規則沒變就好。
-
----
-
-### 3.x 對話與文件分工：細節進 docs，對話保持精簡
-
-- **對話窗保持精簡**
-  - ChatGPT：在對話中只給「任務摘要 + 給 Windsurf 的短指令」，所有長篇規格與細節寫進 docs（例如 `PROJECT_TODO.md`、`WORKFLOW_*`、`CONTENT_SCHEMA.md`、`Windsurf_ChatGPT_NOTES.md`）。
-  - Windsurf：回報時只需提供「本次任務代號 + 變更檔案列表 + 測試結果 + `[建議 git 指令]` 區塊」，不需要貼出完整思路或大段 diff。
-
-- **細節全部寫在文件**
-  - 任務規格與邏輯說明：
-    - 由 ChatGPT 維護在 `docs/PROJECT_TODO.md`、`docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`、`docs/CONTENT_SCHEMA.md` 等文件。
-  - 實作細節與重要決策：
-    - 由 Windsurf 在 `docs/Windsurf_ChatGPT_NOTES.md` 中記錄每個 T 任務的小節。
-  - 關鍵 terminal log：
-    - 由 Windsurf 存到 `docs/terminal_logs/*.txt`，並在回報摘要中列出路徑。
-
-- **Windsurf 儘量自動化，讓你一鍵執行**
-  - 針對可以自動化的步驟（例如 `npm` / `vitest` / `tsc` / `git` 指令），Windsurf 儘量整理成「可直接複製執行」的一組命令。
-  - 尤其是 `[建議 git 指令]` 區塊，會自動列出與本次 T 任務相關的檔案，讓你只需要在 IDE / 終端機裡核對一次，就能一鍵完成 `git add` / `commit` / `push`。
-
-- **你只需要專注在三件事**
-  1. 在 ChatGPT ↔ Windsurf 之間轉貼「任務指令」與「回報摘要」。
-  2. 在 IDE 中檢視、核准並執行 Windsurf 提供的指令（特別是 `[建議 git 指令]`）。
-  3. 在 GitHub 維護分支與整體專案節奏，其餘細節交給 ChatGPT + Windsurf 自動協作處理。
-
-## 4. 每一輪任務的標準節奏
-
-### Step 0：啟動新任務（你 → ChatGPT）
-
-在 ChatGPT 這邊說明：
-
-- 這次要處理什麼（例：sutra 規則 v1、blossom 單元、某個 bug）。
-- （選擇性）希望這個任務在 notes 中的章節名稱，例如：
-  - `## 2025-12-10 任務：sutra 規則 v2`
-
-ChatGPT 會：
-
-- 讀取需要的 docs（`PROJECT_TODO`、`Windsurf_ChatGPT_NOTES`、schema、rules）。
-- 規劃任務拆分與限制條件。
-- 給你一段「**給 Windsurf 的任務指令**」，用 code block 包起來，方便你一鍵複製。
-
----
-
-### Step 1：你 → Windsurf
-
-你只需要：
-
-- 把 ChatGPT 給的指令整段複製，貼到 Windsurf。
-
-Windsurf 收到後會：
-
-- 閱讀指令中提到的 docs。
-- 修改指令中提到的檔案。
-- 在 terminal 執行安全的指令，例如：
-  - `npx vitest`
-  - `npx vitest tests/xxx.spec.ts`
-  - `npm run lint`
-- 在 `docs/Windsurf_ChatGPT_NOTES.md` 裡建立 / 更新本次任務的小節，內容包括：
-  - 任務標題與日期。
-  - 實際修改的檔案與重點邏輯。
-  - 執行了哪些測試、結果如何。
-  - 若有 卡關，就寫「無法解決的問題」段落。
-
----
-
-### Step 2：Windsurf → 你（回報摘要）
-
-任務完成後，Windsurf 會給你一段像這樣的文字：
+1. 在 `docs/PROJECT_TODO.md` 裡，補齊該任務的詳細規格：
+   - 任務目標與背景。
+   - 要修改／新增的檔案列表。
+   - 不可以更動的 contract（型別、函式行為、public API 等）。
+   - 要執行的測試指令與預期結果。
+2. 產生一段「可以直接貼給 Windsurf 的短指令」，格式類似：
 
 ```text
-[Windsurf 回報摘要]
-- 已更新：src/html/html-to-markdown.ts，調整 sutra 頁 anchor 輸出，
-  現在會在 body_markdown 中輸出 `<a id="item83"></a>` + 原始編號文字。
-- 測試：npx vitest tests/html/html-to-markdown.spec.ts
-  - 4 個案例全部通過。
-- 文件：已在 docs/Windsurf_ChatGPT_NOTES.md 增加本次任務小節，說明修改內容與測試結果。
+請依照 docs/PROJECT_TODO.md 中的 T-0003 任務說明進行實作，重點如下：
+
+1. 先閱讀：
+   - docs/PROJECT_TODO.md（T-0003 小節）
+   - docs/CONTENT_SCHEMA.md（NewsContent 相關欄位）
+   - docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md（特別是 4.y 小節）
+
+2. 允許修改或新增的檔案：
+   - src/adapters/news-from-legacy.ts
+   - tests/adapters/news-from-legacy.spec.ts
+   - 其他與 NewsContent 直接相關、在 T-0003 任務說明中列出的檔案。
+
+3. 不可以變更的 contract：
+   - 已存在的 AnyContent 型別定義（除非 T-0003 任務明確允許）。
+   - 其他 T 任務尚未觸及的 adapter 行為。
+
+4. 請執行並確保以下測試通過：
+   - npx vitest tests/adapters/news-from-legacy.spec.ts
+
+5. 任務完成後：
+   - 更新 docs/Windsurf_ChatGPT_NOTES.md，新增 T-0003 小節，說明修改內容與測試結果。
+   - 在 docs/terminal_logs/ 新增本次 vitest 執行結果的 log 檔。
+   - 在回報摘要最後加上一段 [建議 git 指令]，方便我在本機執行 git add / commit / push。
 ```
 
-你只要：
+### 3.3 你要做的事（每個任務循環）
 
-- 把這段回報摘要貼回 ChatGPT。
+- 把 ChatGPT 產生的「任務指令」整段複製，貼給 Windsurf。  
+- 等 Windsurf 完成任務並給出回報摘要後：
+  - 把「回報摘要」貼回 ChatGPT，讓 ChatGPT 幫你檢查是否符合任務說明。
+  - 確認沒問題後，再依 Windsurf 提供的 `[建議 git 指令]` 在本機執行 `git add / commit / push`。
+
+### 3.4 Windsurf 要做的事（每個任務循環）
+
+Windsurf 根據 ChatGPT 給的指令：
+
+- 修改程式碼與測試。  
+- 在 terminal 自動跑安全指令（`npx vitest`、`npm run lint`…）。  
+- 更新 `docs/Windsurf_ChatGPT_NOTES.md` 對應小節，記錄：
+  - 任務標題與日期。
+  - 實際修改的檔案與重點邏輯。
+  - 執行了哪些測試／結果如何。
+  - 若有卡關，寫「無法解決的問題」段落。
+- 在回報摘要最後給你一段 `[建議 git 指令]`，會特別為 ChatGPT / 你設計成可直接貼的文字。
+
+### 3.5 對話與文件分工：細節進 docs，對話保持精簡
+
+**對話窗保持精簡**：
+
+- ChatGPT：在對話中只給「任務摘要 + 給 Windsurf 的短指令」，所有長篇規格與細節寫進 docs（例如 `WORKFLOW_*`、`CONTENT_SCHEMA.md`、`Windsurf_ChatGPT_NOTES.md`）。
+- Windsurf：回報時只需提供「本次任務代號 + 變更檔案列表 + 測試結果 + [建議 git 指令] 區塊」，不需要貼出完整思路或大段 diff。
+
+**細節全部寫在文件**：
+
+- 任務規格與邏輯說明：  
+  放在 `docs/PROJECT_TODO.md` 對應的 T 任務小節。
+- 實作細節與歷史：  
+  放在 `docs/Windsurf_ChatGPT_NOTES.md`。
+- 尚未決定的議題：  
+  放在 `docs/PENDING_DECISIONS.md`。
+
+**ChatGPT 只看 docs，不靠舊對話記憶**：
+
+- 新對話啟動時，ChatGPT 先讀最新 docs（或你提供的 snapshot ZIP）。
+- 若發現 docs 沒有記錄某個規則，會請你在 docs 中補上，而不是只記在對話裡。
 
 ---
 
-### Step 3：你 → ChatGPT（回報與下一步）
+## 4. T 任務與 git 流程（Windsurf → 你）
 
-在 ChatGPT 對話中：
+### 4.1 T 任務命名慣例
 
-- 貼上 Windsurf 的回報摘要。
-- 視情況說明是否已經 push 到 GitHub。
+- 任務 ID：`T-0001`, `T-0002`, ...（零填滿 4 碼）。
+- 標題範例：
+  - `T-0001 teaching-from-legacy: 將 htmlToMarkdown 的 verses 映射到 TeachingMeta 偈語欄位`
+  - `T-0002 AnyContent 其他 post_type：news / magazine contract`
+  - `T-0003 news-from-legacy: 建立 NewsContent adapter 骨架（minimal mapping）`
 
-ChatGPT 會：
+### 4.2 任務的最小單位
 
-- 用回報摘要更新心中的專案狀態。
-- 視需要：
-  - 調整 / 追加 `docs/PROJECT_TODO.md` 的任務狀態。
-  - 規劃下一步（下一個單元、下一個 pipeline…）。
-  - 給你下一段要貼給 Windsurf 的指令。
+一個 T 任務盡量只做「一件清楚的小事」：
 
----
+- 新增或擴充一個 adapter。
+- 定義一個 AnyContent 型別。
+- 實作一個 CLI 工具（例如 docs snapshot）。
 
+每個 T 任務的變更都應盡量集中：
 
+- 修改的檔案列表可由 ChatGPT 事先列出。
+- 不要同時在多個不相關模組大改。
 
-### 4.x T 任務（T-0001, T-0002 …）的 lifecycle
+### 4.3 T 任務的完成條件（Definition of Done）
 
-> T-0001, T-0002, ... 是「可以拆給 Windsurf 的最小工作單位」。
+每個 T 任務完成時，應該至少滿足：
 
-1. **定義 T 任務（你 ↔ ChatGPT）**
-   - 你在 ChatGPT 這邊說明想做的事與優先順序。
-   - ChatGPT 會：
-     - 先讀 `docs/PROJECT_TODO.md`、`docs/Windsurf_ChatGPT_NOTES.md`、schema / rules。
-     - 在 `PROJECT_TODO.md` 裡新增一條 `T-XXXX` 任務（含：
-       - 規格來源 docs
-       - 要改的檔案路徑
-       - 允許修改範圍
-       - 驗收方式
-     - 同時幫你想好一段「給 Windsurf 的短指令」。
+**程式與型別層面**
 
-2. **交辦 T 任務給 Windsurf（你 → Windsurf）**
-   - 你只需要：
-     - 把 ChatGPT 提供的短指令（code block）貼給 Windsurf。
-     - 指令內容通常是：
-       - 「請完成 `docs/PROJECT_TODO.md` 中的 T-000X，依照其中規格修改哪些檔案與跑哪些測試。」
+- 所有相關 `.ts` / `.tsx` 檔能通過 typecheck。
+- 新增或修改的函式／型別有合理的命名與註解（如有需要）。
 
-3. **Windsurf 實作與記錄（Windsurf）**
-   - Windsurf 依照 `PROJECT_TODO.md` 中 T-XXXX 的規格：
-     - 修改程式與測試檔（只在允許修改的檔案內動手）。
-     - 執行對應的 `npx vitest` / `npm run typecheck` / `npx tsc --noEmit` 等指令。
-   - 並更新：
-     - `docs/Windsurf_ChatGPT_NOTES.md`：加入本次任務的小節（實作細節、重要 decision）。
-     - `docs/terminal_logs/…`：存放這次任務關鍵的 terminal log（tsc / vitest / 其他工具）。
+**測試層面**
 
-4. **Windsurf 回報與你轉貼（Windsurf → 你 → ChatGPT）**
-   - Windsurf 給你一段「回報摘要」，例如：
-     - 本次任務代號（T-000X）。
-     - 新增 / 更新的程式檔、測試檔路徑。
-     - 新增的 docs / terminal_logs 路徑。
-     - 測試與型別檢查是否通過。
-   - 你只要把這段摘要貼回 ChatGPT 對話即可。
+- 相關 Vitest 測試全部通過，新增的功能具備基本測試覆蓋。
+- 如有無法立即補測的情況，需在 `PENDING_DECISIONS.md` 或 T 任務說明中註明原因。
 
-5. **ChatGPT 收尾與規劃下一步（ChatGPT）**
-   - ChatGPT 會：
-     - 將 `PROJECT_TODO.md` 中對應的 `T-XXXX` 標記為 ✅，並補上結果摘要。
-     - 視需要調整 / 補充其他 docs 的說明（例如 CONTENT_SCHEMA / WORKFLOW）。
-     - 幫你規劃下一個 T 任務（T-XXXX+1），並給出下一輪要貼給 Windsurf 的短指令。
+**文件層面**
 
-> 總之：  
-> - `PROJECT_TODO.md` 是「T 任務清單 + 狀態」。  
-> - `Windsurf_ChatGPT_NOTES.md` 是「每個 T 任務的實作日誌」。  
-> - 你只要負責在 ChatGPT 和 Windsurf 之間傳遞「短指令」與「回報摘要」，就能一路推進 T-0001, T-0002, ...。
+- `docs/PROJECT_TODO.md` 中對應的 T 任務狀態更新（⬜ → ✅）。
+- `docs/Windsurf_ChatGPT_NOTES.md` 新增一個 T 任務小節，記錄：
+  - 變更摘要。
+  - 主要改動檔案。
+  - 執行指令與測試結果。
+  - 未解決問題（若有）。
+- 如有重大設計決策變更，更新：
+  - `docs/COMPLETE_PROJECT_WORKFLOW.md`
+  - `docs/CONTENT_SCHEMA.md`
+  - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`
+  - `docs/PENDING_DECISIONS.md` 等。
+
+**git 層面**
+
+- 本機 `git status` 乾淨（`working tree clean`）。
+- 該 T 任務產生的 commit message 建議使用：
+  - `feat: T-000X ...`
+  - 或 `chore: T-000X ...`（若主要是重構 / 文件）。
 
 ### 4.y 每個 T 任務完成後的建議 git 流程（Windsurf → 你）
 
 為了讓 GitHub 上的 repo 永遠貼近「最新已完成的 T 任務」，每一個 T-XXXX 任務收尾時，建議由 Windsurf 在回報摘要的最後，自動多附一段「建議 git 指令」，讓你可以在 IDE / 終端機中直接複製執行。
 
-同時，**Windsurf 不會自動執行任何 `git add` / `git commit` / `git push`**，只會提供建議指令，由你在 IDE / 終端機中手動確認與執行。
+同時，Windsurf 不會自動執行任何 `git add` / `git commit` / `git push`，只會提供建議指令，由你在 IDE / 終端機中手動確認與執行。
 
 #### 4.y.1 建議的 git 指令區塊格式
 
-Windsurf 在每次任務完成時，回報摘要的結尾多附一段（範例）：
+Windsurf（或其他實作 Agent）在每次任務完成時，回報摘要的結尾多附一段 `[建議 git 指令]`，讓你可以在 PowerShell / 終端機中「整段複製貼上就能執行」，不需要再自行代入參數。
 
-```text
+範例（以 `T-0007` 為例）：
+
+```bash
 [建議 git 指令]
 git status
 
-git add <這次變更相關的檔案列表>
+git add package.json package-lock.json tools/docs-snapshot/make-docs-snapshot.ts docs/PROJECT_TODO.md docs/Windsurf_ChatGPT_NOTES.md docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt
 
-git commit -m "feat: T-0005 news meta date/location"
-git push origin <你的目標分支，例如 main>
+git commit -m "feat: T-0007 docs snapshot CLI"
+git push origin main
 ```
 
-#### 4.y.2 建議的 commit message 模板
+規則：
 
-```text
-<type>: T-<序號> <簡短說明>
+- `[建議 git 指令]` 區塊中的每一行，都必須是可以直接在終端機執行的真實指令。
+- 不可使用 `<your-branch>`、`<files>`、`[...]`、`...` 這類佔位符或省略寫法。
+- 不可在指令行內加入 `#`、`//` 等註解；若需要補充說明，請寫在回報摘要的正文裡，而不是指令區塊中。
+- 若本次任務明確在 `main` 分支上工作，就直接輸出：
+  - `git push origin main`
+- 若任務使用其他分支（例如 `feature/xyz`），請在 `[Agent 回報摘要]` 中說明分支用途，並在 `[建議 git 指令]` 內直接輸出：
+  - `git push origin feature/xyz`
 
-# 範例
-feat: T-0005 news meta date/location
-feat: T-0004 magazine-from-legacy skeleton
-fix: T-0007 sutra verse edge-case handling
-chore: T-0002 anycontent news/magazine types
-docs: T-0001 teaching-from-legacy verses notes
-```
+實務上，你看到 `[建議 git 指令]` 時，理論上可以「整段複製貼上」到 PowerShell / 終端機執行。  
+只要裡面出現 `<...>`、`[...]` 或看起來像註解的內容，就代表實作 Agent 沒有遵守本節規則，請要求它重新產生一版可直接執行的指令。
 
-> 重點：  
-> - `type` 建議使用：`feat` / `fix` / `refactor` / `chore` / `docs`。  
-> - 每個 T 任務理論上對應「至少一個 commit」，但你也可以視情況把多個小 T 任務合併成一個較大的 milestone commit。  
-> - Windsurf 產生的「建議 git 指令」只是模板，你在執行前可以先看 `git status` / `git diff` 再決定要不要調整檔案列表與 commit message。  
+#### 4.y.2 你在本機的實際操作流程
 
-## 5. Windsurf 自動跑 terminal 與「卡關」處理
+收到 Windsurf 的回報摘要之後，先大致確認：
 
-### 5.1 Windsurf 可以自行執行的指令
+- 任務是否照 T 任務說明執行。
+- 測試是否通過。
+- 有沒有列出任何未解決問題。
 
-**可以自動執行（不需你貼 terminal）：**
+在專案根目錄打開 PowerShell / 終端機，執行 `[建議 git 指令]` 區塊中的內容：
 
-- 測試：
-  - `npx vitest`
-  - `npx vitest tests/xxx.spec.ts`
-- Lint / build：
-  - `npm run lint`
-  - `npm run build`（視專案規模與效能情況決定是否常態執行；如 build 時間較長，可只在特定任務、且經你明確同意後再執行）
+建議順序通常是：
 
-**需要你同意或手動執行：**
+1. `git status`
+2. `git add ...`
+3. `git commit -m "..."`
+4. `git push origin main`
 
-- `npm install ...`
-- 可能會刪除 / 大量改動檔案的指令。
-- 連線外部 API 的指令。
+若你不確定某個指令的作用，可以：
 
-Windsurf 在這些情況會詢問你 / 要你按確認。
+- 先單獨執行 `git status` 觀察變更。
+- 有疑問時，把 `git status` 與回報摘要貼給 ChatGPT 請教。
 
 ---
 
-### 5.2 解不了的問題怎麼交接給 ChatGPT？
+## 5. `Windsurf_ChatGPT_NOTES.md` 與 `PROJECT_TODO.md` 的搭配
 
-當 Windsurf 多次嘗試修正後仍然卡住時，會：
+### 5.1 `PROJECT_TODO.md`：任務清單與狀態
 
-1. 在 `docs/Windsurf_ChatGPT_NOTES.md` 的該任務小節下新增一段：
+每個 T 任務在 `docs/PROJECT_TODO.md` 裡應包含：
 
-   ```markdown
-   #### 無法解決的問題
+- 標題（含 T 編號）。
+- 狀態（✅ / ⬜）。
+- 任務說明（目標、背景）。
+- 要修改的檔案列表。
+- 不可更動的 contract。
+- 驗收條件（測試／檢查項目）。
 
-   - 問題描述：...
-   - 重現步驟：
-     - `npx vitest tests/...`
-   - 關鍵 terminal 輸出（節錄）：
-     - ...
-   - 已嘗試過的修改：
-     - 修改 A 檔案第幾行，結果如何。
-     - 修改 B 檔案第幾行，結果如何。
-   - 目前卡住的點 / 需要 ChatGPT 決策的地方：
-     - ...
-   ```
+ChatGPT 在規劃下一步時，會優先閱讀這份清單。
 
-2. （選用）若問題較多，也可更新 `docs/UNRESOLVED_ISSUES.md` 做列表。
+### 5.2 `Windsurf_ChatGPT_NOTES.md`：實作日誌與交接
 
-你只要：
+每次 Windsurf 完成一個 T 任務，應在 `docs/Windsurf_ChatGPT_NOTES.md` 加一個小節：
 
-- 把這段「無法解決的問題」及相關內容貼給 ChatGPT，  
-  或在 ChatGPT 那邊說：「請閱讀 `docs/Windsurf_ChatGPT_NOTES.md` 裡最新任務的小節，幫我設計具體修改指令給 Windsurf。」
+- `YYYY-MM-DD T-000X 任務名稱`
+
+小節內容包含：
+
+- 修改檔案列表。
+- 關鍵改動說明（例如：新增哪些欄位、修改哪些映射）。
+- 執行指令與結果（簡要；詳細 log 在 `docs/terminal_logs/`）。
+- 未解決問題與後續建議（若有）。
+
+### 5.3 ChatGPT 如何利用這兩份文件
+
+ChatGPT 在每次新對話開始時會：
+
+1. 讀取 `docs/PROJECT_TODO.md`：
+   - 確認哪些 T 任務已完成（✅）。
+   - 找出目前開著但未做完的項目（⬜）。
+2. 讀取 `docs/Windsurf_ChatGPT_NOTES.md`：
+   - 理解最近幾次 T 任務的實作細節。
+   - 找出是否有遺留問題或需要 follow-up 的點。
+
+綜合判斷後，提出「下一個建議的 T 任務」，並給出理由。
 
 ---
 
-## 6. ChatGPT 開新對話建議開場模板
+## 6. ChatGPT 開新對話：什麼時候開、怎麼開？
+
+### 6.1 什麼時候建議開新 ChatGPT 對話？
+
+當出現下面任一種情況時，建議「結束目前對話，開一個新的 ChatGPT 對話」，讓 ChatGPT 重新以 docs 為基準冷啟動，而不是繼續累積越來越重的對話歷史：
+
+- 覺得回應明顯變慢、卡頓，或回應開始「答非所問」。  
+- 本輪已經完成 1～2 個 T 任務，`docs/PROJECT_TODO.md`、`docs/Windsurf_ChatGPT_NOTES.md` 已有明顯更新。  
+- 對話裡已經貼了大量 log / code / 長指令，自己也開始搞不清楚現在在談哪一段。  
+- 準備切換到新的主題（例如：從 html-to-markdown 規則，改成討論 zh-tw → zh-cn pipeline）。
+
+在「關掉舊對話 → 開新對話」之前，建議遵守以下流程：
+
+**請實作 Agent 收尾並更新 docs**
+
+- 確認本輪 T 任務的變更已寫入：
+  - `docs/PROJECT_TODO.md`
+  - `docs/Windsurf_ChatGPT_NOTES.md`
+  - （如有需要）`docs/PENDING_DECISIONS.md`
+- 若有測試或工具輸出，關鍵 log 已存成：
+  - `docs/terminal_logs/T-xxxx_*.txt`
+
+**你在本機手動做的事**
+
+在專案根目錄執行：
+
+```bash
+git status
+```
+
+依照 `[建議 git 指令]` 區塊執行：
+
+```bash
+git add ...
+git commit -m "..."
+git push origin main
+```
+
+執行前先檢查 `[建議 git 指令]`：
+
+- 不能出現 `<...>`、`[...]` 這類佔位符，也不能在指令行內加 `#`、`//` 註解。
+- 若有，先請實作 Agent 重新產生一版可直接執行的指令。
+
+**產生新的 docs snapshot（給下一輪 ChatGPT 用）**
+
+在本機執行（依實際任務代號填寫）：
+
+```bash
+npm run snapshot:docs -- --task T-xxxx
+```
+
+這會在 `snapshots/` 底下產生一個新的 ZIP，例如：
+
+- `snapshots/ctworld-docs-T-0007-YYYY-MM-DD-v1.zip`
+
+`snapshots/` 資料夾與 ZIP 保持未加入 git，只在本機用來傳給 ChatGPT。
+
+**準備好「新對話開場資訊」**
+
+開新對話時，請上傳最新的 docs snapshot ZIP（或指向 GitHub 最新 commit / 分支），並簡單說明：
+
+- 這是「中台世界舊站 → Headless CMS」專案。
+- 希望 ChatGPT 先閱讀的檔案清單。
+- 最近完成的是哪幾個 T 任務（可以引用 `Windsurf_ChatGPT_NOTES.md` 的標題）。
+
+### 6.2 建議的開新對話開場模板
 
 未來你在 ChatGPT 開新對話，可以這樣開場（可自行調整）：
 
@@ -429,107 +459,82 @@ Windsurf 在這些情況會詢問你 / 要你按確認。
 目前最新任務小節是：
 - docs/Windsurf_ChatGPT_NOTES.md 裡的「YYYY-MM-DD 任務：...」（以及之後的任務，如果有）。
 
+如果我有另外提供 docs snapshot ZIP，請以 ZIP 內的檔案為準，不要再使用舊的 snapshot 或舊版本 docs。
+
 請你：
-1. 用自己的話重述目前專案狀態與最近幾次 Windsurf 的修改重點。
-2. 建議我這一輪最適合先做哪一個小任務，並產生一段「可以直接貼給 Windsurf 的指令」。
-3. 之後，每一次新的任務請都以同一個模式給我一段可複製的 Windsurf 指令。
+1. 用自己的話重述目前專案狀態與最近幾次實作 Agent（Windsurf / Codex）的修改重點。
+2. 根據 docs/PROJECT_TODO.md 與 notes，幫我挑一個「最適合現在進行」的 T 任務，並說明理由。
+3. 為這個 T 任務產生一段「可以直接貼給實作 Agent 的任務指令」（用 code block 包起來），內容包含：
+   - 要閱讀的 docs / 章節。
+   - 要修改或新增的檔案路徑。
+   - 不可以改動的型別／規則（contract）。
+   - 要執行的測試指令與預期結果。
+4. 之後每一輪新任務，也都用同樣模式提供「簡短任務摘要 + 給實作 Agent 的指令」即可，把所有細節寫回 docs。
 ```
 
 ---
 
+## 7. ChatGPT 可見範圍與 docs snapshot / ZIP 交接
+
+### 7.1 ChatGPT 能看到什麼？
+
+ChatGPT 能看到：
+
+- 你在對話中打的文字。
+- 你上傳的檔案（ZIP / `.md` / `.txt` / `.ts` / `.tsx` / `.json` 等）。
+- 公開的 GitHub repo（或透過 connector 提供的存取）。
+
+ChatGPT 看不到：
+
+- 你本機的 `F:\` 資料夾（除非你壓縮成 ZIP 上傳）。
+- 尚未 push 的本機變更（只存在於 working tree 的修改）。
+
+### 7.2 實作 Agent 完成任務後要做什麼？
+
+Windsurf / Codex 在本機 / 雲端改完 code 之後，應該：
+
+- 更新 `docs/PROJECT_TODO.md`（T 任務狀態與說明）。
+- 更新 `docs/Windsurf_ChatGPT_NOTES.md`（實作日誌）。
+- 在 `docs/terminal_logs/` 新增執行指令的 log 檔。
+- 在回報摘要中附上 `[建議 git 指令]`。
+
+### 7.3 如何讓 ChatGPT 看到完整變更？
+
+**GitHub 路線**
+
+你在本機執行建議的 git 指令：
+
+```bash
+git status
+git add ...
+git commit -m "..."
+git push origin main
+```
+
+ChatGPT 在新對話中直接閱讀 GitHub 上的 docs / 程式碼。
+
+**docs snapshot ZIP 路線**
+
+在本機執行：
+
+```bash
+npm run snapshot:docs -- --task T-xxxx
+```
+
+得到一個新的 snapshot ZIP，在新對話中上傳給 ChatGPT。
+
+ChatGPT 以 ZIP 內的內容為準，不會再看舊 ZIP。
 
 ---
 
-## 6. ChatGPT 可見範圍與 docs snapshot / ZIP 交接
+## 8. 總結
 
-> 關鍵原則：**ChatGPT 只看得到「對話中貼出的內容」與「你上傳的檔案」。GitHub / Codex / Windsurf 的內部狀態，預設是不可見的。**
-
-### 6.1 ChatGPT 能看到什麼？
-
-ChatGPT 在這個對話中**看不到**：
-
-- GitHub 上的檔案原文（即使 repo 是 public / 已連線）。
-- Codex / Windsurf / 其他 Agent 在自己 sandbox 裡的檔案。
-
-對 ChatGPT 而言，真相來源只有兩種：
-
-1. 你貼進對話的文字（例如完整的 Markdown 段落、程式碼片段、回報摘要）。
-2. 你在對話中上傳的檔案（例如 `docs/` snapshot ZIP、單一 `.md` 檔、log 檔）。
-
-### 6.2 實作 Agent 完成任務後要做什麼？
-
-每一個明確的 T 任務（例如 T-0005）完成後，實作 Agent 應該：
-
-1. 在 repo 中更新對應的 docs：
-   - 在 `docs/Windsurf_ChatGPT_NOTES.md` 新增一節，記錄：
-     - 任務編號與簡述。
-     - 實際修改的檔案與邏輯重點。
-     - 執行過的測試指令與結果。
-     - 若有尚未解決的問題，列在「未解決問題」小節。
-   - 視需要更新 `docs/PROJECT_TODO.md`（將該 T 任務標記為 ✅，或新增後續子任務）。
-   - 若有特殊情況，可更新 `docs/UNRESOLVED_ISSUES.md`。
-   - 若有尚未決定是否寫入正式 workflow 的規則或設計，可以先記錄在 `docs/PENDING_DECISIONS.md`。
-
-2. 在終端機 log 中，保留這次任務相關輸出：
-   - 建議存成 `docs/terminal_logs/T-xxxx_<slug>_<tool>_<result>.txt`。
-   - 例如：`docs/terminal_logs/T-0005_news-from-legacy_vitest_pass.txt`。
-
-3. 若需要讓 ChatGPT 之後查看完整結果（包括 docs + log），請在專案根目錄建立（或重用）`snapshots/` 資料夾，
-   並由實作 Agent 自動產生一個 docs snapshot ZIP（不加入 Git，只存在本機），內容至少包含：
-   - 本次任務有修改的 `docs/*.md` 檔案。
-   - 本次任務新增的 `docs/terminal_logs/*.txt` 檔案。
-
-   建議檔名格式（放在 `snapshots/` 底下）：
-
-   ```text
-   snapshots/ctworld-docs-T-0005-2025-12-09-v1.zip
-   ```
-
-   命名規則說明：
-
-   - `ctworld-docs`：專案代號＋只包含 docs 的 snapshot。
-   - `T-0005`：對應的 T 任務編號。
-   - `2025-12-09`：打包日期（使用當地時間即可）。
-   - `v1`：當日第一次打包；若同一任務需要再次打包，可遞增為 `v2`, `v3`。
-
-4. 產生一段簡短的 `[Windsurf 回報摘要]` 或 `[Agent 回報摘要]`，
-   讓你可以直接貼回 ChatGPT 對話，並在摘要中註明此次 snapshot 檔名，例如：
-
-   ```text
-   本次 docs snapshot：snapshots/ctworld-docs-T-0005-2025-12-09-v1.zip
-   ```
-
-### 6.3 如何讓 ChatGPT 看到完整變更？
-
-當你想讓 ChatGPT「真正看過這次任務的成果與 log」時，建議流程：
-
-1. 確認實作 Agent 已完成 §6.2 的步驟，特別是：
-   - docs 與 `docs/terminal_logs/` 都已更新。
-   - 已在 `snapshots/` 底下產生對應的 docs snapshot ZIP（若該任務需要 ChatGPT 後續指導）。
-
-2. 在本機找到對應的 ZIP 檔案，例如：
-   - `snapshots/ctworld-docs-T-0005-2025-12-09-v1.zip`
-
-3. 在 ChatGPT 對話中上傳該 ZIP，並簡單說明：
-   - 本次任務編號（例如 T-0005）。
-   - 希望 ChatGPT 做什麼（例如：檢查規則是否清楚、設計下一個 T 任務）。
-
-之後 ChatGPT 回應時，會**以你上傳的 ZIP 內容為唯一權威版本**來設計新的任務與規則。
-
-> 補充說明：ChatGPT 不會把舊對話中看過的 ZIP 當成長期檔案空間。  
-> 若在某一個對話中需要重新檢視 docs / logs，請再次上傳對應的 docs snapshot ZIP。  
-> 當 ChatGPT 嘗試讀取某個檔案但系統回報「檔案不存在」時，ChatGPT 應直接請你重新上傳 ZIP，而不是依照過去記憶臆測內容。
-
-
-
-## 7. 總結
-
-- **你**：決定方向＋複製貼上＋偶爾 `git` / `npm install`。
-- **ChatGPT**：設計架構規格＋拆任務＋寫 docs（大改時提供 ZIP）。
-- **Windsurf**：實作程式＋跑測試＋寫 `Windsurf_ChatGPT_NOTES.md`＋輸出回報摘要。
+- 你：決定方向＋複製貼上＋偶爾 `git` / `npm install`。  
+- ChatGPT：設計架構規格＋拆任務＋寫 docs（大改時提供 ZIP）。  
+- Windsurf / Codex：實作程式＋跑測試＋寫 `Windsurf_ChatGPT_NOTES.md`＋輸出回報摘要與 `[建議 git 指令]`。  
 
 只要三方都照這份工作流程走：
 
-- 對話視窗保持「輕量：決策＋指令＋回報」。
-- 詳細規格與操作歷史集中在 Git repo 的 `docs/*.md`。
-- 無論是你、ChatGPT 或 Windsurf，要接續工作時都能快速銜接。
+- 對話視窗保持「輕量：決策＋指令＋回報」。  
+- 詳細規格與操作歷史集中在 Git repo 的 `docs/*.md`。  
+- 無論是你、ChatGPT、Windsurf 或 Codex，要接續工作時都能快速銜接。

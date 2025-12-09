@@ -28,13 +28,36 @@
 - [ ] 有需要請 ChatGPT 幫忙 review 或優化嗎？
 
 
-
-## 收工前
+## 收工前（每一輪對話／每一個 T 任務收尾時）
 
 - [ ] 今天完成了哪些任務？（簡短記錄即可）
-- [ ] `docs/PROJECT_TODO.md` 裡，有沒有更新任務狀態？
-- [ ] 是否已經 `git add` ＋ `commit` ＋ `push`？
-- [ ] 如果希望 ChatGPT review 本次變更：
-  - [ ] 是否已由實作 Agent 產生 docs snapshot ZIP（例如：`snapshots/ctworld-docs-T-0005-2025-12-09-v1.zip`）？
-  - [ ] 是否已經決定要不要把尚未定案的規則暫存到 `docs/PENDING_DECISIONS.md`？
-  - [ ] 是否已準備好要上傳給 ChatGPT 的 ZIP 檔，以及對應的 `[Agent 回報摘要]`？
+- [ ] `docs/PROJECT_TODO.md` 裡，有沒有更新相關 T 任務的狀態與說明？
+- [ ] `docs/Windsurf_ChatGPT_NOTES.md` 是否已新增本次任務的小節？
+- [ ] 是否有需要暫存到 `docs/PENDING_DECISIONS.md` 的「尚未定案規則」？
+
+- [ ] 已依照實作 Agent 提供的 `[Agent 回報摘要]`，確認本次變更已寫回：
+  - `docs/PROJECT_TODO.md`（更新狀態、T 任務說明）
+  - `docs/Windsurf_ChatGPT_NOTES.md`（新增本次任務小節）
+  - `docs/PENDING_DECISIONS.md`（若有暫定規則）
+  - `docs/terminal_logs/`（是否已新增本次指令的 log 檔）
+
+- [ ] 已依照實作 Agent 提供的 `[建議 git 指令]` 完成：
+  - `git status`
+  - `git add ...`
+  - `git commit -m "..."`（建議使用 `feat: T-000X ...` 或 `chore: T-000X ...`）
+  - `git push origin main`
+
+- [ ] 在執行 `[建議 git 指令]` 之前，**已檢查該區塊內沒有出現 `<...>`、`[...]` 或內嵌註解**（例如 `#`、`//`）。  
+      若有，已請 Agent 重生一版「可以直接貼上執行」的指令。
+
+- [ ] 如有需要給 ChatGPT 下一輪使用的 docs snapshot：
+  - 已在本機執行：
+    - `npm run snapshot:docs -- --task T-xxxx`
+  - 新的 snapshot ZIP（例如 `snapshots/ctworld-docs-T-0008-YYYY-MM-DD-v1.zip`）已產生，且 **沒有被加入 git**。
+
+- [ ] 若覺得當前 ChatGPT 對話已經太長、回應變慢或內容開始混亂：
+  - 已完成上述 git / docs / snapshot 步驟。
+  - 準備在新的 ChatGPT 對話中：
+    - 上傳最新 docs snapshot ZIP（或指定 GitHub repo）。
+    - 要求 ChatGPT 依 `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md` 的「新開對話啟動步驟」重新建立 context。
+
