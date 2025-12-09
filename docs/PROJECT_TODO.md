@@ -313,6 +313,53 @@
   - [ ] 如有新增 `docs/LEGACY_DATA_NOTES.md`，已簡要記錄目錄結構現況，無強迫重構要求。
 
 
+
+---
+
+### T-0007 docs-snapshot-cli: 自動產生 docs snapshot ZIP（給 ChatGPT 用）
+
+> 狀態：待執行（優先級：適合 Codex / Windsurf 嚐鮮）
+
+- 目標：
+  - 在本機 repo 中提供一個簡單 CLI 或 npm script，讓實作 Agent 可以用單一指令產生「本次任務專用的 docs snapshot ZIP」。
+  - ZIP 檔預設輸出到 `snapshots/` 目錄，檔名遵守既有命名規則：
+    - `snapshots/ctworld-docs-T-xxxx-YYYY-MM-DD-vN.zip`。
+  - 只打包與 docs 相關的內容（`docs/*.md` ＋ `docs/terminal_logs/*.txt`），不包含 `node_modules` / `dist` 等大型目錄。
+
+- 關聯 docs：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md` §6（ChatGPT 可見範圍與 docs snapshot / ZIP 交接）。
+  - `docs/TOOLS_ROLES_AND_BOUNDARIES.md` §2.4（關於 docs snapshot ZIP）。
+  - `docs/SESSION_CHECKLIST.md`（收工前檢查項目）。
+
+- 建議修改檔案：
+  - `tools/docs-snapshot/` 底下新增一個小型 CLI（例如 `make-docs-snapshot.ts`），負責：
+    - 建立 `snapshots/` 目錄（若不存在）。
+    - 依照指定的 T 任務編號（例如 `T-0007`）與當日日期組出檔名。
+    - 打包指定的檔案集合到 ZIP。
+  - `package.json`：
+    - 新增一個 npm script，例如：`"snapshot:docs": "tsx tools/docs-snapshot/make-docs-snapshot.ts"`。
+  - 視需要補充一小段使用說明到：
+    - `docs/SESSION_CHECKLIST.md` 或
+    - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`（只要連結到既有 §6 說明即可）。
+
+- 允許修改的範圍：
+  - 僅限：
+    - `tools/docs-snapshot/*`（新檔案）
+    - `package.json`（新增 script，避免動到既有 script 的語意）
+    - 與 snapshot CLI 相關的 docs 小段落。
+  - 不得：
+    - 更改既有 T 任務內容。
+    - 改動 `docs/HTML_TO_MARKDOWN_RULES_V4.md`、`docs/CONTENT_SCHEMA.md` 等核心規則。
+
+- 驗收方式：
+  - [ ] 在專案根目錄執行：`npm run snapshot:docs -- T-0007`（或 CLI 說明中定義的參數形式），能在 `snapshots/` 目錄下產生一個 ZIP，例如：
+        - `snapshots/ctworld-docs-T-0007-2025-12-09-v1.zip`
+  - [ ] ZIP 內容僅包含：
+        - 目前 repo 中的 `docs/*.md`
+        - 目前 repo 中的 `docs/terminal_logs/*.txt`（若存在）
+  - [ ] 不會意外打包 `node_modules/`、`dist/` 等大型或敏感目錄。
+
+
 1. 當你和 ChatGPT 討論出一個新功能：
    - 由 ChatGPT 幫你在這裡新增一條 TODO。
    - 同時產生 / 更新對應的 docs 與骨架程式碼。
