@@ -1,7 +1,7 @@
 # 中台世界專案協作工作流程（User / ChatGPT / 實作 Agent）
 
 > 檔名：`docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`  
-> 版本：2025-12-10（由 ChatGPT 更新）  
+> 版本：2025-12-10（由 ChatGPT 更新）
 > 目標：讓你只需要做關鍵決策與簡單 copy / paste，技術細節與執行由 ChatGPT + Windsurf 自動接力完成。
 
 ---
@@ -280,11 +280,11 @@ Windsurf 根據 ChatGPT 給的指令：
 
 #### 4.y.1 建議的 git 指令區塊格式
 
-Windsurf（或其他實作 Agent）在每次任務完成時，回報摘要的結尾多附一段 `[建議 git 指令]`，讓你可以在 PowerShell / 終端機中「整段複製貼上就能執行」，不需要再自行代入參數。
+Windsurf（或其他實作 Agent）在每次任務完成時，回報摘要的結尾多附一段「[建議 git 指令]」區塊，讓你可以在 PowerShell / 終端機中「整段複製貼上就能執行」，不需要再自行代入參數。
 
-範例（以 `T-0007` 為例）：
+範例（以 T-0007 為例）：
 
-```bash
+```text
 [建議 git 指令]
 git status
 
@@ -292,20 +292,7 @@ git add package.json package-lock.json tools/docs-snapshot/make-docs-snapshot.ts
 
 git commit -m "feat: T-0007 docs snapshot CLI"
 git push origin main
-```
 
-規則：
-
-- `[建議 git 指令]` 區塊中的每一行，都必須是可以直接在終端機執行的真實指令。
-- 不可使用 `<your-branch>`、`<files>`、`[...]`、`...` 這類佔位符或省略寫法。
-- 不可在指令行內加入 `#`、`//` 等註解；若需要補充說明，請寫在回報摘要的正文裡，而不是指令區塊中。
-- 若本次任務明確在 `main` 分支上工作，就直接輸出：
-  - `git push origin main`
-- 若任務使用其他分支（例如 `feature/xyz`），請在 `[Agent 回報摘要]` 中說明分支用途，並在 `[建議 git 指令]` 內直接輸出：
-  - `git push origin feature/xyz`
-
-實務上，你看到 `[建議 git 指令]` 時，理論上可以「整段複製貼上」到 PowerShell / 終端機執行。  
-只要裡面出現 `<...>`、`[...]` 或看起來像註解的內容，就代表實作 Agent 沒有遵守本節規則，請要求它重新產生一版可直接執行的指令。
 
 #### 4.y.2 你在本機的實際操作流程
 
@@ -328,6 +315,54 @@ git push origin main
 
 - 先單獨執行 `git status` 觀察變更。
 - 有疑問時，把 `git status` 與回報摘要貼給 ChatGPT 請教。
+
+
+
+#### 4.y.3 同一個 T 任務中的多步驟自動前進規則（給 Windsurf / Codex）
+
+有些較大的工作會拆成「同一顆 T 任務下的一連串 step」（例如 step01 / step02 / step03）。  
+為了減少你在中間一直來回貼指令，只要 **任務說明裡有明確列出步驟與安全範圍**，實作 Agent 可以在同一顆 T 任務內「自動往下一步」，但必須遵守以下原則：
+
+**Agent 可以自動前進到下一個 step 的前提：**
+
+- 當前 step 的任務說明已完成，且：
+  - 所有在該 step 任務說明中列出的測試、typecheck 指令全部通過。
+  - 沒有新增未解決的錯誤或例外（例如測試紅燈但被忽略）。
+  - 不需要更動「不在本 T 任務允許修改清單中的檔案」。
+  - 不需要更動 schema / public API 等「跨多顆 T 任務的共用 contract」。
+- 當前 step 若有要求更新 docs，已完成：
+  - `docs/PROJECT_TODO.md`（補上當前 step 已完成的描述，必要時更新 T 任務狀態）。
+  - `docs/Windsurf_ChatGPT_NOTES.md`（在本 T 任務的小節內，新增一段描述目前 step 的修改與測試結果）。
+  - `docs/PENDING_DECISIONS.md`（如果在過程中產生新的「暫定規則」或待確認議題）。
+
+在上述條件都滿足時，Agent **可以直接繼續執行下一個 step**，不必每一小步都停下來等 ChatGPT 或你確認。
+
+**Agent 必須「停下來 & 回報」的情況：**
+
+- 任一測試 / typecheck 失敗，且不是 trivially fixable 的 typo。
+- 發現必須修改：
+  - 不在本 T 任務允許清單中的檔案，或
+  - 其他 T 任務負責的模組、全域設定。
+- 發現 schema / workflow / contract 層級的設計問題，需要：
+  - 更新 `CONTENT_SCHEMA.md`、`COMPLETE_PROJECT_WORKFLOW.md`、`TOOLS_ROLES_AND_BOUNDARIES.md` 等。
+- 遇到無法確認的業務規則（例如某欄位要不要 nullable、某種 HTML 是否要支援）。
+- 任務說明中明寫「執行到 step N 就暫停，請回報」。
+
+這些情況下，Agent 應該：
+
+- 先停止繼續後續 step。
+- 在 `docs/Windsurf_ChatGPT_NOTES.md` 對應 T 任務的小節中：
+  - 增加「未解決問題」或「卡關說明」段落。
+- 在 `[Agent 回報摘要]` 中清楚說明：
+  - 已完成到哪一個 step。
+  - 哪些測試已通過。
+  - 卡在哪裡、需要 ChatGPT / 你幫忙決定什麼。
+- （選用）若問題較多，也可更新 `docs/PENDING_DECISIONS.md` 或 `docs/UNRESOLVED_ISSUES.md` 做集中列表。
+
+> 特別說明：  
+> - Agent **絕對不能自行開啟「全新 T 任務」或決定 T-號碼**。  
+>   若要新增 T 任務，必須由 ChatGPT 先在 `PROJECT_TODO.md` 設計並命名。  
+> - Agent 允許自動前進的範圍，只限於「同一顆 T 任務內、ChatGPT 已事先規劃好的 step01 / step02 / step03」。
 
 ---
 

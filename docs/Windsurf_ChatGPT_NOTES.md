@@ -648,3 +648,137 @@
     - 以 glob / 目錄為輸入，一次轉多個檔案。
   - 建議在 `PROJECT_TODO.md` 新增對應 T 任務，而不是直接在本小節擴寫行為。
 
+
+---
+
+## 2025-12-09 任務：T-0007 docs-snapshot-cli：自動產生 docs snapshot ZIP
+
+### 1. 任務需求總結
+
+- 對應 PROJECT_TODO：
+  - `T-0007 docs-snapshot-cli: 自動產生 docs snapshot ZIP（給 ChatGPT 用）`
+- 目標：
+  - 在本機 repo 中提供一個簡單 CLI / npm script，讓實作 Agent 可以用單一指令產生「本次任務專用的 docs snapshot ZIP」。
+  - ZIP 只打包 `docs/*.md` 與 `docs/terminal_logs/*.txt`，輸出到 `snapshots/`，**不加入 git**。
+  - 之後你要給 ChatGPT 看最新狀態，只要上傳對應的 snapshot ZIP 即可。
+
+### 2. 主要實作與修改檔案
+
+- `tools/docs-snapshot/make-docs-snapshot.ts`
+  - 新增 docs snapshot CLI：
+    - 預設輸出目錄：`snapshots/`
+    - 檔名格式：`ctworld-docs-T-xxxx-YYYY-MM-DD-vN.zip`
+    - 必填參數：
+      - `--task T-xxxx`：對應本次任務編號（會寫進檔名）。
+    - 打包內容：
+      - 所有 `docs/*.md`
+      - 所有 `docs/terminal_logs/*.txt`
+    - 不會包含 `node_modules`、`dist` 等大型目錄。
+
+- `package.json`
+  - 新增 npm script：
+
+    ```jsonc
+    "scripts": {
+      // ...
+      "snapshot:docs": "ts-node tools/docs-snapshot/make-docs-snapshot.ts"
+    }
+    ```
+
+- `docs/PROJECT_TODO.md`
+  - 將 T-0007 狀態改為「✅ 已完成」並補上實際 CLI 行為與驗收方式說明。
+
+- `docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt`
+  - 記錄第一次成功執行 `npm run snapshot:docs -- --task T-0007` 的終端輸出。
+
+### 3. 使用方式備忘
+
+- 實作 Agent 在每個 T 任務收尾時，如果需要給 ChatGPT 看最新 docs：
+  1. 先依照任務需求更新 `docs/*.md` 與 `docs/terminal_logs/*.txt`。
+  2. 在專案根目錄執行：
+
+     ```bash
+     npm run snapshot:docs -- --task T-xxxx
+     ```
+
+  3. 檢查 `snapshots/` 下多了一個類似：
+
+     ```text
+     snapshots/ctworld-docs-T-0007-2025-12-09-v1.zip
+     ```
+
+  4. **不要把 snapshots/ 加入 git**，只在本機保留，用來上傳給 ChatGPT。
+
+- 之後你開新對話時，只要：
+  - 上傳最新的 docs snapshot ZIP。
+  - 附上一段 `[Agent 回報摘要]`（含 T 任務編號、變更檔案列表、主要測試結果與 snapshot 檔名），
+  - 就能讓新的 ChatGPT 對話直接接上這一輪完成的工作。
+
+---
+
+## 2025-12-09 任務：T-0007 docs-snapshot-cli：自動產生 docs snapshot ZIP
+
+### 1. 任務需求總結
+
+- 對應 PROJECT_TODO：
+  - `T-0007 docs-snapshot-cli: 自動產生 docs snapshot ZIP（給 ChatGPT 用）`
+- 目標：
+  - 在本機 repo 中提供一個簡單 CLI / npm script，讓實作 Agent 可以用單一指令產生「本次任務專用的 docs snapshot ZIP」。
+  - ZIP 只打包 `docs/*.md` 與 `docs/terminal_logs/*.txt`，輸出到 `snapshots/`，**不加入 git**。
+  - 之後要給 ChatGPT 看最新狀態，只要上傳對應的 snapshot ZIP 即可。
+
+### 2. 主要實作與修改檔案
+
+- `tools/docs-snapshot/make-docs-snapshot.ts`
+  - 新增 docs snapshot CLI：
+    - 預設輸出目錄：`snapshots/`
+    - 檔名格式：`ctworld-docs-T-xxxx-YYYY-MM-DD-vN.zip`
+    - 必填參數：
+      - `--task T-xxxx`：對應本次任務編號（會寫進檔名）。
+    - 打包內容：
+      - 所有 `docs/*.md`
+      - 所有 `docs/terminal_logs/*.txt`
+    - 不會包含 `node_modules`、`dist` 等大型目錄。
+
+- `package.json`
+  - 新增 npm script：
+
+    ```jsonc
+    "scripts": {
+      // ...
+      "snapshot:docs": "ts-node tools/docs-snapshot/make-docs-snapshot.ts"
+    }
+    ```
+
+- `docs/PROJECT_TODO.md`
+  - 將 T-0007 狀態改為「✅ 已完成」，並補上實際 CLI 行為與驗收方式說明。
+
+- `docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt`
+  - 記錄第一次成功執行 `npm run snapshot:docs -- --task T-0007` 的終端輸出。
+
+### 3. 使用方式備忘
+
+- 實作 Agent 在每個 T 任務收尾時，如果需要給 ChatGPT 看最新 docs，可以：
+
+  1. 先依照任務需求更新 `docs/*.md` 與 `docs/terminal_logs/*.txt`。
+  2. 在專案根目錄執行：
+
+     ```bash
+     npm run snapshot:docs -- --task T-xxxx
+     ```
+
+  3. 檢查 `snapshots/` 下多了一個類似：
+
+     ```text
+     snapshots/ctworld-docs-T-0007-2025-12-09-v1.zip
+     ```
+
+  4. **不要把 snapshots/ 加入 git**，只在本機保留，用來上傳給 ChatGPT。
+
+- 之後你開新對話時，只要：
+
+  - 上傳最新的 docs snapshot ZIP。
+  - 附上一段 `[Agent 回報摘要]`（含 T 任務編號、變更檔案列表、主要測試結果與 snapshot 檔名），
+
+就能讓新的 ChatGPT 對話直接接上這一輪完成的工作。
+
