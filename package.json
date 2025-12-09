@@ -11,7 +11,8 @@
     "crawl:ctworld": "ts-node tools/crawl/crawl-ctworld.ts --base-url https://www.ctworld.org --out data/crawl/crawled-urls.json --max-depth 5 --delay-ms 200",
     "inventory:fs": "ts-node tools/crawl/filesystem-inventory.ts --docroot ./ctworld-docroot --base-url https://www.ctworld.org --out data/crawl/all-files.json",
     "diff:crawl-vs-fs": "ts-node tools/crawl/diff-crawl-vs-files.ts --crawled data/crawl/crawled-urls.json --files data/crawl/all-files.json --out-dir data/crawl",
-    "test": "vitest"
+    "test": "vitest",
+    "snapshot:docs": "ts-node tools/docs-snapshot/make-docs-snapshot.ts"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
@@ -22,8 +23,10 @@
     "@eslint/js": "^9.39.1",
     "@types/cheerio": "^0.22.35",
     "@types/node": "^24.10.1",
+    "@types/archiver": "^6.0.3",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "archiver": "^7.0.1",
     "@vitejs/plugin-react": "^5.1.1",
     "@vitejs/plugin-react-swc": "^4.2.2",
     "eslint": "^9.39.1",

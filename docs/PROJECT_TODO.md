@@ -1,161 +1,87 @@
-# PROJECT_TODO
+﻿# PROJECT_TODO
 
-> 建議由 ChatGPT 協助維護這份清單，
-> Windsurf / Cursor 則依照指定的 TODO 項目實作。
+> 撱箄降??ChatGPT ?蝬剛風?遢皜嚗?> Windsurf / Cursor ???扳?摰? TODO ?撖虫???
+## 閬?
 
-## 規則
-
-- 每一條任務盡量「小而明確」。
-- 每一條任務要指明：
-  - 關聯的 docs（規格來源）。
-  - 要修改的檔案路徑。
-  - 允許修改的範圍（通常是 TODO 區塊）。
-  - 驗收方式（測試、輸出檔、或手動檢查）。
-
+- 瘥?璇遙?????蝣箝?- 瘥?璇遙????嚗?  - ???docs嚗??潔?皞???  - 閬耨?寧?瑼?頝臬???  - ?迂靽格?????虜??TODO ?憛???  - 撽?孵?嚗葫閰艾撓?箸?????瑼Ｘ嚗?
 ---
 
-## TODO 列表（原始三項）
+## TODO ?”嚗?憪???
 
-### 1. 實作 crawl 工具（已完成範例）
-
-- 狀態：✅ 完成
-- 說明：
-  - 檔案：
-    - `tools/crawl/crawl-ctworld.ts`
+### 1. 撖虫? crawl 撌亙嚗歇摰?蝭?嚗?
+- ?????摰?
+- 隤芣?嚗?  - 瑼?嚗?    - `tools/crawl/crawl-ctworld.ts`
     - `tools/crawl/filesystem-inventory.ts`
     - `tools/crawl/diff-crawl-vs-files.ts`
-    - `package.json`（scripts: `crawl:ctworld` / `inventory:fs` / `diff:crawl-vs-fs`）
-  - 規格：
-    - `docs/crawl-and-inventory.md`
+    - `package.json`嚗cripts: `crawl:ctworld` / `inventory:fs` / `diff:crawl-vs-fs`嚗?  - 閬嚗?    - `docs/crawl-and-inventory.md`
     - `docs/CRAWL_TOOLS_SETUP.md`
-  - 功能摘要：
-    - 從 `https://www.ctworld.org` 與 `/sitemap.htm` 出發做 BFS 爬蟲，只保留 `ctworld.org` / `ctworld.org.tw` 網域。
-    - 產出：
-      - `data/crawl/crawled-urls.json` / `crawled-urls.csv`（線上爬蟲結果）
-      - `data/crawl/all-files.json` / `all-files.csv`（本機 docroot inventory）
-      - `data/crawl/missing-from-crawl.csv` / `extra-from-crawl.csv`（差異報表）
-  - 允許修改範圍（已完成，供未來參考）：
-    - 僅限 `tools/crawl/*.ts` 內的實作細節與 CLI 參數解析，不改動 public API 與 scripts 名稱。
-  - 驗收方式：
-    - 能在本機成功執行：
-      - `npm run crawl:ctworld`
+  - ???嚗?    - 敺?`https://www.ctworld.org` ??`/sitemap.htm` ?箇??BFS ?祈嚗靽? `ctworld.org` / `ctworld.org.tw` 蝬脣???    - ?Ｗ嚗?      - `data/crawl/crawled-urls.json` / `crawled-urls.csv`嚗?銝?脩???
+      - `data/crawl/all-files.json` / `all-files.csv`嚗璈?docroot inventory嚗?      - `data/crawl/missing-from-crawl.csv` / `extra-from-crawl.csv`嚗榆?啣銵剁?
+  - ?迂靽格蝭?嚗歇摰?嚗??芯???嚗?    - ?? `tools/crawl/*.ts` ?抒?撖虫?蝝啁???CLI ?閫??嚗??孵? public API ??scripts ?迂??  - 撽?孵?嚗?    - ?賢?祆????瑁?嚗?      - `npm run crawl:ctworld`
       - `npm run inventory:fs`
       - `npm run diff:crawl-vs-files`
-    - 產出的 JSON / CSV 檔格式符合 `crawl-and-inventory.md` 規格。
-  - 負責人：ChatGPT（規格＋骨架）＋ Windsurf（實作）＋ 你（整合與驗收）
+    - ?Ｗ??JSON / CSV 瑼撘泵??`crawl-and-inventory.md` 閬??  - 鞎痊鈭綽?ChatGPT嚗??潘?撉冽嚗? Windsurf嚗祕雿?嚗?雿??游????塚?
 
 ---
 
-### 2. 實作 HTML→AnyContent：teaching
+### 2. 撖虫? HTML?nyContent嚗eaching
 
-- 狀態：⬜ 尚未開始
-- 說明：
-  - 預計檔案：
-    - `tools/convert/html-to-anycontent-teaching.ts`（由 ChatGPT 產生骨架）
-    - `src/types/anycontent-teaching.ts`（teaching schema 定義，已存在可補強）
-  - 規格：
-    - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
+- ???漎?撠??
+- 隤芣?嚗?  - ??瑼?嚗?    - `tools/convert/html-to-anycontent-teaching.ts`嚗 ChatGPT ?Ｙ?撉冽嚗?    - `src/types/anycontent-teaching.ts`嚗eaching schema 摰儔嚗歇摮?航?撘瘀?
+  - 閬嚗?    - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
     - `docs/CONTENT_SCHEMA.md`
-    - `docs/COMPLETE_PROJECT_WORKFLOW.md`（整體流程）
-  - 功能：
-    - 將 teaching 類型 HTML 轉成 `TeachingContent` / `AnyContent` JSON：
-      - 正確處理標題階層、主文段落、引用與列表。
-      - 偵測並抽離偈語區塊，填入 `ct_verse_block_markdown` 等偈語相關欄位。
-      - 依圖片規則填入 `featured_image`、`featured_image_caption`、`gallery_items[]`。
-  - Windsurf 使用說明：
-    - 只能修改 `html-to-anycontent-teaching.ts` 中標註 TODO 的區塊。
-    - 不可修改 `CONTENT_SCHEMA` 中定義的型別與欄位名稱。
-  - 驗收方式（暫定）：
-    - 準備 2–3 個代表性 teaching HTML 範例，手動比對輸出 JSON 與規格是否一致。
-    - 後續可補上 `tests/html-to-anycontent-teaching.spec.ts` 做 snapshot 測試。
-
+    - `docs/COMPLETE_PROJECT_WORKFLOW.md`嚗擃?蝔?
+  - ?嚗?    - 撠?teaching 憿? HTML 頧? `TeachingContent` / `AnyContent` JSON嚗?      - 甇?Ⅱ??璅??惜?蜓?挾?賬??刻??”??      - ?菜葫銝行?Ｗ?隤?憛?憛怠 `ct_verse_block_markdown` 蝑?隤??雿?      - 靘????‵??`featured_image`?featured_image_caption`?gallery_items[]`??  - Windsurf 雿輻隤芣?嚗?    - ?芾靽格 `html-to-anycontent-teaching.ts` 銝剜?閮?TODO ??憛?    - 銝靽格 `CONTENT_SCHEMA` 銝剖?蝢拍????雿?蝔晞?  - 撽?孵?嚗摰?嚗?    - 皞? 2?? ?誨銵冽?teaching HTML 蝭?嚗???撠撓??JSON ???潭?虫??氬?    - 敺??航?銝?`tests/html-to-anycontent-teaching.spec.ts` ??snapshot 皜祈岫??
 ---
 
-### 3. 實作 zh-TW → zh-CN pipeline
+### 3. 撖虫? zh-TW ??zh-CN pipeline
 
-- 狀態：⬜ 尚未開始
-- 說明：
-  - 預計檔案：
-    - `tools/convert/generate-zh-cn-from-zh-tw.ts`
-  - 規格：
-    - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
-    - `docs/CONTENT_SCHEMA.md`（欄位與 `Language` 定義）
-  - 功能：
-    - 讀取 zh-TW 版 AnyContent JSON（例如 `data/zh-tw/**/*.json`）。
-    - 使用 OpenCC（或等效工具）對指定欄位做繁→簡轉換：
-      - 包含 `post_title`, `post_excerpt`, `body_markdown`，以及多數中文 `meta` 與 `seo` 文案欄位。
-    - 不變更：ID / URL / 數字 / enum 類欄位與 `external_id`。
-    - 輸出對應 zh-CN JSON，並維持 `multilingual` 關聯資訊正確。
-  - Windsurf 使用說明：
-    - 僅實作 `generate-zh-cn-from-zh-tw.ts` 中指定 TODO 區塊。
-    - 不修改 `Language` union 或 `AnyContent` schema；欄位白名單需以 docs 為準。
-  - 驗收方式（暫定）：
-    - 使用少量 zh-TW JSON 範例，檢查 zh-CN 版本：
-      - 文字已正確轉為簡體。
-      - 結構（欄位／型別）與原本完全一致。
-      - ID / URL / enum 未被誤改。
-
+- ???漎?撠??
+- 隤芣?嚗?  - ??瑼?嚗?    - `tools/convert/generate-zh-cn-from-zh-tw.ts`
+  - 閬嚗?    - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
+    - `docs/CONTENT_SCHEMA.md`嚗?雿? `Language` 摰儔嚗?  - ?嚗?    - 霈??zh-TW ??AnyContent JSON嚗?憒?`data/zh-tw/**/*.json`嚗?    - 雿輻 OpenCC嚗?蝑?撌亙嚗???甈????陛頧?嚗?      - ? `post_title`, `post_excerpt`, `body_markdown`嚗誑???訾葉??`meta` ??`seo` ??甈???    - 銝??湛?ID / URL / ?詨? / enum 憿?雿? `external_id`??    - 頛詨撠? zh-CN JSON嚗蒂蝬剜? `multilingual` ?鞈?甇?Ⅱ??  - Windsurf 雿輻隤芣?嚗?    - ?祕雿?`generate-zh-cn-from-zh-tw.ts` 銝剜?摰?TODO ?憛?    - 銝耨??`Language` union ??`AnyContent` schema嚗?雿??隞?docs ?箸???  - 撽?孵?嚗摰?嚗?    - 雿輻撠? zh-TW JSON 蝭?嚗炎??zh-CN ?嚗?      - ??撌脫迤蝣箄??箇陛擃?      - 蝯?嚗?雿??嚗??摰銝?氬?      - ID / URL / enum ?芾◤隤斗??
 ---
 
-## T 系列任務（由 ChatGPT 維護）
-
-> T-XXXX 用來標記「人機協作的小步驟」，方便分派給 Windsurf。
-
-### ✅ T-0001 teaching-from-legacy: 將 htmlToMarkdown 的 verses 映射到 TeachingMeta 偈語欄位（已完成）
-
-- 狀態：
-  - 已由 Windsurf 在 2025-12-08 完成對 teaching-from-legacy 的偈語欄位映射實作。
-  - 對應測試（`tests/adapters/teaching-from-legacy.spec.ts`）已新增並通過。
-- 相關程式檔：
+## T 蝟餃?隞餃?嚗 ChatGPT 蝬剛風嚗?
+> T-XXXX ?其?璅??犖璈?雿?撠郊撽??嫣噶?晷蝯?Windsurf??
+### ??T-0001 teaching-from-legacy: 撠?htmlToMarkdown ??verses ????TeachingMeta ??甈?嚗歇摰?嚗?
+- ???
+  - 撌脩 Windsurf ??2025-12-08 摰?撠?teaching-from-legacy ??隤?雿?撠祕雿?  - 撠?皜祈岫嚗tests/adapters/teaching-from-legacy.spec.ts`嚗歇?啣?銝阡???- ?賊?蝔?瑼?
   - `src/html/html-to-markdown.ts`
   - `src/html/legacy-html-types.ts`
   - `src/types/anycontent-teaching.ts`
   - `src/adapters/teaching-from-legacy.ts`
-- 相關測試：
-  - `tests/html/html-to-markdown.spec.ts`
+- ?賊?皜祈岫嚗?  - `tests/html/html-to-markdown.spec.ts`
   - `tests/adapters/teaching-from-legacy.spec.ts`
-- 相關說明與紀錄：
+- ?賊?隤芣?????
   - `docs/Windsurf_ChatGPT_NOTES.md`
   - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_fail.txt`
   - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_pass.txt`
-- 結果摘要：
-  - `htmlToMarkdown` 專用 sutra 規則會將偈語收集到 `verses: string[]`。
-  - `teaching-from-legacy` adapter 會依據 `verses` 設定 TeachingMeta 的偈語欄位：
+- 蝯???嚗?  - `htmlToMarkdown` 撠 sutra 閬??????園???`verses: string[]`??  - `teaching-from-legacy` adapter ????`verses` 閮剖? TeachingMeta ??隤?雿?
     - `ct_has_dharma_verse`
     - `ct_verse_block_markdown`
     - `ct_verse_type`
     - `ct_verse_lang`
-  - 不破壞既有 TeachingContent / AnyContent schema contract。
-
+  - 銝憯??TeachingContent / AnyContent schema contract??
 ---
 
-### ✅ T-0002 AnyContent 其他 post_type 型別：news / magazine contract（已完成）
-
-- 狀態：
-  - 已由 Windsurf 依照 T-0002 規格完成實作，並通過 TypeScript 型別檢查。
-- 新增 / 更新的型別檔：
-  - `src/types/anycontent-teaching.ts`
+### ??T-0002 AnyContent ?嗡? post_type ?嚗ews / magazine contract嚗歇摰?嚗?
+- ???
+  - 撌脩 Windsurf 靘 T-0002 閬摰?撖虫?嚗蒂?? TypeScript ?瑼Ｘ??- ?啣? / ?湔???交?嚗?  - `src/types/anycontent-teaching.ts`
   - `src/types/anycontent-news.ts`
   - `src/types/anycontent-magazine.ts`
   - `src/types/anycontent.ts`
-- 任務規格來源：
-  - `docs/PROJECT_TODO.md`（T-0002 段落）
-  - `docs/CONTENT_SCHEMA.md`
-- 相關說明與紀錄：
+- 隞餃?閬靘?嚗?  - `docs/PROJECT_TODO.md`嚗-0002 畾菔嚗?  - `docs/CONTENT_SCHEMA.md`
+- ?賊?隤芣?????
   - `docs/Windsurf_ChatGPT_NOTES.md`
   - `docs/terminal_logs/T-0002_anycontent_types_tsc_pass.txt`
-- 結果摘要：
-  - AnyContent 的 contract 型別現已包含 teaching / news / magazine 三種 post_type。
-  - news / magazine 的 meta / content 型別已明確定義，未破壞既有 `Language` union 與 `AnyContentBase`。
-
+- 蝯???嚗?  - AnyContent ??contract ??曉歇? teaching / news / magazine 銝車 post_type??  - news / magazine ??meta / content ?撌脫?蝣箏?蝢抬??芰憯??`Language` union ??`AnyContentBase`??
 ---
 
-### ✅ T-0003 news-from-legacy: 建立 NewsContent adapter 骨架（minimal mapping）（已完成）
+### ??T-0003 news-from-legacy: 撱箇? NewsContent adapter 撉冽嚗inimal mapping嚗?撌脣???
 
-- 狀態：
-  - 已由 Windsurf 依照 T-0003 規格完成實作，並通過 Vitest 測試。
-- 新增 / 更新的程式檔：
-  - `src/html/html-to-markdown.ts`
+- ???
+  - 撌脩 Windsurf 靘 T-0003 閬摰?撖虫?嚗蒂?? Vitest 皜祈岫??- ?啣? / ?湔??撘?嚗?  - `src/html/html-to-markdown.ts`
   - `src/html/legacy-html-types.ts`
   - `src/types/anycontent-teaching.ts`
   - `src/types/anycontent-news.ts`
@@ -163,31 +89,23 @@
   - `src/types/anycontent.ts`
   - `src/adapters/teaching-from-legacy.ts`
   - `src/adapters/news-from-legacy.ts`
-- 新增 / 更新的測試檔：
-  - `tests/html/html-to-markdown.spec.ts`
+- ?啣? / ?湔?葫閰行?嚗?  - `tests/html/html-to-markdown.spec.ts`
   - `tests/adapters/teaching-from-legacy.spec.ts`
   - `tests/adapters/news-from-legacy.spec.ts`
-- 交接與流程說明檔：
-  - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
+- 鈭斗??蝔牧??嚗?  - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
   - `docs/PROJECT_TODO.md`
   - `docs/Windsurf_ChatGPT_NOTES.md`
-- 本次型別檢查與測試 log：
-  - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_fail.txt`
+- ?祆活?瑼Ｘ?葫閰?log嚗?  - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_fail.txt`
   - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_pass.txt`
   - `docs/terminal_logs/T-0002_anycontent_types_tsc_pass.txt`
   - `docs/terminal_logs/T-0003_news-from-legacy_vitest_pass.txt`
-- 結果摘要：
-  - 已有 minimal 版本的 `news-from-legacy` adapter 與對應測試，能從 legacy HTML + htmlToMarkdownResult 建立基本的 `NewsContent`。
-  - teaching / news / magazine adapter / 型別之間關聯已初步串起，之後可逐步擴充 news 的日期、地點等欄位 mapping。
-
+- 蝯???嚗?  - 撌脫? minimal ???`news-from-legacy` adapter ???葫閰佗??賢? legacy HTML + htmlToMarkdownResult 撱箇??箸??`NewsContent`??  - teaching / news / magazine adapter / ?銋??撌脣?甇乩葡韏瘀?銋??舫郊?游? news ??暺?甈? mapping??
 ---
 
-### ✅ T-0004 magazine-from-legacy: 建立 MagazineContent adapter 骨架（minimal mapping）（已完成）
+### ??T-0004 magazine-from-legacy: 撱箇? MagazineContent adapter 撉冽嚗inimal mapping嚗?撌脣???
 
-- 狀態：
-  - 已由 Windsurf 依照 T-0004 規格完成實作，並通過 TypeScript 型別檢查與 Vitest 測試。
-- 新增 / 更新的程式檔：
-  - `src/html/html-to-markdown.ts`
+- ???
+  - 撌脩 Windsurf 靘 T-0004 閬摰?撖虫?嚗蒂?? TypeScript ?瑼Ｘ??Vitest 皜祈岫??- ?啣? / ?湔??撘?嚗?  - `src/html/html-to-markdown.ts`
   - `src/html/legacy-html-types.ts`
   - `src/types/anycontent-teaching.ts`
   - `src/types/anycontent-news.ts`
@@ -196,180 +114,102 @@
   - `src/adapters/teaching-from-legacy.ts`
   - `src/adapters/news-from-legacy.ts`
   - `src/adapters/magazine-from-legacy.ts`
-- 新增 / 更新的測試檔：
-  - `tests/html/html-to-markdown.spec.ts`
+- ?啣? / ?湔?葫閰行?嚗?  - `tests/html/html-to-markdown.spec.ts`
   - `tests/adapters/teaching-from-legacy.spec.ts`
   - `tests/adapters/news-from-legacy.spec.ts`
   - `tests/adapters/magazine-from-legacy.spec.ts`
-- 交接與流程說明檔：
-  - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
+- 鈭斗??蝔牧??嚗?  - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
   - `docs/PROJECT_TODO.md`
   - `docs/Windsurf_ChatGPT_NOTES.md`
-- 本次型別檢查與測試 log：
-  - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_fail.txt`
+- ?祆活?瑼Ｘ?葫閰?log嚗?  - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_fail.txt`
   - `docs/terminal_logs/T-0001_teaching-from-legacy_vitest_pass.txt`
   - `docs/terminal_logs/T-0002_anycontent_types_tsc_pass.txt`
   - `docs/terminal_logs/T-0003_news-from-legacy_vitest_pass.txt`
   - `docs/terminal_logs/T-0004_magazine-from-legacy_tsc_pass.txt`
   - `docs/terminal_logs/T-0004_magazine-from-legacy_vitest_pass.txt`
-- 結果摘要：
-  - 已有 minimal 版本的 `magazine-from-legacy` adapter 與對應測試，能從 legacy HTML + htmlToMarkdownResult 建立基本的 `MagazineContent`。
-  - teaching / news / magazine 三種 post_type 的 adapter 骨架都已完成，可分別在後續任務中逐步補齊欄位 mapping。
-
+- 蝯???嚗?  - 撌脫? minimal ???`magazine-from-legacy` adapter ???葫閰佗??賢? legacy HTML + htmlToMarkdownResult 撱箇??箸??`MagazineContent`??  - teaching / news / magazine 銝車 post_type ??adapter 撉冽?賢歇摰?嚗??典?蝥遙?葉?郊鋆?甈? mapping??
 ---
 
-### T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
-
-- 目標：
-  - 在既有 `news-from-legacy` 骨架上，實作第一版的日期與地點欄位 mapping，
-    讓 `NewsMeta` 至少能填入「新聞日期」與「活動日期 / 地點」等基本資訊。
-
-- 關聯 docs：
-  - `docs/CONTENT_SCHEMA.md`
-    - NewsMeta / NewsContent 段落
+### T-0005 news-from-legacy: ?? NewsMeta ?交??暺?雿?v1嚗?
+- ?格?嚗?  - ?冽??`news-from-legacy` 撉冽銝?撖虫?蝚砌????交??暺?雿?mapping嚗?    霈?`NewsMeta` ?喳??賢‵?乓????暑???/ ?圈????箸鞈???
+- ? docs嚗?  - `docs/CONTENT_SCHEMA.md`
+    - NewsMeta / NewsContent 畾菔
   - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
-    - 與 news 版面相關的 HTML 結構與轉 Markdown 規則（若有）
+    - ??news ??賊???HTML 蝯??? Markdown 閬?嚗??
   - `docs/COMPLETE_PROJECT_WORKFLOW.md`
-    - HTML → Markdown → AnyContent 流程
+    - HTML ??Markdown ??AnyContent 瘚?
   - `docs/Windsurf_ChatGPT_NOTES.md`
-    - 請在本任務完成時補充實際解析到的樣板與 selector
+    - 隢?砌遙????鋆?撖阡?閫???啁?璅???selector
 
-- 要更新的檔案：
-  - `src/adapters/news-from-legacy.ts`
+- 閬?啁?瑼?嚗?  - `src/adapters/news-from-legacy.ts`
   - `tests/adapters/news-from-legacy.spec.ts`
 
-- 規格摘要（v1 範圍）：
-  - 以目前最常見、最容易解析的 news 樣板為主，先支援一小部分範例頁面即可。
-  - 從 legacy HTML 或 htmlToMarkdownResult 中，嘗試解析：
-    - `meta.ct_news_date`
+- 閬??嚗1 蝭?嚗?
+  - 隞亦??撣貉???摰寞?閫????news 璅??箔蜓嚗??舀銝撠??靘??Ｗ?胯?  - 敺?legacy HTML ??htmlToMarkdownResult 銝哨??岫閫??嚗?    - `meta.ct_news_date`
     - `meta.ct_event_date_start`
     - `meta.ct_event_date_end`
     - `meta.ct_event_date_raw`
     - `meta.ct_event_location`
-  - 具體策略由 Windsurf 在程式中實作並在 `docs/Windsurf_ChatGPT_NOTES.md` 紀錄，例如：
-    - 針對特定 container / class（如 `.news-date` / `.article-info`）解析文字。
-    - 或在 Markdown 中尋找「日期：」「地點：」等前綴行，做簡單的字串切割。
-  - 無法可靠解析的欄位先維持 `null` / 未填，避免亂猜：
-    - 例如只有一行「2022-03-14」時，可以同時填入 `ct_news_date` 與 `ct_event_date_start`，但需在 notes 中說明。
-
-- 允許修改的範圍：
-  - 僅修改 `news-from-legacy.ts` 內與 `NewsMeta` 欄位相關的邏輯。
-  - 可以為測試新增少量 fixture / helper，用於組裝代表性的 `LegacyHtmlDocument` / `HtmlToMarkdownResult`。
-  - 不可修改：
-    - `NewsMeta` / `NewsContent` 的欄位名稱與型別。
-    - `Language` union、`AnyContentBase` 結構。
-
-- 驗收方式：
-  - 新增 / 擴充 `tests/adapters/news-from-legacy.spec.ts`：
-    - 至少加入 1–2 個代表性的 news 測試案例，斷言日期與地點欄位正確填入。
-  - 測試指令：
-    - 單檔：
-      - `npx vitest tests/adapters/news-from-legacy.spec.ts`
-    - 全專案：
+  - ?琿?蝑??Windsurf ?函?撘葉撖虫?銝血 `docs/Windsurf_ChatGPT_NOTES.md` 蝝??靘?嚗?    - ???孵? container / class嚗? `.news-date` / `.article-info`嚗圾??摮?    - ? Markdown 銝剖??整???暺????韌銵??陛?桃?摮葡???  - ?⊥??舫?閫????雿?蝬剜? `null` / ?芸‵嚗????
+    - 靘??芣?銝銵?022-03-14??嚗隞亙??‵??`ct_news_date` ??`ct_event_date_start`嚗????notes 銝剛牧??
+- ?迂靽格????
+  - ?耨??`news-from-legacy.ts` ?扯? `NewsMeta` 甈??賊???頛胯?  - ?臭誑?箸葫閰行憓???fixture / helper嚗?潛?鋆誨銵冽抒? `LegacyHtmlDocument` / `HtmlToMarkdownResult`??  - 銝靽格嚗?    - `NewsMeta` / `NewsContent` ??雿?蝔梯????    - `Language` union?AnyContentBase` 蝯???
+- 撽?孵?嚗?  - ?啣? / ?游? `tests/adapters/news-from-legacy.spec.ts`嚗?    - ?喳?? 1?? ?誨銵冽抒? news 皜祈岫獢?嚗閮?交??暺?雿迤蝣箏‵?乓?  - 皜祈岫?誘嚗?    - ?格?嚗?      - `npx vitest tests/adapters/news-from-legacy.spec.ts`
+    - ?典?獢?
       - `npx vitest`
-  - TypeScript 型別檢查需通過：
-    - `npm run typecheck`（若存在）
-    - 或 `npx tsc --noEmit`
+  - TypeScript ?瑼Ｘ???嚗?    - `npm run typecheck`嚗摮嚗?    - ??`npx tsc --noEmit`
 
 ---
 
-## 使用方式
+## 雿輻?孵?
 
 
 ---
 
-### T-0006 legacy-data-root: 舊站資料盤點與 CTWORLD_LEGACY_ROOT 文件化（待資料取得後執行）
+### T-0006 legacy-data-root: ??鞈??日???CTWORLD_LEGACY_ROOT ?辣??敺???敺??瑁?嚗?
+> ???敺?蝡??渲???隞賢?敺??銵??桀????閮極雿??殷?
 
-> 狀態：待舊站完整資料備份取得後再執行（目前僅預先登記工作項目）
-
-- 觸發時機：
-  - 已從主機商／舊系統取得完整舊站檔案（HTML / 圖片 / PDF 等）。
-
-- 目標：
-  - 在本機或指定 storage 設定 `CTWORLD_LEGACY_ROOT`（環境變數），作為舊站資料根目錄。
-  - 實際檢視舊站檔案的目錄結構，紀錄「現況」，而不是強迫重構。
-  - 在 docs 中新增一小節，描述：
-    - `CTWORLD_LEGACY_ROOT` 實際對應的路徑（例如本機 / NAS / S3）。
-    - 目前舊站檔案實際的目錄結構（文字描述或範例樹狀圖即可）。
-  - 暫不對舊站檔案做大規模搬移或改名；若未來需要 refactor，另開新的 T 任務處理。
-
-- 關聯 docs：
-  - `docs/COMPLETE_PROJECT_WORKFLOW.md`：補充「legacy 資料來源」相關小節。
-  - `docs/PROJECT_TODO.md`：本任務條目本身。
-  - （選用）若有需要，可新增 `docs/LEGACY_DATA_NOTES.md` 紀錄更細節。
-
-- 建議修改檔案：
-  - `docs/COMPLETE_PROJECT_WORKFLOW.md`：新增／更新一小節描述 `CTWORLD_LEGACY_ROOT` 與實際檔案位置。
-  - `docs/PROJECT_TODO.md`：標記本任務為 ✅ 並補充實際觀察結果摘要。
-  - （選用）`docs/LEGACY_DATA_NOTES.md`：若檔案結構特別複雜，可在此詳述。
-
-- 允許修改的範圍：
-  - 僅限上述 docs，與實作 pipeline 無關的部分。
-  - 不對舊站檔案做自動搬移／重命名；此類操作需另開專門 T 任務。
-
-- 驗收方式：
-  - [ ] 系統中已設定 `CTWORLD_LEGACY_ROOT` 並能在該路徑下列出舊站檔案。
-  - [ ] `docs/COMPLETE_PROJECT_WORKFLOW.md` 中已能看出舊站資料實際來源與存放位置。
-  - [ ] 如有新增 `docs/LEGACY_DATA_NOTES.md`，已簡要記錄目錄結構現況，無強迫重構要求。
-
+- 閫貊??嚗?  - 撌脣?銝餅????頂蝯勗?敺??渲?蝡?獢?HTML / ?? / PDF 蝑???
+- ?格?嚗?  - ?冽璈??? storage 閮剖? `CTWORLD_LEGACY_ROOT`嚗憓??賂?嚗??箄?蝡???桅???  - 撖阡?瑼Ｚ???瑼????瑽?蝝?瘜????臬撥餈恍?瑽?  - ??docs 銝剜憓?撠?嚗?餈堆?
+    - `CTWORLD_LEGACY_ROOT` 撖阡?撠??楝敺?靘??祆? / NAS / S3嚗?    - ?桀???瑼?撖阡????瑽????膩??靘邦???荔???  - ?思?撠?蝡?獢?憭扯?璅⊥蝘餅??孵?嚗?芯??閬?refactor嚗???T 隞餃?????
+- ? docs嚗?  - `docs/COMPLETE_PROJECT_WORKFLOW.md`嚗??egacy 鞈?靘????蝭??  - `docs/PROJECT_TODO.md`嚗隞餃?璇?祈澈??  - 嚗?剁??交??閬??舀憓?`docs/LEGACY_DATA_NOTES.md` 蝝?蝝啁???
+- 撱箄降靽格瑼?嚗?  - `docs/COMPLETE_PROJECT_WORKFLOW.md`嚗憓??湔銝撠??膩 `CTWORLD_LEGACY_ROOT` ?祕??獢?蝵柴?  - `docs/PROJECT_TODO.md`嚗?閮隞餃?????銝西??祕??撖???閬?  - 嚗?剁?`docs/LEGACY_DATA_NOTES.md`嚗瑼?蝯??孵銴?嚗?冽迨閰唾膩??
+- ?迂靽格????
+  - ??銝膩 docs嚗?撖虫? pipeline ?⊿????  - 銝???瑼???蝘鳴????甇日?????阡?撠? T 隞餃???
+- 撽?孵?嚗?  - [ ] 蝟餌絞銝剖歇閮剖? `CTWORLD_LEGACY_ROOT` 銝西?刻府頝臬?銝??箄?蝡?獢?  - [ ] `docs/COMPLETE_PROJECT_WORKFLOW.md` 銝剖歇?賜??箄?蝡??祕??皞?摮雿蔭??  - [ ] 憒??啣? `docs/LEGACY_DATA_NOTES.md`嚗歇蝪∟?閮??桅?蝯??暹?嚗撘瑁翰??閬???
 
 
 ---
 
 ### T-0007 docs-snapshot-cli: 自動產生 docs snapshot ZIP（給 ChatGPT 用）
 
-> 狀態：待執行（優先級：適合 Codex / Windsurf 嚐鮮）
+> 等候執行：自動化產出 docs snapshot ZIP，供 ChatGPT 使用。
 
-- 目標：
-  - 在本機 repo 中提供一個簡單 CLI 或 npm script，讓實作 Agent 可以用單一指令產生「本次任務專用的 docs snapshot ZIP」。
-  - ZIP 檔預設輸出到 `snapshots/` 目錄，檔名遵守既有命名規則：
-    - `snapshots/ctworld-docs-T-xxxx-YYYY-MM-DD-vN.zip`。
-  - 只打包與 docs 相關的內容（`docs/*.md` ＋ `docs/terminal_logs/*.txt`），不包含 `node_modules` / `dist` 等大型目錄。
-
-- 關聯 docs：
-  - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md` §6（ChatGPT 可見範圍與 docs snapshot / ZIP 交接）。
-  - `docs/TOOLS_ROLES_AND_BOUNDARIES.md` §2.4（關於 docs snapshot ZIP）。
-  - `docs/SESSION_CHECKLIST.md`（收工前檢查項目）。
-
+- 說明：
+  - 在本機 repo 提供一個簡單 CLI / npm script，讓實作 Agent 一鍵產出本次任務的 docs snapshot ZIP。
+  - ZIP 輸出到 `snapshots/`，命名遵循 `snapshots/ctworld-docs-T-xxxx-YYYY-MM-DD-vN.zip`，只包含 `docs/*.md` 與 `docs/terminal_logs/*.txt`，不含 `node_modules` / `dist` 等。
+- 需參考 docs：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md` §6
+  - `docs/TOOLS_ROLES_AND_BOUNDARIES.md` §2.4
+  - `docs/SESSION_CHECKLIST.md`
 - 建議修改檔案：
-  - `tools/docs-snapshot/` 底下新增一個小型 CLI（例如 `make-docs-snapshot.ts`），負責：
-    - 建立 `snapshots/` 目錄（若不存在）。
-    - 依照指定的 T 任務編號（例如 `T-0007`）與當日日期組出檔名。
-    - 打包指定的檔案集合到 ZIP。
-  - `package.json`：
-    - 新增一個 npm script，例如：`"snapshot:docs": "tsx tools/docs-snapshot/make-docs-snapshot.ts"`。
-  - 視需要補充一小段使用說明到：
-    - `docs/SESSION_CHECKLIST.md` 或
-    - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`（只要連結到既有 §6 說明即可）。
-
-- 允許修改的範圍：
-  - 僅限：
-    - `tools/docs-snapshot/*`（新檔案）
-    - `package.json`（新增 script，避免動到既有 script 的語意）
-    - 與 snapshot CLI 相關的 docs 小段落。
-  - 不得：
-    - 更改既有 T 任務內容。
-    - 改動 `docs/HTML_TO_MARKDOWN_RULES_V4.md`、`docs/CONTENT_SCHEMA.md` 等核心規則。
-
-- 驗收方式：
-  - [ ] 在專案根目錄執行：`npm run snapshot:docs -- T-0007`（或 CLI 說明中定義的參數形式），能在 `snapshots/` 目錄下產生一個 ZIP，例如：
+  - `tools/docs-snapshot/` 內新增 CLI（如 `make-docs-snapshot.ts`）
+  - `package.json` 新增 script；補充使用說明（如有）可放 `docs/SESSION_CHECKLIST.md` 或 `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
+- 可修改範圍：
+  - `tools/docs-snapshot/*`
+  - `package.json`
+- 驗收要點：
+  - [x] `npm run snapshot:docs -- T-0007`（或 CLI 說明中的參數形式）可在 `snapshots/` 生成 ZIP，例如：
         - `snapshots/ctworld-docs-T-0007-2025-12-09-v1.zip`
-  - [ ] ZIP 內容僅包含：
-        - 目前 repo 中的 `docs/*.md`
-        - 目前 repo 中的 `docs/terminal_logs/*.txt`（若存在）
-  - [ ] 不會意外打包 `node_modules/`、`dist/` 等大型或敏感目錄。
+  - [x] ZIP 內容僅包含：
+        - repo 中的 `docs/*.md`
+        - repo 中的 `docs/terminal_logs/*.txt`（如有）
+  - [x] 不打包 `node_modules/`、`dist/` 等大型目錄
+- 現狀：✅ 已完成（2025-12-09）
 
-
-1. 當你和 ChatGPT 討論出一個新功能：
-   - 由 ChatGPT 幫你在這裡新增一條 TODO。
-   - 同時產生 / 更新對應的 docs 與骨架程式碼。
-
-2. 當你要交任務給 Windsurf 時：
-   - 指定「請完成 PROJECT_TODO.md 中第 X 項」或「請完成 T-000X」。
-   - 把該項裡的「檔案 / 規格 / 限制」貼給 Windsurf。
-
-3. 任務完成後：
-   - 你標記該項為 ✅ 並（選擇性）附上實際 commit hash 或簡短說明。
-   - 若 ChatGPT 做過 code review，可以在這裡附註「已 review」。
-
-你可以持續維護本檔案，讓它成為本專案「人機協作」的任務總覽。
+1. ?嗡???ChatGPT 閮??箔???嚗?   - ??ChatGPT 撟思??券ㄐ?啣?銝璇?TODO??   - ???Ｙ? / ?湔撠???docs ?爸?嗥?撘Ⅳ??
+2. ?嗡?閬漱隞餃?蝯?Windsurf ??
+   - ????摰? PROJECT_TODO.md 銝剔洵 X ????摰? T-000X??   - ?府?ㄐ??獢?/ 閬 / ??票蝯?Windsurf??
+3. 隞餃?摰?敺?
+   - 雿?閮府? ??銝佗??豢??改???撖阡? commit hash ?陛?剛牧??   - ??ChatGPT ?? code review嚗隞亙?ㄐ?酉?歇 review??
+雿隞交?蝥雁霅瑟瑼?嚗?摰??箸撠??犖璈?雿?隞餃?蝮質汗??
