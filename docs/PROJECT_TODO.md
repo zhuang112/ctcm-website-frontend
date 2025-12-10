@@ -737,3 +737,15 @@
 - 驗收（僅登記）：
   - [ ] PROJECT_TODO 已新增本條目，說明未來模板方向。
   - [ ] notes 已紀錄本次登記與 RAW 連結。
+### T-0034 unknown-content-handling-rule：新增「未知內容暫存」規則
+
+> 狀態：✅ 已完成（rule 已寫入 HTML_to_MD / workflow，2025-12-12）
+
+- 目標：
+  - 在 HTML→Markdown / AnyContent 規則與 workflow 中，明定「無法歸類內容」的處理方式。
+  - 避免任意新增 meta 欄位，優先放入 `body_markdown`，保留 legacy 對照，必要時另開 T 任務。
+
+- 驗收：
+  - [x] `docs/HTML_TO_MARKDOWN_RULES_V4.md` 新增未知內容 fallback 段落。
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 加入 adapter 編輯時需遵守的未知內容處理提醒。
+  - [x] notes 記錄本次規則更新與 RAW 連結。

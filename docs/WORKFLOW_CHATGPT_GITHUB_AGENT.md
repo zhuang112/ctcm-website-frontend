@@ -394,6 +394,14 @@ Windsurf 根據 ChatGPT 給的指令：
 - 目前預設直接在 `main` 上工作並 push。
 - 若未來有多人協作或需要大型重構，可開啟 `feature/T-xxxx-*` 分支並走 PR 流程；但未啟用前請維持 main 為單一真相來源。
 
+### 3.8 無法歸類內容的處理（HTML→Markdown / AnyContent）
+
+- 若在撰寫或調整 HTML→Markdown / AnyContent adapter 時，遇到暫時無對應欄位的片段：
+  - 文字優先放 `body_markdown`，不要臨時新增 meta 欄位或未知 key。
+  - 保留 `old_url`、legacy HTML 來源，方便日後對照。
+  - 若發現常見且需要新欄位，請在 notes 記錄並另開 T 任務，再更新 schema/adapter。
+- 規則詳見 `docs/HTML_TO_MARKDOWN_RULES_V4.md` 的「未知內容 fallback」段落。
+
 **細節全部寫在文件**：
 
 - 任務規格與邏輯說明：  

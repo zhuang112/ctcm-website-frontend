@@ -1336,3 +1336,28 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-12 任務：T-0034 unknown-content-handling-rule
+
+- 目的：在規則與 workflow 中寫明「暫無欄位的內容」處理方式，避免亂增 meta，預設落在 `body_markdown` 並保留 legacy 對照。
+- 內容：
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`：新增「未知內容 fallback」段落（文字放 body_markdown、不立即新增 meta、保留 old_url/legacy HTML，常見 pattern 另開 T）。
+  - `docs/CONTENT_SCHEMA_V1.md`：共用欄位補充「未知內容先留 body_markdown，暫勿新增 meta key」。
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增 3.8，提醒編輯 adapter 時遵守未知內容處理。
+- 測試：純 docs 更新，未執行。
+
+變更檔案（含 RAW 連結）：
+
+- docs/HTML_TO_MARKDOWN_RULES_V4.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
+
+- docs/CONTENT_SCHEMA_V1.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

@@ -1,86 +1,94 @@
-# HTML_TO_MARKDOWN_RULES_V4
+ï»¿# HTML_TO_MARKDOWN_RULES_V4
 
-> ¥Î©ó±N legacy HTML Âà¦¨ AnyContent JSON¡]¤×¨ä `body_markdown`¡B¹Ï¤ùÄæ¦ì»P anchors¡^¡C
-> ¥»ª©µÛ­«¡u¥iºûÅ@¡B¦n¬d§ä¡v¡A­Y­n­×§ïµ{¦¡ÅÞ¿è¡A¥ý§ó·s¥»ÀÉ¦A¦P¨Bµ{¦¡»P´ú¸Õ¡C
-
----
-
-## 0. ³q¥Î­ì«h
-
-- »¡©ú¦p¦óÂà¦¨ Markdown / AnyContent¡F¤£ª½±µ³W½d¯S©wµ{¦¡½X¹ê§@¡C
-- ¤£½T©wªº¤º®e¹ç¥i¯dªÅ¡]`null` / `[]`¡^¡AÁ×§K¶Ã¶ñ¡C
-- ³W«h¥HÂ²¼ä¡B¥i¸¨¦a¬°¥D¡A¤è«K ChatGPT / Agent §Ö³t¦^ÅU¡C
+> ï¿½Î©ï¿½N legacy HTML ï¿½à¦¨ AnyContent JSONï¿½]ï¿½×¨ï¿½ `body_markdown`ï¿½Bï¿½Ï¤ï¿½ï¿½ï¿½ï¿½P anchorsï¿½^ï¿½C
+> ï¿½ï¿½ï¿½ï¿½ï¿½Û­ï¿½ï¿½uï¿½iï¿½ï¿½ï¿½@ï¿½Bï¿½nï¿½dï¿½ï¿½vï¿½Aï¿½Yï¿½nï¿½×§ï¿½{ï¿½ï¿½ï¿½Þ¿ï¿½Aï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½É¦Aï¿½Pï¿½Bï¿½{ï¿½ï¿½ï¿½Pï¿½ï¿½ï¿½Õ¡C
 
 ---
 
-## 1. ¦@¥Î HTML¡÷Markdown ³W«h
+## 0. ï¿½qï¿½Î­ï¿½h
 
-### 1.1 »Ý­n²¾°£ªº¤¸¯À
-- ª½±µ©¿²¤¡G`<script>`, `<style>`, `<nav>`, `<footer>`, `<form>`¡C
-- `<table>` ¼È¤£Âà Markdown ªí®æ¡A¥u¨ú¯Â¤å¦r¡C
-
-### 1.2 °Ï¶ô¤¸¯À
-- `h1` / `h2` / `h3` ¡÷ `#` / `##` / `###`¡C
-- `<p>`¡G¤@¯ë¬q¸¨¨Ì¦æ¤º³W«h¿é¥X¡A`<br>` Âà¦¨´«¦æ¡C
-- `blockquote` / `pre` / `code`¡Gºû«ù Markdown ·N¸q¡A¤£ÃB¥~´O®M¡C
-
-### 1.3 ¦æ¤º¤¸¯À
-- `strong` / `em` / `code` ¡÷ ¹ïÀ³ Markdown ¦æ¤º®æ¦¡¡C
-- ¤£²£¥Í `![]()`¡F¹Ï¤ù¶È¦¬¶°¨ì JSON¡]¨£²Ä 2 ³¹¡^¡C
-
-### 1.4 ³sµ²»PÁãÂI
-- ¤@¯ë³sµ²¡G`[text](href)`¡F­YµL¤å¦r¡A¨Ï¥Î `href` ·í label¡C
-- `mailto:` / `tel:` ¥H¥¿±`³sµ²®æ¦¡«O¯d¡C
-- anchors¡]`id` / `name`¡^¡G¦¬¶°¨ì `anchors`¡AÁ×§K­«½Æ¡Fsutra ¯S¨Ò¦bµ{¦¡¤¤³B²z¡A­ì«h¬O«O«ù°ß¤@»P¥iÅª¡C
+- ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½à¦¨ Markdown / AnyContentï¿½Fï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½dï¿½Sï¿½wï¿½{ï¿½ï¿½ï¿½Xï¿½ï¿½@ï¿½C
+- ï¿½ï¿½ï¿½Tï¿½wï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½iï¿½dï¿½Å¡]`null` / `[]`ï¿½^ï¿½Aï¿½×§Kï¿½Ã¶ï¿½C
+- ï¿½Wï¿½hï¿½HÂ²ï¿½ï¿½Bï¿½iï¿½ï¿½ï¿½aï¿½ï¿½ï¿½Dï¿½Aï¿½ï¿½K ChatGPT / Agent ï¿½Ö³tï¿½^ï¿½Uï¿½C
 
 ---
 
-## 2. ¹Ï¤ù»P¹Ï®wµ¦²¤¡]featured / gallery / fallback¡^
+## 1. ï¿½@ï¿½ï¿½ HTMLï¿½ï¿½Markdown ï¿½Wï¿½h
 
-### 2.1 ¦¬¶° `<img>`
-- ©â¨ú `src` §@¬° URL¡A`alt` §@¬°»¡©ú¡F`caption` ¥Ñ©PÃä¤å¦r±À¾É¡A­YµL«h `null`¡C
-- ¥u¦¬¶°¡A¤£¦b `body_markdown` ¤º´O `![]()`¡C
+### 1.1 ï¿½Ý­nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½G`<script>`, `<style>`, `<nav>`, `<footer>`, `<form>`ï¿½C
+- `<table>` ï¿½È¤ï¿½ï¿½ï¿½ Markdown ï¿½ï¿½ï¿½Aï¿½uï¿½ï¿½ï¿½Â¤ï¿½rï¿½C
+
+### 1.2 ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½
+- `h1` / `h2` / `h3` ï¿½ï¿½ `#` / `##` / `###`ï¿½C
+- `<p>`ï¿½Gï¿½@ï¿½ï¿½qï¿½ï¿½ï¿½Ì¦æ¤ºï¿½Wï¿½hï¿½ï¿½Xï¿½A`<br>` ï¿½à¦¨ï¿½ï¿½ï¿½ï¿½C
+- `blockquote` / `pre` / `code`ï¿½Gï¿½ï¿½ï¿½ï¿½ Markdown ï¿½Nï¿½qï¿½Aï¿½ï¿½ï¿½Bï¿½~ï¿½Oï¿½Mï¿½C
+
+### 1.3 ï¿½æ¤ºï¿½ï¿½ï¿½ï¿½
+- `strong` / `em` / `code` ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Markdown ï¿½æ¤ºï¿½æ¦¡ï¿½C
+- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ `![]()`ï¿½Fï¿½Ï¤ï¿½ï¿½È¦ï¿½ï¿½ï¿½ï¿½ï¿½ JSONï¿½]ï¿½ï¿½ï¿½ï¿½ 2 ï¿½ï¿½ï¿½^ï¿½C
+
+### 1.4 ï¿½sï¿½ï¿½ï¿½Pï¿½ï¿½ï¿½I
+- ï¿½@ï¿½ï¿½sï¿½ï¿½ï¿½G`[text](href)`ï¿½Fï¿½Yï¿½Lï¿½ï¿½rï¿½Aï¿½Ï¥ï¿½ `href` ï¿½ï¿½ labelï¿½C
+- `mailto:` / `tel:` ï¿½Hï¿½ï¿½ï¿½`ï¿½sï¿½ï¿½ï¿½æ¦¡ï¿½Oï¿½dï¿½C
+- anchorsï¿½]`id` / `name`ï¿½^ï¿½Gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ `anchors`ï¿½Aï¿½×§Kï¿½ï¿½ï¿½Æ¡Fsutra ï¿½Sï¿½Ò¦bï¿½{ï¿½ï¿½ï¿½ï¿½ï¿½Bï¿½zï¿½Aï¿½ï¿½hï¿½Oï¿½Oï¿½ï¿½ï¿½ß¤@ï¿½Pï¿½iÅªï¿½C
+
+---
+
+## 2. ï¿½Ï¤ï¿½ï¿½Pï¿½Ï®wï¿½ï¿½ï¿½ï¿½ï¿½]featured / gallery / fallbackï¿½^
+
+### 2.1 ï¿½ï¿½ï¿½ï¿½ `<img>`
+- ï¿½ï¿½ï¿½ `src` ï¿½@ï¿½ï¿½ URLï¿½A`alt` ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½F`caption` ï¿½Ñ©Pï¿½ï¿½ï¿½rï¿½ï¿½ï¿½É¡Aï¿½Yï¿½Lï¿½h `null`ï¿½C
+- ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½b `body_markdown` ï¿½ï¿½ï¿½O `![]()`ï¿½C
 
 ### 2.2 featured_image
-- ¹w³]²Ä¤@±i¹Ï¤ù§@¬° `featured_image`¡F­Y¼ËªO¦³ hero/banner ¥i¥Ñ adapter ³W«h¬D¿ï¡C
-- `featured_image_caption` µL¥i¾a¨Ó·½®É«O«ù `null`¡C
+- ï¿½wï¿½]ï¿½Ä¤@ï¿½iï¿½Ï¤ï¿½ï¿½@ï¿½ï¿½ `featured_image`ï¿½Fï¿½Yï¿½ËªOï¿½ï¿½ hero/banner ï¿½iï¿½ï¿½ adapter ï¿½Wï¿½hï¿½Dï¿½ï¿½C
+- `featured_image_caption` ï¿½Lï¿½iï¿½aï¿½Ó·ï¿½ï¿½É«Oï¿½ï¿½ `null`ï¿½C
 
 ### 2.3 gallery_items
-- ¨ä¾l¹Ï¤ù¨Ì§Ç©ñ¤J `gallery_items[]`¡AÄæ¦ì `{ url, alt, caption }`¡A¯Ê­È¥H `null` ªí¥Ü¡C
-- Markdown ¤º¤£©ñ¹Ï®wªº `![]()`¡C
+- ï¿½ï¿½lï¿½Ï¤ï¿½ï¿½Ì§Ç©ï¿½J `gallery_items[]`ï¿½Aï¿½ï¿½ï¿½ `{ url, alt, caption }`ï¿½Aï¿½Ê­È¥H `null` ï¿½ï¿½Ü¡C
+- Markdown ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï®wï¿½ï¿½ `![]()`ï¿½C
 
-### 2.4 µL¥i¥Î¹Ï¤ù
-- ²MªÅ©Ò¦³¹Ï¤ùÄæ¦ì¡G
+### 2.4 ï¿½Lï¿½iï¿½Î¹Ï¤ï¿½
+- ï¿½Mï¿½Å©Ò¦ï¿½ï¿½Ï¤ï¿½ï¿½ï¿½ï¿½G
   - `featured_image = null`
   - `featured_image_caption = null`
   - `gallery_items = []`
-- ¤£°µ¥ô·N fallback¡AÁ×§K¦Ã¬V¸ê®Æ¡C
+- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½N fallbackï¿½Aï¿½×§Kï¿½Ã¬Vï¿½ï¿½Æ¡C
 
 ---
 
-## 3. ¦U post_type ª`·N¨Æ¶µ
+## 3. ï¿½U post_type ï¿½`ï¿½Nï¿½Æ¶ï¿½
 
 ### 3.1 teaching
-- sutra °¼­«ÔU»y¡G¸g¤å¦æ·|¦¬¶°¦¨ `verses`¡A¨Ñ adapter ¬M®g¨ì `ct_verse_*`¡C
-- ¹Ï¤ùªu¥Î¦@¥Îµ¦²¤¡F­Y»Ý­n hero ¥Ñ adapter §PÂ_¡A¤£¦b¦¹±j¨î¡C
+- sutra ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½yï¿½Gï¿½gï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ `verses`ï¿½Aï¿½ï¿½ adapter ï¿½Mï¿½gï¿½ï¿½ `ct_verse_*`ï¿½C
+- ï¿½Ï¤ï¿½ï¿½uï¿½Î¦@ï¿½Îµï¿½ï¿½ï¿½ï¿½Fï¿½Yï¿½Ý­n hero ï¿½ï¿½ adapter ï¿½Pï¿½_ï¿½Aï¿½ï¿½ï¿½bï¿½ï¿½ï¿½jï¿½ï¿½C
 
 ### 3.2 news
-- ¥D¤å Markdown ¨Ì¦@¥Î³W«h¡C
-- ¹Ï¤ù¡G¤@±i¥D¹Ï¡B¨ä¾l¶i gallery¡F­YµL¥i¾a¹Ï¤ù«h¥þ³¡¯dªÅ¡C
-- ¤é´Á¡B¦aÂIµ¥ meta ¥Ñ adapter ¸ÑªR¡A¥»ÀÉ¤£©w¸q¸ÑªR³W«h¡C
+- ï¿½Dï¿½ï¿½ Markdown ï¿½Ì¦@ï¿½Î³Wï¿½hï¿½C
+- ï¿½Ï¤ï¿½ï¿½Gï¿½@ï¿½iï¿½Dï¿½Ï¡Bï¿½ï¿½lï¿½i galleryï¿½Fï¿½Yï¿½Lï¿½iï¿½aï¿½Ï¤ï¿½ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½dï¿½Å¡C
+- ï¿½ï¿½ï¿½ï¿½Bï¿½aï¿½Iï¿½ï¿½ meta ï¿½ï¿½ adapter ï¿½ÑªRï¿½Aï¿½ï¿½ï¿½É¤ï¿½ï¿½wï¿½qï¿½ÑªRï¿½Wï¿½hï¿½C
 
 ### 3.3 magazine / branch / gallery / resource / download / index_page
-- ¤´±Ä¡u¤@±i¥D¹Ï + ¨ä¾l gallery¡vªºÂ²¤Æµ¦²¤¡C
-- ­Y¼ËªO©|¥¼¦¬ÀÄ¡A¹ç¥i§â¹Ï¤ùÄæ¦ì¯dªÅ¡A¤£±j¨î¶ë­È¡C
+- ä»æŽ¡ã€Œä¸€å¼µä¸»åœ– + å…¶é¤˜ galleryã€çš„ç°¡åŒ–ç­–ç•¥ã€‚
+- è‹¥æ¨£æ¿å°šæœªæ”¶æ–‚ï¼Œå¯§å¯æŠŠåœ–ç‰‡æ¬„ä½ç•™ç©ºï¼Œä¸å¼·åˆ¶å¡žå€¼ã€‚
 
 ---
 
-## 4. Åç¦¬§Ö³tÀË¬d
+## 4. ç„¡æ³•æ­¸é¡žå…§å®¹çš„æš«å­˜è¦å‰‡ï¼ˆæœªçŸ¥å…§å®¹ fallbackï¼‰
 
-- ¤å¦r¡G¼ÐÃD¼h¯Å»P¬q¸¨¬O§_¦X²z¡H¦³µL¦h¾lªÅ¥Õ©Î¯}ª©´«¦æ¡H
-- ³sµ²¡G`mailto:` / `tel:` ¬O§_«O¯d¡Aanchors ¬O§_¥h­«¡H
-- ¹Ï¤ù¡G
-  - `featured_image` ¦³­È®É¡Acaption ¬O§_¥i«H¡H¤£½T©w´N `null`¡C
-  - `gallery_items` ¼Æ¶q»P HTML ¹ê»Ú¹Ï¤ù¬O§_¤@­P¡H
-  - µL¥i¥Î¹Ï¤ù®É¡A¤T­ÓÄæ¦ì¬O§_³£²MªÅ¡H
-- ³W«hÅÜ§ó®É¡A¥ý§ó·s¥»ÀÉ¡A¦A¦P¨Bµ{¦¡»P´ú¸Õ¡A¨Ã¦b notes µù©ú¨Ó·½»P²z¥Ñ¡C
+- æ–‡å­—å„ªå…ˆæ”¾ `body_markdown`ï¼šè‹¥ HTML ç‰‡æ®µæ²’æœ‰å°æ‡‰ schema æ¬„ä½ï¼ˆè‡¨æ™‚æ•˜è¿°ã€å°‘é‡èªªæ˜Žï¼‰ï¼Œç›´æŽ¥ä¿ç•™åœ¨ `body_markdown`ï¼Œä¸è¦ç¡¬æ–°å¢ž meta æ¬„ä½ã€‚
+- ä¸ç«‹å³æ–°å¢ž metaï¼šåªæœ‰åœ¨å¤šæ•¸é é¢æ˜Žç¢ºå‡ºç¾ã€ç¢ºèªéœ€è¦æ¬„ä½æ™‚ï¼Œå†æ–¼å¾ŒçºŒä»»å‹™è£œ schema/adapterï¼›æš«ä¸è¦è‡ªè¡ŒåŠ  `unknownField`ã€‚
+- ä¿ç•™å°ç…§ï¼š`old_url` å¿…å¡«ï¼Œç›¡é‡ä¿ç•™ legacy HTML æª”ï¼ˆå¦‚ `data/legacy-*/...html`ï¼‰ä»¥ä¾¿æ—¥å¾Œå°ç…§ï¼›è‹¥ç™¼ç¾å¸¸è¦‹ä½†å°šæœªæœ‰æ¬„ä½çš„ patternï¼Œè«‹åœ¨ notes è¨˜éŒ„ä¸¦é–‹æ–° T ä»»å‹™è™•ç†ã€‚
+
+---
+
+## 5. é©—æ”¶å¿«é€Ÿæª¢æŸ¥
+
+- æ–‡å­—ï¼šæ¨™é¡Œå±¤ç´šèˆ‡æ®µè½æ˜¯å¦åˆç†ï¼Ÿæœ‰ç„¡å¤šé¤˜ç©ºç™½æˆ–ç ´ç‰ˆæ›è¡Œï¼Ÿ
+- é€£çµï¼š`mailto:` / `tel:` æ˜¯å¦ä¿ç•™ï¼Œanchors æ˜¯å¦åŽ»é‡ï¼Ÿ
+- åœ–ç‰‡ï¼š
+  - `featured_image` æœ‰å€¼æ™‚ï¼Œcaption æ˜¯å¦å¯ä¿¡ï¼Ÿä¸ç¢ºå®šå°± `null`ã€‚
+  - `gallery_items` æ•¸é‡èˆ‡ HTML å¯¦éš›åœ–ç‰‡æ˜¯å¦ä¸€è‡´ï¼Ÿ
+  - ç„¡å¯ç”¨åœ–ç‰‡æ™‚ï¼Œä¸‰å€‹æ¬„ä½æ˜¯å¦éƒ½æ¸…ç©ºï¼Ÿ
+- è¦å‰‡è®Šæ›´æ™‚ï¼Œå…ˆæ›´æ–°æœ¬æª”ï¼Œå†åŒæ­¥ç¨‹å¼èˆ‡æ¸¬è©¦ï¼Œä¸¦åœ¨ notes è¨»æ˜Žä¾†æºèˆ‡ç†ç”±ã€‚
