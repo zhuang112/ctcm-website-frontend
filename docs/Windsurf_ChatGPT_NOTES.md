@@ -59,6 +59,7 @@
   - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`：角色與邊界重寫。
 - 測試：僅文檔更新，無額外測試。
 - commit: 5777bf6
+  - 本次補充 workflow 溝通格式與 notes RAW 規則，commit: eb92dde
 變更檔案（含 RAW 連結）：
 
 - docs/AI_COLLAB_SUMMARY.md  
