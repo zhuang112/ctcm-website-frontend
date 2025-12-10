@@ -196,7 +196,7 @@
   - `docs/PROJECT_TODO.md`：新增 T-0017 條目並標記完成。
   - `docs/Windsurf_ChatGPT_NOTES.md`：記錄任務摘要與 RAW 連結。
 - 測試：純文檔更新，未執行程式。
-- commit: 9b669a4
+- commit: f66b786
 變更檔案（含 RAW 連結）：
 
 - docs/HTML_TO_MARKDOWN_RULES_V4.md  
