@@ -108,7 +108,7 @@
   - `docs/PROJECT_TODO.md`：新增 T-0014 條目並標記完成。
   - `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次任務與 RAW 連結。
 - 測試：新增單元測試（convertToZhCn）；未跑整套，僅 skeleton。
-- commit: e413839
+- commit: fde0a7a
 變更檔案（含 RAW 連結）：
 
 - package.json  
