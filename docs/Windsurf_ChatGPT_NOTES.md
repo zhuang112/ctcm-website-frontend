@@ -54,7 +54,7 @@
   - `docs/SESSION_CHECKLIST.md`：乾淨工作小抄。
   - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`：角色與邊界重寫。
 - 測試：僅文檔更新，無額外測試。
-- commit: (pending push)
+- commit: 5777bf6
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
@@ -833,3 +833,4 @@
   - 附上一段 `[Agent 回報摘要]`（含 T 任務編號、變更檔案列表、主要測試結果與 snapshot 檔名），
 
 就能讓新的 ChatGPT 對話直接接上這一輪完成的工作。
+
