@@ -1,68 +1,68 @@
-ï»¿# ChatGPT Ã— å¯¦ä½œ Agent å”ä½œç­†è¨˜
+# ChatGPT ¡Ñ ¹ê§@ Agent ¨ó§@µ§°O
 
-> æœ¬æª”æ¡ˆçµ¦ã€Œæœªä¾†æ¥æ‰‹çš„ ChatGPT / AI åŠ©æ‰‹ã€é–±è®€ï¼Œèªªæ˜ç›®å‰å°ˆæ¡ˆç‹€æ…‹èˆ‡å·²å®Œæˆçš„ä¿®æ”¹ã€‚
+> ¥»ÀÉ®×µ¹¡u¥¼¨Ó±µ¤âªº ChatGPT / AI §U¤â¡v¾\Åª¡A»¡©ú¥Ø«e±M®×ª¬ºA»P¤w§¹¦¨ªº­×§ï¡C
 >
-> ç›®å‰ä¸»è¦å¯¦ä½œ Agentï¼šCodexï¼ˆåœ¨æœ¬æ©Ÿ repo ç›´æ¥ä¿®æ”¹ç¨‹å¼èˆ‡ docsï¼‰ã€‚æœ¬æª”åæš«ç‚º `Windsurf_ChatGPT_NOTES.md`ï¼Œæœªä¾†è‹¥èª¿æ•´å‘½åå¯åœ¨å°æ‡‰ T ä»»å‹™ä¸­æ›´æ–°æœ¬èªªæ˜ã€‚
+> ¥Ø«e¥D­n¹ê§@ Agent¡GCodex¡]¦b¥»¾÷ repo ª½±µ­×§ïµ{¦¡»P docs¡^¡C¥»ÀÉ¦W¼È¬° `Windsurf_ChatGPT_NOTES.md`¡A¥¼¨Ó­Y½Õ¾ã©R¦W¥i¦b¹ïÀ³ T ¥ô°È¤¤§ó·s¥»»¡©ú¡C
 >
-> ç¶­è­·æ–¹å¼å»ºè­°ï¼šæ¯ä¸€å€‹æ˜ç¢ºçš„é–‹ç™¼ä»»å‹™ï¼ˆfeature / bugfixï¼‰æ–°å¢ä¸€å€‹å°ç¯€ï¼Œç°¡è¦èªªæ˜éœ€æ±‚èˆ‡å·²æ”¹å‹•æª”æ¡ˆã€‚
+> ºûÅ@¤è¦¡«ØÄ³¡G¨C¤@­Ó©ú½Tªº¶}µo¥ô°È¡]feature / bugfix¡^·s¼W¤@­Ó¤p¸`¡AÂ²­n»¡©ú»İ¨D»P¤w§ï°ÊÀÉ®×¡C
 
 ---
 
-## 2025-12-10 é»˜å¥‘ / æ“ä½œç¿’æ…£
+## 2025-12-10 Àq«´ / ¾Ş§@²ßºD
 
-- snapshot CLIï¼š`npm run snapshot:docs -- --task T-0007`ï¼Œåªæ‰“åŒ…æœ¬æ©Ÿ `docs/*.md`ã€`docs/terminal_logs/*.txt` åˆ° `snapshots/`ï¼Œä¸é€² gitï¼›æœ€æ–°é©—æ”¶å·²æ–¼ 2025-12-10 å®Œæˆã€‚
-- å¯¦ä½œ Agent è§’è‰²ï¼šç›®å‰å¯¦ä½œç”± Codex åŸ·è¡Œï¼ˆå–ä»£åŸæœ¬å›ºå®šç¨±å‘¼ Windsurfï¼‰ï¼›ä½¿ç”¨è€…åªéœ€åœ¨ ChatGPT èˆ‡å¯¦ä½œ Agent é–“å‚³éæŒ‡ä»¤èˆ‡å›å ±ã€‚
-- ç·¨ç¢¼ï¼šdocs æª”æ¡ˆç¶­æŒ UTF-8ï¼ˆå« BOM å¯æ¥å—ï¼‰ï¼Œè‹¥å†é‡äº‚ç¢¼å„ªå…ˆç”¨ UTF-8 è®€å¯«ã€‚
-- ç°¡åŒ– TODO è¨˜éŒ„ï¼šä»»å‹™æ¢ç›®ä»¥ã€Œç‹€æ…‹ã€ç›®æ¨™ã€é©—æ”¶ã€ç‚ºä¸»ï¼Œé¿å…éé•·çš„å¯¦ä½œç¯„åœæè¿°ï¼›ç‹€æ…‹æ¬„ä½å«æ—¥æœŸèˆ‡èª°é©—è­‰ã€‚
-- è‹¥é–‹æ–°å°è©±ï¼Œå…ˆçœ‹ `docs/PROJECT_TODO.md` èˆ‡æœ¬æª”ï¼Œå¿«é€Ÿå°é½Šä»»å‹™ç‹€æ…‹èˆ‡ç´„å®šã€‚
-- full access / sandbox ç´„å®šï¼šè‹¥ IDE/Agent å·²é–‹ full accessï¼ˆæˆ– auto-approveï¼‰ï¼Œä»åƒ…èƒ½åœ¨ `ctcm-website-frontend/` ä¸‹æ“ä½œï¼›ç¦æ­¢ç ´å£æ€§æŒ‡ä»¤ï¼ˆå¦‚ `rm -rf /`ã€`rm -rf ..`ï¼‰ï¼›æ‰€æœ‰è®Šæ›´éœ€ç…§ workflow 1.9ã€è¨˜éŒ„åœ¨ notes ä¸¦é™„ RAW é€£çµã€‚
-- notes è¨˜éŒ„æ ¼å¼ï¼ˆæ¯å€‹ T ä»»å‹™ä¸€å€‹å°ç¯€ï¼‰ï¼š
-  - èªªæ˜ä»»å‹™æ¨™é¡Œã€æ—¥æœŸã€éœ€æ±‚æ‘˜è¦ã€‚
-  - åˆ—å‡ºæ›´æ–°æª”æ¡ˆèˆ‡æ¸¬è©¦ç‹€æ…‹ï¼Œç´€éŒ„æœ€å¾Œ commit hashã€‚
-- è¿½åŠ ã€Œè®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ã€å€å¡Šï¼Œåˆ—å‡ºæœ¬æ¬¡æ‰€æœ‰ç•°å‹•/æ–°å¢æª”æ¡ˆèˆ‡ RAW URLã€‚
-- ChatGPT â†’ Agent code block ç´„å®šï¼šcode block ä¸­ä¸å¾—å‡ºç¾ citation / content referenceï¼ˆä¾‹å¦‚ `::contentReference[...]`ã€`oaicite:0`ï¼‰ï¼Œå¦‚éœ€å¼•ç”¨è«‹åœ¨ code block å¤–ä»¥æ–‡å­—æè¿°ã€‚
+- snapshot CLI¡G`npm run snapshot:docs -- --task T-0007`¡A¥u¥´¥]¥»¾÷ `docs/*.md`¡B`docs/terminal_logs/*.txt` ¨ì `snapshots/`¡A¤£¶i git¡F³Ì·sÅç¦¬¤w©ó 2025-12-10 §¹¦¨¡C
+- ¹ê§@ Agent ¨¤¦â¡G¥Ø«e¹ê§@¥Ñ Codex °õ¦æ¡]¨ú¥N­ì¥»©T©wºÙ©I Windsurf¡^¡F¨Ï¥ÎªÌ¥u»İ¦b ChatGPT »P¹ê§@ Agent ¶¡¶Ç»¼«ü¥O»P¦^³ø¡C
+- ½s½X¡Gdocs ÀÉ®×ºû«ù UTF-8¡]§t BOM ¥i±µ¨ü¡^¡A­Y¦A¹J¶Ã½XÀu¥ı¥Î UTF-8 Åª¼g¡C
+- Â²¤Æ TODO °O¿ı¡G¥ô°È±ø¥Ø¥H¡uª¬ºA¡B¥Ø¼Ğ¡BÅç¦¬¡v¬°¥D¡AÁ×§K¹Lªøªº¹ê§@½d³ò´y­z¡Fª¬ºAÄæ¦ì§t¤é´Á»P½ÖÅçÃÒ¡C
+- ­Y¶}·s¹ï¸Ü¡A¥ı¬İ `docs/PROJECT_TODO.md` »P¥»ÀÉ¡A§Ö³t¹ï»ô¥ô°Èª¬ºA»P¬ù©w¡C
+- full access / sandbox ¬ù©w¡G­Y IDE/Agent ¤w¶} full access¡]©Î auto-approve¡^¡A¤´¶È¯à¦b `ctcm-website-frontend/` ¤U¾Ş§@¡F¸T¤î¯}Ãa©Ê«ü¥O¡]¦p `rm -rf /`¡B`rm -rf ..`¡^¡F©Ò¦³ÅÜ§ó»İ·Ó workflow 1.9¡B°O¿ı¦b notes ¨Ãªş RAW ³sµ²¡C
+- notes °O¿ı®æ¦¡¡]¨C­Ó T ¥ô°È¤@­Ó¤p¸`¡^¡G
+  - »¡©ú¥ô°È¼ĞÃD¡B¤é´Á¡B»İ¨DºK­n¡C
+  - ¦C¥X§ó·sÀÉ®×»P´ú¸Õª¬ºA¡A¬ö¿ı³Ì«á commit hash¡C
+- °l¥[¡uÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡v°Ï¶ô¡A¦C¥X¥»¦¸©Ò¦³²§°Ê/·s¼WÀÉ®×»P RAW URL¡C
+- ChatGPT ¡÷ Agent code block ¬ù©w¡Gcode block ¤¤¤£±o¥X²{ citation / content reference¡]¨Ò¦p `::contentReference[...]`¡B`oaicite:0`¡^¡A¦p»İ¤Ş¥Î½Ğ¦b code block ¥~¥H¤å¦r´y­z¡C
 
-## 2025-12-10 ä»»å‹™ï¼šT-0011 / T-0012 åˆå§‹åŒ–
+## 2025-12-10 ¥ô°È¡GT-0011 / T-0012 ªì©l¤Æ
 
-- åœ¨ `docs/PROJECT_TODO.md` å¢è£œæ–°çš„ä»»å‹™æ¢ç›®ï¼š
-  - `T-0011 fix-corrupted-docs`ï¼šä¿®å¾©äº‚ç¢¼ docsã€çµ±ä¸€ UTF-8ã€‚
-  - `T-0012 sync-status-docs`ï¼šå°é½Š PROJECT_TODO / PROJECT_STATUS èˆ‡å¯¦éš›é€²åº¦ã€‚
-- ç›®å‰åƒ…æ–°å¢ TODO æ¢ç›®ï¼Œæœªé–‹å§‹å¯¦ä½œå…§å®¹ã€‚commit: a423ba4
+- ¦b `docs/PROJECT_TODO.md` ¼W¸É·sªº¥ô°È±ø¥Ø¡G
+  - `T-0011 fix-corrupted-docs`¡G­×´_¶Ã½X docs¡B²Î¤@ UTF-8¡C
+  - `T-0012 sync-status-docs`¡G¹ï»ô PROJECT_TODO / PROJECT_STATUS »P¹ê»Ú¶i«×¡C
+- ¥Ø«e¶È·s¼W TODO ±ø¥Ø¡A¥¼¶}©l¹ê§@¤º®e¡Ccommit: a423ba4
 
-## 2025-12-10 ä»»å‹™ï¼šT-0012 sync-status-docsï¼ˆåŸ·è¡Œä¸­ï¼‰
+## 2025-12-10 ¥ô°È¡GT-0012 sync-status-docs¡]°õ¦æ¤¤¡^
 
-- æ›´æ–°æª”æ¡ˆï¼š
-  - `docs/PROJECT_TODO.md`ï¼šè£œé½Šæ•™å­¸ä»»å‹™ç‹€æ…‹ï¼ˆv1 å·²å®Œæˆï¼‰ã€T-0005 ç‹€æ…‹è¡Œï¼ˆnews meta æ—¥æœŸ/åœ°é» mapping v1ï¼‰ï¼Œé‡ç”³ T-0006 blockedã€T-0010 âœ…ã€‚
-  - `docs/PROJECT_STATUS.md`ï¼šé‡å¯«ç¸½è¦½ï¼Œå°é½Šç›®å‰å¯¦ä½œï¼ˆcrawlã€HTMLâ†’Markdown + sutraã€teaching/news/magazine adaptersã€docs snapshot CLIã€zh-TWâ†’zh-CN æœªå¯¦ä½œã€legacy data root å¾…å‚™ä»½ã€WP/React æœªé–‹å§‹ï¼‰ã€‚
-- æ¸¬è©¦ï¼šåƒ…æ–‡æª”æ›´æ–°ï¼Œæœªè·‘é¡å¤–æ¸¬è©¦ã€‚
+- §ó·sÀÉ®×¡G
+  - `docs/PROJECT_TODO.md`¡G¸É»ô±Ğ¾Ç¥ô°Èª¬ºA¡]v1 ¤w§¹¦¨¡^¡BT-0005 ª¬ºA¦æ¡]news meta ¤é´Á/¦aÂI mapping v1¡^¡A­«¥Ó T-0006 blocked¡BT-0010 ?¡C
+  - `docs/PROJECT_STATUS.md`¡G­«¼gÁ`Äı¡A¹ï»ô¥Ø«e¹ê§@¡]crawl¡BHTML¡÷Markdown + sutra¡Bteaching/news/magazine adapters¡Bdocs snapshot CLI¡Bzh-TW¡÷zh-CN ¥¼¹ê§@¡Blegacy data root «İ³Æ¥÷¡BWP/React ¥¼¶}©l¡^¡C
+- ´ú¸Õ¡G¶È¤åÀÉ§ó·s¡A¥¼¶]ÃB¥~´ú¸Õ¡C
 - commit: 86f2021
 
-## 2025-12-11 ä»»å‹™ï¼šT-0011 fix-corrupted-docsï¼ˆPROJECT_STATUS é‡å¯«ï¼‰
+## 2025-12-11 ¥ô°È¡GT-0011 fix-corrupted-docs¡]PROJECT_STATUS ­«¼g¡^
 
-- æ›´æ–°æª”æ¡ˆï¼š`docs/PROJECT_STATUS.md` å®Œæ•´ä»¥ UTF-8 æ–°å…§å®¹è¦†è“‹ï¼Œç§»é™¤äº‚ç¢¼ã€‚
-- é‡é»ï¼šä¾ 2025-12-10 ç‰ˆæœ¬ï¼Œæ•´ç†é€²åº¦ç¸½è¦½ã€å„æ¨¡çµ„ç‹€æ…‹ï¼ˆcrawl/inventoryã€HTMLâ†’Markdown + sutraã€teaching/news/magazine adaptersã€docs snapshot CLIã€zh-TWâ†’zh-CN æœªå¯¦ä½œã€legacy data root blockedã€WP/React æœªé–‹å§‹ï¼‰ã€‚
-- æ¸¬è©¦ï¼šåƒ…æ–‡æª”æ›´æ–°ï¼Œç„¡é¡å¤–æ¸¬è©¦ã€‚
+- §ó·sÀÉ®×¡G`docs/PROJECT_STATUS.md` §¹¾ã¥H UTF-8 ·s¤º®eÂĞ»\¡A²¾°£¶Ã½X¡C
+- ­«ÂI¡G¨Ì 2025-12-10 ª©¥»¡A¾ã²z¶i«×Á`Äı¡B¦U¼Ò²Õª¬ºA¡]crawl/inventory¡BHTML¡÷Markdown + sutra¡Bteaching/news/magazine adapters¡Bdocs snapshot CLI¡Bzh-TW¡÷zh-CN ¥¼¹ê§@¡Blegacy data root blocked¡BWP/React ¥¼¶}©l¡^¡C
+- ´ú¸Õ¡G¶È¤åÀÉ§ó·s¡AµLÃB¥~´ú¸Õ¡C
 - commit: 9329d58
 
-## 2025-12-11 ä»»å‹™ï¼šworkflow æ–°å¢ GitHub RAW é€£çµè¦å‰‡
+## 2025-12-11 ¥ô°È¡Gworkflow ·s¼W GitHub RAW ³sµ²³W«h
 
-- æ›´æ–°æª”æ¡ˆï¼š`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`ï¼Œæ–°å¢ã€Œ1.7 GitHub RAW é€£çµè¦å‰‡ï¼ˆçµ¦ ChatGPT ç”¨ï¼‰ã€ã€‚
-- é‡é»ï¼šå®šç¾© `raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/` ç‚º RAW baseï¼Œèªªæ˜ ChatGPT è®€å–æ–¹å¼èˆ‡å¤±æ•—æ™‚å›å ±åŸå‰‡ã€‚
-- æ¸¬è©¦ï¼šåƒ…æ–‡æª”æ›´æ–°ï¼Œç„¡é¡å¤–æ¸¬è©¦ã€‚
+- §ó·sÀÉ®×¡G`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`¡A·s¼W¡u1.7 GitHub RAW ³sµ²³W«h¡]µ¹ ChatGPT ¥Î¡^¡v¡C
+- ­«ÂI¡G©w¸q `raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/` ¬° RAW base¡A»¡©ú ChatGPT Åª¨ú¤è¦¡»P¥¢±Ñ®É¦^³ø­ì«h¡C
+- ´ú¸Õ¡G¶È¤åÀÉ§ó·s¡AµLÃB¥~´ú¸Õ¡C
 - commit: ccfcbad
 
-## 2025-12-12 ä»»å‹™ï¼šT-0011 fix-corrupted-docsï¼ˆå…¶ä»–äº‚ç¢¼ docs é‡å¯«ï¼‰
+## 2025-12-12 ¥ô°È¡GT-0011 fix-corrupted-docs¡]¨ä¥L¶Ã½X docs ­«¼g¡^
 
-- æ›´æ–°æª”æ¡ˆï¼ˆæ•´æª”è¦†è“‹ï¼ŒUTF-8 æ­£å¸¸å¯è®€ï¼‰ï¼š
-  - `docs/AI_COLLAB_SUMMARY.md`ï¼šå”ä½œæ¨¡å¼ç¸½çµï¼ˆè§’è‰²ã€æµç¨‹ã€çœŸç›¸ä¾†æºï¼‰ã€‚
-  - `docs/COMPLETE_PROJECT_WORKFLOW.md`ï¼šç²¾ç°¡ç‰ˆå®Œæ•´æµç¨‹èˆ‡ç¾æ³ã€‚
-  - `docs/PENDING_DECISIONS.md`ï¼šæœªæ±ºç­–æ¸…å–®ï¼ˆpipelineã€WP åŒ¯å…¥ã€å‰ç«¯æ¶æ§‹ç­‰ï¼‰ã€‚
-  - `docs/SESSION_CHECKLIST.md`ï¼šä¹¾æ·¨å·¥ä½œå°æŠ„ã€‚
-  - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`ï¼šè§’è‰²èˆ‡é‚Šç•Œé‡å¯«ã€‚
-- æ¸¬è©¦ï¼šåƒ…æ–‡æª”æ›´æ–°ï¼Œç„¡é¡å¤–æ¸¬è©¦ã€‚
+- §ó·sÀÉ®×¡]¾ãÀÉÂĞ»\¡AUTF-8 ¥¿±`¥iÅª¡^¡G
+  - `docs/AI_COLLAB_SUMMARY.md`¡G¨ó§@¼Ò¦¡Á`µ²¡]¨¤¦â¡B¬yµ{¡B¯u¬Û¨Ó·½¡^¡C
+  - `docs/COMPLETE_PROJECT_WORKFLOW.md`¡GºëÂ²ª©§¹¾ã¬yµ{»P²{ªp¡C
+  - `docs/PENDING_DECISIONS.md`¡G¥¼¨Mµ¦²M³æ¡]pipeline¡BWP ¶×¤J¡B«eºİ¬[ºcµ¥¡^¡C
+  - `docs/SESSION_CHECKLIST.md`¡G°®²b¤u§@¤p§Û¡C
+  - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`¡G¨¤¦â»PÃä¬É­«¼g¡C
+- ´ú¸Õ¡G¶È¤åÀÉ§ó·s¡AµLÃB¥~´ú¸Õ¡C
 - commit: 5777bf6
-  - æœ¬æ¬¡è£œå…… workflow æºé€šæ ¼å¼èˆ‡ notes RAW è¦å‰‡ï¼Œcommit: eb92dde
-è®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ï¼š
+  - ¥»¦¸¸É¥R workflow ·¾³q®æ¦¡»P notes RAW ³W«h¡Acommit: eb92dde
+ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
 
 - docs/AI_COLLAB_SUMMARY.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/AI_COLLAB_SUMMARY.md
@@ -82,7 +82,7 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-> åƒè€ƒ RAW é€£çµï¼š
+> °Ñ¦Ò RAW ³sµ²¡G
 >
 > - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
 >   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
@@ -90,14 +90,14 @@
 > - docs/Windsurf_ChatGPT_NOTES.md  
 >   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 ä»»å‹™ï¼šT-0013 zh-tw-to-zh-cn-pipeline-designï¼ˆdocs firstï¼‰
+## 2025-12-12 ¥ô°È¡GT-0013 zh-tw-to-zh-cn-pipeline-design¡]docs first¡^
 
-- æ›´æ–°æª”æ¡ˆï¼š
-  - `docs/PROJECT_TODO.md`ï¼šå°‡ zh-TWâ†’zh-CN pipeline æ¢ç›®æ”¹ç‚º umbrellaï¼Œæ–°å¢ T-0013 ä¸¦æ¨™è¨˜ç‚ºå®Œæˆã€‚
-  - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`ï¼šè£œé½Šæ¬„ä½ç™½åå–®ã€è³‡æ–™ä¾†æº/è¼¸å‡ºç›®éŒ„å‡è¨­ã€CLI è¦æ ¼ã€ç¹ç°¡è½‰æ›ç­–ç•¥ï¼ˆåƒ… docsï¼‰ã€‚
-- æ¸¬è©¦ï¼šåƒ…æ–‡æª”æ›´æ–°ï¼Œç„¡é¡å¤–æ¸¬è©¦ã€‚
+- §ó·sÀÉ®×¡G
+  - `docs/PROJECT_TODO.md`¡G±N zh-TW¡÷zh-CN pipeline ±ø¥Ø§ï¬° umbrella¡A·s¼W T-0013 ¨Ã¼Ğ°O¬°§¹¦¨¡C
+  - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`¡G¸É»ôÄæ¦ì¥Õ¦W³æ¡B¸ê®Æ¨Ó·½/¿é¥X¥Ø¿ı°²³]¡BCLI ³W®æ¡BÁcÂ²Âà´«µ¦²¤¡]¶È docs¡^¡C
+- ´ú¸Õ¡G¶È¤åÀÉ§ó·s¡AµLÃB¥~´ú¸Õ¡C
 - commit: 5e7d235
-è®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ï¼š
+ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
 
 - docs/PROJECT_TODO.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
@@ -108,7 +108,7 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-> åƒè€ƒ RAW é€£çµï¼š
+> °Ñ¦Ò RAW ³sµ²¡G
 >
 > - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
 >   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
@@ -116,18 +116,18 @@
 > - docs/Windsurf_ChatGPT_NOTES.md  
 >   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 ä»»å‹™ï¼šT-0014 zh-tw-to-zh-cn-pipeline-core-and-cli-skeleton
+## 2025-12-12 ¥ô°È¡GT-0014 zh-tw-to-zh-cn-pipeline-core-and-cli-skeleton
 
-- æ›´æ–°æª”æ¡ˆï¼š
-  - `package.json`ï¼šæ–°å¢ `convert:zh-cn` è…³æœ¬èˆ‡ opencc-js ä¾è³´ã€‚
-  - `src/i18n/zh-tw-to-zh-cn.ts`ï¼š`convertToZhCn` utilityï¼ˆopencc-jsï¼‰ã€‚
-  - `tests/i18n/zh-tw-to-zh-cn.spec.ts`ï¼šåŸºæœ¬è½‰æ›æ¸¬è©¦ã€‚
-  - `tools/convert/generate-zh-cn-from-zh-tw.ts`ï¼šCLI skeletonï¼Œæ”¯æ´ `--input` / `--output` / `--dry-run`ï¼Œå¯å¯«å‡º zh-cn JSONã€‚
-  - `docs/PROJECT_TODO.md`ï¼šæ–°å¢ T-0014 æ¢ç›®ä¸¦æ¨™è¨˜å®Œæˆã€‚
-  - `docs/Windsurf_ChatGPT_NOTES.md`ï¼šè¨˜éŒ„æœ¬æ¬¡ä»»å‹™èˆ‡ RAW é€£çµã€‚
-- æ¸¬è©¦ï¼šæ–°å¢å–®å…ƒæ¸¬è©¦ï¼ˆconvertToZhCnï¼‰ï¼›æœªè·‘æ•´å¥—ï¼Œåƒ… skeletonã€‚
+- §ó·sÀÉ®×¡G
+  - `package.json`¡G·s¼W `convert:zh-cn` ¸}¥»»P opencc-js ¨Ì¿à¡C
+  - `src/i18n/zh-tw-to-zh-cn.ts`¡G`convertToZhCn` utility¡]opencc-js¡^¡C
+  - `tests/i18n/zh-tw-to-zh-cn.spec.ts`¡G°ò¥»Âà´«´ú¸Õ¡C
+  - `tools/convert/generate-zh-cn-from-zh-tw.ts`¡GCLI skeleton¡A¤ä´© `--input` / `--output` / `--dry-run`¡A¥i¼g¥X zh-cn JSON¡C
+  - `docs/PROJECT_TODO.md`¡G·s¼W T-0014 ±ø¥Ø¨Ã¼Ğ°O§¹¦¨¡C
+  - `docs/Windsurf_ChatGPT_NOTES.md`¡G°O¿ı¥»¦¸¥ô°È»P RAW ³sµ²¡C
+- ´ú¸Õ¡G·s¼W³æ¤¸´ú¸Õ¡]convertToZhCn¡^¡F¥¼¶]¾ã®M¡A¶È skeleton¡C
 - commit: fde0a7a
-è®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ï¼š
+ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
 
 - package.json  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
@@ -147,17 +147,17 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 ä»»å‹™ï¼šT-0015 zh-tw-to-zh-cn-pipeline-write-json
+## 2025-12-12 ¥ô°È¡GT-0015 zh-tw-to-zh-cn-pipeline-write-json
 
-- æ›´æ–°æª”æ¡ˆï¼š
-  - `src/i18n/zh-tw-to-zh-cn-pipeline.ts`ï¼š`transformAnycontentZhTwToZhCn` å¯¦ä½œï¼ˆç™½åå–®è½‰æ›ã€language=zh-cnï¼‰ã€‚
-  - `tools/convert/generate-zh-cn-from-zh-tw.ts`ï¼šCLI å¯«æª”ï¼ˆdry-run / write æ”¯æ´ï¼‰ã€‚
-- `tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`ï¼šè¦†è“‹ transformã€‚
-- `docs/PROJECT_TODO.md`ï¼šæ–°å¢ T-0015 æ¢ç›®ä¸¦æ¨™è¨˜å®Œæˆã€‚
-- `docs/Windsurf_ChatGPT_NOTES.md`ï¼šè¨˜éŒ„æœ¬æ¬¡ä»»å‹™èˆ‡ RAWã€‚
-- æ¸¬è©¦ï¼š`npx vitest tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`
+- §ó·sÀÉ®×¡G
+  - `src/i18n/zh-tw-to-zh-cn-pipeline.ts`¡G`transformAnycontentZhTwToZhCn` ¹ê§@¡]¥Õ¦W³æÂà´«¡Blanguage=zh-cn¡^¡C
+  - `tools/convert/generate-zh-cn-from-zh-tw.ts`¡GCLI ¼gÀÉ¡]dry-run / write ¤ä´©¡^¡C
+- `tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`¡GÂĞ»\ transform¡C
+- `docs/PROJECT_TODO.md`¡G·s¼W T-0015 ±ø¥Ø¨Ã¼Ğ°O§¹¦¨¡C
+- `docs/Windsurf_ChatGPT_NOTES.md`¡G°O¿ı¥»¦¸¥ô°È»P RAW¡C
+- ´ú¸Õ¡G`npx vitest tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`
 - commit: 9b146f4
-è®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ï¼š
+ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
 
 - src/i18n/zh-tw-to-zh-cn-pipeline.ts  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/i18n/zh-tw-to-zh-cn-pipeline.ts
@@ -174,14 +174,14 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 ä»»å‹™ï¼šT-0016 zh-cn-health-check-toolï¼ˆç™»è¨˜ TODOï¼‰
+## 2025-12-12 ¥ô°È¡GT-0016 zh-cn-health-check-tool¡]µn°O TODO¡^
 
-- æ›´æ–°æª”æ¡ˆï¼š
-  - `docs/PROJECT_TODO.md`ï¼šæ–°å¢ T-0016 æ¢ç›®ï¼ˆzh-TW/zh-CN JSON å¥åº·æª¢æŸ¥ CLIï¼‰ã€‚
-  - `docs/Windsurf_ChatGPT_NOTES.md`ï¼šè¨˜éŒ„æ–°å¢ TODO èˆ‡ RAWã€‚
-- æ¸¬è©¦ï¼šç´”æ–‡æª”æ›´æ–°ï¼ŒæœªåŸ·è¡Œç¨‹å¼ã€‚
+- §ó·sÀÉ®×¡G
+  - `docs/PROJECT_TODO.md`¡G·s¼W T-0016 ±ø¥Ø¡]zh-TW/zh-CN JSON °·±dÀË¬d CLI¡^¡C
+  - `docs/Windsurf_ChatGPT_NOTES.md`¡G°O¿ı·s¼W TODO »P RAW¡C
+- ´ú¸Õ¡G¯Â¤åÀÉ§ó·s¡A¥¼°õ¦æµ{¦¡¡C
 - commit: (pending push)
-è®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ï¼š
+ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
 
 - docs/PROJECT_TODO.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
@@ -189,15 +189,15 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 ä»»å‹™ï¼šT-0017 html-to-markdown-rules-cleanup
+## 2025-12-12 ¥ô°È¡GT-0017 html-to-markdown-rules-cleanup
 
-- æ›´æ–°æª”æ¡ˆï¼š
-  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`ï¼šé‡å¯«å…±ç”¨è¦å‰‡ã€åœ–ç‰‡ç­–ç•¥ã€å„ post_type æ³¨æ„äº‹é …èˆ‡é©—æ”¶æª¢æŸ¥ã€‚
-  - `docs/PROJECT_TODO.md`ï¼šæ–°å¢ T-0017 æ¢ç›®ä¸¦æ¨™è¨˜å®Œæˆã€‚
-  - `docs/Windsurf_ChatGPT_NOTES.md`ï¼šè¨˜éŒ„ä»»å‹™æ‘˜è¦èˆ‡ RAW é€£çµã€‚
-- æ¸¬è©¦ï¼šç´”æ–‡æª”æ›´æ–°ï¼ŒæœªåŸ·è¡Œç¨‹å¼ã€‚
-- commit: 9b669a4
-è®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ï¼š
+- §ó·sÀÉ®×¡G
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`¡G­«¼g¦@¥Î³W«h¡B¹Ï¤ùµ¦²¤¡B¦U post_type ª`·N¨Æ¶µ»PÅç¦¬ÀË¬d¡C
+  - `docs/PROJECT_TODO.md`¡G·s¼W T-0017 ±ø¥Ø¨Ã¼Ğ°O§¹¦¨¡C
+  - `docs/Windsurf_ChatGPT_NOTES.md`¡G°O¿ı¥ô°ÈºK­n»P RAW ³sµ²¡C
+- ´ú¸Õ¡G¯Â¤åÀÉ§ó·s¡A¥¼°õ¦æµ{¦¡¡C
+- commits: 9b669a4¡]ªìª©­«¼g¡^¡Bc3e4c3d¡]µ²ºc½Õ¾ã»P«áÄò·L½Õ¡^
+ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
 
 - docs/HTML_TO_MARKDOWN_RULES_V4.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
@@ -208,16 +208,16 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 ä»»å‹™ï¼šT-0018 meta-instr-and-status-structure
+## 2025-12-12 ¥ô°È¡GT-0018 meta-instr-and-status-structure
 
-- æ›´æ–°æª”æ¡ˆï¼š
-  - æ–°å¢ `docs/INSTR/` ç›®éŒ„ä¸¦æ¬ç§» INSTR æª”ï¼Œçµ±ä¸€å‘½åè¦å‰‡ `INSTR-T-xxxx-<slug>.md`ï¼ˆè·¨ä»»å‹™é€šç”¨ä»¥ 0000 è¡¨ç¤ºï¼‰ã€‚
-  - æ–°å¢ `docs/INSTR/README.md`ï¼ˆç”¨é€”ã€å‘½åè¦å‰‡ã€ç¾æœ‰åˆ—è¡¨ï¼‰èˆ‡ `docs/INSTR/INSTR-TEMPLATE.md`ï¼ˆæ–°å¢ INSTR çš„æ¨¡æ¿ï¼‰ã€‚
-  - æ›´æ–° `docs/PROJECT_TODO.md`ï¼šæ–°å¢ T-0018 æ¢ç›®ä¸¦æ¨™è¨˜å®Œæˆã€‚
-  - æ›´æ–° `docs/Windsurf_ChatGPT_NOTES.md`ï¼šè¨˜éŒ„æœ¬æ¬¡ INSTR æ•´ç†èˆ‡ RAW é€£çµã€‚
-- æ¸¬è©¦ï¼šç´”æ–‡æª”æ›´æ–°ï¼ŒæœªåŸ·è¡Œç¨‹å¼ã€‚
+- §ó·sÀÉ®×¡G
+  - ·s¼W `docs/INSTR/` ¥Ø¿ı¨Ã·h²¾ INSTR ÀÉ¡A²Î¤@©R¦W³W«h `INSTR-T-xxxx-<slug>.md`¡]¸ó¥ô°È³q¥Î¥H 0000 ªí¥Ü¡^¡C
+  - ·s¼W `docs/INSTR/README.md`¡]¥Î³~¡B©R¦W³W«h¡B²{¦³¦Cªí¡^»P `docs/INSTR/INSTR-TEMPLATE.md`¡]·s¼W INSTR ªº¼ÒªO¡^¡C
+  - §ó·s `docs/PROJECT_TODO.md`¡G·s¼W T-0018 ±ø¥Ø¨Ã¼Ğ°O§¹¦¨¡C
+  - §ó·s `docs/Windsurf_ChatGPT_NOTES.md`¡G°O¿ı¥»¦¸ INSTR ¾ã²z»P RAW ³sµ²¡C
+- ´ú¸Õ¡G¯Â¤åÀÉ§ó·s¡A¥¼°õ¦æµ{¦¡¡C
 - commit: c3e4c3d
-è®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ï¼š
+ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
 
 - docs/INSTR/README.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/README.md
@@ -247,91 +247,91 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
-## 2025-12-08 ä»»å‹™ï¼š/turn/sutra/ ç¶“è«–è¬›è§£é å°ˆç”¨è¦å‰‡ v1
+## 2025-12-08 ¥ô°È¡G/turn/sutra/ ¸g½×Á¿¸Ñ­¶±M¥Î³W«h v1
 
-### 1. ä»»å‹™éœ€æ±‚ç¸½çµ
+### 1. ¥ô°È»İ¨DÁ`µ²
 
-- é é¢ç¯„åœï¼š`/turn/sutra/` ç¶“è«–è¬›è§£é ã€‚
-- ç›®æ¨™ï¼šåœ¨ä¸ç ´å£æ—¢æœ‰é€šå‰‡èˆ‡æ¸¬è©¦çš„å‰æä¸‹ï¼Œç‚ºç¶“è«–è¬›è§£é å¯¦ä½œ **sutra å°ˆç”¨è¦å‰‡ v1**ã€‚
-- å‹åˆ¥ï¼çµæ§‹ç´„æŸï¼š
-  - ä¸ä¿®æ”¹ `src/html/legacy-html-types.ts` ä¸­æ—¢æœ‰ä»‹é¢åç¨±èˆ‡æ¬„ä½ã€‚
-  - `HtmlToMarkdownResult` çµæ§‹ä¸è®Šï¼Œåªæ˜¯åœ¨ `verses` ä¸­å¡«å€¼ã€‚
-  - ä¸ä¿®æ”¹ `src/types/anycontent-teaching.ts` èˆ‡å…¶ä»– AnyContent å‹åˆ¥æª”æ¡ˆã€‚
+- ­¶­±½d³ò¡G`/turn/sutra/` ¸g½×Á¿¸Ñ­¶¡C
+- ¥Ø¼Ğ¡G¦b¤£¯}Ãa¬J¦³³q«h»P´ú¸Õªº«e´£¤U¡A¬°¸g½×Á¿¸Ñ­¶¹ê§@ **sutra ±M¥Î³W«h v1**¡C
+- «¬§O¡şµ²ºc¬ù§ô¡G
+  - ¤£­×§ï `src/html/legacy-html-types.ts` ¤¤¬J¦³¤¶­±¦WºÙ»PÄæ¦ì¡C
+  - `HtmlToMarkdownResult` µ²ºc¤£ÅÜ¡A¥u¬O¦b `verses` ¤¤¶ñ­È¡C
+  - ¤£­×§ï `src/types/anycontent-teaching.ts` »P¨ä¥L AnyContent «¬§OÀÉ®×¡C
 
-### 2. ä¸»è¦å¯¦ä½œå…§å®¹
+### 2. ¥D­n¹ê§@¤º®e
 
-#### 2.1 sutra é åˆ¤æ–·èˆ‡ context
+#### 2.1 sutra ­¶§PÂ_»P context
 
-- æª”æ¡ˆï¼š`src/html/html-to-markdown.ts`
-- æ–°å¢è¡Œç‚ºï¼š
-  - ä»¥ `LegacyHtmlDocument.url` åˆ¤æ–· sutra é ï¼š
+- ÀÉ®×¡G`src/html/html-to-markdown.ts`
+- ·s¼W¦æ¬°¡G
+  - ¥H `LegacyHtmlDocument.url` §PÂ_ sutra ­¶¡G
     - `const isSutraPage = doc.url.includes("/turn/sutra/");`
-  - å»ºç«‹ `HtmlToMarkdownContext`ï¼š
+  - «Ø¥ß `HtmlToMarkdownContext`¡G
     - `interface HtmlToMarkdownContext { isSutraPage: boolean; verses: string[]; }`
-  - åœ¨ `htmlToMarkdown` ä¸­å»ºç«‹ï¼š
+  - ¦b `htmlToMarkdown` ¤¤«Ø¥ß¡G
     - `const verses: string[] = [];`
     - `const context: HtmlToMarkdownContext = { isSutraPage, verses };`
-  - è½‰æ›ä¸»æµç¨‹æ”¹ç‚ºï¼š
-    - `nodeToMarkdown($, el, context)`ï¼ˆè€ŒéèˆŠç‰ˆç„¡ context ç‰ˆæœ¬ï¼‰ã€‚
+  - Âà´«¥D¬yµ{§ï¬°¡G
+    - `nodeToMarkdown($, el, context)`¡]¦Ó«DÂÂª©µL context ª©¥»¡^¡C
 
-#### 2.2 sutra DOM é è™•ç†ï¼šéŒ¨é»æ­£è¦åŒ–
+#### 2.2 sutra DOM ¹w³B²z¡GÁãÂI¥¿³W¤Æ
 
-- æ–°å¢ `preprocessSutraDom($, $root)`ï¼š
-  - åƒ…åœ¨ `isSutraPage` æ™‚å‘¼å«ã€‚
-  - å° `<a name="...">` åšæ­£è¦åŒ–ï¼š
-    - è‹¥æœ‰ `name` ä¸”æ²’æœ‰ `id`ï¼Œå‰‡è¨­ `id = name`ã€‚
-    - ä¹‹å¾Œ `removeAttr("name")`ï¼Œé¿å…å¾ŒçºŒåŒä¸€éŒ¨é»ä»¥ name/id é‡è¤‡æ”¶é›†ã€‚
-  - åŠ è¨»è¨»è§£ï¼š
-    - `// è¦å‰‡ä¾†æºï¼šHTML_TO_MARKDOWN_RULES_V4.md Â§ ç¶“è«–è¬›è§£ï¼ˆ/turn/sutra/ï¼‰`
+- ·s¼W `preprocessSutraDom($, $root)`¡G
+  - ¶È¦b `isSutraPage` ®É©I¥s¡C
+  - ¹ï `<a name="...">` °µ¥¿³W¤Æ¡G
+    - ­Y¦³ `name` ¥B¨S¦³ `id`¡A«h³] `id = name`¡C
+    - ¤§«á `removeAttr("name")`¡AÁ×§K«áÄò¦P¤@ÁãÂI¥H name/id ­«½Æ¦¬¶°¡C
+  - ¥[µùµù¸Ñ¡G
+    - `// ³W«h¨Ó·½¡GHTML_TO_MARKDOWN_RULES_V4.md ¡± ¸g½×Á¿¸Ñ¡]/turn/sutra/¡^`
 
-#### 2.3 collectImagesAndAnchors èª¿æ•´
+#### 2.3 collectImagesAndAnchors ½Õ¾ã
 
-- å‡½å¼ç°½åç”±ï¼š
+- ¨ç¦¡Ã±¦W¥Ñ¡G
   - `collectImagesAndAnchors($root, baseUrl, images, anchors)`
-- èª¿æ•´ç‚ºï¼š
+- ½Õ¾ã¬°¡G
   - `collectImagesAndAnchors($, $root, baseUrl, images, anchors)`
-- éŒ¨é»æ”¶é›†é‚è¼¯ï¼š
-  - æƒæ `a[name], a[id]`ã€‚
-  - ä½¿ç”¨ `const candidate = id || name;`ï¼Œä¸¦ä»¥ `!anchors.includes(candidate)` é¿å…é‡è¤‡ã€‚
-  - sutra é å› å·²åœ¨ `preprocessSutraDom` å°‡ `name` æ­£è¦åŒ–ç‚º `id`ï¼Œæœ€çµ‚ anchors ä¸­åªæœƒæ”¶åˆ°ä¸€æ¬¡è©² idï¼ˆä¾‹å¦‚ `"item83"`ï¼‰ã€‚
+- ÁãÂI¦¬¶°ÅŞ¿è¡G
+  - ±½´y `a[name], a[id]`¡C
+  - ¨Ï¥Î `const candidate = id || name;`¡A¨Ã¥H `!anchors.includes(candidate)` Á×§K­«½Æ¡C
+  - sutra ­¶¦]¤w¦b `preprocessSutraDom` ±N `name` ¥¿³W¤Æ¬° `id`¡A³Ì²× anchors ¤¤¥u·|¦¬¨ì¤@¦¸¸Ó id¡]¨Ò¦p `"item83"`¡^¡C
 
-#### 2.4 sutra ç¶“æ–‡æ®µè½ï¼š`<p class="word17-coffee">` â†’ blockquote + verses
+#### 2.4 sutra ¸g¤å¬q¸¨¡G`<p class="word17-coffee">` ¡÷ blockquote + verses
 
-- ç›®æ¨™ï¼š
-  - åœ¨ sutra é ï¼Œå°‡ `<p class="word17-coffee">è¡Œä¸€<br>è¡ŒäºŒ</p>` è½‰ç‚ºï¼š
-    - `> è¡Œä¸€`\n`> è¡ŒäºŒ`
-  - ä¸¦æŠŠè©²æ®µç¶“æ–‡çš„ç´”æ–‡å­—åŠ å…¥ `result.verses: string[]`ã€‚
+- ¥Ø¼Ğ¡G
+  - ¦b sutra ­¶¡A±N `<p class="word17-coffee">¦æ¤@<br>¦æ¤G</p>` Âà¬°¡G
+    - `> ¦æ¤@`\n`> ¦æ¤G`
+  - ¨Ã§â¸Ó¬q¸g¤åªº¯Â¤å¦r¥[¤J `result.verses: string[]`¡C
 
-- å¯¦ä½œç´°ç¯€ï¼š
-  - åœ¨ `nodeToMarkdown` çš„ `case "p"` ä¸­ï¼š
-    - è‹¥ `context.isSutraPage && $el.hasClass("word17-coffee")`ï¼š
-      - å‘¼å« `sutraParagraphToMarkdownLines($, $el)` å–å¾—ï¼š
-        - `lines: string[]`ï¼šæ¯ä¸€è¡Œç¶“æ–‡ï¼ˆå·²ä¾ `<br>` åˆ‡è¡Œã€æ•´ç†ç©ºç™½ï¼‰ã€‚
-        - `combinedText: string`ï¼šæ‰€æœ‰è¡Œä»¥ç©ºç™½ä¸²èµ·ä¾†çš„ç´”æ–‡å­—ï¼ˆä¾‹ï¼š`"è¡Œä¸€ è¡ŒäºŒ"`ï¼‰ã€‚
-      - è‹¥ `combinedText` éç©ºï¼š`context.verses.push(combinedText);`
-      - è‹¥ `lines` éç©ºï¼šè¼¸å‡ºï¼š
+- ¹ê§@²Ó¸`¡G
+  - ¦b `nodeToMarkdown` ªº `case "p"` ¤¤¡G
+    - ­Y `context.isSutraPage && $el.hasClass("word17-coffee")`¡G
+      - ©I¥s `sutraParagraphToMarkdownLines($, $el)` ¨ú±o¡G
+        - `lines: string[]`¡G¨C¤@¦æ¸g¤å¡]¤w¨Ì `<br>` ¤Á¦æ¡B¾ã²zªÅ¥Õ¡^¡C
+        - `combinedText: string`¡G©Ò¦³¦æ¥HªÅ¥Õ¦ê°_¨Óªº¯Â¤å¦r¡]¨Ò¡G`"¦æ¤@ ¦æ¤G"`¡^¡C
+      - ­Y `combinedText` «DªÅ¡G`context.verses.push(combinedText);`
+      - ­Y `lines` «DªÅ¡G¿é¥X¡G
         - `lines.map((line) => "> " + line).join("\n")`
-      - è‹¥æ²’æœ‰æœ‰æ•ˆæ–‡å­—è¡Œï¼šå›å‚³ç©ºå­—ä¸²ã€‚
-    - é sutra æˆ–é `word17-coffee` æ®µè½ä»ä½¿ç”¨åŸæœ¬çš„ `inlineText` è¦å‰‡ã€‚
+      - ­Y¨S¦³¦³®Ä¤å¦r¦æ¡G¦^¶ÇªÅ¦r¦ê¡C
+    - «D sutra ©Î«D `word17-coffee` ¬q¸¨¤´¨Ï¥Î­ì¥»ªº `inlineText` ³W«h¡C
 
-- `sutraParagraphToMarkdownLines` è¡Œç‚ºï¼š
-  - é€ä¸€æƒæ `<p>` çš„å­ç¯€é»ï¼š
-    - æ–‡å­—ç¯€é»ï¼šç´¯åŠ åˆ°æš«å­˜ `current`ã€‚
-    - `<br>`ï¼šå°‡ `current` æ­£è¦åŒ–ï¼ˆæ”¶å°¾ trim å¤šé¤˜ç©ºç™½ï¼‰å¾Œ push åˆ° `rawLines`ï¼Œä¸¦æ¸…ç©º `current`ã€‚
-    - å…¶ä»–å­å…ƒç´ ï¼šå‘¼å«æ—¢æœ‰çš„ `inlineText` æŠ½å–ç´”æ–‡å­—ä¸¦åŠ å…¥ `current`ã€‚
-  - çµæŸå¾Œè™•ç†æœ€å¾Œä¸€è¡Œï¼Œç„¶å¾Œï¼š
-    - `lines`ï¼š
-      - å°æ¯è¡Œå†åšä¸€æ¬¡ç©ºç™½æ­£è¦åŒ–èˆ‡ trimï¼Œéæ¿¾ç©ºè¡Œã€‚
+- `sutraParagraphToMarkdownLines` ¦æ¬°¡G
+  - ³v¤@±½´y `<p>` ªº¤l¸`ÂI¡G
+    - ¤å¦r¸`ÂI¡G²Ö¥[¨ì¼È¦s `current`¡C
+    - `<br>`¡G±N `current` ¥¿³W¤Æ¡]¦¬§À trim ¦h¾lªÅ¥Õ¡^«á push ¨ì `rawLines`¡A¨Ã²MªÅ `current`¡C
+    - ¨ä¥L¤l¤¸¯À¡G©I¥s¬J¦³ªº `inlineText` ©â¨ú¯Â¤å¦r¨Ã¥[¤J `current`¡C
+  - µ²§ô«á³B²z³Ì«á¤@¦æ¡AµM«á¡G
+    - `lines`¡G
+      - ¹ï¨C¦æ¦A°µ¤@¦¸ªÅ¥Õ¥¿³W¤Æ»P trim¡A¹LÂoªÅ¦æ¡C
     - `combinedText = lines.join(" ");`
 
-#### 2.5 sutra æ®µè½éŒ¨é»ï¼šåŒæ™‚ä¿ç•™æ–‡å­—èˆ‡ `<a id="..."></a>`
+#### 2.5 sutra ¬q¸¨ÁãÂI¡G¦P®É«O¯d¤å¦r»P `<a id="..."></a>`
 
-- éœ€æ±‚ï¼š
-  - sutra é  `body_markdown` ä¸­å¸Œæœ›æœ‰ï¼š
-    - `<a id="item83"></a>ï¼ˆå…«åä¸‰ï¼‰`
-  - åŒæ™‚ç¶­æŒ anchors æœ‰ `"item83"`ã€‚
+- »İ¨D¡G
+  - sutra ­¶ `body_markdown` ¤¤§Æ±æ¦³¡G
+    - `<a id="item83"></a>¡]¤K¤Q¤T¡^`
+  - ¦P®Éºû«ù anchors ¦³ `"item83"`¡C
 
-- `nodeToMarkdown` çš„ `case "a"` èª¿æ•´ï¼š
+- `nodeToMarkdown` ªº `case "a"` ½Õ¾ã¡G
 
   ```ts
   case "a": {
@@ -340,8 +340,8 @@
     const text = inlineText($, $el);
 
     if (context.isSutraPage && id && !href) {
-      // sutra é çš„æ®µè½éŒ¨é»éœ€åœ¨ markdown ä¸­ä¿ç•™ idï¼Œä¸¦ä¿ç•™åŸæœ¬æ–‡å­—å…§å®¹
-      // è¦å‰‡ä¾†æºï¼šHTML_TO_MARKDOWN_RULES_V4.md Â§ ç¶“è«–è¬›è§£ï¼ˆ/turn/sutra/ï¼‰
+      // sutra ­¶ªº¬q¸¨ÁãÂI»İ¦b markdown ¤¤«O¯d id¡A¨Ã«O¯d­ì¥»¤å¦r¤º®e
+      // ³W«h¨Ó·½¡GHTML_TO_MARKDOWN_RULES_V4.md ¡± ¸g½×Á¿¸Ñ¡]/turn/sutra/¡^
       const anchorHtml = `<a id="${id}"></a>`;
       if (!text) {
         return anchorHtml;
@@ -358,288 +358,288 @@
   }
   ```
 
-- æ•ˆæœï¼š
-  - åŸå§‹ HTMLï¼š
+- ®ÄªG¡G
+  - ­ì©l HTML¡G
 
     ```html
-    <a name="item83" class="chinese">ï¼ˆå…«åä¸‰ï¼‰</a>
-    <p class="word17-coffee">è¡Œä¸€<br>è¡ŒäºŒ</p>
+    <a name="item83" class="chinese">¡]¤K¤Q¤T¡^</a>
+    <p class="word17-coffee">¦æ¤@<br>¦æ¤G</p>
     ```
 
-  - sutra æµç¨‹ï¼š
-    1. `preprocessSutraDom` å°‡ `name="item83"` æ­£è¦åŒ–ç‚º `id="item83"`ã€‚
-    2. `collectImagesAndAnchors` å°‡ `"item83"` æ”¶é€² `result.anchors`ã€‚
-    3. `nodeToMarkdown` å° `<a>` è¼¸å‡ºï¼š`<a id="item83"></a>ï¼ˆå…«åä¸‰ï¼‰`ã€‚
-    4. `word17-coffee` æ®µè½è½‰ç‚ºï¼š
-       - `> è¡Œä¸€`\n`> è¡ŒäºŒ`ã€‚
+  - sutra ¬yµ{¡G
+    1. `preprocessSutraDom` ±N `name="item83"` ¥¿³W¤Æ¬° `id="item83"`¡C
+    2. `collectImagesAndAnchors` ±N `"item83"` ¦¬¶i `result.anchors`¡C
+    3. `nodeToMarkdown` ¹ï `<a>` ¿é¥X¡G`<a id="item83"></a>¡]¤K¤Q¤T¡^`¡C
+    4. `word17-coffee` ¬q¸¨Âà¬°¡G
+       - `> ¦æ¤@`\n`> ¦æ¤G`¡C
 
-  - æœ€çµ‚ `body_markdown` ç‰‡æ®µé¡ä¼¼ï¼š
+  - ³Ì²× `body_markdown` ¤ù¬qÃş¦ü¡G
 
     ```md
-    <a id="item83"></a>ï¼ˆå…«åä¸‰ï¼‰
+    <a id="item83"></a>¡]¤K¤Q¤T¡^
 
-    > è¡Œä¸€
-    > è¡ŒäºŒ
+    > ¦æ¤@
+    > ¦æ¤G
     ```
 
-#### 2.6 å…¶ä»–é€šå‰‡ç¶­æŒä¸è®Š
+#### 2.6 ¨ä¥L³q«hºû«ù¤£ÅÜ
 
-- åŸæœ‰è¡Œç‚ºç¶­æŒï¼š
-  - headingï¼š`h1`â€“`h4` â†’ `#`ï½`####`ã€‚
-  - ä¸€èˆ¬æ®µè½ï¼š`<p>` â†’ `inlineText`ã€‚
-  - åˆ—è¡¨ï¼š`<ul>/<ol>` â†’ `listToMarkdown`ï¼ˆåƒ…å¤šå‚³å…¥ `context`ï¼‰ã€‚
-  - blockquoteï¼šä»ä½¿ç”¨æ—¢æœ‰é‚è¼¯ï¼Œåƒ…æ”¹ç‚ºå‘¼å«æ–°ç‰ˆ `blockChildrenToMarkdown($, $el, context)`ã€‚
-  - é€£çµï¼šæœ‰ `href` ç…§èˆŠè¼¸å‡º `[text](href)`ã€‚
-  - åœ–ç‰‡ï¼šåªå¾ DOM ä¸­ç§»é™¤ä¸¦æ”¶é›†åˆ° `images`ï¼Œä¸è¼¸å‡º markdown `![]()`ã€‚
+- ­ì¦³¦æ¬°ºû«ù¡G
+  - heading¡G`h1`¡V`h4` ¡÷ `#`¡ã`####`¡C
+  - ¤@¯ë¬q¸¨¡G`<p>` ¡÷ `inlineText`¡C
+  - ¦Cªí¡G`<ul>/<ol>` ¡÷ `listToMarkdown`¡]¶È¦h¶Ç¤J `context`¡^¡C
+  - blockquote¡G¤´¨Ï¥Î¬J¦³ÅŞ¿è¡A¶È§ï¬°©I¥s·sª© `blockChildrenToMarkdown($, $el, context)`¡C
+  - ³sµ²¡G¦³ `href` ·ÓÂÂ¿é¥X `[text](href)`¡C
+  - ¹Ï¤ù¡G¥u±q DOM ¤¤²¾°£¨Ã¦¬¶°¨ì `images`¡A¤£¿é¥X markdown `![]()`¡C
 
 ---
 
-### 3. æ¸¬è©¦èª¿æ•´
+### 3. ´ú¸Õ½Õ¾ã
 
-- æª”æ¡ˆï¼š`tests/html/html-to-markdown.spec.ts`
+- ÀÉ®×¡G`tests/html/html-to-markdown.spec.ts`
 
-#### 3.1 åŸæœ‰ä¸‰å€‹æ¸¬è©¦ç¶­æŒ
+#### 3.1 ­ì¦³¤T­Ó´ú¸Õºû«ù
 
 1. `converts simple heading and paragraph`
-   - é©—è­‰ h1 + æ®µè½è½‰æ›ã€‚
+   - ÅçÃÒ h1 + ¬q¸¨Âà´«¡C
 2. `collects images but does not embed them in markdown`
-   - é©—è­‰ images è¢«æ”¶é›†ã€markdown ä¸å« `![]()`ã€‚
+   - ÅçÃÒ images ³Q¦¬¶°¡Bmarkdown ¤£§t `![]()`¡C
 3. `collects anchors like item83 from name/id attributes`
-   - é©—è­‰ anchors æ”¶é›† `"item83"`ï¼Œä¸¦ä¿ç•™ä¸€èˆ¬æ®µè½æ–‡å­—ã€‚
+   - ÅçÃÒ anchors ¦¬¶° `"item83"`¡A¨Ã«O¯d¤@¯ë¬q¸¨¤å¦r¡C
 
-#### 3.2 æ–°å¢ sutra å°ˆç”¨æ¸¬è©¦
+#### 3.2 ·s¼W sutra ±M¥Î´ú¸Õ
 
-- æ¸¬è©¦åç¨±ï¼š`"applies sutra-specific rules for word17-coffee paragraphs and anchors"`
-- æ¸¬è©¦è¼¸å…¥ï¼š
+- ´ú¸Õ¦WºÙ¡G`"applies sutra-specific rules for word17-coffee paragraphs and anchors"`
+- ´ú¸Õ¿é¤J¡G
 
   ```html
   <html>
     <body>
       <a name="item83" class="chinese">
-        ï¼ˆå…«åä¸‰ï¼‰
+        ¡]¤K¤Q¤T¡^
       </a>
-      <p class="word17-coffee">è¡Œä¸€<br>è¡ŒäºŒ</p>
+      <p class="word17-coffee">¦æ¤@<br>¦æ¤G</p>
     </body>
   </html>
   ```
 
-- æ¸¬è©¦é‡é»æ–·è¨€ï¼š
-  - blockquoteï¼š
-    - `result.body_markdown` å« `"> è¡Œä¸€"` èˆ‡ `"> è¡ŒäºŒ"`ã€‚
-  - verses æ”¶é›†ï¼š
-    - ä»¥ `const verses = result.verses ?? [];` è®€å–ã€‚
-    - æ–·è¨€ `verses.length > 0`ï¼Œä¸” `verses[0]` åŒæ™‚åŒ…å« `"è¡Œä¸€"`ã€`"è¡ŒäºŒ"`ã€‚
-  - anchors èˆ‡ idï¼š
-    - `result.anchors` åŒ…å« `"item83"`ã€‚
-    - `body_markdown` ä¸­åŒ…å« `<a id="item83"></a>`ï¼ˆè€Œä¸æ˜¯åªæœ‰ç´”æ–‡å­—ï¼‰ã€‚
+- ´ú¸Õ­«ÂIÂ_¨¥¡G
+  - blockquote¡G
+    - `result.body_markdown` §t `"> ¦æ¤@"` »P `"> ¦æ¤G"`¡C
+  - verses ¦¬¶°¡G
+    - ¥H `const verses = result.verses ?? [];` Åª¨ú¡C
+    - Â_¨¥ `verses.length > 0`¡A¥B `verses[0]` ¦P®É¥]§t `"¦æ¤@"`¡B`"¦æ¤G"`¡C
+  - anchors »P id¡G
+    - `result.anchors` ¥]§t `"item83"`¡C
+    - `body_markdown` ¤¤¥]§t `<a id="item83"></a>`¡]¦Ó¤£¬O¥u¦³¯Â¤å¦r¡^¡C
 
 ---
 
-### 4. ä¹‹å¾Œçµ¦ ChatGPT çš„ä½¿ç”¨å»ºè­°
+### 4. ¤§«áµ¹ ChatGPT ªº¨Ï¥Î«ØÄ³
 
-æœªä¾†è‹¥æœ‰å…¶ä»–ä»»å‹™ï¼ˆä¾‹å¦‚ blossom / reply ç­‰ç‰¹æ®Šå–®å…ƒï¼‰ï¼š
+¥¼¨Ó­Y¦³¨ä¥L¥ô°È¡]¨Ò¦p blossom / reply µ¥¯S®í³æ¤¸¡^¡G
 
-1. åœ¨æœ¬æª”æ¡ˆæ–°å¢ä¸€å€‹æ–°çš„ç« ç¯€ï¼Œä¾‹å¦‚ï¼š
-   - `## 2025-12-10 ä»»å‹™ï¼šblossom å–®å…ƒç‰¹æ®Šæ¨£å¼è™•ç†`
-2. ç°¡è¦åˆ—å‡ºï¼š
-   - éœ€æ±‚æ‘˜è¦
-   - é è¨ˆä¿®æ”¹æª”æ¡ˆ
-   - å·²å®Œæˆçš„å¯¦ä½œèˆ‡æ¸¬è©¦
-3. æŠŠé€™å€‹æª”æ¡ˆï¼ˆæˆ–å…¶ä¸­ç›¸é—œç« ç¯€ï¼‰è²¼çµ¦ ChatGPT / AI åŠ©æ‰‹ï¼Œè®“å®ƒå¿«é€ŸæŒæ¡å‰æƒ…ã€‚é€™æ¨£å¯ä»¥é¿å…é‡è¤‡è§£é‡‹å°ˆæ¡ˆèƒŒæ™¯èˆ‡æ—¢æœ‰ç´„æŸã€‚
+1. ¦b¥»ÀÉ®×·s¼W¤@­Ó·sªº³¹¸`¡A¨Ò¦p¡G
+   - `## 2025-12-10 ¥ô°È¡Gblossom ³æ¤¸¯S®í¼Ë¦¡³B²z`
+2. Â²­n¦C¥X¡G
+   - »İ¨DºK­n
+   - ¹w­p­×§ïÀÉ®×
+   - ¤w§¹¦¨ªº¹ê§@»P´ú¸Õ
+3. §â³o­ÓÀÉ®×¡]©Î¨ä¤¤¬ÛÃö³¹¸`¡^¶Kµ¹ ChatGPT / AI §U¤â¡AÅı¥¦§Ö³t´x´¤«e±¡¡C³o¼Ë¥i¥HÁ×§K­«½Æ¸ÑÄÀ±M®×­I´º»P¬J¦³¬ù§ô¡C
 
 ---
 
-## 2025-12-08 ä»»å‹™ï¼šT-0001 teaching-from-legacy åˆèªæ¬„ä½æ˜ å°„
+## 2025-12-08 ¥ô°È¡GT-0001 teaching-from-legacy ÔU»yÄæ¦ì¬M®g
 
-### 1. ä»»å‹™éœ€æ±‚ç¸½çµ
+### 1. ¥ô°È»İ¨DÁ`µ²
 
-- å°æ‡‰ PROJECT_TODOï¼š
-  - `T-0001 teaching-from-legacy: å°‡ htmlToMarkdown çš„ verses æ˜ å°„åˆ° TeachingMeta åˆèªæ¬„ä½`
-- ç›®æ¨™ï¼š
-  - ä¸ä¿®æ”¹ `htmlToMarkdown` çš„è¼¸å…¥ / è¼¸å‡ºå‹åˆ¥èˆ‡ verses ç”¢ç”Ÿé‚è¼¯ã€‚
-  - åƒ…åœ¨ teaching adapter ä¸­ï¼Œæ ¹æ“š `HtmlToMarkdownResult.verses` å°‡åˆèªè³‡è¨Šå¡«å…¥ `TeachingMeta` åå¥½æ¬„ä½ã€‚
+- ¹ïÀ³ PROJECT_TODO¡G
+  - `T-0001 teaching-from-legacy: ±N htmlToMarkdown ªº verses ¬M®g¨ì TeachingMeta ÔU»yÄæ¦ì`
+- ¥Ø¼Ğ¡G
+  - ¤£­×§ï `htmlToMarkdown` ªº¿é¤J / ¿é¥X«¬§O»P verses ²£¥ÍÅŞ¿è¡C
+  - ¶È¦b teaching adapter ¤¤¡A®Ú¾Ú `HtmlToMarkdownResult.verses` ±NÔU»y¸ê°T¶ñ¤J `TeachingMeta` °¾¦nÄæ¦ì¡C
 
-### 2. ä¸»è¦å¯¦ä½œå…§å®¹
+### 2. ¥D­n¹ê§@¤º®e
 
-- æª”æ¡ˆï¼š`src/adapters/teaching-from-legacy.ts`
+- ÀÉ®×¡G`src/adapters/teaching-from-legacy.ts`
 
-  - è®€å– `const verses = mdResult.verses ?? [];`.
-  - æ–°å¢ helperï¼š`buildTeachingMetaFromVerses(verses, language)`, å›å‚³ `TeachingMeta`ï¼š
-    - ç„¡åˆèªæ™‚ï¼ˆ`verses.length === 0`ï¼‰ï¼š
+  - Åª¨ú `const verses = mdResult.verses ?? [];`.
+  - ·s¼W helper¡G`buildTeachingMetaFromVerses(verses, language)`, ¦^¶Ç `TeachingMeta`¡G
+    - µLÔU»y®É¡]`verses.length === 0`¡^¡G
       - `ct_has_dharma_verse = "no"`
       - `ct_verse_block_markdown = null`
       - `ct_verse_type = null`
       - `ct_verse_lang = null`
-    - æœ‰åˆèªæ™‚ï¼ˆ`verses.length >= 1`ï¼‰ï¼š
+    - ¦³ÔU»y®É¡]`verses.length >= 1`¡^¡G
       - `ct_has_dharma_verse = "yes"`
       - `ct_verse_block_markdown = verses.map(line => "> " + line).join("\n")`
-        - ç›®å‰ sutra é çš„ verses æœƒå°‡æ•´æ®µåˆèªå£“æˆä¸€å€‹å…ƒç´ ï¼ˆä¾‹å¦‚ `"è¡Œä¸€ è¡ŒäºŒ"`ï¼‰ï¼Œ
-          å› æ­¤å¯¦éš›è¼¸å‡ºæœƒæ˜¯å–®è¡Œ `> è¡Œä¸€ è¡ŒäºŒ`ã€‚
+        - ¥Ø«e sutra ­¶ªº verses ·|±N¾ã¬qÔU»yÀ£¦¨¤@­Ó¤¸¯À¡]¨Ò¦p `"¦æ¤@ ¦æ¤G"`¡^¡A
+          ¦]¦¹¹ê»Ú¿é¥X·|¬O³æ¦æ `> ¦æ¤@ ¦æ¤G`¡C
       - `ct_verse_type = "sutra"`
-      - `ct_verse_lang = "zh-tw"`ï¼ˆåƒ…ç•¶ `language === "zh-tw"`ï¼›å…¶ä»–èªè¨€æš«æ™‚è¨­ç‚º `null`ï¼‰ã€‚
-  - å…¶é¤˜ TeachingContent çµæ§‹ï¼ˆåœ–ç‰‡æ¬„ä½ã€post_type ç­‰ï¼‰ç¶­æŒåŸç‹€ã€‚
+      - `ct_verse_lang = "zh-tw"`¡]¶È·í `language === "zh-tw"`¡F¨ä¥L»y¨¥¼È®É³]¬° `null`¡^¡C
+  - ¨ä¾l TeachingContent µ²ºc¡]¹Ï¤ùÄæ¦ì¡Bpost_type µ¥¡^ºû«ù­ìª¬¡C
 
-- å‹åˆ¥ç´„æŸï¼š
-  - æœªä¿®æ”¹ `HtmlToMarkdownResult` ä»‹é¢ï¼ˆ`verses` ä»ç‚ºé¸å¡« `string[] | undefined`ï¼‰ã€‚
-  - æœªä¿®æ”¹ `src/types/anycontent-teaching.ts` ä¸­ `TeachingMeta` / `TeachingContent` å®šç¾©ã€‚
+- «¬§O¬ù§ô¡G
+  - ¥¼­×§ï `HtmlToMarkdownResult` ¤¶­±¡]`verses` ¤´¬°¿ï¶ñ `string[] | undefined`¡^¡C
+  - ¥¼­×§ï `src/types/anycontent-teaching.ts` ¤¤ `TeachingMeta` / `TeachingContent` ©w¸q¡C
 
-### 3. æ¸¬è©¦èª¿æ•´
+### 3. ´ú¸Õ½Õ¾ã
 
-- æª”æ¡ˆï¼š`tests/adapters/teaching-from-legacy.spec.ts`
+- ÀÉ®×¡G`tests/adapters/teaching-from-legacy.spec.ts`
 
-  - åŸæœ‰æ¸¬è©¦ï¼š
+  - ­ì¦³´ú¸Õ¡G
     - `builds a minimal TeachingContent from legacy HTML`
-      - é©—è­‰ TeachingContent çš„åŸºæœ¬æ¬„ä½èˆ‡åœ–ç‰‡æ¬„ä½ mappingã€‚
+      - ÅçÃÒ TeachingContent ªº°ò¥»Äæ¦ì»P¹Ï¤ùÄæ¦ì mapping¡C
 
-  - æ–°å¢æ¸¬è©¦ï¼š`"maps verses from htmlToMarkdown into TeachingMeta dharma verse fields"`
+  - ·s¼W´ú¸Õ¡G`"maps verses from htmlToMarkdown into TeachingMeta dharma verse fields"`
 
-    - æ¸¬è©¦è¼¸å…¥ï¼š
+    - ´ú¸Õ¿é¤J¡G
 
       ```html
       <html>
         <body>
-          <p class="word17-coffee">è¡Œä¸€<br>è¡ŒäºŒ</p>
+          <p class="word17-coffee">¦æ¤@<br>¦æ¤G</p>
         </body>
       </html>
       ```
 
-    - é æœŸè¡Œç‚ºï¼š
-      - sutra é çš„ `htmlToMarkdown` æœƒå°‡è©²æ®µåˆèªè½‰æˆï¼š
-        - `verses = ["è¡Œä¸€ è¡ŒäºŒ"]`ï¼ˆå¯¦éš›å…§å®¹ç”± HTML parser æ±ºå®šï¼Œé€™è£¡åªä¾ adapter è¦æ ¼è™•ç†ï¼‰ã€‚
-      - teaching adapter è½‰æ›å¾Œï¼š
+    - ¹w´Á¦æ¬°¡G
+      - sutra ­¶ªº `htmlToMarkdown` ·|±N¸Ó¬qÔU»yÂà¦¨¡G
+        - `verses = ["¦æ¤@ ¦æ¤G"]`¡]¹ê»Ú¤º®e¥Ñ HTML parser ¨M©w¡A³o¸Ì¥u¨Ì adapter ³W®æ³B²z¡^¡C
+      - teaching adapter Âà´««á¡G
         - `meta.ct_has_dharma_verse === "yes"`
-        - `meta.ct_verse_block_markdown === "> è¡Œä¸€ è¡ŒäºŒ"`
+        - `meta.ct_verse_block_markdown === "> ¦æ¤@ ¦æ¤G"`
         - `meta.ct_verse_type === "sutra"`
         - `meta.ct_verse_lang === "zh-tw"`
 
-### 4. æ¸¬è©¦æ–¹å¼
+### 4. ´ú¸Õ¤è¦¡
 
-- å–®æª”æ¸¬è©¦ï¼š
+- ³æÀÉ´ú¸Õ¡G
 
   ```bash
   npx vitest tests/adapters/teaching-from-legacy.spec.ts
   ```
 
-- å…¨å°ˆæ¡ˆæ¸¬è©¦ï¼š
+- ¥ş±M®×´ú¸Õ¡G
 
   ```bash
   npx vitest
   ```
 
-- é æœŸï¼šæ‰€æœ‰ Vitest æ¸¬è©¦é€šéï¼Œæœªæ”¾å¯¬å‹åˆ¥æˆ–ä¿®æ”¹æ—¢æœ‰ contract.
+- ¹w´Á¡G©Ò¦³ Vitest ´ú¸Õ³q¹L¡A¥¼©ñ¼e«¬§O©Î­×§ï¬J¦³ contract.
 
 ---
 
-## 2025-12-08 ä»»å‹™ï¼šT-0003 news-from-legacy: å»ºç«‹ NewsContent adapter éª¨æ¶ï¼ˆminimal mappingï¼‰
+## 2025-12-08 ¥ô°È¡GT-0003 news-from-legacy: «Ø¥ß NewsContent adapter °©¬[¡]minimal mapping¡^
 
-### 1. ä»»å‹™éœ€æ±‚ç¸½çµ
+### 1. ¥ô°È»İ¨DÁ`µ²
 
-- å°æ‡‰ PROJECT_TODOï¼š
-  - `T-0003 news-from-legacy: å»ºç«‹ NewsContent adapter éª¨æ¶ï¼ˆminimal mappingï¼‰`
-- ç›®æ¨™ï¼š
-  - å»ºç«‹ç¬¬ä¸€ç‰ˆ `news-from-legacy` adapterï¼Œå°‡ legacy HTML + htmlToMarkdown è¼¸å‡ºè½‰æˆæœ€åŸºæœ¬çš„ `NewsContent` çµæ§‹ï¼Œ
-    åƒ…å¯¦ä½œ minimal mappingï¼Œå…¶é¤˜é€²éšæ¬„ä½ç•™å¾…å¾ŒçºŒ T ä»»å‹™è™•ç†ã€‚
+- ¹ïÀ³ PROJECT_TODO¡G
+  - `T-0003 news-from-legacy: «Ø¥ß NewsContent adapter °©¬[¡]minimal mapping¡^`
+- ¥Ø¼Ğ¡G
+  - «Ø¥ß²Ä¤@ª© `news-from-legacy` adapter¡A±N legacy HTML + htmlToMarkdown ¿é¥XÂà¦¨³Ì°ò¥»ªº `NewsContent` µ²ºc¡A
+    ¶È¹ê§@ minimal mapping¡A¨ä¾l¶i¶¥Äæ¦ì¯d«İ«áÄò T ¥ô°È³B²z¡C
 
-### 2. ä¸»è¦å¯¦ä½œå…§å®¹
+### 2. ¥D­n¹ê§@¤º®e
 
-- æª”æ¡ˆï¼š`src/adapters/news-from-legacy.ts`
+- ÀÉ®×¡G`src/adapters/news-from-legacy.ts`
 
-  - åŒ¯å‡ºï¼š
+  - ¶×¥X¡G
     - `newsFromLegacy(doc: LegacyHtmlDocument, options: NewsFromLegacyOptions): NewsContent`
-  - `NewsFromLegacyOptions`ï¼š
-    - å»¶ä¼¸ `HtmlToMarkdownOptions`ï¼Œæ–°å¢ï¼š
+  - `NewsFromLegacyOptions`¡G
+    - ©µ¦ù `HtmlToMarkdownOptions`¡A·s¼W¡G
       - `externalId: string`
-      - `language: Language`ï¼ˆæ²¿ç”¨ AnyContent çš„ `Language` unionï¼Œç›®å‰å¯¦éš›æ¸¬è©¦ä»¥ `"zh-tw"` ç‚ºä¸»ï¼‰
+      - `language: Language`¡]ªu¥Î AnyContent ªº `Language` union¡A¥Ø«e¹ê»Ú´ú¸Õ¥H `"zh-tw"` ¬°¥D¡^
       - `fallbackTitle?: string`
-  - è½‰æ›æµç¨‹ï¼š
-    - å‘¼å« `htmlToMarkdown(doc, markdownOptions)` å–å¾— `mdResult`ã€‚
-    - `post_title`ï¼šå…ˆä»¥ `fallbackTitle ?? deriveTitleFromUrl(doc.url)` ç°¡å–®æ¨å¾—ï¼Œè©³ç´°æ¨™é¡Œè¦å‰‡ç•™å¾…å¾ŒçºŒä»»å‹™ã€‚
-    - `meta: NewsMeta`ï¼šåƒ…å»ºç«‹ skeletonï¼Œå…¨éƒ¨æ—¥æœŸ / åœ°é» / é¡åˆ¥æ¬„ä½å…ˆå¡« `null`ï¼š
+  - Âà´«¬yµ{¡G
+    - ©I¥s `htmlToMarkdown(doc, markdownOptions)` ¨ú±o `mdResult`¡C
+    - `post_title`¡G¥ı¥H `fallbackTitle ?? deriveTitleFromUrl(doc.url)` Â²³æ±À±o¡A¸Ô²Ó¼ĞÃD³W«h¯d«İ«áÄò¥ô°È¡C
+    - `meta: NewsMeta`¡G¶È«Ø¥ß skeleton¡A¥ş³¡¤é´Á / ¦aÂI / Ãş§OÄæ¦ì¥ı¶ñ `null`¡G
       - `ct_news_date: null`
       - `ct_event_date_start: null`
       - `ct_event_date_end: null`
       - `ct_event_date_raw: null`
       - `ct_event_location: null`
       - `ct_news_category: null`
-    - `NewsContent`ï¼š
-      - `external_id`ï¼šä¾†è‡ª options.externalIdã€‚
-      - `language`ï¼šä¾†è‡ª options.languageã€‚
+    - `NewsContent`¡G
+      - `external_id`¡G¨Ó¦Û options.externalId¡C
+      - `language`¡G¨Ó¦Û options.language¡C
       - `post_type: 'news'`.
       - `old_url: doc.url`.
-      - `post_title` å¦‚ä¸Šã€‚
-      - `post_excerpt: null`ï¼ˆæš«ä¸å¾ HTML æ¨å°ï¼‰ã€‚
+      - `post_title` ¦p¤W¡C
+      - `post_excerpt: null`¡]¼È¤£±q HTML ±À¾É¡^¡C
       - `body_markdown: mdResult.body_markdown`.
-      - `featured_image`ï¼šå– `mdResult.images[0]?.src ?? null`.
+      - `featured_image`¡G¨ú `mdResult.images[0]?.src ?? null`.
       - `featured_image_caption: null`.
-      - `gallery_items`ï¼šå…¶é¤˜åœ–ç‰‡æ˜ å°„ç‚º `{ url, alt, caption: null }` é™£åˆ—ã€‚
+      - `gallery_items`¡G¨ä¾l¹Ï¤ù¬M®g¬° `{ url, alt, caption: null }` °}¦C¡C
 
-- æª”æ¡ˆï¼š`tests/adapters/news-from-legacy.spec.ts`
+- ÀÉ®×¡G`tests/adapters/news-from-legacy.spec.ts`
 
-  - æ–°å¢æ¸¬è©¦ï¼š`"builds a minimal NewsContent from legacy HTML"`
-  - æ¸¬è©¦è¼¸å…¥ï¼šä¸€å€‹ç°¡å–®çš„ legacy news HTMLï¼ŒåŒ…å«ï¼š
-    - `<h1>é‡è¦å…¬å‘Š</h1>`
-    - ä¸€æ®µä¸»æ–‡ `<p>é€™æ˜¯ä¸€å‰‡æ–°èå…§å®¹ã€‚</p>`
-    - å…©å¼µåœ–ç‰‡ï¼šä¸€å¼µä¸»åœ–ã€ä¸€å¼µ gallery åœ–ã€‚
-  - æ¸¬è©¦æ–·è¨€ï¼š
+  - ·s¼W´ú¸Õ¡G`"builds a minimal NewsContent from legacy HTML"`
+  - ´ú¸Õ¿é¤J¡G¤@­ÓÂ²³æªº legacy news HTML¡A¥]§t¡G
+    - `<h1>­«­n¤½§i</h1>`
+    - ¤@¬q¥D¤å `<p>³o¬O¤@«h·s»D¤º®e¡C</p>`
+    - ¨â±i¹Ï¤ù¡G¤@±i¥D¹Ï¡B¤@±i gallery ¹Ï¡C
+  - ´ú¸ÕÂ_¨¥¡G
     - `news.post_type === 'news'`.
     - `news.language === 'zh-tw'`.
     - `news.old_url === doc.url`.
-    - `news.body_markdown` å…§å«ä¸»æ–‡æ–‡å­—ã€‚
-    - åœ–ç‰‡ï¼š
-      - `featured_image` åŒ…å«ä¸»åœ–æª”åã€‚
-      - `gallery_items.length === 1` ä¸”å”¯ä¸€å…ƒç´ çš„ `url` åŒ…å« gallery åœ–æª”åã€‚
-    - `meta` skeletonï¼š
-      - `ct_news_date` / `ct_event_date_start` / `ct_event_date_end` / `ct_event_date_raw` / `ct_event_location` / `ct_news_category` çš†ç‚º `null`.
+    - `news.body_markdown` ¤º§t¥D¤å¤å¦r¡C
+    - ¹Ï¤ù¡G
+      - `featured_image` ¥]§t¥D¹ÏÀÉ¦W¡C
+      - `gallery_items.length === 1` ¥B°ß¤@¤¸¯Àªº `url` ¥]§t gallery ¹ÏÀÉ¦W¡C
+    - `meta` skeleton¡G
+      - `ct_news_date` / `ct_event_date_start` / `ct_event_date_end` / `ct_event_date_raw` / `ct_event_location` / `ct_news_category` ¬Ò¬° `null`.
 
-### 3. æ¸¬è©¦èˆ‡å‹åˆ¥æª¢æŸ¥
+### 3. ´ú¸Õ»P«¬§OÀË¬d
 
-- å‹åˆ¥æª¢æŸ¥ï¼š
-  - æŒ‡ä»¤ï¼ˆæ²¿ç”¨ T-0002ï¼‰ï¼š
+- «¬§OÀË¬d¡G
+  - «ü¥O¡]ªu¥Î T-0002¡^¡G
     - `npx tsc --noEmit`
 
-- æ¸¬è©¦ï¼š
-  - å–®æª”ï¼š
+- ´ú¸Õ¡G
+  - ³æÀÉ¡G
 
     ```bash
     npx vitest tests/adapters/news-from-legacy.spec.ts
     ```
 
-  - å…¨å°ˆæ¡ˆï¼š
+  - ¥ş±M®×¡G
 
     ```bash
     npx vitest
     ```
 
-- å¾ŒçºŒè‹¥åœ¨ news adapter ä¸Šæ–°å¢æ—¥æœŸ / åœ°é» / é¡åˆ¥ç­‰é‚è¼¯ï¼Œå»ºè­°å†é–‹æ–°çš„ T ä»»å‹™ï¼Œè€Œä¸ç›´æ¥æ›´å‹•æœ¬å°ç¯€æè¿°.
+- «áÄò­Y¦b news adapter ¤W·s¼W¤é´Á / ¦aÂI / Ãş§Oµ¥ÅŞ¿è¡A«ØÄ³¦A¶}·sªº T ¥ô°È¡A¦Ó¤£ª½±µ§ó°Ê¥»¤p¸`´y­z.
 
 ---
 
-## 2025-12-08 ä»»å‹™ï¼šT-0004 magazine-from-legacy: å»ºç«‹ MagazineContent adapter éª¨æ¶ï¼ˆminimal mappingï¼‰
+## 2025-12-08 ¥ô°È¡GT-0004 magazine-from-legacy: «Ø¥ß MagazineContent adapter °©¬[¡]minimal mapping¡^
 
-### 1. ä»»å‹™éœ€æ±‚ç¸½çµ
+### 1. ¥ô°È»İ¨DÁ`µ²
 
-- å°æ‡‰ PROJECT_TODOï¼š
-  - `T-0004 magazine-from-legacy: å»ºç«‹ MagazineContent adapter éª¨æ¶ï¼ˆminimal mappingï¼‰`
-- ç›®æ¨™ï¼š
-  - å»ºç«‹ç¬¬ä¸€ç‰ˆ `magazine-from-legacy` adapterï¼Œå¾ legacy HTML + htmlToMarkdown è¼¸å‡ºå»ºç«‹æœ€åŸºæœ¬çš„ `MagazineContent`ï¼Œ
-    åƒ…å¯¦ä½œ minimal mappingï¼ŒæœŸæ•¸ / å€å¡Š / ä½œè€…ç­‰é€²éšæ¬„ä½ç•™çµ¦å¾ŒçºŒ T ä»»å‹™è£œå¼·ã€‚
+- ¹ïÀ³ PROJECT_TODO¡G
+  - `T-0004 magazine-from-legacy: «Ø¥ß MagazineContent adapter °©¬[¡]minimal mapping¡^`
+- ¥Ø¼Ğ¡G
+  - «Ø¥ß²Ä¤@ª© `magazine-from-legacy` adapter¡A±q legacy HTML + htmlToMarkdown ¿é¥X«Ø¥ß³Ì°ò¥»ªº `MagazineContent`¡A
+    ¶È¹ê§@ minimal mapping¡A´Á¼Æ / °Ï¶ô / §@ªÌµ¥¶i¶¥Äæ¦ì¯dµ¹«áÄò T ¥ô°È¸É±j¡C
 
-### 2. ä¸»è¦å¯¦ä½œå…§å®¹
+### 2. ¥D­n¹ê§@¤º®e
 
-- æª”æ¡ˆï¼š`src/adapters/magazine-from-legacy.ts`
+- ÀÉ®×¡G`src/adapters/magazine-from-legacy.ts`
 
-  - åŒ¯å‡ºï¼š
+  - ¶×¥X¡G
     - `magazineFromLegacy(doc: LegacyHtmlDocument, options: MagazineFromLegacyOptions): MagazineContent`
-  - `MagazineFromLegacyOptions`ï¼š
-    - å»¶ä¼¸ `HtmlToMarkdownOptions`ï¼Œæ–°å¢ï¼š
+  - `MagazineFromLegacyOptions`¡G
+    - ©µ¦ù `HtmlToMarkdownOptions`¡A·s¼W¡G
       - `externalId: string`
-      - `language: Language`ï¼ˆæ²¿ç”¨ AnyContent çš„ `Language` unionï¼Œç›®å‰å¯¦éš›æ¸¬è©¦ä»¥ `"zh-tw"` ç‚ºä¸»ï¼‰
+      - `language: Language`¡]ªu¥Î AnyContent ªº `Language` union¡A¥Ø«e¹ê»Ú´ú¸Õ¥H `"zh-tw"` ¬°¥D¡^
       - `fallbackTitle?: string`
-  - è½‰æ›æµç¨‹ï¼š
-    - å‘¼å« `htmlToMarkdown(doc, markdownOptions)` å–å¾— `mdResult`ã€‚
-    - `post_title`ï¼šå…ˆä»¥ `fallbackTitle ?? deriveTitleFromUrl(doc.url)` ç°¡å–®æ¨å¾—ã€‚
-    - `meta: MagazineMeta`ï¼šåƒ…å»ºç«‹ skeletonï¼Œissue / article ç›¸é—œæ¬„ä½å…ˆå¡« `null` / `undefined`ï¼š
-      - `ct_magazine_level: "issue"`ï¼ˆæš«å®šç•¶å‰é ä»£è¡¨æ•´æœŸé›œèªŒï¼‰ã€‚
+  - Âà´«¬yµ{¡G
+    - ©I¥s `htmlToMarkdown(doc, markdownOptions)` ¨ú±o `mdResult`¡C
+    - `post_title`¡G¥ı¥H `fallbackTitle ?? deriveTitleFromUrl(doc.url)` Â²³æ±À±o¡C
+    - `meta: MagazineMeta`¡G¶È«Ø¥ß skeleton¡Aissue / article ¬ÛÃöÄæ¦ì¥ı¶ñ `null` / `undefined`¡G
+      - `ct_magazine_level: "issue"`¡]¼È©w·í«e­¶¥Nªí¾ã´ÁÂø»x¡^¡C
       - `ct_magazine_issue_no: null`
       - `ct_magazine_year: null`
       - `ct_magazine_month: null`
@@ -648,73 +648,73 @@
       - `ct_magazine_section: null`
       - `ct_magazine_type: null`
       - `ct_author_name: null`
-    - `MagazineContent`ï¼š
-      - `external_id`ï¼šä¾†è‡ª options.externalIdã€‚
-      - `language`ï¼šä¾†è‡ª options.languageã€‚
-      - `post_type: 'magazine'`ã€‚
-      - `old_url: doc.url`ã€‚
-      - `post_title` å¦‚ä¸Šã€‚
-      - `post_excerpt: null`ï¼ˆæš«ä¸å¾ HTML æ¨å°ï¼‰ã€‚
-      - `body_markdown: mdResult.body_markdown`ã€‚
-      - `featured_image`ï¼šå– `mdResult.images[0]?.src ?? null`ã€‚
-      - `featured_image_caption: null`ã€‚
-      - `gallery_items`ï¼šå…¶é¤˜åœ–ç‰‡æ˜ å°„ç‚º `{ url, alt, caption: null }` é™£åˆ—ã€‚
+    - `MagazineContent`¡G
+      - `external_id`¡G¨Ó¦Û options.externalId¡C
+      - `language`¡G¨Ó¦Û options.language¡C
+      - `post_type: 'magazine'`¡C
+      - `old_url: doc.url`¡C
+      - `post_title` ¦p¤W¡C
+      - `post_excerpt: null`¡]¼È¤£±q HTML ±À¾É¡^¡C
+      - `body_markdown: mdResult.body_markdown`¡C
+      - `featured_image`¡G¨ú `mdResult.images[0]?.src ?? null`¡C
+      - `featured_image_caption: null`¡C
+      - `gallery_items`¡G¨ä¾l¹Ï¤ù¬M®g¬° `{ url, alt, caption: null }` °}¦C¡C
 
-- æª”æ¡ˆï¼š`tests/adapters/magazine-from-legacy.spec.ts`
+- ÀÉ®×¡G`tests/adapters/magazine-from-legacy.spec.ts`
 
-  - æ–°å¢æ¸¬è©¦ï¼š`"builds a minimal MagazineContent from legacy HTML"`
-  - æ¸¬è©¦è¼¸å…¥ï¼šä¸€å€‹ç°¡å–®çš„ legacy magazine HTMLï¼ŒåŒ…å«ï¼š
-    - `<h1>é›œèªŒç¬¬ä¸€æœŸ</h1>`
-    - ä¸€æ®µä¸»æ–‡ `<p>é€™æ˜¯é›œèªŒå…§å®¹çš„æ‘˜è¦æ®µè½ã€‚</p>`
-    - å…©å¼µåœ–ç‰‡ï¼šä¸€å¼µå°é¢ã€ä¸€å¼µå…§é åœ–ã€‚
-  - æ¸¬è©¦æ–·è¨€ï¼š
-    - `magazine.post_type === 'magazine'`ã€‚
-    - `magazine.language === 'zh-tw'`ã€‚
-    - `magazine.old_url === doc.url`ã€‚
-    - `magazine.body_markdown` å…§å«ä¸»æ–‡æ–‡å­—ã€‚
-    - åœ–ç‰‡ï¼š
-      - `featured_image` åŒ…å«å°é¢æª”åã€‚
-      - `gallery_items.length === 1` ä¸”å”¯ä¸€å…ƒç´ çš„ `url` åŒ…å«å…§é åœ–æª”åã€‚
-    - `meta` skeletonï¼š
-      - `ct_magazine_issue_no` / `ct_magazine_year` / `ct_magazine_month` / `ct_magazine_issue_label` ç‚º `null`ã€‚
-      - `ct_issue_items` ç‚º `undefined`ã€‚
-      - `ct_magazine_section` / `ct_magazine_type` / `ct_author_name` ç‚º `null`ã€‚
+  - ·s¼W´ú¸Õ¡G`"builds a minimal MagazineContent from legacy HTML"`
+  - ´ú¸Õ¿é¤J¡G¤@­ÓÂ²³æªº legacy magazine HTML¡A¥]§t¡G
+    - `<h1>Âø»x²Ä¤@´Á</h1>`
+    - ¤@¬q¥D¤å `<p>³o¬OÂø»x¤º®eªººK­n¬q¸¨¡C</p>`
+    - ¨â±i¹Ï¤ù¡G¤@±i«Ê­±¡B¤@±i¤º­¶¹Ï¡C
+  - ´ú¸ÕÂ_¨¥¡G
+    - `magazine.post_type === 'magazine'`¡C
+    - `magazine.language === 'zh-tw'`¡C
+    - `magazine.old_url === doc.url`¡C
+    - `magazine.body_markdown` ¤º§t¥D¤å¤å¦r¡C
+    - ¹Ï¤ù¡G
+      - `featured_image` ¥]§t«Ê­±ÀÉ¦W¡C
+      - `gallery_items.length === 1` ¥B°ß¤@¤¸¯Àªº `url` ¥]§t¤º­¶¹ÏÀÉ¦W¡C
+    - `meta` skeleton¡G
+      - `ct_magazine_issue_no` / `ct_magazine_year` / `ct_magazine_month` / `ct_magazine_issue_label` ¬° `null`¡C
+      - `ct_issue_items` ¬° `undefined`¡C
+      - `ct_magazine_section` / `ct_magazine_type` / `ct_author_name` ¬° `null`¡C
 
-### 3. æ¸¬è©¦èˆ‡å‹åˆ¥æª¢æŸ¥
+### 3. ´ú¸Õ»P«¬§OÀË¬d
 
-- å‹åˆ¥æª¢æŸ¥ï¼š
-  - æŒ‡ä»¤ï¼ˆæ²¿ç”¨ T-0002ï¼‰ï¼š
+- «¬§OÀË¬d¡G
+  - «ü¥O¡]ªu¥Î T-0002¡^¡G
     - `npx tsc --noEmit`
 
-- æ¸¬è©¦ï¼š
-  - å–®æª”ï¼š
+- ´ú¸Õ¡G
+  - ³æÀÉ¡G
 
     ```bash
     npx vitest tests/adapters/magazine-from-legacy.spec.ts
     ```
 
-  - å…¨å°ˆæ¡ˆï¼š
+  - ¥ş±M®×¡G
 
     ```bash
-- å¾ŒçºŒè‹¥åœ¨ magazine adapter ä¸Šæ–°å¢ issue / section / author ç­‰é‚è¼¯ï¼Œå»ºè­°å†é–‹æ–°çš„ T ä»»å‹™ï¼Œè€Œä¸ç›´æ¥æ›´å‹•æœ¬å°ç¯€æè¿°ã€‚
+- «áÄò­Y¦b magazine adapter ¤W·s¼W issue / section / author µ¥ÅŞ¿è¡A«ØÄ³¦A¶}·sªº T ¥ô°È¡A¦Ó¤£ª½±µ§ó°Ê¥»¤p¸`´y­z¡C
 
 ---
 
-## 2025-12-08 ä»»å‹™ï¼šT-0005 news-from-legacy: æ˜ å°„ NewsMeta æ—¥æœŸèˆ‡åœ°é»æ¬„ä½ï¼ˆv1ï¼‰
+## 2025-12-08 ¥ô°È¡GT-0005 news-from-legacy: ¬M®g NewsMeta ¤é´Á»P¦aÂIÄæ¦ì¡]v1¡^
 
-### 1. ä»»å‹™éœ€æ±‚ç¸½çµ
+### 1. ¥ô°È»İ¨DÁ`µ²
 
-- å°æ‡‰ PROJECT_TODOï¼š
-  - `T-0005 news-from-legacy: æ˜ å°„ NewsMeta æ—¥æœŸèˆ‡åœ°é»æ¬„ä½ï¼ˆv1ï¼‰`
-- ç›®æ¨™ï¼š
-  - åœ¨ç¾æœ‰ `news-from-legacy` éª¨æ¶ä¸Šï¼Œå¯¦ä½œç¬¬ä¸€ç‰ˆæ—¥æœŸèˆ‡åœ°é»æ¬„ä½ mappingï¼Œ
-    è®“ `NewsMeta` è‡³å°‘èƒ½å¡«å…¥ã€Œæ–°èæ—¥æœŸã€èˆ‡ã€Œæ´»å‹•æ—¥æœŸ / åœ°é»ã€ç­‰åŸºæœ¬è³‡è¨Šã€‚
+- ¹ïÀ³ PROJECT_TODO¡G
+  - `T-0005 news-from-legacy: ¬M®g NewsMeta ¤é´Á»P¦aÂIÄæ¦ì¡]v1¡^`
+- ¥Ø¼Ğ¡G
+  - ¦b²{¦³ `news-from-legacy` °©¬[¤W¡A¹ê§@²Ä¤@ª©¤é´Á»P¦aÂIÄæ¦ì mapping¡A
+    Åı `NewsMeta` ¦Ü¤Ö¯à¶ñ¤J¡u·s»D¤é´Á¡v»P¡u¬¡°Ê¤é´Á / ¦aÂI¡vµ¥°ò¥»¸ê°T¡C
 
-### 2. ä¸»è¦å¯¦ä½œå…§å®¹
+### 2. ¥D­n¹ê§@¤º®e
 
-- æª”æ¡ˆï¼š`src/adapters/news-from-legacy.ts`
+- ÀÉ®×¡G`src/adapters/news-from-legacy.ts`
 
-  - æ–°å¢ helperï¼š`parseNewsDateAndLocationFromHtml(html: string)`ï¼Œå›å‚³ï¼š
+  - ·s¼W helper¡G`parseNewsDateAndLocationFromHtml(html: string)`¡A¦^¶Ç¡G
 
     ```ts
     interface ParsedNewsDateLocation {
@@ -726,26 +726,26 @@
     }
     ```
 
-  - è§£æç­–ç•¥ï¼ˆv1ï¼‰ï¼š
-    - åƒ…é‡å°æœ€ç°¡å–®ä¸”å¸¸è¦‹çš„æ¨£æ¿ï¼š
-      - æ–‡å­—ä¸­å‡ºç¾ï¼š`æ—¥æœŸï¼šYYYY-MM-DD`ï¼ˆå¯é¸ `~` / `ï½` / `-` å†æ¥ç¬¬äºŒå€‹æ—¥æœŸï¼‰ã€‚
-      - æ–‡å­—ä¸­å‡ºç¾ï¼š`åœ°é»ï¼šXXXX`ï¼Œä»¥ `ã€‚` / `ï¼›` / `;` æˆ–å­—ä¸²çµå°¾ä½œç‚ºçµ‚æ­¢ã€‚
-    - æ­¥é©Ÿï¼š
-      1. å°‡ HTML ä¸­æ‰€æœ‰æ¨™ç±¤ç§»é™¤ï¼Œå–å¾—ç´”æ–‡å­—ï¼Œä¸¦å°‡ç©ºç™½å£“æˆå–®è¡Œå­—ä¸²ã€‚
-      2. ä½¿ç”¨æ­£å‰‡ï¼š
-         - æ—¥æœŸï¼š`/æ—¥æœŸï¼š\s*([0-9]{4}-[0-9]{1,2}-[0-9]{1,2})(?:\s*[~ï½â”€-]\s*([0-9]{4}-[0-9]{1,2}-[0-9]{1,2}))?/`
-         - åœ°é»ï¼š`/åœ°é»ï¼š\s*([^ã€‚ï¼›;]+)/`
-    - å°æ‡‰æ¬„ä½å¡«å€¼ï¼š
-      - è‹¥æœ‰æ—¥æœŸï¼š
-        - `ct_news_date = ç¬¬ä¸€å€‹æ—¥æœŸ`
-        - `ct_event_date_start = ç¬¬ä¸€å€‹æ—¥æœŸ`
-        - `ct_event_date_end = ç¬¬äºŒå€‹æ—¥æœŸ`ï¼ˆè‹¥å­˜åœ¨ï¼Œå¦å‰‡ç‚º `null`ï¼‰
-        - `ct_event_date_raw = å»æ‰ã€Œæ—¥æœŸï¼šã€å‰ç¶´å¾Œçš„åŸå§‹æ—¥æœŸå­—ä¸²`
-      - è‹¥æœ‰åœ°é»ï¼š
-        - `ct_event_location = åœ°é»å¾Œæ–¹æ–‡å­—ï¼ˆå»å°¾ç«¯æ¨™é»èˆ‡å¤šé¤˜ç©ºç™½ï¼‰`
-      - è‹¥ç„¡åŒ¹é…åˆ°ï¼Œä¿æŒ `null`ã€‚
+  - ¸ÑªRµ¦²¤¡]v1¡^¡G
+    - ¶È°w¹ï³ÌÂ²³æ¥B±`¨£ªº¼ËªO¡G
+      - ¤å¦r¤¤¥X²{¡G`¤é´Á¡GYYYY-MM-DD`¡]¥i¿ï `~` / `¡ã` / `-` ¦A±µ²Ä¤G­Ó¤é´Á¡^¡C
+      - ¤å¦r¤¤¥X²{¡G`¦aÂI¡GXXXX`¡A¥H `¡C` / `¡F` / `;` ©Î¦r¦êµ²§À§@¬°²×¤î¡C
+    - ¨BÆJ¡G
+      1. ±N HTML ¤¤©Ò¦³¼ĞÅÒ²¾°£¡A¨ú±o¯Â¤å¦r¡A¨Ã±NªÅ¥ÕÀ£¦¨³æ¦æ¦r¦ê¡C
+      2. ¨Ï¥Î¥¿«h¡G
+         - ¤é´Á¡G`/¤é´Á¡G\s*([0-9]{4}-[0-9]{1,2}-[0-9]{1,2})(?:\s*[~¡ã¢w-]\s*([0-9]{4}-[0-9]{1,2}-[0-9]{1,2}))?/`
+         - ¦aÂI¡G`/¦aÂI¡G\s*([^¡C¡F;]+)/`
+    - ¹ïÀ³Äæ¦ì¶ñ­È¡G
+      - ­Y¦³¤é´Á¡G
+        - `ct_news_date = ²Ä¤@­Ó¤é´Á`
+        - `ct_event_date_start = ²Ä¤@­Ó¤é´Á`
+        - `ct_event_date_end = ²Ä¤G­Ó¤é´Á`¡]­Y¦s¦b¡A§_«h¬° `null`¡^
+        - `ct_event_date_raw = ¥h±¼¡u¤é´Á¡G¡v«eºó«áªº­ì©l¤é´Á¦r¦ê`
+      - ­Y¦³¦aÂI¡G
+        - `ct_event_location = ¦aÂI«á¤è¤å¦r¡]¥h§Àºİ¼ĞÂI»P¦h¾lªÅ¥Õ¡^`
+      - ­YµL¤Ç°t¨ì¡A«O«ù `null`¡C
 
-  - `NewsMeta` çµ„è£èª¿æ•´ï¼š
+  - `NewsMeta` ²Õ¸Ë½Õ¾ã¡G
 
     ```ts
     const parsed = parseNewsDateAndLocationFromHtml(doc.html);
@@ -762,77 +762,77 @@
     };
     ```
 
-### 3. æ¸¬è©¦èª¿æ•´
+### 3. ´ú¸Õ½Õ¾ã
 
-- æª”æ¡ˆï¼š`tests/adapters/news-from-legacy.spec.ts`
+- ÀÉ®×¡G`tests/adapters/news-from-legacy.spec.ts`
 
-  - åŸæœ‰æ¸¬è©¦ï¼š`"builds a minimal NewsContent from legacy HTML"` ç¶­æŒï¼Œç”¨æ–¼ç¢ºèª skeleton è¡Œç‚ºä»æ­£ç¢ºã€‚
+  - ­ì¦³´ú¸Õ¡G`"builds a minimal NewsContent from legacy HTML"` ºû«ù¡A¥Î©ó½T»{ skeleton ¦æ¬°¤´¥¿½T¡C
 
-  - æ–°å¢æ¸¬è©¦ï¼š`"maps basic date and location fields into NewsMeta when present in HTML (T-0005 v1)"`
+  - ·s¼W´ú¸Õ¡G`"maps basic date and location fields into NewsMeta when present in HTML (T-0005 v1)"`
 
-    - æ¸¬è©¦è¼¸å…¥ï¼ˆä»£è¡¨æ€§ news HTMLï¼‰ï¼š
+    - ´ú¸Õ¿é¤J¡]¥Nªí©Ê news HTML¡^¡G
 
       ```html
       <html>
         <body>
           <div class="news-meta">
-            æ—¥æœŸï¼š2025-03-14 åœ°é»ï¼šå°åŒ—è¬›å ‚
+            ¤é´Á¡G2025-03-14 ¦aÂI¡G¥x¥_Á¿°ó
           </div>
-          <p>é€™æ˜¯ä¸€å‰‡å«æœ‰æ—¥æœŸèˆ‡åœ°é»è³‡è¨Šçš„æ–°èã€‚</p>
+          <p>³o¬O¤@«h§t¦³¤é´Á»P¦aÂI¸ê°Tªº·s»D¡C</p>
         </body>
       </html>
       ```
 
-    - é æœŸè¡Œç‚ºï¼š
+    - ¹w´Á¦æ¬°¡G
       - `ct_news_date === "2025-03-14"`
       - `ct_event_date_start === "2025-03-14"`
-      - `ct_event_date_end === null`ï¼ˆå› ç‚ºåªå‡ºç¾å–®ä¸€æ—¥æœŸï¼‰
+      - `ct_event_date_end === null`¡]¦]¬°¥u¥X²{³æ¤@¤é´Á¡^
       - `ct_event_date_raw === "2025-03-14"`
-      - `ct_event_location === "å°åŒ—è¬›å ‚"`
+      - `ct_event_location === "¥x¥_Á¿°ó"`
 
-### 4. æ¸¬è©¦èˆ‡å‹åˆ¥æª¢æŸ¥
+### 4. ´ú¸Õ»P«¬§OÀË¬d
 
-- å‹åˆ¥æª¢æŸ¥ï¼š
-  - å»ºè­°æŒ‡ä»¤ï¼š
+- «¬§OÀË¬d¡G
+  - «ØÄ³«ü¥O¡G
     - `npx tsc --noEmit`
 
-- æ¸¬è©¦ï¼š
-  - å–®æª”ï¼š
+- ´ú¸Õ¡G
+  - ³æÀÉ¡G
 
     ```bash
     npx vitest tests/adapters/news-from-legacy.spec.ts
     ```
 
-  - å…¨å°ˆæ¡ˆï¼š
+  - ¥ş±M®×¡G
 
     ```bash
     npx vitest
     ```
 
-- ä¹‹å¾Œè‹¥è¦æ”¯æ´æ›´è¤‡é›œçš„æ—¥æœŸç¯„åœæˆ–å¤šæ®µåœ°é»æè¿°ï¼Œå»ºè­°å†é–‹æ–° T ä»»å‹™ï¼Œä¸¦åœ¨æœ¬æª”è¨˜éŒ„æ–°çš„è§£æç­–ç•¥.
+- ¤§«á­Y­n¤ä´©§ó½ÆÂøªº¤é´Á½d³ò©Î¦h¬q¦aÂI´y­z¡A«ØÄ³¦A¶}·s T ¥ô°È¡A¨Ã¦b¥»ÀÉ°O¿ı·sªº¸ÑªRµ¦²¤.
 
 ---
 
-## 2025-12-08 ä»»å‹™ï¼šT-0006 teaching-from-legacy CLIï¼ˆHTML â†’ AnyContent ç¯„ä¾‹ï¼‰
+## 2025-12-08 ¥ô°È¡GT-0006 teaching-from-legacy CLI¡]HTML ¡÷ AnyContent ½d¨Ò¡^
 
-### 1. ä»»å‹™éœ€æ±‚ç¸½çµ
+### 1. ¥ô°È»İ¨DÁ`µ²
 
-- å°æ‡‰ PROJECT_TODOï¼ˆå£é ­æè¿°ï¼‰ï¼š
-  - `T-0006 teaching-from-legacy CLIï¼ˆHTML â†’ AnyContent ç¯„ä¾‹ï¼‰`
-- ç›®æ¨™ï¼š
-  - æä¾›ä¸€æ”¯æœ€å°å¯ç”¨çš„ teaching è½‰æ› CLIï¼Œå¾æœ¬æ©Ÿ legacy teaching HTML æª”ç”¢ç”Ÿ `TeachingContent` / `AnyContent` JSONï¼Œ
-    ä½œç‚ºæ—¥å¾Œæ‰¹æ¬¡è½‰æ›å·¥å…·èˆ‡ pipeline çš„ç¤ºç¯„ã€‚
+- ¹ïÀ³ PROJECT_TODO¡]¤fÀY´y­z¡^¡G
+  - `T-0006 teaching-from-legacy CLI¡]HTML ¡÷ AnyContent ½d¨Ò¡^`
+- ¥Ø¼Ğ¡G
+  - ´£¨Ñ¤@¤ä³Ì¤p¥i¥Îªº teaching Âà´« CLI¡A±q¥»¾÷ legacy teaching HTML ÀÉ²£¥Í `TeachingContent` / `AnyContent` JSON¡A
+    §@¬°¤é«á§å¦¸Âà´«¤u¨ã»P pipeline ªº¥Ü½d¡C
 
-### 2. ä¸»è¦å¯¦ä½œå…§å®¹
+### 2. ¥D­n¹ê§@¤º®e
 
-- æª”æ¡ˆï¼š`tools/convert/teaching-html-to-anycontent.ts`
+- ÀÉ®×¡G`tools/convert/teaching-html-to-anycontent.ts`
 
-  - åŠŸèƒ½ï¼š
-    - å¾æœ¬æ©Ÿè®€å–ä¸€å€‹ legacy teaching HTML æª”ã€‚
-    - çµ„è£ `LegacyHtmlDocument`ï¼Œå‘¼å« `teachingFromLegacy` adapterï¼ˆå…§éƒ¨æœƒå†å‘¼å« `htmlToMarkdown`ï¼‰ã€‚
-    - å°‡çµæœè¼¸å‡ºç‚º JSONï¼ˆstdout æˆ–æŒ‡å®šè¼¸å‡ºæª”ï¼‰ã€‚
+  - ¥\¯à¡G
+    - ±q¥»¾÷Åª¨ú¤@­Ó legacy teaching HTML ÀÉ¡C
+    - ²Õ¸Ë `LegacyHtmlDocument`¡A©I¥s `teachingFromLegacy` adapter¡]¤º³¡·|¦A©I¥s `htmlToMarkdown`¡^¡C
+    - ±Nµ²ªG¿é¥X¬° JSON¡]stdout ©Î«ü©w¿é¥XÀÉ¡^¡C
 
-  - CLI ä»‹é¢ï¼ˆv1ï¼‰ï¼š
+  - CLI ¤¶­±¡]v1¡^¡G
 
     ```bash
     ts-node tools/convert/teaching-html-to-anycontent.ts \
@@ -842,14 +842,14 @@
       --out data/anycontent/teaching/example-0001.json
     ```
 
-    - åƒæ•¸èªªæ˜ï¼š
-      - `--in`ï¼ˆå¿…å¡«ï¼‰ï¼šlegacy teaching HTML æª”æ¡ˆè·¯å¾‘ã€‚
-      - `--external-id`ï¼ˆé¸å¡«ï¼‰ï¼šé è¨­ç‚ºè¼¸å…¥æª”åï¼›å¯¦å‹™ä¸Šå»ºè­°ç”±å¤–å±¤ pipeline æ±ºå®šã€‚
-      - `--language`ï¼ˆé¸å¡«ï¼‰ï¼šé è¨­ `zh-tw`ï¼Œéœ€ç¬¦åˆ `Language` unionã€‚
-      - `--out`ï¼ˆé¸å¡«ï¼‰ï¼šè¼¸å‡º JSON æª”æ¡ˆè·¯å¾‘ï¼›è‹¥æœªæŒ‡å®šï¼Œå‰‡ç›´æ¥è¼¸å‡ºåˆ° stdoutã€‚
-      - `--url`ï¼ˆé¸å¡«ï¼‰ï¼šç”¨æ–¼å¡«å…¥ `LegacyHtmlDocument.url`ï¼Œè‹¥æœªçµ¦å‰‡ä½¿ç”¨ `file://<çµ•å°è·¯å¾‘>`ã€‚
+    - °Ñ¼Æ»¡©ú¡G
+      - `--in`¡]¥²¶ñ¡^¡Glegacy teaching HTML ÀÉ®×¸ô®|¡C
+      - `--external-id`¡]¿ï¶ñ¡^¡G¹w³]¬°¿é¤JÀÉ¦W¡F¹ê°È¤W«ØÄ³¥Ñ¥~¼h pipeline ¨M©w¡C
+      - `--language`¡]¿ï¶ñ¡^¡G¹w³] `zh-tw`¡A»İ²Å¦X `Language` union¡C
+      - `--out`¡]¿ï¶ñ¡^¡G¿é¥X JSON ÀÉ®×¸ô®|¡F­Y¥¼«ü©w¡A«hª½±µ¿é¥X¨ì stdout¡C
+      - `--url`¡]¿ï¶ñ¡^¡G¥Î©ó¶ñ¤J `LegacyHtmlDocument.url`¡A­Y¥¼µ¹«h¨Ï¥Î `file://<µ´¹ï¸ô®|>`¡C
 
-  - è½‰æ›æµç¨‹ï¼š
+  - Âà´«¬yµ{¡G
 
     ```ts
     const doc: LegacyHtmlDocument = {
@@ -863,61 +863,61 @@
     });
     ```
 
-    - `teachingFromLegacy` æœƒï¼š
-      - å‘¼å« `htmlToMarkdown` å–å¾— `body_markdown`ã€`images`ã€ï¼ˆå¯èƒ½çš„ï¼‰`verses`ã€‚
-      - ä¾ T-0001 çš„è¦å‰‡ï¼Œå°‡ `verses` æ˜ å°„åˆ° `TeachingMeta` åˆèªæ¬„ä½ã€‚
-      - çµ„è£ `TeachingContent` çµæ§‹ï¼ˆpost_type / images / meta ç­‰ï¼‰ã€‚
+    - `teachingFromLegacy` ·|¡G
+      - ©I¥s `htmlToMarkdown` ¨ú±o `body_markdown`¡B`images`¡B¡]¥i¯àªº¡^`verses`¡C
+      - ¨Ì T-0001 ªº³W«h¡A±N `verses` ¬M®g¨ì `TeachingMeta` ÔU»yÄæ¦ì¡C
+      - ²Õ¸Ë `TeachingContent` µ²ºc¡]post_type / images / meta µ¥¡^¡C
 
-### 3. ä½¿ç”¨èˆ‡é™åˆ¶èªªæ˜
+### 3. ¨Ï¥Î»P­­¨î»¡©ú
 
-- ç›®å‰ CLI åƒ…æ”¯æ´ã€Œå–®ä¸€æª”æ¡ˆ â†’ å–®ä¸€ JSONã€çš„ä½¿ç”¨æƒ…å¢ƒï¼Œé©åˆä½œç‚ºï¼š
-  - æ‰‹å‹•é©—è­‰ teaching adapter è¡Œç‚ºã€‚
-  - ç¤ºç¯„æœªä¾†æ‰¹æ¬¡è½‰æ›å·¥å…·ï¼ˆä¾‹å¦‚ï¼šè®€å–ä¸€æ•´å€‹ docroot è·¯å¾‘ï¼‰ã€‚
+- ¥Ø«e CLI ¶È¤ä´©¡u³æ¤@ÀÉ®× ¡÷ ³æ¤@ JSON¡vªº¨Ï¥Î±¡¹Ò¡A¾A¦X§@¬°¡G
+  - ¤â°ÊÅçÃÒ teaching adapter ¦æ¬°¡C
+  - ¥Ü½d¥¼¨Ó§å¦¸Âà´«¤u¨ã¡]¨Ò¦p¡GÅª¨ú¤@¾ã­Ó docroot ¸ô®|¡^¡C
 
-- URL æ¬„ä½ï¼š
-  - è‹¥å‘¼å«æ™‚æœªæŒ‡å®š `--url`ï¼Œå‰‡é è¨­ä½¿ç”¨ï¼š
+- URL Äæ¦ì¡G
+  - ­Y©I¥s®É¥¼«ü©w `--url`¡A«h¹w³]¨Ï¥Î¡G
 
     ```
     file:///.../absolute/path/to/legacy-teaching.html
     ```
 
-  - å¯¦éš›ä¸Šæ­£å¼ pipeline æ‡‰è©²ç”±å¤–å±¤æµç¨‹æä¾›å°æ‡‰çš„èˆŠç«™ URLï¼ˆä¾‹å¦‚ `https://www.ctworld.org/turn/xxx.htm`ï¼‰ã€‚
+  - ¹ê»Ú¤W¥¿¦¡ pipeline À³¸Ó¥Ñ¥~¼h¬yµ{´£¨Ñ¹ïÀ³ªºÂÂ¯¸ URL¡]¨Ò¦p `https://www.ctworld.org/turn/xxx.htm`¡^¡C
 
-- å¾ŒçºŒè‹¥è¦æ“´å……ï¼š
-  - å¯ä»¥æ–°å¢ï¼š
-    - `--stdout` / `--pretty` ç­‰æ——æ¨™ã€‚
-    - ä»¥ glob / ç›®éŒ„ç‚ºè¼¸å…¥ï¼Œä¸€æ¬¡è½‰å¤šå€‹æª”æ¡ˆã€‚
-  - å»ºè­°åœ¨ `PROJECT_TODO.md` æ–°å¢å°æ‡‰ T ä»»å‹™ï¼Œè€Œä¸æ˜¯ç›´æ¥åœ¨æœ¬å°ç¯€æ“´å¯«è¡Œç‚ºã€‚
+- «áÄò­Y­nÂX¥R¡G
+  - ¥i¥H·s¼W¡G
+    - `--stdout` / `--pretty` µ¥ºX¼Ğ¡C
+    - ¥H glob / ¥Ø¿ı¬°¿é¤J¡A¤@¦¸Âà¦h­ÓÀÉ®×¡C
+  - «ØÄ³¦b `PROJECT_TODO.md` ·s¼W¹ïÀ³ T ¥ô°È¡A¦Ó¤£¬Oª½±µ¦b¥»¤p¸`ÂX¼g¦æ¬°¡C
 
 
 ---
 
-## 2025-12-09 ä»»å‹™ï¼šT-0007 docs-snapshot-cliï¼šè‡ªå‹•ç”¢ç”Ÿ docs snapshot ZIP
+## 2025-12-09 ¥ô°È¡GT-0007 docs-snapshot-cli¡G¦Û°Ê²£¥Í docs snapshot ZIP
 
-### 1. ä»»å‹™éœ€æ±‚ç¸½çµ
+### 1. ¥ô°È»İ¨DÁ`µ²
 
-- å°æ‡‰ PROJECT_TODOï¼š
-  - `T-0007 docs-snapshot-cli: è‡ªå‹•ç”¢ç”Ÿ docs snapshot ZIPï¼ˆçµ¦ ChatGPT ç”¨ï¼‰`
-- ç›®æ¨™ï¼š
-  - åœ¨æœ¬æ©Ÿ repo ä¸­æä¾›ä¸€å€‹ç°¡å–® CLI / npm scriptï¼Œè®“å¯¦ä½œ Agent å¯ä»¥ç”¨å–®ä¸€æŒ‡ä»¤ç”¢ç”Ÿã€Œæœ¬æ¬¡ä»»å‹™å°ˆç”¨çš„ docs snapshot ZIPã€ã€‚
-  - ZIP åªæ‰“åŒ… `docs/*.md` èˆ‡ `docs/terminal_logs/*.txt`ï¼Œè¼¸å‡ºåˆ° `snapshots/`ï¼Œ**ä¸åŠ å…¥ git**ã€‚
-  - ä¹‹å¾Œä½ è¦çµ¦ ChatGPT çœ‹æœ€æ–°ç‹€æ…‹ï¼Œåªè¦ä¸Šå‚³å°æ‡‰çš„ snapshot ZIP å³å¯ã€‚
+- ¹ïÀ³ PROJECT_TODO¡G
+  - `T-0007 docs-snapshot-cli: ¦Û°Ê²£¥Í docs snapshot ZIP¡]µ¹ ChatGPT ¥Î¡^`
+- ¥Ø¼Ğ¡G
+  - ¦b¥»¾÷ repo ¤¤´£¨Ñ¤@­ÓÂ²³æ CLI / npm script¡AÅı¹ê§@ Agent ¥i¥H¥Î³æ¤@«ü¥O²£¥Í¡u¥»¦¸¥ô°È±M¥Îªº docs snapshot ZIP¡v¡C
+  - ZIP ¥u¥´¥] `docs/*.md` »P `docs/terminal_logs/*.txt`¡A¿é¥X¨ì `snapshots/`¡A**¤£¥[¤J git**¡C
+  - ¤§«á§A­nµ¹ ChatGPT ¬İ³Ì·sª¬ºA¡A¥u­n¤W¶Ç¹ïÀ³ªº snapshot ZIP §Y¥i¡C
 
-### 2. ä¸»è¦å¯¦ä½œèˆ‡ä¿®æ”¹æª”æ¡ˆ
+### 2. ¥D­n¹ê§@»P­×§ïÀÉ®×
 
 - `tools/docs-snapshot/make-docs-snapshot.ts`
-  - æ–°å¢ docs snapshot CLIï¼š
-    - é è¨­è¼¸å‡ºç›®éŒ„ï¼š`snapshots/`
-    - æª”åæ ¼å¼ï¼š`ctworld-docs-T-xxxx-YYYY-MM-DD-vN.zip`
-    - å¿…å¡«åƒæ•¸ï¼š
-      - `--task T-xxxx`ï¼šå°æ‡‰æœ¬æ¬¡ä»»å‹™ç·¨è™Ÿï¼ˆæœƒå¯«é€²æª”åï¼‰ã€‚
-    - æ‰“åŒ…å…§å®¹ï¼š
-      - æ‰€æœ‰ `docs/*.md`
-      - æ‰€æœ‰ `docs/terminal_logs/*.txt`
-    - ä¸æœƒåŒ…å« `node_modules`ã€`dist` ç­‰å¤§å‹ç›®éŒ„ã€‚
+  - ·s¼W docs snapshot CLI¡G
+    - ¹w³]¿é¥X¥Ø¿ı¡G`snapshots/`
+    - ÀÉ¦W®æ¦¡¡G`ctworld-docs-T-xxxx-YYYY-MM-DD-vN.zip`
+    - ¥²¶ñ°Ñ¼Æ¡G
+      - `--task T-xxxx`¡G¹ïÀ³¥»¦¸¥ô°È½s¸¹¡]·|¼g¶iÀÉ¦W¡^¡C
+    - ¥´¥]¤º®e¡G
+      - ©Ò¦³ `docs/*.md`
+      - ©Ò¦³ `docs/terminal_logs/*.txt`
+    - ¤£·|¥]§t `node_modules`¡B`dist` µ¥¤j«¬¥Ø¿ı¡C
 
 - `package.json`
-  - æ–°å¢ npm scriptï¼š
+  - ·s¼W npm script¡G
 
     ```jsonc
     "scripts": {
@@ -927,63 +927,63 @@
     ```
 
 - `docs/PROJECT_TODO.md`
-  - å°‡ T-0007 ç‹€æ…‹æ”¹ç‚ºã€Œâœ… å·²å®Œæˆã€ä¸¦è£œä¸Šå¯¦éš› CLI è¡Œç‚ºèˆ‡é©—æ”¶æ–¹å¼èªªæ˜ã€‚
+  - ±N T-0007 ª¬ºA§ï¬°¡u? ¤w§¹¦¨¡v¨Ã¸É¤W¹ê»Ú CLI ¦æ¬°»PÅç¦¬¤è¦¡»¡©ú¡C
 
 - `docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt`
-  - è¨˜éŒ„ç¬¬ä¸€æ¬¡æˆåŠŸåŸ·è¡Œ `npm run snapshot:docs -- --task T-0007` çš„çµ‚ç«¯è¼¸å‡ºã€‚
-- é©—æ”¶ï¼šå·²æ–¼ 2025-12-10 è·‘ `npm run snapshot:docs -- --task T-0007`ï¼Œç”¢ç”Ÿ zip ä¸¦ç¢ºèªå…§å®¹ã€‚
+  - °O¿ı²Ä¤@¦¸¦¨¥\°õ¦æ `npm run snapshot:docs -- --task T-0007` ªº²×ºİ¿é¥X¡C
+- Åç¦¬¡G¤w©ó 2025-12-10 ¶] `npm run snapshot:docs -- --task T-0007`¡A²£¥Í zip ¨Ã½T»{¤º®e¡C
 
-### 3. ä½¿ç”¨æ–¹å¼å‚™å¿˜
+### 3. ¨Ï¥Î¤è¦¡³Æ§Ñ
 
-- å¯¦ä½œ Agent åœ¨æ¯å€‹ T ä»»å‹™æ”¶å°¾æ™‚ï¼Œå¦‚æœéœ€è¦çµ¦ ChatGPT çœ‹æœ€æ–° docsï¼š
-  1. å…ˆä¾ç…§ä»»å‹™éœ€æ±‚æ›´æ–° `docs/*.md` èˆ‡ `docs/terminal_logs/*.txt`ã€‚
-  2. åœ¨å°ˆæ¡ˆæ ¹ç›®éŒ„åŸ·è¡Œï¼š
+- ¹ê§@ Agent ¦b¨C­Ó T ¥ô°È¦¬§À®É¡A¦pªG»İ­nµ¹ ChatGPT ¬İ³Ì·s docs¡G
+  1. ¥ı¨Ì·Ó¥ô°È»İ¨D§ó·s `docs/*.md` »P `docs/terminal_logs/*.txt`¡C
+  2. ¦b±M®×®Ú¥Ø¿ı°õ¦æ¡G
 
      ```bash
      npm run snapshot:docs -- --task T-xxxx
      ```
 
-  3. æª¢æŸ¥ `snapshots/` ä¸‹å¤šäº†ä¸€å€‹é¡ä¼¼ï¼š
+  3. ÀË¬d `snapshots/` ¤U¦h¤F¤@­ÓÃş¦ü¡G
 
      ```text
      snapshots/ctworld-docs-T-0007-2025-12-09-v1.zip
      ```
 
-  4. **ä¸è¦æŠŠ snapshots/ åŠ å…¥ git**ï¼Œåªåœ¨æœ¬æ©Ÿä¿ç•™ï¼Œç”¨ä¾†ä¸Šå‚³çµ¦ ChatGPTã€‚
+  4. **¤£­n§â snapshots/ ¥[¤J git**¡A¥u¦b¥»¾÷«O¯d¡A¥Î¨Ó¤W¶Çµ¹ ChatGPT¡C
 
-- ä¹‹å¾Œä½ é–‹æ–°å°è©±æ™‚ï¼Œåªè¦ï¼š
-  - ä¸Šå‚³æœ€æ–°çš„ docs snapshot ZIPã€‚
-  - é™„ä¸Šä¸€æ®µ `[Agent å›å ±æ‘˜è¦]`ï¼ˆå« T ä»»å‹™ç·¨è™Ÿã€è®Šæ›´æª”æ¡ˆåˆ—è¡¨ã€ä¸»è¦æ¸¬è©¦çµæœèˆ‡ snapshot æª”åï¼‰ï¼Œ
-  - å°±èƒ½è®“æ–°çš„ ChatGPT å°è©±ç›´æ¥æ¥ä¸Šé€™ä¸€è¼ªå®Œæˆçš„å·¥ä½œã€‚
+- ¤§«á§A¶}·s¹ï¸Ü®É¡A¥u­n¡G
+  - ¤W¶Ç³Ì·sªº docs snapshot ZIP¡C
+  - ªş¤W¤@¬q `[Agent ¦^³øºK­n]`¡]§t T ¥ô°È½s¸¹¡BÅÜ§óÀÉ®×¦Cªí¡B¥D­n´ú¸Õµ²ªG»P snapshot ÀÉ¦W¡^¡A
+  - ´N¯àÅı·sªº ChatGPT ¹ï¸Üª½±µ±µ¤W³o¤@½ü§¹¦¨ªº¤u§@¡C
 
 ---
 
-## 2025-12-09 ä»»å‹™ï¼šT-0007 docs-snapshot-cliï¼šè‡ªå‹•ç”¢ç”Ÿ docs snapshot ZIP
+## 2025-12-09 ¥ô°È¡GT-0007 docs-snapshot-cli¡G¦Û°Ê²£¥Í docs snapshot ZIP
 
-### 1. ä»»å‹™éœ€æ±‚ç¸½çµ
+### 1. ¥ô°È»İ¨DÁ`µ²
 
-- å°æ‡‰ PROJECT_TODOï¼š
-  - `T-0007 docs-snapshot-cli: è‡ªå‹•ç”¢ç”Ÿ docs snapshot ZIPï¼ˆçµ¦ ChatGPT ç”¨ï¼‰`
-- ç›®æ¨™ï¼š
-  - åœ¨æœ¬æ©Ÿ repo ä¸­æä¾›ä¸€å€‹ç°¡å–® CLI / npm scriptï¼Œè®“å¯¦ä½œ Agent å¯ä»¥ç”¨å–®ä¸€æŒ‡ä»¤ç”¢ç”Ÿã€Œæœ¬æ¬¡ä»»å‹™å°ˆç”¨çš„ docs snapshot ZIPã€ã€‚
-  - ZIP åªæ‰“åŒ… `docs/*.md` èˆ‡ `docs/terminal_logs/*.txt`ï¼Œè¼¸å‡ºåˆ° `snapshots/`ï¼Œ**ä¸åŠ å…¥ git**ã€‚
-  - ä¹‹å¾Œè¦çµ¦ ChatGPT çœ‹æœ€æ–°ç‹€æ…‹ï¼Œåªè¦ä¸Šå‚³å°æ‡‰çš„ snapshot ZIP å³å¯ã€‚
+- ¹ïÀ³ PROJECT_TODO¡G
+  - `T-0007 docs-snapshot-cli: ¦Û°Ê²£¥Í docs snapshot ZIP¡]µ¹ ChatGPT ¥Î¡^`
+- ¥Ø¼Ğ¡G
+  - ¦b¥»¾÷ repo ¤¤´£¨Ñ¤@­ÓÂ²³æ CLI / npm script¡AÅı¹ê§@ Agent ¥i¥H¥Î³æ¤@«ü¥O²£¥Í¡u¥»¦¸¥ô°È±M¥Îªº docs snapshot ZIP¡v¡C
+  - ZIP ¥u¥´¥] `docs/*.md` »P `docs/terminal_logs/*.txt`¡A¿é¥X¨ì `snapshots/`¡A**¤£¥[¤J git**¡C
+  - ¤§«á­nµ¹ ChatGPT ¬İ³Ì·sª¬ºA¡A¥u­n¤W¶Ç¹ïÀ³ªº snapshot ZIP §Y¥i¡C
 
-### 2. ä¸»è¦å¯¦ä½œèˆ‡ä¿®æ”¹æª”æ¡ˆ
+### 2. ¥D­n¹ê§@»P­×§ïÀÉ®×
 
 - `tools/docs-snapshot/make-docs-snapshot.ts`
-  - æ–°å¢ docs snapshot CLIï¼š
-    - é è¨­è¼¸å‡ºç›®éŒ„ï¼š`snapshots/`
-    - æª”åæ ¼å¼ï¼š`ctworld-docs-T-xxxx-YYYY-MM-DD-vN.zip`
-    - å¿…å¡«åƒæ•¸ï¼š
-      - `--task T-xxxx`ï¼šå°æ‡‰æœ¬æ¬¡ä»»å‹™ç·¨è™Ÿï¼ˆæœƒå¯«é€²æª”åï¼‰ã€‚
-    - æ‰“åŒ…å…§å®¹ï¼š
-      - æ‰€æœ‰ `docs/*.md`
-      - æ‰€æœ‰ `docs/terminal_logs/*.txt`
-    - ä¸æœƒåŒ…å« `node_modules`ã€`dist` ç­‰å¤§å‹ç›®éŒ„ã€‚
+  - ·s¼W docs snapshot CLI¡G
+    - ¹w³]¿é¥X¥Ø¿ı¡G`snapshots/`
+    - ÀÉ¦W®æ¦¡¡G`ctworld-docs-T-xxxx-YYYY-MM-DD-vN.zip`
+    - ¥²¶ñ°Ñ¼Æ¡G
+      - `--task T-xxxx`¡G¹ïÀ³¥»¦¸¥ô°È½s¸¹¡]·|¼g¶iÀÉ¦W¡^¡C
+    - ¥´¥]¤º®e¡G
+      - ©Ò¦³ `docs/*.md`
+      - ©Ò¦³ `docs/terminal_logs/*.txt`
+    - ¤£·|¥]§t `node_modules`¡B`dist` µ¥¤j«¬¥Ø¿ı¡C
 
 - `package.json`
-  - æ–°å¢ npm scriptï¼š
+  - ·s¼W npm script¡G
 
     ```jsonc
     "scripts": {
@@ -993,34 +993,34 @@
     ```
 
 - `docs/PROJECT_TODO.md`
-  - å°‡ T-0007 ç‹€æ…‹æ”¹ç‚ºã€Œâœ… å·²å®Œæˆã€ï¼Œä¸¦è£œä¸Šå¯¦éš› CLI è¡Œç‚ºèˆ‡é©—æ”¶æ–¹å¼èªªæ˜ã€‚
+  - ±N T-0007 ª¬ºA§ï¬°¡u? ¤w§¹¦¨¡v¡A¨Ã¸É¤W¹ê»Ú CLI ¦æ¬°»PÅç¦¬¤è¦¡»¡©ú¡C
 
 - `docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt`
-  - è¨˜éŒ„ç¬¬ä¸€æ¬¡æˆåŠŸåŸ·è¡Œ `npm run snapshot:docs -- --task T-0007` çš„çµ‚ç«¯è¼¸å‡ºã€‚
+  - °O¿ı²Ä¤@¦¸¦¨¥\°õ¦æ `npm run snapshot:docs -- --task T-0007` ªº²×ºİ¿é¥X¡C
 
-### 3. ä½¿ç”¨æ–¹å¼å‚™å¿˜
+### 3. ¨Ï¥Î¤è¦¡³Æ§Ñ
 
-- å¯¦ä½œ Agent åœ¨æ¯å€‹ T ä»»å‹™æ”¶å°¾æ™‚ï¼Œå¦‚æœéœ€è¦çµ¦ ChatGPT çœ‹æœ€æ–° docsï¼Œå¯ä»¥ï¼š
+- ¹ê§@ Agent ¦b¨C­Ó T ¥ô°È¦¬§À®É¡A¦pªG»İ­nµ¹ ChatGPT ¬İ³Ì·s docs¡A¥i¥H¡G
 
-  1. å…ˆä¾ç…§ä»»å‹™éœ€æ±‚æ›´æ–° `docs/*.md` èˆ‡ `docs/terminal_logs/*.txt`ã€‚
-  2. åœ¨å°ˆæ¡ˆæ ¹ç›®éŒ„åŸ·è¡Œï¼š
+  1. ¥ı¨Ì·Ó¥ô°È»İ¨D§ó·s `docs/*.md` »P `docs/terminal_logs/*.txt`¡C
+  2. ¦b±M®×®Ú¥Ø¿ı°õ¦æ¡G
 
      ```bash
      npm run snapshot:docs -- --task T-xxxx
      ```
 
-  3. æª¢æŸ¥ `snapshots/` ä¸‹å¤šäº†ä¸€å€‹é¡ä¼¼ï¼š
+  3. ÀË¬d `snapshots/` ¤U¦h¤F¤@­ÓÃş¦ü¡G
 
      ```text
      snapshots/ctworld-docs-T-0007-2025-12-09-v1.zip
      ```
 
-  4. **ä¸è¦æŠŠ snapshots/ åŠ å…¥ git**ï¼Œåªåœ¨æœ¬æ©Ÿä¿ç•™ï¼Œç”¨ä¾†ä¸Šå‚³çµ¦ ChatGPTã€‚
+  4. **¤£­n§â snapshots/ ¥[¤J git**¡A¥u¦b¥»¾÷«O¯d¡A¥Î¨Ó¤W¶Çµ¹ ChatGPT¡C
 
-- ä¹‹å¾Œä½ é–‹æ–°å°è©±æ™‚ï¼Œåªè¦ï¼š
+- ¤§«á§A¶}·s¹ï¸Ü®É¡A¥u­n¡G
 
-  - ä¸Šå‚³æœ€æ–°çš„ docs snapshot ZIPã€‚
-  - é™„ä¸Šä¸€æ®µ `[Agent å›å ±æ‘˜è¦]`ï¼ˆå« T ä»»å‹™ç·¨è™Ÿã€è®Šæ›´æª”æ¡ˆåˆ—è¡¨ã€ä¸»è¦æ¸¬è©¦çµæœèˆ‡ snapshot æª”åï¼‰ï¼Œ
+  - ¤W¶Ç³Ì·sªº docs snapshot ZIP¡C
+  - ªş¤W¤@¬q `[Agent ¦^³øºK­n]`¡]§t T ¥ô°È½s¸¹¡BÅÜ§óÀÉ®×¦Cªí¡B¥D­n´ú¸Õµ²ªG»P snapshot ÀÉ¦W¡^¡A
 
-å°±èƒ½è®“æ–°çš„ ChatGPT å°è©±ç›´æ¥æ¥ä¸Šé€™ä¸€è¼ªå®Œæˆçš„å·¥ä½œã€‚
+´N¯àÅı·sªº ChatGPT ¹ï¸Üª½±µ±µ¤W³o¤@½ü§¹¦¨ªº¤u§@¡C
 
