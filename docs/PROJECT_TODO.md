@@ -708,3 +708,16 @@
   - [x] `docs/CONTENT_SCHEMA_V1.md` 建立，含共用欄位、各 post_type 欄位、繁簡轉換注意事項、後續擴充提醒。
   - [x] `docs/CONTENT_SCHEMA.md` 標註 V1 草稿位置。
   - [x] notes 記錄本次草稿與 RAW 連結。
+### T-0032 refine-anycontent-v1-schema-details：補齊 AnyContent V1 schema 欄位說明
+
+> 狀態：✅ 已完成（補齊 teaching/news/magazine 欄位與繁簡轉換描述，2025-12-12）
+
+- 目標：
+  - 依現有 TypeScript 與 sample JSON，補齊 V1 schema 草稿的欄位細節。
+  - 清楚標示各 post_type 專用欄位，以及 zh-TW / zh-CN 轉換範圍。
+  - 為後續 schema 調整提供基準，若要破壞性變更需另開任務。
+
+- 驗收：
+  - [x] `docs/CONTENT_SCHEMA_V1.md` 已補上教學/新聞/雜誌欄位細節與繁簡轉換注意事項。
+  - [x] `docs/CONTENT_SCHEMA.md` 保留舊版說明並提示 V1 草稿位置。
+  - [x] notes 記錄本次草稿更新與 RAW 連結。

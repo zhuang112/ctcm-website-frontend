@@ -1300,3 +1300,24 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-12 任務：T-0032 refine-anycontent-v1-schema-details
+
+- 目的：在 V1 草稿上補齊 teaching/news/magazine 欄位與 zh-TW/zh-CN 轉換描述，讓現有 JSON 更易對照與維護。
+- 內容：
+  - `docs/CONTENT_SCHEMA_V1.md`：補充共用欄位（external_id、gallery_items 等）與各 post_type 專用欄位細節，列出繁簡轉換/不轉換欄位，增列後續可能擴充。
+  - `docs/CONTENT_SCHEMA.md`：頂端註記 V1 草稿位置，避免混淆。
+- 測試：純 docs 更新，未執行。
+
+變更檔案（含 RAW 連結）：
+
+- docs/CONTENT_SCHEMA_V1.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+
+- docs/CONTENT_SCHEMA.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA.md
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
