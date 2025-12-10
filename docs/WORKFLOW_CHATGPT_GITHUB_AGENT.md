@@ -1,8 +1,9 @@
-# 中台世界專案協作工作流程（User / ChatGPT / 實作 Agent）
+﻿# 中台世界專案協作工作流程（User / ChatGPT / 實作 Agent）
 
-> 檔名：`docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`  
+> 檔名：`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
 > 版本：2025-12-10（由 ChatGPT 更新）
-> 目標：讓你只需要做關鍵決策與簡單 copy / paste，技術細節與執行由 ChatGPT + Windsurf 自動接力完成。
+> 目標：讓你只需要做關鍵決策與簡單 copy / paste，技術細節與執行由 ChatGPT + 實作 Agent（目前主要是 Codex）自動接力完成。
+> 本檔案原為舊版 workflow（Windsurf 版），已在 T-0010 任務中改名為 WORKFLOW_CHATGPT_GITHUB_AGENT.md。
 
 ---
 
@@ -124,7 +125,7 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
    - GitHub repo 名稱（例如：`zhuang112/ctcm-website-frontend`）。
    - 最新的 docs snapshot ZIP（或要求 ChatGPT 直接閱讀 GitHub 上的 docs）。
 2. ChatGPT 先閱讀：
-   - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
+   - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`
    - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`
    - `docs/PROJECT_STATUS.md`
    - `docs/PROJECT_TODO.md`
@@ -151,7 +152,7 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
 1. 先閱讀：
    - docs/PROJECT_TODO.md（T-0003 小節）
    - docs/CONTENT_SCHEMA.md（NewsContent 相關欄位）
-   - docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md（特別是 4.y 小節）
+   - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md（特別是 4.y 小節）
 
 2. 允許修改或新增的檔案：
    - src/adapters/news-from-legacy.ts
@@ -489,7 +490,7 @@ npm run snapshot:docs -- --task T-xxxx
 - docs/HTML_TO_MARKDOWN_RULES_V4.md
 - docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md
-- docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
 
 目前最新任務小節是：
 - docs/Windsurf_ChatGPT_NOTES.md 裡的「YYYY-MM-DD 任務：...」（以及之後的任務，如果有）。
@@ -573,3 +574,5 @@ ChatGPT 以 ZIP 內的內容為準，不會再看舊 ZIP。
 - 對話視窗保持「輕量：決策＋指令＋回報」。  
 - 詳細規格與操作歷史集中在 Git repo 的 `docs/*.md`。  
 - 無論是你、ChatGPT、Windsurf 或 Codex，要接續工作時都能快速銜接。
+
+

@@ -1,8 +1,20 @@
-﻿# Windsurf × ChatGPT 協作筆記
+﻿# ChatGPT × 實作 Agent 協作筆記
 
 > 本檔案給「未來接手的 ChatGPT / AI 助手」閱讀，說明目前專案狀態與已完成的修改。
 >
+> 目前主要實作 Agent：Codex（在本機 repo 直接修改程式與 docs）。本檔名暫為 `Windsurf_ChatGPT_NOTES.md`，未來若調整命名可在對應 T 任務中更新本說明。
+>
 > 維護方式建議：每一個明確的開發任務（feature / bugfix）新增一個小節，簡要說明需求與已改動檔案。
+
+---
+
+## 2025-12-10 默契 / 操作習慣
+
+- snapshot CLI：`npm run snapshot:docs -- --task T-0007`，只打包本機 `docs/*.md`、`docs/terminal_logs/*.txt` 到 `snapshots/`，不進 git；最新驗收已於 2025-12-10 完成。
+- 實作 Agent 角色：目前實作由 Codex 執行（取代原本固定稱呼 Windsurf）；使用者只需在 ChatGPT 與實作 Agent 間傳遞指令與回報。
+- 編碼：docs 檔案維持 UTF-8（含 BOM 可接受），若再遇亂碼優先用 UTF-8 讀寫。
+- 簡化 TODO 記錄：任務條目以「狀態、目標、驗收」為主，避免過長的實作範圍描述；狀態欄位含日期與誰驗證。
+- 若開新對話，先看 `docs/PROJECT_TODO.md` 與本檔，快速對齊任務狀態與約定。
 
 ---
 
@@ -690,6 +702,7 @@
 
 - `docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt`
   - 記錄第一次成功執行 `npm run snapshot:docs -- --task T-0007` 的終端輸出。
+- 驗收：已於 2025-12-10 跑 `npm run snapshot:docs -- --task T-0007`，產生 zip 並確認內容。
 
 ### 3. 使用方式備忘
 
@@ -781,4 +794,3 @@
   - 附上一段 `[Agent 回報摘要]`（含 T 任務編號、變更檔案列表、主要測試結果與 snapshot 檔名），
 
 就能讓新的 ChatGPT 對話直接接上這一輪完成的工作。
-

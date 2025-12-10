@@ -1,195 +1,129 @@
-# COMPLETE_PROJECT_WORKFLOW（舊站 HTML → AnyContent JSON → zh-cn → WordPress）
-
-> 本檔案描述「整體 pipeline」，細部規則拆到其他 docs。  
-> 實作時請搭配：
-> - `docs/CONTENT_SCHEMA.md`
+﻿# COMPLETE_PROJECT_WORKFLOW嚗?蝡?HTML ??AnyContent JSON ??zh-cn ??WordPress嚗?
+> ?祆?獢?餈啜擃?pipeline??蝝圈閬???嗡? docs?? 
+> 撖虫????剝?嚗?> - `docs/CONTENT_SCHEMA.md`
 > - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
 > - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
-> - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
+> - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`
 
 ---
 
-## 1. 階段總覽
+## 1. ?挾蝮質汗
 
-1. 爬蟲與檔案盤點  
-2. HTML 抓取與清洗  
-3. HTML → Markdown（通則 + 各單元專用規則）  
-4. Markdown + metadata → AnyContent JSON  
-5. zh-tw → zh-cn pipeline  
-6. 匯入 WordPress（含 Polylang & redirect）  
-7. 匯入後驗證與人工調整  
+1. ?祈??獢暺? 
+2. HTML ????瘣? 
+3. HTML ??Markdown嚗? + ????刻???  
+4. Markdown + metadata ??AnyContent JSON  
+5. zh-tw ??zh-cn pipeline  
+6. ?臬 WordPress嚗 Polylang & redirect嚗? 
+7. ?臬敺?霅?鈭箏極隤踵  
 
 ---
 
-## 2. 爬蟲與檔案盤點
+## 2. ?祈??獢暺?
+**?格?嚗?*  
+蝣箏???蝡??芯?????踹??镼踵?????啣?擗??暹???
+**撌亙?撓?綽?**
 
-**目標：**  
-確定「舊站有哪些頁面」，避免有東西沒抓到或抓到多餘垃圾檔。
-
-**工具與輸出：**
-
-- 工具：
-  - `tools/crawl/crawl-ctworld.ts`
+- 撌亙嚗?  - `tools/crawl/crawl-ctworld.ts`
   - `tools/crawl/filesystem-inventory.ts`
   - `tools/crawl/diff-crawl-vs-files.ts`
-- NPM scripts（已在 `package.json` 中定義）：
-  - `npm run crawl:ctworld`
+- NPM scripts嚗歇??`package.json` 銝剖?蝢抬?嚗?  - `npm run crawl:ctworld`
   - `npm run inventory:fs`
   - `npm run diff:crawl-vs-fs`
-- 主要輸出：
-  - `data/crawl/crawled-urls.{json,csv}`
+- 銝餉?頛詨嚗?  - `data/crawl/crawled-urls.{json,csv}`
   - `data/crawl/all-files.{json,csv}`
   - `data/crawl/{missing-from-crawl,extra-from-crawl}.csv`
 
-> 詳細參考：未來可補充 `docs/crawl-and-inventory.md`。
-
+> 閰喟敦???芯??航???`docs/crawl-and-inventory.md`??
 ---
 
-## 3. HTML 抓取與清洗
+## 3. HTML ????瘣?
+**?格?嚗?*  
+撠?銝??legacy URL??敺?HTML嚗蒂??撠?瘣??嫣噶敺?閫????
+**頛詨嚗?*
 
-**目標：**  
-對「每一個 legacy URL」取得 HTML，並做最小清洗，方便後續解析。
+- 敺?crawl + inventory ?游?敺? URL ?”嚗歇?銝?閬?憭?嚗??桐葉??蝑???
+**??嚗?*
 
-**輸入：**
-
-- 從 crawl + inventory 整合後的 URL 列表（已排除不需要的外站，如普中國小等）。
-
-**處理：**
-
-- 用 Node `fetch` 抓取 HTML。
-- 清除明顯不需要的元素（`<script>` / `<style>` / 一些全站 header/footer…）。
-- 保存為 `LegacyHtmlDocument` 結構：
-  - `url: string`
+- ??Node `fetch` ?? HTML??- 皜?＊銝?閬???嚗<script>` / `<style>` / 銝鈭蝡?header/footer?佗???- 靽???`LegacyHtmlDocument` 蝯?嚗?  - `url: string`
   - `html: string`
-  - 之後可擴充例如 `fetched_at`, `http_status` 等。
+  - 銋??舀??憒?`fetched_at`, `http_status` 蝑?
+**頛詨嚗?*
 
-**輸出：**
-
-- 建議使用 JSONL 或多個 JSON 檔，供之後 pipeline 使用：
-  - 例如：`data/html-dump/legacy-html.jsonl`（每行一個 `LegacyHtmlDocument`）。
-
+- 撱箄降雿輻 JSONL ????JSON 瑼?靘?敺?pipeline 雿輻嚗?  - 靘?嚗data/html-dump/legacy-html.jsonl`嚗?銵???`LegacyHtmlDocument`嚗?
 ---
 
-## 4. HTML → Markdown（`htmlToMarkdown`）
-
-**目標：**  
-把每篇 HTML 的「主內容」轉成 Markdown，並收集圖片、anchors、偈語等結構資訊。
-
-**實作位置：**
+## 4. HTML ??Markdown嚗htmlToMarkdown`嚗?
+**?格?嚗?*  
+??蝭?HTML ?蜓?批捆????Markdown嚗蒂?園????nchors??隤?蝯?鞈???
+**撖虫?雿蔭嚗?*
 
 - `src/html/html-to-markdown.ts`
-- 規格：`docs/HTML_TO_MARKDOWN_RULES_V4.md`
+- 閬嚗docs/HTML_TO_MARKDOWN_RULES_V4.md`
 
-**輸入：**
+**頛詨嚗?*
 
-- `LegacyHtmlDocument`（至少包含 `url` 與 `html`）。
+- `LegacyHtmlDocument`嚗撠???`url` ??`html`嚗?
+**頛詨嚗?*
 
-**輸出：**
+- `HtmlToMarkdownResult`嚗?閬?嚗?  - `body_markdown: string`
+  - `images: HtmlImageInfo[]`嚗??Ｗ?箇??????src / alt嚗?  - `anchors: string[]`嚗? `item83`嚗?  - `verses: string[]`嚗?隤?蝬?畾菔????嚗?
+**瘜冽?嚗?*
 
-- `HtmlToMarkdownResult`（摘要）：
-  - `body_markdown: string`
-  - `images: HtmlImageInfo[]`（頁面內出現的圖片，含 src / alt）
-  - `anchors: string[]`（如 `item83`）
-  - `verses: string[]`（偈語／經文段落的純文字）
-
-**注意：**
-
-- 此階段**不決定**：
-  - featured image 是哪一張
-  - caption 要寫什麼
-  - 偈語要不要存到 `meta`
-- 這些決策留給「各 post_type adapter」。
-
+- 甇日?畾?*銝捱摰?*嚗?  - featured image ?臬銝撘?  - caption 閬神隞暻?  - ??閬?閬???`meta`
+- ??瘙箇??策?? post_type adapter??
 ---
 
-## 5. Markdown + metadata → AnyContent JSON
+## 5. Markdown + metadata ??AnyContent JSON
 
-**目標：**  
-每篇 HTML 轉成「結構化 JSON」，按照 post_type（teaching / news / magazine / …）填入對應欄位。
+**?格?嚗?*  
+瘥? HTML 頧???瑽? JSON??? post_type嚗eaching / news / magazine / ?佗?憛怠撠?甈???
+**撖虫?雿蔭嚗?蝥?葉嚗?**
 
-**實作位置（持續擴充中）：**
+- ?嚗?  - `src/types/anycontent-teaching.ts`嚗歇摰?嚗?  - ?芯?嚗src/types/anycontent-news.ts`, `src/types/anycontent-magazine.ts`, ??- adapter嚗?  - `src/adapters/teaching-from-legacy.ts`嚗歇摰? v1嚗?  - ?芯?嚗src/adapters/news-from-legacy.ts`, `src/adapters/magazine-from-legacy.ts`, ??
+**頛詨嚗?*
 
-- 型別：
-  - `src/types/anycontent-teaching.ts`（已完成）
-  - 未來：`src/types/anycontent-news.ts`, `src/types/anycontent-magazine.ts`, …
-- adapter：
-  - `src/adapters/teaching-from-legacy.ts`（已完成 v1）
-  - 未來：`src/adapters/news-from-legacy.ts`, `src/adapters/magazine-from-legacy.ts`, …
-
-**輸入：**
-
-- `LegacyHtmlDocument`（含 URL + HTML）
-- `HtmlToMarkdownResult`（由 `htmlToMarkdown` 轉出）
-- 外層給的：
-  - `externalId: string`
+- `LegacyHtmlDocument`嚗 URL + HTML嚗?- `HtmlToMarkdownResult`嚗 `htmlToMarkdown` 頧嚗?- 憭惜蝯衣?嚗?  - `externalId: string`
   - `language: "zh-tw" | "zh-cn" | "en" | "ja"`
 
-**輸出：**
+**頛詨嚗?*
 
-- 各 post_type 的 `*Content`（例如 `TeachingContent`），結構對齊 `docs/CONTENT_SCHEMA.md`。
-
+- ??post_type ??`*Content`嚗?憒?`TeachingContent`嚗?蝯?撠? `docs/CONTENT_SCHEMA.md`??
 ---
 
-## 6. zh-tw → zh-cn pipeline
+## 6. zh-tw ??zh-cn pipeline
 
-**目標：**  
-在不重抓 `-gb` HTML 的前提下，為每篇內容產生對應的 `zh-cn` 版本，並保留舊簡體網址（`-gb`）供 redirect 使用。
-
-**規格來源：**
+**?格?嚗?*  
+?其??? `-gb` HTML ????嚗瘥??批捆?Ｙ?撠???`zh-cn` ?嚗蒂靽??陛擃雯?嚗-gb`嚗? redirect 雿輻??
+**閬靘?嚗?*
 
 - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
 
-**高層流程：**
+**擃惜瘚?嚗?*
 
-1. 建立 `baseUrl ↔ gbUrl` 對應（從 sitemap / 既有 URL 分析）。
-2. 只從 `baseUrl`（繁中）抓 HTML → 產生 zh-tw AnyContent JSON。
-3. 使用 OpenCC（或等效工具）遍歷 zh-tw JSON，產生 zh-cn JSON：
-   - 規定哪些欄位要轉、哪些不能動（URL, ID, enum…）。
-4. 匯入 WordPress 時：
-   - 第一輪匯入 zh-tw。
-   - 第二輪匯入 zh-cn，並透過 external_id / group key 建立 Polylang 對應。
-   - 將 `old_url` / `-gb` URL 存進 meta，供 redirect 使用。
-
+1. 撱箇? `baseUrl ??gbUrl` 撠?嚗? sitemap / ?Ｘ? URL ??嚗?2. ?芸? `baseUrl`嚗?銝哨???HTML ???Ｙ? zh-tw AnyContent JSON??3. 雿輻 OpenCC嚗?蝑?撌亙嚗?甇?zh-tw JSON嚗??zh-cn JSON嚗?   - 閬??芯?甈?閬??鈭??賢?嚗RL, ID, enum?佗???4. ?臬 WordPress ??
+   - 蝚砌?頛芸??zh-tw??   - 蝚砌?頛芸??zh-cn嚗蒂?? external_id / group key 撱箇? Polylang 撠???   - 撠?`old_url` / `-gb` URL 摮?meta嚗? redirect 雿輻??
 ---
 
-## 7. 匯入 WordPress ＋ Polylang ＋ redirect
+## 7. ?臬 WordPress 嚗?Polylang 嚗?redirect
 
-**目標：**  
-把 AnyContent JSON（zh-tw + zh-cn）安全匯入 Headless WordPress，並建立多語＆舊網址 redirect。
+**?格?嚗?*  
+??AnyContent JSON嚗h-tw + zh-cn嚗??典??Headless WordPress嚗蒂撱箇?憭?嚗?蝬脣? redirect??
+**??閮剛?嚗?*
 
-**預計設計：**
-
-- WordPress 端實作：
-  - WP-CLI 指令或 plugin：
-    - 讀 JSON 檔（從某個目錄或 API）。
-    - 依 post_type 建立／更新文章。
-    - 設定：
-      - `language`（Polylang）
-      - `ct_external_id`（meta）
-      - 各 `ct_*` meta 欄位（speaker, location, event_date…）
-    - 寫入舊網址：
-      - `_ct_old_url`（原繁中 URL）
-      - `_ct_old_url_gb`（原 `-gb` URL，如果有）
-- Redirect：
-  - 可使用現有 redirect 外掛，或自寫一個簡單 routing：
-    - 遇到舊 URL：查 meta → 301 到新站對應路徑。
-
+- WordPress 蝡臬祕雿?
+  - WP-CLI ?誘??plugin嚗?    - 霈 JSON 瑼?敺???? API嚗?    - 靘?post_type 撱箇?嚗?唳?蝡?    - 閮剖?嚗?      - `language`嚗olylang嚗?      - `ct_external_id`嚗eta嚗?      - ??`ct_*` meta 甈?嚗peaker, location, event_date?佗?
+    - 撖怠?雯?嚗?      - `_ct_old_url`嚗?蝜葉 URL嚗?      - `_ct_old_url_gb`嚗? `-gb` URL嚗???嚗?- Redirect嚗?  - ?臭蝙?函??redirect 憭?嚗??芸神銝?陛??routing嚗?    - ???URL嚗 meta ??301 ?唳蝡??楝敺?
 ---
 
-## 8. 匯入後驗證與人工調整
+## 8. ?臬敺?霅?鈭箏極隤踵
 
-**目標：**  
-確保「沒有漏資料、沒有錯頁」，並提供一點人工微調空間。
+**?格?嚗?*  
+蝣箔?????鞈??????銝行?靘?暺犖撌亙凝隤輻征??
+**憭扯雿?嚗?*
 
-**大致作法：**
-
-1. 對照：
-   - `data/crawl/crawled-urls.csv`
-   - 匯入成功的 WordPress post 列表
-   - 看是否有 URL 還沒對應到任何文章。
-2. Spot check：
-   - 隨機挑幾頁 sutra / blossom / news，確認：
-     - Markdown 排版是否符合預期。
-     - 圖片有無遺漏或錯誤。
-3. 若有特殊單元需要客製 layout（例如月刊左側目錄＋右側文章）：
-   - 由前端 React 根據 `post_type` + `meta` 渲染，不需要再改 pipeline。
+1. 撠嚗?   - `data/crawl/crawled-urls.csv`
+   - ?臬????WordPress post ?”
+   - ??行? URL ??撠??唬遙雿?蝡?2. Spot check嚗?   - ?冽??嗾??sutra / blossom / news嚗Ⅱ隤?
+     - Markdown ???臬蝚血?????     - ????箸??隤扎?3. ?交??寞??桀??閬恥鋆?layout嚗?憒??椰?渡???喳??嚗?
+   - ?勗?蝡?React ?寞? `post_type` + `meta` 皜脫?嚗??閬???pipeline??

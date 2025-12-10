@@ -1,163 +1,80 @@
-# AI 協作摘要（角色、契約、修改範圍）
+﻿# AI ????嚗??脯?蝝耨?寧???
 
-> 根據：
-> - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md`
+> ?寞?嚗?> - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`
 > - `docs/COMPLETE_PROJECT_WORKFLOW.md`
 > - `docs/CONVENTIONS.md`
 > - `docs/CODING_GUIDELINES.md`
 >
-> 整理出「AI 在本專案中的角色與責任」、「不可隨便改動的契約」、「實作任務時允許修改的範圍」。
-
+> ?渡??箝I ?冽撠?銝剔?閫?痊隞颯??舫靘踵??憟??祕雿遙???迂靽格????
 ---
 
-## 1. AI（ChatGPT / Windsurf / Cursor）在專案中的角色與責任
-
-### 1.1 ChatGPT（這個對話）— 架構師＋規格機
-
-- **主要責任**
-  - 設計內容模型與 JSON schema：`AnyContent`、各 `*Meta` / `*Content` 型別。
-  - 撰寫與維護規格文件：
+## 1. AI嚗hatGPT / Windsurf / Cursor嚗撠?銝剔?閫?痊隞?
+### 1.1 ChatGPT嚗?閰梧????嗆?撣恬?閬璈?
+- **銝餉?鞎砌遙**
+  - 閮剛??批捆璅∪???JSON schema嚗AnyContent`?? `*Meta` / `*Content` ???  - ?啣神?雁霅瑁??潭?隞塚?
     - `docs/CONTENT_SCHEMA.md`
     - `docs/COMPLETE_PROJECT_WORKFLOW.md`
     - `docs/HTML_TO_MARKDOWN_RULES_*.md`
     - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
-    - `docs/WORKFLOW_CHATGPT_GITHUB_WINDSURF.md` 等。
-  - 產生骨架程式碼（含 `// TODO`）與函式簽名：
-    - 例如 `tools/convert/*.ts`、`tools/crawl/*.ts`、未來的 `html-to-anycontent-*.ts` 等。
-  - 在你提供 diff 或檔案內容時，做 **code review**：
-    - 檢查是否符合 schema / docs
-    - 檢查實作是否適合長期維護
+    - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 蝑?  - ?Ｙ?撉冽蝔?蝣潘???`// TODO`嚗??賢?蝪賢?嚗?    - 靘? `tools/convert/*.ts`?tools/crawl/*.ts`?靘? `html-to-anycontent-*.ts` 蝑?  - ?其??? diff ??獢摰寞?嚗? **code review**嚗?    - 瑼Ｘ?臬蝚血? schema / docs
+    - 瑼Ｘ撖虫??臬?拙??瑟?蝬剛風
 
-- **不該做的事**
-  - 不在完全沒有規格的情況下「亂寫成品」。
-  - 不繞過 `docs/*.md` 直接更改 schema 或 type 定義。
-  - 不隨意重構 public API 或大改檔案結構，除非你先決策並更新文件。
-
-### 1.2 Windsurf / Cursor — 實作工程師
-
-- 依照 `docs/*.md` ＋骨架程式碼＋ TODO 清單，補完實作細節。
-- 修正 TypeScript / Node.js /（未來）WordPress plugin 的具體錯誤。
-- 讓測試程式（若已存在）全部通過。
-- **需要遵守**：
-  - 不修改 TypeScript interface / JSON schema 欄位名稱與型別。
-  - 不任意變更檔案架構或改名核心函式。
-
-### 1.3 你 — 協調者 / 決策者
-
-- 決定需求與優先順序（例如：先做 crawl、還是先做 teaching 轉換）。
-- 把 ChatGPT 產生的 docs / 骨架程式碼放進 repo。
-- 用固定模板把任務交給 Windsurf（限定可修改範圍）。
-- 在關鍵階段把程式碼 / diff 貼回 ChatGPT，請求 code review。
-
+- **銝府??鈭?*
+  - 銝摰瘝?閬??瘜???撖急???  - 銝???`docs/*.md` ?湔?湔 schema ??type 摰儔??  - 銝??瑽?public API ?之?寞?獢?瑽??日?雿?瘙箇?銝行?唳?隞嗚?
+### 1.2 Windsurf / Cursor ??撖虫?撌亦?撣?
+- 靘 `docs/*.md` 嚗爸?嗥?撘Ⅳ嚗?TODO 皜嚗?摰祕雿敦蝭??- 靽格迤 TypeScript / Node.js /嚗靘?WordPress plugin ?擃隤扎?- 霈葫閰衣?撘??亙歇摮嚗?券???- **?閬摰?*嚗?  - 銝耨??TypeScript interface / JSON schema 甈??迂???乓?  - 銝遙???湔?獢瑽??孵??詨??賢???
+### 1.3 雿????矽??/ 瘙箇???
+- 瘙箏??瘙??芸???嚗?憒??? crawl???臬???teaching 頧?嚗?- ??ChatGPT ?Ｙ???docs / 撉冽蝔?蝣潭??repo??- ?典摰芋?踵?隞餃?鈭斤策 Windsurf嚗?摰靽格蝭?嚗?- ?券??菟?畾菜?蝔?蝣?/ diff 鞎澆? ChatGPT嚗?瘙?code review??
 ---
 
-## 2. 「不能隨便改動的契約」檔案與型別
+## 2. ???賡靘踵??憟???獢??
 
-### 2.1 Schema / 型別層（最關鍵的 contract）
-
+### 2.1 Schema / ?撅歹?????contract嚗?
 - **`docs/CONTENT_SCHEMA.md`**
-  - 定義 `Language`、`PostType`、`AnyContentBase`、各 `*Meta` / `*Content` interface。
-  - 例如：
-    - `Language = 'zh-tw' | 'zh-cn' | 'en' | 'ja'`
+  - 摰儔 `Language`?PostType`?AnyContentBase`?? `*Meta` / `*Content` interface??  - 靘?嚗?    - `Language = 'zh-tw' | 'zh-cn' | 'en' | 'ja'`
     - `featured_image` / `featured_image_caption` / `gallery_items[]`
-    - `external_id`, `old_url`, `post_title`, `body_markdown` 等。
-
-- **`src/types/*.ts`、`tools/types/*.ts`**
-  - 映射 `CONTENT_SCHEMA` 的實際 TypeScript 定義。
-  - 視為「內容 schema 的合約」。
-
-- **規則（AI / IDE 不得做的事）**
-  - 不改 interface / type 名稱：例如 `AnyContent`, `TeachingMeta`, `MagazineContent`。
-  - 不改欄位名稱：例如 `external_id`, `language`, `post_type`, `body_markdown`。
-  - 不改關鍵欄位型別：例如 `language` union、`featured_image?: string | null`。
-  - 若要調整 schema：
-    1. 由 ChatGPT 先更新 `docs/CONTENT_SCHEMA.md`。
-    2. 再調整對應 `src/types/*.ts` / `tools/types/*.ts`。
-    3. 最後才更新實作程式與測試。
-
-### 2.2 行為層規則（HTML→Markdown、繁→簡）
-
+    - `external_id`, `old_url`, `post_title`, `body_markdown` 蝑?
+- **`src/types/*.ts`?tools/types/*.ts`**
+  - ?? `CONTENT_SCHEMA` ?祕??TypeScript 摰儔??  - 閬?摰?schema ??蝝?
+- **閬?嚗I / IDE 銝???鈭?**
+  - 銝 interface / type ?迂嚗?憒?`AnyContent`, `TeachingMeta`, `MagazineContent`??  - 銝甈??迂嚗?憒?`external_id`, `language`, `post_type`, `body_markdown`??  - 銝?甈??嚗?憒?`language` union?featured_image?: string | null`??  - ?亥?隤踵 schema嚗?    1. ??ChatGPT ???`docs/CONTENT_SCHEMA.md`??    2. ?矽?游???`src/types/*.ts` / `tools/types/*.ts`??    3. ?敺??湔撖虫?蝔??葫閰艾?
+### 2.2 銵撅方???HTML?arkdown???陛嚗?
 - **`docs/HTML_TO_MARKDOWN_RULES_*.md`**
-  - 規定：
-    - Caption 只存在 JSON；不寫進 `body_markdown`。
-    - 圖片欄位必須用 `featured_image` / `featured_image_caption` / `gallery_items[]`。
-    - 偈語、索引頁等特殊區塊的處理方式。
-  - AI / IDE 實作時不得：
-    - 在 `body_markdown` 插入圖片圖說。
-    - 自行新增 `body_html` 等未定義欄位當作捷徑。
-    - 改變圖片欄位的結構設計。
-
+  - 閬?嚗?    - Caption ?芸???JSON嚗?撖恍?`body_markdown`??    - ??甈?敹???`featured_image` / `featured_image_caption` / `gallery_items[]`??    - ???揣撘?蝑畾?憛????孵???  - AI / IDE 撖虫???敺?
+    - ??`body_markdown` ????牧??    - ?芾??啣? `body_html` 蝑摰儔甈??嗡??瑕???    - ?寡???甈???瑽身閮?
 - **`docs/ZH_TW_TO_ZH_CN_PIPELINE.md`**
-  - 哪些欄位需要繁→簡，哪些絕對不能動（ID、URL、enum、數字）。
-
+  - ?芯?甈??閬??陛嚗鈭?撠??賢?嚗D?RL?num?摮???
 - **`docs/COMPLETE_PROJECT_WORKFLOW.md`**
-  - 整體 pipeline：crawl → HTML→AnyContent(JSON) → 繁簡 → WordPress 匯入 → React 前端。
-  - 各階段邊界、責任分工（例如：fallback 主圖不在 HTML→JSON 階段處理）。
-
-### 2.3 Public API（函式與檔案邊界）
-
-- 已經定義好的對外匯出介面視為 contract：
-  - 如 `htmlToAnyContentTeaching(html: string, url: string): TeachingContent`。
-  - `crawl-ctworld.ts` 的 CLI 參數與主流程。
-- AI / IDE 在實作任務時不應：
-  - 改變函式名稱或參數列表。
-  - 任意更動檔案對外的 export 結構。
-
+  - ?湧? pipeline嚗rawl ??HTML?nyContent(JSON) ??蝜陛 ??WordPress ?臬 ??React ?垢??  - ??畾菟??痊隞餃?撌伐?靘?嚗allback 銝餃?銝 HTML?SON ?挾??嚗?
+### 2.3 Public API嚗撘?瑼???嚗?
+- 撌脩?摰儔憟賜?撠??臬隞閬 contract嚗?  - 憒?`htmlToAnyContentTeaching(html: string, url: string): TeachingContent`??  - `crawl-ctworld.ts` ??CLI ??蜓瘚???- AI / IDE ?典祕雿遙??銝?嚗?  - ?寡??賢??迂???詨?銵具?  - 隞餅??游?瑼?撠???export 蝯???
 ---
 
-## 3. 實作任務時應修改哪些區塊？應避免哪些重構？
+## 3. 撖虫?隞餃???靽格?芯??憛???鈭?瑽?
 
-### 3.1 可以安全修改的範圍
-
-- **標註 `// TODO` 的區塊**
-  - 例如：
-    - `tools/convert/html-to-anycontent-teaching.ts` 中未實作的函式體。
-    - `tools/crawl/*.ts` 內明確標出待完成的邏輯。
-  - Windsurf / Cursor 應主要在這些區塊填入實作。
-
-- **同一檔案內的小型輔助函式**
-  - 為了完成 TODO，可以在同一檔案內新增小 helper：
-    - 例如 `extractMainContentRoot(dom)`、`normalizeLegacyUrl(url)` 等。
-  - 但不可：
-    - 拆檔案成多個 module，改整體架構。
-    - 改變既有 public export 的介面。
-
-- **與任務直接相關的實作細節**
-  - HTML→Markdown 的標題、段落、列表、圖片解析實作。
-  - crawl / filesystem inventory / diff 的業務邏輯。
-  - 繁→簡 pipeline 中欄位遍歷與轉換邏輯。
-
-### 3.2 應避免或需極度小心的變更
-
-- **避免修改 schema／型別檔**
-  - 不直接改 `src/types/*.ts`、`tools/types/*.ts`，除非：
-    - 先在 `docs/CONTENT_SCHEMA.md` 調整，
-    - 再由 ChatGPT 幫忙更新 types 與實作。
-
-- **避免隨意更動 public API / 檔案結構**
-  - 不將既有函式改名或改參數型別。
-  - 不重命名檔案、搬動目錄、或拆分/合併已約定好的模組（例如 `classify-url.ts`、`extract-main-content.ts`）。
-
-- **避免為了一個任務就重構整個檔案**
-  - 任務只要求「補完 TODO」時：
-    - 不大規模改寫毫無關聯的程式碼。
-    - 不跨檔案引入新的相依關係或大改呼叫方式。
-
-- **避免違反 HTML / Markdown / JSON 的核心規則**
-  - 不把圖片 caption 寫進 `body_markdown`。
-  - 不增加與 docs 不符的新欄位（例如 `body_html`、`images_raw`）。
-  - 不更改 `featured_image` + `gallery_items[]` 的結構與用途。
-
-- **避免為了測試過關偷偷改 schema**
-  - 若有測試（未來的 `tests/*.spec.ts` 等）：
-    - 完成標準是「在 **既有 schema 與 docs 不變** 的前提下，讓測試通過」。
-    - 若認為測試與文件衝突，應更新 docs 或討論後再動 schema，而不是私下改 type 或欄位。
-
+### 3.1 ?臭誑摰靽格????
+- **璅酉 `// TODO` ??憛?*
+  - 靘?嚗?    - `tools/convert/html-to-anycontent-teaching.ts` 銝剜撖虫??撘???    - `tools/crawl/*.ts` ?扳?蝣箸??箏?摰???頛胯?  - Windsurf / Cursor ?蜓閬???憛‵?亙祕雿?
+- **??瑼??抒?撠?頛?賢?**
+  - ?箔?摰? TODO嚗隞亙??瑼??扳憓? helper嚗?    - 靘? `extractMainContentRoot(dom)`?normalizeLegacyUrl(url)` 蝑?  - 雿??荔?
+    - ??獢?憭?module嚗?湧??嗆???    - ?寡??Ｘ? public export ???Ｕ?
+- **?遙??亦??撖虫?蝝啁?**
+  - HTML?arkdown ??憿挾?賬?銵具??圾?祕雿?  - crawl / filesystem inventory / diff ?平??頛胯?  - 蝜?蝪?pipeline 銝剜?雿?甇瑁?頧??摩??
+### 3.2 ????璆萄漲撠?????
+- **?踹?靽格 schema嚗??交?**
+  - 銝?交 `src/types/*.ts`?tools/types/*.ts`嚗??
+    - ? `docs/CONTENT_SCHEMA.md` 隤踵嚗?    - ? ChatGPT 撟怠??湔 types ?祕雿?
+- **?踹??冽??游? public API / 瑼?蝯?**
+  - 銝??Ｘ??賢??孵??????  - 銝??賢?瑼???????/?蔥撌脩?摰末?芋蝯?靘? `classify-url.ts`?extract-main-content.ts`嚗?
+- **?踹??箔?銝?遙?停???游?獢?*
+  - 隞餃??芾?瘙?摰?TODO??嚗?    - 銝之閬芋?孵神瘥怎???撘Ⅳ??    - 銝楊瑼?撘?啁??訾????之?孵?急撘?
+- **?踹??? HTML / Markdown / JSON ?敹???*
+  - 銝??? caption 撖恍?`body_markdown`??  - 銝??? docs 銝泵?甈?嚗?憒?`body_html`?images_raw`嚗?  - 銝??`featured_image` + `gallery_items[]` ??瑽??券?
+- **?踹??箔?皜祈岫???瑕??schema**
+  - ?交?皜祈岫嚗靘? `tests/*.spec.ts` 蝑?嚗?    - 摰?璅??胯 **?Ｘ? schema ??docs 銝?** ????嚗?皜祈岫????    - ?亥??箸葫閰西??辣銵?嚗??湔 docs ??隢??? schema嚗??舐?銝 type ??雿?
 ---
 
-## 4. 一句話總結
+## 4. 銝?亥店蝮賜?
 
-- **ChatGPT**：負責「規格 + 骨架 + code review」，是 schema / 流程的設計者。
-- **`docs/CONTENT_SCHEMA.md` + `src/types/*.ts` 等**：是這個專案的「憲法」與合約，不可隨意改動。
-- **每次實作任務**：應只在明確標註的 TODO 與本任務相關的小範圍內修改程式，
-  避免隨意重構或變更 contract，以保持長期可維護性與多方協作的一致性。
+- **ChatGPT**嚗?鞎研???+ 撉冽 + code review????schema / 瘚??身閮?- **`docs/CONTENT_SCHEMA.md` + `src/types/*.ts` 蝑?*嚗??獢??瘜???嚗??舫???- **瘥活撖虫?隞餃?**嚗??芸?Ⅱ璅酉??TODO ?隞餃??賊???蝭??找耨?寧?撘?
+  ?踹??冽???????contract嚗誑靽??瑟??舐雁霅瑟扯?憭?????湔扼?
