@@ -44,6 +44,17 @@
 - 重點：定義 `raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/` 為 RAW base，說明 ChatGPT 讀取方式與失敗時回報原則。
 - 測試：僅文檔更新，無額外測試。
 - commit: ccfcbad
+
+## 2025-12-12 任務：T-0011 fix-corrupted-docs（其他亂碼 docs 重寫）
+
+- 更新檔案（整檔覆蓋，UTF-8 正常可讀）：
+  - `docs/AI_COLLAB_SUMMARY.md`：協作模式總結（角色、流程、真相來源）。
+  - `docs/COMPLETE_PROJECT_WORKFLOW.md`：精簡版完整流程與現況。
+  - `docs/PENDING_DECISIONS.md`：未決策清單（pipeline、WP 匯入、前端架構等）。
+  - `docs/SESSION_CHECKLIST.md`：乾淨工作小抄。
+  - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`：角色與邊界重寫。
+- 測試：僅文檔更新，無額外測試。
+- commit: (pending push)
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1

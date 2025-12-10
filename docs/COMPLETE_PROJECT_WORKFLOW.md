@@ -1,129 +1,60 @@
-﻿# COMPLETE_PROJECT_WORKFLOW嚗?蝡?HTML ??AnyContent JSON ??zh-cn ??WordPress嚗?
-> ?祆?獢?餈啜擃?pipeline??蝝圈閬???嗡? docs?? 
-> 撖虫????剝?嚗?> - `docs/CONTENT_SCHEMA.md`
-> - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
-> - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
-> - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`
+# COMPLETE_PROJECT_WORKFLOW
+
+> 版本：2025-12-12（精簡版）  
+> 目標：ctworld.org → Headless WordPress + React（長期可能採 Next.js），以 AnyContent schema 為核心。
 
 ---
 
-## 1. ?挾蝮質汗
+## 1. 目前進度概覽（2025-12-10 基準）
 
-1. ?祈??獢暺? 
-2. HTML ????瘣? 
-3. HTML ??Markdown嚗? + ????刻???  
-4. Markdown + metadata ??AnyContent JSON  
-5. zh-tw ??zh-cn pipeline  
-6. ?臬 WordPress嚗 Polylang & redirect嚗? 
-7. ?臬敺?霅?鈭箏極隤踵  
+- ✅ 爬蟲 + filesystem inventory：`tools/crawl/*` 已跑出 `data/crawl/*.json/.csv` 差異報表。
+- ✅ HTML → Markdown（含 sutra 規則）：`src/html/html-to-markdown.ts` + 測試。
+- ✅ AnyContent schema + adapters：teaching / news / magazine 皆有 V1；teaching/news 有測試、magazine minimal V1。
+- ✅ docs snapshot CLI（T-0007）：`npm run snapshot:docs -- --task ...` 可產 ZIP（不進 git）。
+- ⬜ zh-TW → zh-CN pipeline：僅有規格，未實作。
+- ⬜ legacy data root 導入（T-0006）：待完整舊站備份（blocked）。
+- ⬜ WordPress importer / React 前端：尚未開始。
 
 ---
 
-## 2. ?祈??獢暺?
-**?格?嚗?*  
-蝣箏???蝡??芯?????踹??镼踵?????啣?擗??暹???
-**撌亙?撓?綽?**
+## 2. 專案目標與範圍
 
-- 撌亙嚗?  - `tools/crawl/crawl-ctworld.ts`
-  - `tools/crawl/filesystem-inventory.ts`
-  - `tools/crawl/diff-crawl-vs-files.ts`
-- NPM scripts嚗歇??`package.json` 銝剖?蝢抬?嚗?  - `npm run crawl:ctworld`
-  - `npm run inventory:fs`
-  - `npm run diff:crawl-vs-fs`
-- 銝餉?頛詨嚗?  - `data/crawl/crawled-urls.{json,csv}`
-  - `data/crawl/all-files.{json,csv}`
-  - `data/crawl/{missing-from-crawl,extra-from-crawl}.csv`
+- 使用 AnyContent schema 管理 ctworld.org 內容，導向 Headless WordPress，前端以 React/Next.js 呈現。
+- 維持內容雙語（繁/簡），保留舊站 URL 映射與 SEO 資訊。
+- 以 docs + T 任務驅動開發，GitHub main 為單一真相。
 
-> 閰喟敦???芯??航???`docs/crawl-and-inventory.md`??
 ---
 
-## 3. HTML ????瘣?
-**?格?嚗?*  
-撠?銝??legacy URL??敺?HTML嚗蒂??撠?瘣??嫣噶敺?閫????
-**頛詨嚗?*
+## 3. 已完成的大步驟
 
-- 敺?crawl + inventory ?游?敺? URL ?”嚗歇?銝?閬?憭?嚗??桐葉??蝑???
-**??嚗?*
+- 爬蟲與檔案盤點：抓取舊站 URL，盤點 docroot，產出缺漏/多餘清單。
+- HTML → Markdown：通用轉換流程 + sutra 專用規則（偈語、anchors）；測試涵蓋。
+- AnyContent schema + adapters：teaching/news/magazine 型別與 adapter V1；news 已有日期/地點 mapping；teaching 有偈語 mapping；magazine minimal。
+- docs snapshot CLI：可隨時打包 docs 與 terminal logs，供 ChatGPT/Agent 檢視。
 
-- ??Node `fetch` ?? HTML??- 皜?＊銝?閬???嚗<script>` / `<style>` / 銝鈭蝡?header/footer?佗???- 靽???`LegacyHtmlDocument` 蝯?嚗?  - `url: string`
-  - `html: string`
-  - 銋??舀??憒?`fetched_at`, `http_status` 蝑?
-**頛詨嚗?*
-
-- 撱箄降雿輻 JSONL ????JSON 瑼?靘?敺?pipeline 雿輻嚗?  - 靘?嚗data/html-dump/legacy-html.jsonl`嚗?銵???`LegacyHtmlDocument`嚗?
 ---
 
-## 4. HTML ??Markdown嚗htmlToMarkdown`嚗?
-**?格?嚗?*  
-??蝭?HTML ?蜓?批捆????Markdown嚗蒂?園????nchors??隤?蝯?鞈???
-**撖虫?雿蔭嚗?*
+## 4. 未完成的大步驟
 
-- `src/html/html-to-markdown.ts`
-- 閬嚗docs/HTML_TO_MARKDOWN_RULES_V4.md`
+- zh-TW → zh-CN pipeline：按 `docs/ZH_TW_TO_ZH_CN_PIPELINE.md` 實作 CLI + 測試。
+- legacy data root：取得完整舊站備份後設定 `CTWORLD_LEGACY_ROOT`，再開 T 任務盤點與導入。
+- WordPress importer / React 前端：設計 importer（ACF/custom post type/Polylang），前端路由與 SEO 策略尚未啟動。
 
-**頛詨嚗?*
-
-- `LegacyHtmlDocument`嚗撠???`url` ??`html`嚗?
-**頛詨嚗?*
-
-- `HtmlToMarkdownResult`嚗?閬?嚗?  - `body_markdown: string`
-  - `images: HtmlImageInfo[]`嚗??Ｗ?箇??????src / alt嚗?  - `anchors: string[]`嚗? `item83`嚗?  - `verses: string[]`嚗?隤?蝬?畾菔????嚗?
-**瘜冽?嚗?*
-
-- 甇日?畾?*銝捱摰?*嚗?  - featured image ?臬銝撘?  - caption 閬神隞暻?  - ??閬?閬???`meta`
-- ??瘙箇??策?? post_type adapter??
 ---
 
-## 5. Markdown + metadata ??AnyContent JSON
+## 5. 一個標準 T 任務的流程
 
-**?格?嚗?*  
-瘥? HTML 頧???瑽? JSON??? post_type嚗eaching / news / magazine / ?佗?憛怠撠?甈???
-**撖虫?雿蔭嚗?蝥?葉嚗?**
+1) 發想 / 登記：在 `PROJECT_TODO.md` 補齊背景、目標、檔案範圍、驗收方式。  
+2) 寫 spec：ChatGPT 完善條目，給 Codex 短指令。  
+3) 實作：Codex 依 spec 改檔、跑必要測試。  
+4) 驗收：依條目檢查（測試結果 / 產出檔 / 手動檢查）。  
+5) 收尾：`git add` → `git commit`（含任務編號/摘要）→ `git push`。  
+6) 紀錄：在 `Windsurf_ChatGPT_NOTES.md` 登記變更與最後 commit hash；同步 `PROJECT_TODO.md` / `PROJECT_STATUS.md`。
 
-- ?嚗?  - `src/types/anycontent-teaching.ts`嚗歇摰?嚗?  - ?芯?嚗src/types/anycontent-news.ts`, `src/types/anycontent-magazine.ts`, ??- adapter嚗?  - `src/adapters/teaching-from-legacy.ts`嚗歇摰? v1嚗?  - ?芯?嚗src/adapters/news-from-legacy.ts`, `src/adapters/magazine-from-legacy.ts`, ??
-**頛詨嚗?*
-
-- `LegacyHtmlDocument`嚗 URL + HTML嚗?- `HtmlToMarkdownResult`嚗 `htmlToMarkdown` 頧嚗?- 憭惜蝯衣?嚗?  - `externalId: string`
-  - `language: "zh-tw" | "zh-cn" | "en" | "ja"`
-
-**頛詨嚗?*
-
-- ??post_type ??`*Content`嚗?憒?`TeachingContent`嚗?蝯?撠? `docs/CONTENT_SCHEMA.md`??
 ---
 
-## 6. zh-tw ??zh-cn pipeline
+## 6. 與 `WORKFLOW_CHATGPT_GITHUB_AGENT.md` 的關係
 
-**?格?嚗?*  
-?其??? `-gb` HTML ????嚗瘥??批捆?Ｙ?撠???`zh-cn` ?嚗蒂靽??陛擃雯?嚗-gb`嚗? redirect 雿輻??
-**閬靘?嚗?*
-
-- `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
-
-**擃惜瘚?嚗?*
-
-1. 撱箇? `baseUrl ??gbUrl` 撠?嚗? sitemap / ?Ｘ? URL ??嚗?2. ?芸? `baseUrl`嚗?銝哨???HTML ???Ｙ? zh-tw AnyContent JSON??3. 雿輻 OpenCC嚗?蝑?撌亙嚗?甇?zh-tw JSON嚗??zh-cn JSON嚗?   - 閬??芯?甈?閬??鈭??賢?嚗RL, ID, enum?佗???4. ?臬 WordPress ??
-   - 蝚砌?頛芸??zh-tw??   - 蝚砌?頛芸??zh-cn嚗蒂?? external_id / group key 撱箇? Polylang 撠???   - 撠?`old_url` / `-gb` URL 摮?meta嚗? redirect 雿輻??
----
-
-## 7. ?臬 WordPress 嚗?Polylang 嚗?redirect
-
-**?格?嚗?*  
-??AnyContent JSON嚗h-tw + zh-cn嚗??典??Headless WordPress嚗蒂撱箇?憭?嚗?蝬脣? redirect??
-**??閮剛?嚗?*
-
-- WordPress 蝡臬祕雿?
-  - WP-CLI ?誘??plugin嚗?    - 霈 JSON 瑼?敺???? API嚗?    - 靘?post_type 撱箇?嚗?唳?蝡?    - 閮剖?嚗?      - `language`嚗olylang嚗?      - `ct_external_id`嚗eta嚗?      - ??`ct_*` meta 甈?嚗peaker, location, event_date?佗?
-    - 撖怠?雯?嚗?      - `_ct_old_url`嚗?蝜葉 URL嚗?      - `_ct_old_url_gb`嚗? `-gb` URL嚗???嚗?- Redirect嚗?  - ?臭蝙?函??redirect 憭?嚗??芸神銝?陛??routing嚗?    - ???URL嚗 meta ??301 ?唳蝡??楝敺?
----
-
-## 8. ?臬敺?霅?鈭箏極隤踵
-
-**?格?嚗?*  
-蝣箔?????鞈??????銝行?靘?暺犖撌亙凝隤輻征??
-**憭扯雿?嚗?*
-
-1. 撠嚗?   - `data/crawl/crawled-urls.csv`
-   - ?臬????WordPress post ?”
-   - ??行? URL ??撠??唬遙雿?蝡?2. Spot check嚗?   - ?冽??嗾??sutra / blossom / news嚗Ⅱ隤?
-     - Markdown ???臬蝚血?????     - ????箸??隤扎?3. ?交??寞??桀??閬恥鋆?layout嚗?憒??椰?渡???喳??嚗?
-   - ?勗?蝡?React ?寞? `post_type` + `meta` 皜脫?嚗??閬???pipeline??
+- `WORKFLOW_CHATGPT_GITHUB_AGENT.md`：高層協作規則＋日常操作（角色、單一真相、RAW 連結規則、snapshot 例外）。  
+- `COMPLETE_PROJECT_WORKFLOW.md`：專案整體 roadmap + 各階段任務集合，快速了解「現在跑到哪、還剩什麼」。  
+- 兩者互補：前者管「怎麼合作」，後者說「專案全貌與階段性目標」。
