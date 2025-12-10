@@ -1,0 +1,13 @@
+﻿[
+  {
+    "id": "teaching-sample-001",
+    "label": "Teaching sample 001",
+    "postType": "teaching",
+    "legacyUrl": "https://www.ctworld.org/turn/sutra/sample-001.htm",
+    "legacyHtmlPath": "data/legacy-teaching/sample-001.html",
+    "anycontentZhTwPath": "data/anycontent/zh-tw/teaching/sample-001.json",
+    "anycontentZhCnPath": "data/anycontent/zh-cn/teaching/sample-001.json",
+    "newSiteUrl": null,
+    "wordpressPostId": null
+  }
+]

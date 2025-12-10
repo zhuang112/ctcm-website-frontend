@@ -365,6 +365,35 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0026 implement-visual-compare-tool-v1
+
+- 目標：依 T-0025 構想實作 v1 dev 工具頁 `/dev/compare`，先支援 teaching sample-001，方便比對 legacy / AnyContent / 新站。
+- 內容：
+  - 新增 index 資料：`data/compare/index.json`（含 teaching-sample-001 的 legacy 路徑、AnyContent 路徑、預留新站/WordPress 欄位）。
+  - 新增 React dev page：`src/dev/VisualComparePage.tsx`，提供：
+    - 上方 index 總表（點選同步左右欄）。
+    - 左欄：legacy 本機 HTML 預覽或 legacy URL（iframe + 連結）。
+    - 右欄：tabs 切換 zh-TW JSON / zh-CN JSON / New page / WordPress（後兩者暫 placeholder）。
+  - 入口：`src/main.tsx` 判斷 `/dev/compare` 時掛載 `VisualComparePage`，其餘路徑維持原 App。
+- 測試：`npm run build` 嘗試編譯，失敗（既有問題：opencc-js 缺型別宣告，TS7016，尚未處理）。未另外執行其他測試。
+
+變更檔案（含 RAW 連結）：
+
+- data/compare/index.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/compare/index.json
+
+- src/dev/VisualComparePage.tsx  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/dev/VisualComparePage.tsx
+
+- src/main.tsx  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/main.tsx
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
 
 ### 1. 任務需求總結

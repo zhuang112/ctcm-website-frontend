@@ -628,4 +628,24 @@
 - 備註：
   - 本 T 僅為 roadmap 登記，未強制立即實作；正式開發時應另開後續 T（如 T-0030）＋ INSTR 拆解技術細節。
 
+### T-0026 implement-visual-compare-tool-v1：舊站 / AnyContent / 新站對照工具 v1
+
+> 狀態：✅ 已完成（dev 工具在 `/dev/compare`，支援 teaching sample-001，2025-12-12）
+
+- 目標：
+  - 實作一個 dev 單頁工具，方便人工比對 legacy / AnyContent / 新站：
+    - 上方：index 總表（以 data/compare/index.json 為來源，一列一組 mapping）。
+    - 左欄：legacy 預覽（可切換本機 HTML 或 legacy URL）。
+    - 右欄：可切換 zh-TW JSON / zh-CN JSON / 新站 URL（暫可 placeholder） / WordPress（暫可 placeholder）。
+  - v1 聚焦 teaching sample-001，後續可擴充更多 mapping。
+
+- 驗收方式：
+  - [x] `npm run dev` 可開啟 `/dev/compare`，看到 index + 左右欄 layout。
+  - [x] index 中至少有 `teaching-sample-001`，點選後：
+    - 左欄可預覽 `data/legacy-teaching/sample-001.html`。
+    - 右欄 zh-TW/zh-CN JSON tab 可看到 AnyContent 檔案內容。
+    - New page / WordPress 目前可顯示 placeholder 或 URL/ID（若未填）。
+  - [x] 相關路徑與使用說明已記錄在 `docs/Windsurf_ChatGPT_NOTES.md` 的 T-0026 小節。
+
+
 
