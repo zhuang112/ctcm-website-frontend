@@ -207,6 +207,44 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0018 meta-instr-and-status-structure
+
+- 更新檔案：
+  - 新增 `docs/INSTR/` 目錄並搬移 INSTR 檔，統一命名規則 `INSTR-T-xxxx-<slug>.md`（跨任務通用以 0000 表示）。
+  - 新增 `docs/INSTR/README.md`（用途、命名規則、現有列表）與 `docs/INSTR/INSTR-TEMPLATE.md`（新增 INSTR 的模板）。
+  - 更新 `docs/PROJECT_TODO.md`：新增 T-0018 條目並標記完成。
+  - 更新 `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次 INSTR 整理與 RAW 連結。
+- 測試：純文檔更新，未執行程式。
+- commit: c3e4c3d
+變更檔案（含 RAW 連結）：
+
+- docs/INSTR/README.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/README.md
+
+- docs/INSTR/INSTR-TEMPLATE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-TEMPLATE.md
+
+- docs/INSTR/INSTR-T-0000-fix-communication-rules-no-citations.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-T-0000-fix-communication-rules-no-citations.md
+
+- docs/INSTR/INSTR-T-0000-update-workflow-full-access-rules.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-T-0000-update-workflow-full-access-rules.md
+
+- docs/INSTR/INSTR-T-0016-zh-cn-health-check-tool-todo.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-T-0016-zh-cn-health-check-tool-todo.md
+
+- docs/INSTR/INSTR-T-0017-html-to-markdown-rules-cleanup.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-T-0017-html-to-markdown-rules-cleanup.md
+
+- docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1

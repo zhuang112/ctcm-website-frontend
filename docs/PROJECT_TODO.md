@@ -374,6 +374,21 @@
 
 ---
 
+### T-0018 meta-instr-and-status-structure: 整理 INSTR 與狀態紀錄結構
+
+> 狀態：✅ 已完成（集中 INSTR、補 README/Template，2025-12-12）
+
+- 目標：
+  - 將所有 INSTR 檔集中於 `docs/INSTR/`，命名規則 `INSTR-T-xxxx-<slug>.md`（跨任務通用可用 0000）。
+  - 新增 `docs/INSTR/README.md` 說明用途、命名與現有列表；新增 `docs/INSTR/INSTR-TEMPLATE.md` 供新增 INSTR 時複製。
+  - 在 notes 紀錄 INSTR 變更並附 RAW 連結。
+- 驗收：
+  - `docs/INSTR/` 內含 README、Template，以及已搬移、依命名規則的 INSTR 檔。
+  - `docs/Windsurf_ChatGPT_NOTES.md` 有 T-0018 小節，列出變更與 RAW 連結。
+  - 相關變更已 git add/commit/push。
+
+---
+
 ### T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
 
 > 狀態：✅ 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）
