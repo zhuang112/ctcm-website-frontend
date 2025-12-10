@@ -254,7 +254,7 @@
   - `docs/PROJECT_TODO.md`：新增 T-0019 條目並標記完成。
   - `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次任務與 RAW 連結。
 - 測試：純文檔/設定更新，未執行程式。
-- commit: 2301792
+- commit: 95d9a13
 變更檔案（含 RAW 連結）：
 
 - .editorconfig  
@@ -1049,5 +1049,6 @@
   - 附上一段 `[Agent 回報摘要]`（含 T 任務編號、變更檔案列表、主要測試結果與 snapshot 檔名），
 
 就能讓新的 ChatGPT 對話直接接上這一輪完成的工作。
+
 
 
