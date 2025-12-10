@@ -15,6 +15,7 @@
 - 編碼：docs 檔案維持 UTF-8（含 BOM 可接受），若再遇亂碼優先用 UTF-8 讀寫。
 - 簡化 TODO 記錄：任務條目以「狀態、目標、驗收」為主，避免過長的實作範圍描述；狀態欄位含日期與誰驗證。
 - 若開新對話，先看 `docs/PROJECT_TODO.md` 與本檔，快速對齊任務狀態與約定。
+- full access / sandbox 約定：若 IDE/Agent 已開 full access（或 auto-approve），仍僅能在 `ctcm-website-frontend/` 下操作；禁止破壞性指令（如 `rm -rf /`、`rm -rf ..`）；所有變更需照 workflow 1.9、記錄在 notes 並附 RAW 連結。
 - notes 記錄格式（每個 T 任務一個小節）：
   - 說明任務標題、日期、需求摘要。
   - 列出更新檔案與測試狀態，紀錄最後 commit hash。
@@ -97,6 +98,14 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+> 參考 RAW 連結：
+>
+> - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+>   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+>
+> - docs/Windsurf_ChatGPT_NOTES.md  
+>   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
 ## 2025-12-12 任務：T-0014 zh-tw-to-zh-cn-pipeline-core-and-cli-skeleton
 

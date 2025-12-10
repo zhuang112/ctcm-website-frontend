@@ -187,6 +187,19 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
 - ChatGPT 在 review 任務時，可以只看 notes 中的這個區塊，直接點 RAW 連結打開每一個變更檔案的最新內容。
 - 若未來 repo 名稱或預設分支有變更，必須同步更新本小節中的 RAW base URL 與示範連結。
 
+### 1.9 實作 Agent 的 sandbox / full access 規則
+
+- 只允許在本 repo 目錄內操作：`cwd` 指向 `ctcm-website-frontend/`，避免跨出專案根目錄（禁止對 `../` 做破壞性指令）。
+- sandbox / approval 設定：
+  - 若 IDE/Agent 已開啟 full access（無 sandbox + auto-approve），仍需遵守本小節的範圍限制。
+  - 若處於受限模式，必要時請求 allow，但以不超出專案根目錄為原則。
+- 安全界線：
+  - 禁用破壞性指令：`rm -rf /`、`rm -rf ..`、修改全域 git config / hosts 等與專案無關的項目。
+  - 對 repo 的變更需正常 `git status` 檢查與 notes 紀錄，避免隱性修改。
+- 工作流程不變：
+  - 依 `PROJECT_TODO` / `Windsurf_ChatGPT_NOTES` 條目執行任務。
+  - 變更完成後，`git add` / `commit` / `push`，並在 notes 記錄 commit hash 與 RAW 連結。
+  - ChatGPT 會以 notes + RAW 連結 review，不在對話中展開長篇細節。
 ---
 
 ## 2. 檔案與資料夾結構（簡要）
