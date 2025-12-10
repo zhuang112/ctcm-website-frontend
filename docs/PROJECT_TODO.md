@@ -333,6 +333,32 @@
 
 ---
 
+### T-0016 zh-cn-health-check-tool: zh-TW / zh-CN JSON 健康檢查 CLI
+
+> 狀態：⬜ 尚未開始
+
+- 目標：
+  - 實作一支 CLI（或 Node script），用來比對 zh-TW / zh-CN JSON 是否對齊：
+    - 掃描 `data/anycontent/zh-tw` 與 `data/anycontent/zh-cn`（可調整）。
+    - 檢查：
+      - zh-TW 有而 zh-CN 缺的檔案清單。
+      - zh-CN 有而 zh-TW 缺的檔案清單。
+      - 可能不一致的欄位（如 language 不是 zh-cn 等）。
+    - 產出 log 或報表，供後續修正。
+  - 與既有 zh-TW→zh-CN pipeline 串接，避免缺漏。
+
+- 關聯檔案：
+  - `docs/PROJECT_TODO.md`
+  - `docs/Windsurf_ChatGPT_NOTES.md`
+  - （預計）`tools/convert/generate-zh-cn-from-zh-tw.ts` 或新 CLI
+
+- 驗收方式：
+  - 新增 `npm run check:zh-cn`（或等效指令）可執行健康檢查。
+  - 能輸出缺漏或不一致的檔案/欄位摘要（dry-run 報表即可）。
+  - notes 記錄變更與 RAW 連結。
+
+---
+
 ### T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
 
 > 狀態：✅ 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）
