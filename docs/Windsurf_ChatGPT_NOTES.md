@@ -303,6 +303,21 @@
   - docs/Windsurf_ChatGPT_NOTES.md  
     RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0022 update-workflow-raw-fallback
+
+- 在 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 新增「RAW 無法開啟時的本機上傳 fallback」規則：
+  - ChatGPT 若打不開 RAW / 檔案內容，須明確告知是哪個檔案或 URL。
+  - 請使用者在對話中直接上傳檔案，之後以上傳檔案為準，不得猜測。
+  - 若 RAW 與上傳版本不同，以使用者確認的最新版本為準，並在 notes 記錄。
+- 目的：確保後續判斷都基於可讀檔案，避免因工具限制誤判。
+- 變更檔案（含 RAW 連結）：
+
+  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+  - docs/Windsurf_ChatGPT_NOTES.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
 
 ### 1. 任務需求總結
@@ -1079,6 +1094,5 @@
   - 附上一段 `[Agent 回報摘要]`（含 T 任務編號、變更檔案列表、主要測試結果與 snapshot 檔名），
 
 就能讓新的 ChatGPT 對話直接接上這一輪完成的工作。
-
 
 
