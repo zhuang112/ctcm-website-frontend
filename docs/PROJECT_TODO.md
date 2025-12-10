@@ -721,3 +721,19 @@
   - [x] `docs/CONTENT_SCHEMA_V1.md` 已補上教學/新聞/雜誌欄位細節與繁簡轉換注意事項。
   - [x] `docs/CONTENT_SCHEMA.md` 保留舊版說明並提示 V1 草稿位置。
   - [x] notes 記錄本次草稿更新與 RAW 連結。
+### T-0033 plan-future-branch-gallery-index_page inventory+schema templates
+
+> 狀態：⏳ 尚未啟動（僅登記未來規劃，2025-12-12）
+
+- 目標：
+  - 為後續可能需要的 branch / gallery / index_page 任務預先規劃「inventory＋schema」類型的模板。
+  - 不在本任務內實作實際 inventory 或 schema；僅在 TODO 中記下未來需要的新模板方向。
+- 預期模板內容（概念）：
+  - 每種類型（branch / gallery / index_page）包含：
+    - inventory 步驟（如 crawl/抓取代表頁面、列出檔案清單）。
+    - schema 設計步驟（如何從 legacy HTML 抽出 AnyContent/WordPress 欄位）。
+    - sample JSON + /dev/compare 對照（若未來需要）。
+  - 未來實作時再拆成對應的 T 任務（另開 INSTR）。
+- 驗收（僅登記）：
+  - [ ] PROJECT_TODO 已新增本條目，說明未來模板方向。
+  - [ ] notes 已紀錄本次登記與 RAW 連結。

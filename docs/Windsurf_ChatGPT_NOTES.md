@@ -1321,3 +1321,18 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-12 任務：T-0033 plan-future-branch-gallery-index_page inventory+schema templates
+
+- 目的：登記未來可能的 branch / gallery / index_page 任務，預計需要的 inventory＋schema 模板方向，暫不實作。
+- 內容：
+  - `docs/PROJECT_TODO.md` 新增 T-0033，描述未來可用的模板元素（inventory 步驟、schema 設計、sample/compare）。
+  - 本次不修改任何程式或 schema，僅記錄規劃。
+- 測試：純 docs 更新，未執行。
+
+變更檔案（含 RAW 連結）：
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
