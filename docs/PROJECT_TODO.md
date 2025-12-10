@@ -661,3 +661,20 @@
     - 右欄 zh-TW/zh-CN JSON tab 可看到 AnyContent 檔案內容。
     - New page / WordPress 目前可顯示 placeholder 或 URL/ID（若未填）。
   - [x] 相關路徑與使用說明已記錄在 `docs/Windsurf_ChatGPT_NOTES.md` 的 T-0026 小節。
+
+### T-0029 news-sample-and-visual-compare：news 範例＋視覺對照整合
+
+> 狀態：✅ 已完成（news sample-001 end-to-end + dev compare 更新，2025-12-12）
+
+- 目標：
+  - 建立一組 news 範例資料，涵蓋：
+    - legacy HTML（sample-001）
+    - zh-TW AnyContent JSON（post_type=news）
+    - zh-CN AnyContent JSON（pipeline 轉出）
+  - 將該範例掛入 `/dev/compare` 視覺比對工具的 index，與 teaching 範例並列檢視。
+
+- 驗收：
+  - [x] `data/legacy-news/sample-001.html` 內容可預覽（含標題、日期、地點、正文）。
+  - [x] `data/anycontent/zh-tw/news/sample-001.json` 與 `data/anycontent/zh-cn/news/sample-001.json` 建立，欄位符合 `NewsContent`，語言標記正確。
+  - [x] `data/compare/index.json` 新增 `news-sample-001`，在 `/dev/compare` 可選擇並同步左右欄顯示。
+  - [x] `npm test` 與 `npm run build` 通過（依 T-0028 規則）。

@@ -1,0 +1,17 @@
+﻿{
+  "post_type": "news",
+  "language": "zh-tw",
+  "post_title": "範例新聞：春季共修講座",
+  "slug": "news-sample-001",
+  "old_url": "https://www.ctworld.org/news/sample-001.htm",
+  "body_markdown": "這是一則示範用的新聞，描述即將舉辦的春季共修講座與座談活動。\n講座內容包含經典導讀、實修分享，以及問答交流。",
+  "meta": {
+    "ct_news_date": "2025-03-14",
+    "ct_event_date_start": "2025-03-14",
+    "ct_event_date_end": null,
+    "ct_event_date_raw": "2025-03-14",
+    "ct_event_location": "台北講堂",
+    "ct_event_location_raw": "台北講堂",
+    "ct_has_gallery": "no"
+  }
+}

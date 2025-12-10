@@ -1,13 +1,24 @@
 ﻿[
-  {
-    "id": "teaching-sample-001",
-    "label": "Teaching sample 001",
-    "postType": "teaching",
-    "legacyUrl": "https://www.ctworld.org/turn/sutra/sample-001.htm",
-    "legacyHtmlPath": "data/legacy-teaching/sample-001.html",
-    "anycontentZhTwPath": "data/anycontent/zh-tw/teaching/sample-001.json",
-    "anycontentZhCnPath": "data/anycontent/zh-cn/teaching/sample-001.json",
-    "newSiteUrl": null,
-    "wordpressPostId": null
-  }
+    {
+        "id":  "teaching-sample-001",
+        "label":  "Teaching sample 001",
+        "postType":  "teaching",
+        "legacyUrl":  "https://www.ctworld.org/turn/sutra/sample-001.htm",
+        "legacyHtmlPath":  "data/legacy-teaching/sample-001.html",
+        "anycontentZhTwPath":  "data/anycontent/zh-tw/teaching/sample-001.json",
+        "anycontentZhCnPath":  "data/anycontent/zh-cn/teaching/sample-001.json",
+        "newSiteUrl":  null,
+        "wordpressPostId":  null
+    },
+    {
+        "legacyHtmlPath":  "data/legacy-news/sample-001.html",
+        "id":  "news-sample-001",
+        "anycontentZhTwPath":  "data/anycontent/zh-tw/news/sample-001.json",
+        "newSiteUrl":  null,
+        "label":  "News sample 001 春季共修講座",
+        "wordpressPostId":  null,
+        "legacyUrl":  "https://www.ctworld.org/news/sample-001.htm",
+        "postType":  "news",
+        "anycontentZhCnPath":  "data/anycontent/zh-cn/news/sample-001.json"
+    }
 ]

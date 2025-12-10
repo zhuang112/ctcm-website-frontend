@@ -1211,3 +1211,37 @@
   - 附上一段 `[Agent 回報摘要]`（含 T 任務編號、變更檔案列表、主要測試結果與 snapshot 檔名），
 
 就能讓新的 ChatGPT 對話直接接上這一輪完成的工作。
+
+## 2025-12-12 任務：T-0029 news-sample-and-visual-compare
+
+- 目的：為 news 建立 sample-001（legacy→zh-TW AnyContent→zh-CN）並納入 `/dev/compare`。方便與 teaching 範例並列驗收 mapping 與資料完整度。
+- 內容：
+  - 新增 legacy 範例：`data/legacy-news/sample-001.html`（含標題、日期/地點、正文）。
+  - 新增 AnyContent：
+    - `data/anycontent/zh-tw/news/sample-001.json`
+    - `data/anycontent/zh-cn/news/sample-001.json`
+  - 更新 dev compare index：`data/compare/index.json` 增 `news-sample-001`；`/dev/compare` 可切換 teaching/news。
+- 測試/建置：`npm test`、`npm run build` 皆通過。
+
+變更檔案（含 RAW 連結）：
+
+- data/legacy-news/sample-001.html  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/legacy-news/sample-001.html
+
+- data/anycontent/zh-tw/news/sample-001.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-tw/news/sample-001.json
+
+- data/anycontent/zh-cn/news/sample-001.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-cn/news/sample-001.json
+
+- data/compare/index.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/compare/index.json
+
+- src/dev/VisualComparePage.tsx  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/dev/VisualComparePage.tsx
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
