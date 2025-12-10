@@ -83,6 +83,32 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
   - 優先更新 docs。
   - 再請 ChatGPT / Agent 依 docs 調整說法。
 
+### 1.6 GitHub 作為唯一真相 & push 規則
+
+- GitHub（預設：`main` 分支）是程式碼與 docs 的單一真相來源：
+  - ChatGPT 需要了解目前專案狀況時，優先以 GitHub 的內容為準。
+  - 本機尚未 `commit` / `push` 的修改，視為「尚未正式生效」。
+- 每一個 T-XXXX 任務的標準結束流程：
+  1. 實作 Agent（目前主要是 Codex）完成程式與 docs 修改。
+  2. 本機跑必要的測試 / lint（若有 script，如 `npm test`、`npm run typecheck`）。
+  3. 使用 git 將相關檔案 commit，commit message 至少包含：
+     - T 任務編號（例如 `T-0007 docs-snapshot-cli: ...`）
+     - 簡短說明本次變更。
+  4. 將該 commit push 到遠端（預設 `origin/main`）。
+  5. 在 `docs/Windsurf_ChatGPT_NOTES.md` 對應 T 任務的小節中，紀錄：
+     - 完成時間
+     - 最後 push 的 commit hash（例如 `commit: abc1234`）
+     - 簡要變更摘要。
+- ChatGPT 在分析程式碼 / docs 時：
+  - 預設以 GitHub 上的 `main` 分支為準。
+  - 若 GitHub 無法存取（網路 / 權限問題），必須明確告知使用者，不得假設 GitHub 狀態。
+- snapshot ZIP（`npm run snapshot:docs -- --task T-XXXX`）的定位：
+  - 作為「例外情況」的備用方案，而不是主要資訊來源。
+  - 典型使用情境：
+    - 需要讓 ChatGPT 檢查本機尚未 commit 的變更。
+    - 需要傳遞較大的 log / 中間產出，不適合直接 commit 到 repo。
+  - 若當前 T 任務已經有對應的 commit 並 push 到 GitHub，優先讓 ChatGPT 直接讀 GitHub，而不是重新上傳 ZIP。
+
 ---
 
 ## 2. 檔案與資料夾結構（簡要）

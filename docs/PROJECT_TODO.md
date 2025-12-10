@@ -1,7 +1,7 @@
 ﻿# PROJECT_TODO
 
 > 建議由 ChatGPT 協助維護這份清單，
-> Windsurf / Cursor 則依照指定的 TODO 項目實作。
+> 實作 Agent（目前主要是 Codex）則依照指定的 TODO 項目實作。
 
 ## 規則
 
@@ -11,6 +11,13 @@
   - 要修改的檔案路徑。
   - 允許修改的範圍（通常是 TODO 區塊）。
   - 驗收方式（測試、輸出檔、或手動檢查）。
+- 每一個 T-XXXX 任務完成時，實作 Agent（目前主要是 Codex）負責：
+  - 跑必要測試 / 型別檢查。
+  - `git add` 本次修改涉及的檔案。
+  - `git commit`，訊息需包含 T 任務編號與簡短說明。
+  - `git push` 到遠端（預設 `origin/main`）。
+  - 在 `docs/Windsurf_ChatGPT_NOTES.md` 對應的小節中紀錄本次 commit hash 與變更摘要。
+  - 若因特殊原因暫時無法 push，須在 notes 中說明原因，並可視情況產生 snapshot ZIP 給 ChatGPT 使用。
 
 ---
 
@@ -328,4 +335,5 @@
   - [x] repo 內只剩新檔名，舊檔名不再出現於檔案系統或文字內容。
   - [x] 相關 docs 皆引用 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`。
   - [x] 本條狀態標記為 ✅ 並記載新檔名。
+
 
