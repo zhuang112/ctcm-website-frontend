@@ -16,6 +16,13 @@
 - 簡化 TODO 記錄：任務條目以「狀態、目標、驗收」為主，避免過長的實作範圍描述；狀態欄位含日期與誰驗證。
 - 若開新對話，先看 `docs/PROJECT_TODO.md` 與本檔，快速對齊任務狀態與約定。
 
+## 2025-12-10 任務：T-0011 / T-0012 初始化
+
+- 在 `docs/PROJECT_TODO.md` 增補新的任務條目：
+  - `T-0011 fix-corrupted-docs`：修復亂碼 docs、統一 UTF-8。
+  - `T-0012 sync-status-docs`：對齊 PROJECT_TODO / PROJECT_STATUS 與實際進度。
+- 目前僅新增 TODO 條目，未開始實作內容。commit: (pending)
+
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1

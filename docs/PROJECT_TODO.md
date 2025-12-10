@@ -336,4 +336,86 @@
   - [x] 相關 docs 皆引用 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`。
   - [x] 本條狀態標記為 ✅ 並記載新檔名。
 
+### T-0011 fix-corrupted-docs: 修復亂碼 docs 並統一為 UTF-8
+
+> 狀態：⬜ 尚未開始
+
+- 目標：
+  - 將目前 repo 中出現亂碼的幾個 docs 修復為正常的 UTF-8 內容，確保未來 ChatGPT / 實作 Agent 以這些檔案為單一真相來源時不會誤判。
+  - 修復對象預期包含：
+    - `docs/PROJECT_STATUS.md`
+    - `docs/AI_COLLAB_SUMMARY.md`
+    - `docs/COMPLETE_PROJECT_WORKFLOW.md`
+    - `docs/PENDING_DECISIONS.md`
+    - `docs/SESSION_CHECKLIST.md`
+    - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`
+
+- 關聯來源（真相來源說明）：
+  - 使用者曾將上述檔案的「正常版本」上傳給 ChatGPT（位於 ChatGPT 的 /mnt/data）。
+  - 若有疑問，請未來由 ChatGPT 提供最新版內容，再進行小幅調整。
+
+- 建議修改檔案：
+  - 以上列出的全部 docs 檔案。
+
+- 允許修改範圍：
+  - 允許完整覆蓋內容（以正常 UTF-8 版本取代亂碼版本）。
+  - 可小幅調整文字，使之與目前專案實際狀態一致，但不得隨意刪減重要章節。
+  - 不改變檔名與整體段落結構的大方向（除非經 ChatGPT 建議並由使用者確認）。
+
+- 驗收方式：
+  - 在文字編輯器中以 UTF-8 開啟上述檔案，確認：
+    - 中文不再出現大量「嚗」「?」等亂碼。
+    - 段落與標題皆為可理解的自然語句。
+  - 由 ChatGPT 再次閱讀這些 docs，確認可以用來判斷專案進度與工作流程。
+  - 所有變更已依照 workflow：
+    - `git add` 相關檔案。
+    - `git commit -m "T-0011 fix corrupted docs to UTF-8"`（訊息可微調）。
+    - `git push` 到 `origin/main`。
+    - 在 `docs/Windsurf_ChatGPT_NOTES.md` 新增一小節紀錄本任務與最後 commit hash。
+
+### T-0012 sync-status-docs: 對齊 PROJECT_TODO / PROJECT_STATUS 與實際進度
+
+> 狀態：⬜ 尚未開始
+
+- 目標：
+  - 讓 `docs/PROJECT_TODO.md` 與 `docs/PROJECT_STATUS.md` 真實反映目前 repo 的實作狀態，
+    減少未來 ChatGPT / 實作 Agent / 使用者之間的認知落差。
+
+- 關聯 docs：
+  - `docs/PROJECT_TODO.md`
+  - `docs/PROJECT_STATUS.md`
+  - （參考）`docs/Windsurf_ChatGPT_NOTES.md`
+  - （參考）`docs/AI_COLLAB_SUMMARY.md`
+
+- 建議修改內容：
+  - `docs/PROJECT_TODO.md`：
+    - 為 **T-0005 news-from-legacy** 新增狀態行，例如：
+      - `> 狀態：✅ 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）`
+    - 在「原始三項 TODO」中：
+      - teaching HTML→AnyContent 的條目，補充目前已有的實作（`teaching-from-legacy` + `teaching-html-to-anycontent.ts`），
+        並視情況將狀態更新為「部分完成 / v1 完成」。
+    - 確認 T-0006 / T-0010 的敘述與實際情況一致（T-0010 已完成、T-0006 仍等待舊站備份）。
+  - `docs/PROJECT_STATUS.md`：
+    - 以目前 repo 狀態重寫一版「總覽」，可以依以下區塊撰寫：
+      - 爬蟲與 inventory：V1 完成。
+      - HTML→Markdown + sutra 規則：V1 完成，sutra 專用規則已上線。
+      - teaching / news / magazine adapters：皆有 minimal v1，且 teaching / news 有測試。
+      - docs snapshot CLI（T-0007）：已實作並驗收。
+      - zh-TW→zh-CN pipeline：僅有規格，尚未實作。
+      - legacy data root（T-0006）：等待完整備份。
+      - WordPress importer / React 前端：尚未開始實作（僅有架構與構想）。
+
+- 允許修改範圍：
+  - 僅限狀態描述與摘要文字，不大改既有章節結構。
+  - 不刪除任何既有 T 任務，只更新其狀態與說明。
+
+- 驗收方式：
+  - 由 ChatGPT 再次閱讀 `PROJECT_TODO.md` 與 `PROJECT_STATUS.md`，確認：
+    - T-0005 與 teaching 相關實作與檔案列表、測試狀態皆有描述。
+    - 各大模組的完成度敘述符合目前 repo 的實作。
+  - 變更依 workflow 提交：
+    - `git add` 相關檔案。
+    - `git commit -m "T-0012 sync PROJECT_TODO and PROJECT_STATUS with current repo state"`（訊息可微調）。
+    - `git push` 到 `origin/main`。
+    - 在 `docs/Windsurf_ChatGPT_NOTES.md` 新增 T-0012 對應小節與 commit hash。
 
