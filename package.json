@@ -12,10 +12,12 @@
     "inventory:fs": "ts-node tools/crawl/filesystem-inventory.ts --docroot ./ctworld-docroot --base-url https://www.ctworld.org --out data/crawl/all-files.json",
     "diff:crawl-vs-fs": "ts-node tools/crawl/diff-crawl-vs-files.ts --crawled data/crawl/crawled-urls.json --files data/crawl/all-files.json --out-dir data/crawl",
     "test": "vitest",
-    "snapshot:docs": "ts-node tools/docs-snapshot/make-docs-snapshot.ts"
+    "snapshot:docs": "ts-node tools/docs-snapshot/make-docs-snapshot.ts",
+    "convert:zh-cn": "ts-node tools/convert/generate-zh-cn-from-zh-tw.ts"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
+    "opencc-js": "^1.0.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

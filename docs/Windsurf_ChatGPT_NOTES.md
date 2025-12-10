@@ -97,6 +97,37 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0014 zh-tw-to-zh-cn-pipeline-core-and-cli-skeleton
+
+- 更新檔案：
+  - `package.json`：新增 `convert:zh-cn` 腳本與 opencc-js 依賴。
+  - `src/i18n/zh-tw-to-zh-cn.ts`：`convertToZhCn` utility（opencc-js）。
+  - `tests/i18n/zh-tw-to-zh-cn.spec.ts`：基本轉換測試。
+  - `tools/convert/generate-zh-cn-from-zh-tw.ts`：CLI skeleton，支援 `--input` / `--output` / `--dry-run`，可寫出 zh-cn JSON。
+  - `docs/PROJECT_TODO.md`：新增 T-0014 條目並標記完成。
+  - `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次任務與 RAW 連結。
+- 測試：新增單元測試（convertToZhCn）；未跑整套，僅 skeleton。
+- commit: e413839
+變更檔案（含 RAW 連結）：
+
+- package.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+
+- src/i18n/zh-tw-to-zh-cn.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/i18n/zh-tw-to-zh-cn.ts
+
+- tests/i18n/zh-tw-to-zh-cn.spec.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/i18n/zh-tw-to-zh-cn.spec.ts
+
+- tools/convert/generate-zh-cn-from-zh-tw.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/convert/generate-zh-cn-from-zh-tw.ts
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1

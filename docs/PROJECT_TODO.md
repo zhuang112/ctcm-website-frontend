@@ -254,6 +254,61 @@
 
 ---
 
+### T-0013 zh-tw-to-zh-cn-pipeline-design: 定義欄位白名單與 CLI 規格（docs first）
+
+> 狀態：✅ 已完成（docs 規格補齊，未實作程式碼，2025-12-12）
+
+- 目標：
+  - 將 `docs/ZH_TW_TO_ZH_CN_PIPELINE.md` 補齊到可以實作的程度：
+    - 明確列出「要做繁→簡轉換的欄位白名單」與「不應轉換的欄位」。
+    - 說清楚 pipeline 的輸入來源與輸出位置（資料夾結構假設可以是暫定版）。
+    - 定義一支 CLI 工具（預計 `tools/convert/generate-zh-cn-from-zh-tw.ts`）的參數與使用方式。
+  - 不修改任何 TypeScript 程式碼，只改 docs。
+
+- 關聯 docs：
+  - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
+  - `docs/CONTENT_SCHEMA.md`
+  - `docs/PROJECT_STATUS.md`（目前標記 zh-TW→zh-CN 尚未實作）
+
+- 建議修改檔案：
+  - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`：補齊 pipeline 設計細節（已於本次完成）。
+  - `docs/PROJECT_TODO.md`：本任務條目與原始第 3 項說明。
+
+- 驗收方式：
+  - 由 ChatGPT 閱讀 `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`，確認：
+    - 可清楚知道哪一類欄位要轉換、哪一類不能轉。
+    - 知道 CLI 工具預計怎麼呼叫（含 input/output 參數和使用範例）。
+    - 知道 pipeline 預期的輸出資料結構（檔名 / language 欄位 / multilingual 關聯的策略）。
+  - `PROJECT_TODO.md` 中 T-0013 狀態更新為 ✅，並簡短描述本次完成的內容。
+
+---
+
+### T-0014 zh-tw-to-zh-cn-pipeline-core-and-cli-skeleton: 實作核心轉換＋CLI 框架（含 dry-run）
+
+> 狀態：✅ 已完成（核心轉換與 CLI skeleton，2025-12-12）
+
+- 目標：
+  - 實作繁→簡轉換核心與 CLI 骨架：
+    - 建立 `convertToZhCn(text: string)` utility（opencc-js 或等效實作）。
+    - 建立 `tools/convert/generate-zh-cn-from-zh-tw.ts` CLI，支援 `--input` / `--output` / `--dry-run`。
+    - dry-run 模式僅列出預計處理檔案，不寫檔；正式模式輸出 zh-CN JSON。
+  - 本任務著重程式骨架與 logging；更進一步的欄位對應留給後續 T 任務。
+
+- 關聯檔案：
+  - `src/i18n/zh-tw-to-zh-cn.ts`
+  - `tests/i18n/zh-tw-to-zh-cn.spec.ts`
+  - `tools/convert/generate-zh-cn-from-zh-tw.ts`
+  - `package.json`
+  - `docs/PROJECT_TODO.md`
+  - `docs/Windsurf_ChatGPT_NOTES.md`
+
+- 驗收方式：
+  - `convertToZhCn` 可將典型繁體詞（如「臺灣」）轉為簡體（如「台湾」）。
+  - CLI 可跑 dry-run 列出輸出路徑；正常模式可將輸入目錄的 JSON 產生對應輸出檔（基本欄位轉換即可）。
+  - 有對應單元測試（至少覆蓋 convertToZhCn），並新增 `npm run convert:zh-cn` 便於呼叫。
+
+---
+
 ### T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
 
 > 狀態：✅ 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）
