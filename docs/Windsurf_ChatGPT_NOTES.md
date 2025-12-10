@@ -1245,3 +1245,37 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0030 magazine-sample-and-visual-compare
+
+- 目的：為 magazine 建立 sample-001（legacy→zh-TW→zh-CN）並納入 `/dev/compare`，與 teaching/news 並列檢視。
+- 內容：
+  - 新增 legacy 範例：`data/legacy-magazine/sample-001.html`（含標題、期別/日期、正文）。
+  - 新增 AnyContent：
+    - `data/anycontent/zh-tw/magazine/sample-001.json`
+    - `data/anycontent/zh-cn/magazine/sample-001.json`
+  - 更新 dev compare index：`data/compare/index.json` 增 `magazine-sample-001`，`/dev/compare` 可切換 teaching/news/magazine。
+- 測試/建置：`npm test`、`npm run build` 皆通過。
+
+變更檔案（含 RAW 連結）：
+
+- data/legacy-magazine/sample-001.html  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/legacy-magazine/sample-001.html
+
+- data/anycontent/zh-tw/magazine/sample-001.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-tw/magazine/sample-001.json
+
+- data/anycontent/zh-cn/magazine/sample-001.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-cn/magazine/sample-001.json
+
+- data/compare/index.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/compare/index.json
+
+- src/dev/VisualComparePage.tsx  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/dev/VisualComparePage.tsx
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

@@ -678,3 +678,20 @@
   - [x] `data/anycontent/zh-tw/news/sample-001.json` 與 `data/anycontent/zh-cn/news/sample-001.json` 建立，欄位符合 `NewsContent`，語言標記正確。
   - [x] `data/compare/index.json` 新增 `news-sample-001`，在 `/dev/compare` 可選擇並同步左右欄顯示。
   - [x] `npm test` 與 `npm run build` 通過（依 T-0028 規則）。
+
+### T-0030 magazine-sample-and-visual-compare：magazine 範例＋視覺對照整合
+
+> 狀態：✅ 已完成（magazine sample-001 end-to-end + dev compare 更新，2025-12-12）
+
+- 目標：
+  - 建立一組 magazine 範例資料，涵蓋：
+    - legacy HTML（sample-001）
+    - zh-TW AnyContent JSON（post_type=magazine）
+    - zh-CN AnyContent JSON（pipeline 轉出）
+  - 將該範例掛入 `/dev/compare` 視覺比對工具的 index，與 teaching/news 範例並列檢視。
+
+- 驗收：
+  - [x] `data/legacy-magazine/sample-001.html` 可預覽（含標題、期別/日期、正文）。
+  - [x] `data/anycontent/zh-tw/magazine/sample-001.json` 與 `data/anycontent/zh-cn/magazine/sample-001.json` 建立，欄位符合 `MagazineContent`，語言標記正確。
+  - [x] `data/compare/index.json` 新增 `magazine-sample-001`，在 `/dev/compare` 可選擇並同步左右欄顯示。
+  - [x] `npm test` 與 `npm run build` 通過（依 T-0028 規則）。

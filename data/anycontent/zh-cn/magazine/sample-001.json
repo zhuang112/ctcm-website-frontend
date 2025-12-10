@@ -1,0 +1,14 @@
+﻿{
+  "post_type": "magazine",
+  "language": "zh-cn",
+  "post_title": "范例杂志：春季专题",
+  "slug": "magazine-sample-001",
+  "old_url": "https://www.ctworld.org/magazine/sample-001.htm",
+  "body_markdown": "本期专题聚焦春季修持与社群行动，收录多篇专访与实修分享。\n内容包含法师开示、专题报道，以及读者投稿的心得与问答。",
+  "meta": {
+    "ct_magazine_issue": "15",
+    "ct_magazine_issue_raw": "第 15 期",
+    "ct_magazine_pub_date": "2025-03-20",
+    "ct_magazine_pub_date_raw": "2025-03-20"
+  }
+}

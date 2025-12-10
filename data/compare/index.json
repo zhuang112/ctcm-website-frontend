@@ -20,5 +20,16 @@
         "legacyUrl":  "https://www.ctworld.org/news/sample-001.htm",
         "postType":  "news",
         "anycontentZhCnPath":  "data/anycontent/zh-cn/news/sample-001.json"
+    },
+    {
+        "legacyHtmlPath":  "data/legacy-magazine/sample-001.html",
+        "id":  "magazine-sample-001",
+        "anycontentZhTwPath":  "data/anycontent/zh-tw/magazine/sample-001.json",
+        "newSiteUrl":  null,
+        "label":  "Magazine sample 001 春季專題",
+        "wordpressPostId":  null,
+        "legacyUrl":  "https://www.ctworld.org/magazine/sample-001.htm",
+        "postType":  "magazine",
+        "anycontentZhCnPath":  "data/anycontent/zh-cn/magazine/sample-001.json"
     }
 ]
