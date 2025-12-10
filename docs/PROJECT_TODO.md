@@ -359,6 +359,21 @@
 
 ---
 
+### T-0017 html-to-markdown-rules-cleanup: 整理 HTML→Markdown 規則文件
+
+> 狀態：✅ 已完成（V4 規則整理，2025-12-12）
+
+- 目標：
+  - 重寫並整理 `docs/HTML_TO_MARKDOWN_RULES_V4.md`，讓共用規則與圖片策略清楚可維護。
+  - 梳理：移除元素、區塊/行內轉換、連結/錨點、圖片（featured / gallery / fallback）。
+  - 標記各 post_type 注意事項（teaching sutra 偈語收集、news 主圖＋gallery、其他以簡化策略）。
+- 驗收：
+  - `HTML_TO_MARKDOWN_RULES_V4.md` 為 UTF-8 正常可讀且結構清楚。
+  - 明確指出：Markdown 不嵌入 `![]()`，圖片只收集到 JSON；無可用圖片時三欄位均清空。
+  - notes 已記錄本次任務與 RAW 連結。
+
+---
+
 ### T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
 
 > 狀態：✅ 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）

@@ -188,6 +188,25 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0017 html-to-markdown-rules-cleanup
+
+- 更新檔案：
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`：重寫共用規則、圖片策略、各 post_type 注意事項與驗收檢查。
+  - `docs/PROJECT_TODO.md`：新增 T-0017 條目並標記完成。
+  - `docs/Windsurf_ChatGPT_NOTES.md`：記錄任務摘要與 RAW 連結。
+- 測試：純文檔更新，未執行程式。
+- commit: (pending push)
+變更檔案（含 RAW 連結）：
+
+- docs/HTML_TO_MARKDOWN_RULES_V4.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
