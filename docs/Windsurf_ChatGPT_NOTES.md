@@ -318,6 +318,39 @@
   - docs/Windsurf_ChatGPT_NOTES.md  
     RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0023 cleanup-working-tree-simple
+
+- 目的：依使用者授權，將當前 working tree 的「所有已修改/已刪除的 tracked 檔案」一次打包 commit，讓 main 回到乾淨狀態；未追蹤檔（docs/todo、snapshots ZIP/TAR 等）維持 untracked、不加入本次 commit。
+- 變更範圍（皆為既有 tracked 檔案的累積修改）：
+  - 設定/Workflow：`.editorconfig`、`.gitattributes`、`.gitignore`、`.github/workflows/deploy-pages.yml`、`README_CTWorld_AI_WORKFLOW.md`、`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`、`docs/INSTR/...`。
+  - 文件/notes：`docs/PROJECT_TODO.md`、`docs/Windsurf_ChatGPT_NOTES.md`、`docs/terminal_logs/*` 等。
+  - 程式碼/型別：`src/adapters/*`、`src/html/*`、`src/types/*`、`tools/convert/teaching-html-to-anycontent.ts`。
+  - 測試：`tests/adapters/*`、`tests/html/html-to-markdown.spec.ts`。
+  - 資料：`data/crawl/*.csv`。
+  - 依賴鎖定：`package-lock.json`。
+- 測試：`npm test` 全部通過（12/12）。
+- 變更檔案（含 RAW 連結）：
+
+  - docs/Windsurf_ChatGPT_NOTES.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+  - docs/PROJECT_TODO.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+  - .editorconfig  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.editorconfig
+
+  - .gitattributes  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.gitattributes
+
+  - package-lock.json  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package-lock.json
+
+  - （其餘大量 tracked 檔案修改，請以本次 commit diff 為準）
+
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
 
 ### 1. 任務需求總結
@@ -1094,5 +1127,4 @@
   - 附上一段 `[Agent 回報摘要]`（含 T 任務編號、變更檔案列表、主要測試結果與 snapshot 檔名），
 
 就能讓新的 ChatGPT 對話直接接上這一輪完成的工作。
-
 
