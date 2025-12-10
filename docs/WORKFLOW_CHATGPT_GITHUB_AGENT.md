@@ -161,6 +161,16 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
     - 「請從 GitHub 讀取 `docs/PROJECT_TODO.md`」，  
       ChatGPT 會自動以 RAW 連結 `https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md` 來讀取。
 
+#### RAW 無法讀取時的停用規則
+
+- ChatGPT 在以下情況必須 **立即停止** 針對該檔案內容提出推論或建議：
+  - RAW URL 能打開頁面但實際內容缺漏/無法解析（只看到框架或空白）。
+  - 被工具或 sandbox 阻擋，無法取得 RAW 內容。
+  - RAW 直接回傳 404 / 403。
+- 停用動作：
+  - 不得依舊記憶或舊 snapshot 猜測內容。
+  - 回報「RAW 無法讀取」，請使用者貼上本機檔案或重新上傳 snapshot，待取得可讀內容後再分析。
+
 ### 1.8 Notes 中必須附上 RAW 連結
 
 - 每一個 T-XXXX 任務完成後，實作 Agent 必須在 `docs/Windsurf_ChatGPT_NOTES.md` 的對應小節中，紀錄：
@@ -364,6 +374,25 @@ Windsurf 根據 ChatGPT 給的指令：
   - 先讀 `docs/Windsurf_ChatGPT_NOTES.md` 對應小節。
   - 再透過 notes 中提供的 RAW 連結打開各個異動檔案，確認內容是否符合任務說明。
   - 若發現問題或需要新任務，會再產生下一個 T 任務的 code block 指令。
+
+### 3.6 code 任務一律先跑 test + build 才能收尾
+
+- 適用範圍（需跑 test+build 的任務類型）：
+  - `src/` 內的程式碼、型別、i18n/pipeline。
+  - `tools/` 內的 CLI / script。
+  - `tests/` 內的測試檔。
+  - `data/` 內若涉及程式解析/轉換會讀寫的資料（CSV/JSON 等）。
+- 收尾規則：
+  - 這些任務在 commit 前，預設都要執行 `npm test` **以及** `npm run build`，兩者都需通過。
+  - 若任務本身就是為了修復 test/build 失敗，可以在 notes 中記錄當前錯誤與狀態，但不得隱瞞未通過的結果。
+- 例外：
+  - 純 docs/INSTR 編輯不強制跑 test/build。
+  - 若因外部阻礙（例如依賴未備妥）暫時無法通過，需在 notes 清楚記錄錯誤訊息、原因與下一步建議。
+
+### 3.7（前瞻）分支策略的提醒
+
+- 目前預設直接在 `main` 上工作並 push。
+- 若未來有多人協作或需要大型重構，可開啟 `feature/T-xxxx-*` 分支並走 PR 流程；但未啟用前請維持 main 為單一真相來源。
 
 **細節全部寫在文件**：
 
@@ -740,4 +769,3 @@ ChatGPT 以 ZIP 內的內容為準，不會再看舊 ZIP。
 - 對話視窗保持「輕量：決策＋指令＋回報」。  
 - 詳細規格與操作歷史集中在 Git repo 的 `docs/*.md`。  
 - 無論是你、ChatGPT、Windsurf 或 Codex，要接續工作時都能快速銜接。
-

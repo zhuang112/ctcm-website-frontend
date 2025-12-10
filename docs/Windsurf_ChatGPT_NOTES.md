@@ -416,6 +416,25 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0028 enforce-test-build-and-raw-stop-rules
+
+- 目的：把「RAW 無法讀取即停用」與「code 任務預設要跑 test+build」正式寫入 workflow，並在 notes 留存。
+- 內容：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：
+    - 新增 RAW 停用規則：RAW 缺漏/阻擋/404/403 時，ChatGPT 必須停止推論該檔案內容，請使用者提供本機檔或 snapshot。
+    - 新增 code 任務規則：凡改動 `src/`、`tools/`、`tests/`、或會被程式讀寫的 `data/`，收尾前需執行 `npm test` **及** `npm run build`；若仍失敗，須在 notes 記錄錯誤與原因。
+    - 前瞻提醒：目前仍以 `main` 為主；若未來多人協作可考慮 feature 分支 + PR。
+  - notes 本節記錄規則更新，無程式碼改動。
+- 測試：純 docs 更新，未執行測試/建置。
+
+變更檔案（含 RAW 連結）：
+
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
 
 ### 1. 任務需求總結
