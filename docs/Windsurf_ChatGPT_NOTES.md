@@ -354,7 +354,7 @@
 ## 2025-12-12 任務：T-0025 legacy-new-visual-compare-tool（僅登記 TODO）
 
 - 說明：
-  - 在 `docs/PROJECT_TODO.md` 新增 T-0025，登記未來要做的「三欄視覺比對工具」：左欄 legacy HTML/URL、中欄 AnyContent JSON（teaching/news/magazine 等）、右欄新前端頁面或暫時 preview，方便人工驗收欄位遺漏或錯位。
+  - 在 `docs/PROJECT_TODO.md` 更新 T-0025 規格：做成「單獨一頁」的小工具，左右兩欄＋ index 總表；左欄顯示 legacy URL/HTML，右欄可切換「新頁 render / AnyContent JSON 可讀版 / WP 資料摘要」，index 點選一列可同步切換三者。目標用於檢查 mapping 與資料欄位正確性（先支援 teaching 或 news，再擴充）。
   - 本次僅更新 PROJECT_TODO，未實作任何程式或 CLI。
 
 變更檔案（含 RAW 連結）：

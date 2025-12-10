@@ -25,7 +25,7 @@
 
 ### 1. 實作 crawl 工具（已完成範例）
 
-- 狀態：✅ 完成
+- 狀態：? 完成
 - 說明：
   - 檔案：
     - `tools/crawl/crawl-ctworld.ts`
@@ -55,7 +55,7 @@
 
 ### 2. 實作 HTML→AnyContent：teaching
 
-- 狀態：✅ v1 已完成（已有 teaching-from-legacy + teaching-html-to-anycontent.ts；後續優化另開任務）
+- 狀態：? v1 已完成（已有 teaching-from-legacy + teaching-html-to-anycontent.ts；後續優化另開任務）
 - 說明：
   - 主要檔案（已存在）：
     - `tools/convert/teaching-html-to-anycontent.ts`
@@ -78,7 +78,7 @@
 
 ### 3. 實作 zh-TW → zh-CN pipeline
 
-- 狀態：⏳ 拆解中（將拆成多個 T 任務，T-0013 先負責 docs 規格）
+- 狀態：? 拆解中（將拆成多個 T 任務，T-0013 先負責 docs 規格）
 - 說明：
   - 預計檔案：
     - `tools/convert/generate-zh-cn-from-zh-tw.ts`
@@ -108,7 +108,7 @@
 
 > T-XXXX 用來標記「人機協作的小步驟」，方便分派給 Windsurf。
 
-### ✅ T-0001 teaching-from-legacy: 將 htmlToMarkdown 的 verses 映射到 TeachingMeta 偈語欄位（已完成）
+### ? T-0001 teaching-from-legacy: 將 htmlToMarkdown 的 verses 映射到 TeachingMeta 偈語欄位（已完成）
 
 - 狀態：
   - 已由 Windsurf 在 2025-12-08 完成對 teaching-from-legacy 的偈語欄位映射實作。
@@ -136,7 +136,7 @@
 
 ---
 
-### ✅ T-0002 AnyContent 其他 post_type 型別：news / magazine contract（已完成）
+### ? T-0002 AnyContent 其他 post_type 型別：news / magazine contract（已完成）
 
 - 狀態：
   - 已由 Windsurf 依照 T-0002 規格完成實作，並通過 TypeScript 型別檢查。
@@ -157,7 +157,7 @@
 
 ---
 
-### ✅ T-0003 news-from-legacy: 建立 NewsContent adapter 骨架（minimal mapping）（已完成）
+### ? T-0003 news-from-legacy: 建立 NewsContent adapter 骨架（minimal mapping）（已完成）
 
 - 狀態：
   - 已由 Windsurf 依照 T-0003 規格完成實作，並通過 Vitest 測試。
@@ -189,7 +189,7 @@
 
 ---
 
-### ✅ T-0004 magazine-from-legacy: 建立 MagazineContent adapter 骨架（minimal mapping）（已完成）
+### ? T-0004 magazine-from-legacy: 建立 MagazineContent adapter 骨架（minimal mapping）（已完成）
 
 - 狀態：
   - 已由 Windsurf 依照 T-0004 規格完成實作，並通過 TypeScript 型別檢查與 Vitest 測試。
@@ -227,7 +227,7 @@
 
 ### T-0013 zh-tw-to-zh-cn-pipeline-design: 定義欄位白名單與 CLI 規格（docs first）
 
-> 狀態：✅ 已完成（docs 規格補齊，未實作程式碼，2025-12-12）
+> 狀態：? 已完成（docs 規格補齊，未實作程式碼，2025-12-12）
 
 - 目標：
   - 將 `docs/ZH_TW_TO_ZH_CN_PIPELINE.md` 補齊到可以實作的程度：
@@ -250,13 +250,13 @@
     - 可清楚知道哪一類欄位要轉換、哪一類不能轉。
     - 知道 CLI 工具預計怎麼呼叫（含 input/output 參數和使用範例）。
     - 知道 pipeline 預期的輸出資料結構（檔名 / language 欄位 / multilingual 關聯的策略）。
-  - `PROJECT_TODO.md` 中 T-0013 狀態更新為 ✅，並簡短描述本次完成的內容。
+  - `PROJECT_TODO.md` 中 T-0013 狀態更新為 ?，並簡短描述本次完成的內容。
 
 ---
 
 ### T-0013 zh-tw-to-zh-cn-pipeline-design: 定義欄位白名單與 CLI 規格（docs first）
 
-> 狀態：✅ 已完成（docs 規格補齊，未實作程式碼，2025-12-12）
+> 狀態：? 已完成（docs 規格補齊，未實作程式碼，2025-12-12）
 
 - 目標：
   - 將 `docs/ZH_TW_TO_ZH_CN_PIPELINE.md` 補齊到可以實作的程度：
@@ -279,13 +279,13 @@
     - 可清楚知道哪一類欄位要轉換、哪一類不能轉。
     - 知道 CLI 工具預計怎麼呼叫（含 input/output 參數和使用範例）。
     - 知道 pipeline 預期的輸出資料結構（檔名 / language 欄位 / multilingual 關聯的策略）。
-  - `PROJECT_TODO.md` 中 T-0013 狀態更新為 ✅，並簡短描述本次完成的內容。
+  - `PROJECT_TODO.md` 中 T-0013 狀態更新為 ?，並簡短描述本次完成的內容。
 
 ---
 
 ### T-0014 zh-tw-to-zh-cn-pipeline-core-and-cli-skeleton: 實作核心轉換＋CLI 框架（含 dry-run）
 
-> 狀態：✅ 已完成（核心轉換與 CLI skeleton，2025-12-12）
+> 狀態：? 已完成（核心轉換與 CLI skeleton，2025-12-12）
 
 - 目標：
   - 實作繁→簡轉換核心與 CLI 骨架：
@@ -303,7 +303,7 @@
   - `docs/Windsurf_ChatGPT_NOTES.md`
 
 - 驗收方式：
-  - `convertToZhCn` 可將典型繁體詞（如「臺灣」）轉為簡體（如「台湾」）。
+  - `convertToZhCn` 可將典型繁體詞（如「臺灣」）轉為簡體（如「台?」）。
   - CLI 可跑 dry-run 列出輸出路徑；正常模式可將輸入目錄的 JSON 產生對應輸出檔（基本欄位轉換即可）。
   - 有對應單元測試（至少覆蓋 convertToZhCn），並新增 `npm run convert:zh-cn` 便於呼叫。
 
@@ -311,7 +311,7 @@
 
 ### T-0015 zh-tw-to-zh-cn-pipeline-write-json: 將 AnyContent JSON 轉為 zh-CN 寫檔
 
-> 狀態：✅ 已完成（transform + CLI 寫檔，2025-12-12）
+> 狀態：? 已完成（transform + CLI 寫檔，2025-12-12）
 
 - 目標：
   - 完成 `transformAnycontentZhTwToZhCn`（依 pipeline docs 的欄位白名單）。
@@ -335,7 +335,7 @@
 
 ### T-0016 zh-cn-health-check-tool: zh-TW / zh-CN JSON 健康檢查 CLI
 
-> 狀態：⬜ 尚未開始
+> 狀態：? 尚未開始
 
 - 目標：
   - 實作一支 CLI（或 Node script），用來比對 zh-TW / zh-CN JSON 是否對齊：
@@ -361,7 +361,7 @@
 
 ### T-0017 html-to-markdown-rules-cleanup: 整理 HTML→Markdown 規則文件
 
-> 狀態：✅ 已完成（V4 規則整理，2025-12-12）
+> 狀態：? 已完成（V4 規則整理，2025-12-12）
 
 - 目標：
   - 重寫並整理 `docs/HTML_TO_MARKDOWN_RULES_V4.md`，讓共用規則與圖片策略清楚可維護。
@@ -376,7 +376,7 @@
 
 ### T-0018 meta-instr-and-status-structure: 整理 INSTR 與狀態紀錄結構
 
-> 狀態：✅ 已完成（集中 INSTR、補 README/Template，2025-12-12）
+> 狀態：? 已完成（集中 INSTR、補 README/Template，2025-12-12）
 
 - 目標：
   - 將所有 INSTR 檔集中於 `docs/INSTR/`，命名規則 `INSTR-T-xxxx-<slug>.md`（跨任務通用可用 0000）。
@@ -391,7 +391,7 @@
 
 ### T-0019 enforce-utf8-encoding: 強制文字檔使用 UTF-8 + LF
 
-> 狀態：✅ 已完成（2025-12-12）
+> 狀態：? 已完成（2025-12-12）
 
 - 目標：
   - 透過 `.editorconfig` / `.gitattributes` 確保文字檔一律 UTF-8、行尾 LF。
@@ -406,7 +406,7 @@
 
 ### T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
 
-> 狀態：✅ 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）
+> 狀態：? 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）
 
 - 目標：
   - 在既有 `news-from-legacy` 骨架上，實作第一版的日期與地點欄位 mapping，
@@ -488,7 +488,7 @@
 
 - 建議修改檔案：
   - `docs/COMPLETE_PROJECT_WORKFLOW.md`：新增／更新一小節描述 `CTWORLD_LEGACY_ROOT` 與實際檔案位置。
-  - `docs/PROJECT_TODO.md`：標記本任務為 ✅ 並補充實際觀察結果摘要。
+  - `docs/PROJECT_TODO.md`：標記本任務為 ? 並補充實際觀察結果摘要。
   - （選用）`docs/LEGACY_DATA_NOTES.md`：若檔案結構特別複雜，可在此詳述。
 
 - 允許修改的範圍：
@@ -497,7 +497,7 @@
 
 ### T-0010 rename-workflow-file: 將 workflow 檔名改為 Agent 中立版本
 
-> 狀態：✅ 已完成（檔名已改為 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`，2025-12-10）
+> 狀態：? 已完成（檔名已改為 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`，2025-12-10）
 
 - 目標：
   - 將 workflow 檔更名為 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`（取代舊 windsuf 版命名）。
@@ -515,11 +515,11 @@
 - 驗收：
   - [x] repo 內只剩新檔名，舊檔名不再出現於檔案系統或文字內容。
   - [x] 相關 docs 皆引用 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`。
-  - [x] 本條狀態標記為 ✅ 並記載新檔名。
+  - [x] 本條狀態標記為 ? 並記載新檔名。
 
 ### T-0011 fix-corrupted-docs: 修復亂碼 docs 並統一為 UTF-8
 
-> 狀態：⬜ 尚未開始
+> 狀態：? 尚未開始
 
 - 目標：
   - 將目前 repo 中出現亂碼的幾個 docs 修復為正常的 UTF-8 內容，確保未來 ChatGPT / 實作 Agent 以這些檔案為單一真相來源時不會誤判。
@@ -556,7 +556,7 @@
 
 ### T-0012 sync-status-docs: 對齊 PROJECT_TODO / PROJECT_STATUS 與實際進度
 
-> 狀態：⬜ 尚未開始
+> 狀態：? 尚未開始
 
 - 目標：
   - 讓 `docs/PROJECT_TODO.md` 與 `docs/PROJECT_STATUS.md` 真實反映目前 repo 的實作狀態，
@@ -571,7 +571,7 @@
 - 建議修改內容：
   - `docs/PROJECT_TODO.md`：
     - 為 **T-0005 news-from-legacy** 新增狀態行，例如：
-      - `> 狀態：✅ 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）`
+      - `> 狀態：? 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）`
     - 在「原始三項 TODO」中：
       - teaching HTML→AnyContent 的條目，補充目前已有的實作（`teaching-from-legacy` + `teaching-html-to-anycontent.ts`），
         並視情況將狀態更新為「部分完成 / v1 完成」。
@@ -600,28 +600,32 @@
     - `git push` 到 `origin/main`。
     - 在 `docs/Windsurf_ChatGPT_NOTES.md` 新增 T-0012 對應小節與 commit hash。
 
-### T-0025 legacy-new-visual-compare-tool：舊站 / AnyContent / 新站三欄視覺比對工具
+### T-0025 legacy-new-visual-compare-tool：舊站 / AnyContent / 新站視覺比對工具（單頁兩欄＋ index）
 
 > 狀態：⬜ 尚未開始（概念登記，未實作）
 
-- 目標：
-  - 提供一個簡單的視覺比對工具，讓人工驗收可以同時看到：
-    - 左欄：舊站 legacy HTML 頁面（或舊站 URL 預覽）。
-    - 中欄：抽取後的 AnyContent JSON（以較可讀的欄位/區塊方式呈現：標題、內文、偈語、圖片 meta 等）。
-    - 右欄：新站對應頁面（或暫時以 React/Markdown 預覽方式模擬）。
-  - 協助檢查：
-    - 有沒有欄位遺漏（例如舊頁有的段落/偈語在 AnyContent 沒出現）。
-    - 有沒有欄位放錯（例如日期/地點跑到錯欄位）。
-    - 新頁呈現是否忠實反映 AnyContent JSON。
+- 目標（介面形態）：
+  - 做成「單獨的一頁小工具」：左右兩欄 + 上方/側邊的 index 總表。
+  - 左欄：顯示舊站內容，可嵌入 legacy URL（iframe/預覽）或載入本機 legacy HTML 供純文字/簡易 render，讓使用者看到舊站原貌。
+  - 右欄：可切換視圖（tab/按鈕），至少包含：
+    - 新前端頁面 render（若已有 React/Next 頁面，直接 URL 預覽）。
+    - AnyContent JSON 的可讀版（欄位重組：標題、內文、偈語、圖片 meta 等）。
+    - WordPress 資料摘要（若已匯入：post_id、slug、meta 等）。
+  - index 總表：每列是一筆 mapping，欄位示意：
+    - legacy URL 或檔案路徑
+    - AnyContent JSON 路徑（如 data/anycontent/zh-tw/teaching/...）
+    - 新站 URL（如未來 /teaching/... slug）
+    - WordPress post ID / slug（若已知）
+  - 點選 index 的一列時，左/右欄同步切換到對應的 legacy / 新頁 / JSON / WP 資料。
 
-- 驗收方式（先粗略定義，之後可在實作任務中細化）：
-  - [ ] 提供一個簡單的介面或工具，可以分別輸入：
-    - legacy HTML 檔路徑或 URL；
-    - 對應的 AnyContent JSON 檔路徑；
-    - （可選）新頁 preview URL 或本地渲染。
-  - [ ] 在同一畫面上呈現三欄內容，支援基本同步閱讀（例如同時捲動到類似位置）。
-  - [ ] 至少能支援 teaching/news 這兩種 post_type，之後可擴充到 magazine 等其他類型。
+- 驗收精神（粗略，實作時可細化）：
+  - [ ] 單頁工具具備左右兩欄與 index；右欄可在「新頁 render / AnyContent JSON / WP 資料」三種視圖間切換。
+  - [ ] 至少先支援 teaching 或 news 其中一種 post_type，後續可擴充 magazine 等其他類型。
+  - [ ] 可協助兩層檢查：
+    - A. 新舊網站對應關係是否正確（URL/slug/post_id 等 mapping）。
+    - B. 資料欄位是否正確（偈語、標題、內容段落有無漏/錯欄位）。
 
 - 備註：
-  - 本 T 目前僅為「需求登記」，不包含實作程式；實作時應另開 T（例如 T-0030）搭配 INSTR 說明技術細節。
+  - 本 T 僅為 roadmap 登記，未強制立即實作；正式開發時應另開後續 T（如 T-0030）＋ INSTR 拆解技術細節。
+
 
