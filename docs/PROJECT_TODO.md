@@ -389,6 +389,21 @@
 
 ---
 
+### T-0019 enforce-utf8-encoding: 強制文字檔使用 UTF-8 + LF
+
+> 狀態：✅ 已完成（2025-12-12）
+
+- 目標：
+  - 透過 `.editorconfig` / `.gitattributes` 確保文字檔一律 UTF-8、行尾 LF。
+  - 在 workflow 中提醒 Windows 使用者如何避免 Big5/ANSI 亂碼。
+  - 在 notes 留存 RAW 連結與 commit 紀錄。
+- 驗收：
+  - 專案根有 `.editorconfig` / `.gitattributes`，內容設定為 UTF-8 + LF。
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 提醒編碼/行尾規則。
+  - notes 有 T-0019 小節並附 RAW 連結。
+
+---
+
 ### T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
 
 > 狀態：✅ 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）

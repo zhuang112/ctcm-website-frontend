@@ -200,6 +200,12 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
   - 依 `PROJECT_TODO` / `Windsurf_ChatGPT_NOTES` 條目執行任務。
   - 變更完成後，`git add` / `commit` / `push`，並在 notes 記錄 commit hash 與 RAW 連結。
   - ChatGPT 會以 notes + RAW 連結 review，不在對話中展開長篇細節。
+
+### 1.10 檔案編碼與行尾（防止亂碼）
+
+- 所有文字檔一律使用 `UTF-8`，行尾使用 `LF`；已在 `.editorconfig` / `.gitattributes` 強制設定。
+- 若在 Windows 看到亂碼，請先 `chcp 65001`，或在編輯器選擇「以 UTF-8 重新開啟」。
+- 禁止以 ANSI / Big5 另存；如誤存請改回 UTF-8 並重新提交。
 ---
 
 ## 2. 檔案與資料夾結構（簡要）

@@ -245,6 +245,32 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0019 enforce-utf8-encoding
+
+- 更新檔案：
+  - 新增 `.editorconfig`、`.gitattributes`，強制文字檔 UTF-8 + LF。
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增編碼/行尾提醒。
+  - `docs/PROJECT_TODO.md`：新增 T-0019 條目並標記完成。
+  - `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次任務與 RAW 連結。
+- 測試：純文檔/設定更新，未執行程式。
+- commit: 2301792
+變更檔案（含 RAW 連結）：
+
+- .editorconfig  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.editorconfig
+
+- .gitattributes  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.gitattributes
+
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
