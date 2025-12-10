@@ -79,6 +79,24 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0013 zh-tw-to-zh-cn-pipeline-design（docs first）
+
+- 更新檔案：
+  - `docs/PROJECT_TODO.md`：將 zh-TW→zh-CN pipeline 條目改為 umbrella，新增 T-0013 並標記為完成。
+  - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`：補齊欄位白名單、資料來源/輸出目錄假設、CLI 規格、繁簡轉換策略（僅 docs）。
+- 測試：僅文檔更新，無額外測試。
+- commit: (pending push)
+變更檔案（含 RAW 連結）：
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/ZH_TW_TO_ZH_CN_PIPELINE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/ZH_TW_TO_ZH_CN_PIPELINE.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1

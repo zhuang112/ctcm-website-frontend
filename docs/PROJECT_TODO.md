@@ -78,7 +78,7 @@
 
 ### 3. 實作 zh-TW → zh-CN pipeline
 
-- 狀態：⬜ 尚未開始
+- 狀態：⏳ 拆解中（將拆成多個 T 任務，T-0013 先負責 docs 規格）
 - 說明：
   - 預計檔案：
     - `tools/convert/generate-zh-cn-from-zh-tw.ts`
@@ -99,6 +99,8 @@
       - 文字已正確轉為簡體。
       - 結構（欄位／型別）與原本完全一致。
       - ID / URL / enum 未被誤改。
+  - 備註：
+    - 此條為整體 pipeline 目標，實作將拆成多個 T 任務（如 T-0013 規格設計、T-0014 程式實作 v1 等）。本次新增 T-0013，專注 docs 規格，不動程式碼。
 
 ---
 
@@ -220,6 +222,35 @@
 - 結果摘要：
   - 已有 minimal 版本的 `magazine-from-legacy` adapter 與對應測試，能從 legacy HTML + htmlToMarkdownResult 建立基本的 `MagazineContent`。
   - teaching / news / magazine 三種 post_type 的 adapter 骨架都已完成，可分別在後續任務中逐步補齊欄位 mapping。
+
+---
+
+### T-0013 zh-tw-to-zh-cn-pipeline-design: 定義欄位白名單與 CLI 規格（docs first）
+
+> 狀態：✅ 已完成（docs 規格補齊，未實作程式碼，2025-12-12）
+
+- 目標：
+  - 將 `docs/ZH_TW_TO_ZH_CN_PIPELINE.md` 補齊到可以實作的程度：
+    - 明確列出「要做繁→簡轉換的欄位白名單」與「不應轉換的欄位」。
+    - 說清楚 pipeline 的輸入來源與輸出位置（資料夾結構假設可以是暫定版）。
+    - 定義一支 CLI 工具（預計 `tools/convert/generate-zh-cn-from-zh-tw.ts`）的參數與使用方式。
+  - 不修改任何 TypeScript 程式碼，只改 docs。
+
+- 關聯 docs：
+  - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
+  - `docs/CONTENT_SCHEMA.md`
+  - `docs/PROJECT_STATUS.md`（目前標記 zh-TW→zh-CN 尚未實作）
+
+- 建議修改檔案：
+  - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`：補齊 pipeline 設計細節（已於本次完成）。
+  - `docs/PROJECT_TODO.md`：本任務條目與原始第 3 項說明。
+
+- 驗收方式：
+  - 由 ChatGPT 閱讀 `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`，確認：
+    - 可清楚知道哪一類欄位要轉換、哪一類不能轉。
+    - 知道 CLI 工具預計怎麼呼叫（含 input/output 參數和使用範例）。
+    - 知道 pipeline 預期的輸出資料結構（檔名 / language 欄位 / multilingual 關聯的策略）。
+  - `PROJECT_TODO.md` 中 T-0013 狀態更新為 ✅，並簡短描述本次完成的內容。
 
 ---
 
