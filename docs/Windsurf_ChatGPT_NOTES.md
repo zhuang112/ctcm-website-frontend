@@ -86,7 +86,7 @@
   - `docs/PROJECT_TODO.md`：將 zh-TW→zh-CN pipeline 條目改為 umbrella，新增 T-0013 並標記為完成。
   - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`：補齊欄位白名單、資料來源/輸出目錄假設、CLI 規格、繁簡轉換策略（僅 docs）。
 - 測試：僅文檔更新，無額外測試。
-- commit: (pending push)
+- commit: 5e7d235
 變更檔案（含 RAW 連結）：
 
 - docs/PROJECT_TODO.md  
