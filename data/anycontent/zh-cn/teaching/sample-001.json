@@ -1,0 +1,22 @@
+{
+  "external_id": "teaching_sample_001",
+  "language": "zh-cn",
+  "post_type": "teaching",
+  "old_url": "https://www.ctworld.org/turn/sutra/sample-001.htm",
+  "post_title": "sample-001.htm",
+  "post_excerpt": null,
+  "body_markdown": "示范教学页：心经讲记\n\n# 心经讲记\n\n## 导读\n\n这是一篇示范用的教学页面，含有简短的导读。\n\n> 观自在菩萨\n> 行深般若波罗蜜多时\n\n以下是课程要点：\n\n- 强调日常修持\n- 搭配静坐与持咒\n\n更多内容请参考附件。",
+  "featured_image": null,
+  "featured_image_caption": null,
+  "gallery_items": [],
+  "meta": {
+    "ct_speaker_name": null,
+    "ct_location": null,
+    "ct_event_date": null,
+    "ct_sutra_reference": null,
+    "ct_has_dharma_verse": "yes",
+    "ct_verse_block_markdown": "> 观自在菩萨 行深般若波罗蜜多时",
+    "ct_verse_type": "sutra",
+    "ct_verse_lang": "zh-tw"
+  }
+}

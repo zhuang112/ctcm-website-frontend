@@ -273,6 +273,36 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
+
+## 2025-12-12 臨時檢查：全套 Vitest
+
+- 執行：`npm test`（Vitest 全套）。
+- 結果：全部通過（6 檔測試、12 個測試案例），無新增失敗。
+- 其他：執行前執行 `npm install` 安裝依賴，未改動程式或 docs。
+
+## 2025-12-12 任務：T-0020 teaching-end-to-end-sample（teaching HTML → zh-TW AnyContent → zh-CN）
+
+- 範例來源：`data/legacy-teaching/sample-001.html`（示範教學頁，含 sutra 偈語、列表）。
+- 轉換流程：
+  - zh-TW：`npx tsx tools/convert/teaching-html-to-anycontent.ts --in data/legacy-teaching/sample-001.html --external-id teaching_sample_001 --language zh-tw --out data/anycontent/zh-tw/teaching/sample-001.json`
+  - zh-CN：`npx tsx tools/convert/generate-zh-cn-from-zh-tw.ts --input data/anycontent/zh-tw/teaching --output data/anycontent/zh-cn/teaching`
+- 人工檢查摘要：
+  - zh-TW JSON：post_type=teaching、language=zh-tw，偈語轉成 blockquote，meta `ct_has_dharma_verse=yes`、`ct_verse_block_markdown` 兩行 `>`。
+  - zh-CN JSON：language=zh-cn，內文與偈語皆轉為簡體，結構與 zh-TW 對齊。
+- 變更檔案（含 RAW 連結）：
+
+  - data/legacy-teaching/sample-001.html  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/legacy-teaching/sample-001.html
+
+  - data/anycontent/zh-tw/teaching/sample-001.json  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-tw/teaching/sample-001.json
+
+  - data/anycontent/zh-cn/teaching/sample-001.json  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-cn/teaching/sample-001.json
+
+  - docs/Windsurf_ChatGPT_NOTES.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
 
 ### 1. 任務需求總結
