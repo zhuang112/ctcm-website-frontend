@@ -161,6 +161,32 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
     - 「請從 GitHub 讀取 `docs/PROJECT_TODO.md`」，  
       ChatGPT 會自動以 RAW 連結 `https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md` 來讀取。
 
+### 1.8 Notes 中必須附上 RAW 連結
+
+- 每一個 T-XXXX 任務完成後，實作 Agent 必須在 `docs/Windsurf_ChatGPT_NOTES.md` 的對應小節中，紀錄：
+  - 任務標題與日期
+  - 實際修改／新增的檔案清單
+  - 測試指令與結果（若有）
+  - 最後 push 的 commit hash（例如 `commit: 27caf76`）
+  - 一個「變更檔案（含 RAW 連結）」區塊
+- RAW 連結的格式例如：
+
+  ```markdown
+  變更檔案（含 RAW 連結）：
+
+  - docs/PROJECT_TODO.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+  - docs/Windsurf_ChatGPT_NOTES.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+  ```
+
+- ChatGPT 在 review 任務時，可以只看 notes 中的這個區塊，直接點 RAW 連結打開每一個變更檔案的最新內容。
+- 若未來 repo 名稱或預設分支有變更，必須同步更新本小節中的 RAW base URL 與示範連結。
+
 ---
 
 ## 2. 檔案與資料夾結構（簡要）
@@ -276,6 +302,34 @@ Windsurf 根據 ChatGPT 給的指令：
 
 - ChatGPT：在對話中只給「任務摘要 + 給 Windsurf 的短指令」，所有長篇規格與細節寫進 docs（例如 `WORKFLOW_*`、`CONTENT_SCHEMA.md`、`Windsurf_ChatGPT_NOTES.md`）。
 - Windsurf：回報時只需提供「本次任務代號 + 變更檔案列表 + 測試結果 + [建議 git 指令] 區塊」，不需要貼出完整思路或大段 diff。
+
+### 3.6 ChatGPT ↔ 實作 Agent 的溝通格式（code block＋notes）
+
+為了讓使用者只需要做「轉貼」而不用自己整理指令，本專案規定：
+
+- ChatGPT 對使用者的回應，預設分成兩個部分：
+  1. **簡短摘要**：用自己的話說明這次要做的任務（例如要改哪些 docs / 實作哪個 T 任務）。
+  2. **給實作 Agent 的完整指令**：以「單一 code block」呈現，可以直接貼給實作 Agent（目前為 Codex）。  
+     指令中會明寫：
+     - 需要修改 / 新增的檔案列表
+     - 允許修改的範圍（通常是特定檔案或 TODO 區塊）
+     - 要執行的測試指令與預期結果
+     - 收尾動作（git add / commit / push、更新 notes）
+
+- 使用者只需要：
+  - 把 ChatGPT 提供的 code block 原封不動貼給實作 Agent。
+  - 任務完成後，將實作 Agent 的回報摘要貼回 ChatGPT。
+
+- 實作 Agent（目前為 Codex）完成任務後，對使用者應提供「極簡回報」：
+  - 指明已完成的 T 任務編號（例如 `T-0011`）。
+  - 提醒使用者：「詳細請看 notes 的哪一個小節」，例如：  
+    `請看 docs/Windsurf_ChatGPT_NOTES.md 中 2025-12-12 任務：T-0011 小節（內含 RAW 連結）。`
+  - 其餘細節（變更檔案、測試內容、疑問）一律寫入 `docs/Windsurf_ChatGPT_NOTES.md`，而不是塞在對話裡。
+
+- ChatGPT 在 review 任務成果時，會依據 notes 中的資訊與 RAW 連結：
+  - 先讀 `docs/Windsurf_ChatGPT_NOTES.md` 對應小節。
+  - 再透過 notes 中提供的 RAW 連結打開各個異動檔案，確認內容是否符合任務說明。
+  - 若發現問題或需要新任務，會再產生下一個 T 任務的 code block 指令。
 
 **細節全部寫在文件**：
 
