@@ -37,6 +37,13 @@
 - 重點：依 2025-12-10 版本，整理進度總覽、各模組狀態（crawl/inventory、HTML→Markdown + sutra、teaching/news/magazine adapters、docs snapshot CLI、zh-TW→zh-CN 未實作、legacy data root blocked、WP/React 未開始）。
 - 測試：僅文檔更新，無額外測試。
 - commit: 9329d58
+
+## 2025-12-11 任務：workflow 新增 GitHub RAW 連結規則
+
+- 更新檔案：`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`，新增「1.7 GitHub RAW 連結規則（給 ChatGPT 用）」。
+- 重點：定義 `raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/` 為 RAW base，說明 ChatGPT 讀取方式與失敗時回報原則。
+- 測試：僅文檔更新，無額外測試。
+- commit: (pending push)
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1

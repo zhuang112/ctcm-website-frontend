@@ -109,6 +109,58 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
     - 需要傳遞較大的 log / 中間產出，不適合直接 commit 到 repo。
   - 若當前 T 任務已經有對應的 commit 並 push 到 GitHub，優先讓 ChatGPT 直接讀 GitHub，而不是重新上傳 ZIP。
 
+### 1.7 GitHub RAW 連結規則（給 ChatGPT 用）
+
+為了讓 ChatGPT 能穩定讀取 repo 裡的 docs，而不是只看到 GitHub 頁面的外框，本專案對 `zhuang112/ctcm-website-frontend` 採用以下 RAW 連結規則：
+
+- Repo：`zhuang112/ctcm-website-frontend`
+- 預設分支：`main`
+- RAW base URL（給 ChatGPT 用）：
+
+  ```text
+  https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/
+  ```
+
+- 對於 repo 內的任何檔案路徑（例如 `docs/PROJECT_TODO.md`），ChatGPT 應優先用下列 RAW URL 讀取內容：
+
+  ```text
+  Base + 相對路徑
+
+  範例：
+  docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  → https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+  docs/PROJECT_TODO.md
+  → https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+  ```
+
+- ChatGPT 在本專案中必須遵守的行為：
+
+  1. 當使用者或實作 Agent 在對話中直接提供 `raw.githubusercontent.com` 開頭的連結時（RAW 連結），  
+     ChatGPT 應自動讀取該檔案全文；若讀取失敗（404 / 網路 / 權限問題），必須明確回報，  
+     不得假裝已讀取內容。
+
+  2. 當使用者或實作 Agent 在對話中提到本 repo 的檔案相對路徑，並明確表示要「從 GitHub 讀取」時，例如：  
+     - 「請從 GitHub 讀取 `docs/PROJECT_TODO.md`」  
+     - 「請看 GitHub 上的 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`」
+
+     則 ChatGPT 應自動組合上述 RAW base URL + 相對路徑，  
+     形成對應的 RAW URL，並以該 RAW URL 讀取檔案內容。
+
+  3. 若 RAW 連結無法讀取（例如路徑打錯、分支名稱不符、檔案不存在），  
+     ChatGPT 不得用記憶或舊 snapshot 當作「最新版」，  
+     必須回報問題並請使用者提供：
+     - 正確的 RAW 連結，或
+     - 最新的 docs snapshot ZIP，或
+     - 直接貼上需要分析的段落。
+
+- 注意事項：
+  - 本規則僅適用於本 repo（`zhuang112/ctcm-website-frontend`）的 `main` 分支。  
+    若未來使用其他分支或 fork，需要在本小節更新 RAW base URL。
+  - 在本專案的對話中，可以簡單說：
+    - 「請從 GitHub 讀取 `docs/PROJECT_TODO.md`」，  
+      ChatGPT 會自動以 RAW 連結 `https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md` 來讀取。
+
 ---
 
 ## 2. 檔案與資料夾結構（簡要）
