@@ -309,6 +309,30 @@
 
 ---
 
+### T-0015 zh-tw-to-zh-cn-pipeline-write-json: 將 AnyContent JSON 轉為 zh-CN 寫檔
+
+> 狀態：✅ 已完成（transform + CLI 寫檔，2025-12-12）
+
+- 目標：
+  - 完成 `transformAnycontentZhTwToZhCn`（依 pipeline docs 的欄位白名單）。
+  - 讓 `tools/convert/generate-zh-cn-from-zh-tw.ts` 支援 dry-run 與實際輸出 zh-CN JSON。
+  - 補上基本測試（至少覆蓋 transform）。
+
+- 建議檔案：
+  - `src/i18n/zh-tw-to-zh-cn-pipeline.ts`
+  - `tools/convert/generate-zh-cn-from-zh-tw.ts`
+  - `tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`
+  - `package.json`（腳本/依賴）
+  - `docs/PROJECT_TODO.md`
+  - `docs/Windsurf_ChatGPT_NOTES.md`
+
+- 驗收：
+  - `npx vitest tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`
+  - dry-run 範例：`npm run convert:zh-cn -- --input data/anycontent/zh-tw --output data/anycontent/zh-cn --dry-run`
+  - 確認輸出 JSON 語言為 zh-cn，白名單欄位已轉換。
+
+---
+
 ### T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
 
 > 狀態：✅ 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）

@@ -1,35 +1,13 @@
 #!/usr/bin/env ts-node
 import { promises as fs } from "fs";
 import path from "path";
-import { convertToZhCn } from "../../src/i18n/zh-tw-to-zh-cn";
+import { transformAnycontentZhTwToZhCn } from "../../src/i18n/zh-tw-to-zh-cn-pipeline";
 
 type CliOptions = {
   input: string;
   output: string;
   dryRun: boolean;
 };
-
-const RAW_CONVERT_PATHS = new Set([
-  "title",
-  "post_title",
-  "excerpt",
-  "post_excerpt",
-  "body_markdown",
-  "seo.meta_title",
-  "seo.meta_description",
-]);
-
-const BLOCKED_KEYS = new Set([
-  "id",
-  "uuid",
-  "external_id",
-  "slug",
-  "url",
-  "old_url",
-  "permalink",
-  "featured_image",
-  "language",
-]);
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
@@ -59,11 +37,7 @@ async function main() {
       continue;
     }
 
-    const converted = convertNode(parsed);
-    // force language to zh-cn if present
-    if (typeof converted === "object" && converted && "language" in converted) {
-      (converted as Record<string, unknown>).language = "zh-cn";
-    }
+    const converted = transformAnycontentZhTwToZhCn(parsed);
 
     if (options.dryRun) {
       console.log(`  - would write: ${outPath}`);
@@ -108,51 +82,6 @@ async function collectJsonFiles(dir: string): Promise<string[]> {
     }
   }
   return files;
-}
-
-function convertNode(value: unknown, pathParts: string[] = []): unknown {
-  if (Array.isArray(value)) {
-    return value.map((v) => convertNode(v, pathParts));
-  }
-  if (typeof value === "object" && value !== null) {
-    const out: Record<string, unknown> = {};
-    for (const [k, v] of Object.entries(value)) {
-      out[k] = convertNode(v, [...pathParts, k]);
-    }
-    return out;
-  }
-  if (typeof value === "string") {
-    return shouldConvert(pathParts) ? convertToZhCn(value) : value;
-  }
-  return value;
-}
-
-function shouldConvert(pathParts: string[]): boolean {
-  const key = pathParts[pathParts.length - 1];
-  if (!key) return false;
-  const lowerKey = key.toLowerCase();
-  if (BLOCKED_KEYS.has(lowerKey)) return false;
-
-  const fullPath = pathParts.join(".").toLowerCase();
-  if (RAW_CONVERT_PATHS.has(lowerKey) || RAW_CONVERT_PATHS.has(fullPath)) {
-    return true;
-  }
-
-  // meta.*: convert string fields unless obviously non-textual
-  if (pathParts[0] === "meta") {
-    if (
-      lowerKey.includes("id") ||
-      lowerKey.includes("url") ||
-      lowerKey.includes("date") ||
-      lowerKey.includes("time") ||
-      lowerKey.includes("slug")
-    ) {
-      return false;
-    }
-    return true;
-  }
-
-  return false;
 }
 
 main().catch((err) => {

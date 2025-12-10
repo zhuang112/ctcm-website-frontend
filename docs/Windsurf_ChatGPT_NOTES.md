@@ -137,6 +137,33 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0015 zh-tw-to-zh-cn-pipeline-write-json
+
+- 更新檔案：
+  - `src/i18n/zh-tw-to-zh-cn-pipeline.ts`：`transformAnycontentZhTwToZhCn` 實作（白名單轉換、language=zh-cn）。
+  - `tools/convert/generate-zh-cn-from-zh-tw.ts`：CLI 寫檔（dry-run / write 支援）。
+  - `tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`：覆蓋 transform。
+  - `docs/PROJECT_TODO.md`：新增 T-0015 條目並標記完成。
+  - `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次任務與 RAW。
+- 測試：`npx vitest tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`
+- commit: fde0a7a（notes 更新 hash：9e12769）
+變更檔案（含 RAW 連結）：
+
+- src/i18n/zh-tw-to-zh-cn-pipeline.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/i18n/zh-tw-to-zh-cn-pipeline.ts
+
+- tools/convert/generate-zh-cn-from-zh-tw.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/convert/generate-zh-cn-from-zh-tw.ts
+
+- tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
