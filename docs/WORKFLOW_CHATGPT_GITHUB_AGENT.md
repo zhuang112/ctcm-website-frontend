@@ -400,6 +400,7 @@ Windsurf 根據 ChatGPT 給的指令：
   - 文字優先放 `body_markdown`，不要臨時新增 meta 欄位或未知 key。
   - 保留 `old_url`、legacy HTML 來源，方便日後對照。
   - 若發現常見且需要新欄位，請在 notes 記錄並另開 T 任務，再更新 schema/adapter。
+- 如需標記仍有未分類內容，可在 AnyContent JSON 設 `meta.has_unclassified_content = true`，並用 `meta.unclassified_notes` 簡述暫存原因；不強迫當下拆欄位。
 - 規則詳見 `docs/HTML_TO_MARKDOWN_RULES_V4.md` 的「未知內容 fallback」段落。
 
 **細節全部寫在文件**：

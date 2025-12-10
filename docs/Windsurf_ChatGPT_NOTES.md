@@ -1361,3 +1361,29 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-12 任務：T-0035 add-unclassified-content-flags
+
+- 目的：在 AnyContent schema 與流程中加入「未分類內容」旗標，避免亂塞 meta，方便後續追蹤。
+- 內容：
+  - `docs/CONTENT_SCHEMA_V1.md`：共用欄位新增 `meta.has_unclassified_content`（boolean）與 `meta.unclassified_notes`（string）。
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`：未知內容 fallback 段落說明可搭配旗標，暫時留在 `body_markdown`。
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：提醒 adapter 編輯時可視需要設定旗標，不強迫當下拆欄位。
+  - `docs/PROJECT_TODO.md`：新增 T-0035 並標記完成。
+- 測試：純 docs 更新，未執行。
+
+變更檔案（含 RAW 連結）：
+
+- docs/CONTENT_SCHEMA_V1.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+
+- docs/HTML_TO_MARKDOWN_RULES_V4.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
+
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

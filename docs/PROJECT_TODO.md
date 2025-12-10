@@ -734,9 +734,23 @@
     - schema 設計步驟（如何從 legacy HTML 抽出 AnyContent/WordPress 欄位）。
     - sample JSON + /dev/compare 對照（若未來需要）。
   - 未來實作時再拆成對應的 T 任務（另開 INSTR）。
-- 驗收（僅登記）：
-  - [ ] PROJECT_TODO 已新增本條目，說明未來模板方向。
-  - [ ] notes 已紀錄本次登記與 RAW 連結。
+  - 驗收（僅登記）：
+    - [ ] PROJECT_TODO 已新增本條目，說明未來模板方向。
+    - [ ] notes 已紀錄本次登記與 RAW 連結。
+
+### T-0035 add-unclassified-content-flags：新增未分類內容標記欄位
+
+> 狀態：✅ 已完成（schema/workflow/rules 更新，2025-12-12）
+
+- 目標：
+  - 在 AnyContent V1 schema 加入共用欄位 `meta.has_unclassified_content`（boolean）與 `meta.unclassified_notes`（string），方便標記暫未分類的內容。
+  - 在 HTML→Markdown 規則與 workflow 中說明這兩個欄位的用途：暫時留在 `body_markdown`，必要時以旗標標記，後續再開 T 任務處理。
+
+- 驗收：
+  - [x] `docs/CONTENT_SCHEMA_V1.md` 增列兩個欄位說明。
+  - [x] `docs/HTML_TO_MARKDOWN_RULES_V4.md` 補充如何搭配旗標使用的 fallback 規則。
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 提醒 adapter 編輯時可視需要設定旗標。
+  - [x] notes 紀錄本次規則更新與 RAW 連結。
 ### T-0034 unknown-content-handling-rule：新增「未知內容暫存」規則
 
 > 狀態：✅ 已完成（rule 已寫入 HTML_to_MD / workflow，2025-12-12）

@@ -80,6 +80,7 @@
 - 文字優先放 `body_markdown`：若 HTML 片段沒有對應 schema 欄位（臨時敘述、少量說明），直接保留在 `body_markdown`，不要硬新增 meta 欄位。
 - 不立即新增 meta：只有在多數頁面明確出現、確認需要欄位時，再於後續任務補 schema/adapter；暫不要自行加 `unknownField`。
 - 保留對照：`old_url` 必填，盡量保留 legacy HTML 檔（如 `data/legacy-*/...html`）以便日後對照；若發現常見但尚未有欄位的 pattern，請在 notes 記錄並開新 T 任務處理。
+- 若整體內容仍有大量暫存段落，可在 AnyContent JSON 的 `meta.has_unclassified_content = true`，並以 `meta.unclassified_notes` 簡述原因；無需在 adapter 當下強行拆欄位，後續再開 T 任務處理。
 
 ---
 

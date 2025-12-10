@@ -16,7 +16,10 @@
 - `featured_image`: string | null；`featured_image_caption`: string | null（選填）
 - `gallery_items`: Array<{ url: string; alt?: string | null; caption?: string | null }>（現有 sample 未使用，暫為空陣列）
 - `meta`: 各 post_type 專用欄位（下方詳述）
-- 未知或暫無欄位的內容：先留在 `body_markdown`；除非確定常見且需要欄位，暫勿自行新增 meta key（等待後續任務評估 schema）。- 其他暫未使用欄位（seo、multilingual 等）可留白，視未來需要另行定義。
+- `meta.has_unclassified_content`: boolean（預設 false；若該 JSON 仍含大量未分類內容可設為 true）
+- `meta.unclassified_notes`: string | null（選填，簡述「哪些段落暫時留在 body_markdown」）
+- 未知或暫無欄位的內容：先留在 `body_markdown`；除非確定常見且需要欄位，暫勿自行新增 meta key（等待後續任務評估 schema）。
+- 其他暫未使用欄位（seo、multilingual 等）可留白，視未來需要另行定義。
 
 ## 2. teaching（TeachingContent）
 
