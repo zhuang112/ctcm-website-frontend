@@ -19,7 +19,8 @@
 - notes 記錄格式（每個 T 任務一個小節）：
   - 說明任務標題、日期、需求摘要。
   - 列出更新檔案與測試狀態，紀錄最後 commit hash。
-  - 追加「變更檔案（含 RAW 連結）」區塊，列出本次所有異動/新增檔案與 RAW URL。
+- 追加「變更檔案（含 RAW 連結）」區塊，列出本次所有異動/新增檔案與 RAW URL。
+- ChatGPT → Agent code block 約定：code block 中不得出現 citation / content reference（例如 `::contentReference[...]`、`oaicite:0`），如需引用請在 code block 外以文字描述。
 
 ## 2025-12-10 任務：T-0011 / T-0012 初始化
 
@@ -80,6 +81,14 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+> 參考 RAW 連結：
+>
+> - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+>   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+>
+> - docs/Windsurf_ChatGPT_NOTES.md  
+>   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
 ## 2025-12-12 任務：T-0013 zh-tw-to-zh-cn-pipeline-design（docs first）
 

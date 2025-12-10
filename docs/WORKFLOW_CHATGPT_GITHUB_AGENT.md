@@ -338,6 +338,9 @@ Windsurf 根據 ChatGPT 給的指令：
   - 提醒使用者：「詳細請看 notes 的哪一個小節」，例如：  
     `請看 docs/Windsurf_ChatGPT_NOTES.md 中 2025-12-12 任務：T-0011 小節（內含 RAW 連結）。`
   - 其餘細節（變更檔案、測試內容、疑問）一律寫入 `docs/Windsurf_ChatGPT_NOTES.md`，而不是塞在對話裡。
+- code block 規範：
+  - 不得出現 citation / content reference（例如 `::contentReference[...]`、`oaicite:0` 等），避免污染貼給 Agent 的指令。
+  - 若 ChatGPT 需要引用內容，請在 code block 之外以文字描述，不要在 code block 中夾帶引用標記。
 
 - ChatGPT 在 review 任務成果時，會依據 notes 中的資訊與 RAW 連結：
   - 先讀 `docs/Windsurf_ChatGPT_NOTES.md` 對應小節。
