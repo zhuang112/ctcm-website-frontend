@@ -9,6 +9,8 @@
     "ct_magazine_issue": "15",
     "ct_magazine_issue_raw": "第 15 期",
     "ct_magazine_pub_date": "2025-03-20",
-    "ct_magazine_pub_date_raw": "2025-03-20"
+    "ct_magazine_pub_date_raw": "2025-03-20",
+    "has_unclassified_content": true,
+    "unclassified_notes": "示範：仍有部分圖說/旁白未拆欄位，暫留 body_markdown。"
   }
 }

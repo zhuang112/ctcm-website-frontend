@@ -10,6 +10,8 @@ type CompareEntry = {
   anycontentZhCnPath?: string | null
   newSiteUrl?: string | null
   wordpressPostId?: string | number | null
+  hasUnclassifiedContent?: boolean
+  unclassifiedNotes?: string | null
 }
 
 type LoadedJson = Record<string, any> | null
@@ -61,7 +63,7 @@ function useFetchedJson(path?: string | null) {
 
 function JsonSummary({ data, title }: { data: LoadedJson; title: string }) {
   if (!data) {
-    return <div className="text-sm text-gray-600">尚未載入 {title}，或檔案不存在</div>
+    return <div className="text-sm text-gray-600">尚未載入 {title}</div>
   }
 
   const body = typeof data.body_markdown === 'string' ? data.body_markdown : ''
@@ -89,11 +91,13 @@ function JsonSummary({ data, title }: { data: LoadedJson; title: string }) {
       </div>
 
       <div>
-        <div className="text-xs text-gray-500 mb-1">偈語 / meta</div>
-        <div className="text-gray-800 leading-relaxed">
+        <div className="text-xs text-gray-500 mb-1">meta</div>
+        <div className="text-gray-800 leading-relaxed space-y-1">
           <div>ct_has_dharma_verse: {meta.ct_has_dharma_verse ?? '—'}</div>
           <div>ct_verse_type: {meta.ct_verse_type ?? '—'}</div>
           <div>ct_verse_lang: {meta.ct_verse_lang ?? '—'}</div>
+          <div>has_unclassified_content: {meta.has_unclassified_content ?? '—'}</div>
+          {meta.unclassified_notes ? <div>unclassified_notes: {meta.unclassified_notes}</div> : null}
         </div>
         {meta.ct_verse_block_markdown ? (
           <pre className="mt-2 bg-gray-50 border rounded p-2 whitespace-pre-wrap text-xs">
@@ -103,14 +107,14 @@ function JsonSummary({ data, title }: { data: LoadedJson; title: string }) {
       </div>
 
       <div>
-        <div className="text-xs text-gray-500 mb-1">內文摘要</div>
+        <div className="text-xs text-gray-500 mb-1">body_markdown (snippet)</div>
         <pre className="bg-gray-50 border rounded p-2 whitespace-pre-wrap text-xs max-h-48 overflow-auto">
           {body ? body.split('\n').slice(0, 12).join('\n') : '—'}
         </pre>
       </div>
 
       <details className="text-xs">
-        <summary className="cursor-pointer text-gray-600">查看原始 JSON</summary>
+        <summary className="cursor-pointer text-gray-600">展開完整 JSON</summary>
         <pre className="mt-2 bg-gray-50 border rounded p-2 whitespace-pre-wrap overflow-auto">
           {JSON.stringify(data, null, 2)}
         </pre>
@@ -157,13 +161,9 @@ function LegacyView({
       <div className="p-3 text-sm flex-1 overflow-auto">
         {legacyView === 'local' && entry.legacyHtmlPath ? (
           htmlText ? (
-            <iframe
-              title="Legacy HTML preview"
-              srcDoc={htmlText}
-              className="w-full h-96 border rounded"
-            />
+            <iframe title="Legacy HTML preview" srcDoc={htmlText} className="w-full h-96 border rounded" />
           ) : (
-            <div className="text-gray-600">正在載入本機 HTML …</div>
+            <div className="text-gray-600">尚未載入 local HTML</div>
           )
         ) : null}
 
@@ -172,19 +172,13 @@ function LegacyView({
             <a className="text-blue-600 underline break-all" href={entry.legacyUrl} target="_blank" rel="noreferrer">
               {entry.legacyUrl}
             </a>
-            <div className="text-xs text-gray-500">
-              若因 X-Frame-Options 無法嵌入，可直接點擊連結於新分頁查看。
-            </div>
-            <iframe
-              title="Legacy URL preview"
-              src={entry.legacyUrl}
-              className="w-full h-96 border rounded"
-            />
+            <div className="text-xs text-gray-500">若站台有限制（X-Frame-Options），內嵌預覽可能被阻擋。</div>
+            <iframe title="Legacy URL preview" src={entry.legacyUrl} className="w-full h-96 border rounded" />
           </div>
         ) : null}
 
         {!entry.legacyHtmlPath && !entry.legacyUrl ? (
-          <div className="text-gray-600">沒有 legacy HTML / URL 可供預覽。</div>
+          <div className="text-gray-600">尚未提供 legacy HTML / URL</div>
         ) : null}
       </div>
     </div>
@@ -199,12 +193,14 @@ function RightPane({
   zhCn,
   tab,
   setTab,
+  unclassified,
 }: {
   entry: CompareEntry
   zhTw: LoadedJson
   zhCn: LoadedJson
   tab: RightTab
   setTab: (t: RightTab) => void
+  unclassified?: { hasUnclassifiedContent?: boolean; unclassifiedNotes?: string | null }
 }) {
   return (
     <div className="bg-white border rounded-lg shadow-sm h-full flex flex-col">
@@ -226,7 +222,19 @@ function RightPane({
         </div>
       </div>
 
-      <div className="p-3 text-sm flex-1 overflow-auto">
+      <div className="p-3 text-sm flex-1 overflow-auto space-y-3">
+        {unclassified?.hasUnclassifiedContent ? (
+          <div className="rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-800">
+            <div className="font-semibold mb-1">Unclassified content noted</div>
+            <div className="text-xs text-amber-900">
+              meta.has_unclassified_content = true，暫存內容先留在 <code>body_markdown</code>。
+            </div>
+            {unclassified.unclassifiedNotes ? (
+              <div className="mt-1 text-xs text-amber-900">Notes: {unclassified.unclassifiedNotes}</div>
+            ) : null}
+          </div>
+        ) : null}
+
         {tab === 'zh-tw' && <JsonSummary data={zhTw} title="zh-TW JSON" />}
         {tab === 'zh-cn' && <JsonSummary data={zhCn} title="zh-CN JSON" />}
 
@@ -237,14 +245,10 @@ function RightPane({
                 <a className="text-blue-600 underline break-all" href={entry.newSiteUrl} target="_blank" rel="noreferrer">
                   {entry.newSiteUrl}
                 </a>
-                <iframe
-                  title="New page preview"
-                  src={entry.newSiteUrl}
-                  className="w-full h-96 border rounded"
-                />
+                <iframe title="New page preview" src={entry.newSiteUrl} className="w-full h-96 border rounded" />
               </>
             ) : (
-              <div className="text-gray-600">尚未有新站 URL（目前為 placeholder）。</div>
+              <div className="text-gray-600">尚未設定新站 URL</div>
             )}
           </div>
         )}
@@ -254,7 +258,7 @@ function RightPane({
             {entry.wordpressPostId ? (
               <div>WordPress post_id: {entry.wordpressPostId}</div>
             ) : (
-              <div className="text-gray-600">尚未匯入 WordPress（目前為 placeholder）。</div>
+              <div className="text-gray-600">尚未設定 WordPress 資料</div>
             )}
           </div>
         )}
@@ -269,6 +273,10 @@ export default function VisualComparePage() {
   const [indexError, setIndexError] = useState<string | null>(null)
   const [legacyView, setLegacyView] = useState<'local' | 'url'>('local')
   const [rightTab, setRightTab] = useState<RightTab>('zh-tw')
+  const [showOnlyUnclassified, setShowOnlyUnclassified] = useState(false)
+  const [unclassifiedMap, setUnclassifiedMap] = useState<
+    Record<string, { hasUnclassifiedContent: boolean; unclassifiedNotes: string | null }>
+  >({})
 
   useEffect(() => {
     fetch('/data/compare/index.json')
@@ -284,7 +292,44 @@ export default function VisualComparePage() {
       .catch((err) => setIndexError(err.message || 'failed to load index'))
   }, [])
 
+  useEffect(() => {
+    let cancelled = false
+    async function loadFlags() {
+      const next: Record<string, { hasUnclassifiedContent: boolean; unclassifiedNotes: string | null }> = {}
+      for (const item of entries) {
+        const path = item.anycontentZhTwPath ? (item.anycontentZhTwPath.startsWith('/') ? item.anycontentZhTwPath : `/${item.anycontentZhTwPath}`) : null
+        if (!path) continue
+        try {
+          const res = await fetch(path)
+          if (!res.ok) continue
+          const json = await res.json()
+          const meta = json?.meta || {}
+          next[item.id] = {
+            hasUnclassifiedContent: Boolean(meta.has_unclassified_content),
+            unclassifiedNotes: meta.unclassified_notes ?? null,
+          }
+        } catch {
+          // ignore errors per item
+        }
+      }
+      if (!cancelled) setUnclassifiedMap(next)
+    }
+    if (entries.length > 0) {
+      loadFlags()
+    } else {
+      setUnclassifiedMap({})
+    }
+    return () => {
+      cancelled = true
+    }
+  }, [entries])
+
   const selected = useMemo(() => entries.find((e) => e.id === selectedId) || null, [entries, selectedId])
+  const selectedFlags = selected ? unclassifiedMap[selected.id] : undefined
+  const visibleEntries = useMemo(
+    () => (showOnlyUnclassified ? entries.filter((e) => unclassifiedMap[e.id]?.hasUnclassifiedContent) : entries),
+    [entries, showOnlyUnclassified, unclassifiedMap],
+  )
 
   const { text: legacyHtml } = useFetchedText(selected?.legacyHtmlPath)
   const { data: zhTw } = useFetchedJson(selected?.anycontentZhTwPath)
@@ -301,7 +346,7 @@ export default function VisualComparePage() {
         <div className="max-w-6xl mx-auto px-4 py-4">
           <h1 className="text-xl font-bold">Visual Compare Tool v1</h1>
           <p className="text-sm text-gray-600">
-            單頁 dev 工具，用來比對 legacy / AnyContent / 新站（暫支援 teaching sample-001）。
+            開啟 dev 用的比對工具，檢查 legacy / AnyContent / 新站（目前含 teaching/news/magazine sample）。
           </p>
         </div>
       </header>
@@ -313,6 +358,14 @@ export default function VisualComparePage() {
               <div className="font-semibold">Index</div>
               <div className="text-xs text-gray-600">點選一列同步切換 legacy / JSON / 新頁</div>
             </div>
+            <label className="text-xs flex items-center gap-2 px-2 py-1 border rounded bg-gray-50">
+              <input
+                type="checkbox"
+                checked={showOnlyUnclassified}
+                onChange={(e) => setShowOnlyUnclassified(e.target.checked)}
+              />
+              只顯示未分類旗標
+            </label>
           </div>
           <div className="overflow-x-auto">
             {indexError ? (
@@ -330,15 +383,25 @@ export default function VisualComparePage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {entries.map((item) => {
+                  {visibleEntries.map((item) => {
                     const isActive = item.id === selectedId
+                    const hasUnclassified = unclassifiedMap[item.id]?.hasUnclassifiedContent
                     return (
                       <tr
                         key={item.id}
                         className={`border-t cursor-pointer ${isActive ? 'bg-blue-50' : 'hover:bg-gray-50'}`}
                         onClick={() => setSelectedId(item.id)}
                       >
-                        <td className="px-3 py-2 font-medium">{item.label}</td>
+                        <td className="px-3 py-2 font-medium">
+                          <div className="flex items-center gap-2">
+                            <span>{item.label}</span>
+                            {hasUnclassified ? (
+                              <span className="text-[11px] px-2 py-0.5 rounded border border-amber-400 bg-amber-50 text-amber-700">
+                                unclassified
+                              </span>
+                            ) : null}
+                          </div>
+                        </td>
                         <td className="px-3 py-2">{item.postType}</td>
                         <td className="px-3 py-2 break-all">{item.legacyUrl || item.legacyHtmlPath || '—'}</td>
                         <td className="px-3 py-2 break-all">{item.anycontentZhTwPath || '—'}</td>
@@ -349,10 +412,10 @@ export default function VisualComparePage() {
                       </tr>
                     )
                   })}
-                  {entries.length === 0 && (
+                  {visibleEntries.length === 0 && (
                     <tr>
                       <td className="px-3 py-2 text-sm text-gray-600" colSpan={6}>
-                        尚無資料，請檢查 data/compare/index.json
+                        目前沒有資料，請檢查 data/compare/index.json
                       </td>
                     </tr>
                   )}
@@ -374,7 +437,14 @@ export default function VisualComparePage() {
           </div>
           <div className="min-h-[480px]">
             {selected ? (
-              <RightPane entry={selected} zhTw={zhTw} zhCn={zhCn} tab={rightTab} setTab={setRightTab} />
+              <RightPane
+                entry={selected}
+                zhTw={zhTw}
+                zhCn={zhCn}
+                tab={rightTab}
+                setTab={setRightTab}
+                unclassified={selectedFlags}
+              />
             ) : (
               <div className="bg-white border rounded-lg shadow-sm h-full flex items-center justify-center text-gray-600">
                 請先在 index 選擇一筆資料

@@ -751,6 +751,21 @@
   - [x] `docs/HTML_TO_MARKDOWN_RULES_V4.md` 補充如何搭配旗標使用的 fallback 規則。
   - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 提醒 adapter 編輯時可視需要設定旗標。
   - [x] notes 紀錄本次規則更新與 RAW 連結。
+### T-0036 compare-unclassified-flag：在 /dev/compare 顯示 has_unclassified_content
+
+> 狀態：✅ 已完成（/dev/compare 支援旗標與篩選，2025-12-12）
+
+- 目標：
+  - `/dev/compare` 的 index 列表能讀取 AnyContent zh-TW JSON 的 `meta.has_unclassified_content` / `meta.unclassified_notes`：
+    - 標示 badge（unclassified）。
+    - 提供「只顯示未分類」篩選。
+  - 右欄（New/JSON/WP）在切換到有旗標的項目時，顯示提示卡與 `unclassified_notes` 內容。
+  - 至少有一個 sample（magazine sample-001）示範 `meta.has_unclassified_content = true`。
+
+- 驗收：
+  - [x] `/dev/compare` index 可看到 has_unclassified_content badge 與 filter。
+  - [x] 點選有旗標的項目，右欄顯示提示卡與 notes。
+  - [x] `npm test`、`npm run build` 通過；變更記錄在 notes，含 RAW 連結。
 ### T-0034 unknown-content-handling-rule：新增「未知內容暫存」規則
 
 > 狀態：✅ 已完成（rule 已寫入 HTML_to_MD / workflow，2025-12-12）

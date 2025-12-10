@@ -1387,3 +1387,29 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-12 任務：T-0036 compare-unclassified-flag
+
+- 目的：在 `/dev/compare` 顯示 AnyContent JSON 的未分類旗標，並提供篩選。
+- 內容：
+  - `src/dev/VisualComparePage.tsx`：index 新增 badge、filter，右欄顯示未分類提示卡與 notes。
+  - `data/anycontent/zh-tw/magazine/sample-001.json`：示範 `meta.has_unclassified_content = true` 與 `unclassified_notes`。
+  - `data/anycontent/zh-cn/magazine/sample-001.json`：同步標記，便於對照。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0036。
+- 測試：`npm test`、`npm run build`。
+
+變更檔案（含 RAW 連結）：
+
+- src/dev/VisualComparePage.tsx  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/dev/VisualComparePage.tsx
+
+- data/anycontent/zh-tw/magazine/sample-001.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-tw/magazine/sample-001.json
+
+- data/anycontent/zh-cn/magazine/sample-001.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-cn/magazine/sample-001.json
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
