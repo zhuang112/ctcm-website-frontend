@@ -351,6 +351,20 @@
 
   - （其餘大量 tracked 檔案修改，請以本次 commit diff 為準）
 
+## 2025-12-12 任務：T-0025 legacy-new-visual-compare-tool（僅登記 TODO）
+
+- 說明：
+  - 在 `docs/PROJECT_TODO.md` 新增 T-0025，登記未來要做的「三欄視覺比對工具」：左欄 legacy HTML/URL、中欄 AnyContent JSON（teaching/news/magazine 等）、右欄新前端頁面或暫時 preview，方便人工驗收欄位遺漏或錯位。
+  - 本次僅更新 PROJECT_TODO，未實作任何程式或 CLI。
+
+變更檔案（含 RAW 連結）：
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
 
 ### 1. 任務需求總結
@@ -1127,4 +1141,3 @@
   - 附上一段 `[Agent 回報摘要]`（含 T 任務編號、變更檔案列表、主要測試結果與 snapshot 檔名），
 
 就能讓新的 ChatGPT 對話直接接上這一輪完成的工作。
-

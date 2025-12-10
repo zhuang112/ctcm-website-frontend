@@ -600,3 +600,28 @@
     - `git push` 到 `origin/main`。
     - 在 `docs/Windsurf_ChatGPT_NOTES.md` 新增 T-0012 對應小節與 commit hash。
 
+### T-0025 legacy-new-visual-compare-tool：舊站 / AnyContent / 新站三欄視覺比對工具
+
+> 狀態：⬜ 尚未開始（概念登記，未實作）
+
+- 目標：
+  - 提供一個簡單的視覺比對工具，讓人工驗收可以同時看到：
+    - 左欄：舊站 legacy HTML 頁面（或舊站 URL 預覽）。
+    - 中欄：抽取後的 AnyContent JSON（以較可讀的欄位/區塊方式呈現：標題、內文、偈語、圖片 meta 等）。
+    - 右欄：新站對應頁面（或暫時以 React/Markdown 預覽方式模擬）。
+  - 協助檢查：
+    - 有沒有欄位遺漏（例如舊頁有的段落/偈語在 AnyContent 沒出現）。
+    - 有沒有欄位放錯（例如日期/地點跑到錯欄位）。
+    - 新頁呈現是否忠實反映 AnyContent JSON。
+
+- 驗收方式（先粗略定義，之後可在實作任務中細化）：
+  - [ ] 提供一個簡單的介面或工具，可以分別輸入：
+    - legacy HTML 檔路徑或 URL；
+    - 對應的 AnyContent JSON 檔路徑；
+    - （可選）新頁 preview URL 或本地渲染。
+  - [ ] 在同一畫面上呈現三欄內容，支援基本同步閱讀（例如同時捲動到類似位置）。
+  - [ ] 至少能支援 teaching/news 這兩種 post_type，之後可擴充到 magazine 等其他類型。
+
+- 備註：
+  - 本 T 目前僅為「需求登記」，不包含實作程式；實作時應另開 T（例如 T-0030）搭配 INSTR 說明技術細節。
+
