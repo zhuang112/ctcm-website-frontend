@@ -394,6 +394,28 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0027 fix-opencc-types-and-build
+
+- 背景：`npm run build` 失敗，因 TypeScript 找不到 `opencc-js` 型別宣告（TS7016）。
+- 作法：
+  - 安裝 devDependency：`@types/opencc-js`，無需額外自訂型別檔。
+  - 再次執行 `npm run build`，已通過（Vite build/type-check 均 OK）。
+- 測試/檢查：`npm run build` 成功，未再出現 opencc-js 型別錯誤。
+
+變更檔案（含 RAW 連結）：
+
+- package.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+
+- package-lock.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package-lock.json
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
 
 ### 1. 任務需求總結

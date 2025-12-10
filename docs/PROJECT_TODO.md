@@ -359,6 +359,21 @@
 
 ---
 
+### T-0027 fix-opencc-types-and-build：修復 opencc-js 型別並讓 npm run build 通過
+
+> 狀態：✅ 已完成（安裝 @types/opencc-js，npm run build 通過，2025-12-12）
+
+- 目標：
+  - 消除 `opencc-js` 缺型別導致的 TS7016，讓 `npm run build` 可以順利通過。
+  - 確保 zh-TW→zh-CN pipeline 的開發依賴完整，build/type-check 不中斷。
+  - 在 docs 記錄採用的解法，若未來需要可再補自定義型別檔。
+
+- 驗收方式：
+  - [x] 安裝 `@types/opencc-js`（或必要時新增 `src/types/opencc-js.d.ts`）後，`npm run build` 不再出現 `opencc-js` 型別錯誤。
+  - [x] 相關變更與路徑已記錄在 `docs/Windsurf_ChatGPT_NOTES.md` 的 T-0027 小節。
+
+---
+
 ### T-0017 html-to-markdown-rules-cleanup: 整理 HTML→Markdown 規則文件
 
 > 狀態：? 已完成（V4 規則整理，2025-12-12）
@@ -646,6 +661,3 @@
     - 右欄 zh-TW/zh-CN JSON tab 可看到 AnyContent 檔案內容。
     - New page / WordPress 目前可顯示 placeholder 或 URL/ID（若未填）。
   - [x] 相關路徑與使用說明已記錄在 `docs/Windsurf_ChatGPT_NOTES.md` 的 T-0026 小節。
-
-
-
