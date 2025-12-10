@@ -21,7 +21,7 @@
 - 在 `docs/PROJECT_TODO.md` 增補新的任務條目：
   - `T-0011 fix-corrupted-docs`：修復亂碼 docs、統一 UTF-8。
   - `T-0012 sync-status-docs`：對齊 PROJECT_TODO / PROJECT_STATUS 與實際進度。
-- 目前僅新增 TODO 條目，未開始實作內容。commit: (pending)
+- 目前僅新增 TODO 條目，未開始實作內容。commit: a423ba4
 
 ---
 
