@@ -1,115 +1,62 @@
-﻿# PROJECT_STATUS嚗??獢脣漲??嚗?
-> ?祆?獢策?靘???芸楛 / ChatGPT / Windsurf?翰???∠???? 
-> ?批捆?芣?歇摰? vs ?脰?銝?vs 銝?甇乓?閰喟敦閬隢??嗡? docs??
+# PROJECT_STATUS
+
+> 給 ChatGPT × 實作 Agent（目前主要是 Codex）掌握現況：GitHub `main` 為單一真相。
+
 ---
 
-## 1. ?湧?????潛?
+## 總覽（2025-12-10）
 
-- ??撠? repo 撌脣?憪?嚗ctcm-website-frontend`
-  - ?垢嚗eact + Vite ?箸?嗆?撌脣停雿?雿??芣 Headless ?批捆嚗?  - `docs/*.md` 撌脫?摰蝚砌?頛芾??潦?- ???祈??獢?inventory 撌亙撌脣停蝺?  - `tools/crawl/crawl-ctworld.ts`
-  - `tools/crawl/filesystem-inventory.ts`
-  - `tools/crawl/diff-crawl-vs-files.ts`
-  - npm scripts嚗?    - `crawl:ctworld` / `inventory:fs` / `diff:crawl-vs-fs`
-- ??HTML ??Markdown ?詨??賢?撌脣祕雿洵銝??  - `src/html/html-to-markdown.ts`
-  - 閬????? `/turn/sutra/` 撠閬? v1??  - 撠?閬嚗docs/HTML_TO_MARKDOWN_RULES_V4.md`
-- ??AnyContent teaching ???adapter 撌脣???v1
-  - ?嚗src/types/anycontent-teaching.ts`
-    - `Language = "zh-tw" | "zh-cn" | "en" | "ja"`
-    - `TeachingMeta` / `TeachingContent` 蝯?蝛拙?嚗閬 contract??  - adapter嚗src/adapters/teaching-from-legacy.ts`
-    - 頛詨嚗LegacyHtmlDocument`嚗rl + html嚗?    - 頛詨嚗TeachingContent`
-- ??皜祈岫?箇?撌脣遣蝡?  - `tests/html/html-to-markdown.spec.ts`
-  - `tests/adapters/teaching-from-legacy.spec.ts`
-  - 撌脣?鋆?`vitest`嚗??`npx vitest` ??`npm test` 頝葫閰艾?- ??銝??撌乩?瘚歇撖急??辣
-  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`
-  - `docs/AI_COLLAB_SUMMARY.md`
-  - `docs/Windsurf_ChatGPT_NOTES.md`嚗indsurf 撌脣神蝚砌???sutra 隞餃?撠?嚗?
+- 爬蟲與 inventory：V1 完成。`tools/crawl/*` 可產出 `data/crawl/*.json/.csv`，包含站內 URL、docroot 檔案列表與差異報表。
+- HTML→Markdown（含 sutra 規則）：V1 完成。`src/html/html-to-markdown.ts` 具 `/turn/sutra/` 專用規則，測試於 `tests/html/html-to-markdown.spec.ts`。
+- Adapters：
+  - teaching：`src/adapters/teaching-from-legacy.ts` V1，搭配 `src/types/anycontent-teaching.ts`，有測試。
+  - news：`src/adapters/news-from-legacy.ts` V1，含日期/地點欄位 mapping，測試於 `tests/adapters/news-from-legacy.spec.ts`。
+  - magazine：`src/adapters/magazine-from-legacy.ts` minimal V1，測試於 `tests/adapters/magazine-from-legacy.spec.ts`。
+- Docs snapshot CLI（T-0007）：已完成並驗收，`npm run snapshot:docs -- --task ...` 由 `tools/docs-snapshot/make-docs-snapshot.ts` 產出 ZIP（不進 git）；log 見 `docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt`。
+- zh-TW→zh-CN pipeline：僅有規格 `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`，尚未實作。
+- Legacy data root（T-0006）：等待完整舊站備份導入後再開工。
+- WordPress importer / React 前端：尚未開始，僅有架構構想（見 `docs/COMPLETE_PROJECT_WORKFLOW.md` 等）。
+
 ---
 
-## 2. ??畾菔底蝝啁???
-### 2.1 ?祈??蝡?獢?inventory
+## 模組/任務狀態詳述
 
-**撌脣???*
+### 爬蟲與 inventory（V1 完成）
+- 主要檔案：`tools/crawl/crawl-ctworld.ts`、`tools/crawl/filesystem-inventory.ts`、`tools/crawl/diff-crawl-vs-files.ts`。
+- 產出：`data/crawl/crawled-urls.*`、`all-files.*`、`missing-from-crawl.*`、`extra-from-crawl.*`。
+- 使用：`npm run crawl:ctworld` / `npm run inventory:fs` / `npm run diff:crawl-vs-files`。
 
-- `tools/crawl/crawl-ctworld.ts`
-  - BFS ??`https://www.ctworld.org` / `ctworld.org.tw`
-  - ?嚗?    - `--base-url`
-    - `--out`
-    - `--max-depth`
-    - `--max-urls`
-    - `--delay-ms`
-  - ?芣? HTML ?嚗??撓??JSON + CSV??
-- `tools/crawl/filesystem-inventory.ts`
-  - 敺璈?`./ctworld-docroot` ????`.htm / .html` 瑼?  - ?Ｙ? `all-files.json` / `.csv`??
-- `tools/crawl/diff-crawl-vs-files.ts`
-  - 瘥???銝祕???啁? URL??vs ?璈?docroot 瑼???  - ?曉嚗?    - 蝺????祆?瘝?
-    - ?祆???蝺?瘝??
-**銝?甇亙遣霅?*
+### HTML→Markdown + sutra 規則（V1 完成）
+- 主要檔案：`src/html/html-to-markdown.ts`，sutra 專用規則收錄在 `docs/HTML_TO_MARKDOWN_RULES_V4.md`。
+- 特點：收集 images/anchors/verses，處理 `<p class="word17-coffee">` 等 sutra 特例。
+- 測試：`tests/html/html-to-markdown.spec.ts`。
 
-- [ ] 撖思?????`docs/crawl-and-inventory.md`嚗??遙?牧????甇?? doc嚗?
-  - 撖急?璆?雿蝙?券??極?瑕??函??日???  - 鋆???雿???max-urls ?璅??
+### Teaching / News / Magazine adapters（皆有 V1）
+- teaching：`src/adapters/teaching-from-legacy.ts`，將 verses 映射到 TeachingMeta；測試於 `tests/adapters/teaching-from-legacy.spec.ts`。
+- news：`src/adapters/news-from-legacy.ts`，日期/地點 mapping V1；測試於 `tests/adapters/news-from-legacy.spec.ts`。
+- magazine：`src/adapters/magazine-from-legacy.ts`，minimal mapping；測試於 `tests/adapters/magazine-from-legacy.spec.ts`。
+- 型別：`src/types/anycontent-*.ts` 已定義 teaching/news/magazine contract。
+
+### Docs snapshot CLI（已完成）
+- 檔案：`tools/docs-snapshot/make-docs-snapshot.ts`。
+- 指令：`npm run snapshot:docs -- --task T-XXXX`，輸出至 `snapshots/`（不納入 git）。
+- 驗收紀錄：`docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt`。
+
+### zh-TW→zh-CN pipeline（尚未實作）
+- 目前僅有規格檔：`docs/ZH_TW_TO_ZH_CN_PIPELINE.md`。
+- 尚無程式碼與測試。
+
+### Legacy data root / 舊站備份（T-0006，阻塞中）
+- 等待取得完整舊站備份後，才會設定 `CTWORLD_LEGACY_ROOT` 並記錄實際結構。
+
+### WordPress importer / React 前端（未開始）
+- 僅有流程與架構描述，尚無實作或測試。
+
 ---
 
-### 2.2 HTML ??Markdown嚗htmlToMarkdown`嚗?
-**撌脣???*
-
-- ??嚗?  - 撠?`<h1>~<h6>`, `<p>`, `<ul>/<ol>/<li>`, `<a>`, `<img>`, `<blockquote>` 頧璅? Markdown??  - ?園?嚗?    - `images: HtmlImageInfo[]`
-    - `anchors: string[]`
-    - `verses: string[]`嚗??蝯血?隤?蝬?雿輻嚗?- `/turn/sutra/` 撠閬? v1嚗?? `docs/Windsurf_ChatGPT_NOTES.md`嚗?
-  - 隞?URL ? `/turn/sutra/` ?斗 sutra ??  - `preprocessSutraDom()`嚗?    - 甇????`<a name="item83">` ??`id="item83"`嚗蒂?踹????園??券???  - `<p class="word17-coffee">`嚗?    - 頧?? `> ...` blockquote??    - ???畾菜?摮???`result.verses[]`??  - 皜祈岫嚗?    - `tests/html/html-to-markdown.spec.ts` 銝剜? sutra 撠獢???
-**?脰?銝哨?敺?**
-
-- ?嗡??桀??畾?class ??撖虫?嚗?  - `blossom`?reply`?chan7` 銝銵??雿???`??撣急?隤???- ???賢歇??`HTML_TO_MARKDOWN_RULES_V4.md` ??鋆⊥?閬?嚗?舐?撘??芾?摰?
----
-
-### 2.3 HTML ??AnyContent JSON嚗??focused ??teaching嚗?
-**撌脣???*
-
-- `src/types/anycontent-teaching.ts`
-  - 摰儔 `Language`, `TeachingMeta`, `TeachingContent`??  - ??`docs/CONTENT_SCHEMA.md` 撠???
-- `src/adapters/teaching-from-legacy.ts`
-  - `teachingFromLegacy(doc, { externalId, language, fallbackTitle })`嚗?    - ?澆 `htmlToMarkdown` 敺嚗?      - `body_markdown`
-      - `images[]`
-      - `anchors[]`
-      - `verses[]`嚗??剁?銋??臬神??`ct_verse_*`嚗?    - 憛怠 `TeachingContent`嚗?      - `external_id = externalId`
-      - `language` 靘憭惜嚗?? `Language` union嚗?      - `old_url = doc.url`
-      - `post_title` ? `fallbackTitle` ??URL ?典?
-      - `featured_image = 蝚砌?撘萄?`
-      - `gallery_items = ?園???`
-      - `meta` 鋆∠? `ct_*` 甈??‵ `null` / `undefined`嚗??芯? adapter ?渡移蝝啗圾??
-**銝?甇亙遣霅?*
-
-- [ ] ??`verses` 撖怠 `TeachingMeta` ??`ct_has_dharma_verse`, `ct_verse_block_markdown`, `ct_verse_type` 蝑?- [ ] ?箏隞?post_type 撖?AnyContent ???adapter嚗?  - `src/types/anycontent-news.ts` / `src/adapters/news-from-legacy.ts`
-  - `src/types/anycontent-magazine.ts` / `src/adapters/magazine-from-legacy.ts`
-  - ??
----
-
-### 2.4 zh-tw ??zh-cn pipeline
-
-**撌脣???閬嚗?*
-
-- `docs/ZH_TW_TO_ZH_CN_PIPELINE.md` ?膩嚗?  - 憒?敺?`-gb` URL 撱箇? `baseUrl ??gbUrl` 撠???  - ?芣?蝜葉 HTML嚗陛銝剔 OpenCC 敺?zh-tw JSON 頧?  - ?芯?甈?閬?嚗post_title`, `body_markdown`, `meta` 銝凋葉??雿佗?嚗鈭??質?嚗D, URL 蝑???  - WordPress + Polylang 撠?蝑??
-**撠撖虫?蝔?**
-
-- ?迤??`zh-tw ??zh-cn` Node 撌亙撠撖虫?嚗?憒?`tools/convert/zh-tw-to-zh-cn.ts`嚗?- WordPress ?臬?單銋??芸神嚗P-CLI / plugin嚗?
----
-
-### 2.5 WordPress ?臬??Polylang / Redirect
-
-**?桀????*
-
-- ?嗆????歇?其誑銝?隞嗆?餈堆?
-  - `docs/COMPLETE_PROJECT_WORKFLOW.md`嚗瑼?
-  - `docs/CONTENT_SCHEMA.md`
-  - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
-- 撖阡???WP-CLI / plugin code 撠????
-**?芯??孵?**
-
-- ??銝??`tools/wp-import/?圳 ??WordPress plugin嚗?  - 霈??JSON嚗nyContent嚗?  - 撱箇???post_type??  - 閮剖? Polylang 隤??蕃霅舫?靽?  - 撖怠?? `old_url` / `-gb` URL 靘?redirect 雿輻??
----
-
-## 3. 撱箄降銝?甇乩遙??靘?ChatGPT / Windsurf ??嚗?
-1. **鋆?strong contract嚗nyContent ?嗡? post_type ?**
-   - 撱箇? `src/types/anycontent-news.ts`, `src/types/anycontent-magazine.ts`??2. **?游? htmlToMarkdown嚗lossom / reply / chan7 蝑???刻???v1**
-   - 瘥活?芣?銝???撖虫?嚗?皜祈岫??3. **撖虫? `zh-tw ??zh-cn` 頧?撌亙 v1**
-   - ??撠?teaching ??璇???pipeline嚗HTML ??TeachingContent(zh-tw) ??TeachingContent(zh-cn)`??4. **閬? WordPress importer skeleton**
-   - ?神 docs + PHP / WP-CLI 撉冽嚗??亥?撖虫?蝝啁???
+## 待辦焦點（節錄）
+- T-0011 fix-corrupted-docs：修復亂碼 docs，統一 UTF-8。
+- T-0012 sync-status-docs：持續對齊 PROJECT_TODO / PROJECT_STATUS 與實際進度。
+- T-0006 legacy-data-root：待備份到位後展開。
+- zh-TW→zh-CN pipeline：依規格實作 CLI 與測試。
+- WordPress importer / React 前端：後續階段再啟動。

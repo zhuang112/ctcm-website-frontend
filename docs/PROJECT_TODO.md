@@ -55,11 +55,12 @@
 
 ### 2. 實作 HTML→AnyContent：teaching
 
-- 狀態：⬜ 尚未開始
+- 狀態：✅ v1 已完成（已有 teaching-from-legacy + teaching-html-to-anycontent.ts；後續優化另開任務）
 - 說明：
-  - 預計檔案：
-    - `tools/convert/html-to-anycontent-teaching.ts`（由 ChatGPT 產生骨架）
-    - `src/types/anycontent-teaching.ts`（teaching schema 定義，已存在可補強）
+  - 主要檔案（已存在）：
+    - `tools/convert/teaching-html-to-anycontent.ts`
+    - `src/adapters/teaching-from-legacy.ts`
+    - `src/types/anycontent-teaching.ts`
   - 規格：
     - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
     - `docs/CONTENT_SCHEMA.md`
@@ -69,12 +70,9 @@
       - 正確處理標題階層、主文段落、引用與列表。
       - 偵測並抽離偈語區塊，填入 `ct_verse_block_markdown` 等偈語相關欄位。
       - 依圖片規則填入 `featured_image`、`featured_image_caption`、`gallery_items[]`。
-  - Windsurf 使用說明：
-    - 只能修改 `html-to-anycontent-teaching.ts` 中標註 TODO 的區塊。
-    - 不可修改 `CONTENT_SCHEMA` 中定義的型別與欄位名稱。
-  - 驗收方式（暫定）：
-    - 準備 2–3 個代表性 teaching HTML 範例，手動比對輸出 JSON 與規格是否一致。
-    - 後續可補上 `tests/html-to-anycontent-teaching.spec.ts` 做 snapshot 測試。
+  - 測試：
+    - `tests/adapters/teaching-from-legacy.spec.ts`
+    - `tests/html/html-to-markdown.spec.ts`（涵蓋 sutra 規則）
 
 ---
 
@@ -226,6 +224,8 @@
 ---
 
 ### T-0005 news-from-legacy: 映射 NewsMeta 日期與地點欄位（v1）
+
+> 狀態：✅ 已完成（news meta 日期與地點 mapping v1，2025-12-10 已通過測試）
 
 - 目標：
   - 在既有 `news-from-legacy` 骨架上，實作第一版的日期與地點欄位 mapping，

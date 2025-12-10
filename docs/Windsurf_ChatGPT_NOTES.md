@@ -23,6 +23,14 @@
   - `T-0012 sync-status-docs`：對齊 PROJECT_TODO / PROJECT_STATUS 與實際進度。
 - 目前僅新增 TODO 條目，未開始實作內容。commit: a423ba4
 
+## 2025-12-10 任務：T-0012 sync-status-docs（執行中）
+
+- 更新檔案：
+  - `docs/PROJECT_TODO.md`：補齊教學任務狀態（v1 已完成）、T-0005 狀態行（news meta 日期/地點 mapping v1），重申 T-0006 blocked、T-0010 ✅。
+  - `docs/PROJECT_STATUS.md`：重寫總覽，對齊目前實作（crawl、HTML→Markdown + sutra、teaching/news/magazine adapters、docs snapshot CLI、zh-TW→zh-CN 未實作、legacy data root 待備份、WP/React 未開始）。
+- 測試：僅文檔更新，未跑額外測試。
+- commit: (pending push)
+
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
