@@ -695,3 +695,16 @@
   - [x] `data/anycontent/zh-tw/magazine/sample-001.json` 與 `data/anycontent/zh-cn/magazine/sample-001.json` 建立，欄位符合 `MagazineContent`，語言標記正確。
   - [x] `data/compare/index.json` 新增 `magazine-sample-001`，在 `/dev/compare` 可選擇並同步左右欄顯示。
   - [x] `npm test` 與 `npm run build` 通過（依 T-0028 規則）。
+### T-0031 define-anycontent-v1-schema-v1-draft：整理 AnyContent V1 schema 底稿
+
+> 狀態：✅ 已完成（產出 CONTENT_SCHEMA_V1 草稿，2025-12-12）
+
+- 目標：
+  - 彙整 teaching/news/magazine 欄位，產出 AnyContent V1 schema 草稿文件。
+  - 說明共用欄位與各 post_type 專用欄位，並註記 zh-TW / zh-CN 轉換注意事項。
+  - 為後續 schema 調整建立基準（若有破壞性更新應另開 T 任務討論）。
+
+- 驗收：
+  - [x] `docs/CONTENT_SCHEMA_V1.md` 建立，含共用欄位、各 post_type 欄位、繁簡轉換注意事項、後續擴充提醒。
+  - [x] `docs/CONTENT_SCHEMA.md` 標註 V1 草稿位置。
+  - [x] notes 記錄本次草稿與 RAW 連結。

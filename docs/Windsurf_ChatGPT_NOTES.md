@@ -1279,3 +1279,24 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-12 任務：T-0031 define-anycontent-v1-schema-v1-draft
+
+- 目的：整理 AnyContent teaching/news/magazine 欄位，產出 V1 schema 草稿，作為後續調整基準。
+- 內容：
+  - 整理 type 與 sample JSON，彙整為 `docs/CONTENT_SCHEMA_V1.md`（共用欄位、各 post_type 專用欄位、繁簡轉換注意事項、未來可能擴充）。
+  - 在 `docs/CONTENT_SCHEMA.md` 標註 V1 草稿位置。
+- 測試：純 docs 更新，未執行。
+
+變更檔案（含 RAW 連結）：
+
+- docs/CONTENT_SCHEMA_V1.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+
+- docs/CONTENT_SCHEMA.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA.md
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

@@ -1,5 +1,7 @@
 # CONTENT_SCHEMA.md (vNext + image & language updates)
 
+> 提示：AnyContent V1 草稿摘要請見 `docs/CONTENT_SCHEMA_V1.md`（T-0031）。若後續有破壞性調整，請先在 V1 草稿討論並另開任務。
+
 > 定義從舊站 HTML 轉出後的統一 JSON 結構（AnyContent）。  
 > 本版已更新：`Language` 型別（小寫語言碼）、`featured_image` / `featured_image_caption` 規則、external_id / slug 的定位。
 
