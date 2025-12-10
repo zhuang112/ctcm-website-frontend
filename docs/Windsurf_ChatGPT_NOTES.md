@@ -142,12 +142,12 @@
 
 - 更新檔案：
   - `src/i18n/zh-tw-to-zh-cn-pipeline.ts`：`transformAnycontentZhTwToZhCn` 實作（白名單轉換、language=zh-cn）。
-  - `tools/convert/generate-zh-cn-from-zh-tw.ts`：CLI 寫檔（dry-run / write 支援）。
-  - `tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`：覆蓋 transform。
-  - `docs/PROJECT_TODO.md`：新增 T-0015 條目並標記完成。
-  - `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次任務與 RAW。
+- `tools/convert/generate-zh-cn-from-zh-tw.ts`：CLI 寫檔（dry-run / write 支援）。
+- `tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`：覆蓋 transform。
+- `docs/PROJECT_TODO.md`：新增 T-0015 條目並標記完成。
+- `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次任務與 RAW。
 - 測試：`npx vitest tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`
-- commit: fde0a7a（notes 更新 hash：9e12769）
+- commit: 9b146f4
 變更檔案（含 RAW 連結）：
 
 - src/i18n/zh-tw-to-zh-cn-pipeline.ts  
