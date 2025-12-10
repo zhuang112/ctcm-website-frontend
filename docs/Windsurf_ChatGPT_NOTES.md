@@ -29,7 +29,7 @@
   - `docs/PROJECT_TODO.md`：補齊教學任務狀態（v1 已完成）、T-0005 狀態行（news meta 日期/地點 mapping v1），重申 T-0006 blocked、T-0010 ✅。
   - `docs/PROJECT_STATUS.md`：重寫總覽，對齊目前實作（crawl、HTML→Markdown + sutra、teaching/news/magazine adapters、docs snapshot CLI、zh-TW→zh-CN 未實作、legacy data root 待備份、WP/React 未開始）。
 - 測試：僅文檔更新，未跑額外測試。
-- commit: (pending push)
+- commit: 86f2021
 
 ---
 
