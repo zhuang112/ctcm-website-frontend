@@ -1,95 +1,289 @@
-﻿# HTML_TO_MARKDOWN_RULES_V4
+# HTML_TO_MARKDOWN_RULES_V4.md (updated images & fallback notes)
 
-> �Ω�N legacy HTML �ন AnyContent JSON�]�ר� `body_markdown`�B�Ϥ����P anchors�^�C
-> �����ۭ��u�i���@�B�n�d��v�A�Y�n�ק�{���޿�A����s���ɦA�P�B�{���P���աC
-
----
-
-## 0. �q�έ�h
-
-- �����p���ন Markdown / AnyContent�F�������W�d�S�w�{���X��@�C
-- ���T�w�����e��i�d�š]`null` / `[]`�^�A�קK�ö�C
-- �W�h�H²��B�i���a���D�A��K ChatGPT / Agent �ֳt�^�U�C
+> 中台世界舊站 → JSON vNext 的 HTML→Markdown 轉換規格  
+> 本版重點更新：圖片欄位行為、`featured_image` / `gallery_items` / `featured_image_caption` 的角色，
+> 並明確說明 **不在此階段處理 fallback 主圖**。
 
 ---
 
-## 1. �@�� HTML��Markdown �W�h
+## 0. 目標與輸入輸出
 
-### 1.1 �ݭn����������
-- ���������G`<script>`, `<style>`, `<nav>`, `<footer>`, `<form>`�C
-- `<table>` �Ȥ��� Markdown ���A�u���¤�r�C
-
-### 1.2 �϶����
-- `h1` / `h2` / `h3` �� `#` / `##` / `###`�C
-- `<p>`�G�@��q���̦椺�W�h��X�A`<br>` �ন����C
-- `blockquote` / `pre` / `code`�G���� Markdown �N�q�A���B�~�O�M�C
-
-### 1.3 �椺����
-- `strong` / `em` / `code` �� ���� Markdown �椺�榡�C
-- ������ `![]()`�F�Ϥ��Ȧ����� JSON�]���� 2 ���^�C
-
-### 1.4 �s���P���I
-- �@��s���G`[text](href)`�F�Y�L��r�A�ϥ� `href` �� label�C
-- `mailto:` / `tel:` �H���`�s���榡�O�d�C
-- anchors�]`id` / `name`�^�G������ `anchors`�A�קK���ơFsutra �S�Ҧb�{�����B�z�A��h�O�O���ߤ@�P�iŪ�C
+（略，同前版：目標是將舊站 HTML 轉成 `AnyContent` JSON，並產出 `body_markdown`。）
 
 ---
 
-## 2. �Ϥ��P�Ϯw�����]featured / gallery / fallback�^
+## 1. 全域清理規則
 
-### 2.1 ���� `<img>`
-- ��� `src` �@�� URL�A`alt` �@�������F`caption` �ѩP���r���ɡA�Y�L�h `null`�C
-- �u�����A���b `body_markdown` ���O `![]()`�C
-
-### 2.2 featured_image
-- �w�]�Ĥ@�i�Ϥ��@�� `featured_image`�F�Y�˪O�� hero/banner �i�� adapter �W�h�D��C
-- `featured_image_caption` �L�i�a�ӷ��ɫO�� `null`�C
-
-### 2.3 gallery_items
-- ��l�Ϥ��̧ǩ�J `gallery_items[]`�A��� `{ url, alt, caption }`�A�ʭȥH `null` ��ܡC
-- Markdown ������Ϯw�� `![]()`�C
-
-### 2.4 �L�i�ιϤ�
-- �M�ũҦ��Ϥ����G
-  - `featured_image = null`
-  - `featured_image_caption = null`
-  - `gallery_items = []`
-- ������N fallback�A�קK�ìV��ơC
+（略，同前版：移除 script/style/nav/footer/form、處理版面 table、行內元素等。）
 
 ---
 
-## 3. �U post_type �`�N�ƶ�
+## 2. 區塊元素 → Markdown
 
-### 3.1 teaching
-- sutra �����U�y�G�g���|������ `verses`�A�� adapter �M�g�� `ct_verse_*`�C
-- �Ϥ��u�Φ@�ε����F�Y�ݭn hero �� adapter �P�_�A���b���j��C
-
-### 3.2 news
-- �D�� Markdown �̦@�γW�h�C
-- �Ϥ��G�@�i�D�ϡB��l�i gallery�F�Y�L�i�a�Ϥ��h�����d�šC
-- ����B�a�I�� meta �� adapter �ѪR�A���ɤ��w�q�ѪR�W�h�C
-
-### 3.3 magazine / branch / gallery / resource / download / index_page
-- 仍採「一張主圖 + 其餘 gallery」的簡化策略。
-- 若樣板尚未收斂，寧可把圖片欄位留空，不強制塞值。
+（略，同前版：h2/h3 → `##`/`###`，`<p>`、`<br>`、列表、blockquote、pre/code 等。）
 
 ---
 
-## 4. 無法歸類內容的暫存規則（未知內容 fallback）
+## 3. 連結處理
 
-- 文字優先放 `body_markdown`：若 HTML 片段沒有對應 schema 欄位（臨時敘述、少量說明），直接保留在 `body_markdown`，不要硬新增 meta 欄位。
-- 不立即新增 meta：只有在多數頁面明確出現、確認需要欄位時，再於後續任務補 schema/adapter；暫不要自行加 `unknownField`。
-- 保留對照：`old_url` 必填，盡量保留 legacy HTML 檔（如 `data/legacy-*/...html`）以便日後對照；若發現常見但尚未有欄位的 pattern，請在 notes 記錄並開新 T 任務處理。
-- 若整體內容仍有大量暫存段落，可在 AnyContent JSON 的 `meta.has_unclassified_content = true`，並以 `meta.unclassified_notes` 簡述原因；無需在 adapter 當下強行拆欄位，後續再開 T 任務處理。
+（略，同前版：一般超連結、相對/絕對 URL、mailto/tel 等。）
 
 ---
 
-## 5. 驗收快速檢查
+## 4. 圖片與圖說規則（更新版）
 
-- 文字：標題層級與段落是否合理？有無多餘空白或破版換行？
-- 連結：`mailto:` / `tel:` 是否保留，anchors 是否去重？
+> 核心原則：  
+> - 圖片資訊存在 JSON 的 `featured_image` / `gallery_items` 欄位；
+> - Markdown `body_markdown` 專注於文字內容；
+> - **fallback 主圖不在本階段處理，而在匯入 / 後處理階段處理。**
+
+### 4.1 圖片來源解析
+
+對主內容節點中的 `<img>`：
+
+- 解析：
+  - `src` → 圖片 URL（先記舊網址）
+  - `alt` → 若有，填入 `GalleryItem.alt`
+- 關於圖說：
+  - 嘗試從圖片 **相鄰** 的文字節點（同層的下一個兄弟節點、同一個 `<td>` / `<div>` 內的短句）判斷 caption 候選。
+  - 判斷條件（示意）：
+    - 字數低於某閾值（例如 60 字）
+    - 不像長篇段落
+    - 含有「攝影」、「Photo by」等提示詞時優先視為 caption
+  - 清理標點與空白後，填至對應圖片的 `caption`。
+
+### 4.2 第一張圖片 → featured_image
+
+- 規則：
+  - 主內容區內「第一張符合條件的內容圖片」 → `featured_image`。
+  - 原則上：
+    - **不將此圖片再重複放入 `gallery_items`**（除非未來有明確需求）。
+- `featured_image_caption`：
+  - 預設填 `null`。
+  - 例外情況（選擇性）：
+    - 若判斷該頁為「banner / hero」型區塊，且圖片下方有一行明顯的標語或主題文字，可將其填入 `featured_image_caption`。
+    - 這類判斷多半依特定頁型進行（例如首頁），一般內容頁可不啟用。
+
+> 注意：`featured_image` 在此階段 **僅來自 HTML 原始圖片**。  
+> 對於完全沒有圖片的頁面，`featured_image` 必須維持 `null`，以便後續 fallback 流程統一處理。
+
+### 4.3 後續圖片 → gallery_items
+
+- 第二張及之後的圖片，一律寫入 `gallery_items[]`：
+
+```jsonc
+"gallery_items": [
+  {
+    "url": "https://www.ctworld.org.tw/arts/xxx/01.jpg",
+    "alt": "供佛儀軌",
+    "caption": "供佛儀軌時，僧眾靜默安住。"
+  }
+]
+```
+
+- Caption 來源同 4.1 的判斷方式。
+- `body_markdown` 中預設 **不輸出** `![]()` 圖片語法，除非未來有特殊需求。
+
+### 4.4 假如頁面沒有任何 `<img>`
+
+- `featured_image = null`
+- `featured_image_caption = null`
+- `gallery_items = []`
+- 不在本階段使用任何 fallback 圖片。
+
+---
+
+## 5. 各 post_type 特殊規則（與圖片的關係）
+
+### 5.1 teaching
+
+- 核心與前版相同（偈語抽出為 `ct_verse_block_markdown` 等）。
 - 圖片：
-  - `featured_image` 有值時，caption 是否可信？不確定就 `null`。
-  - `gallery_items` 數量與 HTML 實際圖片是否一致？
-  - 無可用圖片時，三個欄位是否都清空？
-- 規則變更時，先更新本檔，再同步程式與測試，並在 notes 註明來源與理由。
+  - 若為法會現場照片、法相等，依 4.2/4.3 原則處理。
+  - 若某些子頁型需要特別處理（例如封面圖與內頁圖分區），可在 teaching adapter 中加入對應邏輯。
+
+### 5.2 news
+
+- 活動報導中常含多張照片。
+- 規則：
+  - 第一張 → `featured_image`，作為報導主圖。
+  - 其餘 → `gallery_items`，caption 為「攝影：XXX」「活動現場」等。
+
+### 5.3 magazine / branch / gallery / resource / download / index_page
+
+- 依類型自行判斷圖片多寡與重要性，但一律遵守：
+  - 第一張 → `featured_image`。
+  - 第 2 張起 → `gallery_items`。
+  - 沒有任何 `<img>` → 不做 fallback，由後處理階段統一補齊主圖。
+
+---
+
+## 6. 測試與驗證（與圖片相關）
+
+- 為每個 post_type 準備包含圖片的 HTML 樣本，驗證：
+  - `featured_image` 是否為預期的第一張內容圖。
+  - `gallery_items.length` 是否符合 HTML 中圖片數量（視是否排除 banner / logo 而定）。
+  - `caption` 是否沒有被誤抓成長篇文章或非圖說。
+- 為完全無圖的頁面準備樣本：
+  - 確認 `featured_image`、`featured_image_caption` 均為 `null`，`gallery_items` 為空 array。
+
+---
+
+（其餘章節與前版一致，如需變更請同步更新本檔與 CONTENT_SCHEMA / WORKFLOW。）
+
+---
+
+## 附錄：舊站特殊樣板對應規則（vNext 彙整）
+
+以下規則僅補充說明常見單元的特殊 class／標籤對應方式，
+若與前文通則衝突，以本節為優先。
+
+### 一、通用樣式與強調
+
+- 顏色、margin、字型等純視覺 CSS 一律在轉換時移除，由新站 CSS 決定呈現。
+- `<span class="wordstrong">…</span>`：一律轉為粗體 `**…**`。
+- 帶有 `class="qa"` 或 `class="q"` 的行：
+  - 若獨立成一行 → 全行粗體，作為「重點語句」。  
+  - 若在句中 → 僅該段文字加粗。  
+  - **不**使用 blockquote。
+
+- `<i>…</i>`：一般情況下轉為斜體 `*…*`；
+  但若同時帶有 `class="q"`，仍以粗體為主（視為重點語句），避免過度使用斜體。
+
+- `<sup>…</sup>`：
+  - 在姓名中的「上／下」尊稱（如 `<sup>上</sup>惟<sup>下</sup>覺`）**必須保留** inline HTML，
+    不視為純排版資訊。
+  - 在 `body_markdown` 中保留 `<sup>`；在結構化欄位（如 `teacher`）則存對應的純文字版本。
+
+- `<hr>`：
+  - 在主內容區塊內，作為段落／段落群的分隔線時保留，轉成 Markdown `---`。
+  - 以圖片模擬的細線（如 `bk_dot.gif`）一律視為裝飾，直接刪除。
+
+### 二、禪七行程（`/chan/chan7/03_schedule.htm` 類）
+
+- 主標題：
+  - 第一個 `<span class="T">…</span>` → 主標題 `# …`（H1）。
+
+- 小節標題：
+  - 單獨成行、內容為一兩個詞的 `<b>…</b>`（如「報到」「起七」「起七茶會」）
+    → `### …`（H3）。
+
+- 行程內容：
+  - 內文中以 `<br>` 分行的時間表，轉為一般段落或條列，
+    只保留時間＋事件文字，不保留 `margin-left` 等縮排 CSS。
+  - 具體排版（是否用兩欄、表格、時間軸）交由前端元件實作。
+
+### 三、禪話隨筆（`/turn/chan_talk/`）
+
+- 每篇文章：視為 `teaching` 類，`teaching_type = 'chan_talk'`。
+
+- 標題：
+  - 依既有規則取自 heading / 圖片對應文字；
+    若頁面內有 `<span class="heading3">` 並明顯為篇名，則提升為 H1。
+
+- 小節：
+  - `<span class="q">…</span>` → `### …`（H3）作為段落小標。
+
+- 強調文字：
+  - `<span class="wordstrong">…</span>` → `**…**`。
+
+### 四、開示講記（`/turn/lecture/`）
+
+- 每篇文章視為 `teaching` 類，`teaching_type = 'lecture'`。
+
+- 主標題：
+  - 主內容區第一個 `<span class="heading3">…</span>` → `# …`（H1）。
+
+- 經文／偈頌：
+  - `<p class="word17-coffee">…</p>` → blockquote：
+    ```md
+    > 經文或偈頌內容……
+    ```
+  - 此類段落同時可抽出，填入 `verses[]` 或 `scripture_blocks[]`，
+    但 canonical 內容仍以 `body_markdown` 為主。
+
+- 編號小節：
+  - `<span class="chinese">（一）</span>` 或 `<a name="item12" class="chinese">（六）</a>`：
+    - 單獨成行時 → 小節標題，例如 `#### （一）`。
+    - `name="item12"` 轉為 `<a id="item12"></a>` 插入對應位置，
+      以便保留舊站 `#item12` 等錨點連結。
+
+- 來源／場合說明：
+  - 若 `<span class="brown">…</span>` 出現在標題下，內容為場合／日期／刊載資訊，
+    則轉為一行粗體說明，並寫入 `meta.source_note`：
+    ```md
+    **於普台國民中小學九十七學年度運動大會開示**
+    ```
+
+### 五、問答單元（`/turn/reply/`）
+
+- 主標題：
+  - 主內容區的第一個 `<b>…</b>` 問句 → H1：`# …`，並填入 `title`。
+
+- 來源 caption：
+  - `<span class="caption">…</span>`（如「摘自法光雜誌．訪惟覺老和尚」）
+    → 標題下方一行粗體，並寫入 `meta.source_note`：
+    ```md
+    **摘自法光雜誌．訪惟覺老和尚**
+    ```
+
+### 六、開山祖師法語系列（`/turn/blossom/`）
+
+- 主標題：
+  - 每篇文章的第一個 `<span class="heading3">…</span>` → H1。
+
+- 來源說明：
+  - `<span class="brown">於自由時報…刊載</span>` →
+    標題下方一行粗體來源說明，同時寫入 `meta.source_note`：
+    ```md
+    **於自由時報 92.12.11（四）刊載**
+    ```
+
+- 多篇文章共用一個 HTML：
+  - 若同一 `.htm` 內含多個 heading3／來源說明／內文區塊，
+    則在轉換時切成多筆 AnyContent 記錄，
+    `external_id` 可依檔名加序號（例如 `blossom-044-1`, `blossom-044-2`）。
+
+### 七、經論講解（`/turn/sutra/`）
+
+- 主標題：
+  - 在經論講解模板中，主內容區第一個 `<span class="heading3">…</span>` → H1。
+
+- 經文：
+  - `<p class="word17-coffee">…</p>` → 使用 blockquote 呈現：
+    ```md
+    > 經文內容……
+    ```
+  - 同時抽出至 `scripture_blocks[]` 或 `verses[]` 作為索引。
+
+- 偈頌／詩偈：
+  - 若某段為一連串 `<br>` 分行的偈頌，亦轉為多行 blockquote：
+    ```md
+    > 參禪非等閒　　滿室春風寶光現  
+    > 大眾共行無生法　　參透三關玄又玄
+    ```
+
+- 段落編號與錨點：
+  - `<a name="item83" class="chinese">（八十三）</a>`：
+    - 轉為 `<a id="item83"></a>` 插在對應段落前，
+      以支援舊站 `#item83` 錨點連結。
+    - 數字括號「（八十三）」可作為小節標題或內文標示。
+
+### 八、佛教藝術等專欄（`/buddaart/` 等）
+
+- 此類頁面多半歸類為 `teaching`，
+  可使用 `teaching_type = 'buddhist_art'` 或填入 `series = '佛教藝術'`。
+
+- 結構建議：
+  - 標題：對應頁內主標或明顯篇名 → H1。  
+  - 副標題（若有）：可放入 `subtitle`（未來擴充欄位）。  
+  - 作者：填入 `teacher` 或 `byline`。  
+  - 摘要：取開頭幾行作 `excerpt`。  
+  - 主圖：`featured_image`（caption 放在 `featured_image_caption`）。  
+  - 附圖＋圖說：`gallery_items[]`。  
+  - 作者小檔案：作為 `body_markdown` 最後一節，以小標題區分。
+
+上述規則皆以「內容語意優先」為原則：
+- 有語意的標記（標題層級、經文、偈頌、法語、來源說明、尊稱上標與錨點）會保留或轉為結構化資訊；
+- 純視覺樣式（顏色、縮排、字型大小）則交由新站前端 CSS 決定。
+

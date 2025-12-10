@@ -1413,3 +1413,20 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-12 任務：HTML_TO_MARKDOWN_RULES_V4 亂碼修復（af7ff6c 回溯）
+
+- 目的：main 上的 `docs/HTML_TO_MARKDOWN_RULES_V4.md` 出現亂碼，需從乾淨版本覆蓋並固定 UTF-8。
+- 作法：
+  - 使用 `git checkout af7ff6c -- docs/HTML_TO_MARKDOWN_RULES_V4.md` 取回乾淨版（含附錄）。
+  - 確認 UTF-8 編碼，配合 `.editorconfig` / `.gitattributes`。
+  - 單一 commit 推回 main。
+- 測試：純 docs 修復，未執行。
+- commit: 1e3d8a5（restore from af7ff6c，修復亂碼）
+
+變更檔案（含 RAW 連結）：
+
+- docs/HTML_TO_MARKDOWN_RULES_V4.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
