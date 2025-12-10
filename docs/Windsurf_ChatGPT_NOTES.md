@@ -36,7 +36,7 @@
 - 更新檔案：`docs/PROJECT_STATUS.md` 完整以 UTF-8 新內容覆蓋，移除亂碼。
 - 重點：依 2025-12-10 版本，整理進度總覽、各模組狀態（crawl/inventory、HTML→Markdown + sutra、teaching/news/magazine adapters、docs snapshot CLI、zh-TW→zh-CN 未實作、legacy data root blocked、WP/React 未開始）。
 - 測試：僅文檔更新，無額外測試。
-- commit: (pending push)
+- commit: 9329d58
 ---
 
 ## 2025-12-08 任務：/turn/sutra/ 經論講解頁專用規則 v1
