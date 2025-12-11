@@ -1,8 +1,8 @@
-# COMPLETE_PROJECT_WORKFLOW
+﻿# COMPLETE_PROJECT_WORKFLOW
 
-> 版本：2025-12-12（精簡版）  
-> 目標：ctworld.org → Headless WordPress + React（長期可能採 Next.js），以 AnyContent schema 為核心。
-
+> 版本：2025-12-12
+> 提醒：詳細協作流程與安全規則以 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 為單一真相；本檔僅保留專案 roadmap / 歷史摘要。
+---
 ---
 
 ## 1. 目前進度概覽（2025-12-10 基準）

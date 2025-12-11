@@ -4,6 +4,7 @@
 > 版本：2025-12-10（由 ChatGPT 更新）
 > 目標：讓你只需要做關鍵決策與簡單 copy / paste，技術細節與執行由 ChatGPT + 實作 Agent（目前主要是 Codex）自動接力完成。
 > 本檔案原為舊版 workflow（Windsurf 版），已在 T-0010 任務中改名為 WORKFLOW_CHATGPT_GITHUB_AGENT.md。
+> **提醒：本檔為協作流程與安全規則的單一真相來源，其他文件僅作摘要或歷史備忘。**
 
 ---
 

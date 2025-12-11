@@ -348,12 +348,38 @@
   - 新增 `docs/RULES_CROSSCHECK_NOTES_V1.md`：記錄 workflow/schema/HTML→MD/zh-CN pipeline/INSTR 等主題的交叉檢視，列出單一真相文件與未來候選 T。
   - 不修改其他規則檔，僅筆記用途。
 - 測試 / 建置：本次僅 docs 筆記，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commit: fd3e23f
+- commit: 3f0e602
 
 變更檔案（含 RAW 連結）：
 
 - docs/RULES_CROSSCHECK_NOTES_V1.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/RULES_CROSSCHECK_NOTES_V1.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0048 consolidate-workflow-docs-single-source
+
+- 目的：將協作流程相關文件統一以 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 為單一真相，其餘檔案改為摘要/導覽並加註提醒。
+- 主要變更：
+  - 在 TOOLS_ROLES_AND_BOUNDARIES / SESSION_CHECKLIST / AI_COLLAB_SUMMARY / COMPLETE_PROJECT_WORKFLOW / PENDING_DECISIONS 檔頭加入提醒，指向 workflow 單一真相。
+  - 在 workflow 檔頭明示「本檔為單一真相」。
+  - 未改動程式碼，僅整理說明文並標示歷史/摘要角色。
+- 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: 43bc794
+
+變更檔案（含 RAW 連結）：
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/TOOLS_ROLES_AND_BOUNDARIES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/TOOLS_ROLES_AND_BOUNDARIES.md
+- docs/SESSION_CHECKLIST.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/SESSION_CHECKLIST.md
+- docs/AI_COLLAB_SUMMARY.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/AI_COLLAB_SUMMARY.md
+- docs/COMPLETE_PROJECT_WORKFLOW.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/COMPLETE_PROJECT_WORKFLOW.md
+- docs/PENDING_DECISIONS.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PENDING_DECISIONS.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
