@@ -1769,7 +1769,7 @@
   - 測試：`tests/adapters/news-from-legacy.spec.ts`、`tests/adapters/magazine-from-legacy.spec.ts` 更新圖片拆解與 caption 期望。
   - Sample：`data/legacy-news/sample-001.html`、`data/legacy-magazine/sample-001.html` 增封面 + gallery；對應 zh-tw / zh-cn JSON 補入圖片欄位與 caption；compare index 繼續使用。
 - 測試 / 建置：已執行 `npm test`、`npm run build`、`npm run check:zh-cn`。
-- commit: <待填入>
+- commit: 57893db
 
 變更檔案（含 RAW 連結）：
 - `src/adapters/news-from-legacy.ts`  
