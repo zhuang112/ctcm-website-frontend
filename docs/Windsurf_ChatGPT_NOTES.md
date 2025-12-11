@@ -1719,7 +1719,7 @@
   - 測試：`tests/html/html-to-markdown.spec.ts`（圖片 alt 保留）、`tests/adapters/teaching-from-legacy.spec.ts`（featured / gallery 順序與 caption）。
   - Sample 與 compare：`data/legacy-teaching/sample-001.html`、`data/anycontent/zh-tw|zh-cn/teaching/sample-001.json`、`data/compare/index.json` 更新，含封面 + 2 張 gallery 圖。
 - 測試 / 建置：已執行 `npm test`、`npm run build`、`npm run check:zh-cn`。
-- commit: <待填入>
+- commit: 57d9d0b
 
 變更檔案（含 RAW 連結）：
 - `src/adapters/teaching-from-legacy.ts`  
