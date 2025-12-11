@@ -300,7 +300,7 @@
 - 測試 / 建置：
   - `npm test`（通過）
   - `npm run build`（通過）
-- commit: <pending>
+- commit: 8c74c29
 
 變更檔案（含 RAW 連結）：
 
