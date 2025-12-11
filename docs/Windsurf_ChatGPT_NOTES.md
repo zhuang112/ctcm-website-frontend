@@ -1507,7 +1507,7 @@
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0040。
   - `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次 docs-only 更新。
 - 測試：純 docs 更新，未執行額外指令。
-- commit: 809fd10
+- commit: 390e800
 
 變更檔案（含 RAW 連結）：
 
@@ -1519,4 +1519,7 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+
+
 
