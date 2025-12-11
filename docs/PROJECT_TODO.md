@@ -835,3 +835,19 @@
   - [x] INSTR 模板已加入檔案清單與 RAW 提醒。
   - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 已新增撰寫 INSTR 的注意事項。
   - [x] notes 已記錄本次 docs-only 更新。
+
+### T-0041 teaching-batch-from-crawl-pilot：crawl 教學小批次暫停（blocked）
+
+> 狀態：⛔ blocked（缺少實際教學頁 HTML，2025-12-12）
+
+- 目標（原計畫，暫停中）：
+  - 從 crawl CSV 挑 3–5 筆教學頁，產出 legacy HTML → zh-tw AnyContent → zh-cn AnyContent，並掛入 `/dev/compare`。
+
+- 目前阻礙：
+  - repo 只有 `data/legacy-teaching/sample-001.html`，沒有其他實際教學頁。
+  - `data/crawl/*.csv` 目前只有索引頁 URL（如 `/turn/lecture/index.htm`、`/turn/sutra/index.htm`），沒有實際內容頁。
+  - 嘗試抓取 `https://www.ctworld.org/turn/teaching/index.htm` 類型網址僅得到 404/廣告頁，依 workflow 不應自行對外爬資料。
+
+- 解法方向（待解鎖後再啟動）：
+  - 請使用者提供 3–5 個實際教學頁的 legacy HTML（放入 `data/legacy-teaching/*.html`），或等待 T-0006 舊站備份完成。
+  - 取得實際 HTML 後再恢復本任務，重新跑轉換與 `npm run check:zh-cn`、更新 `/dev/compare`。

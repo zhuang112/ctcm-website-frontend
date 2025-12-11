@@ -1520,6 +1520,25 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0042 mark-T-0041-blocked-and-adjust-todo-notes
+
+- 目的：暫停 T-0041，正式記錄阻礙與解鎖條件。
+- 阻礙：
+  - repo 僅有 `data/legacy-teaching/sample-001.html`，缺少其他教學頁。
+  - `data/crawl/*.csv` 只有索引頁 URL，沒有實際教學內容頁。
+  - 嘗試抓取 `https://www.ctworld.org/turn/teaching/index.htm` 等網址只得到 404/廣告，依 workflow 不自行對外爬。
+- 後續解法：
+  - 等使用者提供 3–5 個實際教學頁 HTML（放入 `data/legacy-teaching/*.html`），或等待 T-0006 取得完整舊站備份，再重啟 T-0041。
+- 測試：本次僅 docs 更新，未執行測試。
+- commit: <pending>
+
+變更檔案（含 RAW 連結）：
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
 
 
