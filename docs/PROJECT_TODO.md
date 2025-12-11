@@ -811,3 +811,15 @@
   - [x] 針對現有 sample（teaching/news/magazine）可跑出健康檢查報表。
   - [x] 有 ERROR 時 exit code = 1，無 ERROR 僅 WARN 或無問題時 exit code = 0。
   - [x] PROJECT_TODO / notes 記錄本次 docs 及 CLI 更新。
+
+### T-0039 zh-cn-health-check-in-workflow：把 zh-CN 健康檢查加入 workflow / checklist
+
+> 狀態：✅ 已完成（已更新 workflow / checklist，2025-12-12）
+
+- 目標：
+  - 在 workflow / session checklist 中寫明：凡觸及 zh-CN JSON / pipeline，需執行 `npm run check:zh-cn`，並在有 ERROR 時停止 push、先修復或開 T 任務處理。
+
+- 驗收：
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 已加入 check:zh-cn 相關提醒。
+  - [x] `docs/SESSION_CHECKLIST.md` 已加入 check:zh-cn 的收工檢查項。
+  - [x] PROJECT_TODO / notes 已記錄本次 docs-only 調整。

@@ -1473,3 +1473,28 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0039 zh-cn-health-check-in-workflow
+
+- 目的：在 workflow / checklist 中寫明 zh-CN JSON 健康檢查流程（`npm run check:zh-cn`）。
+- 內容：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增 3.7 小節，要求觸及 zh-CN pipeline/JSON 時要跑 `npm run check:zh-cn`，有 ERROR 不得 push，需修復或開 T 任務。
+  - `docs/SESSION_CHECKLIST.md`：收工檢查加入 `npm run check:zh-cn` 的提醒（當涉及 zh-CN 變更時）。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0039（docs-only）。
+- 測試：docs-only，未執行額外指令。
+- commit: ca3dfd2
+
+變更檔案（含 RAW 連結）：
+
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+- docs/SESSION_CHECKLIST.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/SESSION_CHECKLIST.md
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+

@@ -389,6 +389,16 @@ Windsurf 根據 ChatGPT 給的指令：
   - 純 docs/INSTR 編輯不強制跑 test/build。
   - 若因外部阻礙（例如依賴未備妥）暫時無法通過，需在 notes 清楚記錄錯誤訊息、原因與下一步建議。
 
+### 3.7 zh-CN JSON 健康檢查（check:zh-cn）
+
+- 只要任務涉及 zh-CN pipeline 或新增 / 調整 zh-CN JSON，請在收尾流程加入：
+  - `npm run check:zh-cn`
+  - 若輸出有 **ERROR**，先修復或開 T 任務處理，暫停 push；只有 WARN 或無問題時再進行 git 收尾。
+- 主要檢查：
+  - zh-TW / zh-CN JSON 是否成對存在。
+  - `post_type` / `slug` / `old_url` / `language` 一致性。
+  - 依 `ZH_TW_TO_ZH_CN_PIPELINE.md` 白名單，確認 `post_title` / `post_excerpt` / `body_markdown`、meta string、`seo.meta_title` / `seo.meta_description` 等欄位在 zh-CN 版本存在。
+
 ### 3.7（前瞻）分支策略的提醒
 
 - 目前預設直接在 `main` 上工作並 push。

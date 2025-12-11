@@ -18,6 +18,7 @@
 ## 與 Codex / Agent 協作時
 - 是否將 ChatGPT 的短指令原樣貼給 Codex？
 - Codex 回報摘要是否貼回 ChatGPT 讓其 review？
+- 若有調整 zh-CN pipeline / JSON，是否在收尾前跑過 `npm run check:zh-cn`？
 
 ## 收工前
 - 是否已 `git add` / `commit` / `push` 本輪變更？
