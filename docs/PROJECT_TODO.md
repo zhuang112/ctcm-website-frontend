@@ -283,3 +283,15 @@
 ### T-0046 fix-instr-encoding-and-snapshot-rules：修正 INSTR 編碼與補強 snapshot 規則
 > 狀態：✅ 已完成（2025-12-12）
 - 目標：確保指定 INSTR/README/PROJECT_TODO 為 UTF-8，並在 workflow 補充 docs snapshot 使用規則。
+
+### T-0056 progress-dashboard-daily-update：每日更新進度儀表板
+
+> 狀態：✅ 已完成（2025-12-12；dev/docs-only）
+
+- 目標：
+  - 建立可手動每日更新的進度儀表板（docs/DESIGN/ctworld-progress-dashboard.html），以 	asks 陣列呈現當日完成的 T 任務與描述。
+  - 由 Codex 依 PROJECT_TODO / Windsurf_ChatGPT_NOTES 補齊最新完成度，更新 Timeline 與 checkbox。
+- 驗收：
+  - [x] 儀表板頁可顯示日期分組、完成度百分比與 checkbox 狀態。
+  - [x] 已填入近期任務（例如 T-0054、T-0055），並標記完成。
+  - [x] notes 中有 T-0056 小節與 RAW 連結；本次為 dev/docs-only。

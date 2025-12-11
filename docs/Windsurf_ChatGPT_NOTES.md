@@ -1871,3 +1871,21 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/dev/VisualComparePage.tsx
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0056 progress-dashboard-daily-update
+
+- 目的：建立每日可手動更新的進度儀表板，依 PROJECT_TODO / NOTES 對齊 Timeline 與完成度。
+- 主要變更：
+  - 新增 docs/DESIGN/ctworld-progress-dashboard.html，以 	asks 陣列呈現日期分組、checkbox 與完成度百分比。
+  - 先填入 2025-12-12 的 T-0054 / T-0055 與 2025-12-11 的 T-0046，供後續每日更新。
+  - PROJECT_TODO 新增 T-0056 條目並標記完成（dev/docs-only）。
+- 測試 / 建置：本次為 dev/docs-only，未新增程式碼；未重跑測試。
+- commit: 0bfd657
+
+變更檔案（含 RAW 連結）：
+- docs/DESIGN/ctworld-progress-dashboard.html
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/DESIGN/ctworld-progress-dashboard.html
+- docs/PROJECT_TODO.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
