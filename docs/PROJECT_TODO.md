@@ -320,6 +320,18 @@
   - [x] 在 CONTENT_SCHEMA_V1 補充 cross-link，方便查找 WordPress 對應文件。
   - [x] notes 中有 T-0058 小節與 RAW 連結；本次為 docs-only，未執行測試。
 
+### T-0060 workflow-review-and-temp-files：ChatGPT review 規則與 TEMP 檔交接
+
+> 狀態：✅ 已完成（2025-12-12；workflow/docs-only）
+
+- 目標：
+  - 在 workflow 中寫清 ChatGPT review 決策與輸出規則（結論→重點註記→需要的檔案清單）。
+  - 定義 `docs/TEMP/` 暫存交接流程（路徑以 `__` 取代 `/`，review 後可清空），並忽略於 git。
+- 驗收：
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 更新 review 規則與 `docs/TEMP/` 流程。
+  - [x] `.gitignore` 忽略 `docs/TEMP/`；TODO/notes 登記 T-0060 完成。
+  - [x] notes 中有 T-0060 小節與 RAW 連結；本次為 docs-only，未跑測試。
+
 ### T-0057 deploy-progress-dashboard-to-siteground：部署儀表板到 SiteGround（dev script）
 
 > 狀態：✅ 已完成（2025-12-12；dev-only）

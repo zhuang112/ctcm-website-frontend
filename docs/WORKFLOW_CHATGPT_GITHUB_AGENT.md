@@ -229,6 +229,22 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
 - /dev/compare、檔案樣本：
   - 若任務需要 sample/對照（如 compare 頁），優先用 repo 內現有樣本；缺料時在 notes 記錄阻礙，避免自行對外抓資料。
 
+### 1.11 ChatGPT review 輸出規則（T-0060 起）
+
+- ChatGPT 回應時先給「結論/判斷」（可否視為完成）、再列「重點註記」（bug/風險/TODO），如需更多檔案一次列出需求。
+- 若有未定案議題，提出 A/B/C 選項請使用者決策，必要時建議另開 T + INSTR。
+- 不在對話中長篇描述 Codex 的執行過程；細節寫回 docs/notes。
+
+### 1.12 ChatGPT 交接檔（docs/TEMP/）流程
+
+- 用途：給 ChatGPT review 的暫存檔集合，非真相來源；review 後可清空。
+- 命名：將原始路徑的 `/` 改為 `__`，置於 `docs/TEMP/`。  
+  例：`src/wp/import/anycontent-to-wp.ts` → `docs/TEMP/src__wp__import__anycontent-to-wp.ts`
+- Codex 完成任務後：  
+  1) 把要給 ChatGPT 的檔案複製到 `docs/TEMP/`（依命名規則）。  
+  2) 在回報訊息中列出 `docs/TEMP/...`，提醒使用者上傳。  
+  3) review 完成即可刪除 `docs/TEMP/` 內容（`docs/TEMP/` 已列入 `.gitignore`）。
+
 ### 1.11 檔案編碼與行尾（防止亂碼）
 
 - 所有文字檔一律使用 `UTF-8`，行尾使用 `LF`；已在 `.editorconfig` / `.gitattributes` 強制設定。

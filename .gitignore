@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Temp handoff files for ChatGPT review (not tracked)
+docs/TEMP/

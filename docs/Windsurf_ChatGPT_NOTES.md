@@ -1971,3 +1971,25 @@ pm run wp:import:dry-run 生成計畫檔（tmp/wp-import-plan-zh-tw-*.json）。
 - docs/Windsurf_ChatGPT_NOTES.md
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+
+## 2025-12-12 任務：T-0060 workflow-review-and-temp-files
+
+- 目的：更新 workflow 的 ChatGPT review 規則、docs/TEMP 暫存交接流程，並忽略 TEMP 目錄。
+- 主要變更：
+  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md：新增 ChatGPT review 決策輸出規則、docs/TEMP 命名與交接流程。
+  - .gitignore：忽略 docs/TEMP/。
+  - docs/PROJECT_TODO.md：新增並標記完成 T-0060。
+- 測試 / 建置：docs/workflow-only，未執行 
+pm test / 
+pm run build。
+- commit: <填入本次 commit hash>
+
+變更檔案（含 RAW 連結）：
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/PROJECT_TODO.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+- .gitignore
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.gitignore
