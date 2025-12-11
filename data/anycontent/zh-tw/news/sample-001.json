@@ -1,12 +1,12 @@
 {
   "post_type": "news",
   "language": "zh-tw",
-  "post_title": "範例新聞：春季共修講座",
+  "post_title": "春季共修講座",
   "slug": "news-sample-001",
   "old_url": "https://www.ctworld.org/news/sample-001.htm",
-  "body_markdown": "# 範例新聞：春季共修講座\n\n這是一則示範用的新聞，描述即將舉辦的春季共修講座與座談活動。\n講座內容包含經典導讀、實修分享，以及問答交流。\n\n講座開始時的現場照片。\n\n問答時間的互動畫面。",
+  "body_markdown": "# 春季共修講座\n\n這是一篇示範用的新聞稿，描述春季共修講座的重點。\n\n- 時間：2025-03-14\n- 地點：台北講堂\n\n講座摘要、互動問答與報名資訊請參考下列內容。",
   "featured_image": "https://www.ctworld.org/news/images/news/news-cover.jpg",
-  "featured_image_caption": "共修講座封面圖",
+  "featured_image_caption": "共修講座封面",
   "gallery_items": [
     {
       "url": "https://www.ctworld.org/news/images/news/news-gallery-1.jpg",
@@ -15,11 +15,19 @@
     },
     {
       "url": "https://www.ctworld.org/news/images/news/news-gallery-2.jpg",
-      "alt": "問答時間",
-      "caption": "問答時間"
+      "alt": "交流討論",
+      "caption": "交流討論"
+    }
+  ],
+  "gallery_blocks": [
+    {
+      "id": "main_gallery",
+      "style": null,
+      "image_indexes": [0, 1]
     }
   ],
   "meta": {
+    "default_gallery_style": "grid-3",
     "ct_news_date": "2025-03-14",
     "ct_event_date_start": "2025-03-14",
     "ct_event_date_end": null,

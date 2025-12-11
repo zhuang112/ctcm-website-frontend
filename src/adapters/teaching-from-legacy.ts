@@ -42,6 +42,8 @@ export function teachingFromLegacy(
 
   const verses = mdResult.verses ?? [];
   const [firstImage, ...galleryImages] = mdResult.images;
+  const defaultGalleryStyle = "grid-2";
+  const galleryBlocks = buildGalleryBlocks(galleryImages);
 
   const teaching: TeachingContent = {
     external_id: externalId,
@@ -58,7 +60,8 @@ export function teachingFromLegacy(
       alt: img.alt ?? null,
       caption: img.alt ?? null,
     })),
-    meta: buildTeachingMetaFromVerses(verses, language),
+    gallery_blocks: galleryBlocks,
+    meta: buildTeachingMetaFromVerses(verses, language, defaultGalleryStyle),
   };
 
   return teaching;
@@ -67,12 +70,14 @@ export function teachingFromLegacy(
 function buildTeachingMetaFromVerses(
   verses: string[],
   language: Language,
+  defaultGalleryStyle: string | null,
 ): TeachingMeta {
   const hasVerses = verses.length > 0;
 
   const base: TeachingMeta = {
     ct_collection_key: undefined,
     ct_collection_order: undefined,
+    default_gallery_style: defaultGalleryStyle,
     ct_speaker_name: null,
     ct_location: null,
     ct_event_date: null,
@@ -97,6 +102,19 @@ function buildTeachingMetaFromVerses(
     ct_verse_type: "sutra",
     ct_verse_lang: language === "zh-tw" ? "zh-tw" : null,
   };
+}
+
+function buildGalleryBlocks(
+  galleryItems: Array<{ src: string; alt?: string | null; caption?: string | null }>,
+) {
+  if (!galleryItems.length) return undefined;
+  return [
+    {
+      id: "main_gallery",
+      style: null,
+      image_indexes: galleryItems.map((_, index) => index),
+    },
+  ];
 }
 
 function deriveTitleFromUrl(url: string): string {

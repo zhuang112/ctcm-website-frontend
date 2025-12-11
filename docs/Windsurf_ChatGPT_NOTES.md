@@ -1820,3 +1820,54 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0055 teaching-news-magazine-gallery-adapter-v2
+
+- 目的：依 gallery schema v2 為 teaching/news/magazine adapter 輸出 `meta.default_gallery_style` 與 `gallery_blocks`，並更新 sample / compare。
+- 主要變更：
+  - `src/adapters/teaching-from-legacy.ts` / `news-from-legacy.ts` / `magazine-from-legacy.ts`：預設 style（teaching=`grid-2`、news/magazine=`grid-3`）＋ `gallery_blocks`（main_gallery 取全部 gallery_items），保留 featured / gallery_items 行為。
+  - `src/types/*`：BaseMeta 增加 `default_gallery_style`、`has_unclassified_content` / `unclassified_notes`，news meta 補 `ct_event_location_raw`；magazine meta 維持 issue/pub_date。
+  - sample JSON（zh-tw / zh-cn teaching/news/magazine）重寫為 UTF-8，新增 `gallery_blocks` 與 default gallery style；compare dev page 顯示 gallery style / blocks 指標。
+  - 測試改為正常 UTF-8 文字並驗證 gallery_blocks / default_gallery_style；VisualComparePage 重新整理文案並顯示 gallery summary。
+- 測試 / 建置：已執行 `npm test`、`npm run build`、`npm run check:zh-cn`。
+- commit: <填入本次 commit hash>
+
+變更檔案（含 RAW 連結）：
+- `src/adapters/teaching-from-legacy.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/adapters/teaching-from-legacy.ts
+- `src/adapters/news-from-legacy.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/adapters/news-from-legacy.ts
+- `src/adapters/magazine-from-legacy.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/adapters/magazine-from-legacy.ts
+- `src/types/anycontent-teaching.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/types/anycontent-teaching.ts
+- `src/types/anycontent-news.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/types/anycontent-news.ts
+- `src/types/anycontent-magazine.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/types/anycontent-magazine.ts
+- `tests/adapters/teaching-from-legacy.spec.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/adapters/teaching-from-legacy.spec.ts
+- `tests/adapters/news-from-legacy.spec.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/adapters/news-from-legacy.spec.ts
+- `tests/adapters/magazine-from-legacy.spec.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/adapters/magazine-from-legacy.spec.ts
+- `data/anycontent/zh-tw/teaching/sample-001.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-tw/teaching/sample-001.json
+- `data/anycontent/zh-cn/teaching/sample-001.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-cn/teaching/sample-001.json
+- `data/anycontent/zh-tw/news/sample-001.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-tw/news/sample-001.json
+- `data/anycontent/zh-cn/news/sample-001.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-cn/news/sample-001.json
+- `data/anycontent/zh-tw/magazine/sample-001.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-tw/magazine/sample-001.json
+- `data/anycontent/zh-cn/magazine/sample-001.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-cn/magazine/sample-001.json
+- `docs/CONTENT_SCHEMA_V1.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `src/dev/VisualComparePage.tsx`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/dev/VisualComparePage.tsx
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

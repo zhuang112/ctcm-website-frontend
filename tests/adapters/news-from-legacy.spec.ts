@@ -3,16 +3,16 @@ import { newsFromLegacy } from "../../src/adapters/news-from-legacy";
 import type { LegacyHtmlDocument } from "../../src/html/legacy-html-types";
 
 describe("newsFromLegacy", () => {
-  it("maps featured image / caption and gallery items with alt", () => {
+  it("maps featured image, gallery items, gallery blocks, and default style", () => {
     const doc: LegacyHtmlDocument = {
       url: "https://www.ctworld.org.tw/news/2025/important-news.htm",
       html: `
         <html>
           <body>
             <h1>重要公告</h1>
-            <p>這是一段示範新聞內容。</p>
-            <img src="/images/news-main.jpg" alt="封面新聞圖" />
-            <img src="/images/news-gallery.jpg" alt="現場照片" />
+            <p>這是新聞導讀段落。</p>
+            <img src="/images/news-main.jpg" alt="封面圖片" />
+            <img src="/images/news-gallery.jpg" alt="交流合影" />
           </body>
         </html>
       `,
@@ -24,13 +24,17 @@ describe("newsFromLegacy", () => {
     });
 
     expect(news.featured_image).toContain("news-main.jpg");
-    expect(news.featured_image_caption).toBe("封面新聞圖");
+    expect(news.featured_image_caption).toBe("封面圖片");
     expect(news.gallery_items).toHaveLength(1);
     expect(news.gallery_items[0]).toMatchObject({
       url: expect.stringContaining("news-gallery.jpg"),
-      alt: "現場照片",
-      caption: "現場照片",
+      alt: "交流合影",
+      caption: "交流合影",
     });
+    expect(news.gallery_blocks).toEqual([
+      { id: "main_gallery", style: null, image_indexes: [0] },
+    ]);
+    expect(news.meta.default_gallery_style).toBe("grid-3");
   });
 
   it("maps basic date and location fields into NewsMeta when present in HTML (T-0005 v1)", () => {
@@ -40,9 +44,9 @@ describe("newsFromLegacy", () => {
         <html>
           <body>
             <div class="news-meta">
-              日期：2025-03-14 地點：台北講堂
+              日期：2025-03-14 場地：台北講堂
             </div>
-            <p>這裡有日期和地點的示範段落。</p>
+            <p>這是帶日期與場地的新聞測試。</p>
           </body>
         </html>
       `,

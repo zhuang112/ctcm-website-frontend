@@ -3,16 +3,16 @@ import { magazineFromLegacy } from "../../src/adapters/magazine-from-legacy";
 import type { LegacyHtmlDocument } from "../../src/html/legacy-html-types";
 
 describe("magazineFromLegacy", () => {
-  it("maps featured image / caption and gallery items with alt", () => {
+  it("maps featured image, gallery items, gallery blocks, and default style", () => {
     const doc: LegacyHtmlDocument = {
       url: "https://www.ctworld.org.tw/magazine/2025/issue001.htm",
       html: `
         <html>
           <body>
             <h1>春季專題</h1>
-            <p>這是一段雜誌導讀。</p>
-            <img src="/images/magazine-cover.jpg" alt="雜誌封面" />
-            <img src="/images/magazine-inner.jpg" alt="內頁圖片" />
+            <p>這是一段示範說明。</p>
+            <img src="/images/magazine-cover.jpg" alt="封面" />
+            <img src="/images/magazine-inner.jpg" alt="內頁" />
           </body>
         </html>
       `,
@@ -24,13 +24,17 @@ describe("magazineFromLegacy", () => {
     });
 
     expect(magazine.featured_image).toContain("magazine-cover.jpg");
-    expect(magazine.featured_image_caption).toBe("雜誌封面");
+    expect(magazine.featured_image_caption).toBe("封面");
     expect(magazine.gallery_items).toHaveLength(1);
     expect(magazine.gallery_items[0]).toMatchObject({
       url: expect.stringContaining("magazine-inner.jpg"),
-      alt: "內頁圖片",
-      caption: "內頁圖片",
+      alt: "內頁",
+      caption: "內頁",
     });
+    expect(magazine.gallery_blocks).toEqual([
+      { id: "main_gallery", style: null, image_indexes: [0] },
+    ]);
+    expect(magazine.meta.default_gallery_style).toBe("grid-3");
   });
 
   it("maps magazine issue and publish date meta from legacy HTML (T-0045 v1)", () => {
@@ -39,9 +43,9 @@ describe("magazineFromLegacy", () => {
       html: `
         <html>
           <body>
-            <h1>範例雜誌：春季專題</h1>
-            <div class="meta">日期：2025-03-20　期別：第 15 期</div>
-            <p>這裡測試 issue 與出版日期解析。</p>
+            <h1>春季專題</h1>
+            <div class="meta">日期：2025-03-20 刊別：第 15 期</div>
+            <p>這裡是測試 issue 與出版日的區塊。</p>
           </body>
         </html>
       `,

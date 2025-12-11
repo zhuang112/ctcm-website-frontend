@@ -9,6 +9,7 @@ export interface NewsMeta extends BaseMeta {
   ct_event_date_end?: string | null;
   ct_event_date_raw?: string | null;
   ct_event_location?: string | null;
+  ct_event_location_raw?: string | null;
   ct_news_category?: string | null;
 }
 
@@ -28,6 +29,7 @@ export interface NewsContent {
     alt?: string | null;
     caption?: string | null;
   }>;
+  gallery_blocks?: import("./anycontent-teaching").GalleryBlock[];
 
   meta: NewsMeta;
 }

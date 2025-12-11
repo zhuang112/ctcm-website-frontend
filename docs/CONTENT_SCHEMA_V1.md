@@ -16,11 +16,11 @@
 - `featured_image`: string | null（封面圖 URL；通常取正文第一張圖或專用封面區塊）
 - `featured_image_caption`: string | null（封面圖圖說；優先取 `alt` 或鄰近圖說，缺乏來源則為 null）
 - `gallery_items`: Array<{ url: string; alt?: string | null; caption?: string | null }>（多圖 gallery；目前 sample 多為空或僅含 url/alt，caption 可為 null）
-- `default_gallery_style`: string | null（可選，預設 gallery 呈現方式，如 `"grid3"`、`"slider"`；未指定則由前端/WP importer 決定 fallback）
 - `gallery_blocks`: Array<{ id: string; style?: string | null; image_indexes?: number[]; image_ids?: string[]; title?: string | null; description?: string | null; position_hint?: string | null }>（可選，預留多個 gallery 區塊，僅 schema 設計，未強制實作）
-  - `style` 可覆寫 `default_gallery_style`；`image_indexes` / `image_ids` 可對應 `gallery_items` 中的圖片。
+  - `style` 可覆寫 `meta.default_gallery_style`；`image_indexes` / `image_ids` 可對應 `gallery_items` 中的圖片。
   - `title` / `description` / `position_hint`（例如 `after-intro`）供前端排版提示；未填可為 null。
 - `meta`: 各 post_type 專用欄位（下方詳述）
+- `meta.default_gallery_style`: string | null（可選，預設 gallery 呈現方式；建議 teaching = `"grid-2"`，news/magazine = `"grid-3"`，未指定則由前端或 importer 決定 fallback）
 - `meta.has_unclassified_content`: boolean（預設 false；若該 JSON 仍含大量未分類內容可設為 true）
 - `meta.unclassified_notes`: string | null（選填，簡述「哪些段落暫時留在 body_markdown」）
 - 未知或暫無欄位的內容：先留在 `body_markdown`；除非確定常見且需要欄位，暫勿自行新增 meta key（等待後續任務評估 schema）。
@@ -89,7 +89,7 @@
 ## 6. 可能的後續擴充（暫不實作）
 
 - gallery 更完整欄位（排序、類型等）。
-- layout / multi-gallery（預留，未實作）：`default_gallery_style`、`gallery_blocks` 兩組欄位，供未來支援多 gallery 區塊與樣式覆寫。
+- layout / multi-gallery（預留，未實作）：`meta.default_gallery_style`、`gallery_blocks` 兩組欄位，供未來支援多 gallery 區塊與樣式覆寫。
 - seo（title/description/og:image 等）。
 - multilingual（跨語系對應表）。
 - magazine 單篇的封面/分類/標籤。

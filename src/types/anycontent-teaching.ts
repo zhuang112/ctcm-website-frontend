@@ -6,6 +6,10 @@ export type Language = "zh-tw" | "zh-cn" | "en" | "ja";
 export interface BaseMeta {
   ct_collection_key?: string | null;
   ct_collection_order?: number | null;
+  /** default gallery style hint, e.g. "grid-2" / "grid-3" / "slider" */
+  default_gallery_style?: string | null;
+  has_unclassified_content?: boolean;
+  unclassified_notes?: string | null;
 }
 
 export interface TeachingMeta extends BaseMeta {
@@ -36,6 +40,17 @@ export interface TeachingContent {
     alt?: string | null;
     caption?: string | null;
   }>;
+  gallery_blocks?: GalleryBlock[];
 
   meta: TeachingMeta;
+}
+
+export interface GalleryBlock {
+  id: string;
+  style?: string | null;
+  image_indexes?: number[];
+  image_ids?: string[];
+  title?: string | null;
+  description?: string | null;
+  position_hint?: string | null;
 }

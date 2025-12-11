@@ -1,30 +1,38 @@
 {
   "post_type": "magazine",
   "language": "zh-cn",
-  "post_title": "示例杂志：春季专题",
+  "post_title": "春季专题",
   "slug": "magazine-sample-001",
   "old_url": "https://www.ctworld.org/magazine/sample-001.htm",
-  "body_markdown": "# 示例杂志：春季专题\n\n本期专题聚焦春季修持与社群行动，收录多篇专访与实修分享。\n内容包含法师开示、专题报道，以及读者投稿的心得与问答。\n\n专题内文插图：修持分享片段。\n\n专题内文插图：社群行动照片。",
+  "body_markdown": "# 春季专题\n\n本期聚焦春季修学社群的故事，包含专访、现场照与心得分享。\n\n- 专题：修学分享\n- 侧记：社群行脚\n\n更多内容与深入报导请参考完整期刊。",
   "featured_image": "https://www.ctworld.org/magazine/images/magazine/magazine-cover.jpg",
   "featured_image_caption": "春季专题封面",
   "gallery_items": [
     {
       "url": "https://www.ctworld.org/magazine/images/magazine/magazine-gallery-1.jpg",
-      "alt": "修持分享",
-      "caption": "修持分享"
+      "alt": "修学分享",
+      "caption": "修学分享"
     },
     {
       "url": "https://www.ctworld.org/magazine/images/magazine/magazine-gallery-2.jpg",
-      "alt": "社群行动",
-      "caption": "社群行动"
+      "alt": "社群行脚",
+      "caption": "社群行脚"
+    }
+  ],
+  "gallery_blocks": [
+    {
+      "id": "main_gallery",
+      "style": null,
+      "image_indexes": [0, 1]
     }
   ],
   "meta": {
+    "default_gallery_style": "grid-3",
     "ct_magazine_issue": "15",
     "ct_magazine_issue_raw": "第 15 期",
     "ct_magazine_pub_date": "2025-03-20",
     "ct_magazine_pub_date_raw": "2025-03-20",
     "has_unclassified_content": true,
-    "unclassified_notes": "示范：仍有部分图说/旁白未拆栏位，暂留 body_markdown。"
+    "unclassified_notes": "示范：部分段落仍待分类，暂时保留在 body_markdown。"
   }
 }

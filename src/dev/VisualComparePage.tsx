@@ -1,103 +1,110 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from "react";
 
 type CompareEntry = {
-  id: string
-  label: string
-  postType: string
-  legacyUrl?: string | null
-  legacyHtmlPath?: string | null
-  anycontentZhTwPath?: string | null
-  anycontentZhCnPath?: string | null
-  newSiteUrl?: string | null
-  wordpressPostId?: string | number | null
-  hasUnclassifiedContent?: boolean
-  unclassifiedNotes?: string | null
-}
+  id: string;
+  label: string;
+  postType: string;
+  legacyUrl?: string | null;
+  legacyHtmlPath?: string | null;
+  anycontentZhTwPath?: string | null;
+  anycontentZhCnPath?: string | null;
+  newSiteUrl?: string | null;
+  wordpressPostId?: string | number | null;
+  hasUnclassifiedContent?: boolean;
+  unclassifiedNotes?: string | null;
+};
 
-type LoadedJson = Record<string, any> | null
+type LoadedJson = Record<string, any> | null;
 
 function useFetchedText(path?: string | null) {
-  const [text, setText] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [text, setText] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!path) {
-      setText(null)
-      setError(null)
-      return
+      setText(null);
+      setError(null);
+      return;
     }
-    let cancelled = false
-    setText(null)
-    setError(null)
+    let cancelled = false;
+    setText(null);
+    setError(null);
     fetch(path)
       .then((res) => {
-        if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
-        return res.text()
+        if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+        return res.text();
       })
       .then((t) => {
-        if (!cancelled) setText(t)
+        if (!cancelled) setText(t);
       })
       .catch((err) => {
-        if (!cancelled) setError(err.message || 'failed to load')
-      })
+        if (!cancelled) setError(err.message || "failed to load");
+      });
     return () => {
-      cancelled = true
-    }
-  }, [path])
+      cancelled = true;
+    };
+  }, [path]);
 
-  return { text, error }
+  return { text, error };
 }
 
 function useFetchedJson(path?: string | null) {
-  const { text, error } = useFetchedText(path)
+  const { text, error } = useFetchedText(path);
   const parsed = useMemo<LoadedJson>(() => {
-    if (!text) return null
+    if (!text) return null;
     try {
-      return JSON.parse(text)
+      return JSON.parse(text);
     } catch {
-      return null
+      return null;
     }
-  }, [text])
-  return { data: parsed, raw: text, error }
+  }, [text]);
+  return { data: parsed, raw: text, error };
 }
 
 function JsonSummary({ data, title }: { data: LoadedJson; title: string }) {
   if (!data) {
-    return <div className="text-sm text-gray-600">尚未載入 {title}</div>
+    return <div className="text-sm text-gray-600">尚未載入 {title}</div>;
   }
 
-  const body = typeof data.body_markdown === 'string' ? data.body_markdown : ''
-  const meta = data.meta || {}
+  const body = typeof data.body_markdown === "string" ? data.body_markdown : "";
+  const meta = data.meta || {};
+  const galleryItems = Array.isArray(data.gallery_items) ? data.gallery_items : [];
+  const galleryBlocks = Array.isArray(data.gallery_blocks) ? data.gallery_blocks : [];
+  const defaultGalleryStyle = meta.default_gallery_style ?? "—";
 
   return (
     <div className="space-y-3 text-sm">
       <div className="grid grid-cols-2 gap-3">
         <div>
           <div className="text-xs text-gray-500">post_type</div>
-          <div className="font-medium">{data.post_type || '—'}</div>
+          <div className="font-medium">{data.post_type || "—"}</div>
         </div>
         <div>
           <div className="text-xs text-gray-500">language</div>
-          <div className="font-medium">{data.language || '—'}</div>
+          <div className="font-medium">{data.language || "—"}</div>
         </div>
         <div>
           <div className="text-xs text-gray-500">post_title</div>
-          <div className="font-medium break-words">{data.post_title || '—'}</div>
+          <div className="font-medium break-words">{data.post_title || "—"}</div>
         </div>
         <div>
           <div className="text-xs text-gray-500">old_url</div>
-          <div className="break-words">{data.old_url || '—'}</div>
+          <div className="break-words">{data.old_url || "—"}</div>
         </div>
       </div>
 
       <div>
         <div className="text-xs text-gray-500 mb-1">meta</div>
         <div className="text-gray-800 leading-relaxed space-y-1">
-          <div>ct_has_dharma_verse: {meta.ct_has_dharma_verse ?? '—'}</div>
-          <div>ct_verse_type: {meta.ct_verse_type ?? '—'}</div>
-          <div>ct_verse_lang: {meta.ct_verse_lang ?? '—'}</div>
-          <div>has_unclassified_content: {meta.has_unclassified_content ?? '—'}</div>
+          <div>ct_has_dharma_verse: {meta.ct_has_dharma_verse ?? "—"}</div>
+          <div>ct_verse_type: {meta.ct_verse_type ?? "—"}</div>
+          <div>ct_verse_lang: {meta.ct_verse_lang ?? "—"}</div>
+          <div>has_unclassified_content: {meta.has_unclassified_content ?? "—"}</div>
           {meta.unclassified_notes ? <div>unclassified_notes: {meta.unclassified_notes}</div> : null}
+          <div>default_gallery_style: {defaultGalleryStyle}</div>
+          <div>
+            gallery_items: {galleryItems.length} · gallery_blocks: {galleryBlocks.length}
+          </div>
         </div>
         {meta.ct_verse_block_markdown ? (
           <pre className="mt-2 bg-gray-50 border rounded p-2 whitespace-pre-wrap text-xs">
@@ -109,7 +116,7 @@ function JsonSummary({ data, title }: { data: LoadedJson; title: string }) {
       <div>
         <div className="text-xs text-gray-500 mb-1">body_markdown (snippet)</div>
         <pre className="bg-gray-50 border rounded p-2 whitespace-pre-wrap text-xs max-h-48 overflow-auto">
-          {body ? body.split('\n').slice(0, 12).join('\n') : '—'}
+          {body ? body.split("\n").slice(0, 12).join("\n") : "—"}
         </pre>
       </div>
 
@@ -120,7 +127,7 @@ function JsonSummary({ data, title }: { data: LoadedJson; title: string }) {
         </pre>
       </details>
     </div>
-  )
+  );
 }
 
 function LegacyView({
@@ -129,10 +136,10 @@ function LegacyView({
   legacyView,
   setLegacyView,
 }: {
-  entry: CompareEntry
-  htmlText: string | null
-  legacyView: 'local' | 'url'
-  setLegacyView: (view: 'local' | 'url') => void
+  entry: CompareEntry;
+  htmlText: string | null;
+  legacyView: "local" | "url";
+  setLegacyView: (view: "local" | "url") => void;
 }) {
   return (
     <div className="bg-white border rounded-lg shadow-sm h-full flex flex-col">
@@ -141,16 +148,20 @@ function LegacyView({
         <div className="flex gap-2 text-xs">
           {entry.legacyHtmlPath && (
             <button
-              className={`px-2 py-1 rounded border ${legacyView === 'local' ? 'bg-blue-50 border-blue-400' : 'border-gray-200'}`}
-              onClick={() => setLegacyView('local')}
+              className={`px-2 py-1 rounded border ${
+                legacyView === "local" ? "bg-blue-50 border-blue-400" : "border-gray-200"
+              }`}
+              onClick={() => setLegacyView("local")}
             >
               Local HTML
             </button>
           )}
           {entry.legacyUrl && (
             <button
-              className={`px-2 py-1 rounded border ${legacyView === 'url' ? 'bg-blue-50 border-blue-400' : 'border-gray-200'}`}
-              onClick={() => setLegacyView('url')}
+              className={`px-2 py-1 rounded border ${
+                legacyView === "url" ? "bg-blue-50 border-blue-400" : "border-gray-200"
+              }`}
+              onClick={() => setLegacyView("url")}
             >
               Legacy URL
             </button>
@@ -159,7 +170,7 @@ function LegacyView({
       </div>
 
       <div className="p-3 text-sm flex-1 overflow-auto">
-        {legacyView === 'local' && entry.legacyHtmlPath ? (
+        {legacyView === "local" && entry.legacyHtmlPath ? (
           htmlText ? (
             <iframe title="Legacy HTML preview" srcDoc={htmlText} className="w-full h-96 border rounded" />
           ) : (
@@ -167,12 +178,12 @@ function LegacyView({
           )
         ) : null}
 
-        {legacyView === 'url' && entry.legacyUrl ? (
+        {legacyView === "url" && entry.legacyUrl ? (
           <div className="space-y-2">
             <a className="text-blue-600 underline break-all" href={entry.legacyUrl} target="_blank" rel="noreferrer">
               {entry.legacyUrl}
             </a>
-            <div className="text-xs text-gray-500">若站台有限制（X-Frame-Options），內嵌預覽可能被阻擋。</div>
+            <div className="text-xs text-gray-500">若網站阻擋 iframe，預覽可能失敗。</div>
             <iframe title="Legacy URL preview" src={entry.legacyUrl} className="w-full h-96 border rounded" />
           </div>
         ) : null}
@@ -182,10 +193,10 @@ function LegacyView({
         ) : null}
       </div>
     </div>
-  )
+  );
 }
 
-type RightTab = 'zh-tw' | 'zh-cn' | 'new-page' | 'wordpress'
+type RightTab = "zh-tw" | "zh-cn" | "new-page" | "wordpress";
 
 function RightPane({
   entry,
@@ -195,65 +206,74 @@ function RightPane({
   setTab,
   unclassified,
 }: {
-  entry: CompareEntry
-  zhTw: LoadedJson
-  zhCn: LoadedJson
-  tab: RightTab
-  setTab: (t: RightTab) => void
-  unclassified?: { hasUnclassifiedContent?: boolean; unclassifiedNotes?: string | null }
+  entry: CompareEntry;
+  zhTw: LoadedJson;
+  zhCn: LoadedJson;
+  tab: RightTab;
+  setTab: (tab: RightTab) => void;
+  unclassified?: { hasUnclassifiedContent: boolean; unclassifiedNotes: string | null };
 }) {
   return (
     <div className="bg-white border rounded-lg shadow-sm h-full flex flex-col">
       <div className="flex justify-between items-center px-3 py-2 border-b">
-        <div className="font-semibold text-sm">New / JSON / WP</div>
+        <div className="font-semibold text-sm">New / JSON</div>
         <div className="flex gap-2 text-xs">
-          {(['zh-tw', 'zh-cn', 'new-page', 'wordpress'] as RightTab[]).map((key) => (
-            <button
-              key={key}
-              className={`px-2 py-1 rounded border ${tab === key ? 'bg-blue-50 border-blue-400' : 'border-gray-200'}`}
-              onClick={() => setTab(key)}
-            >
-              {key === 'zh-tw' && 'zh-TW JSON'}
-              {key === 'zh-cn' && 'zh-CN JSON'}
-              {key === 'new-page' && 'New page'}
-              {key === 'wordpress' && 'WordPress'}
-            </button>
-          ))}
+          <button
+            className={`px-2 py-1 rounded border ${tab === "zh-tw" ? "bg-blue-50 border-blue-400" : "border-gray-200"}`}
+            onClick={() => setTab("zh-tw")}
+          >
+            zh-tw JSON
+          </button>
+          <button
+            className={`px-2 py-1 rounded border ${tab === "zh-cn" ? "bg-blue-50 border-blue-400" : "border-gray-200"}`}
+            onClick={() => setTab("zh-cn")}
+          >
+            zh-cn JSON
+          </button>
+          <button
+            className={`px-2 py-1 rounded border ${
+              tab === "new-page" ? "bg-blue-50 border-blue-400" : "border-gray-200"
+            }`}
+            onClick={() => setTab("new-page")}
+          >
+            New page
+          </button>
+          <button
+            className={`px-2 py-1 rounded border ${
+              tab === "wordpress" ? "bg-blue-50 border-blue-400" : "border-gray-200"
+            }`}
+            onClick={() => setTab("wordpress")}
+          >
+            WP
+          </button>
         </div>
       </div>
 
-      <div className="p-3 text-sm flex-1 overflow-auto space-y-3">
+      <div className="p-3 text-sm flex-1 overflow-auto">
         {unclassified?.hasUnclassifiedContent ? (
-          <div className="rounded border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-800">
-            <div className="font-semibold mb-1">Unclassified content noted</div>
-            <div className="text-xs text-amber-900">
-              meta.has_unclassified_content = true，暫存內容先留在 <code>body_markdown</code>。
-            </div>
-            {unclassified.unclassifiedNotes ? (
-              <div className="mt-1 text-xs text-amber-900">Notes: {unclassified.unclassifiedNotes}</div>
-            ) : null}
+          <div className="mb-3 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded px-2 py-1 inline-block">
+            has_unclassified_content = true
+            {unclassified.unclassifiedNotes ? ` · ${unclassified.unclassifiedNotes}` : ""}
           </div>
         ) : null}
 
-        {tab === 'zh-tw' && <JsonSummary data={zhTw} title="zh-TW JSON" />}
-        {tab === 'zh-cn' && <JsonSummary data={zhCn} title="zh-CN JSON" />}
+        {tab === "zh-tw" && <JsonSummary data={zhTw} title="zh-tw JSON" />}
+        {tab === "zh-cn" && <JsonSummary data={zhCn} title="zh-cn JSON" />}
 
-        {tab === 'new-page' && (
-          <div className="space-y-2">
+        {tab === "new-page" && (
+          <div className="text-gray-700 space-y-2">
+            <div className="text-sm">New page preview URL</div>
             {entry.newSiteUrl ? (
-              <>
-                <a className="text-blue-600 underline break-all" href={entry.newSiteUrl} target="_blank" rel="noreferrer">
-                  {entry.newSiteUrl}
-                </a>
-                <iframe title="New page preview" src={entry.newSiteUrl} className="w-full h-96 border rounded" />
-              </>
+              <a className="text-blue-600 underline break-all" href={entry.newSiteUrl} target="_blank" rel="noreferrer">
+                {entry.newSiteUrl}
+              </a>
             ) : (
               <div className="text-gray-600">尚未設定新站 URL</div>
             )}
           </div>
         )}
 
-        {tab === 'wordpress' && (
+        {tab === "wordpress" && (
           <div className="space-y-2">
             {entry.wordpressPostId ? (
               <div>WordPress post_id: {entry.wordpressPostId}</div>
@@ -264,81 +284,85 @@ function RightPane({
         )}
       </div>
     </div>
-  )
+  );
 }
 
 export default function VisualComparePage() {
-  const [entries, setEntries] = useState<CompareEntry[]>([])
-  const [selectedId, setSelectedId] = useState<string | null>(null)
-  const [indexError, setIndexError] = useState<string | null>(null)
-  const [legacyView, setLegacyView] = useState<'local' | 'url'>('local')
-  const [rightTab, setRightTab] = useState<RightTab>('zh-tw')
-  const [showOnlyUnclassified, setShowOnlyUnclassified] = useState(false)
+  const [entries, setEntries] = useState<CompareEntry[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [indexError, setIndexError] = useState<string | null>(null);
+  const [legacyView, setLegacyView] = useState<"local" | "url">("local");
+  const [rightTab, setRightTab] = useState<RightTab>("zh-tw");
+  const [showOnlyUnclassified, setShowOnlyUnclassified] = useState(false);
   const [unclassifiedMap, setUnclassifiedMap] = useState<
     Record<string, { hasUnclassifiedContent: boolean; unclassifiedNotes: string | null }>
-  >({})
+  >({});
 
   useEffect(() => {
-    fetch('/data/compare/index.json')
+    fetch("/data/compare/index.json")
       .then((res) => {
-        if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
-        return res.json()
+        if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+        return res.json();
       })
       .then((list: CompareEntry[]) => {
-        setEntries(list)
-        if (list.length > 0) setSelectedId(list[0].id)
-        setIndexError(null)
+        setEntries(list);
+        if (list.length > 0) setSelectedId(list[0].id);
+        setIndexError(null);
       })
-      .catch((err) => setIndexError(err.message || 'failed to load index'))
-  }, [])
+      .catch((err) => setIndexError(err.message || "failed to load index"));
+  }, []);
 
   useEffect(() => {
-    let cancelled = false
+    let cancelled = false;
     async function loadFlags() {
-      const next: Record<string, { hasUnclassifiedContent: boolean; unclassifiedNotes: string | null }> = {}
+      const next: Record<string, { hasUnclassifiedContent: boolean; unclassifiedNotes: string | null }> = {};
       for (const item of entries) {
-        const path = item.anycontentZhTwPath ? (item.anycontentZhTwPath.startsWith('/') ? item.anycontentZhTwPath : `/${item.anycontentZhTwPath}`) : null
-        if (!path) continue
+        const path = item.anycontentZhTwPath
+          ? item.anycontentZhTwPath.startsWith("/")
+            ? item.anycontentZhTwPath
+            : `/${item.anycontentZhTwPath}`
+          : null;
+        if (!path) continue;
         try {
-          const res = await fetch(path)
-          if (!res.ok) continue
-          const json = await res.json()
-          const meta = json?.meta || {}
+          const res = await fetch(path);
+          if (!res.ok) continue;
+          const json = await res.json();
+          const meta = json?.meta || {};
           next[item.id] = {
             hasUnclassifiedContent: Boolean(meta.has_unclassified_content),
             unclassifiedNotes: meta.unclassified_notes ?? null,
-          }
+          };
         } catch {
           // ignore errors per item
         }
       }
-      if (!cancelled) setUnclassifiedMap(next)
+      if (!cancelled) setUnclassifiedMap(next);
     }
     if (entries.length > 0) {
-      loadFlags()
+      loadFlags();
     } else {
-      setUnclassifiedMap({})
+      setUnclassifiedMap({});
     }
     return () => {
-      cancelled = true
-    }
-  }, [entries])
+      cancelled = true;
+    };
+  }, [entries]);
 
-  const selected = useMemo(() => entries.find((e) => e.id === selectedId) || null, [entries, selectedId])
-  const selectedFlags = selected ? unclassifiedMap[selected.id] : undefined
+  const selected = useMemo(() => entries.find((e) => e.id === selectedId) || null, [entries, selectedId]);
+  const selectedFlags = selected ? unclassifiedMap[selected.id] : undefined;
   const visibleEntries = useMemo(
     () => (showOnlyUnclassified ? entries.filter((e) => unclassifiedMap[e.id]?.hasUnclassifiedContent) : entries),
     [entries, showOnlyUnclassified, unclassifiedMap],
-  )
+  );
 
-  const { text: legacyHtml } = useFetchedText(selected?.legacyHtmlPath)
-  const { data: zhTw } = useFetchedJson(selected?.anycontentZhTwPath)
-  const { data: zhCn } = useFetchedJson(selected?.anycontentZhCnPath)
+  const { text: legacyHtml } = useFetchedText(selected?.legacyHtmlPath);
+  const { data: zhTw } = useFetchedJson(selected?.anycontentZhTwPath);
+  const { data: zhCn } = useFetchedJson(selected?.anycontentZhCnPath);
 
   useEffect(() => {
-    setLegacyView('local')
-    setRightTab('zh-tw')
-  }, [selectedId])
+    setLegacyView("local");
+    setRightTab("zh-tw");
+  }, [selectedId]);
 
   return (
     <div className="min-h-screen bg-[#f6f7fb] text-[#1f2937]">
@@ -346,7 +370,7 @@ export default function VisualComparePage() {
         <div className="max-w-6xl mx-auto px-4 py-4">
           <h1 className="text-xl font-bold">Visual Compare Tool v1</h1>
           <p className="text-sm text-gray-600">
-            開啟 dev 用的比對工具，檢查 legacy / AnyContent / 新站（目前含 teaching/news/magazine sample）。
+            dev-only 介面：並排查看 legacy / AnyContent / new / WP，現在附帶 gallery style / blocks 指標。
           </p>
         </div>
       </header>
@@ -356,7 +380,7 @@ export default function VisualComparePage() {
           <div className="px-4 py-3 border-b flex items-center justify-between">
             <div>
               <div className="font-semibold">Index</div>
-              <div className="text-xs text-gray-600">點選一列同步切換 legacy / JSON / 新頁</div>
+              <div className="text-xs text-gray-600">點選列即可同步左 / 右欄資料</div>
             </div>
             <label className="text-xs flex items-center gap-2 px-2 py-1 border rounded bg-gray-50">
               <input
@@ -364,7 +388,7 @@ export default function VisualComparePage() {
                 checked={showOnlyUnclassified}
                 onChange={(e) => setShowOnlyUnclassified(e.target.checked)}
               />
-              只顯示未分類旗標
+              只看 has_unclassified_content
             </label>
           </div>
           <div className="overflow-x-auto">
@@ -384,12 +408,12 @@ export default function VisualComparePage() {
                 </thead>
                 <tbody>
                   {visibleEntries.map((item) => {
-                    const isActive = item.id === selectedId
-                    const hasUnclassified = unclassifiedMap[item.id]?.hasUnclassifiedContent
+                    const isActive = item.id === selectedId;
+                    const hasUnclassified = unclassifiedMap[item.id]?.hasUnclassifiedContent;
                     return (
                       <tr
                         key={item.id}
-                        className={`border-t cursor-pointer ${isActive ? 'bg-blue-50' : 'hover:bg-gray-50'}`}
+                        className={`border-t cursor-pointer ${isActive ? "bg-blue-50" : "hover:bg-gray-50"}`}
                         onClick={() => setSelectedId(item.id)}
                       >
                         <td className="px-3 py-2 font-medium">
@@ -403,14 +427,14 @@ export default function VisualComparePage() {
                           </div>
                         </td>
                         <td className="px-3 py-2">{item.postType}</td>
-                        <td className="px-3 py-2 break-all">{item.legacyUrl || item.legacyHtmlPath || '—'}</td>
-                        <td className="px-3 py-2 break-all">{item.anycontentZhTwPath || '—'}</td>
-                        <td className="px-3 py-2 break-all">{item.newSiteUrl || '—'}</td>
+                        <td className="px-3 py-2 break-all">{item.legacyUrl || item.legacyHtmlPath || "—"}</td>
+                        <td className="px-3 py-2 break-all">{item.anycontentZhTwPath || "—"}</td>
+                        <td className="px-3 py-2 break-all">{item.newSiteUrl || "—"}</td>
                         <td className="px-3 py-2 break-all">
-                          {item.wordpressPostId ? `post_id: ${item.wordpressPostId}` : '—'}
+                          {item.wordpressPostId ? `post_id: ${item.wordpressPostId}` : "—"}
                         </td>
                       </tr>
-                    )
+                    );
                   })}
                   {visibleEntries.length === 0 && (
                     <tr>
@@ -431,7 +455,7 @@ export default function VisualComparePage() {
               <LegacyView entry={selected} htmlText={legacyHtml} legacyView={legacyView} setLegacyView={setLegacyView} />
             ) : (
               <div className="bg-white border rounded-lg shadow-sm h-full flex items-center justify-center text-gray-600">
-                請先在 index 選擇一筆資料
+                請從 index 選擇一筆資料
               </div>
             )}
           </div>
@@ -447,12 +471,12 @@ export default function VisualComparePage() {
               />
             ) : (
               <div className="bg-white border rounded-lg shadow-sm h-full flex items-center justify-center text-gray-600">
-                請先在 index 選擇一筆資料
+                請從 index 選擇一筆資料
               </div>
             )}
           </div>
         </section>
       </main>
     </div>
-  )
+  );
 }

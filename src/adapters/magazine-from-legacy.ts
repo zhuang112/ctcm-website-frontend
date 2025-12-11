@@ -1,5 +1,5 @@
-// magazine 單元：從舊站 HTML 轉成 MagazineContent（AnyContent 的 magazine 變體）
-// 對應：docs/CONTENT_SCHEMA.md § magazine、docs/HTML_TO_MARKDOWN_RULES_V4.md 共用規則
+// magazine 轉換：將 legacy HTML 轉為 MagazineContent（AnyContent 的 magazine 結構）
+// 對應：docs/CONTENT_SCHEMA_V1.md § magazine、docs/HTML_TO_MARKDOWN_RULES_V4.md 共用規則
 
 import { htmlToMarkdown } from "../html/html-to-markdown";
 import type {
@@ -10,27 +10,13 @@ import type { Language } from "../types/anycontent-teaching";
 import type { MagazineContent, MagazineMeta } from "../types/anycontent-magazine";
 
 export interface MagazineFromLegacyOptions extends HtmlToMarkdownOptions {
-  /**
-   * 指派給這一篇內容的 external_id（由外層流程決定）。
-   */
   externalId: string;
-  /**
-   * 語言碼，目前先以 zh-tw 為主，未來由 zh-TW → zh-CN pipeline 產生其他語言版本。
-   */
   language: Language;
-  /**
-   * 預設標題（若無法從 HTML 自動推斷時使用）。
-   */
   fallbackTitle?: string;
 }
 
 /**
- * 將一篇舊站 magazine 類型 HTML 轉成 MagazineContent（minimal mapping 版本）。
- *
- * - HTML→Markdown 的規則實作由 `htmlToMarkdown()` 負責。
- * - 本函式目前只負責：
- *   - 填入 MagazineContent 所需的基本欄位（post_type / language / old_url / body_markdown / meta skeleton）。
- *   - issue / section / author 等進階欄位留待後續 T 任務補強。
+ * 將 legacy magazine 頁面轉為 MagazineContent（minimal v2，含 gallery style/block）。
  */
 export function magazineFromLegacy(
   doc: LegacyHtmlDocument,
@@ -43,10 +29,13 @@ export function magazineFromLegacy(
   const post_title = fallbackTitle ?? deriveTitleFromUrl(doc.url);
   const parsedMeta = parseMagazineMetaFromHtml(doc.html);
   const [firstImage, ...galleryImages] = mdResult.images;
+  const defaultGalleryStyle = "grid-3";
+  const galleryBlocks = buildGalleryBlocks(galleryImages);
 
   const meta: MagazineMeta = {
     ct_collection_key: undefined,
     ct_collection_order: undefined,
+    default_gallery_style: defaultGalleryStyle,
     ct_magazine_level: "issue",
     ct_magazine_issue: parsedMeta.issue,
     ct_magazine_issue_raw: parsedMeta.issueRaw,
@@ -77,6 +66,7 @@ export function magazineFromLegacy(
       alt: img.alt ?? null,
       caption: img.alt ?? null,
     })),
+    gallery_blocks: galleryBlocks,
     meta,
   };
 
@@ -101,45 +91,34 @@ interface ParsedMagazineMeta {
   pubDate: string | null;
 }
 
-/**
- * v1 meta 解析：支援 sample-001 的格式
- * 「日期：YYYY-MM-DD　期別：第 N 期」
- * 未匹配時回傳 null，不拋錯，避免整頁轉換失敗。
- */
 function parseMagazineMetaFromHtml(html: string): ParsedMagazineMeta {
   const text = toHalfWidth(
     html
-      // 粗略移除標籤，取得可搜尋文字
       .replace(/<script[^>]*>.*?<\/script>/gis, " ")
       .replace(/<style[^>]*>.*?<\/style>/gis, " ")
-      .replace(/<[^>]+>/g, " "),
-  );
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&nbsp;/g, " "),
+  )
+    .replace(/\s+/g, " ")
+    .trim();
 
-  const pubDateRaw = extractAfterLabel(text, /日期[:：]/);
-  const issueRaw = extractAfterLabel(text, /期別[:：]/);
+  const dateMatch = text.match(/日期[:：]\s*([0-9]{4}[./-][0-9]{1,2}[./-][0-9]{1,2})/);
+  const issueMatch = text.match(/(刊別|刊别|刊號|刊号|期別|期别)[:：]\s*([^\r\n；，。]+)/);
+
+  const pubDateRaw = dateMatch ? dateMatch[1] : null;
+  const issueRaw = issueMatch ? issueMatch[2].trim() : null;
+  const issueRawTrimmed = issueRaw ? issueRaw.match(/第\s*\d+\s*期/)?.[0] ?? issueRaw : null;
 
   return {
-    issueRaw,
-    issue: normalizeIssue(issueRaw),
+    issueRaw: issueRawTrimmed,
+    issue: normalizeIssue(issueRawTrimmed),
     pubDateRaw,
     pubDate: normalizeDate(pubDateRaw),
   };
 }
 
-function extractAfterLabel(text: string, label: RegExp): string | null {
-  const parts = text.split(label);
-  if (parts.length < 2) return null;
-  // 取標籤後第一段，並截到下一個標籤或行斷
-  const candidate = parts[1]
-    .split(/(?:日期[:：]|期別[:：]|\r|\n)/)[0]
-    .trim();
-  return candidate || null;
-}
-
 function toHalfWidth(input: string): string {
-  return input.replace(/[！-～]/g, (ch) =>
-    String.fromCharCode(ch.charCodeAt(0) - 0xfee0),
-  );
+  return input.replace(/[：～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0));
 }
 
 function normalizeIssue(raw: string | null): string | null {
@@ -156,4 +135,17 @@ function normalizeDate(raw: string | null): string | null {
   const [, y, m, d] = match;
   const pad2 = (v: string) => v.padStart(2, "0");
   return `${y}-${pad2(m)}-${pad2(d)}`;
+}
+
+function buildGalleryBlocks(
+  galleryItems: Array<{ src: string; alt?: string | null; caption?: string | null }>,
+) {
+  if (!galleryItems.length) return undefined;
+  return [
+    {
+      id: "main_gallery",
+      style: null,
+      image_indexes: galleryItems.map((_, index) => index),
+    },
+  ];
 }

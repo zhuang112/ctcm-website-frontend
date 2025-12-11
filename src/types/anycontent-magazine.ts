@@ -52,6 +52,7 @@ export interface MagazineContent {
     alt?: string | null;
     caption?: string | null;
   }>;
+  gallery_blocks?: import("./anycontent-teaching").GalleryBlock[];
 
   meta: MagazineMeta;
 }

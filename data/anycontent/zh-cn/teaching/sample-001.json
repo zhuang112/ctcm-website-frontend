@@ -4,16 +4,16 @@
   "post_type": "teaching",
   "old_url": "https://www.ctworld.org/turn/teaching/sample-001.htm",
   "slug": "teaching-sample-001",
-  "post_title": "sample-001.htm",
-  "post_excerpt": null,
-  "body_markdown": "# 心经讲记\n\n这是一篇示范用的教学页面，含有简短的导读。\n\n## 导读\n\n> 观自在菩萨\n> 行深般若波罗蜜多时\n\n以下是课程要点：\n\n- 强调日常修持\n- 搭配静坐与持咒\n\n以下是课程现场图片：\n\n课程开场介绍。\n\n讲师示范与提问。\n\n更多内容请参考附件。",
+  "post_title": "心经讲记示例",
+  "post_excerpt": "示范教学页面，含偈语与图片。",
+  "body_markdown": "# 心经讲记\n\n这是一篇示范用的教学页面，提供简短导读。\n\n## 导读\n\n> 观自在菩萨\n> 行深般若波罗蜜多时\n\n以下为课程重点：\n\n- 强调日常修习\n- 课程包含偈语与问答\n\n更多现场资讯请参考附图与说明。",
   "featured_image": "https://www.ctworld.org/turn/teaching/images/teaching/featured.jpg",
-  "featured_image_caption": "心经封面图",
+  "featured_image_caption": "讲座封面示意",
   "gallery_items": [
     {
       "url": "https://www.ctworld.org/turn/teaching/images/teaching/gallery-1.jpg",
-      "alt": "现场同修",
-      "caption": "现场同修"
+      "alt": "现场修习",
+      "caption": "现场修习"
     },
     {
       "url": "https://www.ctworld.org/turn/teaching/images/teaching/gallery-2.jpg",
@@ -21,7 +21,15 @@
       "caption": "讲师示范"
     }
   ],
+  "gallery_blocks": [
+    {
+      "id": "main_gallery",
+      "style": null,
+      "image_indexes": [0, 1]
+    }
+  ],
   "meta": {
+    "default_gallery_style": "grid-2",
     "ct_collection_key": null,
     "ct_collection_order": null,
     "ct_speaker_name": null,

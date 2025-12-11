@@ -267,6 +267,19 @@
   - [x] `HTML_TO_MARKDOWN_RULES_V4.md` 註明 layout / multi-gallery 尚未產出，需未來 T 實作。
   - [x] `RULES_CROSSCHECK_NOTES_V1.md`、`PROJECT_TODO.md`、`Windsurf_ChatGPT_NOTES.md` 有對應 T-0054 紀錄；本次為 docs-only，未跑測試。
 
+### T-0055 teaching-news-magazine-gallery-adapter-v2：gallery style/block 輸出與 sample 更新
+
+> 狀態：✅ 已完成（teaching/news/magazine adapter v2，2025-12-12）
+
+- 目標：
+  - teaching / news / magazine adapter 輸出 `meta.default_gallery_style`（預設：teaching=`grid-2`，news/magazine=`grid-3`），並新增 `gallery_blocks`（main_gallery 對應全部 gallery_items）。
+  - sample JSON（zh-tw / zh-cn）改為有效 UTF-8，帶 main_gallery block；compare dev page 可看到 default_gallery_style / gallery_blocks 指標。
+  - 仍保留既有 `featured_image` / `featured_image_caption` / `gallery_items` 行為。
+- 驗收：
+  - [x] 三個 adapter 皆輸出 `meta.default_gallery_style` 與 `gallery_blocks`，且未破壞既有圖片欄位。
+  - [x] teaching/news/magazine sample JSON（zh-tw / zh-cn）更新，/dev/compare 可顯示新的欄位摘要。
+  - [x] `npm test`、`npm run build`、`npm run check:zh-cn` 通過；notes 有 T-0055 小節與 RAW 連結。
+
 ### T-0046 fix-instr-encoding-and-snapshot-rules：修正 INSTR 編碼與補強 snapshot 規則
 > 狀態：✅ 已完成（2025-12-12）
 - 目標：確保指定 INSTR/README/PROJECT_TODO 為 UTF-8，並在 workflow 補充 docs snapshot 使用規則。
