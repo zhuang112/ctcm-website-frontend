@@ -331,3 +331,17 @@
   - [x] scripts/deploy/deploy-progress-dashboard-to-siteground.js 可讀取環境變數並上傳 HTML。
   - [x] .env.siteground.example 提供 placeholders；新增 npm script deploy:progress-dashboard。
   - [x] notes 中有 T-0057 小節與 RAW 連結；本次為 dev/docs-only，未實際佈署。
+
+### T-0059 wordpress-gallery-importer-cli-v1：AnyContent→WP 匯入 dry-run CLI
+
+> 狀態：✅ 已完成（2025-12-12；CLI dry-run）
+
+- 目標：
+  - 依 WP content model 產出 dry-run CLI，將 AnyContent JSON 轉為 WP 匯入 payload 並輸出 JSON 計畫檔（不呼叫 WP）。
+  - 保留圖片與 gallery 欄位（featured_image、gallery_items、gallery_blocks、default_gallery_style）與 meta。
+- 驗收：
+  - [x] src/wp/import/anycontent-to-wp.ts 提供轉換函式；src/wp/import/types.ts 定義 WPImportRecord。
+  - [x] 	ools/wp-import/wp-import-from-anycontent.ts 可掃描 data/anycontent，產生 dry-run 計畫檔；npm script wp:import:dry-run 可執行。
+  - [x] notes 中有 T-0059 小節與 RAW 連結；
+pm test、
+pm run build 通過。

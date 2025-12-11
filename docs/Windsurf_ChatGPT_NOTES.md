@@ -1940,3 +1940,34 @@ pm run check:zh-cn。
 - docs/Windsurf_ChatGPT_NOTES.md
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+
+## 2025-12-12 任務：T-0059 wordpress-gallery-importer-cli-v1
+
+- 目的：實作 AnyContent → WordPress 匯入 dry-run CLI，產出 WPImportRecord 計畫檔（不呼叫 WP）。
+- 主要變更：
+  - src/wp/import/types.ts：定義 WPImportRecord / gallery block 等型別。
+  - src/wp/import/anycontent-to-wp.ts：將 teaching/news/magazine AnyContent 轉為 WPImportRecord（含 featured、gallery_items、gallery_blocks、default_gallery_style、meta）。
+  - 	ools/wp-import/wp-import-from-anycontent.ts：CLI，掃描 data/anycontent，輸出 dry-run JSON；新增 npm script wp:import:dry-run。
+  - PROJECT_TODO 新增並標記 T-0059 完成；docs-only 無。
+- 測試 / 建置：已執行 
+pm test、
+pm run build；
+pm run wp:import:dry-run 生成計畫檔（tmp/wp-import-plan-zh-tw-*.json）。
+- commit: 123353e
+
+變更檔案（含 RAW 連結）：
+- src/wp/import/types.ts
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/wp/import/types.ts
+- src/wp/import/anycontent-to-wp.ts
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/wp/import/anycontent-to-wp.ts
+- tools/wp-import/wp-import-from-anycontent.ts
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/wp-import/wp-import-from-anycontent.ts
+- package.json
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+- package-lock.json
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package-lock.json
+- docs/PROJECT_TODO.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
