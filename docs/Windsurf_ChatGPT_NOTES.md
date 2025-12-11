@@ -1798,3 +1798,25 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-12 任務：T-0054 layout-and-multi-gallery-schema-design（docs-only）
+
+- 目的：為未來多 gallery 區塊預留 schema 與規則，暫不實作程式。
+- 主要變更：
+  - `docs/CONTENT_SCHEMA_V1.md`：新增 `default_gallery_style`、`gallery_blocks` 欄位（預留樣式與多 gallery 區塊）。
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`：註記 layout / multi-gallery 尚未由 extractor 產出，仍僅提供 `images[]` → `featured_image` / `gallery_items`。
+  - `docs/RULES_CROSSCHECK_NOTES_V1.md`：補充 T-0054 圖片/gallery schema 更新的 cross-check 提醒。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0054。
+- 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: <待填入>
+
+變更檔案（含 RAW 連結）：
+- `docs/CONTENT_SCHEMA_V1.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+- `docs/HTML_TO_MARKDOWN_RULES_V4.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
+- `docs/RULES_CROSSCHECK_NOTES_V1.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/RULES_CROSSCHECK_NOTES_V1.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

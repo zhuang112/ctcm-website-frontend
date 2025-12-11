@@ -253,6 +253,20 @@
   - [x] Sample 同步：`data/legacy-news|magazine/sample-001.html`、`data/anycontent/zh-tw|zh-cn/news|magazine/sample-001.json` 含封面與 gallery；compare index 保持可瀏覽。
   - [x] notes 記錄本次變更與 RAW 連結。
 
+### T-0054 layout-and-multi-gallery-schema-design：gallery 樣式與多 gallery schema（docs-only）
+
+> 狀態：✅ 已完成（設計 schema / 規則，未實作程式，2025-12-12）
+
+- 目標：
+  - 在 `CONTENT_SCHEMA_V1.md` 預留 `default_gallery_style`、`gallery_blocks` 欄位，支援未來多 gallery 區塊與樣式覆寫。
+  - 在 `HTML_TO_MARKDOWN_RULES_V4.md` 標註 layout / multi-gallery 尚未由 extractor 產出，暫維持 `featured_image` + `gallery_items`。
+  - 在 crosscheck / notes 紀錄此設計，便於後續 T（adapter / importer / frontend）實作時參考。
+
+- 驗收：
+  - [x] `CONTENT_SCHEMA_V1.md` 增列 `default_gallery_style`、`gallery_blocks` 欄位與欄位意義。
+  - [x] `HTML_TO_MARKDOWN_RULES_V4.md` 註明 layout / multi-gallery 尚未產出，需未來 T 實作。
+  - [x] `RULES_CROSSCHECK_NOTES_V1.md`、`PROJECT_TODO.md`、`Windsurf_ChatGPT_NOTES.md` 有對應 T-0054 紀錄；本次為 docs-only，未跑測試。
+
 ### T-0046 fix-instr-encoding-and-snapshot-rules：修正 INSTR 編碼與補強 snapshot 規則
 > 狀態：✅ 已完成（2025-12-12）
 - 目標：確保指定 INSTR/README/PROJECT_TODO 為 UTF-8，並在 workflow 補充 docs snapshot 使用規則。

@@ -110,3 +110,8 @@
 - `T-00xx html-to-md-gap-review`: æ¢³ç† V4 è¦å‰‡ vs adapter/test å¯¦ä½œçš„ç¼ºå£ã€‚
 - `T-00xx extend-zh-cn-health-check`: æ“´å…… health check å ±è¡¨èˆ‡æª¢æŸ¥æ¬„ä½ï¼ˆå« SEO/metaï¼‰ã€‚
 - `T-00xx align-instr-guidelines`: å°‡ INSTR æ’°å¯«è¦å‰‡é›†ä¸­ç‚ºå–®ä¸€ä¾†æºï¼ˆworkflow vs INSTR/READMEï¼‰ã€‚
+### T-0054 ¹Ï¤ù / gallery schema ¸É¥R
+
+- schema¡G`CONTENT_SCHEMA_V1.md` ¤w¹w¯d `default_gallery_style`¡B`gallery_blocks` ¥H¤ä´©¦h gallery °Ï¶ô»P¼Ë¦¡ÂĞ¼g¡F¥Ø«e adapter ¤´¶È²£¥X `featured_image` / `gallery_items`¡C
+- ³W«h¡G`HTML_TO_MARKDOWN_RULES_V4.md` µù©ú layout / multi-gallery ©|¥¼¥Ñ extractor ²£¥X¡A¤À²Õ»P¼Ë¦¡»İ«áÄò T ¹ê§@¡C
+- «áÄò«ØÄ³¡G¥¼¨Ó­Y­n±Ò¥Î multi-gallery¡A»İ¦P®É§ó·s adapter/importer/frontend¡A¨Ã¦b crosscheck / TODO / notes µn°O¹ïÀ³ T¡C
