@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>ctworld Progress Dashboard</title>
+  <style>
+    body { font-family: "Segoe UI", sans-serif; background: #f7f8fb; color: #1f2937; margin: 0; padding: 24px; }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); padding: 20px; max-width: 1080px; margin: 0 auto 20px; }
+    h1 { margin: 0 0 12px; }
+    .meta { color: #6b7280; font-size: 13px; margin-bottom: 12px; }
+    .progress { margin: 12px 0 16px; }
+    .progress-bar { height: 10px; background: #e5e7eb; border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 10px; background: linear-gradient(90deg, #2563eb, #22c55e); }
+    .date-block { margin-bottom: 16px; }
+    .date-title { font-weight: 700; font-size: 14px; margin-bottom: 8px; color: #374151; }
+    .task { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px solid #e5e7eb; border-radius: 10px; background: #fafafa; margin-bottom: 8px; }
+    .task.done { background: #f0fdf4; border-color: #bbf7d0; }
+    .task .info { flex: 1; }
+    .task .id { font-weight: 700; color: #2563eb; font-size: 13px; }
+    .task .title { font-weight: 600; color: #111827; }
+    .task .desc { color: #4b5563; margin-top: 4px; font-size: 13px; }
+    .task .meta { margin: 4px 0 0; }
+    .legend { font-size: 12px; color: #6b7280; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>ctworld Progress Dashboard</h1>
+    <div class="meta">每日手動更新（由 Codex 依 PROJECT_TODO / NOTES 對齊）。</div>
+    <div id="progress" class="progress">
+      <div class="legend" id="progress-text"></div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <div id="timeline"></div>
+  </div>
+
+  <script>
+    // 更新時，只需依 NOTES / PROJECT_TODO 將當日完成或進行中的項目寫進下方 tasks 陣列。
+    const tasks = [
+      {
+        date: "2025-12-12",
+        items: [
+          {
+            id: "T-0055",
+            title: "Teaching/News/Magazine gallery adapter v2",
+            meta: "meta.default_gallery_style + gallery_blocks；sample/compare 更新",
+            desc: "Adapters 輸出 gallery style/block，sample JSON 與 compare 顯示新欄位；tests/build/check:zh-cn 通過。",
+            done: true
+          },
+          {
+            id: "T-0054",
+            title: "Layout & multi-gallery schema 設計",
+            meta: "docs-only",
+            desc: "Schema 預留 default_gallery_style / gallery_blocks，規則文件標註尚未由 extractor 產出。",
+            done: true
+          }
+        ]
+      },
+      {
+        date: "2025-12-11",
+        items: [
+          {
+            id: "T-0046",
+            title: "INSTR UTF-8 & snapshot 規則修正",
+            meta: "workflow + INSTR",
+            desc: "確保 INSTR/README/PROJECT_TODO 為 UTF-8，補充 snapshot 只作備援、不作真相。",
+            done: true
+          }
+        ]
+      }
+    ];
+
+    function render() {
+      const timeline = document.getElementById("timeline");
+      const total = tasks.reduce((acc, g) => acc + g.items.length, 0);
+      const completed = tasks.reduce((acc, g) => acc + g.items.filter(i => i.done).length, 0);
+      const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+      document.getElementById("progress-text").textContent = `完成 ${completed}/${total} (${pct}%)`;
+      document.getElementById("progress-fill").style.width = `${pct}%`;
+
+      timeline.innerHTML = "";
+      tasks.forEach(group => {
+        const block = document.createElement("div");
+        block.className = "date-block";
+        const heading = document.createElement("div");
+        heading.className = "date-title";
+        heading.textContent = group.date;
+        block.appendChild(heading);
+
+        group.items.forEach(item => {
+          const row = document.createElement("div");
+          row.className = `task ${item.done ? "done" : ""}`;
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.checked = item.done;
+          checkbox.disabled = true;
+          const info = document.createElement("div");
+          info.className = "info";
+          info.innerHTML = `
+            <div class="id">${item.id}</div>
+            <div class="title">${item.title}</div>
+            <div class="desc">${item.desc}</div>
+            <div class="meta">meta: ${item.meta || "—"}</div>
+          `;
+          row.appendChild(checkbox);
+          row.appendChild(info);
+          block.appendChild(row);
+        });
+
+        timeline.appendChild(block);
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>

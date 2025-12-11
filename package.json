@@ -14,11 +14,13 @@
     "test": "vitest",
     "snapshot:docs": "ts-node tools/docs-snapshot/make-docs-snapshot.ts",
     "convert:zh-cn": "ts-node tools/convert/generate-zh-cn-from-zh-tw.ts",
-    "check:zh-cn": "ts-node tools/convert/check-zh-cn-health.ts"
+    "check:zh-cn": "ts-node tools/convert/check-zh-cn-health.ts",
+    "deploy:progress-dashboard": "node scripts/deploy/deploy-progress-dashboard-to-siteground.js"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
     "opencc-js": "^1.0.5",
+    "ssh2-sftp-client": "^9.0.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

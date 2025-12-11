@@ -289,9 +289,21 @@
 > 狀態：✅ 已完成（2025-12-12；dev/docs-only）
 
 - 目標：
-  - 建立可手動每日更新的進度儀表板（docs/DESIGN/ctworld-progress-dashboard.html），以 	asks 陣列呈現當日完成的 T 任務與描述。
+  - 建立可手動每日更新的進度儀表板（docs/DESIGN/ctworld-progress-dashboard.html），以 tasks 陣列呈現當日完成的 T 任務與描述。
   - 由 Codex 依 PROJECT_TODO / Windsurf_ChatGPT_NOTES 補齊最新完成度，更新 Timeline 與 checkbox。
 - 驗收：
   - [x] 儀表板頁可顯示日期分組、完成度百分比與 checkbox 狀態。
   - [x] 已填入近期任務（例如 T-0054、T-0055），並標記完成。
   - [x] notes 中有 T-0056 小節與 RAW 連結；本次為 dev/docs-only。
+
+### T-0057 deploy-progress-dashboard-to-siteground：部署儀表板到 SiteGround（dev script）
+
+> 狀態：✅ 已完成（2025-12-12；dev-only）
+
+- 目標：
+  - 提供一個 SFTP 部署腳本，將 dev/progress-dashboard/ctworld-progress-dashboard.html 上傳到 SiteGround 指定路徑。
+  - 以 .env.siteground 管理站台憑證，不將密碼/金鑰寫入 repo。
+- 驗收：
+  - [x] scripts/deploy/deploy-progress-dashboard-to-siteground.js 可讀取環境變數並上傳 HTML。
+  - [x] .env.siteground.example 提供 placeholders；新增 npm script deploy:progress-dashboard。
+  - [x] notes 中有 T-0057 小節與 RAW 連結；本次為 dev/docs-only，未實際佈署。
