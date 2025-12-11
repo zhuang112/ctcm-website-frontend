@@ -209,6 +209,21 @@
   - [x] Schema V1 補上圖片欄位定義與繁簡轉換說明。
   - [x] Crosscheck 筆記更新圖片缺口與後續 T 建議；未改動程式碼。
 
+### T-0051 teaching-image-gallery-impl-v1：Teaching 圖片 / 圖說 / Gallery V1 實作
+
+> 狀態：✅ 已完成（教學圖片拆解與 sample 更新，2025-12-12）
+
+- 目標：
+  - teaching 從 legacy HTML 拆出封面圖與 gallery，填入 `featured_image` / `featured_image_caption` / `gallery_items`。
+  - 圖片順序與 alt 保留，caption 以 alt 為主（缺少則為 null）。
+  - 教學 sample（legacy HTML、zh-tw / zh-cn JSON、/dev/compare index）同步展示圖片欄位，便於驗收。
+
+- 驗收：
+  - [x] `teaching-from-legacy` 以第一張圖為封面，其餘為 gallery，caption 取自 alt（無則 null）。
+  - [x] `npm test`、`npm run build` 通過；若觸及 zh-CN JSON，亦執行 `npm run check:zh-cn`。
+  - [x] `data/legacy-teaching/sample-001.html`、`data/anycontent/zh-tw|zh-cn/teaching/sample-001.json`、`data/compare/index.json` 同步更新，包含封面與 gallery 圖片。
+  - [x] notes 記錄本次變更與 RAW 連結。
+
 ### T-0046 fix-instr-encoding-and-snapshot-rules：修正 INSTR 編碼與補強 snapshot 規則
 > 狀態：✅ 已完成（2025-12-12）
 - 目標：確保指定 INSTR/README/PROJECT_TODO 為 UTF-8，並在 workflow 補充 docs snapshot 使用規則。

@@ -1710,3 +1710,33 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0051 teaching-image-gallery-impl-v1
+
+- 目的：依 V4 規則為 teaching 實作封面圖與 gallery（alt → caption），並更新 sample 與 compare。
+- 主要變更：
+  - `src/adapters/teaching-from-legacy.ts`：第一張圖作為 `featured_image`，caption 取 alt；其餘為 `gallery_items`，保留 alt / caption。
+  - 測試：`tests/html/html-to-markdown.spec.ts`（圖片 alt 保留）、`tests/adapters/teaching-from-legacy.spec.ts`（featured / gallery 順序與 caption）。
+  - Sample 與 compare：`data/legacy-teaching/sample-001.html`、`data/anycontent/zh-tw|zh-cn/teaching/sample-001.json`、`data/compare/index.json` 更新，含封面 + 2 張 gallery 圖。
+- 測試 / 建置：已執行 `npm test`、`npm run build`、`npm run check:zh-cn`。
+- commit: <待填入>
+
+變更檔案（含 RAW 連結）：
+- `src/adapters/teaching-from-legacy.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/adapters/teaching-from-legacy.ts
+- `tests/html/html-to-markdown.spec.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/html/html-to-markdown.spec.ts
+- `tests/adapters/teaching-from-legacy.spec.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/adapters/teaching-from-legacy.spec.ts
+- `data/legacy-teaching/sample-001.html`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/legacy-teaching/sample-001.html
+- `data/anycontent/zh-tw/teaching/sample-001.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-tw/teaching/sample-001.json
+- `data/anycontent/zh-cn/teaching/sample-001.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/anycontent/zh-cn/teaching/sample-001.json
+- `data/compare/index.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/compare/index.json
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
