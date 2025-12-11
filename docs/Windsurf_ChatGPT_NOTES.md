@@ -382,6 +382,23 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PENDING_DECISIONS.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0049 html-to-md-gap-review
+
+- 目的：盤點 `HTML_TO_MARKDOWN_RULES_V4.md` 與實作（html-to-markdown + adapters + tests）之間的落差，僅寫筆記、不改程式。
+- 主要變更：
+  - `docs/RULES_CROSSCHECK_NOTES_V1.md`：新增 HTML→Markdown 落差小節（列出已對齊 / 待補 / 未來 T 建議）。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0049。
+- 測試 / 建置：本次 docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: 0533f08
+
+變更檔案（含 RAW 連結）：
+- docs/RULES_CROSSCHECK_NOTES_V1.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/RULES_CROSSCHECK_NOTES_V1.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 

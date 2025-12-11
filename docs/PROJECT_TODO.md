@@ -173,10 +173,29 @@
 - 目標：清理檔頭亂碼、整理段落格式，使狀態對齊 notes。
 
 ### T-0045 magazine-meta-from-legacy-v1：雜誌期別與出版日期 meta 映射 v1
-> 狀態：✅ 已完成
-- 目標：magazine adapter 解析「期別 / 出版日期」並映射至 meta，schema/型別/test 對齊。
+
+> 狀態：✅ 已完成（magazine-from-legacy 新增 issue / publish date 映射，2025-12-12）
+
+- 目標：
+  - 在雜誌 adapter 中，從 legacy HTML 解析期別與出版日期，灌入 AnyContent magazine meta。
+  - 確保 `CONTENT_SCHEMA_V1`、TypeScript 型別與 sample JSON 在這些欄位上對齊。
+- 驗收：
+  - [x] `src/adapters/magazine-from-legacy.ts` 具備 issue/date 解析與映射邏輯。
+  - [x] `tests/adapters/magazine-from-legacy.spec.ts` 新增 issue/date 測試並通過 `npm test`。
+  - [x] `npm run build` 通過。
+
+### T-0049 html-to-md-gap-review：HTML→Markdown 規則 vs 實作落差盤點
+
+> 狀態：✅ 已完成（整理落差筆記至 RULES_CROSSCHECK_NOTES_V1，2025-12-12）
+
+- 目標：
+  - 盤點 `HTML_TO_MARKDOWN_RULES_V4.md` 與實作/測試的差異，僅寫筆記，不改程式碼。
+  - 在 `RULES_CROSSCHECK_NOTES_V1.md` 條列：✅ 已對齊、⚠️ 待補、📌 未來 T 建議。
+- 驗收：
+  - [x] RULES_CROSSCHECK_NOTES_V1.md 新增 HTML→Markdown 落差小節。
+  - [x] 未改動 src/tools/tests/data；純 docs。
+  - [x] notes 記錄本次任務。
 
 ### T-0046 fix-instr-encoding-and-snapshot-rules：修正 INSTR 編碼與補強 snapshot 規則
 > 狀態：✅ 已完成（2025-12-12）
 - 目標：確保指定 INSTR/README/PROJECT_TODO 為 UTF-8，並在 workflow 補充 docs snapshot 使用規則。
-

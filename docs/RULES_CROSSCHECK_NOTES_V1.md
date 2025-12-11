@@ -74,6 +74,21 @@
 - 📌 建議未來 T（候選）：
   - `T-00xx align-instr-guidelines`: 合併/交叉引用 workflow 與 INSTR/README，讓撰寫規則單一來源。
 
+### 6) HTML→Markdown 實作落差盤點（T-0049）
+- ✅ 已對齊：
+  - 標題/段落/換行：`html-to-markdown.ts` + `tests/html/html-to-markdown.spec.ts` 覆蓋一般 `<h1>`~`<h6>`、`<p>`、基本換行/連續 `<br>` 壓縮行為，與 V4 主規則一致。
+  - 偈語/blockquote：teaching adapter 透過 V4 的偈語規則轉成多行 `>`，測試覆蓋主路徑（sutra 偵測、偈語欄位）。
+  - 未分類 fallback：workflow + V4 + schema 一致，實作透過 unclassified flags（teaching/news/magazine）可標記，compare 亦支援 badge/filter。
+- ⚠️ 待補/尚未完全覆蓋：
+  - 圖片/圖說：V4 提到 featured/gallery/fallback；實作目前僅抽第一張為 featured、其餘 gallery_items，尚未完全落實圖說、圖組分組與 JSON 圖片欄位的完整策略（亦與 schema 不完全對齊）。
+  - 清單：多層/特殊 class 的處理在規則有描述，但實作/測試主要覆蓋一般 UL/OL，缺少複合樣板（例如帶 icon/自訂 class）的檢驗。
+  - index_page/特殊樣板：V4 提及目錄/分欄等樣板；目前 adapter/HTML→MD 未有實作或測試，實際頁面樣式尚未驗證。
+  - 未知內容標記：雖有 flags 機制，但自動判斷仍偏人工（多依靠手動標記），規則中提及的「自動偵測未分類片段」尚未落地。
+- 📌 建議未來 T（草案）：
+  - `T-00xx html-to-md-gap-fix-images-gallery`: 落實 V4 圖片/圖說策略（featured vs gallery、圖說落點、schema 對齊），補測試。
+  - `T-00xx html-to-md-gap-fix-lists-special`: 針對多層/特殊 class list 與 index_page/特殊樣板補實作與測試。
+  - `T-00xx html-to-md-unclassified-detection`: 探索自動/半自動標記未分類內容，減少人工設定。
+
 ---
 
 ## 建議單一真相文件
