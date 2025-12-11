@@ -1749,7 +1749,7 @@
   - `docs/INSTR/INSTR-TEMPLATE.md`：補充 INSTR 強制配對規則、允許修改檔案與必跑測試的填寫方式。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0052。
 - 測試 / 建置：本次為 docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commit: ea1a110
+- commit: fcce160
 
 變更檔案（含 RAW 連結）：
 - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
