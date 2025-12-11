@@ -1982,7 +1982,7 @@ pm run wp:import:dry-run 生成計畫檔（tmp/wp-import-plan-zh-tw-*.json）。
 - 測試 / 建置：docs/workflow-only，未執行 
 pm test / 
 pm run build。
-- commit: <填入本次 commit hash>
+- commit: 5e6a5b1
 
 變更檔案（含 RAW 連結）：
 - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
@@ -1993,3 +1993,4 @@ pm run build。
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 - .gitignore
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.gitignore
+
