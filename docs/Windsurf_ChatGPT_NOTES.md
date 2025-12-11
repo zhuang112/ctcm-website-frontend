@@ -1547,7 +1547,7 @@
   - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增 Safety levels 小節（test + build、check:zh-cn、RAW 無法讀取要停、schema/mapping 需先寫 docs 並審核）。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0043。
 - 測試：本次僅 docs 更新，未執行 test/build/check:zh-cn。
-- commit: （同本次提交，hash 於回報提供）
+- commit: f297ec4
 
 變更檔案（含 RAW 連結）：
 
@@ -1559,4 +1559,3 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
-
