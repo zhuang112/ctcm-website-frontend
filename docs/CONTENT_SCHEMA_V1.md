@@ -26,6 +26,8 @@
 - 未知或暫無欄位的內容：先留在 `body_markdown`；除非確定常見且需要欄位，暫勿自行新增 meta key（等待後續任務評估 schema）。
 - 其他暫未使用欄位（seo、multilingual 等）可留白，視未來需要另行定義。
 
+> WordPress content model / importer 欄位對應，可參考：`docs/DESIGN/WP_CONTENT_MODEL_V1.md`。
+
 ## 2. teaching（TeachingContent）
 
 對應 TypeScript：`src/types/anycontent-teaching.ts`

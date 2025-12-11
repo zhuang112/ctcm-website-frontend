@@ -307,3 +307,27 @@
   - [x] scripts/deploy/deploy-progress-dashboard-to-siteground.js 可讀取環境變數並上傳 HTML。
   - [x] .env.siteground.example 提供 placeholders；新增 npm script deploy:progress-dashboard。
   - [x] notes 中有 T-0057 小節與 RAW 連結；本次為 dev/docs-only，未實際佈署。
+
+### T-0058 wordpress-gallery-importer-schema-and-mapping：WordPress content model & importer mapping（docs-only）
+
+> 狀態：✅ 已完成（2025-12-12；docs-only）
+
+- 目標：
+  - 定義 AnyContent teaching/news/magazine 與 WordPress post type / taxonomy / meta / ACF 欄位的對應（含 gallery_blocks / default_gallery_style）。
+  - 建立 `docs/DESIGN/WP_CONTENT_MODEL_V1.md`，供 importer / ACF / 後台 UI 後續實作參考。
+- 驗收：
+  - [x] 新增 content model 文檔並涵蓋三個 post_type mapping。
+  - [x] 在 CONTENT_SCHEMA_V1 補充 cross-link，方便查找 WordPress 對應文件。
+  - [x] notes 中有 T-0058 小節與 RAW 連結；本次為 docs-only，未執行測試。
+
+### T-0057 deploy-progress-dashboard-to-siteground：部署儀表板到 SiteGround（dev script）
+
+> 狀態：✅ 已完成（2025-12-12；dev-only）
+
+- 目標：
+  - 提供一個 SFTP 部署腳本，將 dev/progress-dashboard/ctworld-progress-dashboard.html 上傳到 SiteGround 指定路徑。
+  - 以 .env.siteground 管理站台憑證，不將密碼/金鑰寫入 repo。
+- 驗收：
+  - [x] scripts/deploy/deploy-progress-dashboard-to-siteground.js 可讀取環境變數並上傳 HTML。
+  - [x] .env.siteground.example 提供 placeholders；新增 npm script deploy:progress-dashboard。
+  - [x] notes 中有 T-0057 小節與 RAW 連結；本次為 dev/docs-only，未實際佈署。
