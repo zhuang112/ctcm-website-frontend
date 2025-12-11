@@ -1547,7 +1547,7 @@
   - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增 Safety levels 小節（test + build、check:zh-cn、RAW 無法讀取要停、schema/mapping 需先寫 docs 並審核）。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0043。
 - 測試：本次僅 docs 更新，未執行 test/build/check:zh-cn。
-- commit: f297ec4
+- commits: f297ec4（workflow / TODO 補 safety levels）、01274ef（notes 補 commit hash）
 
 變更檔案（含 RAW 連結）：
 
