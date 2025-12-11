@@ -1,10 +1,27 @@
-# HTML_TO_MARKDOWN_RULES_V4.md (updated images & fallback notes)
+﻿# HTML_TO_MARKDOWN_RULES_V4.md (updated images & fallback notes)
 
 > 中台世界舊站 → JSON vNext 的 HTML→Markdown 轉換規格  
 > 本版重點更新：圖片欄位行為、`featured_image` / `gallery_items` / `featured_image_caption` 的角色，
 > 並明確說明 **不在此階段處理 fallback 主圖**。
 
 ---
+## 圖片與圖說（featured / gallery）【T-0050 補充】
+
+- 偵測來源：一般 `<img>`（含 `src`、`alt`），如有明顯封面區塊（hero/banner）或正文開頭第一張圖，列為封面候選。
+- featured_image（封面圖）：
+  - ✅ 目前：正文第一張圖預設為 `featured_image`（teaching/news/magazine adapter），caption 多為 `null`。
+  - ⚠️ 待補：專用 class/區塊（hero/banner）優先級；若未識別封面，應至少納入 gallery，不可遺失。
+- gallery_items：
+  - ✅ 目前：featured 以外的圖片收集為 `gallery_items`，欄位含 `url`、`alt`（caption 多為 null）。
+  - ⚠️ 待補：同一 gallery 容器的群組化、排序、分欄/段落對應。
+- 圖說（caption）來源優先序：
+  - `alt` → 鄰近 `figcaption` / `<p>` / 指定 class `<span>`；缺乏可靠來源時保持 `null`，勿亂生內容。
+- 未能歸類的圖片：
+  - 非封面圖至少進 `gallery_items`；若策略不明可暫留 `body_markdown`，必要時標記 `meta.has_unclassified_content = true` 並在 notes 說明。
+- 各 post_type 提醒：
+  - teaching：✅ 首圖為封面；⚠️ 偈語區內的圖片策略未定。
+  - news：✅ 首圖封面，其餘 gallery；⚠️ 多圖報導/版型位置對齊未處理。
+  - magazine：✅ 首圖封面，其餘 gallery；⚠️ 內頁插圖群組、封面 class 未實作。
 
 ## 0. 目標與輸入輸出
 
@@ -12,11 +29,13 @@
 
 ---
 
+
 ## 1. 全域清理規則
 
 （略，同前版：移除 script/style/nav/footer/form、處理版面 table、行內元素等。）
 
 ---
+
 
 ## 0.1 無法歸類內容的暫存處理（簡版）
 
@@ -33,17 +52,20 @@
 
 ---
 
+
 ## 2. 區塊元素 → Markdown
 
 （略，同前版：h2/h3 → `##`/`###`，`<p>`、`<br>`、列表、blockquote、pre/code 等。）
 
 ---
 
+
 ## 3. 連結處理
 
 （略，同前版：一般超連結、相對/絕對 URL、mailto/tel 等。）
 
 ---
+
 
 ## 4. 圖片與圖說規則（更新版）
 
@@ -108,6 +130,7 @@
 
 ---
 
+
 ## 5. 各 post_type 特殊規則（與圖片的關係）
 
 ### 5.1 teaching
@@ -133,6 +156,7 @@
 
 ---
 
+
 ## 6. 測試與驗證（與圖片相關）
 
 - 為每個 post_type 準備包含圖片的 HTML 樣本，驗證：
@@ -144,9 +168,11 @@
 
 ---
 
+
 （其餘章節與前版一致，如需變更請同步更新本檔與 CONTENT_SCHEMA / WORKFLOW。）
 
 ---
+
 
 ## 附錄：舊站特殊樣板對應規則（vNext 彙整）
 
@@ -301,3 +327,5 @@
 上述規則皆以「內容語意優先」為原則：
 - 有語意的標記（標題層級、經文、偈頌、法語、來源說明、尊稱上標與錨點）會保留或轉為結構化資訊；
 - 純視覺樣式（顏色、縮排、字型大小）則交由新站前端 CSS 決定。
+
+

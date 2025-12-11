@@ -196,6 +196,19 @@
   - [x] 未改動 src/tools/tests/data；純 docs。
   - [x] notes 記錄本次任務。
 
+### T-0050 html-image-gallery-rules-v1-design：HTML 圖片 / 圖說 / Gallery 規則 V1 設計（docs-only）
+
+> 狀態：✅ 已完成（圖片規則 V1 文檔化，2025-12-12）
+
+- 目標：
+  - 在 `HTML_TO_MARKDOWN_RULES_V4.md` 補充圖片/圖說/gallery 專章，標示已實作 vs 未實作。
+  - 在 `CONTENT_SCHEMA_V1.md` 補齊 `featured_image` / `featured_image_caption` / `gallery_items` 欄位說明與轉換備註。
+  - 在 `RULES_CROSSCHECK_NOTES_V1.md` 更新圖片相關落差與未來 T 建議。
+- 驗收：
+  - [x] V4 文件有清楚的圖片/圖說/gallery V1 行為，並標示實作狀態。
+  - [x] Schema V1 補上圖片欄位定義與繁簡轉換說明。
+  - [x] Crosscheck 筆記更新圖片缺口與後續 T 建議；未改動程式碼。
+
 ### T-0046 fix-instr-encoding-and-snapshot-rules：修正 INSTR 編碼與補強 snapshot 規則
 > 狀態：✅ 已完成（2025-12-12）
 - 目標：確保指定 INSTR/README/PROJECT_TODO 為 UTF-8，並在 workflow 補充 docs snapshot 使用規則。

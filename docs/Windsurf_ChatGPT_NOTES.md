@@ -399,6 +399,29 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0050 html-image-gallery-rules-v1-design
+
+- 目的：整理 HTML→Markdown / AnyContent schema 的圖片、圖說、gallery 規則（docs-only，不改程式）。
+- 主要變更：
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`：新增圖片/圖說/gallery 專章，標示已實作 vs 未實作，按 post_type 補充提醒。
+  - `docs/CONTENT_SCHEMA_V1.md`：補齊 `featured_image` / `featured_image_caption` / `gallery_items` 定義與轉換備註。
+  - `docs/RULES_CROSSCHECK_NOTES_V1.md`：更新圖片相關落差與未來 T 建議（鏈結 T-0051~T-0053 候選）。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0050。
+- 測試 / 建置：本次 docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: 6dfda93
+
+變更檔案（含 RAW 連結）：
+- docs/HTML_TO_MARKDOWN_RULES_V4.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
+- docs/CONTENT_SCHEMA_V1.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+- docs/RULES_CROSSCHECK_NOTES_V1.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/RULES_CROSSCHECK_NOTES_V1.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 

@@ -13,8 +13,9 @@
 - `post_title`: string（必填）
 - `post_excerpt`: string | null（摘要，可為 null）
 - `body_markdown`: string（必填，主內容 Markdown）
-- `featured_image`: string | null；`featured_image_caption`: string | null（選填）
-- `gallery_items`: Array<{ url: string; alt?: string | null; caption?: string | null }>（現有 sample 未使用，暫為空陣列）
+- `featured_image`: string | null（封面圖 URL；通常取正文第一張圖或專用封面區塊）
+- `featured_image_caption`: string | null（封面圖圖說；優先取 `alt` 或鄰近圖說，缺乏來源則為 null）
+- `gallery_items`: Array<{ url: string; alt?: string | null; caption?: string | null }>（多圖 gallery；目前 sample 多為空或僅含 url/alt，caption 可為 null）
 - `meta`: 各 post_type 專用欄位（下方詳述）
 - `meta.has_unclassified_content`: boolean（預設 false；若該 JSON 仍含大量未分類內容可設為 true）
 - `meta.unclassified_notes`: string | null（選填，簡述「哪些段落暫時留在 body_markdown」）
@@ -77,6 +78,7 @@
 - 內容等同、欄位結構相同，差異在：
   - `language`: zh-tw vs zh-cn。
   - 需繁→簡的欄位：`post_title`、`post_excerpt`（若有）、`body_markdown`、以及主要中文 meta 欄位（如 news 日期地點文字、magazine 期別標籤等）。
+  - 圖片 URL 欄位（featured_image、gallery_items.url）不需繁簡轉換；文字欄位（caption）若有內容，需在 pipeline 中轉換。
   - 不轉換：`post_type`、`slug`、`external_id`、`old_url`、日期數字欄位、布林/enum。
 - 若 pipeline 尚未轉換某 meta 欄位，請於後續任務補齊並更新本文件。
 

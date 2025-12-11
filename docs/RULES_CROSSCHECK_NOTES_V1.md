@@ -88,6 +88,7 @@
   - `T-00xx html-to-md-gap-fix-images-gallery`: 落實 V4 圖片/圖說策略（featured vs gallery、圖說落點、schema 對齊），補測試。
   - `T-00xx html-to-md-gap-fix-lists-special`: 針對多層/特殊 class list 與 index_page/特殊樣板補實作與測試。
   - `T-00xx html-to-md-unclassified-detection`: 探索自動/半自動標記未分類內容，減少人工設定。
+  - T-0050（docs-only）已在 V4/Schema 補充圖片規則；後續實作可據此拆解為上列 T。
 
 ---
 
