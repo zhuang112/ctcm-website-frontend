@@ -211,13 +211,26 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
   - 變更完成後，`git add` / `commit` / `push`，並在 notes 記錄 commit hash 與 RAW 連結。
   - ChatGPT 會以 notes + RAW 連結 review，不在對話中展開長篇細節。
 
-### 1.10 檔案編碼與行尾（防止亂碼）
+### 1.10 Safety levels：test/build/zh-CN/RAW/審核
+
+- 基本原則：
+  - 只要任務碰到 `src/`、`tools/`、`tests/` 或程式會讀寫的 `data/`，收尾前一律跑 `npm test` **與** `npm run build`。
+  - 任務若涉及 zh-CN pipeline 或新增/修改 zh-CN JSON，再加跑 `npm run check:zh-cn`；有 ERROR 先修復或開 T 任務，無法通過不得 push。
+  - 純 docs/INSTR 編輯可不跑 test/build，但需在 notes 明講「docs-only，未跑 test/build」。
+- RAW 可讀性：
+  - 預設 ChatGPT 直接讀 GitHub RAW；若 RAW 404/無法讀取，必須停止推論，請使用者貼本機檔或提供 snapshot，待可讀內容後再繼續。
+- schema / mapping 調整：
+  - 任何新增欄位、調整 mapping（HTML→Markdown、AnyContent、zh-CN 白名單）都要在 docs 先寫清楚，並標記「需 ChatGPT review」後再實作。
+- /dev/compare、檔案樣本：
+  - 若任務需要 sample/對照（如 compare 頁），優先用 repo 內現有樣本；缺料時在 notes 記錄阻礙，避免自行對外抓資料。
+
+### 1.11 檔案編碼與行尾（防止亂碼）
 
 - 所有文字檔一律使用 `UTF-8`，行尾使用 `LF`；已在 `.editorconfig` / `.gitattributes` 強制設定。
 - 若在 Windows 看到亂碼，請先 `chcp 65001`，或在編輯器選擇「以 UTF-8 重新開啟」。
 - 禁止以 ANSI / Big5 另存；如誤存請改回 UTF-8 並重新提交。
 
-### 1.11 RAW 無法開啟時的本機上傳 fallback（給 ChatGPT 用）
+### 1.12 RAW 無法開啟時的本機上傳 fallback（給 ChatGPT 用）
 
 - ChatGPT 每次看到 `raw.githubusercontent.com/...` 連結時，會嘗試直接讀取 RAW 內容。
 - 若因工具限制、404 或權限問題 **無法讀取檔案本體**，必須在回覆中明講：

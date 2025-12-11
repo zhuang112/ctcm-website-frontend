@@ -1530,7 +1530,7 @@
 - 後續解法：
   - 等使用者提供 3–5 個實際教學頁 HTML（放入 `data/legacy-teaching/*.html`），或等待 T-0006 取得完整舊站備份，再重啟 T-0041。
 - 測試：本次僅 docs 更新，未執行測試。
-- commit: <pending>
+- commit: 4c831cb
 
 變更檔案（含 RAW 連結）：
 
@@ -1540,5 +1540,23 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0043 workflow-safety-level-note
 
+- 目的：在 workflow 補充 safety levels，統一何時要跑 test/build/check:zh-cn、RAW 讀取失敗的停用規則，以及 schema/mapping 需先經 ChatGPT review。
+- 內容：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增 Safety levels 小節（test + build、check:zh-cn、RAW 無法讀取要停、schema/mapping 需先寫 docs 並審核）。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0043。
+- 測試：本次僅 docs 更新，未執行 test/build/check:zh-cn。
+- commit: （同本次提交，hash 於回報提供）
+
+變更檔案（含 RAW 連結）：
+
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 

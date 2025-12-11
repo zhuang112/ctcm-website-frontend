@@ -851,3 +851,19 @@
 - 解法方向（待解鎖後再啟動）：
   - 請使用者提供 3–5 個實際教學頁的 legacy HTML（放入 `data/legacy-teaching/*.html`），或等待 T-0006 舊站備份完成。
   - 取得實際 HTML 後再恢復本任務，重新跑轉換與 `npm run check:zh-cn`、更新 `/dev/compare`。
+
+### T-0043 workflow-safety-level-note：在 workflow 加入安全等級說明
+
+> 狀態：✅ 已完成（補充 safety levels、RAW、審核提醒，2025-12-12）
+
+- 目標：
+  - 在 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 補充「Safety levels」：  
+    - code / tools / tests / data 任務收尾前必跑 `npm test` + `npm run build`。  
+    - 牽涉 zh-CN JSON 再跑 `npm run check:zh-cn`，有 ERROR 需修復或開 T 任務再 push。  
+    - RAW 讀不到時停止推論，請使用者提供檔案或 snapshot。  
+    - schema / mapping 調整需先寫 docs 並由 ChatGPT review 後再實作。
+  - 更新 notes 記錄本次補充。
+
+- 驗收：
+  - [x] workflow 已新增 safety levels 段落，涵蓋 test/build/zh-CN/RAW/審核規則。
+  - [x] notes 中有對應 T-0043 小節記錄本次更新。
