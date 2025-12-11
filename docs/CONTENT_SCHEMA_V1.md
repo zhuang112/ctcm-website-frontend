@@ -59,11 +59,12 @@
 - 主要欄位：同共用結構。
 - `meta`（MagazineMeta，現有 sample 使用期別/出刊日欄位）：
   - `ct_magazine_level`: `"issue" | "article"`（標示整期或單篇）
-  - 期別：
-    - `ct_magazine_issue_no`: string | null
-    - `ct_magazine_year`: number | null
-    - `ct_magazine_month`: number | null
-    - `ct_magazine_issue_label`: string | null（如「第 15 期」）
+  - 期別／出版日期（v1）：
+    - `ct_magazine_issue`: string | null（標準化期別，例如 "15"）
+    - `ct_magazine_issue_raw`: string | null（原始期別字串，例如「第 15 期」）
+    - `ct_magazine_pub_date`: string | null（YYYY-MM-DD，若無法正規化可為 null）
+    - `ct_magazine_pub_date_raw`: string | null（原始日期字串）
+    - legacy/補充欄位：`ct_magazine_issue_no`、`ct_magazine_year`、`ct_magazine_month`、`ct_magazine_issue_label`（若既有資料使用可保留）
     - `ct_issue_items`: IssueItem[]（issue 專用：section/title/has_article/article_external_id/page_no）
   - 單篇：
     - `ct_magazine_section`: string | null

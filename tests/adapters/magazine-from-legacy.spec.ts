@@ -38,6 +38,10 @@ describe("magazineFromLegacy", () => {
     expect(magazine.gallery_items[0].url).toContain("magazine-inner.jpg");
 
     // meta skeleton：目前 issue / section / author 等欄位皆為 null 或未填
+    expect(magazine.meta.ct_magazine_issue).toBeNull();
+    expect(magazine.meta.ct_magazine_issue_raw).toBeNull();
+    expect(magazine.meta.ct_magazine_pub_date).toBeNull();
+    expect(magazine.meta.ct_magazine_pub_date_raw).toBeNull();
     expect(magazine.meta.ct_magazine_issue_no).toBeNull();
     expect(magazine.meta.ct_magazine_year).toBeNull();
     expect(magazine.meta.ct_magazine_month).toBeNull();
@@ -46,5 +50,30 @@ describe("magazineFromLegacy", () => {
     expect(magazine.meta.ct_magazine_section).toBeNull();
     expect(magazine.meta.ct_magazine_type).toBeNull();
     expect(magazine.meta.ct_author_name).toBeNull();
+  });
+
+  it("maps magazine issue and publish date meta from legacy HTML (T-0045 v1)", () => {
+    const doc: LegacyHtmlDocument = {
+      url: "https://www.ctworld.org/magazine/sample-001.htm",
+      html: `
+        <html>
+          <body>
+            <h1>範例雜誌：春季專題</h1>
+            <div class="meta">日期：2025-03-20　期別：第 15 期</div>
+            <p>本期專題聚焦春季修持與社群行動，收錄多篇專訪與實修分享。</p>
+          </body>
+        </html>
+      `,
+    };
+
+    const magazine = magazineFromLegacy(doc, {
+      externalId: "magazine_issue001_2025_zh-tw",
+      language: "zh-tw",
+    });
+
+    expect(magazine.meta.ct_magazine_issue_raw).toBe("第 15 期");
+    expect(magazine.meta.ct_magazine_issue).toBe("15");
+    expect(magazine.meta.ct_magazine_pub_date_raw).toBe("2025-03-20");
+    expect(magazine.meta.ct_magazine_pub_date).toBe("2025-03-20");
   });
 });

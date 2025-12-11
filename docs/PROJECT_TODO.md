@@ -861,3 +861,15 @@
   - [x] PROJECT_TODO 檔頭已改為乾淨、易懂的說明。
   - [x] T 條目的標題／狀態行與段落格式整理完畢（必要時以 notes 為準）。
   - [x] notes 中新增 T-0044 小節並附 RAW 連結。
+
+### T-0045 magazine-meta-from-legacy-v1：雜誌期別與出版日期 meta 映射 v1
+
+> 狀態：✅ 已完成（magazine-from-legacy 新增 issue / publish date 映射，2025-12-12）
+
+- 目標：
+  - 在雜誌 adapter 中，從 legacy HTML 解析期別與出版日期，灌入 AnyContent magazine meta。
+  - 確保 `CONTENT_SCHEMA_V1`、TypeScript 型別與 sample JSON 在這些欄位上對齊。
+- 驗收：
+  - [x] `src/adapters/magazine-from-legacy.ts` 具備 issue/date 解析與映射邏輯。
+  - [x] `tests/adapters/magazine-from-legacy.spec.ts` 新增 issue/date 測試並通過 `npm test`。
+  - [x] `npm run build` 通過。

@@ -288,6 +288,34 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0045 magazine-meta-from-legacy-v1
+
+- 目的：讓 magazine AnyContent 的期別與出版日期 meta 可由 legacy HTML 自動解析（v1）。
+- 主要變更：
+  - `src/adapters/magazine-from-legacy.ts`：新增 `parseMagazineMetaFromHtml`，解析「日期：YYYY-MM-DD　期別：第 N 期」，填入 `ct_magazine_issue(_raw)`、`ct_magazine_pub_date(_raw)`。
+  - `src/types/anycontent-magazine.ts`：補齊上述欄位型別（issue/pub_date），保留既有 legacy 欄位。
+  - `docs/CONTENT_SCHEMA_V1.md`：magazine meta 加入 issue/pub_date 欄位說明（v1）。
+  - `tests/adapters/magazine-from-legacy.spec.ts`：新增 issue/date 測試案例並調整 skeleton 期望。
+- 測試 / 建置：
+  - `npm test`（通過）
+  - `npm run build`（通過）
+- commit: <pending>
+
+變更檔案（含 RAW 連結）：
+
+- src/adapters/magazine-from-legacy.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/adapters/magazine-from-legacy.ts
+- src/types/anycontent-magazine.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/types/anycontent-magazine.ts
+- tests/adapters/magazine-from-legacy.spec.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/adapters/magazine-from-legacy.spec.ts
+- docs/CONTENT_SCHEMA_V1.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 

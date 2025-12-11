@@ -15,6 +15,13 @@ export interface IssueItem {
 
 export interface MagazineMeta extends BaseMeta {
   ct_magazine_level: MagazineLevel;
+  // 期別／出版日期（v1，對應 T-0045）
+  ct_magazine_issue?: string | null;
+  ct_magazine_issue_raw?: string | null;
+  ct_magazine_pub_date?: string | null;
+  ct_magazine_pub_date_raw?: string | null;
+
+  // legacy / 補充欄位（保留以便未來對齊舊資料）
   ct_magazine_issue_no?: string | null;
   ct_magazine_year?: number | null;
   ct_magazine_month?: number | null;

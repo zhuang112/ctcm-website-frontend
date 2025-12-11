@@ -41,11 +41,16 @@ export function magazineFromLegacy(
   const mdResult = htmlToMarkdown(doc, markdownOptions);
 
   const post_title = fallbackTitle ?? deriveTitleFromUrl(doc.url);
+  const parsedMeta = parseMagazineMetaFromHtml(doc.html);
 
   const meta: MagazineMeta = {
     ct_collection_key: undefined,
     ct_collection_order: undefined,
     ct_magazine_level: "issue",
+    ct_magazine_issue: parsedMeta.issue,
+    ct_magazine_issue_raw: parsedMeta.issueRaw,
+    ct_magazine_pub_date: parsedMeta.pubDate,
+    ct_magazine_pub_date_raw: parsedMeta.pubDateRaw,
     ct_magazine_issue_no: null,
     ct_magazine_year: null,
     ct_magazine_month: null,
@@ -86,4 +91,68 @@ function deriveTitleFromUrl(url: string): string {
   } catch {
     return url;
   }
+}
+
+interface ParsedMagazineMeta {
+  issueRaw: string | null;
+  issue: string | null;
+  pubDateRaw: string | null;
+  pubDate: string | null;
+}
+
+/**
+ * v1 meta 解析：支援 sample-001 的格式
+ * 「日期：YYYY-MM-DD　期別：第 N 期」
+ * 未匹配時回傳 null，不拋錯，避免整頁轉換失敗。
+ */
+function parseMagazineMetaFromHtml(html: string): ParsedMagazineMeta {
+  const text = toHalfWidth(
+    html
+      // 粗略移除標籤，取得可搜尋文字
+      .replace(/<script[^>]*>.*?<\/script>/gis, " ")
+      .replace(/<style[^>]*>.*?<\/style>/gis, " ")
+      .replace(/<[^>]+>/g, " "),
+  );
+
+  const pubDateRaw = extractAfterLabel(text, /日期[:：]/);
+  const issueRaw = extractAfterLabel(text, /期別[:：]/);
+
+  return {
+    issueRaw,
+    issue: normalizeIssue(issueRaw),
+    pubDateRaw,
+    pubDate: normalizeDate(pubDateRaw),
+  };
+}
+
+function extractAfterLabel(text: string, label: RegExp): string | null {
+  const parts = text.split(label);
+  if (parts.length < 2) return null;
+  // 取標籤後第一段，並截到下一個標籤或行斷
+  const candidate = parts[1]
+    .split(/(?:日期[:：]|期別[:：]|\r|\n)/)[0]
+    .trim();
+  return candidate || null;
+}
+
+function toHalfWidth(input: string): string {
+  return input.replace(/[！-～]/g, (ch) =>
+    String.fromCharCode(ch.charCodeAt(0) - 0xfee0),
+  );
+}
+
+function normalizeIssue(raw: string | null): string | null {
+  if (!raw) return null;
+  const digits = toHalfWidth(raw).match(/\d+/);
+  return digits ? digits[0] : null;
+}
+
+function normalizeDate(raw: string | null): string | null {
+  if (!raw) return null;
+  const normalized = toHalfWidth(raw);
+  const match = normalized.match(/(\d{4})[./-](\d{1,2})[./-](\d{1,2})/);
+  if (!match) return null;
+  const [, y, m, d] = match;
+  const pad2 = (v: string) => v.padStart(2, "0");
+  return `${y}-${pad2(m)}-${pad2(d)}`;
 }
