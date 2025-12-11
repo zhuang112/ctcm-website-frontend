@@ -340,6 +340,22 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0047 docs-rules-consistency-review-phase-1
+
+- 目的：檢查規則文件一致性，整理 cross-check 筆記（docs-only）。
+- 主要變更：
+  - 新增 `docs/RULES_CROSSCHECK_NOTES_V1.md`：記錄 workflow/schema/HTML→MD/zh-CN pipeline/INSTR 等主題的交叉檢視，列出單一真相文件與未來候選 T。
+  - 不修改其他規則檔，僅筆記用途。
+- 測試 / 建置：本次僅 docs 筆記，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: fd3e23f
+
+變更檔案（含 RAW 連結）：
+
+- docs/RULES_CROSSCHECK_NOTES_V1.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/RULES_CROSSCHECK_NOTES_V1.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 
