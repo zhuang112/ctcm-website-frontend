@@ -18,6 +18,21 @@
 
 ---
 
+## 0.1 無法歸類內容的暫存處理（簡版）
+
+- 如果 legacy HTML 出現無法對應既有 schema 欄位的零星內容，先保留在 `body_markdown`，不要自行新增新的 `meta.*` 欄位。
+- 若整段內容暫時只能放在 `body_markdown`，且未來可能需要人工再拆：
+  - 在 AnyContent JSON 標記 `meta.has_unclassified_content = true`。
+  - 視情況於 `meta.unclassified_notes` 簡述原因（例如「段落為旁白，暫未拆欄位」）。
+- 一律保留對照資訊：
+  - `old_url` 必填。
+  - 若有 legacy HTML 檔（如 `data/legacy-*/xxx.html`），盡量保留以便 `/dev/compare` 左欄對照。
+- 與本段相關的完整說明請參考：
+  - `docs/CONTENT_SCHEMA_V1.md` 的 `meta.has_unclassified_content` / `meta.unclassified_notes`
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` §3.8（adapter 編輯時的未知內容處理）
+
+---
+
 ## 2. 區塊元素 → Markdown
 
 （略，同前版：h2/h3 → `##`/`###`，`<p>`、`<br>`、列表、blockquote、pre/code 等。）
@@ -286,4 +301,3 @@
 上述規則皆以「內容語意優先」為原則：
 - 有語意的標記（標題層級、經文、偈頌、法語、來源說明、尊稱上標與錨點）會保留或轉為結構化資訊；
 - 純視覺樣式（顏色、縮排、字型大小）則交由新站前端 CSS 決定。
-

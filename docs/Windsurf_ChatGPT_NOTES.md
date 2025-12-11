@@ -1430,3 +1430,22 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-12 任務：T-0037 sync-html-to-markdown-unknown-content
+
+- 目的：在 `HTML_TO_MARKDOWN_RULES_V4` 補回「無法歸類內容的暫存處理（簡版）」段落，對齊 T-0034/T-0035 的 schema & workflow 說明。
+- 內容：
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`：新增小節，說明無欄位對應的內容暫留 `body_markdown`，必要時標 `meta.has_unclassified_content` / `meta.unclassified_notes`，並保留 `old_url` / legacy HTML。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0037（docs-only）。
+- 測試：純 docs 更新，未執行。
+- commit: fdcf799
+
+變更檔案（含 RAW 連結）：
+
+- docs/HTML_TO_MARKDOWN_RULES_V4.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
