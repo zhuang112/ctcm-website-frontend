@@ -238,6 +238,21 @@
   - [x] `docs/INSTR/INSTR-TEMPLATE.md` 反映上述規則與 docs-only 測試註記。
   - [x] `docs/PROJECT_TODO.md` 新增並標記完成 T-0052；notes 有對應小節與 RAW 連結。
 
+### T-0053 news-magazine-image-gallery-impl-v1：news / magazine 圖片 / 圖說 / Gallery V1 實作
+
+> 狀態：✅ 已完成（news / magazine 圖片欄位與 sample 更新，2025-12-12）
+
+- 目標：
+  - news / magazine 從 legacy HTML 拆出封面圖與 gallery，填入 `featured_image` / `featured_image_caption` / `gallery_items`（caption 取 alt，缺則 null）。
+  - 更新 sample（legacy HTML、zh-tw / zh-cn JSON）展示封面 + 至少 2 張 gallery 圖，compare 可對照。
+  - 測試覆蓋 news / magazine 的圖片拆解與 meta 行為。
+
+- 驗收：
+  - [x] `news-from-legacy` / `magazine-from-legacy` 以第一張圖為封面、其餘為 gallery，caption 取 alt。
+  - [x] `npm test`、`npm run build`、`npm run check:zh-cn` 通過（觸及 zh-CN JSON）。
+  - [x] Sample 同步：`data/legacy-news|magazine/sample-001.html`、`data/anycontent/zh-tw|zh-cn/news|magazine/sample-001.json` 含封面與 gallery；compare index 保持可瀏覽。
+  - [x] notes 記錄本次變更與 RAW 連結。
+
 ### T-0046 fix-instr-encoding-and-snapshot-rules：修正 INSTR 編碼與補強 snapshot 規則
 > 狀態：✅ 已完成（2025-12-12）
 - 目標：確保指定 INSTR/README/PROJECT_TODO 為 UTF-8，並在 workflow 補充 docs snapshot 使用規則。

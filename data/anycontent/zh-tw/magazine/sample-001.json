@@ -4,7 +4,21 @@
   "post_title": "範例雜誌：春季專題",
   "slug": "magazine-sample-001",
   "old_url": "https://www.ctworld.org/magazine/sample-001.htm",
-  "body_markdown": "本期專題聚焦春季修持與社群行動，收錄多篇專訪與實修分享。\n內容包含法師開示、專題報導，以及讀者投稿的心得與問答。",
+  "body_markdown": "# 範例雜誌：春季專題\n\n本期專題聚焦春季修持與社群行動，收錄多篇專訪與實修分享。\n內容包含法師開示、專題報導，以及讀者投稿的心得與問答。\n\n專題內文插圖：修持分享片段。\n\n專題內文插圖：社群行動照片。",
+  "featured_image": "https://www.ctworld.org/magazine/images/magazine/magazine-cover.jpg",
+  "featured_image_caption": "春季專題封面",
+  "gallery_items": [
+    {
+      "url": "https://www.ctworld.org/magazine/images/magazine/magazine-gallery-1.jpg",
+      "alt": "修持分享",
+      "caption": "修持分享"
+    },
+    {
+      "url": "https://www.ctworld.org/magazine/images/magazine/magazine-gallery-2.jpg",
+      "alt": "社群行動",
+      "caption": "社群行動"
+    }
+  ],
   "meta": {
     "ct_magazine_issue": "15",
     "ct_magazine_issue_raw": "第 15 期",

@@ -42,6 +42,7 @@ export function magazineFromLegacy(
 
   const post_title = fallbackTitle ?? deriveTitleFromUrl(doc.url);
   const parsedMeta = parseMagazineMetaFromHtml(doc.html);
+  const [firstImage, ...galleryImages] = mdResult.images;
 
   const meta: MagazineMeta = {
     ct_collection_key: undefined,
@@ -69,12 +70,12 @@ export function magazineFromLegacy(
     post_title,
     post_excerpt: null,
     body_markdown: mdResult.body_markdown,
-    featured_image: mdResult.images[0]?.src ?? null,
-    featured_image_caption: null,
-    gallery_items: mdResult.images.slice(1).map((img) => ({
+    featured_image: firstImage?.src ?? null,
+    featured_image_caption: firstImage?.alt ?? null,
+    gallery_items: galleryImages.map((img) => ({
       url: img.src,
       alt: img.alt ?? null,
-      caption: null,
+      caption: img.alt ?? null,
     })),
     meta,
   };

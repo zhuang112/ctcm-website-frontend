@@ -4,7 +4,21 @@
   "post_title": "範例新聞：春季共修講座",
   "slug": "news-sample-001",
   "old_url": "https://www.ctworld.org/news/sample-001.htm",
-  "body_markdown": "這是一則示範用的新聞，描述即將舉辦的春季共修講座與座談活動。\n講座內容包含經典導讀、實修分享，以及問答交流。",
+  "body_markdown": "# 範例新聞：春季共修講座\n\n這是一則示範用的新聞，描述即將舉辦的春季共修講座與座談活動。\n講座內容包含經典導讀、實修分享，以及問答交流。\n\n講座開始時的現場照片。\n\n問答時間的互動畫面。",
+  "featured_image": "https://www.ctworld.org/news/images/news/news-cover.jpg",
+  "featured_image_caption": "共修講座封面圖",
+  "gallery_items": [
+    {
+      "url": "https://www.ctworld.org/news/images/news/news-gallery-1.jpg",
+      "alt": "講座現場",
+      "caption": "講座現場"
+    },
+    {
+      "url": "https://www.ctworld.org/news/images/news/news-gallery-2.jpg",
+      "alt": "問答時間",
+      "caption": "問答時間"
+    }
+  ],
   "meta": {
     "ct_news_date": "2025-03-14",
     "ct_event_date_start": "2025-03-14",
@@ -12,6 +26,6 @@
     "ct_event_date_raw": "2025-03-14",
     "ct_event_location": "台北講堂",
     "ct_event_location_raw": "台北講堂",
-    "ct_has_gallery": "no"
+    "ct_has_gallery": "yes"
   }
 }
