@@ -1830,7 +1830,7 @@
   - sample JSON（zh-tw / zh-cn teaching/news/magazine）重寫為 UTF-8，新增 `gallery_blocks` 與 default gallery style；compare dev page 顯示 gallery style / blocks 指標。
   - 測試改為正常 UTF-8 文字並驗證 gallery_blocks / default_gallery_style；VisualComparePage 重新整理文案並顯示 gallery summary。
 - 測試 / 建置：已執行 `npm test`、`npm run build`、`npm run check:zh-cn`。
-- commit: <填入本次 commit hash>
+- commit: b1dcbbd
 
 變更檔案（含 RAW 連結）：
 - `src/adapters/teaching-from-legacy.ts`  
