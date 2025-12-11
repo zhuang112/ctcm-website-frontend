@@ -425,6 +425,13 @@ Windsurf 根據 ChatGPT 給的指令：
 - 若任務涉及 schema / pipeline / rules，請在 INSTR 指明 ChatGPT 要先讀的 docs（如 RULES_V4 / CONTENT_SCHEMA_V1 / ZH_TW_TO_ZH_CN_PIPELINE）。
 - 長規格放 docs，INSTR 只放必要的檔案清單與步驟，避免佔位符與註解。
 
+### 3.11 每個 T 任務都要有對應的 INSTR .md（T-0052）
+
+- 原則：**沒有 INSTR 不開工**。在 `docs/INSTR/` 下建立 `INSTR-T-xxxx-<slug>.md`，內容至少列任務目標、允許修改的檔案、必跑測試、收尾與 notes 更新規則。
+- ChatGPT 發任務時務必指定 INSTR 檔名；實作 Agent 只在 INSTR 列出的範圍內動手，若缺 INSTR 或範圍不明，先回報、不要自行擴張。
+- INSTR 應指向 `PROJECT_TODO` 對應的小節，並要求完成後更新 notes（含 RAW 連結與 commit hash）。
+- 例外：純文檔小修若已在 INSTR/TODO 明示可省略，需在 notes 註記「docs-only / 未跑 test/build」；其他任務一律遵守 T + INSTR 配對。
+
 ### 3.9（前瞻）分支策略的提醒
 
 - 目前預設直接在 `main` 上工作並 push。

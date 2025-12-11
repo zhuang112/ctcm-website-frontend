@@ -224,6 +224,20 @@
   - [x] `data/legacy-teaching/sample-001.html`、`data/anycontent/zh-tw|zh-cn/teaching/sample-001.json`、`data/compare/index.json` 同步更新，包含封面與 gallery 圖片。
   - [x] notes 記錄本次變更與 RAW 連結。
 
+### T-0052 workflow-instr-for-all-tasks：每個 T 任務必須配對 INSTR（workflow 規則）
+
+> 狀態：✅ 已完成（workflow / INSTR-TEMPLATE / TODO / notes 已更新，2025-12-12）
+
+- 目標：
+  - 在 workflow 寫明「沒有 INSTR 不開工」，每顆 T 任務都要有 `docs/INSTR/INSTR-T-xxxx-<slug>.md`。
+  - 更新 INSTR-TEMPLATE，強調要列允許修改檔案、必跑測試（docs-only 可註記未跑 test/build）、禁用 citation。
+  - 在 TODO / notes 登記本規則，方便後續查閱。
+
+- 驗收：
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 新增「每個 T 任務需對應 INSTR .md」規則。
+  - [x] `docs/INSTR/INSTR-TEMPLATE.md` 反映上述規則與 docs-only 測試註記。
+  - [x] `docs/PROJECT_TODO.md` 新增並標記完成 T-0052；notes 有對應小節與 RAW 連結。
+
 ### T-0046 fix-instr-encoding-and-snapshot-rules：修正 INSTR 編碼與補強 snapshot 規則
 > 狀態：✅ 已完成（2025-12-12）
 - 目標：確保指定 INSTR/README/PROJECT_TODO 為 UTF-8，並在 workflow 補充 docs snapshot 使用規則。

@@ -1740,3 +1740,23 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0052 workflow-instr-for-all-tasks（docs-only）
+
+- 目的：把「每個 T 任務必須有對應 INSTR .md」寫進 workflow，並更新 INSTR-TEMPLATE / TODO / notes。
+- 主要變更：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增 3.11 說明「沒有 INSTR 不開工」、INSTR 要列範圍與測試、docs-only 可註記未跑 test/build。
+  - `docs/INSTR/INSTR-TEMPLATE.md`：補充 INSTR 強制配對規則、允許修改檔案與必跑測試的填寫方式。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0052。
+- 測試 / 建置：本次為 docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: ea1a110
+
+變更檔案（含 RAW 連結）：
+- `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- `docs/INSTR/INSTR-TEMPLATE.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-TEMPLATE.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

@@ -1,6 +1,7 @@
-﻿# INSTR-TEMPLATE
+# INSTR-TEMPLATE
 
-> 用途：建立新的 INSTR 文件時的骨架，方便 ChatGPT / Codex / 你快速接力。全檔一律 UTF-8 + LF。
+> 用途：建立新的 INSTR 文件時的骨架，方便 ChatGPT / Codex / 你快速接力。全檔一律 UTF-8 + LF。  
+> 規定：每一個 T 任務都要有對應 `docs/INSTR/INSTR-T-xxxx-<slug>.md`，未建立 INSTR 不開工。
 
 ```text
 指定實作 Agent：本次負責人（目前預設 Codex）
@@ -10,7 +11,8 @@
 ## 重點
 1. <重點 1>
 2. <重點 2>
-3. （必要時）提醒同步 PROJECT_TODO / notes。
+3. 明確列出允許修改的檔案與必跑測試；若為 docs-only，註記「未跑 test/build」。
+4. （必要時）提醒同步 PROJECT_TODO / notes。
 
 ---
 
@@ -37,7 +39,7 @@
 1. 開啟 `docs/Windsurf_ChatGPT_NOTES.md`。
 2. 在最新日期區塊下新增「T-xxxx <任務名稱>」小節，記錄：
    - 修改檔案與重點。
-   - 執行的測試 / 指令與結果。
+   - 執行的測試 / 指令與結果（若 docs-only，註記未跑 test/build）。
    - 最後 commit hash。
    - 變更檔案（含 RAW 連結）：
      ```markdown
