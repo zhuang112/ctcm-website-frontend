@@ -1928,7 +1928,7 @@
 pm test / 
 pm run build / 
 pm run check:zh-cn。
-- commit: <填入本次 commit hash>
+- commit: 8fd8b52
 
 變更檔案（含 RAW 連結）：
 - docs/DESIGN/WP_CONTENT_MODEL_V1.md  
@@ -1939,3 +1939,4 @@ pm run check:zh-cn。
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
