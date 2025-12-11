@@ -326,7 +326,7 @@
   - `docs/PROJECT_TODO.md`：重寫為可讀的 UTF-8 版本，並新增 T-0046 條目。
   - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：補充 docs snapshot ZIP 的定位（備援、非單一真相）、檔名建議（含 T 編號＋日期）、RAW 優先順序。
 - 測試 / 建置：本次僅 docs 更新，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commit: <pending>
+- commit: 0ece285
 
 變更檔案（含 RAW 連結）：
 
