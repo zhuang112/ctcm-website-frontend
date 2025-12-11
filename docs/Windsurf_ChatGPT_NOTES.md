@@ -1807,7 +1807,7 @@
   - `docs/RULES_CROSSCHECK_NOTES_V1.md`：補充 T-0054 圖片/gallery schema 更新的 cross-check 提醒。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0054。
 - 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commit: <待填入>
+- commit: e613c19
 
 變更檔案（含 RAW 連結）：
 - `docs/CONTENT_SCHEMA_V1.md`  
