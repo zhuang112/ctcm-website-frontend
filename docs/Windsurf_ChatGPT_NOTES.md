@@ -1449,3 +1449,27 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0038 zh-cn-health-check-cli
+
+- 目的：提供 CLI，檢查 zh-TW / zh-CN AnyContent JSON 是否成對存在、基本欄位一致，並提醒可轉換欄位是否缺漏。
+- 內容：
+  - `tools/convert/check-zh-cn-health.ts`：掃描 `data/anycontent/zh-tw` 與 `data/anycontent/zh-cn` 成對 JSON。
+  - 檢查欄位：`post_type` / `slug` / `old_url` / `language`；以及可轉換欄位 `post_title` / `post_excerpt` / `body_markdown`、meta string 欄位、`seo.meta_title` / `seo.meta_description`。
+  - 新增 npm script：`npm run check:zh-cn`。
+- 測試：`npm test`、`npm run build`。
+- commit: b875471
+
+變更檔案（含 RAW 連結）：
+
+- tools/convert/check-zh-cn-health.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/convert/check-zh-cn-health.ts
+
+- package.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

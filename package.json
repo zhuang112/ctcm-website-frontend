@@ -13,7 +13,8 @@
     "diff:crawl-vs-fs": "ts-node tools/crawl/diff-crawl-vs-files.ts --crawled data/crawl/crawled-urls.json --files data/crawl/all-files.json --out-dir data/crawl",
     "test": "vitest",
     "snapshot:docs": "ts-node tools/docs-snapshot/make-docs-snapshot.ts",
-    "convert:zh-cn": "ts-node tools/convert/generate-zh-cn-from-zh-tw.ts"
+    "convert:zh-cn": "ts-node tools/convert/generate-zh-cn-from-zh-tw.ts",
+    "check:zh-cn": "ts-node tools/convert/check-zh-cn-health.ts"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
