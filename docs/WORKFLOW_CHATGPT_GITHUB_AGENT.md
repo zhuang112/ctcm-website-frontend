@@ -399,12 +399,20 @@ Windsurf 根據 ChatGPT 給的指令：
   - `post_type` / `slug` / `old_url` / `language` 一致性。
   - 依 `ZH_TW_TO_ZH_CN_PIPELINE.md` 白名單，確認 `post_title` / `post_excerpt` / `body_markdown`、meta string、`seo.meta_title` / `seo.meta_description` 等欄位在 zh-CN 版本存在。
 
-### 3.7（前瞻）分支策略的提醒
+### 3.8 撰寫 INSTR 的必要資訊（給 ChatGPT 檢閱）
+
+- INSTR 要明列「需要 ChatGPT review 的檔案清單」，方便 ChatGPT 直接開 RAW：
+  - 列出 src / tools / tests / docs 相關檔案，commit 後在 notes 補 RAW 連結。
+  - INSTR 內不要放 citation 或 `::contentReference[...]`；保持可直接貼給 Agent 的指令格式。
+- 若任務涉及 schema / pipeline / rules，請在 INSTR 指明 ChatGPT 要先讀的 docs（如 RULES_V4 / CONTENT_SCHEMA_V1 / ZH_TW_TO_ZH_CN_PIPELINE）。
+- 長規格放 docs，INSTR 只放必要的檔案清單與步驟，避免佔位符與註解。
+
+### 3.9（前瞻）分支策略的提醒
 
 - 目前預設直接在 `main` 上工作並 push。
 - 若未來有多人協作或需要大型重構，可開啟 `feature/T-xxxx-*` 分支並走 PR 流程；但未啟用前請維持 main 為單一真相來源。
 
-### 3.8 無法歸類內容的處理（HTML→Markdown / AnyContent）
+### 3.10 無法歸類內容的處理（HTML→Markdown / AnyContent）
 
 - 若在撰寫或調整 HTML→Markdown / AnyContent adapter 時，遇到暫時無對應欄位的片段：
   - 文字優先放 `body_markdown`，不要臨時新增 meta 欄位或未知 key。

@@ -823,3 +823,15 @@
   - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 已加入 check:zh-cn 相關提醒。
   - [x] `docs/SESSION_CHECKLIST.md` 已加入 check:zh-cn 的收工檢查項。
   - [x] PROJECT_TODO / notes 已記錄本次 docs-only 調整。
+### T-0040 instr-template-files-for-chatgpt：INSTR 模板加上給 ChatGPT 的檔案清單提醒
+
+> 狀態：✅ 已完成（更新 INSTR 模板與 workflow，2025-12-12）
+
+- 目標：
+  - 在 `docs/INSTR/INSTR-TEMPLATE.md` 補充「給 ChatGPT review 的檔案清單」區塊，提醒列出需檢閱檔案並避免 citation。
+  - 在 workflow 中提示撰寫 INSTR 時需列檔案清單、避免 citation，並指向相關 docs。
+
+- 驗收：
+  - [x] INSTR 模板已加入檔案清單與 RAW 提醒。
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 已新增撰寫 INSTR 的注意事項。
+  - [x] notes 已記錄本次 docs-only 更新。

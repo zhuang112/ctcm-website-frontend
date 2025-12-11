@@ -1,56 +1,63 @@
-# INSTR-TEMPLATE
+ï»¿# INSTR-TEMPLATE
 
-> ½d¨Ò¼ÒªO¡G«Ø¥ß·sªº INSTR ÀÉ®É½Æ»s¥»¬q¨Ã´À´«¤º®e¡C
+> ç”¨é€”ï¼šå»ºç«‹æ–°çš„ INSTR æ–‡ä»¶æ™‚çš„éª¨æ¶ï¼Œæ–¹ä¾¿ ChatGPT / Codex / ä½ å¿«é€Ÿæ¥åŠ›ã€‚å…¨æª”ä¸€å¾‹ UTF-8 + LFã€‚
 
 ```text
-«ü©w°õ¦æªÌ¡G¹ê§@ Agent¡]¥Ø«e¬° Codex¡^
-¥ô°È¡G*T-xxxx <Â²µu´y­z>*
+æŒ‡å®šå¯¦ä½œ Agentï¼šæœ¬æ¬¡è² è²¬äººï¼ˆç›®å‰é è¨­ Codexï¼‰
+ä»»å‹™ä»£è™Ÿï¼šT-xxxx <ä»»å‹™åç¨±>
 ```
 
-## ¥Ø¼Ğ
-1. <¥Ø¼Ğ 1>
-2. <¥Ø¼Ğ 2>
-3.¡]¦p»İ¡^§ó·s TODO / STATUS / notes µ¥¤å¥ó¡C
+## é‡é»
+1. <é‡é» 1>
+2. <é‡é» 2>
+3. ï¼ˆå¿…è¦æ™‚ï¼‰æé†’åŒæ­¥ PROJECT_TODO / notesã€‚
 
 ---
 
-## ­n­×§ï / °Ñ¦ÒªºÀÉ®×
-1. <ÀÉ®×¸ô®|»P¥Î³~>
-2. <ÀÉ®×¸ô®|»P¥Î³~>
+## éœ€ä¿®æ”¹ / æ–°å¢çš„æª”æ¡ˆ
+1. <æª”æ¡ˆæˆ–ç›®éŒ„>
+2. <æª”æ¡ˆæˆ–ç›®éŒ„>
 
 ---
 
-## ¾Ş§@¨BÆJ
-1. <¨BÆJ 1¡A¦C¥X¤¹³\­×§ï½d³ò>
-2. <¨BÆJ 2¡A´£¿ôÅç¦¬ÂI©Î´ú¸Õ«ü¥O>
-3. <¨BÆJ 3¡A¦p»İ§ó·s docs/PROJECT_TODO.md ©Î docs/Windsurf_ChatGPT_NOTES.md>
+## æ­¥é©Ÿ / é©—æ”¶
+1. <æ­¥é©Ÿ 1ï¼Œå«é æœŸçµæœ>
+2. <æ­¥é©Ÿ 2ï¼Œå«æ¸¬è©¦æˆ–æª¢æŸ¥>
+3. <æ­¥é©Ÿ 3ï¼Œè‹¥éœ€è¦æ›´æ–° docs/PROJECT_TODO.md æˆ– docs/Windsurf_ChatGPT_NOTES.md>
 
 ---
 
-## §ó·s PROJECT_TODO¡]¦p¾A¥Î¡^
-1. ¥´¶} `docs/PROJECT_TODO.md`¡C
-2. §ó·s/·s¼W T-xxxx ±ø¥Ø¡]ª¬ºA¡B¥Ø¼Ğ¡BÅç¦¬¡^¡C
+## æ›´æ–° PROJECT_TODOï¼ˆå¿…è¦æ™‚ï¼‰
+1. é–‹å•Ÿ `docs/PROJECT_TODO.md`ã€‚
+2. æ–°å¢ / æ›´æ–° T-xxxx å°ç¯€ï¼ˆç›®æ¨™ã€ç‹€æ…‹ã€é©—æ”¶ï¼‰ã€‚
 
 ---
 
-## §ó·s notes¡]¥²¶ñ RAW ³sµ²¡^
-1. ¥´¶} `docs/Windsurf_ChatGPT_NOTES.md`¡C
-2. ¦b¹ïÀ³¤é´Á¤U·s¼W¡uT-xxxx <Â²µu´y­z>¡v¤p¸`¡A°O¿ı¡G
-   - ­×§ïÀÉ®×²M³æ¡C
-   - ÅÜ§óºK­n»P´ú¸Õµ²ªG¡]­Y¦³¡^¡C
-   - ³Ì«á commit hash¡C
-   - ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
+## æ›´æ–° notesï¼ˆå« RAW é€£çµï¼‰
+1. é–‹å•Ÿ `docs/Windsurf_ChatGPT_NOTES.md`ã€‚
+2. åœ¨æœ€æ–°æ—¥æœŸå€å¡Šä¸‹æ–°å¢ã€ŒT-xxxx <ä»»å‹™åç¨±>ã€å°ç¯€ï¼Œè¨˜éŒ„ï¼š
+   - ä¿®æ”¹æª”æ¡ˆèˆ‡é‡é»ã€‚
+   - åŸ·è¡Œçš„æ¸¬è©¦ / æŒ‡ä»¤èˆ‡çµæœã€‚
+   - æœ€å¾Œ commit hashã€‚
+   - è®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ï¼š
      ```markdown
-     ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
-     - <ÀÉ®× 1>
-       RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/<ÀÉ®× 1>
-     - <ÀÉ®× 2>
-       RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/<ÀÉ®× 2>
+     è®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ï¼š
+     - <æª”æ¡ˆ 1>
+       RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/<æª”æ¡ˆ 1>
+     - <æª”æ¡ˆ 2>
+       RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/<æª”æ¡ˆ 2>
      ```
 
 ---
 
-## ¦¬§À¡]git + push¡^
-1. `git status` ½T»{ÅÜ§óÀÉ®×¡C
-2. `git add ...` / `git commit -m "T-xxxx: <°T®§>"` / `git push origin main`¡C
-3. ¦^³øºK­n¡G«ü¥X¤w§¹¦¨ªº T ¥ô°È»P notes ¤p¸`¦ì¸m¡C
+## çµ¦ ChatGPT review çš„æª”æ¡ˆåˆ—è¡¨ï¼ˆå‹™å¿…åˆ—å‡ºï¼‰
+- å°‡ã€Œæœ¬æ¬¡éœ€è¦ ChatGPT review çš„æª”æ¡ˆã€ä»¥æ¸…å–®åˆ—å‡ºï¼Œæ–¹ä¾¿ ChatGPT ç›´æ¥é–‹ RAW é€£çµæª¢è¦–ã€‚
+- ç¦ç”¨ citation / contentReference æ¨™è¨˜ï¼Œä¸è¦åœ¨æŒ‡ä»¤ä¸­å‡ºç¾ `::contentReference[...]`ã€`oaicite` ç­‰ã€‚
+- è‹¥æ¶‰åŠ schema / pipeline / rulesï¼Œè«‹æé†’ ChatGPT è¦å…ˆçœ‹å“ªäº› docsã€‚
+
+---
+
+## æ”¶å°¾ï¼ˆgit + pushï¼‰
+1. `git status` ç¢ºèªè®Šæ›´ã€‚
+2. `git add ...` / `git commit -m "T-xxxx: <æ‘˜è¦>"` / `git push origin main`ã€‚
+3. å›å ±æ™‚é™„ä¸Š commit hashï¼Œä¸¦æŒ‡å‘ notes å°ç¯€ã€‚

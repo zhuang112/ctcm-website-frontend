@@ -1498,3 +1498,25 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0040 instr-template-files-for-chatgpt
+
+- 目的：讓 INSTR 模板預設列出「給 ChatGPT review 的檔案清單」，並在 workflow 中提醒撰寫 INSTR 的注意事項。
+- 內容：
+  - `docs/INSTR/INSTR-TEMPLATE.md`：重寫模板，加入檔案清單/RAW 提醒，禁止 citation。
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增撰寫 INSTR 的注意事項小節（3.8），要求列檔案清單、避免 citation，並指明需閱讀的 docs。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0040。
+  - `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次 docs-only 更新。
+- 測試：純 docs 更新，未執行額外指令。
+- commit: 809fd10
+
+變更檔案（含 RAW 連結）：
+
+- docs/INSTR/INSTR-TEMPLATE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-TEMPLATE.md
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
