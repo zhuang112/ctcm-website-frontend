@@ -316,6 +316,30 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0046 fix-instr-encoding-and-snapshot-rules
+
+- 目的：確認 INSTR/README/PROJECT_TODO 為 UTF-8、補充 workflow 中的 docs snapshot 規則。
+- 主要變更：
+  - `docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md`：確認內容正常 UTF-8。
+  - `docs/INSTR/README.md`：確認內容正常 UTF-8。
+  - `docs/PROJECT_TODO.md`：重寫為可讀的 UTF-8 版本，並新增 T-0046 條目。
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：補充 docs snapshot ZIP 的定位（備援、非單一真相）、檔名建議（含 T 編號＋日期）、RAW 優先順序。
+- 測試 / 建置：本次僅 docs 更新，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: <pending>
+
+變更檔案（含 RAW 連結）：
+
+- docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md
+- docs/INSTR/README.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/README.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 

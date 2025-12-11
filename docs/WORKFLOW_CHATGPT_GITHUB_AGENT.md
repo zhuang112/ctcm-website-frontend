@@ -160,6 +160,10 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
   - 在本專案的對話中，可以簡單說：
     - 「請從 GitHub 讀取 `docs/PROJECT_TODO.md`」，  
       ChatGPT 會自動以 RAW 連結 `https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md` 來讀取。
+  - docs snapshot ZIP（備援，不是單一真相）：
+    - 定位：只作為 ChatGPT / Agent 的備援，不是單一真相；真相以 GitHub/main + notes 為準。
+    - 檔名建議：包含 T 編號＋日期，例如 `ctworld-docs-T-0007-2025-12-10-v1.zip`。
+    - 使用順序：若 RAW 可讀，以 RAW（GitHub/main）為準；RAW 無法讀或被阻擋時，再使用最新 snapshot 或請使用者上傳本機檔。
 
 #### RAW 無法讀取時的停用規則
 
