@@ -271,6 +271,23 @@
 
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-12 任務：T-0044 cleanup-project_todo-header-and-structure
+
+- 目的：整理 `docs/PROJECT_TODO.md` 檔頭亂碼與結構，維持各 T 條目有標題與狀態行、格式較一致。
+- 內容：
+  - 檔頭改寫為簡短說明（GitHub/main 為真相、細節看 notes/INSTR）。
+  - 清掉重複的 T-0013 區塊、補上缺失的狀態行（以「請參考 notes」標示），並保持原有文字不改寫。
+- 測試 / 建置：本次僅 docs 更新，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: <pending>
+
+變更檔案（含 RAW 連結）：
+
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ---
 
 
