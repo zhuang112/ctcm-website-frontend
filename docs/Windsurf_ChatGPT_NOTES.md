@@ -279,7 +279,7 @@
   - 檔頭改寫為簡短說明（GitHub/main 為真相、細節看 notes/INSTR）。
   - 清掉重複的 T-0013 區塊、補上缺失的狀態行（以「請參考 notes」標示），並保持原有文字不改寫。
 - 測試 / 建置：本次僅 docs 更新，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commit: <pending>
+- commit: 5e7684b
 
 變更檔案（含 RAW 連結）：
 
