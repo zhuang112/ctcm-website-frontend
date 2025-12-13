@@ -1923,7 +1923,7 @@
   - `docs/HTML_TO_MARKDOWN_RULES_V4.md`：補充「空白 alt 視為 null」。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0067。
 - 測試 / 建置：已跑 `npm test`、`npm run build`、`npm run check:zh-cn`。
-- commits: 59dbe10（anchors）/ 25628be（notes hash）/ <填入本次 commit hash>
+- commits: 59dbe10（anchors）/ 25628be（notes hash）/ c82efd4（caption/alt 正規化）
 
 變更檔案（含 RAW 連結）：
 - `src/html/html-to-markdown.ts`  
