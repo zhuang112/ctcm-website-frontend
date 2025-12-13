@@ -1982,6 +1982,26 @@
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-13 任務：T-0070 magazine-flipbook-images-and-pdf-attachments-design（docs-only）
+
+- 目的：設計雜誌期別附件欄位，支援 flipbook / PDF / page image set，並規劃 WP 對應。
+- 主要變更：
+  - `docs/CONTENT_SCHEMA_V1.md`：新增 `magazine_issue_attachments` schema（type/url/pages/is_visible/source/notes）。
+  - `docs/DESIGN/WP_CONTENT_MODEL_V1.md`：新增 magazine attachments 對應 ACF repeater。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0070。
+- 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`（依 workflow 允許）。
+- commits: <填入本次 commit hash>
+
+變更檔案（含 RAW 連結）：
+- `docs/CONTENT_SCHEMA_V1.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+- `docs/DESIGN/WP_CONTENT_MODEL_V1.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/DESIGN/WP_CONTENT_MODEL_V1.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-12 任務：T-0053 news-magazine-image-gallery-impl-v1
 
 - 目的：依 V4 規則為 news / magazine 實作封面圖與 gallery（alt → caption），並更新 sample 與 compare。

@@ -89,6 +89,7 @@
 | `ct_magazine_section` | post meta `ct_magazine_section` |  |
 | `ct_magazine_type` | post meta `ct_magazine_type` |  |
 | `ct_author_name` | post meta `ct_author_name` |  |
+| `magazine_issue_attachments[]` | ACF Repeater `magazine_issue_attachments`（type / url / pages / is_visible / source / notes） | flipbook / pdf / page_image_set；pages[] 可含 url/width/height；`is_visible` 控管顯示 |
 
 ---
 

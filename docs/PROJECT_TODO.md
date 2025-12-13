@@ -437,6 +437,18 @@
   - [x] 測試覆蓋 teaching anchor 案例；`anchors[]` 收錄 id/name。
   - [x] `docs/HTML_TO_MARKDOWN_RULES_V4.md` 補充 anchor preservation；notes 有 T-0068 小節與 RAW 連結。
 
+### T-0070 magazine-flipbook-images-and-pdf-attachments-design：雜誌 flipbook/PDF/頁圖設計稿（docs-only）
+
+> 狀態：✅ 已完成（2025-12-13）
+
+- 目標：
+  - 在 schema / WP content model 中設計 `magazine_issue_attachments`：支援 flipbook、pdf、page_image_set，含 url/pages/is_visible/source/notes。
+  - 說明用途：舊站 flipbook、PDF 下載、page images 預覽；`is_visible` 控制前端是否顯示。
+- 驗收：
+  - [x] `docs/CONTENT_SCHEMA_V1.md` 新增 `magazine_issue_attachments` 欄位定義。
+  - [x] `docs/DESIGN/WP_CONTENT_MODEL_V1.md` 對應 ACF mapping（repeater attachments）。
+  - [x] notes 有 T-0070 小節與 RAW 連結；本次為 docs-only，未跑程式測試。
+
 ### T-0072 handoff-zip-versioned-filenames-taskid-and-docs-nobom：交接 ZIP 版本化與 docs 無 BOM（workflow + handoff tool）
 
 > 狀態：? 已完成（2025-12-12）

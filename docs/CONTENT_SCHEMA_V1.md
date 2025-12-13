@@ -81,6 +81,17 @@
     - `ct_magazine_section`: string | null
     - `ct_magazine_type`: string | null
     - `ct_author_name`: string | null
+- 期刊附件／預覽（設計，尚未全面實作）：
+  - `magazine_issue_attachments`: Array<{
+      type: `"flipbook" | "pdf" | "page_image_set"`;
+      url?: string | null; // flipbook / pdf 主入口
+      pages?: Array<{ url: string; width?: number | null; height?: number | null }>; // page_image_set 用
+      is_visible?: boolean; // 預設 true，false 時前端可選擇隱藏
+      source?: `"legacy" | "generated" | "manual"` | null;
+      notes?: string | null;
+    }>
+  - 用途：對應舊站 flipbook、PDF 下載、或以 page images 組成的雜誌預覽。
+  - pipeline / importer 可依 `is_visible` 控制是否在前端顯示，`source` 標記來源以便追蹤。
 - 目前 sample-001 只使用 issue/出刊日相關欄位；其他欄位可視未來需要再補。
 
 ## 5. zh-TW / zh-CN 轉換注意事項（pipeline）
