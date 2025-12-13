@@ -235,21 +235,22 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
 - 若有未定案議題，提出 A/B/C 選項請使用者決策，必要時建議另開 T + INSTR。
 - 不在對話中長篇描述 Codex 的執行過程；細節寫回 docs/notes。
 
-### 1.12 ChatGPT 交接檔（docs/TEMP/ → docs/TEMP.zip + MANIFEST，v5.2）
+### 1.12 ChatGPT 交接檔（docs/TEMP/ → docs/TEMP/TEMP_<date>_...zip + MANIFEST，v5.3）
 
-- 單一交接包：ChatGPT review **只看 `docs/TEMP.zip`（內含 `docs/TEMP/` 檔案與 `MANIFEST.json`）**，避免同時混用 RAW / 零散檔。  
-- staging 規則：`docs/TEMP/` 只作為暫存，zip 完成後應可清空；repo 內不得同時保留舊的 `docs/TEMP/` 與 `docs/TEMP.zip` 造成混淆（`.gitignore` 已忽略兩者）。  
-- 命名：原始路徑的 `/` → `__`，置於 `docs/TEMP/`。例：`src/wp/import/anycontent-to-wp.ts` → `docs/TEMP/src__wp__import__anycontent-to-wp.ts`
-- MANIFEST（必備）：`docs/TEMP/MANIFEST.json` 為 UTF-8（無 BOM），至少包含：  
-  - `generated_at`（ISO 8601）、`repo`、`source_commit`（zip 生成時可追溯的 commit）、`task_id`。  
-  - `files[]`：每筆列出 `temp_path`、`repo_path`（repo 相對路徑，勿出現 `docs/docs/...` 類重複）、`sha256`、`bytes`。  
-  - 可另附 `MANIFEST.sha256.txt` 供校驗。  
+- 單一交接包：ChatGPT review **只看 `docs/TEMP/*.zip`（內含 `docs/TEMP/` 檔案與 `MANIFEST.json`）**，避免混用 RAW / 零散檔。  
+- staging 規則：`docs/TEMP/` 僅作暫存，zip 完成後可清空；repo 不得同時留存舊 TEMP 與 zip 造成混淆（`.gitignore` 忽略 `docs/TEMP/`、`docs/TEMP/*.zip`）。  
+- 目錄結構：zip 內保留 repo 相對路徑（不再 flatten）。MANIFEST `repo_path`/`temp_path` 皆使用 repo 相對路徑。  
+- zip 命名：`TEMP_<YYYYMMDD>[_<task_id>]_<source_commit>.zip`（預設輸出路徑：`docs/TEMP/`）。  
+- MANIFEST（必備）：`docs/TEMP/MANIFEST.json`，UTF-8 無 BOM，至少包含：  
+  - `generated_at`（ISO 8601）、`repo`、`source_commit`（zip 時的 commit）、`task_id`（可為 null）。  
+  - `files[]`：`repo_path`、`temp_path`（同 repo_path）、`sha256`、`bytes`。  
+  - 可附 `MANIFEST.sha256.txt` 供校驗。  
 - 流程：  
-  1) 將需審檔案複製到 `docs/TEMP/`，產出 `MANIFEST.json`（含 sha256、bytes）。  
-  2) 壓縮為 `docs/TEMP.zip`（`.gitignore` 已忽略 `docs/TEMP/` 與 `docs/TEMP.zip`）。  
-  3) 回報時提供 `docs/TEMP.zip` 與 MANIFEST 的 `source_commit`，提醒使用者上傳給 ChatGPT。  
-  4) review 完成即可清空 `docs/TEMP/`（不影響 git）。  
-- 自動化（推薦）：可使用 `npm run handoff:tempzip` 產生 TEMP + MANIFEST + ZIP；如自訂腳本，亦需遵守上述欄位與路徑規則。
+  1) 將需審檔案依原路徑放入 `docs/TEMP/`（保持目錄結構）。  
+  2) 產出 `MANIFEST.json`（含 sha256、bytes、source_commit、task_id）。  
+  3) 壓縮為上述命名的 zip；回報時提供 zip 名稱與 source_commit。  
+  4) review 完成即可清空 `docs/TEMP/`。  
+- 自動化（推薦）：`npm run handoff:tempzip -- --source_commit <hash> --task_id <T-xxxx> --files ...`。未指定 `--out` 時，會自動命名為 `docs/TEMP/TEMP_<date>[_<task>]_commit.zip`。
 
 ### 1.13 檔案編碼與行尾（防止亂碼）
 
@@ -309,6 +310,9 @@ Codex 每顆 T 完成且 push 後，回報維持精簡四要點：
   - `FIELD_COVERAGE_SAMPLING.md`：最新的欄位覆蓋抽樣筆記。
   - `ARCHIVE/`：歷史抽樣版本。
   - `URL_QUEUE.md`：待抽樣的 URL/檔案清單（格式 `[unit] <url>`，unit=teaching/news/magazine/branch/flipbook/other）。
+- `docs/REVIEWS/`：
+  - REVIEW 摘要存放處，命名：`REVIEW-T-XXXX-<slug>.md`（例：`REVIEW-T-0064-field-coverage-sampling-v2.md`）。
+  - README：`docs/REVIEWS/README.md`。
 
 ---
 

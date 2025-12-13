@@ -1808,6 +1808,32 @@
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0072 handoff-zip-versioned-filenames-taskid-and-docs-nobom
+
+- 目的：強化交接 ZIP 的命名與內容規則，確保 MANIFEST 無 BOM、zip 內保留 repo 結構，並提供 review 檔案放置規範。
+- 主要變更：
+  - `scripts/handoff/build-temp-zip.js`：支援 `--task_id`、預設 zip 命名 `TEMP_<date>[_<task>]_<commit>.zip`，zip 內保留 repo 路徑，MANIFEST UTF-8 無 BOM。
+  - `.gitignore`：忽略 `docs/TEMP/*.zip`、`docs/TEMP/ARCHIVES/*.zip`。
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：交接章節更新至 v5.3（zip 命名/結構/MANIFEST 欄位），結構章節加入 `docs/REVIEWS/` 說明。
+  - `docs/REVIEWS/README.md`：新增 review 檔案命名規則。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0072。
+- 測試 / 建置：非程式核心變更，未重跑 test/build；handoff script 已實際執行。
+- commit: b81c6fb（前序 T-0065） / 9204ee0 / 6c546b4 / b81c6fb 之後，本次最終提交 hash 見 git log
+
+變更檔案（含 RAW 連結）：
+- `scripts/handoff/build-temp-zip.js`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/scripts/handoff/build-temp-zip.js
+- `.gitignore`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.gitignore
+- `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- `docs/REVIEWS/README.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/REVIEWS/README.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-12 任務：T-0064 field-coverage-sampling-audit-and-schema-gaps（docs-only）
 
 - 目的：以現有 sample-001（teaching/news/magazine）檢視欄位覆蓋，列出缺口與後續 T 候選。

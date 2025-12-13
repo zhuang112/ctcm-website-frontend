@@ -1,17 +1,18 @@
 #!/usr/bin/env node
 /**
  * Build a ChatGPT handoff package:
- * - copies listed files into a staging folder with "__" path separators
+ * - copies listed files into a staging folder preserving repo paths
  * - generates MANIFEST.json with sha256/bytes and metadata
- * - zips staging into docs/TEMP.zip
+ * - zips staging into docs/TEMP.zip (or versioned TEMP_YYYYMMDD_task_commit.zip)
  * - cleans staging afterward
  *
  * Usage:
- *   node scripts/handoff/build-temp-zip.js --source_commit <hash> --out docs/TEMP.zip -- files...
+ *   node scripts/handoff/build-temp-zip.js --source_commit <hash> --task_id T-xxxx --out docs/TEMP/TEMP_YYYYMMDD_<task>_<hash>.zip -- files...
  *
  * Flags:
  *   --source_commit <hash>   optional; defaults to `git rev-parse HEAD`
- *   --out <path>             optional; defaults to docs/TEMP.zip
+ *   --task_id <T-xxxx>       optional; recorded in manifest; used in default zip name
+ *   --out <path>             optional; defaults to docs/TEMP/TEMP_<date>[_<task>]_commit.zip
  *   -- files...              required; repo-relative paths to include
  */
 import fs from 'fs';
@@ -30,6 +31,7 @@ function parseArgs() {
   const files = [];
   let outPath = 'docs/TEMP.zip';
   let sourceCommit = null;
+  let taskId = null;
 
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
@@ -43,6 +45,11 @@ function parseArgs() {
       i += 1;
       continue;
     }
+    if (arg === '--task_id' && args[i + 1]) {
+      taskId = args[i + 1];
+      i += 1;
+      continue;
+    }
     if (arg === '--files') {
       continue;
     }
@@ -52,16 +59,12 @@ function parseArgs() {
   if (!files.length) {
     throw new Error('No files specified. Usage: node scripts/handoff/build-temp-zip.js --out docs/TEMP.zip --source_commit <hash> -- files...');
   }
-  return { files, outPath, sourceCommit };
+  return { files, outPath, sourceCommit, taskId };
 }
 
 async function ensureCleanStaging() {
   await fsp.rm(stagingDir, { recursive: true, force: true });
   await fsp.mkdir(stagingDir, { recursive: true });
-}
-
-function tempNameFor(repoPath) {
-  return repoPath.replace(/\\/g, '/').replace(/\//g, '__');
 }
 
 async function hashFile(filePath) {
@@ -82,11 +85,11 @@ async function stageFiles(filePaths) {
     if (repoPath.startsWith('..')) {
       throw new Error(`File not in repo: ${rel}`);
     }
-    const tempName = tempNameFor(repoPath);
-    const dest = path.join(stagingDir, tempName);
+    const dest = path.join(stagingDir, repoPath);
+    await fsp.mkdir(path.dirname(dest), { recursive: true });
     await fsp.copyFile(abs, dest);
     const { sha256, bytes } = await hashFile(dest);
-    staged.push({ temp_path: tempName, repo_path: repoPath, sha256, bytes });
+    staged.push({ temp_path: repoPath, repo_path: repoPath, sha256, bytes });
   }
   return staged;
 }
@@ -96,7 +99,7 @@ async function writeManifest({ sourceCommit, taskId, filesMeta }) {
     generated_at: new Date().toISOString(),
     repo,
     source_commit: sourceCommit,
-    task_id: taskId,
+    task_id: taskId ?? null,
     files: filesMeta,
   };
   const manifestPath = path.join(stagingDir, 'MANIFEST.json');
@@ -119,11 +122,7 @@ async function buildZip(outPath) {
   });
 
   archive.pipe(output);
-  const entries = await fsp.readdir(stagingDir);
-  for (const entry of entries) {
-    const full = path.join(stagingDir, entry);
-    archive.file(full, { name: entry });
-  }
+  archive.directory(stagingDir, false);
   archive.finalize();
   await finalizePromise;
   const stats = await fsp.stat(outPath);
@@ -131,15 +130,21 @@ async function buildZip(outPath) {
 }
 
 async function main() {
-  const { files, outPath, sourceCommit } = parseArgs();
-  const resolvedOut = path.resolve(cwd, outPath);
+  const { files, outPath, sourceCommit, taskId } = parseArgs();
   const commit = sourceCommit || execSync('git rev-parse HEAD').toString().trim();
+  const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const resolvedOut = path.resolve(
+    cwd,
+    outPath === 'docs/TEMP.zip'
+      ? path.join('docs', 'TEMP', `TEMP_${today}${taskId ? `_${taskId}` : ''}_${commit}.zip`)
+      : outPath,
+  );
 
   await ensureCleanStaging();
   const filesMeta = await stageFiles(files);
   const { manifestPath, manifestSha, manifestBytes } = await writeManifest({
     sourceCommit: commit,
-    taskId: 'T-0063',
+    taskId,
     filesMeta,
   });
 

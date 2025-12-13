@@ -385,6 +385,32 @@
   - [x] PENDING_DECISIONS 或 crosscheck 記錄編碼/日期/圖說對齊等待決策項目。
   - [x] notes 有 T-0064 小節與 RAW 連結；本次為 docs-only，未執行測試。
 
+### T-0065 date-parsing-roc-year-and-range：news/magazine ROC 年與區間日期解析
+
+> 狀態：? 已完成（2025-12-12）
+
+- 目標：
+  - 支援 news/magazine 的 ROC 年、區間日期解析，保留 raw；若 end 無年份則沿用 start 年。
+  - 新增 date parsing util 並更新 tests；確保 zh-CN pipeline 檢查通過。
+  - schema/types 註記可選 `ct_event_date_range`，保留原始字串。
+- 驗收：
+  - [x] `news-from-legacy` 解析 ROC 與區間，`ct_event_date_range` 輸出 start/end/raw。
+  - [x] `magazine-from-legacy` 解析 ROC 出版日期，raw 與 ISO 同步更新。
+  - [x] `npm test` / `npm run build` / `npm run check:zh-cn` 通過；notes 有 T-0065 小節與 RAW 連結。
+
+### T-0072 handoff-zip-versioned-filenames-taskid-and-docs-nobom：交接 ZIP 版本化與 docs 無 BOM（workflow + handoff tool）
+
+> 狀態：? 已完成（2025-12-12）
+
+- 目標：
+  - 手動/自動生成的交接包必須：zip 名含日期+source_commit（可含 task_id），zip 內保留 repo 路徑，MANIFEST UTF-8 無 BOM。
+  - handoff 工具支援 `--task_id`，zip 預設命名 `TEMP_<date>[_<task>]_<commit>.zip`，MANIFEST `task_id` 可為 null。
+  - docs 清點 BOM 風險並調整 workflow 交接章節；新增 REVIEW 檔案放置規則。
+- 驗收：
+  - [x] `scripts/handoff/build-temp-zip.js` 支援 task_id、zip 目錄結構與預設命名，MANIFEST 無 BOM。
+  - [x] workflow 說明 zip 命名、目錄結構、MANIFEST 欄位；`.gitignore` 忽略 `docs/TEMP/*.zip` 等。
+  - [x] 新增 `docs/REVIEWS/README.md` 說明 review 檔案命名；notes 有 T-0072 小節與 RAW 連結。
+
 ### T-0057 deploy-progress-dashboard-to-siteground：部署儀表板到 SiteGround（dev script）
 
 > 狀態：✅ 已完成（2025-12-12；dev-only）
