@@ -1794,7 +1794,7 @@
   - `package.json`：新增 `handoff:tempzip` script。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0063。
 - 測試 / 建置：docs + 新增工具腳本，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commit: (pending，本次提交後更新)
+- commits: 6e6208d（新增 handoff 腳本）/ 44971d3（workflow / TODO / script 入口）
 
 變更檔案（含 RAW 連結）：
 - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
