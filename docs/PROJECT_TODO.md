@@ -1,10 +1,10 @@
-# PROJECT_TODO：中台世界 Headless 專案任務列表
+# PROJECT_TODO????? Headless ??????
 
-> 說明：本檔列出本專案各個 T-xxxx 任務的狀態與簡要說明。  
-> - 所有實作與測試狀態以 GitHub/main 為準。  
-> - 每顆 T 的詳細過程與 RAW 連結請參考 `docs/Windsurf_ChatGPT_NOTES.md`。  
-> - 新任務請依 `docs/INSTR/INSTR-TEMPLATE.md` 撰寫 INSTR，再由 ChatGPT 產生任務內容。
-
+> ??????????? T-xxxx ????????
+> - ???????? GitHub/main ???
+> - ?? T ??????? `docs/Windsurf_ChatGPT_NOTES.md`?
+> - ??????? `docs/INSTR/INSTR-TEMPLATE.md` ?? INSTR??? ChatGPT ???????
+> - ?? / bug / ?????????? `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`?auto ?????discussion ?????
 ---
 
 ## TODO 列表（原始三項）
@@ -472,6 +472,19 @@
   - [x] `npm run check:no-bom` 執行通過，repo 掃描無 BOM。
   - [x] 新增 `scripts/quality/check-no-bom.js`、`npm run check:no-bom`。
   - [x] notes 有 T-0074 小節與 RAW 連結；本次為 docs/tools-only，未跑其他測試。
+
+### T-0077 workflow-improvements-tracker-and-discussion-rule：改善追蹤與討論規則（docs-only）
+
+> 狀態：✅ 已完成（2025-12-13）
+
+- 目標：
+  - 在 workflow 明確區分 auto improvements（可直接做）與 discussion required（需先討論）。
+  - 建立 `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`，集中紀錄改善/修復。
+  - 在 TODO 開頭提醒改善/bug 小優化需同步登記 backlog。
+- 驗收：
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 新增 improvements/fixes 規則並修正章節編號。
+  - [x] `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md` 建立，含欄位說明與初始行。
+  - [x] `docs/PROJECT_TODO.md` 開頭補充 backlog 提醒並新增 T-0077 條目；notes 有 T-0077 小節與 RAW 連結。
 
 ### T-0072 handoff-zip-versioned-filenames-taskid-and-docs-nobom：交接 ZIP 版本化與 docs 無 BOM（workflow + handoff tool）
 

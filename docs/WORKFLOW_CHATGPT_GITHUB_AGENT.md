@@ -401,7 +401,17 @@ Windsurf 根據 ChatGPT 給的指令：
 - ChatGPT：在對話中只給「任務摘要 + 給 Windsurf 的短指令」，所有長篇規格與細節寫進 docs（例如 `WORKFLOW_*`、`CONTENT_SCHEMA.md`、`Windsurf_ChatGPT_NOTES.md`）。
 - Windsurf：回報時只需提供「本次任務代號 + 變更檔案列表 + 測試結果 + [建議 git 指令] 區塊」，不需要貼出完整思路或大段 diff。
 
-### 3.6 ChatGPT ↔ 實作 Agent 的溝通格式（code block＋notes）
+### 3.6 Improvements / Fixes 規則（auto vs discussion）
+
+- 分類：
+  - **Auto improvements**（可直接做）：typo、小幅 UX / log 改善、不改變核心流程的安全修正。
+  - **Discussion required**：可能改變流程 / 架構 / schema / 工作分工的修改，或影響範圍不明者。
+- 流程：
+  1. 所有改善/修復先記錄於 `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`，並在 `docs/PROJECT_TODO.md` 第一條清單註記。
+  2. Auto 類型可直接實作並記錄 notes/commit；Discussion 類型須先經 ChatGPT / 使用者確認（可提供 A/B/C 選項），再開 T 任務或明確同意後動工。
+  3. 完成後更新 backlog 狀態，notes 記錄變更與 commit hash。
+
+### 3.7 ChatGPT ↔ 實作 Agent 的溝通格式（code block＋notes）
 
 為了讓使用者只需要做「轉貼」而不用自己整理指令，本專案規定：
 
@@ -432,7 +442,7 @@ Windsurf 根據 ChatGPT 給的指令：
   - 再透過 notes 中提供的 RAW 連結打開各個異動檔案，確認內容是否符合任務說明。
   - 若發現問題或需要新任務，會再產生下一個 T 任務的 code block 指令。
 
-### 3.6 code 任務一律先跑 test + build 才能收尾
+### 3.8 code 任務一律先跑 test + build 才能收尾
 
 - 適用範圍（需跑 test+build 的任務類型）：
   - `src/` 內的程式碼、型別、i18n/pipeline。

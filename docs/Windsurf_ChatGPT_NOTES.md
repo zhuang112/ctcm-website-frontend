@@ -2065,6 +2065,26 @@
 - `docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt
 
+## 2025-12-13 任務：T-0077 workflow-improvements-tracker-and-discussion-rule（docs-only）
+
+- 目的：把改善/修復追蹤與討論規則寫進 workflow，並建立集中 backlog。
+- 主要變更：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增 Improvements / Fixes 規則（auto vs discussion），並調整章節編號。
+  - `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`：新增 backlog 檔，定義欄位與初始列。
+  - `docs/PROJECT_TODO.md`：開頭加上改善登記提醒，並新增 T-0077 條目。
+- 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commits: <填入本次 commit hash>
+
+變更檔案（含 RAW 連結）：
+- `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-12 任務：T-0053 news-magazine-image-gallery-impl-v1
 
 - 目的：依 V4 規則為 news / magazine 實作封面圖與 gallery（alt → caption），並更新 sample 與 compare。
