@@ -345,6 +345,19 @@
   - [x] `CONTENT_SCHEMA_V1.md` / `DESIGN/WP_CONTENT_MODEL_V1.md` 更新並 cross-link，描述現行策略與未來變化需另開 T。
   - [x] notes 有 T-0061 小節與 RAW 連結；本次為 docs-only，未執行測試。
 
+### T-0062 workflow-v5.2-single-source-temp-zip-and-hash-manifest：交接包單一來源 + MANIFEST（docs-only）
+
+> 狀態：? 已完成（2025-12-12；workflow/docs-only）
+
+- 目標：
+  - 將 ChatGPT review 交接統一為 `docs/TEMP.zip` + `MANIFEST.json`，避免混用 RAW / 零散檔；`MANIFEST` 必列 source_commit + sha256。
+  - 在 workflow 寫明 Codex 回報 Gate（四要點）：完成狀態、commit hash、測試狀態、TEMP.zip 就緒（含 source_commit）。
+  - `.gitignore` 確認忽略 `docs/TEMP/` 與 `docs/TEMP.zip`。
+- 驗收：
+  - [x] workflow 更新 TEMP.zip + MANIFEST 規則，以及 Codex 最小回報集。
+  - [x] `.gitignore` 忽略 `docs/TEMP/` 與 `docs/TEMP.zip`。
+  - [x] notes 有 T-0062 小節與 RAW 連結；本次為 docs-only，未執行測試。
+
 ### T-0057 deploy-progress-dashboard-to-siteground：部署儀表板到 SiteGround（dev script）
 
 > 狀態：✅ 已完成（2025-12-12；dev-only）

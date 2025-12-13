@@ -235,23 +235,25 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
 - 若有未定案議題，提出 A/B/C 選項請使用者決策，必要時建議另開 T + INSTR。
 - 不在對話中長篇描述 Codex 的執行過程；細節寫回 docs/notes。
 
-### 1.12 ChatGPT 交接檔（docs/TEMP/）流程
+### 1.12 ChatGPT 交接檔（docs/TEMP/ → docs/TEMP.zip + MANIFEST，v5.2）
 
-- 用途：給 ChatGPT review 的暫存檔集合，非真相來源；review 後可清空。
-- 命名：將原始路徑的 `/` 改為 `__`，置於 `docs/TEMP/`。  
-  例：`src/wp/import/anycontent-to-wp.ts` → `docs/TEMP/src__wp__import__anycontent-to-wp.ts`
-- Codex 完成任務後：  
-  1) 把要給 ChatGPT 的檔案複製到 `docs/TEMP/`（依命名規則）。  
-  2) 在回報訊息中列出 `docs/TEMP/...`，提醒使用者上傳。  
-  3) review 完成即可刪除 `docs/TEMP/` 內容（`docs/TEMP/` 已列入 `.gitignore`）。
+- 單一交接包：ChatGPT review 預設只看 `docs/TEMP.zip`（內含 `docs/TEMP/` 檔案與 `MANIFEST.json`），避免混用 RAW/零散檔。  
+- 命名：將原始路徑的 `/` 改為 `__`，置於 `docs/TEMP/`。例：`src/wp/import/anycontent-to-wp.ts` → `docs/TEMP/src__wp__import__anycontent-to-wp.ts`
+- MANIFEST（必備）：`docs/TEMP/MANIFEST.json` 至少包含 `generated_at`、`repo`、`source_commit`（main 上可對應的 hash）、`task_id`、`files[]`（temp_path / source_path / sha256）。可另附 `MANIFEST.sha256.txt`。  
+- 流程：  
+  1) 將需審檔案複製到 `docs/TEMP/`，並產出 `MANIFEST.json`（含 sha256）。  
+  2) 壓縮為 `docs/TEMP.zip`（`.gitignore` 已忽略 `docs/TEMP/` 與 `docs/TEMP.zip`）。  
+  3) 回報時提供 `docs/TEMP.zip`、MANIFEST 的 `source_commit`，提醒使用者上傳給 ChatGPT。  
+  4) review 完成即可清空 `docs/TEMP/`（不影響 git）。  
+- 自動化（選用）：可在 scripts 新增 `temp:manifest` / `temp:zip` / `temp:clean` 幫助產生 TEMP + MANIFEST + ZIP，但非強制。
 
-### 1.11 檔案編碼與行尾（防止亂碼）
+### 1.13 檔案編碼與行尾（防止亂碼）
 
 - 所有文字檔一律使用 `UTF-8`，行尾使用 `LF`；已在 `.editorconfig` / `.gitattributes` 強制設定。
 - 若在 Windows 看到亂碼，請先 `chcp 65001`，或在編輯器選擇「以 UTF-8 重新開啟」。
 - 禁止以 ANSI / Big5 另存；如誤存請改回 UTF-8 並重新提交。
 
-### 1.12 RAW 無法開啟時的本機上傳 fallback（給 ChatGPT 用）
+### 1.14 RAW 無法開啟時的本機上傳 fallback（給 ChatGPT 用）
 
 - ChatGPT 每次看到 `raw.githubusercontent.com/...` 連結時，會嘗試直接讀取 RAW 內容。
 - 若因工具限制、404 或權限問題 **無法讀取檔案本體**，必須在回覆中明講：
@@ -262,6 +264,15 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
   - 之後以「上傳的檔案」作為唯一真相來源繼續分析，不再猜測。
 - 若日後 GitHub RAW 與上傳版本有差異：
   - 以最新、經使用者確認的版本為準（通常是上傳檔案），並在 notes 記錄差異來源。
+
+### 1.15 Codex 回報 Gate（最小回報集）
+
+Codex 每顆 T 完成且 push 後，回報維持精簡四要點：  
+1) 結果：已完成 T-xxxx。  
+2) main commit hash。  
+3) 測試指令執行情況（或標註 docs-only 未跑）。  
+4) TEMP：已準備 `docs/TEMP.zip`（含 MANIFEST，source_commit=...）；若有阻塞/測試失敗則在此說明。  
+細節（變更檔案、RAW 連結、決策）一律寫入 notes。
 ---
 
 ## 2. 檔案與資料夾結構（簡要）

@@ -1765,6 +1765,26 @@
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0062 workflow-v5.2-single-source-temp-zip-and-hash-manifest（docs-only）
+
+- 目的：將 ChatGPT 交接統一為 `docs/TEMP.zip`（含 `MANIFEST.json`），並要求 Codex 回報四要點（完成、commit hash、測試狀態、TEMP.zip 就緒）。
+- 主要變更：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：更新交接流程為 TEMP.zip + MANIFEST，新增 Codex 回報 Gate（四要點）。
+  - `.gitignore`：加入 `docs/TEMP.zip` 忽略規則。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0062。
+- 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: (待本次提交後更新)
+
+變更檔案（含 RAW 連結）：
+- `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- `.gitignore`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.gitignore
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-12 任務：T-0052 workflow-instr-for-all-tasks（docs-only）
 
 - 目的：把「每個 T 任務必須有對應 INSTR .md」寫進 workflow，並更新 INSTR-TEMPLATE / TODO / notes。
