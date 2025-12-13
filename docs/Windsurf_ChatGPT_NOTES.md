@@ -1924,7 +1924,7 @@
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0068。
   - `docs/PENDING_DECISIONS.md`：記錄前端呈現 anchors 的待決策事項。
 - 測試 / 建置：已跑 `npm test`、`npm run build`、`npm run check:zh-cn`。
-- commit: <填入本次 commit hash>
+- commits: 59dbe10（anchors 實作與 docs）
 
 變更檔案（含 RAW 連結）：
 - `src/html/html-to-markdown.ts`  
