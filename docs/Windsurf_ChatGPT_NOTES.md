@@ -1785,6 +1785,29 @@
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0063 temp-zip-manifest-cleanup-and-staging-folder（docs-only）
+
+- 目的：強化 TEMP.zip + MANIFEST 交接流程，避免 TEMP 與 ZIP 並存、路徑/編碼錯亂，並提供自動化腳本。
+- 主要變更：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：交接僅用 TEMP.zip（含 MANIFEST），`docs/TEMP/` 只作 staging，MANIFEST 必含 repo_path / temp_path / sha256 / bytes / source_commit 等欄位且為 UTF-8 無 BOM。
+  - `scripts/handoff/build-temp-zip.js`：新增 handoff 腳本，建立 staging、生成 MANIFEST、zip、清理 staging；`npm run handoff:tempzip` 指向此腳本。
+  - `package.json`：新增 `handoff:tempzip` script。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0063。
+- 測試 / 建置：docs + 新增工具腳本，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: (pending，本次提交後更新)
+
+變更檔案（含 RAW 連結）：
+- `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- `scripts/handoff/build-temp-zip.js`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/scripts/handoff/build-temp-zip.js
+- `package.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-12 任務：T-0052 workflow-instr-for-all-tasks（docs-only）
 
 - 目的：把「每個 T 任務必須有對應 INSTR .md」寫進 workflow，並更新 INSTR-TEMPLATE / TODO / notes。
