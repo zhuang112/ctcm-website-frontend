@@ -1812,15 +1812,19 @@
 
 - 目的：以現有 sample-001（teaching/news/magazine）檢視欄位覆蓋，列出缺口與後續 T 候選。
 - 主要變更：
-  - `docs/DESIGN/FIELD_COVERAGE_SAMPLING_V1.md`：新增樣本覆蓋表（teaching/news/magazine/flipbook/branch）、缺口嚴重度與後續建議。
+  - `docs/AUDITS/FIELD_COVERAGE/FIELD_COVERAGE_SAMPLING.md`：最新樣本覆蓋表（teaching/news/magazine/flipbook/branch）、缺口嚴重度與後續建議，並新增 `ARCHIVE/` 與 `URL_QUEUE.md`。
   - `docs/PENDING_DECISIONS.md`：補充圖說對齊策略、爬蟲/編碼 fallback、民國年/區間日期解析等待決策項目。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0064。
 - 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
 - commit: 80202b3
 
 變更檔案（含 RAW 連結）：
-- `docs/DESIGN/FIELD_COVERAGE_SAMPLING_V1.md`  
-  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/DESIGN/FIELD_COVERAGE_SAMPLING_V1.md
+- `docs/AUDITS/FIELD_COVERAGE/FIELD_COVERAGE_SAMPLING.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/AUDITS/FIELD_COVERAGE/FIELD_COVERAGE_SAMPLING.md
+- `docs/AUDITS/FIELD_COVERAGE/ARCHIVE/FIELD_COVERAGE_SAMPLING_2025-12-13_v1.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/AUDITS/FIELD_COVERAGE/ARCHIVE/FIELD_COVERAGE_SAMPLING_2025-12-13_v1.md
+- `docs/AUDITS/FIELD_COVERAGE/URL_QUEUE.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/AUDITS/FIELD_COVERAGE/URL_QUEUE.md
 - `docs/PENDING_DECISIONS.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PENDING_DECISIONS.md
 - `docs/PROJECT_TODO.md`  

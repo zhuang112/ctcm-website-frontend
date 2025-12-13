@@ -377,10 +377,11 @@
 
 - 目標：
   - 以現有 sample-001（teaching/news/magazine）進行欄位覆蓋審查，記錄缺口（日期 ROC/區間、flipbook/branch 缺料、encoding fallback、caption 策略等）。
-  - 建立 `docs/DESIGN/FIELD_COVERAGE_SAMPLING_V1.md`，列出樣本覆蓋表與缺口優先級，提出後續 T 候選。
+  - 建立 `docs/AUDITS/FIELD_COVERAGE/FIELD_COVERAGE_SAMPLING.md`（最新版本）與 `ARCHIVE/`，並提供 `URL_QUEUE.md` 供後續抽樣。
   - 在 PENDING_DECISIONS 或 crosscheck/notes 紀錄缺口，並在 TODO 登記 T-0064 完成。
 - 驗收：
-  - [x] 新增 `FIELD_COVERAGE_SAMPLING_V1.md`，涵蓋至少 teaching/news/magazine/flipbook/branch 樣本狀態與缺口建議。
+  - [x] 新增 `FIELD_COVERAGE_SAMPLING.md`（最新）與 `ARCHIVE`，涵蓋至少 teaching/news/magazine/flipbook/branch 樣本狀態與缺口建議。
+  - [x] `URL_QUEUE.md` 提供待抽樣的 URL 填寫入口。
   - [x] PENDING_DECISIONS 或 crosscheck 記錄編碼/日期/圖說對齊等待決策項目。
   - [x] notes 有 T-0064 小節與 RAW 連結；本次為 docs-only，未執行測試。
 

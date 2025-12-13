@@ -305,6 +305,10 @@ Codex 每顆 T 完成且 push 後，回報維持精簡四要點：
   - 給 ChatGPT 用的 docs snapshot ZIP，例如：
     - `ctworld-docs-T-0007-2025-12-09-v1.zip`
   - 由 `tools/docs-snapshot/make-docs-snapshot.ts` 產生。
+- `docs/AUDITS/FIELD_COVERAGE/`：
+  - `FIELD_COVERAGE_SAMPLING.md`：最新的欄位覆蓋抽樣筆記。
+  - `ARCHIVE/`：歷史抽樣版本。
+  - `URL_QUEUE.md`：待抽樣的 URL/檔案清單（格式 `[unit] <url>`，unit=teaching/news/magazine/branch/flipbook/other）。
 
 ---
 
