@@ -326,7 +326,7 @@
   - 新增 `docs/QA/SECURITY_AUDIT.md` 記錄本次掃描結果；.gitignore 補 .env/.env.*、*.pem、*.key。
   - PROJECT_TODO 開頭提醒 deploy/importer 任務必跑 security:scan；新增 T-0080 條目；IMPROVEMENT_BACKLOG 新增安全條目完成。
 - 測試 / 檢查：`npm run security:scan`（無阻斷，僅關鍵字警告）；`npm test` / `npm run build` / `npm run check:zh-cn` 依前一任務狀態通過（本次未變動程式邏輯）。
-- commits: <填入本次 commit hash>
+- commits: 9d1ac8a
 
 變更檔案（含 RAW 連結）：
 - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
