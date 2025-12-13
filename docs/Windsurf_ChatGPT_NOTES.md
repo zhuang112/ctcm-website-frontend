@@ -1913,6 +1913,32 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-13 任務：T-0068 teaching-anchor-preservation-and-structure
+
+- 目的：teaching/sutra 的 `<a name/id>` 沒有 `href` 時仍保留 anchors，讓深連結不消失；rules 補充 anchor preservation。
+- 主要變更：
+  - `src/html/html-to-markdown.ts`：無 `href` anchors 會輸出 `<a id="..."></a>`，同時仍回傳 anchors[]。
+  - `tests/html/html-to-markdown.spec.ts`：新增 teaching anchor 覆蓋範例。
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`：新增 Anchors 章節，寫明保留策略。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0068。
+  - `docs/PENDING_DECISIONS.md`：記錄前端呈現 anchors 的待決策事項。
+- 測試 / 建置：已跑 `npm test`、`npm run build`、`npm run check:zh-cn`。
+- commit: <填入本次 commit hash>
+
+變更檔案（含 RAW 連結）：
+- `src/html/html-to-markdown.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/html/html-to-markdown.ts
+- `tests/html/html-to-markdown.spec.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/html/html-to-markdown.spec.ts
+- `docs/HTML_TO_MARKDOWN_RULES_V4.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/PENDING_DECISIONS.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PENDING_DECISIONS.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ## 2025-12-12 任務：T-0052 workflow-instr-for-all-tasks（docs-only）
 
 - 目的：把「每個 T 任務必須有對應 INSTR .md」寫進 workflow，並更新 INSTR-TEMPLATE / TODO / notes。

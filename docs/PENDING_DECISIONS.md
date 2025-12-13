@@ -18,6 +18,13 @@
 - 待決策：
   - post type / custom fields / taxonomy 結構。
   - Polylang 語言對應與同步方式。
+
+## HTML anchors / 深連結呈現
+- 背景：T-0068 已規定所有 `<a name/id>` 需在 body_markdown 中保留 `<a id="..."></a>`，並收錄 anchors[]。
+- 待決策：
+  - 前端渲染是否直接顯示這段 HTML，或需加上定位樣式（避免影響版面）。
+  - compare / health-check 是否要特別標示缺失的 anchors。
+- 討論對象：你 / ChatGPT / 未來前端實作者。
   - 匯入時機：一次性匯入 vs. 持續同步（Webhook/CRON）。
   - redirect 策略：old_url / -gb URL 如何對應。
 - 討論對象：你 / ChatGPT／未來 WP 開發者。

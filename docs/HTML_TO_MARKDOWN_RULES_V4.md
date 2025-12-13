@@ -18,6 +18,16 @@
   - `alt` → 鄰近 `figcaption` / `<p>` / 指定 class `<span>`；缺乏可靠來源時保持 `null`，勿亂生內容。
 - layout / multi-gallery（T-0054 設計，尚未由 extractor 產出）：
   - schema 已預留 `default_gallery_style`、`gallery_blocks`，但 htmlToMarkdown 目前只回傳 `images[]`；adapter 仍僅填 `featured_image` / `gallery_items`。
+
+## Anchors / 內文定位（T-0068 補充）
+
+- 所有 `<a name="...">` / `<a id="...">` 都要保留為可用的錨點，即使沒有 `href`：
+  - 輸出為 `<a id="X"></a>`，並保留原始文字內容（若有）。
+  - sutra / teaching 內的章節錨點同樣適用。
+- 轉換結果：
+  - `body_markdown` 會包含錨點 HTML（深連結仍可用）。
+  - `anchors[]` 會收集所有 anchor id/name，供 compare / health-check 使用。
+- 不進行 sanitizer 移除錨點；前端渲染需接受 `<a id="..."></a>`。
   - 若未來需要多 gallery 分區或特定樣式，請在對應 T 任務實作 grouping，並更新本檔與 schema。
 - 未能歸類的圖片：
   - 非封面圖至少進 `gallery_items`；若策略不明可暫留 `body_markdown`，必要時標記 `meta.has_unclassified_content = true` 並在 notes 說明。
@@ -330,4 +340,3 @@
 上述規則皆以「內容語意優先」為原則：
 - 有語意的標記（標題層級、經文、偈頌、法語、來源說明、尊稱上標與錨點）會保留或轉為結構化資訊；
 - 純視覺樣式（顏色、縮排、字型大小）則交由新站前端 CSS 決定。
-

@@ -59,6 +59,26 @@ describe("htmlToMarkdown", () => {
     expect(result.body_markdown).toContain("一般段落");
   });
 
+  it("preserves bare anchors without href on teaching pages", () => {
+    const doc: LegacyHtmlDocument = {
+      url: "https://www.ctworld.org.tw/teachings/example.htm",
+      html: `
+        <html>
+          <body>
+            <a id="section1"></a>
+            <p>教學段落</p>
+          </body>
+        </html>
+      `,
+    };
+
+    const result = htmlToMarkdown(doc);
+
+    expect(result.anchors).toContain("section1");
+    expect(result.body_markdown).toContain('<a id="section1"></a>');
+    expect(result.body_markdown).toContain("教學段落");
+  });
+
   it("applies sutra-specific rules for word17-coffee paragraphs and anchors", () => {
     const doc: LegacyHtmlDocument = {
       url: "https://www.ctworld.org.tw/turn/sutra/example.htm",

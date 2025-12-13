@@ -411,6 +411,19 @@
   - [x] `docs/QA/CRAWL_FAILS.md` 存在並會被 crawler 更新。
   - [x] `npm test` / `npm run build` / `npm run check:zh-cn` 通過；notes 有 T-0066 小節與 RAW 連結。
 
+### T-0068 teaching-anchor-preservation-and-structure：保留 teaching / sutra anchors
+
+> 狀態：✅ 已完成（2025-12-13）
+
+- 目標：
+  - 將所有 `<a name="...">` / `<a id="...">` 在 `body_markdown` 中保留為 `<a id="..."></a>`，即使沒有 `href`。
+  - teaching / sutra 頁面仍可使用 anchors 進行深連結，並在結果 anchors[] 列出。
+  - 規則文件（HTML_TO_MARKDOWN_RULES_V4）補充 anchor preservation。
+- 驗收：
+  - [x] `htmlToMarkdown` 對無 `href` 的 anchors 會輸出 `<a id="..."></a>`，文字內容保持。
+  - [x] 測試覆蓋 teaching anchor 案例；`anchors[]` 收錄 id/name。
+  - [x] `docs/HTML_TO_MARKDOWN_RULES_V4.md` 補充 anchor preservation；notes 有 T-0068 小節與 RAW 連結。
+
 ### T-0072 handoff-zip-versioned-filenames-taskid-and-docs-nobom：交接 ZIP 版本化與 docs 無 BOM（workflow + handoff tool）
 
 > 狀態：? 已完成（2025-12-12）

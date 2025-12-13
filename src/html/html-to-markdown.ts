@@ -162,14 +162,12 @@ function nodeToMarkdown(
     case "br":
       return "\n";
     case "a": {
-      const id = $el.attr("id");
+      const anchorId = $el.attr("id") ?? $el.attr("name");
       const href = $el.attr("href");
       const text = inlineText($, $el);
 
-      if (context.isSutraPage && id && !href) {
-        // sutra 頁的段落錨點需在 markdown 中保留 id，並保留原本文字內容
-        // 規則來源：HTML_TO_MARKDOWN_RULES_V4.md § 經論講解（/turn/sutra/）
-        const anchorHtml = `<a id="${id}"></a>`;
+      if (anchorId && !href) {
+        const anchorHtml = `<a id="${anchorId}"></a>`;
         if (!text) {
           return anchorHtml;
         }
