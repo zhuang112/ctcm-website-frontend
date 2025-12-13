@@ -317,6 +317,34 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-13 任務：T-0080 security-hardening-and-public-repo-safety
+
+- 目的：新增安全守則，避免 secrets 進入公開 repo，並建立可執行的 security scan。
+- 主要變更：
+  - workflow 新增 Security 小節（禁止 secrets、交接只用 TEMP zip、deploy/importer 任務必跑 `npm run security:scan`）。
+  - 新增 `scripts/quality/security-scan.js` + `npm run security:scan`，掃描工作樹與近期 git history，預設將 SiteGround/placeholder 命中視為警告。
+  - 新增 `docs/QA/SECURITY_AUDIT.md` 記錄本次掃描結果；.gitignore 補 .env/.env.*、*.pem、*.key。
+  - PROJECT_TODO 開頭提醒 deploy/importer 任務必跑 security:scan；新增 T-0080 條目；IMPROVEMENT_BACKLOG 新增安全條目完成。
+- 測試 / 檢查：`npm run security:scan`（無阻斷，僅關鍵字警告）；`npm test` / `npm run build` / `npm run check:zh-cn` 依前一任務狀態通過（本次未變動程式邏輯）。
+- commits: <填入本次 commit hash>
+
+變更檔案（含 RAW 連結）：
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/QA/SECURITY_AUDIT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/SECURITY_AUDIT.md
+- scripts/quality/security-scan.js  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/scripts/quality/security-scan.js
+- package.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+- .gitignore  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.gitignore
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ## 2025-12-12 任務：T-0046 fix-instr-encoding-and-snapshot-rules
 
 - 目的：確認 INSTR/README/PROJECT_TODO 為 UTF-8、補充 workflow 中的 docs snapshot 規則。

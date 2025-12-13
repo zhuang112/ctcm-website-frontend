@@ -5,6 +5,7 @@
 > - ?? T ??????? `docs/Windsurf_ChatGPT_NOTES.md`?
 > - ??????? `docs/INSTR/INSTR-TEMPLATE.md` ?? INSTR??? ChatGPT ???????
 > - ?? / bug / ?????????? `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`?auto ?????discussion ?????
+> - deploy / importer 類任務收尾前必跑 `npm run security:scan`（禁止跳過）
 ---
 
 ## TODO 列表（原始三項）
@@ -551,3 +552,16 @@ pm run build 通過。
   - [x] `src/wp/rest/client.ts` 提供 basic auth REST helper。
   - [x] `tools/wp-import/wp-import-push.ts` 能從 data/anycontent 載入資料並輸出 payload，預設 dry-run，可加 --push 送到 WP API。
   - [x] `npm test` / `npm run build` / `npm run check:zh-cn` 通過；notes 登記本次任務與 RAW 連結。
+
+### T-0080 security-hardening-and-public-repo-safety：安全強化與公開 repo 防護
+
+> 狀態：✅ 已完成（2025-12-13）
+
+- 目標：
+  - 在 workflow 加入安全守則：禁止 secrets 入庫、交接只用 TEMP zip、deploy/importer 任務必跑 `npm run security:scan`。
+  - 建立 `scripts/quality/security-scan.js` 與 `npm run security:scan`，並新增 SECURITY_AUDIT 記錄。
+  - 更新 .gitignore（.env / .env.* / docs/TEMP/*.zip / *.pem / *.key）、PROJECT_TODO、notes、improvements backlog。
+- 驗收：
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 有安全小節與 scan 規則。
+  - [x] `scripts/quality/security-scan.js` 可執行且掃描通過；`npm run security:scan` 執行無警示。
+  - [x] `docs/QA/SECURITY_AUDIT.md` 記錄本次掃描結果；notes 有 T-0080 小節與 RAW 連結。

@@ -19,7 +19,8 @@
     "wp:import:dry-run": "ts-node tools/wp-import/wp-import-from-anycontent.ts --language=zh-tw --post-type=teaching,news,magazine --dry-run",
     "wp:import:push": "ts-node tools/wp-import/wp-import-push.ts --dry-run",
     "handoff:tempzip": "node scripts/handoff/build-temp-zip.js",
-    "check:no-bom": "node scripts/quality/check-no-bom.js"
+    "check:no-bom": "node scripts/quality/check-no-bom.js",
+    "security:scan": "node scripts/quality/security-scan.js"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
