@@ -1816,7 +1816,7 @@
   - `docs/PENDING_DECISIONS.md`：補充圖說對齊策略、爬蟲/編碼 fallback、民國年/區間日期解析等待決策項目。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0064。
 - 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commit: 4c7efca
+- commit: 80202b3
 
 變更檔案（含 RAW 連結）：
 - `docs/DESIGN/FIELD_COVERAGE_SAMPLING_V1.md`  
