@@ -1751,7 +1751,7 @@
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0061。
   - `docs/Windsurf_ChatGPT_NOTES.md`：本小節。
 - 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commits: 634b614（docs 更新）、379824d（notes 補記錄）
+- commits: 634b614（docs 更新）、379824d（notes 補 hash）、本檔提交（notes 修正文案）
 
 變更檔案（含 RAW 連結）：
 - `docs/PENDING_DECISIONS.md`  
