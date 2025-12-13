@@ -387,7 +387,7 @@
 
 ### T-0065 date-parsing-roc-year-and-range：news/magazine ROC 年與區間日期解析
 
-> 狀態：? 已完成（2025-12-12）
+> 狀態：✅ 已完成（2025-12-12）
 
 - 目標：
   - 支援 news/magazine 的 ROC 年、區間日期解析，保留 raw；若 end 無年份則沿用 start 年。
@@ -397,6 +397,19 @@
   - [x] `news-from-legacy` 解析 ROC 與區間，`ct_event_date_range` 輸出 start/end/raw。
   - [x] `magazine-from-legacy` 解析 ROC 出版日期，raw 與 ISO 同步更新。
   - [x] `npm test` / `npm run build` / `npm run check:zh-cn` 通過；notes 有 T-0065 小節與 RAW 連結。
+
+### T-0066 crawler-encoding-fallback-and-qa-fail-list：爬蟲編碼 fallback 與 QA 失敗清單
+
+> 狀態：✅ 已完成（2025-12-13）
+
+- 目標：
+  - crawler fetch/decode 支援簡易編碼 fallback（依 charset、utf-8、big5 等）；失敗時記錄 QA。
+  - 建立 `docs/QA/CRAWL_FAILS.md`，自動覆寫紀錄 fetch/decode 失敗。
+  - decode/fetch 失敗時可觀測，不破壞既有輸出。
+- 驗收：
+  - [x] 爬蟲支援編碼 fallback，失敗寫入 QA；未破壞既有輸出。
+  - [x] `docs/QA/CRAWL_FAILS.md` 存在並會被 crawler 更新。
+  - [x] `npm test` / `npm run build` / `npm run check:zh-cn` 通過；notes 有 T-0066 小節與 RAW 連結。
 
 ### T-0072 handoff-zip-versioned-filenames-taskid-and-docs-nobom：交接 ZIP 版本化與 docs 無 BOM（workflow + handoff tool）
 

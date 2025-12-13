@@ -17,6 +17,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { URL } from "node:url";
 import * as cheerio from "cheerio";
+import iconv from "iconv-lite";
 
 interface CrawledUrl {
   url: string;
@@ -29,6 +30,14 @@ interface CrawlTask {
   url: string;
   depth: number;
   source: string;
+}
+
+interface QaEntry {
+  url: string;
+  stage: "fetch" | "decode";
+  encoding?: string | null;
+  error: string;
+  first_seen_at: string;
 }
 
 interface CliOptions {
@@ -128,17 +137,60 @@ async function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function fetchPage(url: string): Promise<{ status: number; contentType: string | null; body: string | null }> {
+async function fetchPage(
+  url: string,
+): Promise<{ status: number; contentType: string | null; body: string | null; qa?: QaEntry }> {
   try {
     const res = await fetch(url);
     const status = res.status;
     const contentType = res.headers.get("content-type");
     const isHtml = contentType ? contentType.includes("text/html") : false;
-    const body = isHtml ? await res.text() : null;
-    return { status, contentType, body };
+    if (!isHtml) {
+      return { status, contentType, body: null };
+    }
+
+    const buffer = Buffer.from(await res.arrayBuffer());
+    const headerCharset = contentType?.match(/charset=([\w-]+)/i)?.[1]?.toLowerCase() ?? null;
+    const guesses = [headerCharset, "utf-8", "big5", "big5-hkscs", "windows-1252"].filter(
+      Boolean,
+    ) as string[];
+    let lastError: string | null = null;
+    for (const enc of guesses) {
+      try {
+        if (!iconv.encodingExists(enc)) continue;
+        const decoded = iconv.decode(buffer, enc);
+        return { status, contentType, body: decoded };
+      } catch (err: any) {
+        lastError = err?.message ?? String(err);
+      }
+    }
+
+    return {
+      status,
+      contentType,
+      body: null,
+      qa: {
+        url,
+        stage: "decode",
+        encoding: headerCharset,
+        error: lastError ?? "decode failed",
+        first_seen_at: new Date().toISOString(),
+      },
+    };
   } catch (err) {
     console.error(`Fetch error for ${url}:`, err);
-    return { status: 0, contentType: null, body: null };
+    return {
+      status: 0,
+      contentType: null,
+      body: null,
+      qa: {
+        url,
+        stage: "fetch",
+        encoding: null,
+        error: err instanceof Error ? err.message : String(err),
+        first_seen_at: new Date().toISOString(),
+      },
+    };
   }
 }
 
@@ -162,7 +214,7 @@ function toCsv(crawled: CrawledUrl[]): string {
 /**
  * BFS 爬蟲主流程
  */
-async function crawl(options: CliOptions): Promise<CrawledUrl[]> {
+async function crawl(options: CliOptions): Promise<{ results: CrawledUrl[]; qa: QaEntry[] }> {
   const { baseUrl, maxDepth, delayMs, maxUrls } = options;
 
   const visited = new Set<string>();
@@ -172,6 +224,7 @@ async function crawl(options: CliOptions): Promise<CrawledUrl[]> {
   ];
 
   const results: CrawledUrl[] = [];
+  const qa: QaEntry[] = [];
 
   while (queue.length > 0) {
     const task = queue.shift()!;
@@ -191,8 +244,11 @@ async function crawl(options: CliOptions): Promise<CrawledUrl[]> {
 
     console.log(`[crawl] (${depth}) ${url}`);
 
-    const { status, contentType, body } = await fetchPage(url);
+    const { status, contentType, body, qa: qaEntry } = await fetchPage(url);
     results.push({ url, status, contentType, source });
+    if (qaEntry) {
+      qa.push(qaEntry);
+    }
 
     // 只在 HTML 頁面上繼續往下抓
     const isHtml = contentType ? contentType.includes("text/html") : false;
@@ -210,13 +266,13 @@ async function crawl(options: CliOptions): Promise<CrawledUrl[]> {
     }
   }
 
-  return results;
+  return { results, qa };
 }
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
 
-  const crawled = await crawl(options);
+  const { results: crawled, qa } = await crawl(options);
 
   ensureDirExists(options.outPath);
   fs.writeFileSync(options.outPath, JSON.stringify(crawled, null, 2), "utf-8");
@@ -227,6 +283,26 @@ async function main() {
   console.log(`Crawled ${crawled.length} URLs.`);
   console.log(`JSON: ${options.outPath}`);
   console.log(`CSV : ${csvPath}`);
+
+  if (qa.length > 0) {
+    const qaPath = path.join("docs", "QA", "CRAWL_FAILS.md");
+    ensureDirExists(qaPath);
+    const lines = [
+      "# CRAWL_FAILS",
+      "",
+      `> 自動記錄 fetch/decode 失敗的 URL（最新 run: ${new Date().toISOString()}）`,
+      "",
+      "| url | stage | encoding | error | first_seen_at |",
+      "| --- | --- | --- | --- | --- |",
+      ...qa.map(
+        (q) =>
+          `| ${q.url} | ${q.stage} | ${q.encoding ?? ""} | ${q.error.replace(/\|/g, "\\|")} | ${q.first_seen_at} |`,
+      ),
+      "",
+    ];
+    fs.writeFileSync(qaPath, lines.join("\n"), "utf-8");
+    console.log(`QA fails recorded: ${qa.length} -> ${qaPath}`);
+  }
 }
 
 // 直接執行 main（在 ts-node 環境中）

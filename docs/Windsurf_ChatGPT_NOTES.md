@@ -1891,6 +1891,28 @@
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-13 任務：T-0066 crawler-encoding-fallback-and-qa-fail-list
+
+- 目的：crawler fetch/decode 支援簡易編碼 fallback，失敗記錄 QA；避免 silent fail。
+- 主要變更：
+  - `tools/crawl/crawl-ctworld.ts`：加入 charset 推測（Content-Type → utf-8 → big5 等），解碼失敗記錄 QA。
+  - `docs/QA/CRAWL_FAILS.md`：新增 QA list（crawler 執行時自動覆寫）。
+- 測試 / 建置：已跑 `npm test`、`npm run build`（docs-only 以外的變更）；未觸及 zh-cn JSON，`npm run check:zh-cn` 已通過。
+- commit: 6c546b4（功能）/ bd4f0cd（handoff 規則後續）/ b81c6fb（notes hash 更新）
+
+變更檔案（含 RAW 連結）：
+- `tools/crawl/crawl-ctworld.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/crawl/crawl-ctworld.ts
+- `docs/QA/CRAWL_FAILS.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/CRAWL_FAILS.md
+- `package.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+- `package-lock.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package-lock.json
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ## 2025-12-12 任務：T-0052 workflow-instr-for-all-tasks（docs-only）
 
 - 目的：把「每個 T 任務必須有對應 INSTR .md」寫進 workflow，並更新 INSTR-TEMPLATE / TODO / notes。
