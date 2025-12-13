@@ -1832,6 +1832,39 @@
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0065 date-parsing-roc-year-and-range
+
+- 目的：補強 news/magazine 的日期解析，支援 ROC 年與區間（缺少年份時沿用起始年），並保留 raw；同步更新 schema/types/tests。
+- 主要變更：
+  - `src/utils/parse-date.ts`：新增日期解析 util（ROC + range，繼承起始年）。
+  - `src/adapters/news-from-legacy.ts`：改用新解析器，輸出 `ct_event_date_range`，保留 raw；location 解析維持。
+  - `src/adapters/magazine-from-legacy.ts`：出版日期改用新解析器，支援 ROC/全形數字。
+  - `src/types/anycontent-news.ts`：meta 增加可選 `ct_event_date_range`。
+  - `tests/adapters/news-from-legacy.spec.ts` / `tests/adapters/magazine-from-legacy.spec.ts`：新增 ROC/區間案例。
+  - `docs/CONTENT_SCHEMA_V1.md`：news meta 註記 `ct_event_date_range` 與 raw 說明。
+- 測試 / 建置：已執行 `npm test`、`npm run build`、`npm run check:zh-cn`。
+- commit: 6c546b4
+
+變更檔案（含 RAW 連結）：
+- `src/utils/parse-date.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/utils/parse-date.ts
+- `src/adapters/news-from-legacy.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/adapters/news-from-legacy.ts
+- `src/adapters/magazine-from-legacy.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/adapters/magazine-from-legacy.ts
+- `src/types/anycontent-news.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/types/anycontent-news.ts
+- `tests/adapters/news-from-legacy.spec.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/adapters/news-from-legacy.spec.ts
+- `tests/adapters/magazine-from-legacy.spec.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/adapters/magazine-from-legacy.spec.ts
+- `docs/CONTENT_SCHEMA_V1.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-12 任務：T-0052 workflow-instr-for-all-tasks（docs-only）
 
 - 目的：把「每個 T 任務必須有對應 INSTR .md」寫進 workflow，並更新 INSTR-TEMPLATE / TODO / notes。
