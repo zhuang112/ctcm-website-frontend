@@ -9,10 +9,10 @@ describe("newsFromLegacy", () => {
       html: `
         <html>
           <body>
-            <h1>重要公告</h1>
-            <p>這是新聞導讀段落。</p>
-            <img src="/images/news-main.jpg" alt="封面圖片" />
-            <img src="/images/news-gallery.jpg" alt="交流合影" />
+            <h1>重要訊息</h1>
+            <p>這是一段新聞內容摘要。</p>
+            <img src="/images/news-main.jpg" alt="主圖" />
+            <img src="/images/news-gallery.jpg" alt="畫面一" />
           </body>
         </html>
       `,
@@ -24,43 +24,73 @@ describe("newsFromLegacy", () => {
     });
 
     expect(news.featured_image).toContain("news-main.jpg");
-    expect(news.featured_image_caption).toBe("封面圖片");
+    expect(news.featured_image_caption).toBe("主圖");
     expect(news.gallery_items).toHaveLength(1);
     expect(news.gallery_items[0]).toMatchObject({
       url: expect.stringContaining("news-gallery.jpg"),
-      alt: "交流合影",
-      caption: "交流合影",
+      alt: "畫面一",
+      caption: "畫面一",
     });
-    expect(news.gallery_blocks).toEqual([
-      { id: "main_gallery", style: null, image_indexes: [0] },
-    ]);
+    expect(news.gallery_blocks).toEqual([{ id: "main_gallery", style: null, image_indexes: [0] }]);
     expect(news.meta.default_gallery_style).toBe("grid-3");
   });
 
-  it("maps basic date and location fields into NewsMeta when present in HTML (T-0005 v1)", () => {
+  it("parses ROC single date and location", () => {
     const doc: LegacyHtmlDocument = {
       url: "https://www.ctworld.org.tw/news/2025/event-news.htm",
       html: `
         <html>
           <body>
             <div class="news-meta">
-              日期：2025-03-14 場地：台北講堂
+              日期：民國114年10月11日 地點：台北市大安區
             </div>
-            <p>這是帶日期與場地的新聞測試。</p>
           </body>
         </html>
       `,
     };
 
     const news = newsFromLegacy(doc, {
-      externalId: "news_event_2025_zh-tw",
+      externalId: "news_event_roc_2025_zh-tw",
       language: "zh-tw",
     });
 
-    expect(news.meta.ct_news_date).toBe("2025-03-14");
-    expect(news.meta.ct_event_date_start).toBe("2025-03-14");
+    expect(news.meta.ct_news_date).toBe("2025-10-11");
+    expect(news.meta.ct_event_date_start).toBe("2025-10-11");
     expect(news.meta.ct_event_date_end).toBeNull();
-    expect(news.meta.ct_event_date_raw).toBe("2025-03-14");
-    expect(news.meta.ct_event_location).toBe("台北講堂");
+    expect(news.meta.ct_event_date_raw).toContain("民國114年10月11日");
+    expect(news.meta.ct_event_location).toBe("台北市大安區");
+    expect(news.meta.ct_event_location_raw).toBe("台北市大安區");
+    expect(news.meta.ct_event_date_range).toEqual({
+      start: "2025-10-11",
+      end: null,
+      raw: news.meta.ct_event_date_raw,
+    });
+  });
+
+  it("parses date range with missing end year", () => {
+    const doc: LegacyHtmlDocument = {
+      url: "https://www.ctworld.org.tw/news/2024/event-range.htm",
+      html: `
+        <html>
+          <body>
+            <p>日期：2024-10-11 ~ 10-13</p>
+          </body>
+        </html>
+      `,
+    };
+
+    const news = newsFromLegacy(doc, {
+      externalId: "news_event_range_2024_zh-tw",
+      language: "zh-tw",
+    });
+
+    expect(news.meta.ct_event_date_start).toBe("2024-10-11");
+    expect(news.meta.ct_event_date_end).toBe("2024-10-13");
+    expect(news.meta.ct_event_date_raw).toBe("2024-10-11 ~ 10-13");
+    expect(news.meta.ct_event_date_range).toEqual({
+      start: "2024-10-11",
+      end: "2024-10-13",
+      raw: "2024-10-11 ~ 10-13",
+    });
   });
 });

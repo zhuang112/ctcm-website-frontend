@@ -1,5 +1,5 @@
-// magazine 轉換：將 legacy HTML 轉為 MagazineContent（AnyContent 的 magazine 結構）
-// 對應：docs/CONTENT_SCHEMA_V1.md § magazine、docs/HTML_TO_MARKDOWN_RULES_V4.md 共用規則
+// magazine：legacy HTML → MagazineContent（AnyContent magazine）
+// 對應：docs/CONTENT_SCHEMA_V1.md § magazine；docs/HTML_TO_MARKDOWN_RULES_V4.md 通用規則
 
 import { htmlToMarkdown } from "../html/html-to-markdown";
 import type {
@@ -8,6 +8,7 @@ import type {
 } from "../html/legacy-html-types";
 import type { Language } from "../types/anycontent-teaching";
 import type { MagazineContent, MagazineMeta } from "../types/anycontent-magazine";
+import { parseDateToken } from "../utils/parse-date";
 
 export interface MagazineFromLegacyOptions extends HtmlToMarkdownOptions {
   externalId: string;
@@ -16,7 +17,7 @@ export interface MagazineFromLegacyOptions extends HtmlToMarkdownOptions {
 }
 
 /**
- * 將 legacy magazine 頁面轉為 MagazineContent（minimal v2，含 gallery style/block）。
+ * 將一篇 legacy magazine 轉成 MagazineContent（含 gallery style/block）。
  */
 export function magazineFromLegacy(
   doc: LegacyHtmlDocument,
@@ -102,10 +103,10 @@ function parseMagazineMetaFromHtml(html: string): ParsedMagazineMeta {
     .replace(/\s+/g, " ")
     .trim();
 
-  const dateMatch = text.match(/日期[:：]\s*([0-9]{4}[./-][0-9]{1,2}[./-][0-9]{1,2})/);
-  const issueMatch = text.match(/(刊別|刊别|刊號|刊号|期別|期别)[:：]\s*([^\r\n；，。]+)/);
+  const dateMatch = text.match(/出版日期[:：]?\s*([^\s，、]+)/);
+  const issueMatch = text.match(/(期數|期別|期號|卷期|期)[:：]?\s*([^\r\n，、]+)/);
 
-  const pubDateRaw = dateMatch ? dateMatch[1] : null;
+  const pubDateRaw = dateMatch ? dateMatch[1].trim() : null;
   const issueRaw = issueMatch ? issueMatch[2].trim() : null;
   const issueRawTrimmed = issueRaw ? issueRaw.match(/第\s*\d+\s*期/)?.[0] ?? issueRaw : null;
 
@@ -118,7 +119,9 @@ function parseMagazineMetaFromHtml(html: string): ParsedMagazineMeta {
 }
 
 function toHalfWidth(input: string): string {
-  return input.replace(/[：～]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0));
+  return input.replace(/[Ａ-Ｚａ-ｚ０-９．：－／]/g, (ch) =>
+    String.fromCharCode(ch.charCodeAt(0) - 0xfee0),
+  );
 }
 
 function normalizeIssue(raw: string | null): string | null {
@@ -130,11 +133,15 @@ function normalizeIssue(raw: string | null): string | null {
 function normalizeDate(raw: string | null): string | null {
   if (!raw) return null;
   const normalized = toHalfWidth(raw);
-  const match = normalized.match(/(\d{4})[./-](\d{1,2})[./-](\d{1,2})/);
-  if (!match) return null;
-  const [, y, m, d] = match;
-  const pad2 = (v: string) => v.padStart(2, "0");
-  return `${y}-${pad2(m)}-${pad2(d)}`;
+  return (
+    parseDateToken(normalized) ??
+    parseDateToken(
+      normalized.replace(/[年月日]/g, (c) => {
+        if (c === "年" || c === "月") return "-";
+        return "";
+      }),
+    )
+  );
 }
 
 function buildGalleryBlocks(

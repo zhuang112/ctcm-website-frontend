@@ -8,6 +8,7 @@ export interface NewsMeta extends BaseMeta {
   ct_event_date_start?: string | null;
   ct_event_date_end?: string | null;
   ct_event_date_raw?: string | null;
+  ct_event_date_range?: { start?: string | null; end?: string | null; raw?: string | null };
   ct_event_location?: string | null;
   ct_event_location_raw?: string | null;
   ct_news_category?: string | null;

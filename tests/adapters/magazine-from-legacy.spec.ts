@@ -9,7 +9,7 @@ describe("magazineFromLegacy", () => {
       html: `
         <html>
           <body>
-            <h1>春季專題</h1>
+            <h1>季刊專欄</h1>
             <p>這是一段示範說明。</p>
             <img src="/images/magazine-cover.jpg" alt="封面" />
             <img src="/images/magazine-inner.jpg" alt="內頁" />
@@ -37,15 +37,15 @@ describe("magazineFromLegacy", () => {
     expect(magazine.meta.default_gallery_style).toBe("grid-3");
   });
 
-  it("maps magazine issue and publish date meta from legacy HTML (T-0045 v1)", () => {
+  it("maps magazine issue and publish date meta from legacy HTML (T-0045 v1) and parses ROC date", () => {
     const doc: LegacyHtmlDocument = {
       url: "https://www.ctworld.org/magazine/sample-001.htm",
       html: `
         <html>
           <body>
-            <h1>春季專題</h1>
-            <div class="meta">日期：2025-03-20 刊別：第 15 期</div>
-            <p>這裡是測試 issue 與出版日的區塊。</p>
+            <h1>季刊專欄</h1>
+            <div class="meta">出版日期：民國114年03月20日 期別：第 15 期</div>
+            <p>這裡用來驗證 issue 與出版日解析。</p>
           </body>
         </html>
       `,
@@ -58,7 +58,7 @@ describe("magazineFromLegacy", () => {
 
     expect(magazine.meta.ct_magazine_issue_raw).toBe("第 15 期");
     expect(magazine.meta.ct_magazine_issue).toBe("15");
-    expect(magazine.meta.ct_magazine_pub_date_raw).toBe("2025-03-20");
+    expect(magazine.meta.ct_magazine_pub_date_raw).toBe("民國114年03月20日");
     expect(magazine.meta.ct_magazine_pub_date).toBe("2025-03-20");
   });
 });

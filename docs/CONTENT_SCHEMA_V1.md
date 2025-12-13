@@ -56,8 +56,10 @@
   - `ct_news_date`: string | null（新聞日期，YYYY-MM-DD）
   - `ct_event_date_start`: string | null
   - `ct_event_date_end`: string | null
-  - `ct_event_date_raw`: string | null
+  - `ct_event_date_raw`: string | null（保留原始字串，可含 ROC / 區間）
+  - `ct_event_date_range`: { start?: string | null; end?: string | null; raw?: string | null }（可選，保留區間與 raw）
   - `ct_event_location`: string | null
+  - `ct_event_location_raw`: string | null
   - `ct_news_category`: string | null
 - 目前 sample 聚焦日期/地點/分類；若未來需要作者、tag 等，請另開任務。
 

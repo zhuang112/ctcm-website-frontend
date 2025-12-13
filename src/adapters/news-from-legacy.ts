@@ -1,5 +1,5 @@
-// news 轉換：將 legacy HTML 轉為 NewsContent（AnyContent 的 news 結構）
-// 對應：docs/CONTENT_SCHEMA_V1.md § news、docs/HTML_TO_MARKDOWN_RULES_V4.md 共用規則
+// news：legacy HTML → NewsContent（AnyContent news）
+// 對應：docs/CONTENT_SCHEMA_V1.md § news；docs/HTML_TO_MARKDOWN_RULES_V4.md 通用規則
 
 import { htmlToMarkdown } from "../html/html-to-markdown";
 import type {
@@ -8,20 +8,21 @@ import type {
 } from "../html/legacy-html-types";
 import type { Language } from "../types/anycontent-teaching";
 import type { NewsContent, NewsMeta } from "../types/anycontent-news";
+import { parseDateRange, parseDateToken } from "../utils/parse-date";
 
 export interface NewsFromLegacyOptions extends HtmlToMarkdownOptions {
-  /** 指派給這篇內容的 external_id（由外層流程決定）。 */
+  /** 外部提供的唯一鍵 */
   externalId: string;
-  /** 語言：預設以 zh-tw 為主，未來由 pipeline 產出 zh-cn 版本。 */
+  /** 語言；預設以 zh-tw 為主，zh-cn 由 pipeline 產出 */
   language: Language;
-  /** 若 HTML 沒有標題，可提供 fallback。 */
+  /** HTML 缺標題時的後援 */
   fallbackTitle?: string;
 }
 
 /**
- * 將一篇 legacy news 頁面轉成 NewsContent（minimal v2）。
- * - Markdown 抽取由 htmlToMarkdown() 處理。
- * - 本函式負責填入 NewsContent 基本欄位與部分 meta。
+ * 將一篇 legacy news 轉成 NewsContent（含 gallery style/block）。
+ * - Markdown 由 htmlToMarkdown() 產出
+ * - 本函式填入 NewsContent 核心欄位與 meta
  */
 export function newsFromLegacy(
   doc: LegacyHtmlDocument,
@@ -45,6 +46,7 @@ export function newsFromLegacy(
     ct_event_date_start: parsed.eventDateStart,
     ct_event_date_end: parsed.eventDateEnd,
     ct_event_date_raw: parsed.eventDateRaw,
+    ct_event_date_range: parsed.eventDateRange,
     ct_event_location: parsed.eventLocation,
     ct_event_location_raw: parsed.eventLocationRaw,
     ct_news_category: null,
@@ -77,26 +79,45 @@ interface ParsedNewsDateLocation {
   eventDateStart: string | null;
   eventDateEnd: string | null;
   eventDateRaw: string | null;
+  eventDateRange?: { start: string | null; end: string | null; raw: string | null };
   eventLocation: string | null;
   eventLocationRaw: string | null;
 }
 
 function parseNewsDateAndLocationFromHtml(html: string): ParsedNewsDateLocation {
-  // T-0005 v1：固定抓常見「日期 / 地點」格式；若抓不到則為 null
-  const text = html.replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ");
+  const text = html
+    .replace(/<script[^>]*>.*?<\/script>/gis, " ")
+    .replace(/<style[^>]*>.*?<\/style>/gis, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ");
   const normalized = text.replace(/\s+/g, " ").trim();
 
-  const dateRegex =
-    /日期[:：]\s*([0-9]{4}-[0-9]{1,2}-[0-9]{1,2})(?:\s*[~〜-]\s*([0-9]{4}-[0-9]{1,2}-[0-9]{1,2}))?/;
-  const dateMatch = normalized.match(dateRegex);
+  // 優先抓「日期：...」段落（可能含區間）
+  const dateFieldMatch = normalized.match(/日期[:：]\s*([^；，。、\s][^；，。]*)/);
+  const dateFieldRaw = dateFieldMatch ? dateFieldMatch[1].trim() : null;
+  const range = parseDateRange(dateFieldRaw ?? "");
 
-  const locationRegex = /(地點|場地)[:：]\s*([^;，。、\s]+)/;
+  // 若仍無日期，再嘗試第一個日期 token（含 ROC）
+  let fallbackStart: string | null = range.start;
+  if (!fallbackStart) {
+    const tokenMatch = normalized.match(
+      /(\d{4}[./-]\d{1,2}[./-]\d{1,2}|民國\s*\d{2,3}[年./-]\d{1,2}[月./-]\d{1,2})/,
+    );
+    if (tokenMatch) {
+      fallbackStart = parseDateToken(tokenMatch[1]);
+      if (fallbackStart && !range.raw) {
+        range.raw = tokenMatch[1];
+      }
+    }
+  }
+
+  const eventDateStart = range.start ?? fallbackStart;
+  const eventDateEnd = range.end;
+  const eventDateRaw = range.raw ?? null;
+  const newsDate = eventDateStart;
+
+  const locationRegex = /(地點|地点)[:：]\s*([^;，。、\s]+)/;
   const locationMatch = normalized.match(locationRegex);
-
-  const newsDate = dateMatch ? dateMatch[1] : null;
-  const eventDateStart = dateMatch ? dateMatch[1] : null;
-  const eventDateEnd = dateMatch && dateMatch[2] ? dateMatch[2] : null;
-  const eventDateRaw = dateMatch ? dateMatch[0].replace(/^日期[:：]\s*/, "").trim() : null;
 
   let eventLocation: string | null = null;
   let eventLocationRaw: string | null = null;
@@ -111,6 +132,7 @@ function parseNewsDateAndLocationFromHtml(html: string): ParsedNewsDateLocation 
     eventDateStart,
     eventDateEnd,
     eventDateRaw,
+    eventDateRange: { start: eventDateStart, end: eventDateEnd, raw: eventDateRaw },
     eventLocation,
     eventLocationRaw,
   };
