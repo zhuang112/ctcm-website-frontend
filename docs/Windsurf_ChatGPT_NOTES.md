@@ -1773,7 +1773,7 @@
   - `.gitignore`：加入 `docs/TEMP.zip` 忽略規則。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0062。
 - 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commit: (待本次提交後更新)
+- commit: 7e33d37
 
 變更檔案（含 RAW 連結）：
 - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
