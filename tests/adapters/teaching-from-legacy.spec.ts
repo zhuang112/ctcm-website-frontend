@@ -42,6 +42,33 @@ describe("teachingFromLegacy", () => {
     expect(teaching.meta.default_gallery_style).toBe("grid-2");
   });
 
+  it("treats empty alt as null caption in gallery items", () => {
+    const doc: LegacyHtmlDocument = {
+      url: "https://www.ctworld.org/turn/teaching/demo-blank-alt.htm",
+      html: `
+        <html>
+          <body>
+            <p><img src="/images/featured.jpg" alt="" /></p>
+            <p><img src="/images/gallery-1.jpg" alt="" />第一張</p>
+          </body>
+        </html>
+      `,
+    };
+
+    const teaching = teachingFromLegacy(doc, {
+      externalId: "teaching_blank_alt_zh-tw",
+      language: "zh-tw",
+    });
+
+    expect(teaching.featured_image).toContain("featured.jpg");
+    expect(teaching.featured_image_caption).toBeNull();
+    expect(teaching.gallery_items[0]).toMatchObject({
+      url: expect.stringContaining("gallery-1.jpg"),
+      alt: null,
+      caption: null,
+    });
+  });
+
   it("maps verses from htmlToMarkdown into TeachingMeta dharma verse fields", () => {
     const doc: LegacyHtmlDocument = {
       url: "https://www.ctworld.org/turn/sutra/example.htm",

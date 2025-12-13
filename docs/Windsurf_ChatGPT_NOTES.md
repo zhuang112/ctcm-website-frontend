@@ -1914,6 +1914,29 @@
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-13 任務：T-0067 gallery-caption-extraction-and-alt-strategy
+
+- 目的：避免空白 alt 被誤用為 caption，確保圖說來源保守可靠。
+- 主要變更：
+  - `htmlToMarkdown` 收集圖片時正規化空白 `alt` → `undefined`。
+  - `teaching-from-legacy`：空白 alt 產出的 featured / gallery caption 為 `null`；新增空白 alt 測試。
+  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`：補充「空白 alt 視為 null」。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0067。
+- 測試 / 建置：已跑 `npm test`、`npm run build`、`npm run check:zh-cn`。
+- commits: 59dbe10（anchors）/ 25628be（notes hash）/ <填入本次 commit hash>
+
+變更檔案（含 RAW 連結）：
+- `src/html/html-to-markdown.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/html/html-to-markdown.ts
+- `tests/adapters/teaching-from-legacy.spec.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/adapters/teaching-from-legacy.spec.ts
+- `docs/HTML_TO_MARKDOWN_RULES_V4.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-13 任務：T-0068 teaching-anchor-preservation-and-structure
 
 - 目的：teaching/sutra 的 `<a name/id>` 沒有 `href` 時仍保留 anchors，讓深連結不消失；rules 補充 anchor preservation。

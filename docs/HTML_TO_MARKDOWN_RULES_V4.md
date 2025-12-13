@@ -16,6 +16,7 @@
   - ⚠️ 待補：同一 gallery 容器的群組化、排序、分欄/段落對應。
 - 圖說（caption）來源優先序：
   - `alt` → 鄰近 `figcaption` / `<p>` / 指定 class `<span>`；缺乏可靠來源時保持 `null`，勿亂生內容。
+- 空白 `alt` 需視為 `null`（不要把空字串寫進 caption/alt）。
 - layout / multi-gallery（T-0054 設計，尚未由 extractor 產出）：
   - schema 已預留 `default_gallery_style`、`gallery_blocks`，但 htmlToMarkdown 目前只回傳 `images[]`；adapter 仍僅填 `featured_image` / `gallery_items`。
 

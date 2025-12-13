@@ -411,6 +411,19 @@
   - [x] `docs/QA/CRAWL_FAILS.md` 存在並會被 crawler 更新。
   - [x] `npm test` / `npm run build` / `npm run check:zh-cn` 通過；notes 有 T-0066 小節與 RAW 連結。
 
+### T-0067 gallery-caption-extraction-and-alt-strategy：圖說 caption / alt 策略調整
+
+> 狀態：✅ 已完成（2025-12-13）
+
+- 目標：
+  - 空白 `alt` 視為 `null`，不要誤填 caption；caption 以可靠來源為先，缺乏來源時保留 `null`。
+  - teaching/news/magazine gallery 欄位持續對齊 V4 規則，避免亂生圖說。
+  - 規則文件補充空白 alt → null 的處理。
+- 驗收：
+  - [x] `htmlToMarkdown` 收集圖片時會將空白 `alt` 正規化為 `undefined` / `null`。
+  - [x] adapter 產出的 featured / gallery caption 不會出現空字串；測試涵蓋空白 alt 案例。
+  - [x] `docs/HTML_TO_MARKDOWN_RULES_V4.md` 記載空白 alt 視為 null；notes 有 T-0067 小節與 RAW 連結。
+
 ### T-0068 teaching-anchor-preservation-and-structure：保留 teaching / sutra anchors
 
 > 狀態：✅ 已完成（2025-12-13）

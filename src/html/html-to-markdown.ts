@@ -92,7 +92,9 @@ function collectImagesAndAnchors(
     if (!src) return;
 
     const absSrc = toAbsoluteUrl(src, baseUrl);
-    const alt = $img.attr("alt") ?? undefined;
+    const rawAlt = $img.attr("alt");
+    const alt =
+      rawAlt && rawAlt.trim().length > 0 ? rawAlt.trim() : undefined;
     images.push({ src: absSrc, alt });
 
     // 不在此階段輸出 Markdown 圖片語法，僅收集資訊
