@@ -237,15 +237,19 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
 
 ### 1.12 ChatGPT 交接檔（docs/TEMP/ → docs/TEMP.zip + MANIFEST，v5.2）
 
-- 單一交接包：ChatGPT review 預設只看 `docs/TEMP.zip`（內含 `docs/TEMP/` 檔案與 `MANIFEST.json`），避免混用 RAW/零散檔。  
-- 命名：將原始路徑的 `/` 改為 `__`，置於 `docs/TEMP/`。例：`src/wp/import/anycontent-to-wp.ts` → `docs/TEMP/src__wp__import__anycontent-to-wp.ts`
-- MANIFEST（必備）：`docs/TEMP/MANIFEST.json` 至少包含 `generated_at`、`repo`、`source_commit`（main 上可對應的 hash）、`task_id`、`files[]`（temp_path / source_path / sha256）。可另附 `MANIFEST.sha256.txt`。  
+- 單一交接包：ChatGPT review **只看 `docs/TEMP.zip`（內含 `docs/TEMP/` 檔案與 `MANIFEST.json`）**，避免同時混用 RAW / 零散檔。  
+- staging 規則：`docs/TEMP/` 只作為暫存，zip 完成後應可清空；repo 內不得同時保留舊的 `docs/TEMP/` 與 `docs/TEMP.zip` 造成混淆（`.gitignore` 已忽略兩者）。  
+- 命名：原始路徑的 `/` → `__`，置於 `docs/TEMP/`。例：`src/wp/import/anycontent-to-wp.ts` → `docs/TEMP/src__wp__import__anycontent-to-wp.ts`
+- MANIFEST（必備）：`docs/TEMP/MANIFEST.json` 為 UTF-8（無 BOM），至少包含：  
+  - `generated_at`（ISO 8601）、`repo`、`source_commit`（zip 生成時可追溯的 commit）、`task_id`。  
+  - `files[]`：每筆列出 `temp_path`、`repo_path`（repo 相對路徑，勿出現 `docs/docs/...` 類重複）、`sha256`、`bytes`。  
+  - 可另附 `MANIFEST.sha256.txt` 供校驗。  
 - 流程：  
-  1) 將需審檔案複製到 `docs/TEMP/`，並產出 `MANIFEST.json`（含 sha256）。  
+  1) 將需審檔案複製到 `docs/TEMP/`，產出 `MANIFEST.json`（含 sha256、bytes）。  
   2) 壓縮為 `docs/TEMP.zip`（`.gitignore` 已忽略 `docs/TEMP/` 與 `docs/TEMP.zip`）。  
-  3) 回報時提供 `docs/TEMP.zip`、MANIFEST 的 `source_commit`，提醒使用者上傳給 ChatGPT。  
+  3) 回報時提供 `docs/TEMP.zip` 與 MANIFEST 的 `source_commit`，提醒使用者上傳給 ChatGPT。  
   4) review 完成即可清空 `docs/TEMP/`（不影響 git）。  
-- 自動化（選用）：可在 scripts 新增 `temp:manifest` / `temp:zip` / `temp:clean` 幫助產生 TEMP + MANIFEST + ZIP，但非強制。
+- 自動化（推薦）：可使用 `npm run handoff:tempzip` 產生 TEMP + MANIFEST + ZIP；如自訂腳本，亦需遵守上述欄位與路徑規則。
 
 ### 1.13 檔案編碼與行尾（防止亂碼）
 

@@ -358,6 +358,19 @@
   - [x] `.gitignore` 忽略 `docs/TEMP/` 與 `docs/TEMP.zip`。
   - [x] notes 有 T-0062 小節與 RAW 連結；本次為 docs-only，未執行測試。
 
+### T-0063 temp-zip-manifest-cleanup-and-staging-folder：TEMP.zip + MANIFEST 流程強化與工具化
+
+> 狀態：? 已完成（2025-12-12；workflow/docs-only）
+
+- 目標：
+  - 明確寫死：交接只交 `docs/TEMP.zip`（內含 `MANIFEST.json`），`docs/TEMP/` 只作 staging，zip 後可清空，不得同時保留舊 TEMP 與 ZIP。
+  - `MANIFEST.json` 規格：UTF-8（無 BOM）、必含 `source_commit` / `generated_at` / `repo` / `task_id` / `files[]`（`repo_path`、`temp_path`、`sha256`、`bytes`），路徑不得出現 `docs/docs/...` 等重複。
+  - 新增 handoff 工具：`scripts/handoff/build-temp-zip.js`，以及 npm script `handoff:tempzip`，自動生成 staging + MANIFEST + ZIP 並清理 staging。
+- 驗收：
+  - [x] workflow 更新 TEMP.zip + MANIFEST 規範與 staging 清理說明，指向 npm script。
+  - [x] 新增 `scripts/handoff/build-temp-zip.js` 與 `npm run handoff:tempzip`，執行後會輸出 zip/manifest 並清空 staging。
+  - [x] notes 有 T-0063 小節與 RAW 連結；本次為 docs-only，未執行測試。
+
 ### T-0057 deploy-progress-dashboard-to-siteground：部署儀表板到 SiteGround（dev script）
 
 > 狀態：✅ 已完成（2025-12-12；dev-only）
