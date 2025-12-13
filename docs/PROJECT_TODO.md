@@ -9,6 +9,8 @@
 
 ## TODO 列表（原始三項）
 
+- [x] T-0078 ?? T-0073 notes ????? RAW ???????
+
 ### 1. crawl / inventory：舊站網址與檔案盤點
 > 狀態：✅ 已完成（V1 盤點）
 - 工具：`tools/crawl/crawl-ctworld.ts`、`tools/crawl/filesystem-inventory.ts`、`tools/crawl/diff-crawl-vs-files.ts`。
@@ -485,6 +487,18 @@
   - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 新增 improvements/fixes 規則並修正章節編號。
   - [x] `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md` 建立，含欄位說明與初始行。
   - [x] `docs/PROJECT_TODO.md` 開頭補充 backlog 提醒並新增 T-0077 條目；notes 有 T-0077 小節與 RAW 連結。
+
+### T-0078 fix-t-0073-notes-handoff-list-and-raw-links：修正 T-0073 交接清單與 RAW 連結（docs-only）
+
+> 狀態：✅ 已完成（2025-12-13）
+
+- 目標：
+  - 更正 T-0073 交接包清單（補上 T-0072、保留 T-0073，附註 T-0071 已由 T-0072 吸收）。
+  - 確保 notes 中相關 RAW 連結與清單完整可讀。
+- 驗收：
+  - [x] `docs/Windsurf_ChatGPT_NOTES.md` 的 T-0073 區塊列出正確交接包清單並附註 T-0071 狀態。
+  - [x] `docs/PROJECT_TODO.md` 第一條清單登記 T-0078；notes 有 T-0078 小節與 RAW 連結。
+  - [x] 本次為 docs-only，未執行 test/build/check:zh-cn；`npm run check:no-bom` 可通過。
 
 ### T-0072 handoff-zip-versioned-filenames-taskid-and-docs-nobom：交接 ZIP 版本化與 docs 無 BOM（workflow + handoff tool）
 
