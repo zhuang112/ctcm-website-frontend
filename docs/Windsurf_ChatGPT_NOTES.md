@@ -2095,7 +2095,7 @@
   - T-0073 區塊交接包清單改為：0066 / 0067 / 0068 / 0070 / 0072 / 0073，並註記 T-0071 由 T-0072 吸收。
   - `PROJECT_TODO` 第一條清單新增 T-0078 完成記錄。
 - 測試 / 建置：docs-only；已執行 `npm run check:no-bom`（通過）；未跑 test/build/check:zh-cn。
-- commits: <填入本次 commit hash>
+- commits: 3b0fa26（T-0073 清單修正 + RAW 校正）
 
 變更檔案（含 RAW 連結）：
 - `docs/Windsurf_ChatGPT_NOTES.md`  
