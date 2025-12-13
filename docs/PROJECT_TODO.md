@@ -449,6 +449,18 @@
   - [x] `docs/DESIGN/WP_CONTENT_MODEL_V1.md` 對應 ACF mapping（repeater attachments）。
   - [x] notes 有 T-0070 小節與 RAW 連結；本次為 docs-only，未跑程式測試。
 
+### T-0073 batch-run-instr-0066-to-0072：批次執行 0066–0072 並保留版本化交接包
+
+> 狀態：✅ 已完成（2025-12-13）
+
+- 目標：
+  - 依 INSTR 逐顆完成 T-0066～T-0072，並為每顆產出帶 task_id+commit 的交接 ZIP。
+  - 不覆蓋舊交接包，確保審閱時可對應正確版本。
+- 驗收：
+  - [x] T-0066 / T-0067 / T-0068 / T-0070 / T-0072 均有對應 commit 與 TEMP zip。
+  - [x] notes 記錄批次完成情況與交接包路徑。
+  - [x] workflow/交接包規則遵守：zip 內保持 repo 路徑，MANIFEST 含 task_id、source_commit。
+
 ### T-0074 remove-utf8-bom-and-add-bom-check：移除 BOM 並加入檢查工具（最高優先）
 
 > 狀態：✅ 已完成（2025-12-13）

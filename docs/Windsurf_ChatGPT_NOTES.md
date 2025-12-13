@@ -2002,6 +2002,20 @@
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-13 任務：T-0073 batch-run-instr-0066-to-0072（流程紀錄）
+
+- 目的：將 T-0066～T-0072 依 INSTR 逐顆完成並各自產出版本化交接包。
+- 主要變更：流程性紀錄，無額外程式/檔案更新；各 T 已於前述小節記錄 commit 與 ZIP。
+- 測試 / 建置：不重跑（各任務已各自驗證）。
+- commits：沿用各任務對應 commit；本小節為紀錄用途。
+
+交接包參考（docs/TEMP/，保留全部版本，不覆蓋）：
+- `docs/TEMP/TEMP_20251213_T-0066_26de43d.zip`
+- `docs/TEMP/TEMP_20251213_T-0067_ff6d20e.zip`
+- `docs/TEMP/TEMP_20251213_T-0068_25628be.zip`
+- `docs/TEMP/TEMP_20251213_T-0070_990d6df.zip`
+- `docs/TEMP/TEMP_20251213_T-0074_e7444ee.zip`
+
 ## 2025-12-13 任務：T-0074 remove-utf8-bom-and-add-bom-check（最高優先）
 
 - 目的：清理既有 UTF-8 BOM 並加入檢查腳本，避免再出現亂碼。
