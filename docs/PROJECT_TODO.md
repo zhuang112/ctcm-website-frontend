@@ -1,4 +1,4 @@
-﻿# PROJECT_TODO：中台世界 Headless 專案任務列表
+# PROJECT_TODO：中台世界 Headless 專案任務列表
 
 > 說明：本檔列出本專案各個 T-xxxx 任務的狀態與簡要說明。  
 > - 所有實作與測試狀態以 GitHub/main 為準。  
@@ -448,6 +448,18 @@
   - [x] `docs/CONTENT_SCHEMA_V1.md` 新增 `magazine_issue_attachments` 欄位定義。
   - [x] `docs/DESIGN/WP_CONTENT_MODEL_V1.md` 對應 ACF mapping（repeater attachments）。
   - [x] notes 有 T-0070 小節與 RAW 連結；本次為 docs-only，未跑程式測試。
+
+### T-0074 remove-utf8-bom-and-add-bom-check：移除 BOM 並加入檢查工具（最高優先）
+
+> 狀態：✅ 已完成（2025-12-13）
+
+- 目標：
+  - 清除 repo 內現有 UTF-8 BOM（至少：`PROJECT_TODO` / `PENDING_DECISIONS` / `Windsurf_ChatGPT_NOTES` / `WORKFLOW_CHATGPT_GITHUB_AGENT` 等）。
+  - 新增檢查腳本與 npm 指令，避免未來再出現 BOM。
+- 驗收：
+  - [x] `npm run check:no-bom` 執行通過，repo 掃描無 BOM。
+  - [x] 新增 `scripts/quality/check-no-bom.js`、`npm run check:no-bom`。
+  - [x] notes 有 T-0074 小節與 RAW 連結；本次為 docs/tools-only，未跑其他測試。
 
 ### T-0072 handoff-zip-versioned-filenames-taskid-and-docs-nobom：交接 ZIP 版本化與 docs 無 BOM（workflow + handoff tool）
 

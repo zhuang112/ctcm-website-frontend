@@ -1,4 +1,4 @@
-﻿# INSTR-T-0049-html-to-md-gap-review：HTML→Markdown 規則 vs 實作落差盤點（docs-only）
+# INSTR-T-0049-html-to-md-gap-review：HTML→Markdown 規則 vs 實作落差盤點（docs-only）
 
 > 任務編號：T-0049  
 > 類型：docs / review（不改程式）  

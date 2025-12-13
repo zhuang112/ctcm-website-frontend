@@ -1,4 +1,4 @@
-﻿# SESSION_CHECKLIST
+# SESSION_CHECKLIST
 
 > 版本：2025-12-12
 > 提醒：協作流程單一真相為 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`；本檔僅為行動檢查表，詳細規則請見 workflow 檔。

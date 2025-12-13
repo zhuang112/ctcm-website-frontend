@@ -1,4 +1,4 @@
-﻿# AnyContent Schema V1 Draft
+# AnyContent Schema V1 Draft
 
 > 版本：V1 draft（T-0031，2025-12-12）  
 > 適用：teaching / news / magazine 的 AnyContent JSON（含 zh-TW / zh-CN）

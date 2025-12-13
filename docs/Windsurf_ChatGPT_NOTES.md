@@ -1,4 +1,4 @@
-﻿# ChatGPT × 實作 Agent 協作筆記
+# ChatGPT × 實作 Agent 協作筆記
 
 > 本檔案給「未來接手的 ChatGPT / AI 助手」閱讀，說明目前專案狀態與已完成的修改。
 >
@@ -2001,6 +2001,55 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-13 任務：T-0074 remove-utf8-bom-and-add-bom-check（最高優先）
+
+- 目的：清理既有 UTF-8 BOM 並加入檢查腳本，避免再出現亂碼。
+- 主要變更：
+  - 移除 BOM：`docs/PROJECT_TODO.md`、`docs/PENDING_DECISIONS.md`、`docs/Windsurf_ChatGPT_NOTES.md`、`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`，以及其他被掃出來的 docs/data/tests 範例檔。
+  - 新增 `scripts/quality/check-no-bom.js`，`npm run check:no-bom` 供日常檢查。
+  - `package.json`：新增 `check:no-bom` script。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0074。
+- 測試 / 建置：執行 `npm run check:no-bom`（通過）；未跑 `npm test` / `npm run build` / `npm run check:zh-cn`（docs/tools-only）。
+- commits: <填入本次 commit hash>
+
+變更檔案（含 RAW 連結）：
+- `scripts/quality/check-no-bom.js`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/scripts/quality/check-no-bom.js
+- `package.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/PENDING_DECISIONS.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PENDING_DECISIONS.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+- `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- `docs/AI_COLLAB_SUMMARY.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/AI_COLLAB_SUMMARY.md
+- `docs/COMPLETE_PROJECT_WORKFLOW.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/COMPLETE_PROJECT_WORKFLOW.md
+- `docs/HTML_TO_MARKDOWN_RULES_V4.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
+- `docs/INSTR/INSTR-T-0019-enforce-utf8-encoding.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-T-0019-enforce-utf8-encoding.md
+- `docs/INSTR/INSTR-T-0049-html-to-md-gap-review.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-T-0049-html-to-md-gap-review.md
+- `docs/SESSION_CHECKLIST.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/SESSION_CHECKLIST.md
+- `docs/TOOLS_ROLES_AND_BOUNDARIES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/TOOLS_ROLES_AND_BOUNDARIES.md
+- `data/compare/index.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/compare/index.json
+- `data/legacy-magazine/sample-001.html`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/legacy-magazine/sample-001.html
+- `data/legacy-news/sample-001.html`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/data/legacy-news/sample-001.html
+- `tests/adapters/teaching-sample-end-to-end.spec.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tests/adapters/teaching-sample-end-to-end.spec.ts
+- `docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt
 
 ## 2025-12-12 任務：T-0053 news-magazine-image-gallery-impl-v1
 

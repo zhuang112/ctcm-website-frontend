@@ -1,4 +1,4 @@
-﻿# PENDING_DECISIONS
+# PENDING_DECISIONS
 
 > 版本：2025-12-12
 > 提醒：協作流程請以 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 為準；本檔僅記錄待決議事項，若描述流程請視為歷史紀錄。

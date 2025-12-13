@@ -1,4 +1,4 @@
-﻿# TOOLS_ROLES_AND_BOUNDARIES
+# TOOLS_ROLES_AND_BOUNDARIES
 
 > 版本：2025-12-12
 > 提醒：完整、最新的協作流程與安全規則以 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 為單一真相；本檔僅作角色摘要與邊界備忘。

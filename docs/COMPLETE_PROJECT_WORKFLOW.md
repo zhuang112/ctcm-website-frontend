@@ -1,4 +1,4 @@
-﻿# COMPLETE_PROJECT_WORKFLOW
+# COMPLETE_PROJECT_WORKFLOW
 
 > 版本：2025-12-12
 > 提醒：詳細協作流程與安全規則以 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 為單一真相；本檔僅保留專案 roadmap / 歷史摘要。

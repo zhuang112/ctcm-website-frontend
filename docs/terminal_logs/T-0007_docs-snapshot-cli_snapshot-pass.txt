@@ -1,4 +1,4 @@
-﻿
+
 > ctcm-website-frontend@0.0.0 snapshot:docs
 > ts-node tools/docs-snapshot/make-docs-snapshot.ts --task T-0007
 

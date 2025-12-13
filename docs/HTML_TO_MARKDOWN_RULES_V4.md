@@ -1,4 +1,4 @@
-﻿# HTML_TO_MARKDOWN_RULES_V4.md (updated images & fallback notes)
+# HTML_TO_MARKDOWN_RULES_V4.md (updated images & fallback notes)
 
 > 中台世界舊站 → JSON vNext 的 HTML→Markdown 轉換規格  
 > 本版重點更新：圖片欄位行為、`featured_image` / `gallery_items` / `featured_image_caption` 的角色，

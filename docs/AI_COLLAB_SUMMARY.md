@@ -1,4 +1,4 @@
-﻿# AI 協作總結
+# AI 協作總結
 
 > 版本：2025-12-12
 > 提醒：完整協作流程與安全規則以 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 為單一真相；本檔僅為角色互動摘要。

@@ -1,4 +1,4 @@
-﻿# 中台世界專案協作工作流程（User / ChatGPT / 實作 Agent）
+# 中台世界專案協作工作流程（User / ChatGPT / 實作 Agent）
 
 > 檔名：`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
 > 版本：2025-12-10（由 ChatGPT 更新）
