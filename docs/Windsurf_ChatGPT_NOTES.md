@@ -2011,7 +2011,7 @@
   - `package.json`：新增 `check:no-bom` script。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0074。
 - 測試 / 建置：執行 `npm run check:no-bom`（通過）；未跑 `npm test` / `npm run build` / `npm run check:zh-cn`（docs/tools-only）。
-- commits: <填入本次 commit hash>
+- commits: 6fb5d48（BOM 清理 + check-no-bom）
 
 變更檔案（含 RAW 連結）：
 - `scripts/quality/check-no-bom.js`  
