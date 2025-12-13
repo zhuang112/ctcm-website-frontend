@@ -1741,6 +1741,35 @@
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-13 任務：T-0079 next phase: WordPress importer v1 + content push（staging）
+
+- 目的：準備 WP staging push 能力（REST client + push CLI），先以 dry-run 驗證 payload，尚未實際推送。
+- 主要變更：
+  - `src/wp/rest/client.ts`：新增 REST client（Basic Auth）。
+  - `tools/wp-import/wp-import-push.ts`：新增 push CLI，預設 dry-run，可指定 lang/post_type/limit/--push。
+  - `package.json`：新增 `wp:import:push` script。
+  - `.env.wp.example`：新增 WP 連線環境變數範例。
+  - `docs/PENDING_DECISIONS.md`：補充 wp_content_html markdown vs HTML 待決策。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0079。
+- 測試 / 建置：已跑 `npm test`、`npm run build`、`npm run check:zh-cn`。
+- commits: <填入本次 commit hash>
+
+變更檔案（含 RAW 連結）：
+- `src/wp/rest/client.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/wp/rest/client.ts
+- `tools/wp-import/wp-import-push.ts`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/wp-import/wp-import-push.ts
+- `package.json`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+- `.env.wp.example`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.env.wp.example
+- `docs/PENDING_DECISIONS.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PENDING_DECISIONS.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-12 任務：T-0061 gallery-default-style-strategy-docs-only
 
 - 目的：釐清 gallery 預設樣式決策層級（目前採 A 案：adapter 直接寫入 meta.default_gallery_style）與 WordPress 內容欄位策略（dry-run 暫存 body_markdown 至 wp_content_html，匯入前預期轉 HTML），僅更新 docs。
@@ -2230,6 +2259,38 @@
 - docs/PROJECT_TODO.md
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-13 任務：T-0079 next phase: WordPress importer v1 + content push（staging）
+
+- 目的：
+  - 建立 WordPress REST client 與 push CLI，預設 dry-run，可選 `--push` 實際送出（現階段建議仍以 dry-run 檢查 payload）。
+  - `.env.wp.example` 提供 WP_BASE_URL / USERNAME / APP_PASSWORD placeholders，方便在 staging 上驗證。
+  - 在 PENDING_DECISIONS 紀錄 `wp_content_html` markdown vs HTML 的決策待定（目前維持 markdown，待後續決定是否轉 HTML）。
+- 主要變更：
+  - `src/wp/rest/client.ts`：新增 basic auth REST helper。
+  - `tools/wp-import/wp-import-push.ts`：新增 push CLI，支援 lang/post_type/limit/--since/--dry-run/--push。
+  - `package.json`：新增 `wp:import:push` script（預設 dry-run）。
+  - `.env.wp.example`：新增 WP staging 憑證範例欄位。
+  - `docs/PENDING_DECISIONS.md`：補充 wp_content_html markdown vs HTML 的待決策項目。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0079 條目。
+- 測試 / 建置：已執行 `npm test`、`npm run build`、`npm run check:zh-cn`（皆通過）。
+- commits: 33a84b0
+
+變更檔案（含 RAW 連結）：
+- src/wp/rest/client.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/wp/rest/client.ts
+- tools/wp-import/wp-import-push.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/wp-import/wp-import-push.ts
+- package.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+- .env.wp.example  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.env.wp.example
+- docs/PENDING_DECISIONS.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PENDING_DECISIONS.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
 ## 2025-12-12 任務：T-0057 deploy-progress-dashboard-to-siteground
