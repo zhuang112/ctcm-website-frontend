@@ -1990,7 +1990,7 @@
   - `docs/DESIGN/WP_CONTENT_MODEL_V1.md`：新增 magazine attachments 對應 ACF repeater。
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0070。
 - 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`（依 workflow 允許）。
-- commits: <填入本次 commit hash>
+- commits: a67a67a（docs design）
 
 變更檔案（含 RAW 連結）：
 - `docs/CONTENT_SCHEMA_V1.md`  
