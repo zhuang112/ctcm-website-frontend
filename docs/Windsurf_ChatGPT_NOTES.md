@@ -2073,7 +2073,7 @@
   - `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`：新增 backlog 檔，定義欄位與初始列。
   - `docs/PROJECT_TODO.md`：開頭加上改善登記提醒，並新增 T-0077 條目。
 - 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commits: <填入本次 commit hash>
+- commits: c2801d4（workflow 規則 + backlog + TODO 提醒）
 
 變更檔案（含 RAW 連結）：
 - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
