@@ -18,6 +18,7 @@
 - 待決策：
   - post type / custom fields / taxonomy 結構。
   - Polylang 語言對應與同步方式。
+  - `wp_content_html` 暫存 markdown 還是 push 前先轉 HTML？v1 可先用 markdown，之後是否轉換待決策。
 
 ## HTML anchors / 深連結呈現
 - 背景：T-0068 已規定所有 `<a name/id>` 需在 body_markdown 中保留 `<a id="..."></a>`，並收錄 anchors[]。

@@ -538,3 +538,16 @@
   - [x] notes 中有 T-0059 小節與 RAW 連結；
 pm test、
 pm run build 通過。
+
+### T-0079 wordpress-importer-push-v1：staging push（dry-run 預設）
+
+> 狀態：✅ 已完成（2025-12-13；staging dry-run）
+
+- 目標：
+  - 建立 WordPress REST client 與 push CLI，預設 dry-run，支援 lang/post_type/limit/--push。
+  - 新增 `.env.wp.example` 管理 WP_BASE_URL / USERNAME / APP_PASSWORD。
+  - 在 PENDING_DECISIONS 註記 wp_content_html markdown vs HTML 的決策待定。
+- 驗收：
+  - [x] `src/wp/rest/client.ts` 提供 basic auth REST helper。
+  - [x] `tools/wp-import/wp-import-push.ts` 能從 data/anycontent 載入資料並輸出 payload，預設 dry-run，可加 --push 送到 WP API。
+  - [x] `npm test` / `npm run build` / `npm run check:zh-cn` 通過；notes 登記本次任務與 RAW 連結。
