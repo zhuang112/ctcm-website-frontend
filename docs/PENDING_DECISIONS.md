@@ -54,3 +54,18 @@
 - 現狀（T-0059 dry-run）：`wp_content_html` 暫放 AnyContent.body_markdown（供計畫檔參考），尚未送出至 WP。
 - 預期 v2（未實作）：importer 將 body_markdown 轉 HTML 後寫入 WordPress；WP plugin/前端負責呈現，markdown 本身不直接寫入 WP。
 - 若未來要改變（例如 WP 端再做 markdown→HTML），需再開 T 決策。
+
+## Gallery 圖說對齊策略
+- 背景：圖片 caption 目前主要取自 alt；若 alt 缺失則為 null。
+- 待決策：是否需要額外 heuristics（鄰近文字/標籤）或手動欄位補充；何時標記為 unclassified。
+- 可能方案：維持現況 vs. adapter 增加鄰近文字判斷 vs. importer/WP 端人工維護。
+
+## 爬蟲/HTML 編碼 fallback
+- 背景：crawler/html-to-md 偶有編碼不明的情形（Big5/CP950 等）。
+- 待決策：需否在工具中加入編碼偵測與 fallback；還是遇到異常時直接 fail 並提示使用者提供正確來源。
+- 建議：以「明確失敗 + 提示上傳正確檔案」為主，若要自動 fallback 需另開 T。
+
+## 日期解析（民國年與區間）
+- 背景：news 日期/區間尚未驗證民國年或複雜區間格式。
+- 待決策：是否在 adapter 內補強 ROC 年換算與區間解析；或在後續 pipeline 中處理。
+- 建議：開專門 T 針對民國年與區間，並補測試案例。

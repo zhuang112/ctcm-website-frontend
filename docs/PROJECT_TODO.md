@@ -371,6 +371,19 @@
   - [x] 新增 `scripts/handoff/build-temp-zip.js` 與 `npm run handoff:tempzip`，執行後會輸出 zip/manifest 並清空 staging。
   - [x] notes 有 T-0063 小節與 RAW 連結；本次為 docs-only，未執行測試。
 
+### T-0064 field-coverage-sampling-audit-and-schema-gaps：樣本覆蓋度審查與缺口清單（docs-only）
+
+> 狀態：? 已完成（2025-12-12；docs-only）
+
+- 目標：
+  - 以現有 sample-001（teaching/news/magazine）進行欄位覆蓋審查，記錄缺口（日期 ROC/區間、flipbook/branch 缺料、encoding fallback、caption 策略等）。
+  - 建立 `docs/DESIGN/FIELD_COVERAGE_SAMPLING_V1.md`，列出樣本覆蓋表與缺口優先級，提出後續 T 候選。
+  - 在 PENDING_DECISIONS 或 crosscheck/notes 紀錄缺口，並在 TODO 登記 T-0064 完成。
+- 驗收：
+  - [x] 新增 `FIELD_COVERAGE_SAMPLING_V1.md`，涵蓋至少 teaching/news/magazine/flipbook/branch 樣本狀態與缺口建議。
+  - [x] PENDING_DECISIONS 或 crosscheck 記錄編碼/日期/圖說對齊等待決策項目。
+  - [x] notes 有 T-0064 小節與 RAW 連結；本次為 docs-only，未執行測試。
+
 ### T-0057 deploy-progress-dashboard-to-siteground：部署儀表板到 SiteGround（dev script）
 
 > 狀態：✅ 已完成（2025-12-12；dev-only）
