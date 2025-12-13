@@ -42,3 +42,15 @@
 - 內容校對流程：誰負責審稿、何時鎖版。
 - 測試策略：unit / e2e / 可接受的覆蓋率與範圍。
 - 標準化規則更新：docs 改版時的通知與驗收機制。
+
+## Gallery default style fallback 策略
+- 現狀（採 A 案）：default gallery style 由 adapter 決定並寫入 AnyContent meta（teaching=grid-2，news/magazine=grid-3）；importer 只忠實搬運，不在 importer/WP 端落地 fallback。
+- B/C 備選（未實作）：  
+  - B：在 importer 側若為 null，再依 post_type 補預設。  
+  - C：由 WordPress/前端決定預設樣式。  
+- A 為目前唯一真相；若未來要採 B/C，需另開 T。
+
+## WordPress 內容欄位：body_markdown 與 wp_content_html
+- 現狀（T-0059 dry-run）：`wp_content_html` 暫放 AnyContent.body_markdown（供計畫檔參考），尚未送出至 WP。
+- 預期 v2（未實作）：importer 將 body_markdown 轉 HTML 後寫入 WordPress；WP plugin/前端負責呈現，markdown 本身不直接寫入 WP。
+- 若未來要改變（例如 WP 端再做 markdown→HTML），需再開 T 決策。

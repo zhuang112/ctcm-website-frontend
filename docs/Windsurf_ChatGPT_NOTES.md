@@ -1741,6 +1741,30 @@
 - `docs/Windsurf_ChatGPT_NOTES.md`  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-12 任務：T-0061 gallery-default-style-strategy-docs-only
+
+- 目的：釐清 gallery 預設樣式決策層級（目前採 A 案：adapter 直接寫入 meta.default_gallery_style）與 WordPress 內容欄位策略（dry-run 暫存 body_markdown 至 wp_content_html，匯入前預期轉 HTML），僅更新 docs。
+- 主要變更：
+  - `docs/PENDING_DECISIONS.md`：新增「Gallery default style fallback 策略」與「WordPress 內容欄位：body_markdown 與 wp_content_html」條目，記錄 A/B/C 案與現況。
+  - `docs/CONTENT_SCHEMA_V1.md`：meta.default_gallery_style 說明改為「由 adapter 直接輸出，importer 不補 fallback」，並補充 wp_content_html 策略提醒。
+  - `docs/DESIGN/WP_CONTENT_MODEL_V1.md`：重寫為可讀版，對齊 A 案、標註 importer 不做 default style fallback，並註記 wp_content_html 的暫定用法。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0061。
+  - `docs/Windsurf_ChatGPT_NOTES.md`：本小節。
+- 測試 / 建置：docs-only，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
+- commit: (待本次提交產生後更新)
+
+變更檔案（含 RAW 連結）：
+- `docs/PENDING_DECISIONS.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PENDING_DECISIONS.md
+- `docs/CONTENT_SCHEMA_V1.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+- `docs/DESIGN/WP_CONTENT_MODEL_V1.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/DESIGN/WP_CONTENT_MODEL_V1.md
+- `docs/PROJECT_TODO.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- `docs/Windsurf_ChatGPT_NOTES.md`  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
 ## 2025-12-12 任務：T-0052 workflow-instr-for-all-tasks（docs-only）
 
 - 目的：把「每個 T 任務必須有對應 INSTR .md」寫進 workflow，並更新 INSTR-TEMPLATE / TODO / notes。
@@ -1993,4 +2017,3 @@ pm run build。
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 - .gitignore
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.gitignore
-

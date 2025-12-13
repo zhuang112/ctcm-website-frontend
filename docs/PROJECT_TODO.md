@@ -332,6 +332,19 @@
   - [x] `.gitignore` 忽略 `docs/TEMP/`；TODO/notes 登記 T-0060 完成。
   - [x] notes 中有 T-0060 小節與 RAW 連結；本次為 docs-only，未跑測試。
 
+### T-0061 gallery-default-style-strategy-docs-only：gallery 預設樣式與 WP 內容欄位策略（docs-only）
+
+> 狀態：? 已完成（2025-12-12；docs-only）
+
+- 目標：
+  - 在 `PENDING_DECISIONS.md` 明確記錄 gallery 預設樣式 A/B/C 案（目前真相：A 案由 adapter 設置 `meta.default_gallery_style`；teaching=`grid-2`，news/mag=`grid-3`；importer 不補 fallback）。
+  - 補充 WordPress 內容欄位策略：dry-run 將 `body_markdown` 暫存於 `wp_content_html`，預期 v2 匯入前轉 HTML。
+  - 讓 schema 與 WP content model 反映上述策略並交叉連結。
+- 驗收：
+  - [x] `PENDING_DECISIONS.md` 有 gallery default style 策略與 wp_content_html/markdown 記錄。
+  - [x] `CONTENT_SCHEMA_V1.md` / `DESIGN/WP_CONTENT_MODEL_V1.md` 更新並 cross-link，描述現行策略與未來變化需另開 T。
+  - [x] notes 有 T-0061 小節與 RAW 連結；本次為 docs-only，未執行測試。
+
 ### T-0057 deploy-progress-dashboard-to-siteground：部署儀表板到 SiteGround（dev script）
 
 > 狀態：✅ 已完成（2025-12-12；dev-only）

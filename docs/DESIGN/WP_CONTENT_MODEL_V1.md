@@ -1,108 +1,118 @@
 # WP_CONTENT_MODEL_V1
 
-> 任務：T-0058（docs-only）  
-> 目的：定義 AnyContent V1（teaching / news / magazine）到 WordPress 的內容模型與欄位 mapping，供未來 importer / ACF / 後台 UI 參考。
+> 版本：V1（最初於 T-0058 建立，T-0061 更新 gallery / wp_content 策略文字）  
+> 目的：記錄 AnyContent V1（teaching / news / magazine）對應到 WordPress 的欄位 / ACF / taxonomy 規劃，供 importer 與後台 UI 參考。  
+> 範圍：docs-only，未包含實際 PHP/JS 程式；importer / ACF 實作需另開任務。
 
 ---
 
-## 1. 範圍與目標
-- 產出一份可直接拿去實作 WordPress importer / ACF 的 mapping 規格（不寫程式）。  
-- 重點：post type / taxonomy 建議、meta / ACF 欄位、圖片與 gallery 欄位、未分類內容旗標。
-- 不做：實際 PHP/JS 程式、SiteGround 部署、修改現有 WordPress 設定。
+## 1. 基本假設
 
-## 2. WordPress 端基本假設
-- 環境：SiteGround 上的 WordPress（單站，預設語系 zh-TW，未啟用多站）。
-- 語言策略（暫定）：同一個 post type 下用 `language` meta 儲存 zh-tw / zh-cn；若未來要分開，可再開對應 post type。
-- 建議 post type：
-  - `ct_teaching`
-  - `ct_news`
-  - `ct_magazine`
-- 建議 taxonomy：
-  - 共用：`ct_language`（若不用 meta 存語言，可改用 taxonomy）
-  - magazine 專用：`ct_magazine_issue`（若 issue 要以 taxonomy 呈現）
-  - 其他分類（可選）：`ct_topic` / `ct_tag` 視需要增設。
+- 環境：SiteGround 上的 WordPress，預設語系 zh-TW（未開啟多語插件；Polylang/其他方案未定）。  
+- Post type（建議）：`ct_teaching`、`ct_news`、`ct_magazine`。  
+- 語言儲存：暫以 post meta `language`（zh-tw / zh-cn）；若未來採 taxonomy，需要同步更新 importer 與後台 UI。  
+- Taxonomy（暫定）：`ct_magazine_issue`（期別）可作為 taxonomy；其他分類/標籤待後續討論。  
+- 匯入策略：以 `external_id + language` 作為唯一鍵；匯入時可選擇 upsert（更新或新增）。
 
-## 3. 共用欄位（AnyContent Base → WordPress）
+---
 
-| AnyContent 欄位 | 型別 | WordPress 對應 | 備註 |
-| --- | --- | --- | --- |
-| post_title | string | post_title |  |
-| post_excerpt | string \| null | post_excerpt |  |
-| body_markdown | string | post_content (Markdown/raw) | importer 可考慮轉 HTML，或維持 Markdown 儲存 ACF。 |
-| slug | string | post_name |  |
-| language | enum | post meta: `language`（或 taxonomy `ct_language`） | zh-tw / zh-cn |
-| old_url | string | post meta: `old_url` | 舊站 URL |
-| external_id | string | post meta: `external_id` | 匯入用唯一鍵 |
-| has_unclassified_content | boolean | post meta: `has_unclassified_content` | |
-| unclassified_notes | string \| null | post meta: `unclassified_notes` | |
+## 2. 共用欄位 mapping
 
-## 4. 圖片 / gallery / layout 欄位
+| AnyContent | WP 欄位 | 備註 |
+| --- | --- | --- |
+| `post_title` | `post_title` |  |
+| `post_excerpt` | `post_excerpt` |  |
+| `slug` | `post_name` |  |
+| `language` | post meta `language`（或 taxonomy `ct_language`，未定） | zh-tw / zh-cn |
+| `old_url` | post meta `old_url` |  |
+| `external_id` | post meta `external_id` | 唯一鍵 |
+| `has_unclassified_content` | post meta `has_unclassified_content` | boolean |
+| `unclassified_notes` | post meta `unclassified_notes` | string |
+| `body_markdown` | **wp_content_html（暫時）** | 目前 dry-run 將 markdown 原文放在計畫檔的 `wp_content_html`；預期 v2 匯入前會先轉 HTML 再寫入 WordPress。 |
 
-| AnyContent 欄位 | 型別 | WordPress 對應 | 備註 |
-| --- | --- | --- | --- |
-| featured_image | string \| null | Featured Image (post thumbnail) 或 ACF `featured_image_url` | 建議匯入時下載/對應到 media library，設定 post thumbnail。 |
-| featured_image_caption | string \| null | ACF `featured_image_caption` |  |
-| gallery_items[] | array | ACF Repeater `gallery_items` | 欄位：`image_url`（或 attachment id）、`alt`、`caption` |
-| meta.default_gallery_style | string \| null | ACF `default_gallery_style` (select) | 預設：teaching = grid-2；news/mag = grid-3；可再補 masonry/slider。 |
-| gallery_blocks[] | array | ACF Repeater `gallery_blocks` | 欄位：`block_id`、`label`、`style`、`image_indexes` (array/int[])、`image_ids` (array/string[])、`title`、`description`、`position_hint` |
+---
 
-> Gallery 建議：  
-> - importer 先以 `gallery_items` 為主；`gallery_blocks` 用來記錄分組/樣式提示。  
-> - 若無 `gallery_blocks`，可由 importer 自動建一個 `main_gallery` block 覆蓋全部 items。  
-> - default_gallery_style 可在前端/WP 後台預設呈現樣式。
+## 3. 圖片 / gallery / layout 欄位
 
-## 5. teaching / news / magazine 專屬欄位
+| AnyContent | WP/ACF 欄位（建議） | 備註 |
+| --- | --- | --- |
+| `featured_image` | Post Thumbnail（或 ACF `featured_image_url`） | 匯入時可下載並設定縮圖，或先以 URL 暫存。 |
+| `featured_image_caption` | ACF `featured_image_caption` |  |
+| `gallery_items[]` | ACF Repeater `gallery_items`（`image_url` / `alt` / `caption`） |  |
+| `meta.default_gallery_style` | ACF `default_gallery_style`（select） | **目前 A 案：adapter 直接填寫**（teaching=`grid-2`，news/magazine=`grid-3`）；importer 不再做 fallback。若為 null，前端/WP 另行決定需另開 T。 |
+| `gallery_blocks[]` | ACF Repeater `gallery_blocks`（block_id / label / style / image_indexes / image_ids / title / description / position_hint） | 目前 importer 建議先照 JSON 搬運；front-end/UI 再做呈現。 |
 
-### 5.1 teaching
-| AnyContent 欄位 | 型別 | WP 對應 | 備註 |
-| --- | --- | --- | --- |
-| meta.ct_speaker_name | string \| null | post meta `ct_speaker_name` | |
-| meta.ct_location | string \| null | post meta `ct_location` | |
-| meta.ct_event_date | string \| null | post meta `ct_event_date` | YYYY-MM-DD |
-| meta.ct_sutra_reference | string \| null | post meta `ct_sutra_reference` | |
-| meta.ct_has_dharma_verse | enum | post meta `ct_has_dharma_verse` | "yes"/"no" |
-| meta.ct_verse_block_markdown | string \| null | post meta `ct_verse_block_markdown` | |
-| meta.ct_verse_type | string \| null | post meta `ct_verse_type` | |
-| meta.ct_verse_lang | enum \| null | post meta `ct_verse_lang` | |
+---
 
-### 5.2 news
-| AnyContent 欄位 | 型別 | WP 對應 | 備註 |
-| --- | --- | --- | --- |
-| meta.ct_news_date | string \| null | post meta `ct_news_date` | |
-| meta.ct_event_date_start | string \| null | post meta `ct_event_date_start` | |
-| meta.ct_event_date_end | string \| null | post meta `ct_event_date_end` | |
-| meta.ct_event_date_raw | string \| null | post meta `ct_event_date_raw` | |
-| meta.ct_event_location | string \| null | post meta `ct_event_location` | |
-| meta.ct_event_location_raw | string \| null | post meta `ct_event_location_raw` | |
-| meta.ct_news_category | string \| null | taxonomy `ct_news_category` 或 post meta `ct_news_category` | 視後台需要，可用 taxonomy。 |
-| meta.ct_has_gallery | enum \| null | post meta `ct_has_gallery` | "yes"/"no" |
+## 4. post_type 專屬欄位（meta）
 
-### 5.3 magazine
-| AnyContent 欄位 | 型別 | WP 對應 | 備註 |
-| --- | --- | --- | --- |
-| meta.ct_magazine_level | enum | post meta `ct_magazine_level` | "issue"/"article" |
-| meta.ct_magazine_issue | string \| null | taxonomy `ct_magazine_issue` 或 post meta `ct_magazine_issue` | 建議 issue 用 taxonomy；若僅單一期可用 meta。 |
-| meta.ct_magazine_issue_raw | string \| null | post meta `ct_magazine_issue_raw` | |
-| meta.ct_magazine_pub_date | string \| null | post meta `ct_magazine_pub_date` | YYYY-MM-DD |
-| meta.ct_magazine_pub_date_raw | string \| null | post meta `ct_magazine_pub_date_raw` | |
-| meta.ct_magazine_issue_no | string \| null | post meta `ct_magazine_issue_no` | legacy 欄位（可留空） |
-| meta.ct_magazine_year | number \| null | post meta `ct_magazine_year` | 可留空 |
-| meta.ct_magazine_month | number \| null | post meta `ct_magazine_month` | 可留空 |
-| meta.ct_magazine_issue_label | string \| null | post meta `ct_magazine_issue_label` | 可留空 |
-| meta.ct_issue_items | object[] \| undefined | ACF repeater `ct_issue_items` | 欄位：section/title/has_article/article_external_id/page_no |
-| meta.ct_magazine_section | string \| null | post meta `ct_magazine_section` | |
-| meta.ct_magazine_type | string \| null | post meta `ct_magazine_type` | |
-| meta.ct_author_name | string \| null | post meta `ct_author_name` | |
+### 4.1 teaching
 
-## 6. importer / 後台 UI 的注意事項（建議）
-- Importer 輸入：AnyContent JSON 檔或資料夾；需支援 zh-tw / zh-cn，並以 `external_id + language` 判定更新/新增。  
-- 圖片策略：可選擇僅存 URL，或下載到 media library 後以 attachment ID 寫入 ACF；前者快、後者穩。  
-- 後台 gallery UI：建議 ACF Repeater + select（style）；gallery_blocks 的 image_indexes 可用文字/JSON 欄位呈現，或用多選勾選 items。  
-- 未分類內容：後台顯示 `has_unclassified_content` checkbox 與 notes，方便人工補齊。  
-- 語言切換：若 zh-tw / zh-cn 共用同一 post type，建議後台 filter：language = zh-tw / zh-cn。
+| AnyContent | WP/ACF | 備註 |
+| --- | --- | --- |
+| `ct_speaker_name` | post meta `ct_speaker_name` |  |
+| `ct_location` | post meta `ct_location` |  |
+| `ct_event_date` | post meta `ct_event_date` | YYYY-MM-DD |
+| `ct_sutra_reference` | post meta `ct_sutra_reference` |  |
+| `ct_has_dharma_verse` | post meta `ct_has_dharma_verse` | "yes"/"no" |
+| `ct_verse_block_markdown` | post meta `ct_verse_block_markdown` |  |
+| `ct_verse_type` | post meta `ct_verse_type` |  |
+| `ct_verse_lang` | post meta `ct_verse_lang` |  |
 
-## 7. 建議後續 T（不在本次實作）
-- `T-00xx wordpress-importer-plugin-skeleton`：實作匯入 JSON 的 WP plugin（含 ACF 寫入）。  
-- `T-00xy wordpress-gallery-admin-ui`：後台 gallery 編輯介面（style 選擇、block 重排）。  
-- `T-00xz magazine-issue-attachments-and-flipbook-mapping`：雜誌期別 / PDF / flipbook mapping 與 UI。  
-- `T-00xw wordpress-language-filter-and-sync`：WP 後台語言 filter、zh-tw/zh-cn 同步策略。
+### 4.2 news
+
+| AnyContent | WP/ACF | 備註 |
+| --- | --- | --- |
+| `ct_news_date` | post meta `ct_news_date` |  |
+| `ct_event_date_start` | post meta `ct_event_date_start` |  |
+| `ct_event_date_end` | post meta `ct_event_date_end` |  |
+| `ct_event_date_raw` | post meta `ct_event_date_raw` |  |
+| `ct_event_location` | post meta `ct_event_location` |  |
+| `ct_event_location_raw` | post meta `ct_event_location_raw` |  |
+| `ct_news_category` | taxonomy `ct_news_category`（或 post meta，同步策略未定） |  |
+| `ct_has_gallery` | post meta `ct_has_gallery` | "yes"/"no" |
+
+### 4.3 magazine
+
+| AnyContent | WP/ACF | 備註 |
+| --- | --- | --- |
+| `ct_magazine_level` | post meta `ct_magazine_level` | "issue"/"article" |
+| `ct_magazine_issue` | taxonomy `ct_magazine_issue` 或 post meta | 期別；若 taxonomy 未定，可先用 meta。 |
+| `ct_magazine_issue_raw` | post meta `ct_magazine_issue_raw` |  |
+| `ct_magazine_pub_date` | post meta `ct_magazine_pub_date` | YYYY-MM-DD |
+| `ct_magazine_pub_date_raw` | post meta `ct_magazine_pub_date_raw` |  |
+| `ct_magazine_issue_no` | post meta `ct_magazine_issue_no` | legacy |
+| `ct_magazine_year` | post meta `ct_magazine_year` | optional |
+| `ct_magazine_month` | post meta `ct_magazine_month` | optional |
+| `ct_magazine_issue_label` | post meta `ct_magazine_issue_label` | optional |
+| `ct_issue_items[]` | ACF repeater `ct_issue_items` | 欄位：section / title / has_article / article_external_id / page_no |
+| `ct_magazine_section` | post meta `ct_magazine_section` |  |
+| `ct_magazine_type` | post meta `ct_magazine_type` |  |
+| `ct_author_name` | post meta `ct_author_name` |  |
+
+---
+
+## 5. Gallery 預設樣式策略（summary）
+
+- **目前真相（A 案）**：`meta.default_gallery_style` 由 adapter 產出，teaching=`grid-2`，news/magazine=`grid-3`；importer 僅搬運，不做預設補值。  
+- **未來變化**：若想改為 importer fallback（B 案）或前端/WP 決定（C 案），需另開 T 並更新本檔。  
+- 參考：`docs/PENDING_DECISIONS.md` 中的「Gallery default style fallback 策略」記錄。
+
+---
+
+## 6. wp_content_html / markdown 策略（暫定）
+
+- 目前 dry-run（T-0059）會將 `body_markdown` 原文放入計畫檔的 `wp_content_html`，供審閱。  
+- 預期 v2：匯入前先將 markdown 轉為 HTML，再寫入 WordPress（可能透過 remark/markdown-it 等工具）。  
+- 若未來改由 WP 插件處理 markdown→HTML，需在 importer 與後台 UI 端同步更新欄位與流程，並開新 T。
+
+---
+
+## 7. 後續建議 T（未實作）
+
+- `T-00xx wordpress-importer-plugin-skeleton`：實作 PHP/Node 端匯入，含 ACF 寫入與 media 處理。  
+- `T-00xy wordpress-gallery-admin-ui`：後台 gallery 編輯介面（style / block 選擇、圖片排序）。  
+- `T-00xz wordpress-language-filter-and-sync`：後台語言篩選與 zh-tw/zh-cn 同步策略。  
+- `T-00xw wordpress-content-html-pipeline`：在匯入前進行 markdown→HTML、處理內嵌圖片/連結。  
+- `T-00xv magazine-issue-attachments-and-flipbook`：期刊附件/翻頁檔 mapping 與 UI。  
+- `T-00xu gallery-style-fallback-rules`：若要改變 default style 決策層級（importer/WP/front-end），需同步更新 schema + importer + UI。

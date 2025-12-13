@@ -20,13 +20,15 @@
   - `style` 可覆寫 `meta.default_gallery_style`；`image_indexes` / `image_ids` 可對應 `gallery_items` 中的圖片。
   - `title` / `description` / `position_hint`（例如 `after-intro`）供前端排版提示；未填可為 null。
 - `meta`: 各 post_type 專用欄位（下方詳述）
-- `meta.default_gallery_style`: string | null（可選，預設 gallery 呈現方式；建議 teaching = `"grid-2"`，news/magazine = `"grid-3"`，未指定則由前端或 importer 決定 fallback）
+- `meta.default_gallery_style`: string | null（預設 gallery 樣式，由 adapter 直接輸出；目前採 A 案：teaching=`"grid-2"`，news/magazine=`"grid-3"`，importer 不再落地 fallback，前端/WP 若需覆寫需另立任務）
 - `meta.has_unclassified_content`: boolean（預設 false；若該 JSON 仍含大量未分類內容可設為 true）
 - `meta.unclassified_notes`: string | null（選填，簡述「哪些段落暫時留在 body_markdown」）
 - 未知或暫無欄位的內容：先留在 `body_markdown`；除非確定常見且需要欄位，暫勿自行新增 meta key（等待後續任務評估 schema）。
 - 其他暫未使用欄位（seo、multilingual 等）可留白，視未來需要另行定義。
 
 > WordPress content model / importer 欄位對應，可參考：`docs/DESIGN/WP_CONTENT_MODEL_V1.md`。
+
+- WordPress 內容欄位提醒：目前 importer dry-run 將 `body_markdown` 暫存於 `wp_content_html` 以便計畫檔參考；預期 v2 會在匯入前轉成 HTML 再寫入 WordPress（詳見 WP content model 文檔與 pending decisions）。
 
 ## 2. teaching（TeachingContent）
 
