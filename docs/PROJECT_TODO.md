@@ -565,3 +565,16 @@ pm run build 通過。
   - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 有安全小節與 scan 規則。
   - [x] `scripts/quality/security-scan.js` 可執行且掃描通過；`npm run security:scan` 執行無警示。
   - [x] `docs/QA/SECURITY_AUDIT.md` 記錄本次掃描結果；notes 有 T-0080 小節與 RAW 連結。
+
+### T-0081 handoff-source-commit-autodetect-and-manifest-assert：交接包自動取 HEAD 並驗證 MANIFEST
+
+> 狀態：✅ 已完成（2025-12-16）
+
+- 目標：
+  - handoff 工具自動取得 `git rev-parse HEAD` 作為 `source_commit`，並強制 MANIFEST 與 ZIP 名稱寫入 HEAD7。
+  - 若指定的 `--source_commit` 與 HEAD 不符，立即 fail，避免交接包與實際 commit 不一致。
+  - workflow / backlog / notes 登記此規則。
+- 驗收：
+  - [x] `scripts/handoff/build-temp-zip.js` 自動取 HEAD，zip 命名含 HEAD7，MANIFEST `source_commit` 與 HEAD 不符會 throw。
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 補充斷言說明；PROJECT_TODO/IMPROVEMENT_BACKLOG/notes 登記 T-0081。
+  - [x] `npm run handoff:tempzip -- --task_id T-0081 --files <示例>` 執行成功；`npm run check:no-bom` 通過。

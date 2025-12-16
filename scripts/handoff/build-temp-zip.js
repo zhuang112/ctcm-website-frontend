@@ -131,12 +131,17 @@ async function buildZip(outPath) {
 
 async function main() {
   const { files, outPath, sourceCommit, taskId } = parseArgs();
-  const commit = sourceCommit || execSync('git rev-parse HEAD').toString().trim();
+  const headCommit = execSync('git rev-parse HEAD').toString().trim();
+  if (sourceCommit && sourceCommit !== headCommit) {
+    throw new Error(`source_commit (${sourceCommit}) does not match HEAD (${headCommit})`);
+  }
+  const commit = headCommit;
+  const commitShort = commit.slice(0, 7);
   const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
   const resolvedOut = path.resolve(
     cwd,
     outPath === 'docs/TEMP.zip'
-      ? path.join('docs', 'TEMP', `TEMP_${today}${taskId ? `_${taskId}` : ''}_${commit}.zip`)
+      ? path.join('docs', 'TEMP', `TEMP_${today}${taskId ? `_${taskId}` : ''}_${commitShort}.zip`)
       : outPath,
   );
 

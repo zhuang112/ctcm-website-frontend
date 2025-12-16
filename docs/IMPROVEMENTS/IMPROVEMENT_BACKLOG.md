@@ -15,4 +15,4 @@
 |-------|------------|----------------------------------------------------------|--------|--------|---------|--------------------------------|
 | I-0001| auto       | （保留佔位，待補實際條目）                               | medium | todo   | -       | -                              |
 | I-0002| auto       | Security hardening & secret scanning rules（T-0080）     | high   | done   | T-0080  | 2025-12-13 新增，scan 通過     |
-
+| I-0003| auto       | Handoff source_commit autodetect + MANIFEST 斷言（T-0081） | high   | done   | T-0081  | 2025-12-16 完成，zip 帶 HEAD7   |

@@ -245,6 +245,7 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
   - `generated_at`（ISO 8601）、`repo`、`source_commit`（zip 時的 commit）、`task_id`（可為 null）。  
   - `files[]`：`repo_path`、`temp_path`（同 repo_path）、`sha256`、`bytes`。  
   - 可附 `MANIFEST.sha256.txt` 供校驗。  
+- 安全斷言：`MANIFEST.source_commit` 必須等於當前 HEAD；handoff 工具預設自動使用 `git rev-parse HEAD`，若手動指定 `--source_commit` 與 HEAD 不符，會直接 fail。zip 檔名也強制帶 HEAD7。
 - 流程：  
   1) 將需審檔案依原路徑放入 `docs/TEMP/`（保持目錄結構）。  
   2) 產出 `MANIFEST.json`（含 sha256、bytes、source_commit、task_id）。  

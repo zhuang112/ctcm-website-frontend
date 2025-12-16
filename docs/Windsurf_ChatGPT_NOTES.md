@@ -345,6 +345,30 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-16 任務：T-0081 handoff-source-commit-autodetect-and-manifest-assert
+
+- 目的：強化 handoff 工具與流程，確保交接包 source_commit 一致並自動取 HEAD。
+- 主要變更：
+  - `scripts/handoff/build-temp-zip.js`：若未指定 `--source_commit` 自動取 `git rev-parse HEAD`；強制 MANIFEST `source_commit` == HEAD，zip 名含 HEAD7，若不符直接 fail。
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：handoff 小節新增 source_commit 斷言與 zip 命名說明。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0081 條目。
+  - `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`：新增 I-0003（handoff source_commit 斷言）並標記 done。
+- 測試 / 檢查：執行 `npm run handoff:tempzip -- --task_id T-0081 --files ...` 成功產出 zip；`npm run check:no-bom` 通過。
+- commits: <填入本次 commit hash>
+- 交接包：`docs/TEMP/TEMP_20251216_T-0081_45fbd17.zip`（含 MANIFEST，task_id=T-0081，source_commit=45fbd17）
+
+變更檔案（含 RAW 連結）：
+- scripts/handoff/build-temp-zip.js  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/scripts/handoff/build-temp-zip.js
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ## 2025-12-12 任務：T-0046 fix-instr-encoding-and-snapshot-rules
 
 - 目的：確認 INSTR/README/PROJECT_TODO 為 UTF-8、補充 workflow 中的 docs snapshot 規則。
