@@ -352,3 +352,24 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+### 補充：T-0091 handoff 對齊 HEAD
+- 新增交接包：docs/TEMP/TEMP_20251216_T-0091_1ad258c.zip（MANIFEST.source_commit=1ad258c，task_id=T-0091）。
+
+## 2025-12-17 任務：T-0092 debug-review-pack-policy-and-missing-handoff-fix
+- 目的：補上缺交接包／缺內容時的處理規則，強化 review pack / snapshot 定位（GitHub/main + notes 為真相，snapshot 只備援）。
+- 主要變更：
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增 1.14.1 交接包補齊規則、1.14.2 snapshot 備援。
+  - `docs/QA/DEBUG_V3/README.md`：REPORTS 一律 Markdown，外部 AI 報告放 REPORTS；指向新增 prompt 範例。
+  - 新增模板：`EXTERNAL_AI_PROMPT_DEBUG_REVIEW_PACK.md`、`EXTERNAL_AI_PROMPT_BUGFIX_VALIDATION.md`。
+  - `docs/PROJECT_TODO.md`：登記並標記 T-0092 完成。
+  - 補跑缺交接包：`docs/TEMP/TEMP_20251216_T-0079_cf5671a.zip`。
+- 測試 / 檢查：`npm test`、`npm run build`、`npm run check:zh-cn`、`npm run check:no-bom`、`npm run security:scan`（僅 placeholder keyword 警告）。
+- handoff：`docs/TEMP/TEMP_20251216_T-0092_cf5671a.zip`；補充交接：`docs/TEMP/TEMP_20251216_T-0079_cf5671a.zip`。
+- RAW：
+  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  — https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  - docs/QA/DEBUG_V3/README.md — https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/README.md
+  - docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_DEBUG_REVIEW_PACK.md — https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_DEBUG_REVIEW_PACK.md
+  - docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_BUGFIX_VALIDATION.md — https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_BUGFIX_VALIDATION.md
+  - docs/PROJECT_TODO.md — https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+  - docs/Windsurf_ChatGPT_NOTES.md — https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
