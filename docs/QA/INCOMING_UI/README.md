@@ -1,4 +1,4 @@
-﻿# UI incoming ZIP (Gemini -> Agent)
+# UI incoming ZIP (Gemini -> Agent)
 
 - 放置 Gemini 產出的 UI ZIP。
 - 檔名：`UIZIP_<YYYYMMDD>_<page_or_feature>_<rev>.zip`，例如 `UIZIP_20251216_homepage_r1.zip`。

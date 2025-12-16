@@ -24,7 +24,9 @@ const fallbackItems = [
     lang,
   },
 ];
-const cards = items.length ? items : fallbackItems;
+const hasDirectus = Boolean(process.env.DIRECTUS_URL);
+const cards = hasDirectus ? items : fallbackItems;
+const showEmpty = hasDirectus && items.length === 0;
 ---
 
 <html lang={lang}>
@@ -35,21 +37,25 @@ const cards = items.length ? items : fallbackItems;
     <main class="page">
       <header class="page__header">
         <h1>{type} index ({lang})</h1>
-        <p class="page__lead">ArticleCard + 列表展示（T-0105）。當前資料來自 Directus，如未連線則顯示範例卡片。</p>
+        <p class="page__lead">ArticleCard + 列表展示（T-0105）。Directus 有連線時顯示實際資料，否則顯示範例卡片。</p>
       </header>
-      <section class="grid">
-        {cards.map((item) => (
-          <ArticleCard
-            title={item.title}
-            slug={item.slug}
-            published_at={item.published_at}
-            summary={item.summary}
-            coverImage={item.cover_url ?? item.coverImage}
-            type={item.type ?? type}
-            lang={item.lang ?? lang}
-          />
-        ))}
-      </section>
+      {showEmpty ? (
+        <p class="empty">Directus 已連線，但目前沒有資料。</p>
+      ) : (
+        <section class="grid">
+          {cards.map((item) => (
+            <ArticleCard
+              title={item.title}
+              slug={item.slug}
+              published_at={item.published_at}
+              summary={item.summary}
+              coverImage={item.cover_url ?? item.coverImage}
+              type={item.type ?? type}
+              lang={item.lang ?? lang}
+            />
+          ))}
+        </section>
+      )}
     </main>
   </body>
 </html>
@@ -73,6 +79,14 @@ const cards = items.length ? items : fallbackItems;
   .page__lead {
     margin: 0;
     color: #475569;
+  }
+  .empty {
+    margin-top: 1.5rem;
+    color: #475569;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    padding: 1rem;
+    border-radius: 10px;
   }
   .grid {
     display: grid;

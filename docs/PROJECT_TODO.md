@@ -24,3 +24,16 @@
   - [x] `ArticleCard` 元件與列表頁面可渲染，支持 slug/published_at/summary/cover。
   - [x] DevTools 量測摘要檔存在；截圖可後續補齊。
   - [x] notes 記錄 T-0105，handoff zip 已產生。
+
+### T-0106 close-t0105-ai-reports-and-snapshots：收斂 T-0105 報告與截圖
+
+> 狀態：? 已完成（2025-12-17）
+
+- 目標：
+  - 產出 Gemini/Grok debug 報告檔（暫為待填 placeholder，統一命名）。
+  - 補齊 T-0105 的 UI 截圖檔位（桌機/平板/手機 placeholder PNG）。
+  - 調整列表頁空狀態：DIRECTUS_URL 未設顯示 sample，有設但無資料顯示「尚無資料」。
+- 驗收：
+  - [x] `docs/QA/DEBUG_V3/REPORTS/T-0105/AI_DEBUG_TEMP_20251216_T-0105_5d73c65_20251217.md` 存在（Gemini/Grok 區塊待外部填寫）。
+  - [x] `docs/QA/UI_SNAPSHOTS/T-0105/desktop.png` / `tablet.png` / `mobile.png` 存在。
+  - [x] 列表頁依 DIRECTUS_URL 決定 sample/空狀態。

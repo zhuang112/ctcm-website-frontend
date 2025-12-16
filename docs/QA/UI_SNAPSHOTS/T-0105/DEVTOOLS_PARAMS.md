@@ -1,4 +1,4 @@
-﻿# T-0105 DevTools 參數紀錄
+# T-0105 DevTools 參數紀錄
 
 此檔為 DevTools 量測摘要，截圖尚未提供（桌機/平板/手機）。若需視覺驗收，請在本目錄放置 `desktop.png` / `tablet.png` / `mobile.png`。
 
