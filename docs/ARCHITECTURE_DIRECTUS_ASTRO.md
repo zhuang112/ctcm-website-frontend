@@ -6,13 +6,14 @@
 - any_content
   - id (uuid)
   - type (string/enum)
+  - lang (enum；zh-TW/zh-CN/en/ja，B1 translations 預留)
   - slug (string)
   - title (string)
   - published_at (datetime)
   - meta (json)
   - body_markdown (text)
   - blocks (json) — 預留
-  - cover_file (m2o -> directus_files)；暫時可用 meta.cover_url
+  - cover_url (string，暫存；未來可搬到 cover_file m2o)
   - images (o2m -> any_content_images)
   - translations（B1 預留，不強制 UI，下一顆 T 處理）
 - any_content_images
@@ -25,6 +26,7 @@
 
 ## C2 importer（tools/directus-import/import.mjs）
 - 掃描 `data/**/*.json`，組 payload（external_id/type/lang/slug/title/published_at/meta/body_markdown/images）。
+- upsert key：`type::lang::slug`（idempotent 取向）。
 - 目前僅列印 payload，未發 HTTP；失敗寫入 `docs/QA/DIRECTUS_IMPORT_FAILS.jsonl`。
 - 後續 T-0095+ 目標：upsert Directus（by external_id 或 type+lang+slug）、支援 files/gallery 關聯、dry-run/commit。
 

@@ -1,3 +1,22 @@
+﻿# PROJECT_TODO????? Headless ??????
+  - [x] PROJECT_TODO / notes �O�� T-0092�F�ʥ汵�]�����Ȥw�� rerun handoff zip�]�R�W�t task_id+HEAD7�^�C
+
+### T-0094R directus-astro-clean-slate：Directus + Astro 乾淨主線（A3+B1+C2）
+
+> 狀態：✅ 已完成（2025-12-17）
+
+- 目標：
+  - 以 Directus + Astro 為新主線（不依賴 WordPress/Next legacy），建好可跑的 docker compose + schema 管理 + importer stub + Astro 頁面。
+  - A3 schema：any_content / any_content_images，lang/slug/type 唯一；B1 translations 預留；C2 importer upsert key 為 type+lang+slug。
+  - Schema 透過 snapshot/apply 管理，避免手動 UI 失控。
+  - Astro 以 Directus 公開讀取為主，缺資料時可 fallback placeholder。
+- 驗收方式：
+  - [x] apps/directus 可 docker compose up；有 .env.example。
+  - [x] schema snapshot/apply 工具可匯出/套用至空實例。
+  - [x] importer stub 可掃描 JSON 並列印 payload（upsert key idempotent），失敗寫 QA jsonl。
+  - [x] Astro 頁面可編譯渲染（如無 Directus 則用 placeholder）。
+  - [x] package scripts：directus:up/down、directus:schema:snapshot/apply、import:directus、dev:astro、build:astro。
+  - [x] notes 登記，handoff zip 含上述檔案。
 # PROJECT_TODO????? Headless ??????
 
 > ??????????? T-xxxx ????????

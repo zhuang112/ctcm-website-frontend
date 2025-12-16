@@ -61,7 +61,8 @@ function main() {
         body_markdown: data.body_markdown ?? '',
         images: data.gallery_items ?? [],
       };
-      console.log(`[import] ready -> ${file}`);
+      const upsertKey = `${payload.type}::${payload.lang}::${payload.slug}`;
+      console.log(`[import] ready -> ${file} (upsert: ${upsertKey})`);
       console.log(payload);
     } catch (err) {
       fs.appendFileSync(
