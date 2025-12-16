@@ -1,4 +1,4 @@
-ï»¿# ChatGPT ? ?è¬˜é´?? Agent ???????
+# ChatGPT ? ?è¬˜é´?? Agent ???????
 
 > ????åšš????æ“³î¿šå?è¬Â€????? ChatGPT / AI ?????è¬œ????Â€?è¬…?ã„ ???è¬–?????åšš???????è¸??????éˆ?åƒ±???>
 > ??â…©Â€??è±²???è¬˜é´?? Agent?è¬…ï¼·?odex?è¬…?é›“??? repo ??î³???éˆ?åƒ±?è¬˜?????docs?è¬…???é ©ï‹²?è˜?ç‰?????î³‡ïˆ‘ `Windsurf_ChatGPT_NOTES.md`?è¬…?ã„é›“îš¨ïŒ??????å¯¡î”³??????è˜ï•Ÿ??è¹?? T ?è±¯???è±²?é›“???æ›„å£¯??å°î•„???>
@@ -297,3 +297,28 @@ pm run check:zh-cn?î¤£î£­??è??ä¼î£¯è¬†????ç¢??è³¹ï¾???  - ???? ci-self-proo
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
 
+## 2025-12-17 ¥ô°È¡GT-0085 rerun handoff¡]politeness/backoff + QA ¾ú¥v¡^
+- ¥Øªº¡G¨Ì INSTR-T-0085-RERUN ²£¥X¥]§tµ{¦¡¡ÏQA¡Ïdocs ªº¥æ±µ¥]¡A¸É»ô¥ı«e¶È¦³ docs ªº handoff¡C
+- ¥D­n¤º®e¡G¨Ï¥Î T-0089 ¤w¸¨¦aªº crawler politeness/backoff ¹ê§@¡A¨Ã±N CRAWL_FAILS ¾ú¥v»P workflow/TODO ¤@¨Ö¥´¥]¡C
+- ´ú¸Õ / ÀË¬d¡Gªu¥Î T-0089 ¦P§å¦¸ªº 
+pm test¡B
+pm run build¡B
+pm run check:zh-cn¡B
+pm run check:no-bom¡B
+pm run security:scan¡]¶È docs placeholder Äµ§i¡^¡C
+- commits: 220549c¡]handoff zip »s§@®Éªº HEAD¡^
+- ¥æ±µ¥]¡Gdocs/TEMP/TEMP_20251216_T-0085_220549c.zip¡]§t MANIFEST¡Atask_id=T-0085¡^
+
+ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
+- tools/crawl/crawl-ctworld.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/crawl/crawl-ctworld.ts
+- docs/QA/CRAWL_FAILS.jsonl  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/CRAWL_FAILS.jsonl
+- docs/QA/CRAWL_FAILS.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/CRAWL_FAILS.md
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
