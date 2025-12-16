@@ -357,8 +357,8 @@
 pm run check:no-bom、
 pm run security:scan（warning 為 docs placeholder）、
 pm run security:scan -- --strict（因 git history 命中預期以 fail 呈現，嚴格模式生效）。
-- commits: <填入本次 commit hash>
-- 交接包：docs/TEMP/TEMP_20251216_T-0082_<commit>.zip（含 MANIFEST，task_id=T-0082）
+- commits: 6a8ab2d
+- 交接包：docs/TEMP/TEMP_20251216_T-0082_6a8ab2d.zip（含 MANIFEST，task_id=T-0082）
 
 變更檔案（含 RAW 連結）：
 - .gitignore  
