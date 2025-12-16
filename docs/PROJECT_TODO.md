@@ -342,3 +342,16 @@ pm run security:scan -- --strict
   - [x] `docs/QA/INCOMING_UI/` ç›®éŒ„å­˜åœ¨ä¸¦è¼‰æ˜Žå‘½åè¦å‰‡ã€‚
   - [x] Workflow/notes èªªæ˜Ž UI handoff æµç¨‹èˆ‡ RAW/ZIP å„ªå…ˆé †åºã€‚
   - [x] T-0099 è¨˜éŒ„æ–¼ notesï¼Œä¸¦ç”¢ç”Ÿå°æ‡‰ TEMP zipã€‚
+
+### T-0102 external-ai-reports-single-home¡G¾ã¦X¥~³¡ AI ³ø§iÂk¤á»P workflow ³W«h
+
+> ª¬ºA¡G? ¤w§¹¦¨¡]2025-12-17¡^
+
+- ¥Ø¼Ð¡G
+  - «Ø¥ß¥~³¡ AI ³ø§i¶°¤¤¥Ø¿ý¡G`docs/QA/DEBUG_V3/REPORTS/` »P `_ADVICE/` ¤l¥Ø¿ý¡C
+  - ±N AI «ØÄ³½Z `AI_ADVICE_Directus_DB_Hardening_20251217.md` ¥¿¦¡¸¨ÀÉ¨Ã¥[¤W metadata¡C
+  - ¦b workflow ¤¤¼g¦º¥~³¡ AI ³ø§iªºÀÉ¦W/Äæ¦ì­n¨D»P¥æ±µ¤è¦¡¡C
+- Åç¦¬¡G
+  - [x] REPORTS/ »P REPORTS/_ADVICE/ ¥Ø¿ý¦s¦b¡C
+  - [x] `AI_ADVICE_Directus_DB_Hardening_20251217.md` ¤w´N¦ì¨Ã§t Date/Sources/Topic/Context¡C
+  - [x] Workflow ¦³ 1.21 ¤p¸`»¡©ú¥~³¡ AI ³ø§iªºÂk¤á»P©R¦W¡Anotes ¦³¹ïÀ³°O¿ý¡C

@@ -476,3 +476,18 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+## 2025-12-17 任務：T-0102 external-ai-reports-single-home
+- 內容：建立外部 AI 報告集中目錄 `docs/QA/DEBUG_V3/REPORTS/`、`REPORTS/_ADVICE/`；將 AI 建議稿 `AI_ADVICE_Directus_DB_Hardening_20251217.md` 落檔並加 metadata（Date/Sources/Topic/Context）；在 workflow 新增 1.21 說明外部 AI 報告的檔名與交接規則。
+- 測試：docs-only，`npm run check:no-bom`, `npm run check:utf8`。
+- commit：<待填寫>
+
+變更檔案（含 RAW 連結）：
+- docs/QA/DEBUG_V3/REPORTS/_ADVICE/AI_ADVICE_Directus_DB_Hardening_20251217.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/REPORTS/_ADVICE/AI_ADVICE_Directus_DB_Hardening_20251217.md
+- docs/PROJECT_TODO.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md

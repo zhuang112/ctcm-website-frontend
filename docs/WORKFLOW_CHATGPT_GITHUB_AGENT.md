@@ -521,3 +521,13 @@ ChatGPT ??ZIP ?????å¯ž??èž??î¤£î£­??????? ZIP??
 - ç¦æ­¢ï¼š`node_modules/`ã€å¤§é‡äºŒé€²ä½ç´ æï¼›ä¿ç•™å¿…è¦è¨­è¨ˆç¨¿/æˆªåœ–å³å¯ã€‚
 - Agent ä½œæ¥­ï¼šä¾ `UI_HANDOFF.md` mapping è½æª”å¾Œï¼Œä»ä¾æ¨™æº– handoff ç”¢ç”Ÿ `docs/TEMP/TEMP_<date>_T-0099_<HEAD7>.zip`ï¼ˆMANIFEST.source_commit=HEADï¼‰ã€‚
 - è¦–è¦ºé©—æ”¶ï¼šæ¡Œæ©Ÿ/å¹³æ¿/æ‰‹æ©Ÿå„ä¸€å¼µæˆªåœ–å­˜æ–¼ `docs/QA/UI_SNAPSHOTS/<T-XXXX>/`ï¼ˆè‹¥æœ‰ï¼‰ã€‚
+
+## 1.21 ¥~³¡ AI¡]Gemini/Grok¡^³ø§iÂkÀÉ»P³æ¤@Âk¤á
+- ³ø§i¶°¤¤¥Ø¿ý¡G`docs/QA/DEBUG_V3/REPORTS/`
+  - debug/review¡G`REPORTS/<T-ID>/AI_DEBUG_<Target>_<YYYYMMDD>.md`
+  - «ØÄ³/µ¦²¤¡G`REPORTS/_ADVICE/AI_ADVICE_<Topic>_<YYYYMMDD>.md`
+- ¤¹³\¦b¦P¤@ MD ¤¤¦P®É¥]§t Gemini / Grok °Ï¶ô¡A½d¥»¡G
+  - ÀY³¡Äæ¦ì¦Ü¤Ö¥]§t¡G`Date`¡B`Sources`¡]¦p Gemini, Grok¡^¡B`Topic`¡B`Context`¡B`(¥i¿ï) T-ID / Target`
+  - ¤º®e¤À¬q¡G`## Gemini`¡B`## Grok`¡]¨Ì¹ê»Ú¨Ó·½¼W´î¡^
+- ¥æ±µ¡G¥~³¡³ø§i¤´»Ý³z¹L¼Ð·Ç handoff zip¡]`docs/TEMP/TEMP_<date>_T-XXXX_<HEAD7>.zip`¡^¡A¨Ã¦b notes «ü¦V¹ïÀ³ÀÉ®×¡C
+- UI/Debug ¬ÛÃö³W½d¨Ö¤J¡GGemini/Grok zip ©Î³ø§i½Ð¥H¦¹¥Ø¿ý¬°³æ¤@Âk¤á¡A¤£¦A´²¸¨¡C
