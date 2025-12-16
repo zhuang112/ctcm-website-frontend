@@ -353,23 +353,43 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-### ¸É¥R¡GT-0091 handoff ¹ï»ô HEAD
-- ·s¼W¥æ±µ¥]¡Gdocs/TEMP/TEMP_20251216_T-0091_1ad258c.zip¡]MANIFEST.source_commit=1ad258c¡Atask_id=T-0091¡^¡C
+### ï¿½É¥Rï¿½GT-0091 handoff ï¿½ï¿½ï¿½ HEAD
+- ï¿½sï¿½Wï¿½æ±µï¿½]ï¿½Gdocs/TEMP/TEMP_20251216_T-0091_1ad258c.zipï¿½]MANIFEST.source_commit=1ad258cï¿½Atask_id=T-0091ï¿½^ï¿½C
 
-## 2025-12-17 ¥ô°È¡GT-0092 debug-review-pack-policy-and-missing-handoff-fix
-- ¥Øªº¡G¸É¤W¯Ê¥æ±µ¥]¡þ¯Ê¤º®e®Éªº³B²z³W«h¡A±j¤Æ review pack / snapshot ©w¦ì¡]GitHub/main + notes ¬°¯u¬Û¡Asnapshot ¥u³Æ´©¡^¡C
+## 2025-12-17 ï¿½ï¿½ï¿½È¡GT-0092 debug-review-pack-policy-and-missing-handoff-fix
+- ï¿½Øªï¿½ï¿½Gï¿½É¤Wï¿½Ê¥æ±µï¿½]ï¿½ï¿½ï¿½Ê¤ï¿½ï¿½eï¿½Éªï¿½ï¿½Bï¿½zï¿½Wï¿½hï¿½Aï¿½jï¿½ï¿½ review pack / snapshot ï¿½wï¿½ï¿½]GitHub/main + notes ï¿½ï¿½ï¿½uï¿½Û¡Asnapshot ï¿½uï¿½Æ´ï¿½ï¿½^ï¿½C
+- ï¿½Dï¿½nï¿½Ü§ï¿½G
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`ï¿½Gï¿½sï¿½W 1.14.1 ï¿½æ±µï¿½]ï¿½É»ï¿½ï¿½Wï¿½hï¿½B1.14.2 snapshot ï¿½Æ´ï¿½ï¿½C
+  - `docs/QA/DEBUG_V3/README.md`ï¿½GREPORTS ï¿½@ï¿½ï¿½ Markdownï¿½Aï¿½~ï¿½ï¿½ AI ï¿½ï¿½ï¿½iï¿½ï¿½ REPORTSï¿½Fï¿½ï¿½ï¿½Vï¿½sï¿½W prompt ï¿½dï¿½Ò¡C
+  - ï¿½sï¿½Wï¿½ÒªOï¿½G`EXTERNAL_AI_PROMPT_DEBUG_REVIEW_PACK.md`ï¿½B`EXTERNAL_AI_PROMPT_BUGFIX_VALIDATION.md`ï¿½C
+  - `docs/PROJECT_TODO.md`ï¿½Gï¿½nï¿½Oï¿½Ã¼Ð°O T-0092 ï¿½ï¿½ï¿½ï¿½ï¿½C
+  - ï¿½É¶]ï¿½Ê¥æ±µï¿½]ï¿½G`docs/TEMP/TEMP_20251216_T-0079_cf5671a.zip`ï¿½C
+- ï¿½ï¿½ï¿½ï¿½ / ï¿½Ë¬dï¿½G`npm test`ï¿½B`npm run build`ï¿½B`npm run check:zh-cn`ï¿½B`npm run check:no-bom`ï¿½B`npm run security:scan`ï¿½]ï¿½ï¿½ placeholder keyword Äµï¿½iï¿½^ï¿½C
+- handoffï¿½G`docs/TEMP/TEMP_20251216_T-0092_cf5671a.zip`ï¿½Fï¿½É¥Rï¿½æ±µï¿½G`docs/TEMP/TEMP_20251216_T-0079_cf5671a.zip`ï¿½C
+- RAWï¿½G
+  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  ï¿½X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  - docs/QA/DEBUG_V3/README.md ï¿½X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/README.md
+  - docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_DEBUG_REVIEW_PACK.md ï¿½X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_DEBUG_REVIEW_PACK.md
+  - docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_BUGFIX_VALIDATION.md ï¿½X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_BUGFIX_VALIDATION.md
+  - docs/PROJECT_TODO.md ï¿½X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+  - docs/Windsurf_ChatGPT_NOTES.md ï¿½X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-17 ¥ô°È¡GT-0093 recover-utf8-docs-and-add-check
+- ¥Øªº¡G½T»{®Ö¤ß docs ºû«ù¥i¾\Åªªº UTF-8¡A¨Ã·s¼W¦Û°ÊÀË¬d¡C
 - ¥D­nÅÜ§ó¡G
-  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`¡G·s¼W 1.14.1 ¥æ±µ¥]¸É»ô³W«h¡B1.14.2 snapshot ³Æ´©¡C
-  - `docs/QA/DEBUG_V3/README.md`¡GREPORTS ¤@«ß Markdown¡A¥~³¡ AI ³ø§i©ñ REPORTS¡F«ü¦V·s¼W prompt ½d¨Ò¡C
-  - ·s¼W¼ÒªO¡G`EXTERNAL_AI_PROMPT_DEBUG_REVIEW_PACK.md`¡B`EXTERNAL_AI_PROMPT_BUGFIX_VALIDATION.md`¡C
-  - `docs/PROJECT_TODO.md`¡Gµn°O¨Ã¼Ð°O T-0092 §¹¦¨¡C
-  - ¸É¶]¯Ê¥æ±µ¥]¡G`docs/TEMP/TEMP_20251216_T-0079_cf5671a.zip`¡C
-- ´ú¸Õ / ÀË¬d¡G`npm test`¡B`npm run build`¡B`npm run check:zh-cn`¡B`npm run check:no-bom`¡B`npm run security:scan`¡]¶È placeholder keyword Äµ§i¡^¡C
-- handoff¡G`docs/TEMP/TEMP_20251216_T-0092_cf5671a.zip`¡F¸É¥R¥æ±µ¡G`docs/TEMP/TEMP_20251216_T-0079_cf5671a.zip`¡C
+  - ¥H UTF-8 ­«·sÀx¦s `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`¡B`docs/PROJECT_TODO.md`¡B`docs/Windsurf_ChatGPT_NOTES.md`¡C
+  - ·s¼W `tools/qa/check-utf8.mjs` »P npm script `check:utf8`¡C
+  - `docs/PROJECT_TODO.md` µn°O T-0093¡Anotes ¼W¥»¸`¡C
+- ´ú¸Õ / ÀË¬d¡G`npm test`¡B`npm run build`¡B`npm run check:zh-cn`¡B`npm run check:no-bom`¡B`npm run check:utf8`¡B`npm run security:scan`¡]security ±½´y¶È placeholder keyword Äµ§i¡^¡C
+- handoff¡G`docs/TEMP/TEMP_20251216_T-0093_<HEAD>.zip`¡C
 - RAW¡G
-  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  ¡X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
-  - docs/QA/DEBUG_V3/README.md ¡X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/README.md
-  - docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_DEBUG_REVIEW_PACK.md ¡X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_DEBUG_REVIEW_PACK.md
-  - docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_BUGFIX_VALIDATION.md ¡X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_BUGFIX_VALIDATION.md
-  - docs/PROJECT_TODO.md ¡X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
-  - docs/Windsurf_ChatGPT_NOTES.md ¡X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  - docs/PROJECT_TODO.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+  - docs/Windsurf_ChatGPT_NOTES.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+  - package.json  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+  - tools/qa/check-utf8.mjs  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/qa/check-utf8.mjs

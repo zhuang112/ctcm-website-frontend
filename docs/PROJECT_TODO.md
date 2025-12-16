@@ -243,6 +243,18 @@
   - [x] dev/static-homepage/index.html|styles.css|app.js|README.md å°±ç·’ï¼Œç›´æŽ¥é–‹å•Ÿå³å¯é è¦½ï¼ˆ0 buildï¼‰ã€‚
   - [x] Hero è¼ªæ’­å¯æ’­æ”¾ï¼Œnav desktop/mobile å¯äº’å‹•ï¼›RWD â‰¥320pxã€‚
   - [x] docs/notes ç™»è¨˜ T-0090ï¼›handoff zipï¼ˆtask_id=T-0090ï¼‰å«åŽŸåž‹æª”æ¡ˆèˆ‡ docsã€‚
+
+### T-0093 recover-utf8-docs-and-add-checkï¼šä¿®å¾© docs ç·¨ç¢¼ä¸¦æ–°å¢ž UTF-8 æª¢æŸ¥
+
+> ç‹€æ…‹ï¼šâœ… å·²å®Œæˆï¼ˆ2025-12-17ï¼‰
+
+- ç›®æ¨™ï¼š
+  - ç¢ºèª `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`ã€`docs/PROJECT_TODO.md`ã€`docs/Windsurf_ChatGPT_NOTES.md` ç‚ºå¯è®€ã€å¯ diff çš„ UTF-8ã€‚
+  - æ–°å¢ž UTF-8 æª¢æŸ¥è…³æœ¬èˆ‡ npm scriptï¼Œé¿å…å†å‡ºç¾ unknown-8bit / `ï¿½`ã€‚
+- é©—æ”¶æ–¹å¼ï¼š
+  - [x] ä¸‰ä»½ docs ä»¥ UTF-8 æ­£å¸¸é¡¯ç¤ºï¼Œç„¡ `ï¿½`ã€‚
+  - [x] `npm run check:utf8` å¯åŸ·è¡Œï¼Œé‡åˆ° decode å¤±æ•—æˆ– `ï¿½` æœƒ exit 1ã€‚
+  - [x] notes è¨˜éŒ„ T-0093 ä¸¦æœ‰äº¤æŽ¥åŒ…ã€‚
 ### T-0083 zh-tw-to-zh-cn-pipeline-docs-unify-and-qa-reports?î¤¢åž“??î²œè¬??îµ¤?è¬˜ï†³???è³¹ï¾???QA ?ç’‡èƒ¼Â€?
 > ????????ï—½ïƒ????2025-12-16?î¤¢æ´«ocs-only??
 - ?????  - ??zh-TW??çž¥-CN pipeline ????çšœèˆªîœ‚?èžîº??î²¤Â€ canonical?î¤£ï–¸docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md`?î¤£î’–???î¿œî¥¿?æ’–æŠ†å†ª??? canonical??  - ?ï‹©?? QA ?ïŽï”¢??î¤¢åž“è¬’??î¤¢??î¤£ï—Šules/*.tsv/json?î¤£î’Š?è¹“é­‚é¼“?è„??reports/report_hits.md?è¹æ²³port_candidates.md?î¤£î’–???cross-link ??workflow/schema??  - ?çšî‹? INSTR index ?æ“—? T-0083??- ?è¸??îš¥??  - [x] canonical ????æ®‰æœ±è¬“å‰?éŠµÂ€?????î†î¼Ž?????ï†¸??ï¤??æ‹™??æ”¹î’Š??  - [x] CONTENT_SCHEMA_V1 / WORKFLOW cross-link ??canonical?î¤¢?NSTR/README ?è¬…î©ï’™??INSTR?î¤¢æ´µacklog ?æ“—??å †î£¯???  - [x] docs-only?î¤¢æ´©npm run check:no-bom`?è¹î¥¡pm run security:scan` ?è¬???
@@ -261,14 +273,14 @@ pm run security:scan -- --strict
 
 ### T-0092 debug-review-pack-policy-and-missing-handoff-fix
 
-> ª¬ºA¡G? ¤w§¹¦¨¡]¥æ±µ¥]¬Fµ¦»P snapshot ³W«h¸É±j¡A2025-12-17¡^
+> ï¿½ï¿½ï¿½Aï¿½G? ï¿½wï¿½ï¿½ï¿½ï¿½ï¿½]ï¿½æ±µï¿½]ï¿½Fï¿½ï¿½ï¿½P snapshot ï¿½Wï¿½hï¿½É±jï¿½A2025-12-17ï¿½^
 
-- ¥Ø¼Ð¡G
-  - ±ø¦C¯Ê¥æ±µ¥] / ¯Ê¤º®e®Éªº³B²z¤è¦¡¡A±j¨î versioned handoff zip¡]§t MANIFEST¡Btask_id¡Bsource_commit¡^¡C
-  - ¸É¥R docs snapshot / ZIP ªº©w¦ì¡G³Æ´©µ¹ ChatGPT / Agent¡A¯u¬Û¥H GitHub/main + notes ¬°·Ç¡AÀÉ¦W«ØÄ³§t T ½s¸¹»P¤é´Á¡C
-  - §ó·s debug/review flow¡]QA/DEBUG_V3 README + ¥~³¡ AI prompt ¼ËªO¡^¡C
-  - ­×¸ÉÂÂ¥ô°È¯Ê¥æ±µ¥]¡]¨Ò¦p T-0079¡^®Éªº rerun handoff ¬yµ{¡C
-- Åç¦¬¡G
-  - [x] WORKFLOW_CHATGPT_GITHUB_AGENT.md ¤w·s¼W¥æ±µ¥]¯Êº|ªº¸É»ô³W«h»P snapshot ³Æ´©´£¿ô¡C
-  - [x] QA/DEBUG_V3 README + ·s¼W¥~³¡ AI prompt ¼ÒªO¡]debug review / bugfix validation¡^¡A³W©w³ø§i¤@«ß Markdown ¨Ã©ñ REPORTS¡C
-  - [x] PROJECT_TODO / notes °O¿ý T-0092¡F¯Ê¥æ±µ¥]ªº¥ô°È¤w¦³ rerun handoff zip¡]©R¦W§t task_id+HEAD7¡^¡C
+- ï¿½Ø¼Ð¡G
+  - ï¿½ï¿½ï¿½Cï¿½Ê¥æ±µï¿½] / ï¿½Ê¤ï¿½ï¿½eï¿½Éªï¿½ï¿½Bï¿½zï¿½è¦¡ï¿½Aï¿½jï¿½ï¿½ versioned handoff zipï¿½]ï¿½t MANIFESTï¿½Btask_idï¿½Bsource_commitï¿½^ï¿½C
+  - ï¿½É¥R docs snapshot / ZIP ï¿½ï¿½ï¿½wï¿½ï¿½Gï¿½Æ´ï¿½ï¿½ï¿½ ChatGPT / Agentï¿½Aï¿½uï¿½Û¥H GitHub/main + notes ï¿½ï¿½ï¿½Ç¡Aï¿½É¦Wï¿½ï¿½Ä³ï¿½t T ï¿½sï¿½ï¿½ï¿½Pï¿½ï¿½ï¿½ï¿½C
+  - ï¿½ï¿½s debug/review flowï¿½]QA/DEBUG_V3 README + ï¿½~ï¿½ï¿½ AI prompt ï¿½ËªOï¿½^ï¿½C
+  - ï¿½×¸ï¿½ï¿½Â¥ï¿½ï¿½È¯Ê¥æ±µï¿½]ï¿½]ï¿½Ò¦p T-0079ï¿½^ï¿½Éªï¿½ rerun handoff ï¿½yï¿½{ï¿½C
+- ï¿½ç¦¬ï¿½G
+  - [x] WORKFLOW_CHATGPT_GITHUB_AGENT.md ï¿½wï¿½sï¿½Wï¿½æ±µï¿½]ï¿½Êº|ï¿½ï¿½ï¿½É»ï¿½ï¿½Wï¿½hï¿½P snapshot ï¿½Æ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½C
+  - [x] QA/DEBUG_V3 README + ï¿½sï¿½Wï¿½~ï¿½ï¿½ AI prompt ï¿½ÒªOï¿½]debug review / bugfix validationï¿½^ï¿½Aï¿½Wï¿½wï¿½ï¿½ï¿½iï¿½@ï¿½ï¿½ Markdown ï¿½Ã©ï¿½ REPORTSï¿½C
+  - [x] PROJECT_TODO / notes ï¿½Oï¿½ï¿½ T-0092ï¿½Fï¿½Ê¥æ±µï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½È¤wï¿½ï¿½ rerun handoff zipï¿½]ï¿½Rï¿½Wï¿½t task_id+HEAD7ï¿½^ï¿½C

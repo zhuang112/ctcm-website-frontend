@@ -1,61 +1,61 @@
 # INSTR-T-0018-meta-instr-and-status-structure
 
-«ü©w°õ¦æªÌ¡G¹ê§@ Agent¡]¥Ø«e¬° Codex¡^
-¥ô°È¡GT-0018 meta-instr-and-status-structure
+æŒ‡å®šåŸ·è¡Œè€…ï¼šå¯¦ä½œ Agentï¼ˆç›®å‰ç‚º Codexï¼‰
+ä»»å‹™ï¼šT-0018 meta-instr-and-status-structure
 
-## ¥Ø¼Ğ
-1. «Ø¥ß `docs/INSTR/` ¥Ø¿ı¡A¶°¤¤©Ò¦³ INSTR ÀÉ¡A¨Ã´£¨Ñ README / Template¡C
-2. ±N²{¦³ INSTR ÀÉ¥H©R¦W³W«h `INSTR-T-xxxx-<slug>.md` ¦s©ñ¨ì `docs/INSTR/`¡C
-3. ¦b notes »P PROJECT_TODO ¤¤µù°O¥»¦¸¾ã²z¡A¤è«K«áÄò¬d§ä»P°lÂÜ¡C
-
----
-
-## ­n­×§ï / °Ñ¦ÒªºÀÉ®×
-1. `docs/INSTR/` ¥Ø¿ı¡]·s¼W README¡BINSTR-TEMPLATE¡B·h²¾«áªº INSTR ÀÉ¡^¡C
-2. `docs/PROJECT_TODO.md`¡]·s¼W T-0018 ±ø¥Ø¡^¡C
-3. `docs/Windsurf_ChatGPT_NOTES.md`¡]·s¼W T-0018 ¤p¸`»P RAW ³sµ²¡^¡C
-4. ¡]µø»İ­n¡^`docs/PROJECT_STATUS.md`¡G¦p»İ´£¿ô INSTR ¶°¤¤¤Æ¡A¥i¸É¥R¤@¥y¡C
+## ç›®æ¨™
+1. å»ºç«‹ `docs/INSTR/` ç›®éŒ„ï¼Œé›†ä¸­æ‰€æœ‰ INSTR æª”ï¼Œä¸¦æä¾› README / Templateã€‚
+2. å°‡ç¾æœ‰ INSTR æª”ä»¥å‘½åè¦å‰‡ `INSTR-T-xxxx-<slug>.md` å­˜æ”¾åˆ° `docs/INSTR/`ã€‚
+3. åœ¨ notes èˆ‡ PROJECT_TODO ä¸­è¨»è¨˜æœ¬æ¬¡æ•´ç†ï¼Œæ–¹ä¾¿å¾ŒçºŒæŸ¥æ‰¾èˆ‡è¿½è¹¤ã€‚
 
 ---
 
-## ¾Ş§@¨BÆJ
-1. «Ø¥ß `docs/INSTR/` ¥Ø¿ı¡C
-2. ±N INSTR ÀÉ·h²¾¨Ã²Å¦X©R¦W³W«h¡A¨Ò¦p¡G
-   - `INSTR-add-T0016-zh-cn-health-check-tool-todo.md` ¡÷ `INSTR-T-0016-zh-cn-health-check-tool-todo.md`
-   - `INSTR-fix-communication-rules-no-citations.md` ¡÷ `INSTR-T-0000-fix-communication-rules-no-citations.md`¡]¸ó¥ô°È³q¥Î³W«h¼È¥H 0000 ªí¥Ü¡^
-   - `INSTR-T0017-html-to-markdown-rules-cleanup.md` ¡÷ `INSTR-T-0017-html-to-markdown-rules-cleanup.md`
-   - `INSTR-update-workflow-full-access-rules.md` ¡÷ `INSTR-T-0000-update-workflow-full-access-rules.md`
-3. ¦b `docs/INSTR/` ·s¼W¡G
-   - `README.md`¡G»¡©ú¥Î³~¡B©R¦W³W«h¡B¬J¦³ INSTR ²M³æ¡C
-   - `INSTR-TEMPLATE.md`¡G«Ø¥ß·s INSTR ®É¥i½Æ»sªº¼ÒªO¡]§t notes/RAW ³sµ²°Ï¶ô¡^¡C
-4. §ó·s `docs/PROJECT_TODO.md`¡G·s¼W T-0018 ±ø¥Ø¡A´y­z INSTR ¾ã²z¡B©R¦W³W«h¡Bnotes/RAW ­n¨D¡C
-5. §ó·s `docs/Windsurf_ChatGPT_NOTES.md`¡G·s¼W T-0018 ¤p¸`¡A°O¿ı·h²¾»P·s¼WÀÉ®×¡Bcommit hash¡BRAW ³sµ²¡C
-6. ¡]¿ï¥Î¡^­Y»İ¦b `docs/PROJECT_STATUS.md` ´£¿ô INSTR ¶°¤¤¤Æ¡A¥i¸É¥R¤@¥y¡FµL¥²­n¥i²¤¡C
+## è¦ä¿®æ”¹ / åƒè€ƒçš„æª”æ¡ˆ
+1. `docs/INSTR/` ç›®éŒ„ï¼ˆæ–°å¢ READMEã€INSTR-TEMPLATEã€æ¬ç§»å¾Œçš„ INSTR æª”ï¼‰ã€‚
+2. `docs/PROJECT_TODO.md`ï¼ˆæ–°å¢ T-0018 æ¢ç›®ï¼‰ã€‚
+3. `docs/Windsurf_ChatGPT_NOTES.md`ï¼ˆæ–°å¢ T-0018 å°ç¯€èˆ‡ RAW é€£çµï¼‰ã€‚
+4. ï¼ˆè¦–éœ€è¦ï¼‰`docs/PROJECT_STATUS.md`ï¼šå¦‚éœ€æé†’ INSTR é›†ä¸­åŒ–ï¼Œå¯è£œå……ä¸€å¥ã€‚
 
 ---
 
-## §ó·s PROJECT_TODO
-1. ¥´¶} `docs/PROJECT_TODO.md`¡C
-2. ·s¼W T-0018 ±ø¥Ø¡]ª¬ºA¡G¤w§¹¦¨¡^¡A»¡©ú¡G
-   - INSTR ¥Ø¿ı»P©R¦W³W«h¡C
-   - »İ­n¦b notes ªş RAW ³sµ²¡C
+## æ“ä½œæ­¥é©Ÿ
+1. å»ºç«‹ `docs/INSTR/` ç›®éŒ„ã€‚
+2. å°‡ INSTR æª”æ¬ç§»ä¸¦ç¬¦åˆå‘½åè¦å‰‡ï¼Œä¾‹å¦‚ï¼š
+   - `INSTR-add-T0016-zh-cn-health-check-tool-todo.md` â†’ `INSTR-T-0016-zh-cn-health-check-tool-todo.md`
+   - `INSTR-fix-communication-rules-no-citations.md` â†’ `INSTR-T-0000-fix-communication-rules-no-citations.md`ï¼ˆè·¨ä»»å‹™é€šç”¨è¦å‰‡æš«ä»¥ 0000 è¡¨ç¤ºï¼‰
+   - `INSTR-T0017-html-to-markdown-rules-cleanup.md` â†’ `INSTR-T-0017-html-to-markdown-rules-cleanup.md`
+   - `INSTR-update-workflow-full-access-rules.md` â†’ `INSTR-T-0000-update-workflow-full-access-rules.md`
+3. åœ¨ `docs/INSTR/` æ–°å¢ï¼š
+   - `README.md`ï¼šèªªæ˜ç”¨é€”ã€å‘½åè¦å‰‡ã€æ—¢æœ‰ INSTR æ¸…å–®ã€‚
+   - `INSTR-TEMPLATE.md`ï¼šå»ºç«‹æ–° INSTR æ™‚å¯è¤‡è£½çš„æ¨¡æ¿ï¼ˆå« notes/RAW é€£çµå€å¡Šï¼‰ã€‚
+4. æ›´æ–° `docs/PROJECT_TODO.md`ï¼šæ–°å¢ T-0018 æ¢ç›®ï¼Œæè¿° INSTR æ•´ç†ã€å‘½åè¦å‰‡ã€notes/RAW è¦æ±‚ã€‚
+5. æ›´æ–° `docs/Windsurf_ChatGPT_NOTES.md`ï¼šæ–°å¢ T-0018 å°ç¯€ï¼Œè¨˜éŒ„æ¬ç§»èˆ‡æ–°å¢æª”æ¡ˆã€commit hashã€RAW é€£çµã€‚
+6. ï¼ˆé¸ç”¨ï¼‰è‹¥éœ€åœ¨ `docs/PROJECT_STATUS.md` æé†’ INSTR é›†ä¸­åŒ–ï¼Œå¯è£œå……ä¸€å¥ï¼›ç„¡å¿…è¦å¯ç•¥ã€‚
 
 ---
 
-## §ó·s notes¡]§t RAW ³sµ²¡^
-1. ¥´¶} `docs/Windsurf_ChatGPT_NOTES.md`¡C
-2. ¦b 2025-12-xx °Ï¬q·s¼W¡uT-0018 meta-instr-and-status-structure¡v¤p¸`¡A°O¿ı¡G
-   - ·h²¾/·s¼Wªº INSTR ÀÉ®×¡C
-   - README / Template ¤º®e·§­z¡C
-   - commit hash¡C
-   - ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡C
+## æ›´æ–° PROJECT_TODO
+1. æ‰“é–‹ `docs/PROJECT_TODO.md`ã€‚
+2. æ–°å¢ T-0018 æ¢ç›®ï¼ˆç‹€æ…‹ï¼šå·²å®Œæˆï¼‰ï¼Œèªªæ˜ï¼š
+   - INSTR ç›®éŒ„èˆ‡å‘½åè¦å‰‡ã€‚
+   - éœ€è¦åœ¨ notes é™„ RAW é€£çµã€‚
 
 ---
 
-## ¦¬§À¡]git + push¡^
-1. `git status` ½T»{ÅÜ§ó¡G`docs/INSTR/`¡B`docs/PROJECT_TODO.md`¡B`docs/Windsurf_ChatGPT_NOTES.md`¡]¥H¤Î¥i¯àªº PROJECT_STATUS¡^¡C
-2. `git add ...` / `git commit -m "T-0018: organize INSTR structure and add status/index docs"` / `git push origin main`¡C
-3. ¦^³øºK­n¡G
-   - §¹¦¨ T-0018¡FINSTR ¶°¤¤¨ì `docs/INSTR/`¡A·s¼W README/Template¡C
-   - notes ¤p¸`¦ì¸m¡C
-   - ³Ì«á commit hash¡C
+## æ›´æ–° notesï¼ˆå« RAW é€£çµï¼‰
+1. æ‰“é–‹ `docs/Windsurf_ChatGPT_NOTES.md`ã€‚
+2. åœ¨ 2025-12-xx å€æ®µæ–°å¢ã€ŒT-0018 meta-instr-and-status-structureã€å°ç¯€ï¼Œè¨˜éŒ„ï¼š
+   - æ¬ç§»/æ–°å¢çš„ INSTR æª”æ¡ˆã€‚
+   - README / Template å…§å®¹æ¦‚è¿°ã€‚
+   - commit hashã€‚
+   - è®Šæ›´æª”æ¡ˆï¼ˆå« RAW é€£çµï¼‰ã€‚
+
+---
+
+## æ”¶å°¾ï¼ˆgit + pushï¼‰
+1. `git status` ç¢ºèªè®Šæ›´ï¼š`docs/INSTR/`ã€`docs/PROJECT_TODO.md`ã€`docs/Windsurf_ChatGPT_NOTES.md`ï¼ˆä»¥åŠå¯èƒ½çš„ PROJECT_STATUSï¼‰ã€‚
+2. `git add ...` / `git commit -m "T-0018: organize INSTR structure and add status/index docs"` / `git push origin main`ã€‚
+3. å›å ±æ‘˜è¦ï¼š
+   - å®Œæˆ T-0018ï¼›INSTR é›†ä¸­åˆ° `docs/INSTR/`ï¼Œæ–°å¢ README/Templateã€‚
+   - notes å°ç¯€ä½ç½®ã€‚
+   - æœ€å¾Œ commit hashã€‚
