@@ -369,6 +369,45 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-16 任務：T-0087 debug-v3-foundation-templates-workflow-ci
+
+- 目的：為 V3 debug 建立模板/目錄，並啟用自動 CI（self-proof）與 CI summary。
+- 主要變更：
+  - `docs/QA/DEBUG_V3/`：新增 README、URL_QUEUE、TEMPLATES（BUG 報告、檢查清單、URL 佇列、goldens policy）、GOLDENS/JSON、GOLDENS/HTML、REPORTS `.gitkeep`。
+  - `.github/workflows/ci-self-proof.yml`：push/pr 跑 check:no-bom、security:scan、test、build、check:zh-cn，產生 ci_summary.md/json，收集 QA/terminal_logs/AUDITS/tmp artifacts。
+  - `scripts/quality/ci-summary.js`：輸出 source_commit/run_at/checks/crawl_fails 至 ci_summary.md/json。
+  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：加入 Debug V3 與 CI 說明。
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0087；`docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md` 增 I-0004。
+- 測試 / 建置：已執行 `npm test`、`npm run build`、`npm run check:zh-cn`、`npm run check:no-bom`、`npm run security:scan`（皆通過）。
+- commits: 7e10600
+- 交接包：`docs/TEMP/TEMP_20251216_T-0087_7e10600.zip`（含 MANIFEST，task_id=T-0087）
+
+變更檔案（含 RAW 連結）：
+- .github/workflows/ci-self-proof.yml  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.github/workflows/ci-self-proof.yml
+- scripts/quality/ci-summary.js  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/scripts/quality/ci-summary.js
+- docs/QA/DEBUG_V3/README.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/README.md
+- docs/QA/DEBUG_V3/URL_QUEUE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/URL_QUEUE.md
+- docs/QA/DEBUG_V3/TEMPLATES/BUG_REPORT_TEMPLATE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/TEMPLATES/BUG_REPORT_TEMPLATE.md
+- docs/QA/DEBUG_V3/TEMPLATES/CHECKLIST_TEMPLATE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/TEMPLATES/CHECKLIST_TEMPLATE.md
+- docs/QA/DEBUG_V3/TEMPLATES/URL_QUEUE_TEMPLATE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/TEMPLATES/URL_QUEUE_TEMPLATE.md
+- docs/QA/DEBUG_V3/TEMPLATES/GOLDENS_POLICY.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/TEMPLATES/GOLDENS_POLICY.md
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ## 2025-12-12 任務：T-0046 fix-instr-encoding-and-snapshot-rules
 
 - 目的：確認 INSTR/README/PROJECT_TODO 為 UTF-8、補充 workflow 中的 docs snapshot 規則。
