@@ -470,8 +470,8 @@
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0085 條目（P0，docs-only）。
   - `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`：新增 I-0005（爬蟲禮貌性 P0，auto）。
 - 測試 / 檢查：docs-only；已執行 `npm run check:no-bom`、`npm run security:scan`。
-- commits: <填入本次 commit hash>
-- 交接包：`docs/TEMP/TEMP_20251216_T-0085_<commit>.zip`（含 MANIFEST，task_id=T-0085）
+- commits: 7143271
+- 交接包：`docs/TEMP/TEMP_20251216_T-0085_7143271.zip`（含 MANIFEST，task_id=T-0085）
 
 變更檔案（含 RAW 連結）：
 - docs/PROJECT_TODO.md  
