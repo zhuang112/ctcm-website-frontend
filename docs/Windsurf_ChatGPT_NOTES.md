@@ -329,3 +329,26 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-17 任務：T-0091 crawler-qa-history-and-docs-cleanup
+
+- 目的：修正 crawler QA 失敗記錄的 append 行為與 retry_count、decode 標記，並清理由於編碼/粘貼造成的 TODO 文字異常。
+- 主要變更：
+  - `tools/crawl/crawl-ctworld.ts`：jsonl append 僅在檔案已有內容時加換行；retry_count 紀錄實際嘗試次數；decode 失敗時 stage/encoding 正確標註；預設 delay/jitter 提高（800/700ms），保留 backoff/retry/UA。
+  - `docs/QA/CRAWL_FAILS.md` 保持摘要，jsonl 空檔可正常 append。
+  - `docs/PROJECT_TODO.md` T-0085/T-0089 段落文字修正；notes 新增本任務。
+- 測試 / 檢查：`npm test`、`npm run build`、`npm run check:zh-cn`、`npm run check:no-bom`、`npm run security:scan`。
+- commits: <填入本次 commit hash>
+- 交接包：`docs/TEMP/TEMP_20251217_T-0091_<commit>.zip`（含 MANIFEST，task_id=T-0091）
+
+變更檔案（含 RAW 連結）：
+- tools/crawl/crawl-ctworld.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/crawl/crawl-ctworld.ts
+- docs/QA/CRAWL_FAILS.jsonl  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/CRAWL_FAILS.jsonl
+- docs/QA/CRAWL_FAILS.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/CRAWL_FAILS.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

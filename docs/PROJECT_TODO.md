@@ -214,27 +214,20 @@
 - 驗收：
   - [x] PROJECT_TODO 記錄 T-0085 條目並描述需求（docs 規範）。
   - [x] IMPROVEMENT_BACKLOG 登記對應條目（P0、auto）。
-  - [x] notes 記錄本次更新；
-pm run check:no-bom、
-pm run security:scan 通過（docs-only）；T-0089 補齊實作。
+  - [x] notes 記錄本次更新；`npm run check:no-bom`、`npm run security:scan` 通過（docs-only）；T-0089 補齊實作。
 
 ### T-0089 crawler-politeness-implementation-and-qa-fails-history：實作爬蟲禮貌/回退並保存 QA 歷史
 
 > 狀態：✅ 已完成（2025-12-17）
 
 - 目標：
-  - 在 	ools/crawl/crawl-ctworld.ts 落實 politeness：UA/Referer、速率限制＋jitter、429/5xx/backoff（預設 maxRetries=5、backoff cap 30s）、可設定 UA。
-  - 將 fetch/decode 失敗寫入 docs/QA/CRAWL_FAILS.jsonl（append），並同步輸出當次摘要到 docs/QA/CRAWL_FAILS.md。
+  - 在 `tools/crawl/crawl-ctworld.ts` 落實 politeness：UA/Referer、速率限制＋jitter、429/5xx/backoff（預設 maxRetries=5、backoff cap 30s）、可設定 UA。
+  - 將 fetch/decode 失敗寫入 `docs/QA/CRAWL_FAILS.jsonl`（append），並同步輸出當次摘要到 `docs/QA/CRAWL_FAILS.md`。
   - workflow/TODO/notes 對齊，註記 CRAWL_FAILS 歷史保存規則。
 - 驗收方式：
-  - [x] 	ools/crawl/crawl-ctworld.ts 具 politeness/backoff/retry，支援 UA 參數。
+  - [x] `tools/crawl/crawl-ctworld.ts` 具 politeness/backoff/retry，支援 UA 參數。
   - [x] 失敗記錄寫入 jsonl append、md 摘要；含 task_id、source_commit、retry_count。
-  - [x] 
-pm test、
-pm run build、
-pm run check:zh-cn、
-pm run check:no-bom、
-pm run security:scan 通過。
+  - [x] `npm test`、`npm run build`、`npm run check:zh-cn`、`npm run check:no-bom`、`npm run security:scan` 通過。
   - [x] PROJECT_TODO / notes 登記 T-0089；handoff zip（task_id=T-0089）含 crawler + QA + docs。
 
 ### T-0090 static-homepage-prototype-britishmuseum-kyohaku-hybrid：靜態首頁原型（桌面 mega menu + 行動抽屜）

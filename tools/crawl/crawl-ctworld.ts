@@ -1,8 +1,7 @@
 #!/usr/bin/env ts-node
 
 /**
- * 爬 ctworld 網站的輕量 crawler，產生 URL 清單。
- * 對應：docs/crawl-and-inventory.md §2 任務 A
+ * 輕量版 ctworld 爬蟲，用來產生 URL 清單並記錄 fetch/decode 失敗。
  *
  * 使用示例：
  *   ts-node tools/crawl/crawl-ctworld.ts \
@@ -10,8 +9,8 @@
  *     --out data/crawl/crawled-urls.json \
  *     --max-depth 3 \
  *     --max-urls 500 \
- *     --delay-ms 200 \
- *     --jitter-ms 300 \
+ *     --delay-ms 800 \
+ *     --jitter-ms 700 \
  *     --max-retries 5
  */
 
@@ -77,8 +76,8 @@ function parseArgs(argv: string[]): CliOptions {
   const baseUrl = args.get("base-url") ?? "https://www.ctworld.org";
   const outPath = args.get("out") ?? "data/crawl/crawled-urls.json";
   const maxDepth = Number(args.get("max-depth") ?? "5");
-  const delayMs = Number(args.get("delay-ms") ?? "200");
-  const jitterMs = Number(args.get("jitter-ms") ?? "300");
+  const delayMs = Number(args.get("delay-ms") ?? "800");
+  const jitterMs = Number(args.get("jitter-ms") ?? "700");
   const maxUrls = Number(args.get("max-urls") ?? "0"); // 0 表示不設上限
   const maxRetries = Number(args.get("max-retries") ?? "5");
   const backoffBaseMs = Number(args.get("backoff-base-ms") ?? "1000");
@@ -120,9 +119,6 @@ function getHeadShort(): string {
   }
 }
 
-/**
- * 僅允許 ctworld.org / ctworld.org.tw
- */
 function isSameDomain(targetUrl: string): boolean {
   try {
     const u = new URL(targetUrl);
@@ -138,9 +134,6 @@ function isSameDomain(targetUrl: string): boolean {
   }
 }
 
-/**
- * 轉成絕對網址
- */
 function toAbsoluteUrl(href: string, baseUrl: string): string | null {
   if (!href) return null;
   href = href.trim();
@@ -155,9 +148,6 @@ function toAbsoluteUrl(href: string, baseUrl: string): string | null {
   }
 }
 
-/**
- * 從 HTML 取出 <a href>
- */
 function getLinksFromHtml(html: string, pageUrl: string): string[] {
   const $ = cheerio.load(html);
   const links = new Set<string>();
@@ -196,8 +186,10 @@ async function fetchPage(
 ): Promise<{ status: number; contentType: string | null; body: string | null; qa?: QaEntry }> {
   let lastError: string | null = null;
   let lastStatus: number | undefined;
+  let attempts = 0;
 
   for (let attempt = 1; attempt <= opts.maxRetries; attempt++) {
+    attempts = attempt;
     try {
       const res = await fetch(url, {
         headers: {
@@ -227,6 +219,26 @@ async function fetchPage(
           }
         }
         lastError = lastError ?? "decode failed";
+        // 將後續 retry 歸類為 decode 問題
+        if (attempt < opts.maxRetries) {
+          const waitMs = backoffDelayMs(opts.backoffBaseMs, opts.backoffCapMs, opts.jitterMs, attempt);
+          await delay(waitMs);
+          continue;
+        }
+        return {
+          status: lastStatus,
+          contentType,
+          body: null,
+          qa: {
+            url,
+            stage: "decode",
+            encoding: headerCharset ?? null,
+            error: lastError,
+            first_seen_at: new Date().toISOString(),
+            last_status: lastStatus,
+            retry_count: attempts,
+          },
+        };
       }
     } catch (err: any) {
       lastError = err instanceof Error ? err.message : String(err);
@@ -249,7 +261,7 @@ async function fetchPage(
       error: lastError ?? "unknown error",
       first_seen_at: new Date().toISOString(),
       last_status: lastStatus,
-      retry_count: opts.maxRetries,
+      retry_count: attempts,
     },
   };
 }
@@ -349,7 +361,8 @@ async function main() {
     const jsonlPath = path.join("docs", "QA", "CRAWL_FAILS.jsonl");
     ensureDirExists(jsonlPath);
     const headShort = getHeadShort();
-    const taskId = process.env.CRAWL_TASK_ID ?? "T-0089";
+    const taskId = process.env.CRAWL_TASK_ID ?? "T-0091";
+    const needsNewline = fs.existsSync(jsonlPath) && fs.statSync(jsonlPath).size > 0;
     const jsonl = qa
       .map((q) =>
         JSON.stringify({
@@ -366,7 +379,7 @@ async function main() {
         }),
       )
       .join("\n");
-    fs.appendFileSync(jsonlPath, (fs.existsSync(jsonlPath) ? "\n" : "") + jsonl, "utf-8");
+    fs.appendFileSync(jsonlPath, (needsNewline ? "\n" : "") + jsonl, "utf-8");
 
     const qaPath = path.join("docs", "QA", "CRAWL_FAILS.md");
     ensureDirExists(qaPath);
