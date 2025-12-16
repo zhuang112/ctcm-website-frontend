@@ -1,39 +1,16 @@
 
 ### T-0103 directus-db-hardening: roles/tokens, indexes, backup runbook
 
-> ���A�G? �w�����]2025-12-17�^
+> ???? 撌脣???2025-12-17嚗?
+- ?格?嚗?  - ??docs 閮? Directus token/role ?極嚗stro readonly / Importer write嚗??踹??垢雿輻 admin token??  - ?啣? DB migration嚗apps/directus/db/migrations/001_any_content_constraints_and_indexes.sql`嚗ype+lang+slug ?臭??虜?函揣撘???  - 撱箇??遢/?? runbook??- 撽嚗?  - [x] `docs/SECURITY/DIRECTUS_TOKENS_AND_ROLES.md` 閮? token/role ?憓??詻?  - [x] migration 瑼歇??repo嚗pps/directus/README 隤芣??瑁??孵???  - [x] `docs/OPS/BACKUP_RESTORE_DIRECTUS_POSTGRES.md` ???遢/????霅郊撽?
+### T-0105 first-uizip-pilot-articlecard-listing嚗rticleCard + ?” UI ?賢銝行?????debug
 
-- �ؼСG
-  - �b docs �O�� Directus token/role ���u�]Astro readonly / Importer write�^�A�קK�e�ݨϥ� admin token�C
-  - �s�W DB migration�G`apps/directus/db/migrations/001_any_content_constraints_and_indexes.sql`�]type+lang+slug �ߤ@�B�`�ί��ޡ^�C
-  - �إ߳ƥ�/�٭� runbook�C
-- �禬�G
-  - [x] `docs/SECURITY/DIRECTUS_TOKENS_AND_ROLES.md` �O�� token/role �P�����ܼơC
-  - [x] migration �ɤw�J repo�Aapps/directus/README ��������覡�C
-  - [x] `docs/OPS/BACKUP_RESTORE_DIRECTUS_POSTGRES.md` ���ѳƥ�/�٭�P���ҨB�J�C
+> ???? 撌脣???2025-12-17嚗?
+- ?格?嚗?  - 撱箇? `ArticleCard` ?辣銝血 `/[lang]/[type]/index` 隞亙??銵典???Directus 鞈?嚗鞈??＊蝷箇?靘????  - 靘?DevTools checklist 閮? UI ?嚗???`docs/QA/UI_SNAPSHOTS/T-0105/DEVTOOLS_PARAMS.md`嚗???璈?撟單/???芸???  - 皞?憭 AI debug 瑼?頝臬?嚗-0105 ?勗??桅???placeholder嚗??嗅偏?Ｗ璅? handoff zip??- 撽嚗?  - [x] `ArticleCard` ?辣??銵券??Ｗ皜脫?嚗??slug/published_at/summary/cover??  - [x] DevTools ?葫??瑼??剁??芸??臬?蝥?朣?  - [x] notes 閮? T-0105嚗andoff zip 撌脩??
+### T-0106 close-t0105-ai-reports-and-snapshots嚗??T-0105 ?勗????
+> ?????撌脣???2025-12-17嚗?
+- ?格?嚗?  - ?Ｗ Gemini/Grok debug ?勗?瑼??怎敺‵ placeholder嚗絞銝?賢?嚗?  - 鋆? T-0105 ??UI ?芸?瑼?嚗?璈?撟單/?? placeholder PNG嚗?  - 隤踵?”?征???DIRECTUS_URL ?芾身憿舐內 sample嚗?閮凋??∟??＊蝷箝??∟???- 撽嚗?  - [x] `docs/QA/DEBUG_V3/REPORTS/T-0105/AI_DEBUG_TEMP_20251216_T-0105_5d73c65_20251217.md` 摮嚗emini/Grok ?憛?憭憛怠神嚗?  - [x] `docs/QA/UI_SNAPSHOTS/T-0105/desktop.png` / `tablet.png` / `mobile.png` 摮??  - [x] ?”?? DIRECTUS_URL 瘙箏? sample/蝛箇???
+### T-0107 workflow-external-debug-triggers-and-reminders嚗?撘瑕???AI debug 閫貊閬?
 
-### T-0105 first-uizip-pilot-articlecard-listing�GArticleCard + �C�� UI ���a�÷ǳƥ~�� debug
-
-> ���A�G? �w�����]2025-12-17�^
-
-- �ؼСG
-  - �إ� `ArticleCard` ����æb `/[lang]/[type]/index` �H�d���C���e�{ Directus ��ơ]�L��ƫh��ܽd�ҥd���^�C
-  - �� DevTools checklist �O�� UI �ѼơA�s�� `docs/QA/UI_SNAPSHOTS/T-0105/DEVTOOLS_PARAMS.md`�A�w�d���/���O/����I�ϡC
-  - �ǳƥ~�� AI debug �ɮ׸��|�]T-0105 ���i�ؿ��P placeholder�^�A�������X�з� handoff zip�C
-- �禬�G
-  - [x] `ArticleCard` ����P�C�������i��V�A��� slug/published_at/summary/cover�C
-  - [x] DevTools �q���K�n�ɦs�b�F�I�ϥi����ɻ��C
-  - [x] notes �O�� T-0105�Ahandoff zip �w���͡C
-
-### T-0106 close-t0105-ai-reports-and-snapshots�G���� T-0105 ���i�P�I��
-
-> ���A�G? �w�����]2025-12-17�^
-
-- �ؼСG
-  - ���X Gemini/Grok debug ���i�ɡ]�Ȭ��ݶ� placeholder�A�Τ@�R�W�^�C
-  - �ɻ� T-0105 �� UI �I���ɦ�]���/���O/��� placeholder PNG�^�C
-  - �վ�C�����Ū��A�GDIRECTUS_URL ���]��� sample�A���]���L�����ܡu�|�L��ơv�C
-- �禬�G
-  - [x] `docs/QA/DEBUG_V3/REPORTS/T-0105/AI_DEBUG_TEMP_20251216_T-0105_5d73c65_20251217.md` �s�b�]Gemini/Grok �϶��ݥ~����g�^�C
-  - [x] `docs/QA/UI_SNAPSHOTS/T-0105/desktop.png` / `tablet.png` / `mobile.png` �s�b�C
-  - [x] �C������ DIRECTUS_URL �M�w sample/�Ū��A�C
+> ?????撌脣???2025-12-17嚗?
+- ?格?嚗?  - ??workflow 銝剜憓???AI debug嚗emini / Grok嚗孛?潸???嚗?蝣箔??????具???怎楨??  - 閮? machine self-check ????debug ??祆?蝔?TEMP zip?rompt????曇楝敺???- 撽?孵?嚗?  - [x] WORKFLOW 1.x ?畾菜憓???debug 閫貊??蝔牧??  - [x] notes ??T-0107 撠???RAW ?????
