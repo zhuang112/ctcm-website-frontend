@@ -578,3 +578,29 @@ pm run build 通過。
   - [x] `scripts/handoff/build-temp-zip.js` 自動取 HEAD，zip 命名含 HEAD7，MANIFEST `source_commit` 與 HEAD 不符會 throw。
   - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 補充斷言說明；PROJECT_TODO/IMPROVEMENT_BACKLOG/notes 登記 T-0081。
   - [x] `npm run handoff:tempzip -- --task_id T-0081 --files <示例>` 執行成功；`npm run check:no-bom` 通過。
+
+### T-0087 debug-v3-foundation-templates-workflow-ci：V3 debug 基礎模板與 CI
+
+> 狀態：✅ 已完成（2025-12-16）
+
+- 目標：
+  - 建立 `docs/QA/DEBUG_V3/` 目錄與模板（URL_QUEUE、BUG 報告、檢查清單、goldens 政策）與預留 GOLDENS/REPORTS。
+  - 新增 CI workflow（`ci-self-proof`）：push/pr 執行 check:no-bom、security:scan、test、build、check:zh-cn，並產出 `ci_summary.md/json` 與 artifacts。
+  - 新增 `scripts/quality/ci-summary.js`，寫入 source_commit / run_at / checks 狀態，附 crawl_fails 簡報。
+  - workflow / TODO / notes 登記本次規則。
+- 驗收：
+  - [x] `docs/QA/DEBUG_V3/` 內模板、URL_QUEUE、GOLDENS/REPORTS 架好且可用。
+  - [x] `.github/workflows/ci-self-proof.yml` 存在並執行上述檢查；`ci_summary.md/json` 會生成。
+  - [x] `scripts/quality/ci-summary.js` 可輸出 summary；`npm test` / `npm run build` / `npm run check:zh-cn` / `npm run check:no-bom` / `npm run security:scan` 通過；notes 有 T-0087 小節與 RAW 連結。
+
+### T-0088 poc-100-pages-metrics-bugreport-checklist：100 頁 POC 基線 + 報告/檢核
+
+> 狀態：✅ 已完成（2025-12-16；目前以 placeholder URL 產出 baseline，等待實際 URL）
+
+- 目標：
+  - 以 `docs/QA/DEBUG_V3/URL_QUEUE.md` 的 URL 執行 POC runner，輸出 results.json、報告與檢查清單。
+  - 暫無實際 URL 時，建立 placeholder 條目並記錄 blocked 狀態，形成 baseline（待提供正式 URL 後重跑）。
+- 驗收：
+  - [x] `tools/debug/poc-run-100.ts` 可讀取 URL_QUEUE、產生 `tmp/poc/results.json`、報告與 checklist。
+  - [x] 報告輸出：`docs/QA/DEBUG_V3/REPORTS/POC_100_<date>_<commit>.md` 與 `CHECKLIST_<date>_POC100.md`。
+  - [x] URL_QUEUE 至少 10 筆（本次為 placeholder），stats 可作為 baseline；notes 記錄狀態與 RAW 連結；`npm test` / `npm run build` / `npm run check:zh-cn` / `npm run check:no-bom` / `npm run security:scan` 通過。

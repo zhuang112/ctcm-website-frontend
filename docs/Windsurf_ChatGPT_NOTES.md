@@ -432,6 +432,36 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-16 任務：T-0088 poc-100-pages-metrics-bugreport-checklist
+
+- 目的：建立 100 頁 POC 基線與報告/檢核輸出；目前以 placeholder URL 產出 baseline，待提供正式 URL 後再重跑。
+- 主要變更：
+  - `tools/debug/poc-run-100.ts`：讀取 URL_QUEUE，產生 `tmp/poc/results.json`、報告與 checklist。未進行外部抓取，統一標記 blocked 等候正式 URL。
+  - `docs/QA/DEBUG_V3/URL_QUEUE.md`：填入 10 筆 placeholder URL（teaching/news/magazine/branch/flipbook/other）。
+  - 報告：`docs/QA/DEBUG_V3/REPORTS/POC_100_2025-12-16_2ef9415.md`、`docs/QA/DEBUG_V3/REPORTS/CHECKLIST_2025-12-16_POC100.md`。
+  - `package.json`：新增 `debug:poc-100` script。
+  - .gitignore：忽略 `tmp/`。
+- 測試 / 檢查：`npm test`、`npm run build`、`npm run check:zh-cn`、`npm run check:no-bom`、`npm run security:scan`（皆通過；security:scan 仍僅有 placeholder 關鍵字警告）。
+- commits: <填入本次 commit hash>
+- 交接包：`docs/TEMP/TEMP_20251216_T-0088_<commit>.zip`（含 MANIFEST，task_id=T-0088）
+
+變更檔案（含 RAW 連結）：
+- tools/debug/poc-run-100.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/debug/poc-run-100.ts
+- docs/QA/DEBUG_V3/URL_QUEUE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/URL_QUEUE.md
+- docs/QA/DEBUG_V3/REPORTS/POC_100_2025-12-16_2ef9415.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/REPORTS/POC_100_2025-12-16_2ef9415.md
+- docs/QA/DEBUG_V3/REPORTS/CHECKLIST_2025-12-16_POC100.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/REPORTS/CHECKLIST_2025-12-16_POC100.md
+- package.json  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
+- .gitignore  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.gitignore
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ## 2025-12-12 任務：T-0047 docs-rules-consistency-review-phase-1
 
 - 目的：檢查規則文件一致性，整理 cross-check 筆記（docs-only）。

@@ -28,6 +28,7 @@ docs/TEMP/
 docs/TEMP.zip
 docs/TEMP/*.zip
 docs/TEMP/ARCHIVES/*.zip
+tmp/
 
 # Secrets and credentials (never commit)
 .env

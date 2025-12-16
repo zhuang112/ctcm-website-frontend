@@ -20,7 +20,8 @@
     "wp:import:push": "ts-node tools/wp-import/wp-import-push.ts --dry-run",
     "handoff:tempzip": "node scripts/handoff/build-temp-zip.js",
     "check:no-bom": "node scripts/quality/check-no-bom.js",
-    "security:scan": "node scripts/quality/security-scan.js"
+    "security:scan": "node scripts/quality/security-scan.js",
+    "debug:poc-100": "ts-node tools/debug/poc-run-100.ts"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
