@@ -523,7 +523,7 @@ Windsurf 根據 ChatGPT 給的指令：
 
 - 嚴禁提交任何 secrets：`.env` / `.env.wp` / `.env.siteground`、API tokens、SSH private keys、WP Application Password 等不得進 git；範例檔一律用 `.example`＋`REDACTED`。
 - `.gitignore` 必含：`.env` / `.env.*`、`docs/TEMP/` / `docs/TEMP/*.zip`、`*.pem` / `*.key`。交接只用 TEMP zip，不得把 zip 納入 git。
-- 每逢 deploy / importer / 憑證相關任務，收尾前必跑 `npm run security:scan`，確認工作樹與近期 git history 無疑似 secrets；若有命中，**立即停止**、移除檔案、rotate 憑證，必要時 rewrite git history，並記錄於 `docs/QA/SECURITY_AUDIT.md`。
+- 每逢 deploy / importer / 憑證相關任務，收尾前必跑 `npm run security:scan`（需要更嚴格時可加 `--strict` 或環境變數 `SECURITY_SCAN_STRICT=1`），確認工作樹與近期 git history 無疑似 secrets；若有命中，**立即停止**、移除檔案、rotate 憑證，必要時 rewrite git history，並記錄於 `docs/QA/SECURITY_AUDIT.md`。
 - 若 RAW/TEMP 中發現疑似洩漏，先阻斷（停止 push / 停止對外存取），再由使用者決策後續處置（rotate、history 清理等）。
 
 ## 4. T 任務與 git 流程（Windsurf → 你）

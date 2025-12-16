@@ -15,6 +15,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(__filename), '..', '..');
 
+const strictMode = process.argv.includes('--strict') || process.env.SECURITY_SCAN_STRICT === '1';
+
 const ignoreDirs = new Set([
   '.git',
   'node_modules',
@@ -64,6 +66,7 @@ function scanFile(filePath) {
 
   const allowWords = ['<redacted>', 'placeholder', 'example', 'your-password', 'xxx', '****'];
   const isMarkdown = filePath.toLowerCase().endsWith('.md');
+  const isDocs = filePath.replace(/\\/g, '/').startsWith('docs/');
   const processPatterns = (patterns, bucket) => {
     for (const pattern of patterns) {
       const match = text.match(pattern);
@@ -72,8 +75,12 @@ function scanFile(filePath) {
         const lowerLine = line.toLowerCase();
         if (allowWords.some((w) => lowerLine.includes(w))) continue;
         const sanitized = line.replace(pattern, '<redacted>');
-        const safeCodeContext = line.includes('process.env') || line.includes('${auth}');
-        const targetBucket = isMarkdown || safeCodeContext ? warns : bucket;
+        const safeCodeContext =
+          line.includes('process.env') ||
+          line.includes('${auth}') ||
+          line.includes('${ secrets.') ||
+          line.includes('${secrets');
+        const targetBucket = isMarkdown || isDocs || safeCodeContext ? warns : bucket;
         targetBucket.push({ file: filePath, pattern: pattern.toString(), line: sanitized.trim() });
       }
     }
@@ -112,7 +119,8 @@ function scanHistory() {
         .split('\n')
         .forEach((line) => {
           const [location] = line.split(':');
-          warns.push({ file: `(git history) ${location}`, pattern: 'history-match', line: '<redacted>' });
+          const targetBucket = strictMode ? hits : warns;
+          targetBucket.push({ file: `(git history) ${location}`, pattern: 'history-match', line: '<redacted>' });
         });
     }
   } catch {

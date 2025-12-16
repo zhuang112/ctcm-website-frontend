@@ -33,5 +33,7 @@ tmp/
 # Secrets and credentials (never commit)
 .env
 .env.*
+!.env*.example
+!.env.*.example
 *.pem
 *.key
