@@ -6,7 +6,7 @@
 ## 1. 共用結構（Base）
 
 - `post_type`: `"teaching" | "news" | "magazine"`（必填）
-- `language`: `"zh-tw" | "zh-cn" | "en" | "ja"`（目前主要用 zh-tw / zh-cn）
+- `language`: `"zh-tw" | "zh-cn" | "en" | "ja"`（目前主要用 zh-tw / zh-cn；zh-TW→zh-CN pipeline 規則見 `docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md`）
 - `external_id`: string（建議必填，跨系統唯一鍵；現有 sample JSON 多未填，保留為可用欄位）
 - `slug`: string（建議；對應未來新站/WordPress slug）
 - `old_url`: string（建議；記錄舊站 URL，方便比對與工具使用）

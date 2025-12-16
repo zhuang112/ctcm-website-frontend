@@ -346,6 +346,35 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-16 任務：T-0083 zh-tw-to-zh-cn-pipeline-docs-unify-and-qa-reports
+
+- 目的：將 zh-TW→zh-CN pipeline 文檔整併為單一真相並對齊 QA 資源。
+- 主要變更：
+  - 新增 canonical：`docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md`（整併原內容並補 QA 報表/規則）。
+  - 原 `docs/ZH_TW_TO_ZH_CN_PIPELINE.md` 改為指向 canonical。
+  - cross-link：`docs/CONTENT_SCHEMA_V1.md`、`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 指向 canonical；`docs/INSTR/README.md` 加入 INSTR 條目。
+  - backlog：IMPROVEMENT_BACKLOG 新增 I-0006（pipeline docs 統一）。
+- 測試 / 檢查：docs-only；已執行 `npm run check:no-bom`、`npm run security:scan`。
+- commits: <填入本次 commit hash>
+- 交接包：`docs/TEMP/TEMP_20251216_T-0083_<commit>.zip`（含 MANIFEST，task_id=T-0083）
+
+變更檔案（含 RAW 連結）：
+- docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md
+- docs/ZH_TW_TO_ZH_CN_PIPELINE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/ZH_TW_TO_ZH_CN_PIPELINE.md
+- docs/CONTENT_SCHEMA_V1.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/CONTENT_SCHEMA_V1.md
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/INSTR/README.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/README.md
+- docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ## 2025-12-16 任務：T-0081 handoff-source-commit-autodetect-and-manifest-assert
 
 - 目的：強化 handoff 工具與流程，確保交接包 source_commit 一致並自動取 HEAD。

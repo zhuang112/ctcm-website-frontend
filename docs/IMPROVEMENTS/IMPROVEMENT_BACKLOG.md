@@ -18,3 +18,4 @@
 | I-0003| auto       | Handoff source_commit autodetect + MANIFEST 斷言（T-0081） | high   | done   | T-0081  | 2025-12-16 完成，zip 帶 HEAD7   |
 | I-0004| auto       | Debug V3 模板與 CI 自動檢查（T-0087）                    | high   | done   | T-0087  | 2025-12-16 建立模板與 ci-self-proof |
 | I-0005| auto       | 爬蟲禮貌性：rate limit + backoff + 429/403 停止並回報（T-0085，P0） | high   | done   | T-0085  | 2025-12-16 登記，待後續實作調整 |
+| I-0006| auto       | zh-TW→zh-CN pipeline docs 統一（T-0083，canonical + QA 報告） | high   | done   | T-0083  | 2025-12-16 整併 canonical 與 cross-link |

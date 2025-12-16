@@ -616,3 +616,16 @@ pm run build 通過。
   - [x] PROJECT_TODO 新增 T-0085 條目並標記完成（docs 規範）。
   - [x] IMPROVEMENT_BACKLOG 新增對應條目（P0、auto）。
   - [x] notes 記錄本次更新與 RAW 連結；`npm run check:no-bom`、`npm run security:scan` 通過（docs-only）。
+
+### T-0083 zh-tw-to-zh-cn-pipeline-docs-unify-and-qa-reports：管線文件單一真相與 QA 報表
+
+> 狀態：✅ 已完成（2025-12-16；docs-only）
+
+- 目標：
+  - 將 zh-TW→zh-CN pipeline 文檔整併為單一 canonical（`docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md`），舊稿改為指向 canonical。
+  - 梳理 QA 資源：白名單（rules/*.tsv/json）、報表（reports/report_hits.md、report_candidates.md），並 cross-link 到 workflow/schema。
+  - 更新 INSTR index 登記 T-0083。
+- 驗收：
+  - [x] canonical 文檔存在並取代舊稿；舊檔標註已移轉。
+  - [x] CONTENT_SCHEMA_V1 / WORKFLOW cross-link 到 canonical；INSTR/README 列出本 INSTR；backlog 登記完成。
+  - [x] docs-only；`npm run check:no-bom`、`npm run security:scan` 通過。

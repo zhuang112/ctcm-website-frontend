@@ -245,13 +245,20 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
   - `generated_at`（ISO 8601）、`repo`、`source_commit`（zip 時的 commit）、`task_id`（可為 null）。  
   - `files[]`：`repo_path`、`temp_path`（同 repo_path）、`sha256`、`bytes`。  
   - 可附 `MANIFEST.sha256.txt` 供校驗。  
-- 安全斷言：`MANIFEST.source_commit` 必須等於當前 HEAD；handoff 工具預設自動使用 `git rev-parse HEAD`，若手動指定 `--source_commit` 與 HEAD 不符，會直接 fail。zip 檔名也強制帶 HEAD7。
+- 安全斷言：`MANIFEST.source_commit` 必須等於當前 HEAD；handoff 工具預設自動使用 `git rev-parse HEAD`，若手動指定 `--source_commit` 與 HEAD 不符，會直接 fail。zip 檔名也強制帶 HEAD7。  
 - 流程：  
   1) 將需審檔案依原路徑放入 `docs/TEMP/`（保持目錄結構）。  
   2) 產出 `MANIFEST.json`（含 sha256、bytes、source_commit、task_id）。  
   3) 壓縮為上述命名的 zip；回報時提供 zip 名稱與 source_commit。  
   4) review 完成即可清空 `docs/TEMP/`。  
 - 自動化（推薦）：`npm run handoff:tempzip -- --source_commit <hash> --task_id <T-xxxx> --files ...`。未指定 `--out` 時，會自動命名為 `docs/TEMP/TEMP_<date>[_<task>]_commit.zip`。
+
+### Debug V3 與 CI（T-0087）
+
+- Debug V3 資源：`docs/QA/DEBUG_V3/README.md`、`docs/QA/DEBUG_V3/URL_QUEUE.md`、`docs/QA/DEBUG_V3/TEMPLATES/*`。新增案例請先在 URL_QUEUE 登記，報告請用模板存入 REPORTS。
+- CI（ci-self-proof）：`push main` / `pull_request` 會自動跑 `check:no-bom`、`security:scan`、`test`、`build`、`check:zh-cn`，並產生 `ci_summary.md/json`，收集 `docs/QA/**`、`docs/terminal_logs/**`、`docs/AUDITS/**`、`tmp/**` 作為 artifacts。
+- CI summary：由 `scripts/quality/ci-summary.js` 產生，包含 source_commit / run_at / checks 狀態與 crawl_fails 簡報。
+- 若 CI 尚未啟用或需手動驗證，請至少本機跑同樣的檢查並在 notes 註記。
 
 ### 1.13 檔案編碼與行尾（防止亂碼）
 
@@ -462,10 +469,10 @@ Windsurf 根據 ChatGPT 給的指令：
 - 只要任務涉及 zh-CN pipeline 或新增 / 調整 zh-CN JSON，請在收尾流程加入：
   - `npm run check:zh-cn`
   - 若輸出有 **ERROR**，先修復或開 T 任務處理，暫停 push；只有 WARN 或無問題時再進行 git 收尾。
-- 主要檢查：
-  - zh-TW / zh-CN JSON 是否成對存在。
-  - `post_type` / `slug` / `old_url` / `language` 一致性。
-  - 依 `ZH_TW_TO_ZH_CN_PIPELINE.md` 白名單，確認 `post_title` / `post_excerpt` / `body_markdown`、meta string、`seo.meta_title` / `seo.meta_description` 等欄位在 zh-CN 版本存在。
+  - 主要檢查：
+    - zh-TW / zh-CN JSON 是否成對存在。
+    - `post_type` / `slug` / `old_url` / `language` 一致性。
+    - 依 `docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md` 白名單，確認 `post_title` / `post_excerpt` / `body_markdown`、meta string、`seo.meta_title` / `seo.meta_description` 等欄位在 zh-CN 版本存在。
 
 ### 3.8 撰寫 INSTR 的必要資訊（給 ChatGPT 檢閱）
 
