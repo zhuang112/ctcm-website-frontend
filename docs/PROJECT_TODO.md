@@ -259,3 +259,16 @@ pm run security:scan -- --strict
   - [x] TODO / notes / backlog ?é¤‰? T-0082??
 
 
+### T-0092 debug-review-pack-policy-and-missing-handoff-fix
+
+> ª¬ºA¡G? ¤w§¹¦¨¡]¥æ±µ¥]¬Fµ¦»P snapshot ³W«h¸É±j¡A2025-12-17¡^
+
+- ¥Ø¼Ð¡G
+  - ±ø¦C¯Ê¥æ±µ¥] / ¯Ê¤º®e®Éªº³B²z¤è¦¡¡A±j¨î versioned handoff zip¡]§t MANIFEST¡Btask_id¡Bsource_commit¡^¡C
+  - ¸É¥R docs snapshot / ZIP ªº©w¦ì¡G³Æ´©µ¹ ChatGPT / Agent¡A¯u¬Û¥H GitHub/main + notes ¬°·Ç¡AÀÉ¦W«ØÄ³§t T ½s¸¹»P¤é´Á¡C
+  - §ó·s debug/review flow¡]QA/DEBUG_V3 README + ¥~³¡ AI prompt ¼ËªO¡^¡C
+  - ­×¸ÉÂÂ¥ô°È¯Ê¥æ±µ¥]¡]¨Ò¦p T-0079¡^®Éªº rerun handoff ¬yµ{¡C
+- Åç¦¬¡G
+  - [x] WORKFLOW_CHATGPT_GITHUB_AGENT.md ¤w·s¼W¥æ±µ¥]¯Êº|ªº¸É»ô³W«h»P snapshot ³Æ´©´£¿ô¡C
+  - [x] QA/DEBUG_V3 README + ·s¼W¥~³¡ AI prompt ¼ÒªO¡]debug review / bugfix validation¡^¡A³W©w³ø§i¤@«ß Markdown ¨Ã©ñ REPORTS¡C
+  - [x] PROJECT_TODO / notes °O¿ý T-0092¡F¯Ê¥æ±µ¥]ªº¥ô°È¤w¦³ rerun handoff zip¡]©R¦W§t task_id+HEAD7¡^¡C
