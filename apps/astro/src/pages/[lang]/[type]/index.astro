@@ -1,7 +1,7 @@
----
-import { fetchAnyContent } from "../../../lib/directus";
+﻿---
+import { fetchAnyContentList } from "../../../lib/directus";
 const { lang, type } = Astro.params;
-const sample = await fetchAnyContent({ lang, type });
+const items = await fetchAnyContentList({ lang, type });
 ---
 
 <html lang={lang}>
@@ -10,6 +10,16 @@ const sample = await fetchAnyContent({ lang, type });
   </head>
   <body>
     <h1>{type} index ({lang})</h1>
-    <p>Placeholder listing page. Sample title: {sample.title}</p>
+    {items.length === 0 ? (
+      <p>尚無資料（或 Directus 尚未連線）。</p>
+    ) : (
+      <ul>
+        {items.map((item) => (
+          <li>
+            <strong>{item.title}</strong> ｜ {item.published_at}
+          </li>
+        ))}
+      </ul>
+    )}
   </body>
 </html>

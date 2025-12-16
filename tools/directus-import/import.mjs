@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
  * Minimal importer stub: read AnyContent JSON and prepare upsert payloads.
  * - For now, it only validates files and logs intended requests.
@@ -39,6 +39,69 @@ function loadJson(file) {
   return JSON.parse(raw);
 }
 
+async function fetchJson(url, options = {}) {
+  const res = await fetch(url, {
+    ...options,
+    headers: {
+      ...(options.headers || {}),
+      'Content-Type': 'application/json',
+      ...(process.env.DIRECTUS_TOKEN ? { Authorization: `Bearer ${process.env.DIRECTUS_TOKEN}` } : {}),
+    },
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`${res.status} ${res.statusText} :: ${text}`);
+  }
+  return res.json();
+}
+
+async function upsertItem(payload) {
+  const base = process.env.DIRECTUS_URL;
+  if (!base) return null;
+  const filter = new URLSearchParams({
+    'filter[type][_eq]': payload.type,
+    'filter[lang][_eq]': payload.lang,
+    'filter[slug][_eq]': payload.slug,
+    limit: '1',
+    fields: 'id',
+  });
+  const existing = await fetchJson(`${base}/items/any_content?${filter.toString()}`);
+  const id = existing?.data?.[0]?.id;
+  if (id) {
+    await fetchJson(`${base}/items/any_content/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(payload),
+    });
+    return id;
+  }
+  const created = await fetchJson(`${base}/items/any_content`, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  });
+  return created?.data?.id;
+}
+
+async function replaceImages(parentId, images = []) {
+  const base = process.env.DIRECTUS_URL;
+  if (!base) return;
+  await fetchJson(`${base}/items/any_content_images?filter[parent][_eq]=${parentId}`, {
+    method: 'DELETE',
+  });
+  for (const [idx, img] of images.entries()) {
+    const body = {
+      parent: parentId,
+      url: img.url,
+      alt: img.alt ?? null,
+      caption: img.caption ?? null,
+      sort: img.sort ?? idx,
+    };
+    await fetchJson(`${base}/items/any_content_images`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+  }
+}
+
 function main() {
   const { input, limit } = readArgs();
   const files = listJsonFiles(input).slice(0, limit ?? undefined);
@@ -63,7 +126,15 @@ function main() {
       };
       const upsertKey = `${payload.type}::${payload.lang}::${payload.slug}`;
       console.log(`[import] ready -> ${file} (upsert: ${upsertKey})`);
-      console.log(payload);
+      if (process.env.DIRECTUS_URL) {
+        const id = await upsertItem(payload);
+        if (id && payload.images?.length) {
+          await replaceImages(id, payload.images);
+        }
+        console.log(`[import] upserted id=${id ?? 'n/a'} (Directus)`);
+      } else {
+        console.log(payload);
+      }
     } catch (err) {
       fs.appendFileSync(
         path.join('docs', 'QA', 'DIRECTUS_IMPORT_FAILS.jsonl'),
@@ -77,3 +148,4 @@ function main() {
 }
 
 main();
+

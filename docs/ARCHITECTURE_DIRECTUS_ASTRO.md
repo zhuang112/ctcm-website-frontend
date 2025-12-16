@@ -1,21 +1,21 @@
-# ARCHITECTURE_DIRECTUS_ASTRO（T-0094 A3+B1+C2）
+# ARCHITECTURE_DIRECTUS_ASTRO（T-0095）
 
-目標：提供 Directus（A3 schema）、Importer（C2 upsert stub）、Astro 最小頁面（B1 後續擴充）三件套 MVP。
+目的：用 Directus（A3 schema）、Importer（C2 upsert）、Astro MVP（B1 早期介面）組成可運作的乾淨主線，便於之後擴充。
 
 ## A3 schema（Directus collections）
 - any_content
   - id (uuid)
   - type (string/enum)
-  - lang (enum；zh-TW/zh-CN/en/ja，B1 translations 預留)
+  - lang (enum：zh-TW/zh-CN/en/ja；B1 translations 預留)
   - slug (string)
   - title (string)
   - published_at (datetime)
   - meta (json)
   - body_markdown (text)
-  - blocks (json) — 預留
-  - cover_url (string，暫存；未來可搬到 cover_file m2o)
+  - blocks (json)
+  - cover_url (string；暫存，之後可換成 cover_file m2o)
   - images (o2m -> any_content_images)
-  - translations（B1 預留，不強制 UI，下一顆 T 處理）
+  - translations（B1 預留，之後開新 T）
 - any_content_images
   - id (uuid)
   - parent (m2o -> any_content)
@@ -26,29 +26,32 @@
 
 ## C2 importer（tools/directus-import/import.mjs）
 - 掃描 `data/**/*.json`，組 payload（external_id/type/lang/slug/title/published_at/meta/body_markdown/images）。
-- upsert key：`type::lang::slug`（idempotent 取向）。
-- 目前僅列印 payload，未發 HTTP；失敗寫入 `docs/QA/DIRECTUS_IMPORT_FAILS.jsonl`。
-- 後續 T-0095+ 目標：upsert Directus（by external_id 或 type+lang+slug）、支援 files/gallery 關聯、dry-run/commit。
+- upsert key：`type::lang::slug`（idempotent）。
+- 實作：先查 existing（GET），有則 PATCH，無則 POST；images 採 replace（先清舊再新增）。
+- 失敗寫入 `docs/QA/DIRECTUS_IMPORT_FAILS.jsonl`。
+- env：`DIRECTUS_URL`、`DIRECTUS_TOKEN`（若未設，只印 payload）。
 
 ## Astro MVP（apps/astro）
-- fetch layer：`src/lib/directus.ts`（placeholder，未接後端）。
+- fetch layer：`src/lib/directus.ts`（Directus REST filters，失敗 fallback placeholder）。
 - 頁面：
   - `src/pages/[lang]/[type]/[slug].astro`：顯示 title/published_at/cover/body_markdown/images。
-  - `src/pages/[lang]/[type]/index.astro`：簡易列表頁 placeholder。
-- 後續可接 Directus REST/GraphQL，再強化 SSG。
+  - `src/pages/[lang]/[type]/index.astro`：簡易列表（若無資料顯示提示）。
+- 後續：可將 pages 改為 SSG 並串接正式 API/GraphQL。
 
-## Directus 開發環境
+## Directus 本地開發
 - docker compose：`apps/directus/docker-compose.yml`
 - 說明：`apps/directus/README.md`
-- 啟停：
+- 指令：
   - `npm run directus:up`
   - `npm run directus:down`
 
 ## npm scripts
-- `directus:up` / `directus:down`：docker compose up/down。
-- `import:directus -- --input data/anycontent --limit 20`：掃描 JSON 並列印 payload（stub）。
+- `directus:up` / `directus:down`：docker compose up/down
+- `directus:schema:snapshot` / `directus:schema:apply`
+- `import:directus -- --input data/anycontent --limit 20`
+- `dev:astro` / `build:astro`
 
-## 後續建議（交給下一顆 T）
-- 真正接 Directus API（auth、upsert、files）。
-- A3 translations（B1）UI/欄位補齊。
-- Astro 改為讀取 Directus，產生 SSG；增加列表排序/分頁。
+## 後續建議（交給之後的 T）
+- 強化 Directus API（auth / upsert / files）。
+- translations（B1）UI/欄位補強。
+- Astro 改為編譯時抓 Directus，產生 SSG；列表/詳細頁版型再精緻化。

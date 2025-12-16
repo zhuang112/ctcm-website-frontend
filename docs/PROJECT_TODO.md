@@ -321,3 +321,18 @@ pm run security:scan -- --strict
   - [x] QA/DEBUG_V3 README + 嚙編嚙磕嚙羯嚙踝蕭 AI prompt 嚙課板嚙稽debug review / bugfix validation嚙稷嚙璀嚙磕嚙緩嚙踝蕭嚙箠嚙瑾嚙踝蕭 Markdown 嚙衛抬蕭 REPORTS嚙瘠
   - [x] PROJECT_TODO / notes 嚙瞌嚙踝蕭 T-0092嚙瘤嚙褊交接嚙稽嚙踝蕭嚙踝蕭嚙褓已嚙踝蕭 rerun handoff zip嚙稽嚙磋嚙磕嚙緣 task_id+HEAD7嚙稷嚙瘠
 
+
+### T-0095 directus-astro-mvp-real-and-agent-naming：Directus/Importer/Astro MVP 可運行化（From clean main@2eff405）
+
+> 狀態：? 已完成（2025-12-16）
+
+- 目標：
+  - 修正 Directus schema 管理：`tools/directus-schema/apply.mjs` 先 diff 再 apply，補上 baseline `apps/directus/schema/snapshot.json`。
+  - Importer 支援實際 upsert：`DIRECTUS_URL` / `DIRECTUS_TOKEN` 環境變數、type+lang+slug idempotent、圖片 replace、失敗寫入 `docs/QA/DIRECTUS_IMPORT_FAILS.jsonl`。
+  - Astro 使用 Directus filters（lang/type/slug），列表/詳細頁保持可渲染，無資料時有提示。
+  - docs 更新：`ARCHITECTURE_DIRECTUS_ASTRO.md`、workflow notes，並提醒 Agent 用 generic「Agent」稱呼。
+- 驗收：
+  - [x] schema apply 走 diff -> apply，沒有差異會顯示 No schema changes。
+  - [x] baseline snapshot 已納入 repo。
+  - [x] importer upsert + 圖片 replace 行為落實，失敗記錄 jsonl。
+  - [x] Astro 以 Directus filters 讀取，fallback 仍可渲染。

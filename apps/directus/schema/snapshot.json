@@ -1,0 +1,67 @@
+{
+  "collections": [
+    {
+      "collection": "any_content",
+      "meta": {
+        "icon": "article",
+        "note": "AnyContent core (type+lang+slug unique)"
+      },
+      "schema": {
+        "name": "any_content",
+        "comment": null
+      }
+    },
+    {
+      "collection": "any_content_images",
+      "meta": {
+        "icon": "image",
+        "note": "Images belonging to any_content"
+      },
+      "schema": {
+        "name": "any_content_images",
+        "comment": null
+      }
+    }
+  ],
+  "fields": [
+    {
+      "collection": "any_content",
+      "field": "id",
+      "type": "uuid",
+      "schema": { "is_primary_key": true }
+    },
+    { "collection": "any_content", "field": "type", "type": "string" },
+    { "collection": "any_content", "field": "lang", "type": "string" },
+    { "collection": "any_content", "field": "slug", "type": "string" },
+    { "collection": "any_content", "field": "title", "type": "string" },
+    { "collection": "any_content", "field": "published_at", "type": "timestamp" },
+    { "collection": "any_content", "field": "meta", "type": "json" },
+    { "collection": "any_content", "field": "body_markdown", "type": "text" },
+    { "collection": "any_content", "field": "blocks", "type": "json" },
+    { "collection": "any_content", "field": "cover_url", "type": "string" },
+    {
+      "collection": "any_content",
+      "field": "images",
+      "type": "alias",
+      "special": ["o2m"],
+      "schema": { "foreign_key_table": "any_content_images", "foreign_key_column": "parent" }
+    },
+    {
+      "collection": "any_content_images",
+      "field": "id",
+      "type": "uuid",
+      "schema": { "is_primary_key": true }
+    },
+    {
+      "collection": "any_content_images",
+      "field": "parent",
+      "type": "uuid",
+      "schema": { "foreign_key_table": "any_content", "foreign_key_column": "id" }
+    },
+    { "collection": "any_content_images", "field": "url", "type": "string" },
+    { "collection": "any_content_images", "field": "alt", "type": "string" },
+    { "collection": "any_content_images", "field": "caption", "type": "text" },
+    { "collection": "any_content_images", "field": "sort", "type": "integer" }
+  ],
+  "relations": []
+}
