@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CT World — 靜態首頁原型</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <div class="brand-mark">CT</div>
+      <div class="brand-text">
+        <div class="brand-title">CT World</div>
+        <div class="brand-subtitle">Headless 靜態首頁原型</div>
+      </div>
+    </div>
+    <nav class="nav-desktop" aria-label="主選單">
+      <ul>
+        <li class="has-mega">
+          <button class="nav-button" aria-haspopup="true" aria-expanded="false">探索</button>
+          <div class="mega">
+            <div>
+              <h4>特色內容</h4>
+              <a href="#">經典課程</a>
+              <a href="#">最新消息</a>
+              <a href="#">雜誌專欄</a>
+            </div>
+            <div>
+              <h4>專案</h4>
+              <a href="#">數位典藏</a>
+              <a href="#">教學影音</a>
+              <a href="#">志工故事</a>
+            </div>
+            <div>
+              <h4>快速連結</h4>
+              <a href="#">活動行事曆</a>
+              <a href="#">FAQ</a>
+              <a href="#">聯絡我們</a>
+            </div>
+          </div>
+        </li>
+        <li><a href="#">教學</a></li>
+        <li><a href="#">最新消息</a></li>
+        <li><a href="#">雜誌</a></li>
+        <li><a href="#">關於</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" aria-label="開啟選單" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="nav-mobile" aria-label="行動版選單">
+    <div class="nav-mobile-inner">
+      <button class="nav-close" aria-label="關閉選單">×</button>
+      <ul>
+        <li>
+          <button class="nav-mobile-parent" aria-expanded="false">探索</button>
+          <div class="nav-mobile-children">
+            <a href="#">經典課程</a>
+            <a href="#">最新消息</a>
+            <a href="#">雜誌專欄</a>
+            <a href="#">數位典藏</a>
+            <a href="#">教學影音</a>
+            <a href="#">志工故事</a>
+          </div>
+        </li>
+        <li><a href="#">教學</a></li>
+        <li><a href="#">最新消息</a></li>
+        <li><a href="#">雜誌</a></li>
+        <li><a href="#">關於</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero" aria-label="焦點輪播">
+      <div class="hero-track" data-hero-track>
+        <article class="hero-slide" style="--slide-accent: #4a90e2" aria-hidden="false">
+          <div class="hero-media" aria-hidden="true"></div>
+          <div class="hero-content">
+            <p class="eyebrow">CT World</p>
+            <h1>以慈悲為引導，讓教學與行動連結世界</h1>
+            <p class="lede">靜態原型示意：以經典課程、新聞與雜誌為核心，串接多語內容與前端展示。</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#">探索課程</a>
+              <a class="btn ghost" href="#">查看最新消息</a>
+            </div>
+          </div>
+        </article>
+        <article class="hero-slide" style="--slide-accent: #c47d3c" aria-hidden="true">
+          <div class="hero-media media-alt" aria-hidden="true"></div>
+          <div class="hero-content">
+            <p class="eyebrow">特色活動</p>
+            <h1>走進現場：法會、展演、工作坊一次掌握</h1>
+            <p class="lede">用事件導向的卡片呈現，搭配行事曆與地點資訊，讓參與更直覺。</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#">查看行事曆</a>
+              <a class="btn ghost" href="#">了解更多</a>
+            </div>
+          </div>
+        </article>
+        <article class="hero-slide" style="--slide-accent: #6c7c59" aria-hidden="true">
+          <div class="hero-media media-alt-2" aria-hidden="true"></div>
+          <div class="hero-content">
+            <p class="eyebrow">多媒體</p>
+            <h1>圖片、雜誌、影音：一頁式導覽</h1>
+            <p class="lede">未來可串接 Directus / Astro 作為元件，維持 Headless 架構的彈性。</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#">體驗原型</a>
+              <a class="btn ghost" href="#">元件規格</a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="hero-controls">
+        <button class="pill" data-hero-prev aria-label="上一張">‹</button>
+        <div class="hero-dots" data-hero-dots></div>
+        <button class="pill" data-hero-next aria-label="下一張">›</button>
+      </div>
+    </section>
+
+    <section class="section key-links">
+      <div class="section-head">
+        <h2>快速導覽</h2>
+        <p>以功能導向的入口，對應未來 Directus/ Astro 元件或 API 資料。</p>
+      </div>
+      <div class="grid key-links-grid">
+        <a class="card-link" href="#" data-field="keylink_teaching">
+          <div class="icon-dot"></div>
+          <div>
+            <h3>教學總覽</h3>
+            <p>以 AnyContent schema 匯入，支援多語切換。</p>
+          </div>
+        </a>
+        <a class="card-link" href="#" data-field="keylink_events">
+          <div class="icon-dot"></div>
+          <div>
+            <h3>活動行事曆</h3>
+            <p>時間、地點、報名資訊一頁呈現。</p>
+          </div>
+        </a>
+        <a class="card-link" href="#" data-field="keylink_magazine">
+          <div class="icon-dot"></div>
+          <div>
+            <h3>雜誌精選</h3>
+            <p>支援封面圖、多圖 gallery 與 PDF 下載。</p>
+          </div>
+        </a>
+        <a class="card-link" href="#" data-field="keylink_news">
+          <div class="icon-dot"></div>
+          <div>
+            <h3>最新消息</h3>
+            <p>新聞 meta (日期、地點) 皆由 adapter 填入。</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section cards">
+      <div class="section-head">
+        <h2>最新消息</h2>
+        <p>News post_type，示意三則卡片（可替換為 API 或 Directus）。</p>
+      </div>
+      <div class="grid card-grid">
+        <article class="card">
+          <p class="eyebrow">2025-12-10・台北</p>
+          <h3>祈福法會線上直播</h3>
+          <p class="meta">ct_news_date / ct_event_location</p>
+          <p class="body">以 AnyContent news schema 呈現，並保留 meta 欄位。</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">2025-12-12・線上</p>
+          <h3>開放的數位典藏講座</h3>
+          <p class="meta">多語、SEO meta 可由 pipeline 產出。</p>
+          <p class="body">支援 zh-tw → zh-cn pipeline 與 health check。</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">2025-12-15・高雄</p>
+          <h3>志工招募說明會</h3>
+          <p class="meta">動態 CTA：立即報名 / 加入 LINE 官方。</p>
+          <p class="body">標註 has_unclassified_content 以利 QA。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section cards">
+      <div class="section-head">
+        <h2>教學精選</h2>
+        <p>Teaching post_type，搭配 sutra/偈語等自訂欄位，可對應 AnyContent。</p>
+      </div>
+      <div class="grid card-grid">
+        <article class="card">
+          <p class="eyebrow">課程系列</p>
+          <h3>入門佛法 12 週</h3>
+          <p class="meta">含偈語段落、教學元件與下載講義。</p>
+          <p class="body">可於 dev/compare 對照 legacy HTML → AnyContent JSON。</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">講座</p>
+          <h3>慈悲與行動</h3>
+          <p class="meta">對應 teaching adapter + gallery。</p>
+          <p class="body">支援圖集與 featured image，保留 alt/caption。</p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">工作坊</p>
+          <h3>心經共讀</h3>
+          <p class="meta">可加上活動時間/地點 meta。</p>
+          <p class="body">未來串接 WordPress importer 或 React 頁面。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section cards">
+      <div class="section-head">
+        <h2>雜誌／圖集</h2>
+        <p>示意多圖 gallery + PDF 附件的版型，對應 magazine adapter。</p>
+      </div>
+      <div class="gallery-highlight">
+        <div class="gallery-preview">
+          <div class="thumb large"></div>
+          <div class="thumb row">
+            <div class="thumb small"></div>
+            <div class="thumb small"></div>
+            <div class="thumb small"></div>
+          </div>
+        </div>
+        <div class="gallery-copy">
+          <p class="eyebrow">Gallery / Magazine</p>
+          <h3>專題攝影：山林與心念</h3>
+          <p>圖集支援多張圖片、圖說（caption）、alt；PDF 下載可置於 CTA。此區塊示意未來 Directus/ Astro 元件與 WordPress importer 的對接。</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#">瀏覽圖集</a>
+            <a class="btn ghost" href="#">下載 PDF</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <div class="brand-mark">CT</div>
+      <p>ctworld.org — 靜態首頁原型（英國博物館 × 京博混合風格）</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">隱私權</a>
+      <a href="#">使用條款</a>
+      <a href="#">聯絡</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

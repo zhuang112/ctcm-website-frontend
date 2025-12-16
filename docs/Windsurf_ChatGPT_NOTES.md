@@ -322,3 +322,27 @@ pm run security:scan（僅 docs placeholder 警告）。
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-17 任務：T-0090 static-homepage-prototype-britishmuseum-kyohaku-hybrid
+
+- 目的：產出不需建置的靜態首頁原型，示意 British Museum × Kyohaku 風格；桌面 mega menu、行動抽屜、hero 輪播、重點區塊。
+- 主要變更：
+  - 新增 dev/static-homepage/index.html|styles.css|app.js|README.md，純 HTML/CSS/JS，無外部依賴。
+  - Hero 輪播（auto + dots + prev/next）；桌面 mega menu、mobile 抽屜＋子選單；RWD ?320px。
+  - 區塊：KeyLinks、News/Teaching/Magazine 精選、Gallery 示意、Footer；以 data-field/placeholder 方便未來對接 Directus / Astro。
+- 測試 / 檢查：dev-only 靜態檔；未跑額外測試（前一批 T-0089 已跑全套）。
+- commits: <填入本次 commit hash>
+- 交接包：docs/TEMP/TEMP_20251217_T-0090_<commit>.zip（含 MANIFEST，task_id=T-0090）
+
+變更檔案（含 RAW 連結）：
+- dev/static-homepage/index.html  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/dev/static-homepage/index.html
+- dev/static-homepage/styles.css  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/dev/static-homepage/styles.css
+- dev/static-homepage/app.js  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/dev/static-homepage/app.js
+- dev/static-homepage/README.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/dev/static-homepage/README.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

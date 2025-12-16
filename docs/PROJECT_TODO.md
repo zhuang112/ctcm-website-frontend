@@ -236,6 +236,20 @@ pm run check:zh-cn、
 pm run check:no-bom、
 pm run security:scan 通過。
   - [x] PROJECT_TODO / notes 登記 T-0089；handoff zip（task_id=T-0089）含 crawler + QA + docs。
+
+### T-0090 static-homepage-prototype-britishmuseum-kyohaku-hybrid：靜態首頁原型（桌面 mega menu + 行動抽屜）
+
+> 狀態：✅ 已完成（2025-12-17；dev-only 靜態原型）
+
+- 目標：
+  - 產出不需建置的靜態首頁原型，參考 British Museum（整體視覺）＋ Kyohaku（hero 輪播、menu 範式）。
+  - 桌面版：mega menu；行動版：抽屜式選單。
+  - 區塊示意：HeroCarousel、KeyLinks、News/Teaching/Magazine 精選、GalleryHighlight、Footer。
+  - 純 HTML/CSS/JS，預留 Directus / Astro 元件化的 data-field。
+- 驗收方式：
+  - [x] dev/static-homepage/index.html|styles.css|app.js|README.md 就緒，直接開啟即可預覽（0 build）。
+  - [x] Hero 輪播可播放，nav desktop/mobile 可互動；RWD ≥320px。
+  - [x] docs/notes 登記 T-0090；handoff zip（task_id=T-0090）含原型檔案與 docs。
 ### T-0083 zh-tw-to-zh-cn-pipeline-docs-unify-and-qa-reports?垓??謍???謘???賹???QA ?璇胼?
 > ????????????2025-12-16?洫ocs-only??
 - ?????  - ??zh-TW??瞥-CN pipeline ????皜航?蝞?? canonical?docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md`?????撖抆冪??? canonical??  - ??? QA ???垓謒????ules/*.tsv/json??蹓魂鼓?萄??reports/report_hits.md?蹍河port_candidates.md????cross-link ??workflow/schema??  - ?皝? INSTR index ?擗? T-0083??- ?踐????  - [x] canonical ????殉朱謓剝?銵??????????????拙??改??  - [x] CONTENT_SCHEMA_V1 / WORKFLOW cross-link ??canonical??NSTR/README ?謅??INSTR?洵acklog ?擗??堆???  - [x] docs-only?洩npm run check:no-bom`?蹍pm run security:scan` ?謍???
