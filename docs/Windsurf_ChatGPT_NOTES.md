@@ -374,15 +374,15 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
   - docs/PROJECT_TODO.md ï¿½X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
   - docs/Windsurf_ChatGPT_NOTES.md ï¿½X https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-17 ¥ô°È¡GT-0093 recover-utf8-docs-and-add-check
-- ¥Øªº¡G½T»{®Ö¤ß docs ºû«ù¥i¾\Åªªº UTF-8¡A¨Ã·s¼W¦Û°ÊÀË¬d¡C
-- ¥D­nÅÜ§ó¡G
-  - ¥H UTF-8 ­«·sÀx¦s `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`¡B`docs/PROJECT_TODO.md`¡B`docs/Windsurf_ChatGPT_NOTES.md`¡C
-  - ·s¼W `tools/qa/check-utf8.mjs` »P npm script `check:utf8`¡C
-  - `docs/PROJECT_TODO.md` µn°O T-0093¡Anotes ¼W¥»¸`¡C
-- ´ú¸Õ / ÀË¬d¡G`npm test`¡B`npm run build`¡B`npm run check:zh-cn`¡B`npm run check:no-bom`¡B`npm run check:utf8`¡B`npm run security:scan`¡]security ±½´y¶È placeholder keyword Äµ§i¡^¡C
-- handoff¡G`docs/TEMP/TEMP_20251216_T-0093_<HEAD>.zip`¡C
-- RAW¡G
+## 2025-12-17 ï¿½ï¿½ï¿½È¡GT-0093 recover-utf8-docs-and-add-check
+- ï¿½Øªï¿½ï¿½Gï¿½Tï¿½{ï¿½Ö¤ï¿½ docs ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½\Åªï¿½ï¿½ UTF-8ï¿½Aï¿½Ã·sï¿½Wï¿½Û°ï¿½ï¿½Ë¬dï¿½C
+- ï¿½Dï¿½nï¿½Ü§ï¿½G
+  - ï¿½H UTF-8 ï¿½ï¿½ï¿½sï¿½xï¿½s `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`ï¿½B`docs/PROJECT_TODO.md`ï¿½B`docs/Windsurf_ChatGPT_NOTES.md`ï¿½C
+  - ï¿½sï¿½W `tools/qa/check-utf8.mjs` ï¿½P npm script `check:utf8`ï¿½C
+  - `docs/PROJECT_TODO.md` ï¿½nï¿½O T-0093ï¿½Anotes ï¿½Wï¿½ï¿½ï¿½`ï¿½C
+- ï¿½ï¿½ï¿½ï¿½ / ï¿½Ë¬dï¿½G`npm test`ï¿½B`npm run build`ï¿½B`npm run check:zh-cn`ï¿½B`npm run check:no-bom`ï¿½B`npm run check:utf8`ï¿½B`npm run security:scan`ï¿½]security ï¿½ï¿½ï¿½yï¿½ï¿½ placeholder keyword Äµï¿½iï¿½^ï¿½C
+- handoffï¿½G`docs/TEMP/TEMP_20251216_T-0093_<HEAD>.zip`ï¿½C
+- RAWï¿½G
   - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
     RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
   - docs/PROJECT_TODO.md  
@@ -393,3 +393,38 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
     RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
   - tools/qa/check-utf8.mjs  
     RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/qa/check-utf8.mjs
+
+## 2025-12-17 ¥ô°È¡GT-0094 directus-astro-mvp-a3-b1-c2
+- ¥Øªº¡G«Ø¥ß Directus + importer stub + Astro MVP¡]A3+B1+C2¡^ªº³Ì¤p¥i¶]®Ø¬[¡C
+- ¥D­nÅÜ§ó¡G
+  - Directus docker-compose »P README¡G`apps/directus/docker-compose.yml`¡B`apps/directus/README.md`¡C
+  - A3 ¬[ºc»¡©ú¡G`docs/ARCHITECTURE_DIRECTUS_ASTRO.md`¡]any_content/any_content_images¡FB1 translations ¹w¯d¡FC2 importer/ Astro ºK­n¡^¡C
+  - Importer stub¡G`tools/directus-import/import.mjs` + `tools/directus-import/README.md`¡Apayload ·Ç³Æ¡B¥¢±Ñ¼g `docs/QA/DIRECTUS_IMPORT_FAILS.jsonl`¡C
+  - Astro ³Ì¤p­¶¡G`apps/astro/src/lib/directus.ts`¡B`apps/astro/src/pages/[lang]/[type]/[slug].astro`¡B`apps/astro/src/pages/[lang]/[type]/index.astro`¡C
+  - package.json scripts¡G`directus:up` / `directus:down` / `import:directus`¡C
+  - `docs/PROJECT_TODO.md` ·s¼W¨Ã¼Ð°O T-0094 §¹¦¨¡C
+- ´ú¸Õ / ÀË¬d¡G`npm test`¡B`npm run build`¡B`npm run check:zh-cn`¡B`npm run check:no-bom`¡B`npm run check:utf8`¡B`npm run security:scan`¡]security warnings ¬°¬J¦³ placeholder¡^¡C
+- handoff¡G`docs/TEMP/TEMP_20251216_T-0094_77070bd.zip`
+- RAW¡G
+  - docs/ARCHITECTURE_DIRECTUS_ASTRO.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/ARCHITECTURE_DIRECTUS_ASTRO.md
+  - apps/directus/docker-compose.yml  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/directus/docker-compose.yml
+  - apps/directus/README.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/directus/README.md
+  - tools/directus-import/import.mjs  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/directus-import/import.mjs
+  - tools/directus-import/README.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/directus-import/README.md
+  - apps/astro/src/lib/directus.ts  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/astro/src/lib/directus.ts
+  - apps/astro/src/pages/[lang]/[type]/[slug].astro  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/astro/src/pages/%5Blang%5D/%5Btype%5D/%5Bslug%5D.astro
+  - apps/astro/src/pages/[lang]/[type]/index.astro  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/astro/src/pages/%5Blang%5D/%5Btype%5D/index.astro
+  - docs/PROJECT_TODO.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+  - docs/Windsurf_ChatGPT_NOTES.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+  - package.json  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json

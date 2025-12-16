@@ -1,0 +1,28 @@
+---
+import { fetchAnyContent } from "../../../lib/directus";
+const { lang, type, slug } = Astro.params;
+const data = await fetchAnyContent({ lang, type, slug });
+---
+
+<html lang={lang}>
+  <head>
+    <title>{data.title}</title>
+  </head>
+  <body>
+    <h1>{data.title}</h1>
+    <p>Published at: {data.published_at}</p>
+    <p>Type: {type}</p>
+    <p>Lang: {lang}</p>
+    <img src={data.cover_url} alt={data.title} />
+    <pre>{data.body_markdown}</pre>
+    <section>
+      <h2>Images</h2>
+      {data.images?.map((img) => (
+        <figure>
+          <img src={img.url} alt={img.alt} />
+          <figcaption>{img.caption}</figcaption>
+        </figure>
+      ))}
+    </section>
+  </body>
+</html>

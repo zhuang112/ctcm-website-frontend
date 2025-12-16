@@ -255,6 +255,23 @@
   - [x] 三份 docs 以 UTF-8 正常顯示，無 `�`。
   - [x] `npm run check:utf8` 可執行，遇到 decode 失敗或 `�` 會 exit 1。
   - [x] notes 記錄 T-0093 並有交接包。
+
+### T-0094 directus-astro-mvp-a3-b1-c2：Directus + Importer stub + Astro MVP
+
+> 狀態：✅ 已完成（2025-12-17）
+
+- 目標：
+  - 建立可啟動的 Directus docker-compose（postgres + storage）。
+  - 定義 A3 schema（any_content / any_content_images），B1 translations 預留，C2 importer 說明。
+  - 提供 importer stub（掃描 AnyContent JSON，準備 upsert payload，記錄失敗），後續再接 Directus API。
+  - Astro MVP 頁面：最小 fetch layer + slug/index 頁能渲染 title/cover/body_markdown/images。
+  - package script：directus:up/down、import:directus。
+- 驗收方式：
+  - [x] apps/directus/docker-compose.yml 可啟動 directus + postgres（README 說明）。
+  - [x] `docs/ARCHITECTURE_DIRECTUS_ASTRO.md` 條列 A3/B1/C2 結構與後續方向。
+  - [x] importer stub 可掃描 JSON 並輸出 payload，失敗寫 QA jsonl（無 HTTP）。
+  - [x] Astro 頁面可編譯渲染 placeholder 資料。
+  - [x] scripts 已新增；notes 登記 T-0094；handoff zip 含上述檔案。
 ### T-0083 zh-tw-to-zh-cn-pipeline-docs-unify-and-qa-reports?垓??謍???謘???賹???QA ?璇胼?
 > ????????????2025-12-16?洫ocs-only??
 - ?????  - ??zh-TW??瞥-CN pipeline ????皜航?蝞?? canonical?docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md`?????撖抆冪??? canonical??  - ??? QA ???垓謒????ules/*.tsv/json??蹓魂鼓?萄??reports/report_hits.md?蹍河port_candidates.md????cross-link ??workflow/schema??  - ?皝? INSTR index ?擗? T-0083??- ?踐????  - [x] canonical ????殉朱謓剝?銵??????????????拙??改??  - [x] CONTENT_SCHEMA_V1 / WORKFLOW cross-link ??canonical??NSTR/README ?謅??INSTR?洵acklog ?擗??堆???  - [x] docs-only?洩npm run check:no-bom`?蹍pm run security:scan` ?謍???
