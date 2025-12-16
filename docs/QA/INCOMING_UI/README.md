@@ -1,6 +1,6 @@
-# UI incoming ZIP (Gemini -> Agent)
+ï»¿# UI incoming ZIP (Gemini -> Agent)
 
-- ©ñ¸m Gemini ²£¥Xªº UI ZIP¡C
-- ÀÉ¦W¡G`UIZIP_<YYYYMMDD>_<page_or_feature>_<rev>.zip`¡A¨Ò¦p `UIZIP_20251216_homepage_r1.zip`¡C
-- ZIP »Ý¥]§t `UI_HANDOFF.md`¡A´y­z­¶­±/¤¸¥ó²M³æ¡BÀÉ®×µ²ºc»P¹ïÀ³ repo ¸ô®|¡B¥i°õ¦æÅçÃÒ¡B¤wª¾­­¨î¡C
-- ¸T¤îªþ±a `node_modules/`¡B¤j«¬¤G¶i¦ì¯À§÷¡F½Ð¯d¥²­nºI¹Ï/³]­p½Z§Y¥i¡C
+- æ”¾ç½® Gemini ç”¢å‡ºçš„ UI ZIPã€‚
+- æª”åï¼š`UIZIP_<YYYYMMDD>_<page_or_feature>_<rev>.zip`ï¼Œä¾‹å¦‚ `UIZIP_20251216_homepage_r1.zip`ã€‚
+- ZIP éœ€åŒ…å« `UI_HANDOFF.md`ï¼Œèªªæ˜Žé é¢/å…ƒä»¶æ¸…å–®ã€æª”æ¡ˆçµæ§‹èˆ‡å°æ‡‰ repo è·¯å¾‘ã€å¯åŸ·è¡Œé©—è­‰ã€å·²çŸ¥é™åˆ¶ã€‚
+- ç¦æ­¢é™„å¸¶ `node_modules/`ã€å¤§åž‹äºŒé€²ä½ç´ æï¼›è«‹ç•™å¿…è¦æˆªåœ–/è¨­è¨ˆç¨¿å³å¯ã€‚
