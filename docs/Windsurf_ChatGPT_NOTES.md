@@ -460,3 +460,25 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
 
 - T-0097 canonical handoff: TEMP_20251216_T-0097_2eff405.zip
 - Archived: TEMP_20251216_T-0097_d166a24.zip (do not use)
+
+## 2025-12-16 任務：T-0101 fix-missing-debug-prompts-and-handoff-folder
+- 內容：
+  - 建立 `docs/QA/DEBUG_V3/PROMPTS/` 並補上 `debug_review.md`、`bugfix_validation.md` 模板。
+  - 確認並保留 `docs/HANDOFF/HANDOFF_SUMMARY_2025-12-16_ctworld_next_chat.md`。
+  - Workflow 快速索引維持對應，未新增其他變更。
+- 測試：docs-only；執行 `npm run check:no-bom`, `npm run check:utf8`。
+- commit：<待填寫>
+
+變更檔案（含 RAW 連結）：
+- docs/PROJECT_TODO.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/WORKFLOW/ADDENDUMS/WORKFLOW_ADDENDUM_MULTI_AI_DEBUG_AND_CLEAN_SLATE.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW/ADDENDUMS/WORKFLOW_ADDENDUM_MULTI_AI_DEBUG_AND_CLEAN_SLATE.md
+- docs/QA/DEBUG_V3/PROMPTS/debug_review.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/PROMPTS/debug_review.md
+- docs/QA/DEBUG_V3/PROMPTS/bugfix_validation.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/PROMPTS/bugfix_validation.md

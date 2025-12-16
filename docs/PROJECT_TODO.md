@@ -336,3 +336,16 @@ pm run security:scan -- --strict
   - [x] baseline snapshot 已納入 repo。
   - [x] importer upsert + 圖片 replace 行為落實，失敗記錄 jsonl。
   - [x] Astro 以 Directus filters 讀取，fallback 仍可渲染。
+
+### T-0101 fix-missing-debug-prompts-and-handoff-folder：補齊 debug 模板與交接目錄
+
+> 狀態：? 已完成（2025-12-16）
+
+- 目標：
+  - 建立 `docs/QA/DEBUG_V3/PROMPTS/` 並補上 debug_review / bugfix_validation 模板。
+  - 確認 handoff 目錄存在並移動 `HANDOFF_SUMMARY_2025-12-16_ctworld_next_chat.md` 至 `docs/HANDOFF/`。
+  - Workflow 快速索引指向正確目錄。
+- 驗收：
+  - [x] PROMPTS/ 下有 debug_review.md、bugfix_validation.md。
+  - [x] docs/HANDOFF/ 存在並包含 handoff summary。
+  - [x] Workflow 快速索引仍可對應現有目錄。
