@@ -355,8 +355,8 @@
   - `docs/PROJECT_TODO.md`：新增並標記完成 T-0081 條目。
   - `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`：新增 I-0003（handoff source_commit 斷言）並標記 done。
 - 測試 / 檢查：執行 `npm run handoff:tempzip -- --task_id T-0081 --files ...` 成功產出 zip；`npm run check:no-bom` 通過。
-- commits: 3c66cba
-- 交接包：`docs/TEMP/TEMP_20251216_T-0081_45fbd17.zip`（含 MANIFEST，task_id=T-0081，source_commit=45fbd17）
+- commits: 097f4ff
+- 交接包：`docs/TEMP/TEMP_20251216_T-0081_097f4ff.zip`（含 MANIFEST，task_id=T-0081，source_commit=097f4ff）
 
 變更檔案（含 RAW 連結）：
 - scripts/handoff/build-temp-zip.js  
