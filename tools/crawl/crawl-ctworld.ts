@@ -1,21 +1,24 @@
 #!/usr/bin/env ts-node
 
 /**
- * 線上 ctworld 網站爬蟲，產生 URL 清單。
+ * 爬 ctworld 網站的輕量 crawler，產生 URL 清單。
  * 對應：docs/crawl-and-inventory.md §2 任務 A
  *
- * 使用方式（示例）：
- *   ts-node tools/crawl/crawl-ctworld.ts \\
- *     --base-url https://www.ctworld.org \\
- *     --out data/crawl/crawled-urls.json \\
- *     --max-depth 3 \\
- *     --max-urls 500 \\
- *     --delay-ms 200
+ * 使用示例：
+ *   ts-node tools/crawl/crawl-ctworld.ts \
+ *     --base-url https://www.ctworld.org \
+ *     --out data/crawl/crawled-urls.json \
+ *     --max-depth 3 \
+ *     --max-urls 500 \
+ *     --delay-ms 200 \
+ *     --jitter-ms 300 \
+ *     --max-retries 5
  */
 
 import fs from "node:fs";
 import path from "node:path";
 import { URL } from "node:url";
+import { execSync } from "node:child_process";
 import * as cheerio from "cheerio";
 import iconv from "iconv-lite";
 
@@ -38,6 +41,8 @@ interface QaEntry {
   encoding?: string | null;
   error: string;
   first_seen_at: string;
+  last_status?: number;
+  retry_count?: number;
 }
 
 interface CliOptions {
@@ -45,7 +50,12 @@ interface CliOptions {
   outPath: string;
   maxDepth: number;
   delayMs: number;
+  jitterMs: number;
   maxUrls: number;
+  maxRetries: number;
+  backoffBaseMs: number;
+  backoffCapMs: number;
+  userAgent: string;
 }
 
 function parseArgs(argv: string[]): CliOptions {
@@ -68,9 +78,28 @@ function parseArgs(argv: string[]): CliOptions {
   const outPath = args.get("out") ?? "data/crawl/crawled-urls.json";
   const maxDepth = Number(args.get("max-depth") ?? "5");
   const delayMs = Number(args.get("delay-ms") ?? "200");
-  const maxUrls = Number(args.get("max-urls") ?? "0"); // 0 代表不限
+  const jitterMs = Number(args.get("jitter-ms") ?? "300");
+  const maxUrls = Number(args.get("max-urls") ?? "0"); // 0 表示不設上限
+  const maxRetries = Number(args.get("max-retries") ?? "5");
+  const backoffBaseMs = Number(args.get("backoff-base-ms") ?? "1000");
+  const backoffCapMs = Number(args.get("backoff-cap-ms") ?? "30000");
+  const userAgent =
+    args.get("user-agent") ??
+    process.env.CTWORLD_CRAWLER_UA ??
+    "ctworld-crawler/1.0 (+https://www.ctworld.org)";
 
-  return { baseUrl, outPath, maxDepth, delayMs, maxUrls };
+  return {
+    baseUrl,
+    outPath,
+    maxDepth,
+    delayMs,
+    jitterMs,
+    maxUrls,
+    maxRetries,
+    backoffBaseMs,
+    backoffCapMs,
+    userAgent,
+  };
 }
 
 function ensureDirExists(filePath: string): void {
@@ -80,8 +109,19 @@ function ensureDirExists(filePath: string): void {
   }
 }
 
+function getHeadShort(): string {
+  try {
+    const head = execSync("git rev-parse --short HEAD", { stdio: ["ignore", "pipe", "ignore"] })
+      .toString()
+      .trim();
+    return head || "unknown";
+  } catch {
+    return "unknown";
+  }
+}
+
 /**
- * 只允許 ctworld.org / ctworld.org.tw 網域
+ * 僅允許 ctworld.org / ctworld.org.tw
  */
 function isSameDomain(targetUrl: string): boolean {
   try {
@@ -99,7 +139,7 @@ function isSameDomain(targetUrl: string): boolean {
 }
 
 /**
- * 將相對網址轉成絕對網址，基準為 baseUrl
+ * 轉成絕對網址
  */
 function toAbsoluteUrl(href: string, baseUrl: string): string | null {
   if (!href) return null;
@@ -116,7 +156,7 @@ function toAbsoluteUrl(href: string, baseUrl: string): string | null {
 }
 
 /**
- * 從 HTML 中抓出所有 <a href> 連結，轉成絕對網址
+ * 從 HTML 取出 <a href>
  */
 function getLinksFromHtml(html: string, pageUrl: string): string[] {
   const $ = cheerio.load(html);
@@ -137,66 +177,83 @@ async function delay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function fetchPage(
-  url: string,
-): Promise<{ status: number; contentType: string | null; body: string | null; qa?: QaEntry }> {
-  try {
-    const res = await fetch(url);
-    const status = res.status;
-    const contentType = res.headers.get("content-type");
-    const isHtml = contentType ? contentType.includes("text/html") : false;
-    if (!isHtml) {
-      return { status, contentType, body: null };
-    }
-
-    const buffer = Buffer.from(await res.arrayBuffer());
-    const headerCharset = contentType?.match(/charset=([\w-]+)/i)?.[1]?.toLowerCase() ?? null;
-    const guesses = [headerCharset, "utf-8", "big5", "big5-hkscs", "windows-1252"].filter(
-      Boolean,
-    ) as string[];
-    let lastError: string | null = null;
-    for (const enc of guesses) {
-      try {
-        if (!iconv.encodingExists(enc)) continue;
-        const decoded = iconv.decode(buffer, enc);
-        return { status, contentType, body: decoded };
-      } catch (err: any) {
-        lastError = err?.message ?? String(err);
-      }
-    }
-
-    return {
-      status,
-      contentType,
-      body: null,
-      qa: {
-        url,
-        stage: "decode",
-        encoding: headerCharset,
-        error: lastError ?? "decode failed",
-        first_seen_at: new Date().toISOString(),
-      },
-    };
-  } catch (err) {
-    console.error(`Fetch error for ${url}:`, err);
-    return {
-      status: 0,
-      contentType: null,
-      body: null,
-      qa: {
-        url,
-        stage: "fetch",
-        encoding: null,
-        error: err instanceof Error ? err.message : String(err),
-        first_seen_at: new Date().toISOString(),
-      },
-    };
-  }
+function backoffDelayMs(base: number, cap: number, jitter: number, attempt: number): number {
+  const exp = base * Math.pow(2, attempt - 1);
+  const withJitter = exp + Math.floor(Math.random() * (jitter > 0 ? jitter : 1));
+  return Math.min(withJitter, cap);
 }
 
-/**
- * 將 CrawledUrl 陣列轉成 CSV 字串
- */
+async function fetchPage(
+  url: string,
+  opts: {
+    userAgent: string;
+    referer: string;
+    maxRetries: number;
+    backoffBaseMs: number;
+    backoffCapMs: number;
+    jitterMs: number;
+  },
+): Promise<{ status: number; contentType: string | null; body: string | null; qa?: QaEntry }> {
+  let lastError: string | null = null;
+  let lastStatus: number | undefined;
+
+  for (let attempt = 1; attempt <= opts.maxRetries; attempt++) {
+    try {
+      const res = await fetch(url, {
+        headers: {
+          "User-Agent": opts.userAgent,
+          Referer: opts.referer,
+        },
+      });
+      lastStatus = res.status;
+      const contentType = res.headers.get("content-type");
+      const isHtml = contentType ? contentType.includes("text/html") : false;
+
+      if (lastStatus >= 500 || lastStatus === 429 || lastStatus === 403) {
+        lastError = `http_${lastStatus}`;
+      } else if (!isHtml) {
+        return { status: lastStatus, contentType, body: null };
+      } else {
+        const buffer = Buffer.from(await res.arrayBuffer());
+        const headerCharset = contentType?.match(/charset=([\w-]+)/i)?.[1]?.toLowerCase() ?? null;
+        const guesses = [headerCharset, "utf-8", "big5", "big5-hkscs", "windows-1252"].filter(Boolean) as string[];
+        for (const enc of guesses) {
+          try {
+            if (!iconv.encodingExists(enc)) continue;
+            const decoded = iconv.decode(buffer, enc);
+            return { status: lastStatus, contentType, body: decoded };
+          } catch (err: any) {
+            lastError = err?.message ?? String(err);
+          }
+        }
+        lastError = lastError ?? "decode failed";
+      }
+    } catch (err: any) {
+      lastError = err instanceof Error ? err.message : String(err);
+    }
+
+    if (attempt < opts.maxRetries) {
+      const waitMs = backoffDelayMs(opts.backoffBaseMs, opts.backoffCapMs, opts.jitterMs, attempt);
+      await delay(waitMs);
+    }
+  }
+
+  return {
+    status: lastStatus ?? 0,
+    contentType: null,
+    body: null,
+    qa: {
+      url,
+      stage: "fetch",
+      encoding: null,
+      error: lastError ?? "unknown error",
+      first_seen_at: new Date().toISOString(),
+      last_status: lastStatus,
+      retry_count: opts.maxRetries,
+    },
+  };
+}
+
 function toCsv(crawled: CrawledUrl[]): string {
   const header = "url,status,contentType,source";
   const esc = (v: string | number | null | undefined) => {
@@ -211,11 +268,8 @@ function toCsv(crawled: CrawledUrl[]): string {
   return header + "\n" + rows.join("\n") + "\n";
 }
 
-/**
- * BFS 爬蟲主流程
- */
 async function crawl(options: CliOptions): Promise<{ results: CrawledUrl[]; qa: QaEntry[] }> {
-  const { baseUrl, maxDepth, delayMs, maxUrls } = options;
+  const { baseUrl, maxDepth, delayMs, jitterMs, maxUrls } = options;
 
   const visited = new Set<string>();
   const queue: CrawlTask[] = [
@@ -236,7 +290,6 @@ async function crawl(options: CliOptions): Promise<{ results: CrawledUrl[]; qa: 
     if (!isSameDomain(url)) continue;
     if (depth > maxDepth) continue;
 
-    // 若有設定 maxUrls，且已達上限，就停止爬蟲
     if (maxUrls > 0 && results.length >= maxUrls) {
       console.log(`[crawl] Reached maxUrls = ${maxUrls}, stopping.`);
       break;
@@ -244,13 +297,19 @@ async function crawl(options: CliOptions): Promise<{ results: CrawledUrl[]; qa: 
 
     console.log(`[crawl] (${depth}) ${url}`);
 
-    const { status, contentType, body, qa: qaEntry } = await fetchPage(url);
+    const { status, contentType, body, qa: qaEntry } = await fetchPage(url, {
+      userAgent: options.userAgent,
+      referer: baseUrl,
+      maxRetries: options.maxRetries,
+      backoffBaseMs: options.backoffBaseMs,
+      backoffCapMs: options.backoffCapMs,
+      jitterMs: options.jitterMs,
+    });
     results.push({ url, status, contentType, source });
     if (qaEntry) {
       qa.push(qaEntry);
     }
 
-    // 只在 HTML 頁面上繼續往下抓
     const isHtml = contentType ? contentType.includes("text/html") : false;
     if (status === 200 && isHtml && body) {
       const links = getLinksFromHtml(body, url);
@@ -262,7 +321,8 @@ async function crawl(options: CliOptions): Promise<{ results: CrawledUrl[]; qa: 
     }
 
     if (delayMs > 0) {
-      await delay(delayMs);
+      const jitter = Math.floor(Math.random() * (jitterMs > 0 ? jitterMs : 1));
+      await delay(delayMs + jitter);
     }
   }
 
@@ -285,18 +345,41 @@ async function main() {
   console.log(`CSV : ${csvPath}`);
 
   if (qa.length > 0) {
+    const nowIso = new Date().toISOString();
+    const jsonlPath = path.join("docs", "QA", "CRAWL_FAILS.jsonl");
+    ensureDirExists(jsonlPath);
+    const headShort = getHeadShort();
+    const taskId = process.env.CRAWL_TASK_ID ?? "T-0089";
+    const jsonl = qa
+      .map((q) =>
+        JSON.stringify({
+          url: q.url,
+          stage: q.stage,
+          encoding: q.encoding ?? null,
+          error: q.error,
+          first_seen_at: q.first_seen_at,
+          last_seen_at: nowIso,
+          last_status: q.last_status ?? null,
+          retry_count: q.retry_count ?? options.maxRetries,
+          task_id: taskId,
+          source_commit: headShort,
+        }),
+      )
+      .join("\n");
+    fs.appendFileSync(jsonlPath, (fs.existsSync(jsonlPath) ? "\n" : "") + jsonl, "utf-8");
+
     const qaPath = path.join("docs", "QA", "CRAWL_FAILS.md");
     ensureDirExists(qaPath);
     const lines = [
       "# CRAWL_FAILS",
       "",
-      `> 自動記錄 fetch/decode 失敗的 URL（最新 run: ${new Date().toISOString()}）`,
+      `> 紀錄 fetch/decode 失敗的 URL（本 run: ${nowIso}，history: docs/QA/CRAWL_FAILS.jsonl，task_id=${taskId}，source_commit=${headShort}）`,
       "",
-      "| url | stage | encoding | error | first_seen_at |",
-      "| --- | --- | --- | --- | --- |",
+      "| url | stage | encoding | error | first_seen_at | last_status | retries |",
+      "| --- | --- | --- | --- | --- | --- | --- |",
       ...qa.map(
         (q) =>
-          `| ${q.url} | ${q.stage} | ${q.encoding ?? ""} | ${q.error.replace(/\|/g, "\\|")} | ${q.first_seen_at} |`,
+          `| ${q.url} | ${q.stage} | ${q.encoding ?? ""} | ${q.error.replace(/\|/g, "\\|")} | ${q.first_seen_at} | ${q.last_status ?? ""} | ${q.retry_count ?? options.maxRetries} |`,
       ),
       "",
     ];
@@ -305,7 +388,6 @@ async function main() {
   }
 }
 
-// 直接執行 main（在 ts-node 環境中）
 main().catch((err) => {
   console.error(err);
   process.exit(1);

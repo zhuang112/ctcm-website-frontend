@@ -1,4 +1,4 @@
-﻿# ChatGPT ? 撖虫? Agent ??蝑?
+# ChatGPT ? 撖虫? Agent ??蝑?
 
 > ?祆?獢策?靘?? ChatGPT / AI ?拇??霈嚗牧???獢???撌脣???靽格??>
 > ?桀?銝餉?撖虫? Agent嚗odex嚗?祆? repo ?湔靽格蝔???docs嚗瑼??怎 `Windsurf_ChatGPT_NOTES.md`嚗靘隤踵?賢??臬撠? T 隞餃?銝剜?唳隤芣???>
@@ -290,3 +290,32 @@ pm run security:scan（僅 placeholder warnings）。
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
+## 2025-12-17 任務：T-0089 crawler-politeness-implementation-and-qa-fails-history
+
+- 目的：在 crawler 實作 UA/Referer、速率限制＋jitter、429/5xx/backoff（maxRetries=5、backoff cap 30s），並將 fetch/decode 失敗寫入 jsonl 歷史。
+- 主要變更：
+  - 	ools/crawl/crawl-ctworld.ts：加入 UA/Referer、jitter delay、重試 + 指數回退；支援 CLI 參數（delay-ms/jitter-ms/max-retries/backoff base/cap/user-agent）。
+  - QA 歷史：新增 docs/QA/CRAWL_FAILS.jsonl（append-only）與摘要 docs/QA/CRAWL_FAILS.md；紀錄 task_id、source_commit、retry_count。
+  - workflow 補充 CRAWL_FAILS 保存規則；PROJECT_TODO 標記 T-0085 由本次落實，新增 T-0089 條目。
+- 測試 / 檢查：
+pm test、
+pm run build、
+pm run check:zh-cn、
+pm run check:no-bom、
+pm run security:scan（僅 docs placeholder 警告）。
+- commits: <填入本次 commit hash>
+- 交接包：docs/TEMP/TEMP_20251217_T-0089_<commit>.zip（含 MANIFEST，task_id=T-0089）
+
+變更檔案（含 RAW 連結）：
+- tools/crawl/crawl-ctworld.ts  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/crawl/crawl-ctworld.ts
+- docs/QA/CRAWL_FAILS.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/CRAWL_FAILS.md
+- docs/QA/CRAWL_FAILS.jsonl  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/CRAWL_FAILS.jsonl
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

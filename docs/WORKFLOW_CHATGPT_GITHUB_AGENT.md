@@ -259,6 +259,7 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
 - CI（ci-self-proof）：`push main` / `pull_request` 會自動跑 `check:no-bom`、`security:scan`、`test`、`build`、`check:zh-cn`，並產生 `ci_summary.md/json`，收集 `docs/QA/**`、`docs/terminal_logs/**`、`docs/AUDITS/**`、`tmp/**` 作為 artifacts。
 - CI summary：由 `scripts/quality/ci-summary.js` 產生，包含 source_commit / run_at / checks 狀態與 crawl_fails 簡報。
 - 若 CI 尚未啟用或需手動驗證，請至少本機跑同樣的檢查並在 notes 註記。
+- CRAWL_FAILS：爬蟲任務若有 fetch/decode 失敗，請寫入 `docs/QA/CRAWL_FAILS.jsonl`（append，保留歷史），並輸出當次摘要 `docs/QA/CRAWL_FAILS.md`；手動或 CI 報告時可在 ci_summary 中提及。
 
 ### 1.13 檔案編碼與行尾（防止亂碼）
 

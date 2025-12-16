@@ -1,5 +1,5 @@
 # CRAWL_FAILS
 
-> 自動記錄 fetch/decode 失敗的 URL。若需要人工追蹤，請保留歷史版本或移至 issues。
+> 紀錄 crawler fetch/decode 失敗的 URL。歷史保存在 docs/QA/CRAWL_FAILS.jsonl（append-only）；本檔為最近一次執行的摘要。
 
-（目前無紀錄；執行 crawler 時若解碼/抓取失敗會自動覆寫本檔。）***
+目前尚無新紀錄（未跑 crawler 或無失敗）。
