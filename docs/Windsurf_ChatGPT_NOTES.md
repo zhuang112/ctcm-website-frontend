@@ -442,8 +442,8 @@
   - `package.json`：新增 `debug:poc-100` script。
   - .gitignore：忽略 `tmp/`。
 - 測試 / 檢查：`npm test`、`npm run build`、`npm run check:zh-cn`、`npm run check:no-bom`、`npm run security:scan`（皆通過；security:scan 仍僅有 placeholder 關鍵字警告）。
-- commits: <填入本次 commit hash>
-- 交接包：`docs/TEMP/TEMP_20251216_T-0088_<commit>.zip`（含 MANIFEST，task_id=T-0088）
+- commits: 16523dd
+- 交接包：`docs/TEMP/TEMP_20251216_T-0088_16523dd.zip`（含 MANIFEST，task_id=T-0088）
 
 變更檔案（含 RAW 連結）：
 - tools/debug/poc-run-100.ts  
