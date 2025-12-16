@@ -604,3 +604,15 @@ pm run build 通過。
   - [x] `tools/debug/poc-run-100.ts` 可讀取 URL_QUEUE、產生 `tmp/poc/results.json`、報告與 checklist。
   - [x] 報告輸出：`docs/QA/DEBUG_V3/REPORTS/POC_100_<date>_<commit>.md` 與 `CHECKLIST_<date>_POC100.md`。
   - [x] URL_QUEUE 至少 10 筆（本次為 placeholder），stats 可作為 baseline；notes 記錄狀態與 RAW 連結；`npm test` / `npm run build` / `npm run check:zh-cn` / `npm run check:no-bom` / `npm run security:scan` 通過。
+
+### T-0085 crawler-politeness-rate-limit-backoff：爬蟲禮貌性與反封鎖風險控管
+
+> 狀態：✅ 已完成（2025-12-16；docs-only 規範，等待後續實作/調整）
+
+- 目標：
+  - 在 TODO 與 backlog 登記 crawler 的禮貌性要求：速率限制、jitter、重試/退避、429/403 停止並回報、尊重 robots.txt（如適用），不得嘗試繞過防護。
+  - 要求 crawler 輸出 QA 報表，記錄 blocked/429/403 URL 與時間、錯誤。
+- 驗收：
+  - [x] PROJECT_TODO 新增 T-0085 條目並標記完成（docs 規範）。
+  - [x] IMPROVEMENT_BACKLOG 新增對應條目（P0、auto）。
+  - [x] notes 記錄本次更新與 RAW 連結；`npm run check:no-bom`、`npm run security:scan` 通過（docs-only）。

@@ -16,3 +16,5 @@
 | I-0001| auto       | （保留佔位，待補實際條目）                               | medium | todo   | -       | -                              |
 | I-0002| auto       | Security hardening & secret scanning rules（T-0080）     | high   | done   | T-0080  | 2025-12-13 新增，scan 通過     |
 | I-0003| auto       | Handoff source_commit autodetect + MANIFEST 斷言（T-0081） | high   | done   | T-0081  | 2025-12-16 完成，zip 帶 HEAD7   |
+| I-0004| auto       | Debug V3 模板與 CI 自動檢查（T-0087）                    | high   | done   | T-0087  | 2025-12-16 建立模板與 ci-self-proof |
+| I-0005| auto       | 爬蟲禮貌性：rate limit + backoff + 429/403 停止並回報（T-0085，P0） | high   | done   | T-0085  | 2025-12-16 登記，待後續實作調整 |

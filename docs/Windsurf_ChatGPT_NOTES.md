@@ -462,6 +462,24 @@
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
+## 2025-12-16 任務：T-0085 crawler-politeness-rate-limit-backoff
+
+- 目的：在 TODO/IMPROVEMENT 註記爬蟲禮貌性與反封鎖風險控管（速率限制、退避、429/403 停止與 QA 報表），暫為 docs 規範，後續視需要實作。
+- 主要變更：
+  - `docs/PROJECT_TODO.md`：新增並標記完成 T-0085 條目（P0，docs-only）。
+  - `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`：新增 I-0005（爬蟲禮貌性 P0，auto）。
+- 測試 / 檢查：docs-only；已執行 `npm run check:no-bom`、`npm run security:scan`。
+- commits: <填入本次 commit hash>
+- 交接包：`docs/TEMP/TEMP_20251216_T-0085_<commit>.zip`（含 MANIFEST，task_id=T-0085）
+
+變更檔案（含 RAW 連結）：
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 ## 2025-12-12 任務：T-0047 docs-rules-consistency-review-phase-1
 
 - 目的：檢查規則文件一致性，整理 cross-check 筆記（docs-only）。
