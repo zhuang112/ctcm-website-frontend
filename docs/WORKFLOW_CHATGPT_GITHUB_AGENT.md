@@ -501,3 +501,29 @@ ChatGPT éš?ZIP ?æŠ’??æ‰¹æ†?ç®¸?åš—ï—¹??ïµ??ï• ? ZIP??
 - æ’ ïššåº—é–¬î¡¾?é½î³ˆ??ï—½??î»?ç˜™ç®‡?åš—ï•?éšæ­¹??îµ¤î¹ª?ïš•Â€? 
 - é–°å–Ÿæ•¦é–¬î²î¹µ?ï‹ª?é›¿î°«é¢¨?è„¤?éŠå‰–î¯­ Git repo ??`docs/*.md`?? 
 - ?âˆŸ??è‡­??îº»hatGPT?î»indsurf ??Codexåš—ï—½??äº¦?æ’Œä¹©??î¿œï?è³¢ç¿°?î¸…??ä¹“Â€?
+
+## 1.15 ¦h AI ¥æ¤eÀËµø»P¥~³¡ debug¡]Gemini / Grok¡^
+- ¥~³¡ AI ¥æ¤eÀËªº½dÃ¥¡Gcrawler/encoding¡Bzh-CN pipeline/OpenCC¡Bhtml-to-markdown¡Bimporter¡]Directus/WP¡^¡Bschema §ó·sµ¥¡u·|¼vÅT runtime ©Î¸ê®Æ«~½è¡vÄ³ÃD¡C¯Â docs ¥i¦Û¦æ review¡A¤£»İ¥~³¡ debug¡C
+- ¨CÁû T ­Y External Debug Required=YES¡G¥ı²£¥Í versioned TEMP zip¡]§t MANIFEST¡^¡A¦A¥Î `docs/QA/DEBUG_V3/PROMPTS/*` Åı¥~³¡ AI ²£¥X bug_report¡FCodex ¨Ì³ø§i­×¥¿¨Ã¦ÛÃÒ¡A¥²­n®Éªş ci_summary¡C
+- INSTR ¥²¶ñ¡GExternal Debug Required YES/NO¡F­Y YES »¡©ú­n²£­ş¨ÇÀÉ¡]bug_report / ci_summary µ¥¡^¡F­Y NO µù©ú docs-only ©Î 100% ¦ÛÃÒ¡C
+
+## 1.16 ¥æ±µ¥] / review pack ³W«h
+- Review ¤@«ß¥H versioned TEMP zip¡]§t MANIFEST¡^¬°·Ç¡G`TEMP_<YYYYMMDD>[_<task>]_ <HEAD7>.zip` ¥B `source_commit` ¥²¶·µ¥©ó HEAD¡C
+- ­Y zip ÂÂ©Î¯Ê¡G¦b¥¿½T HEAD ¤W­«¶] `npm run handoff:tempzip -- --task_id <T-xxxx> --source_commit <HEAD> --files ...`¡C
+- ¥­¥x¤Á´«¡GWP/Next µ¥¤ä½u zip ¥i¼Ğ legacy¡F®Ö¤ß¸ê®Æ½u¡]crawler/AnyContent/zh-CN/QA¡^»İ«O«ù³Ì·s¥i°l·¹¡C
+
+## 1.17 °®²b°_ÂI»P¤ÀÃşµ¦²¤
+- ¦ó®É±j¨î reset¡Gworkflow/QA/¥æ±µ³Q¦Ã¬V®É¡A¦^ GitHub/main °®²bª¬ºA¦A­«¶] handoff¡C
+- ¦ó®É¥iª½±µ«ùÄò¡GWP importer / Next.js µ¥¤ä½u¥i¿W¥ßºt¶i¡F¥D½u¡]Directus schema¡BAnyContent¡Bzh-CN¡BQA¡^»İºû«ù¥i°l·¹¡C
+- ²Ä¤@¤é©T©w¡GDirectus schema ¥Î snapshot/diff/apply ºŞ²z¡FImporter ¥²¶· idempotent¡F¨CÁû T ½T»{ External Debug ¼Ğ°O¡Fnotes/RAW/hand-off »İ§¹¾ã¡C
+
+## 1.18 §Ö³t¯Á¤Ş¡]±`¥ÎÀÉ®×/¥Ø¿ı¡^
+- Àô¹Ò³]¸m¡G`docs/ENV/STEP_BY_STEP_ENV_SETUP_DIRECTUS_ASTRO.md`
+- ¥~³¡ AI Debug¡G`docs/QA/DEBUG_V3/PROMPTS/`, `docs/QA/DEBUG_V3/TEMPLATES/`, `docs/QA/DEBUG_V3/GUIDES/`
+- Handoff¡G`docs/HANDOFF/`¡A¥æ±µ zip ¦b `docs/TEMP/`
+- Strategy¡G`docs/STRATEGY/STRATEGY_Directus_Astro_Migration_ctworld.md`
+- INSTR¡G`docs/INSTR/`
+
+## 1.19 «áÄò·s¼W/¦X¨Öªº Addendum
+- ¤w¦X¨Ö¡G`docs/WORKFLOW/ADDENDUMS/WORKFLOW_ADDENDUM_MULTI_AI_DEBUG_AND_CLEAN_SLATE.md`¡]¤º®e¨Ö¤J 1.15¡ã1.18¡^
+- ª¬ºA¡GMERGED
