@@ -1,7 +1,30 @@
 ﻿---
 import { fetchAnyContentList } from "../../../lib/directus";
+import ArticleCard from "../../../components/ArticleCard.astro";
+
 const { lang, type } = Astro.params;
 const items = await fetchAnyContentList({ lang, type });
+const fallbackItems = [
+  {
+    title: "Sample Article One",
+    slug: "sample-article-one",
+    published_at: "2025-01-01",
+    summary: "Placeholder summary for the article card listing. Replace with Directus data when available.",
+    coverImage: "https://placehold.co/640x360?text=Article+1",
+    type,
+    lang,
+  },
+  {
+    title: "Sample Article Two",
+    slug: "sample-article-two",
+    published_at: "2025-01-08",
+    summary: "Another placeholder summary. Cards show title, meta pills, and a short excerpt.",
+    coverImage: "https://placehold.co/640x360?text=Article+2",
+    type,
+    lang,
+  },
+];
+const cards = items.length ? items : fallbackItems;
 ---
 
 <html lang={lang}>
@@ -9,17 +32,57 @@ const items = await fetchAnyContentList({ lang, type });
     <title>{type} index</title>
   </head>
   <body>
-    <h1>{type} index ({lang})</h1>
-    {items.length === 0 ? (
-      <p>尚無資料（或 Directus 尚未連線）。</p>
-    ) : (
-      <ul>
-        {items.map((item) => (
-          <li>
-            <strong>{item.title}</strong> ｜ {item.published_at}
-          </li>
+    <main class="page">
+      <header class="page__header">
+        <h1>{type} index ({lang})</h1>
+        <p class="page__lead">ArticleCard + 列表展示（T-0105）。當前資料來自 Directus，如未連線則顯示範例卡片。</p>
+      </header>
+      <section class="grid">
+        {cards.map((item) => (
+          <ArticleCard
+            title={item.title}
+            slug={item.slug}
+            published_at={item.published_at}
+            summary={item.summary}
+            coverImage={item.cover_url ?? item.coverImage}
+            type={item.type ?? type}
+            lang={item.lang ?? lang}
+          />
         ))}
-      </ul>
-    )}
+      </section>
+    </main>
   </body>
 </html>
+
+<style>
+  :global(body) {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+    color: #0f172a;
+    margin: 0;
+    padding: 0;
+  }
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 3rem;
+  }
+  .page__header h1 {
+    margin: 0 0 0.5rem;
+    font-size: 2rem;
+  }
+  .page__lead {
+    margin: 0;
+    color: #475569;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+  }
+  @media (max-width: 640px) {
+    .page {
+      padding: 1.5rem 1rem 2rem;
+    }
+  }
+</style>

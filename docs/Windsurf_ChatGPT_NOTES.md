@@ -517,3 +517,33 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
 - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
 
+
+## 2025-12-17 任務：T-0105 first-uizip-pilot-articlecard-listing
+- 內容：
+  - 新增 ArticleCard 元件並改造 `/[lang]/[type]/index` 為卡片列表，Directus 無資料時提供範例卡片。
+  - 依 DevTools checklist 記錄量測摘要，放置 `docs/QA/UI_SNAPSHOTS/T-0105/DEVTOOLS_PARAMS.md`，截圖暫未提供（預留 desktop/tablet/mobile）。
+  - 建立外部 AI debug 報告目錄 `docs/QA/DEBUG_V3/REPORTS/T-0105/AI_DEBUG_TEMP_placeholder.md`（Gemini/Grok 待填），並將 UIZIP/模板定位於 workflow。
+- 測試：`npm run check:no-bom`, `npm run check:utf8`, `npm test`, `npm run build`；`security:scan` 仍有既有樣板警示（Authorization/SITEGROUND）。
+- commit：<待填寫>
+
+變更檔案（含 RAW 連結）：
+- apps/astro/src/components/ArticleCard.astro
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/astro/src/components/ArticleCard.astro
+- apps/astro/src/pages/[lang]/[type]/index.astro
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/astro/src/pages/%5Blang%5D/%5Btype%5D/index.astro
+- docs/QA/UI_SNAPSHOTS/T-0105/DEVTOOLS_PARAMS.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/UI_SNAPSHOTS/T-0105/DEVTOOLS_PARAMS.md
+- docs/QA/DEBUG_V3/REPORTS/T-0105/AI_DEBUG_TEMP_placeholder.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/REPORTS/T-0105/AI_DEBUG_TEMP_placeholder.md
+- docs/QA/INCOMING_UI/GEMINI_UIZIP_INPUT_TEMPLATE.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/INCOMING_UI/GEMINI_UIZIP_INPUT_TEMPLATE.md
+- docs/QA/INCOMING_UI/README.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/INCOMING_UI/README.md
+- docs/QA/UI_SNAPSHOTS/README.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/UI_SNAPSHOTS/README.md
+- docs/PROJECT_TODO.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
