@@ -355,3 +355,16 @@ pm run security:scan -- --strict
   - [x] REPORTS/ 與 REPORTS/_ADVICE/ 目錄存在。
   - [x] `AI_ADVICE_Directus_DB_Hardening_20251217.md` 已就位並含 Date/Sources/Topic/Context。
   - [x] Workflow 有 1.21 小節說明外部 AI 報告的歸戶與命名，notes 有對應記錄。
+
+### T-0103 directus-db-hardening: roles/tokens, indexes, backup runbook
+
+> 狀態：? 已完成（2025-12-17）
+
+- 目標：
+  - 在 docs 記錄 Directus token/role 分工（Astro readonly / Importer write），避免前端使用 admin token。
+  - 新增 DB migration：`apps/directus/db/migrations/001_any_content_constraints_and_indexes.sql`（type+lang+slug 唯一、常用索引）。
+  - 建立備份/還原 runbook。
+- 驗收：
+  - [x] `docs/SECURITY/DIRECTUS_TOKENS_AND_ROLES.md` 記錄 token/role 與環境變數。
+  - [x] migration 檔已入 repo，apps/directus/README 說明執行方式。
+  - [x] `docs/OPS/BACKUP_RESTORE_DIRECTUS_POSTGRES.md` 提供備份/還原與驗證步驟。

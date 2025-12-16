@@ -1,4 +1,4 @@
-﻿Date: 2025-12-17
+Date: 2025-12-17
 Sources: Gemini, Grok
 Topic: Directus/DB hardening (token/role, unique/index, backup)
 Context: ctworld Directus + Astro migration

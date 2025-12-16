@@ -7,6 +7,8 @@
 import fs from 'fs';
 import path from 'path';
 
+const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN_IMPORTER ?? process.env.DIRECTUS_TOKEN;
+
 function readArgs() {
   const args = process.argv.slice(2);
   const opts = { input: 'data', limit: null };
@@ -45,7 +47,7 @@ async function fetchJson(url, options = {}) {
     headers: {
       ...(options.headers || {}),
       'Content-Type': 'application/json',
-      ...(process.env.DIRECTUS_TOKEN ? { Authorization: `Bearer ${process.env.DIRECTUS_TOKEN}` } : {}),
+      ...(DIRECTUS_TOKEN ? { Authorization: `Bearer ${DIRECTUS_TOKEN}` } : {}),
     },
   });
   if (!res.ok) {
@@ -148,4 +150,3 @@ function main() {
 }
 
 main();
-

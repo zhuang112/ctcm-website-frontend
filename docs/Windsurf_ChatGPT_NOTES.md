@@ -491,3 +491,36 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+## 2025-12-17 任務：T-0103 directus-db-hardening-roles-index-backup
+- 內容：
+  - 建立 Directus token/role 分工文件 `docs/SECURITY/DIRECTUS_TOKENS_AND_ROLES.md`（Astro readonly、Importer write）。
+  - 新增 DB migration `apps/directus/db/migrations/001_any_content_constraints_and_indexes.sql`（type+lang+slug 唯一 + 常用索引）。
+  - Importer 改用 `DIRECTUS_TOKEN_IMPORTER` 優先；Astro 支援 readonly token header；更新 README 與 .env.example。
+  - 新增備份/還原 runbook `docs/OPS/BACKUP_RESTORE_DIRECTUS_POSTGRES.md`。
+- 測試：`npm run check:no-bom`, `npm run check:utf8`, `npm test`, `npm run build`；`npm run security:scan` 仍有樣板警示（Authorization/SITEGROUND），無實際 secrets。
+- commit：<待填寫>
+
+變更檔案（含 RAW 連結）：
+- apps/astro/.env.example
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/astro/.env.example
+- apps/astro/src/lib/directus.ts
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/astro/src/lib/directus.ts
+- tools/directus-import/import.mjs
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/directus-import/import.mjs
+- tools/directus-import/README.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/directus-import/README.md
+- apps/directus/db/migrations/001_any_content_constraints_and_indexes.sql
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/directus/db/migrations/001_any_content_constraints_and_indexes.sql
+- apps/directus/README.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/apps/directus/README.md
+- docs/SECURITY/DIRECTUS_TOKENS_AND_ROLES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/SECURITY/DIRECTUS_TOKENS_AND_ROLES.md
+- docs/OPS/BACKUP_RESTORE_DIRECTUS_POSTGRES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/OPS/BACKUP_RESTORE_DIRECTUS_POSTGRES.md
+- docs/PROJECT_TODO.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+- docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md

@@ -1,11 +1,11 @@
-# Directus Importer（T-0095）
+# Directus Importer（T-0103）
 
-用途：把 AnyContent JSON upsert 進 Directus，upsert key = `type::lang::slug`，支援圖片 replace。失敗會記錄 jsonl。
+用途：把 AnyContent JSON upsert 進 Directus，upsert key = `type::lang::slug`，支援圖片 replace。失敗記錄 jsonl。
 
 ## 使用
 ```bash
 DIRECTUS_URL=http://localhost:8055 \
-DIRECTUS_TOKEN=<admin_or_items_token> \
+DIRECTUS_TOKEN_IMPORTER=<write_token> \
 npm run import:directus -- --input data/anycontent --limit 20
 ```
 - `--input`：JSON 根目錄，預設 `data`

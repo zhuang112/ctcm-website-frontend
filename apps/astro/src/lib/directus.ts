@@ -1,9 +1,14 @@
 ﻿// Directus fetch helpers (T-0095)
 
 const DIRECTUS_URL = process.env.DIRECTUS_URL || "http://localhost:8055";
+const DIRECTUS_TOKEN_READONLY = process.env.DIRECTUS_TOKEN_READONLY;
 
 async function fetchJson(url: string) {
-  const res = await fetch(url, { headers: { "Content-Type": "application/json" } });
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (DIRECTUS_TOKEN_READONLY) {
+    headers.Authorization = `Bearer ${DIRECTUS_TOKEN_READONLY}`;
+  }
+  const res = await fetch(url, { headers });
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`${res.status} ${res.statusText} :: ${text}`);
