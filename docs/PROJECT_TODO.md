@@ -1,4 +1,4 @@
-﻿# PROJECT_TODO????? Headless ??????
+# PROJECT_TODO????? Headless ??????
   - [x] PROJECT_TODO / notes �O�� T-0092�F�ʥ汵�]�����Ȥw�� rerun handoff zip�]�R�W�t task_id+HEAD7�^�C
 
 ### T-0094R directus-astro-clean-slate：Directus + Astro 乾淨主線（A3+B1+C2）
@@ -320,3 +320,4 @@ pm run security:scan -- --strict
   - [x] WORKFLOW_CHATGPT_GITHUB_AGENT.md �w�s�W�汵�]�ʺ|���ɻ��W�h�P snapshot �ƴ������C
   - [x] QA/DEBUG_V3 README + �s�W�~�� AI prompt �ҪO�]debug review / bugfix validation�^�A�W�w���i�@�� Markdown �é� REPORTS�C
   - [x] PROJECT_TODO / notes �O�� T-0092�F�ʥ汵�]�����Ȥw�� rerun handoff zip�]�R�W�t task_id+HEAD7�^�C
+
