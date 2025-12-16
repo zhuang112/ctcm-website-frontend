@@ -1,0 +1,54 @@
+name: CI Self Proof
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  self-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run check:no-bom
+        run: npm run check:no-bom
+
+      - name: Run security:scan
+        run: npm run security:scan
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: zh-CN health check
+        run: npm run check:zh-cn
+
+      - name: Generate CI summary
+        run: node scripts/quality/ci-summary.js --check check:no-bom=pass --check security:scan=pass --check test=pass --check build=pass --check check:zh-cn=pass
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-artifacts
+          path: |
+            ci_summary.md
+            ci_summary.json
+            docs/terminal_logs/**
+            docs/QA/**
+            docs/AUDITS/**
+            tmp/**
+          if-no-files-found: ignore
