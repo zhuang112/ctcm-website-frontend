@@ -1,68 +1,32 @@
-# ChatGPT × 實作 Agent 協作筆記
+﻿# ChatGPT ? 撖虫? Agent ??蝑?
 
-> 本檔案給「未來接手的 ChatGPT / AI 助手」閱讀，說明目前專案狀態與已完成的修改。
->
-> 目前主要實作 Agent：Codex（在本機 repo 直接修改程式與 docs）。本檔名暫為 `Windsurf_ChatGPT_NOTES.md`，未來若調整命名可在對應 T 任務中更新本說明。
->
-> 維護方式建議：每一個明確的開發任務（feature / bugfix）新增一個小節，簡要說明需求與已改動檔案。
-
+> ?祆?獢策?靘?? ChatGPT / AI ?拇??霈嚗牧???獢???撌脣???靽格??>
+> ?桀?銝餉?撖虫? Agent嚗odex嚗?祆? repo ?湔靽格蝔???docs嚗瑼??怎 `Windsurf_ChatGPT_NOTES.md`嚗靘隤踵?賢??臬撠? T 隞餃?銝剜?唳隤芣???>
+> 蝬剛風?孵?撱箄降嚗?銝??蝣箇??隞餃?嚗eature / bugfix嚗憓???蝭嚗陛閬牧??瘙?撌脫??獢?
 ---
 
-## 2025-12-10 默契 / 操作習慣
+## 2025-12-10 暺? / ??蝧
 
-- snapshot CLI：`npm run snapshot:docs -- --task T-0007`，只打包本機 `docs/*.md`、`docs/terminal_logs/*.txt` 到 `snapshots/`，不進 git；最新驗收已於 2025-12-10 完成。
-- 實作 Agent 角色：目前實作由 Codex 執行（取代原本固定稱呼 Windsurf）；使用者只需在 ChatGPT 與實作 Agent 間傳遞指令與回報。
-- 編碼：docs 檔案維持 UTF-8（含 BOM 可接受），若再遇亂碼優先用 UTF-8 讀寫。
-- 簡化 TODO 記錄：任務條目以「狀態、目標、驗收」為主，避免過長的實作範圍描述；狀態欄位含日期與誰驗證。
-- 若開新對話，先看 `docs/PROJECT_TODO.md` 與本檔，快速對齊任務狀態與約定。
-- full access / sandbox 約定：若 IDE/Agent 已開 full access（或 auto-approve），仍僅能在 `ctcm-website-frontend/` 下操作；禁止破壞性指令（如 `rm -rf /`、`rm -rf ..`）；所有變更需照 workflow 1.9、記錄在 notes 並附 RAW 連結。
-- notes 記錄格式（每個 T 任務一個小節）：
-  - 說明任務標題、日期、需求摘要。
-  - 列出更新檔案與測試狀態，紀錄最後 commit hash。
-- 追加「變更檔案（含 RAW 連結）」區塊，列出本次所有異動/新增檔案與 RAW URL。
-- ChatGPT → Agent code block 約定：code block 中不得出現 citation / content reference（例如 `::contentReference[...]`、`oaicite:0`），如需引用請在 code block 外以文字描述。
+- snapshot CLI嚗npm run snapshot:docs -- --task T-0007`嚗???祆? `docs/*.md`?docs/terminal_logs/*.txt` ??`snapshots/`嚗???git嚗??圈??嗅歇??2025-12-10 摰???- 撖虫? Agent 閫嚗?祕雿 Codex ?瑁?嚗?隞???砍摰迂??Windsurf嚗?雿輻????ChatGPT ?祕雿?Agent ???隞方????- 蝺函Ⅳ嚗ocs 瑼?蝬剜? UTF-8嚗 BOM ?舀??嚗??鈭Ⅳ?芸???UTF-8 霈撖怒?- 蝪∪? TODO 閮?嚗遙???桐誑???璅??嗚銝鳴??踹???祕雿???餈堆????雿?交??狐撽???- ?仿??啣?閰梧??? `docs/PROJECT_TODO.md` ?瑼?敹恍?朣遙????蝝???- full access / sandbox 蝝?嚗 IDE/Agent 撌脤? full access嚗? auto-approve嚗?隞??賢 `ctcm-website-frontend/` 銝?雿?蝳迫?游??扳?隞歹?憒?`rm -rf /`?rm -rf ..`嚗?????湧???workflow 1.9??? notes 銝阡? RAW ?????- notes 閮??澆?嚗???T 隞餃?銝??蝭嚗?
+  - 隤芣?隞餃?璅????瘙?閬?  - ??湔瑼??葫閰衣???蝝??敺?commit hash??- 餈賢????湔?獢???RAW ???嚗?憛???祆活?????啣?瑼???RAW URL??- ChatGPT ??Agent code block 蝝?嚗ode block 銝凋?敺??citation / content reference嚗?憒?`::contentReference[...]`?oaicite:0`嚗?憒?撘隢 code block 憭誑???膩??
+## 2025-12-10 隞餃?嚗-0011 / T-0012 ????
+- ??`docs/PROJECT_TODO.md` 憓??啁?隞餃?璇嚗?  - `T-0011 fix-corrupted-docs`嚗耨敺拐?蝣?docs?絞銝 UTF-8??  - `T-0012 sync-status-docs`嚗?朣?PROJECT_TODO / PROJECT_STATUS ?祕?脣漲??- ?桀??憓?TODO 璇嚗??撖虫??批捆?ommit: a423ba4
 
-## 2025-12-10 任務：T-0011 / T-0012 初始化
+## 2025-12-10 隞餃?嚗-0012 sync-status-docs嚗銵葉嚗?
+- ?湔瑼?嚗?  - `docs/PROJECT_TODO.md`嚗?朣?摮訾遙????v1 撌脣????-0005 ???嚗ews meta ?交?/?圈? mapping v1嚗?? T-0006 blocked?-0010 ???  - `docs/PROJECT_STATUS.md`嚗?撖怎蜇閬踝?撠??桀?撖虫?嚗rawl?TML?arkdown + sutra?eaching/news/magazine adapters?ocs snapshot CLI?h-TW?h-CN ?芸祕雿egacy data root 敺?隞賬P/React ?芷?憪???- 皜祈岫嚗????湔嚗頝?憭葫閰艾?- commit: 86f2021
 
-- 在 `docs/PROJECT_TODO.md` 增補新的任務條目：
-  - `T-0011 fix-corrupted-docs`：修復亂碼 docs、統一 UTF-8。
-  - `T-0012 sync-status-docs`：對齊 PROJECT_TODO / PROJECT_STATUS 與實際進度。
-- 目前僅新增 TODO 條目，未開始實作內容。commit: a423ba4
+## 2025-12-11 隞餃?嚗-0011 fix-corrupted-docs嚗ROJECT_STATUS ?神嚗?
+- ?湔瑼?嚗docs/PROJECT_STATUS.md` 摰隞?UTF-8 ?啣摰寡???蝘駁鈭Ⅳ??- ??嚗? 2025-12-10 ?嚗?脣漲蝮質汗??璅∠????crawl/inventory?TML?arkdown + sutra?eaching/news/magazine adapters?ocs snapshot CLI?h-TW?h-CN ?芸祕雿egacy data root blocked?P/React ?芷?憪???- 皜祈岫嚗????湔嚗憿?皜祈岫??- commit: 9329d58
 
-## 2025-12-10 任務：T-0012 sync-status-docs（執行中）
+## 2025-12-11 隞餃?嚗orkflow ?啣? GitHub RAW ???閬?
 
-- 更新檔案：
-  - `docs/PROJECT_TODO.md`：補齊教學任務狀態（v1 已完成）、T-0005 狀態行（news meta 日期/地點 mapping v1），重申 T-0006 blocked、T-0010 ?。
-  - `docs/PROJECT_STATUS.md`：重寫總覽，對齊目前實作（crawl、HTML→Markdown + sutra、teaching/news/magazine adapters、docs snapshot CLI、zh-TW→zh-CN 未實作、legacy data root 待備份、WP/React 未開始）。
-- 測試：僅文檔更新，未跑額外測試。
-- commit: 86f2021
+- ?湔瑼?嚗docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`嚗憓?.7 GitHub RAW ???閬?嚗策 ChatGPT ?剁???- ??嚗?蝢?`raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/` ??RAW base嚗牧??ChatGPT 霈?撘?憭望????勗???- 皜祈岫嚗????湔嚗憿?皜祈岫??- commit: ccfcbad
 
-## 2025-12-11 任務：T-0011 fix-corrupted-docs（PROJECT_STATUS 重寫）
-
-- 更新檔案：`docs/PROJECT_STATUS.md` 完整以 UTF-8 新內容覆蓋，移除亂碼。
-- 重點：依 2025-12-10 版本，整理進度總覽、各模組狀態（crawl/inventory、HTML→Markdown + sutra、teaching/news/magazine adapters、docs snapshot CLI、zh-TW→zh-CN 未實作、legacy data root blocked、WP/React 未開始）。
-- 測試：僅文檔更新，無額外測試。
-- commit: 9329d58
-
-## 2025-12-11 任務：workflow 新增 GitHub RAW 連結規則
-
-- 更新檔案：`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`，新增「1.7 GitHub RAW 連結規則（給 ChatGPT 用）」。
-- 重點：定義 `raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/` 為 RAW base，說明 ChatGPT 讀取方式與失敗時回報原則。
-- 測試：僅文檔更新，無額外測試。
-- commit: ccfcbad
-
-## 2025-12-12 任務：T-0011 fix-corrupted-docs（其他亂碼 docs 重寫）
-
-- 更新檔案（整檔覆蓋，UTF-8 正常可讀）：
-  - `docs/AI_COLLAB_SUMMARY.md`：協作模式總結（角色、流程、真相來源）。
-  - `docs/COMPLETE_PROJECT_WORKFLOW.md`：精簡版完整流程與現況。
-  - `docs/PENDING_DECISIONS.md`：未決策清單（pipeline、WP 匯入、前端架構等）。
-  - `docs/SESSION_CHECKLIST.md`：乾淨工作小抄。
-  - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`：角色與邊界重寫。
-- 測試：僅文檔更新，無額外測試。
-- commit: 5777bf6
-  - 本次補充 workflow 溝通格式與 notes RAW 規則，commit: eb92dde
-變更檔案（含 RAW 連結）：
+## 2025-12-12 隞餃?嚗-0011 fix-corrupted-docs嚗隞?蝣?docs ?神嚗?
+- ?湔瑼?嚗瑼???UTF-8 甇?虜?航?嚗?
+  - `docs/AI_COLLAB_SUMMARY.md`嚗?雿芋撘蜇蝯?閫??蝔??訾?皞???  - `docs/COMPLETE_PROJECT_WORKFLOW.md`嚗移蝪∠?摰瘚??瘜?  - `docs/PENDING_DECISIONS.md`嚗瘙箇?皜嚗ipeline?P ?臬??蝡舀瑽?嚗?  - `docs/SESSION_CHECKLIST.md`嚗嗾瘛典極雿???  - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`嚗??脰????神??- 皜祈岫嚗????湔嚗憿?皜祈岫??- commit: 5777bf6
+  - ?祆活鋆? workflow 皞撘? notes RAW 閬?嚗ommit: eb92dde
+霈瑼?嚗 RAW ???嚗?
 
 - docs/AI_COLLAB_SUMMARY.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/AI_COLLAB_SUMMARY.md
@@ -82,22 +46,16 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-> 參考 RAW 連結：
->
+> ??RAW ???嚗?>
 > - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
 >   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
 >
 > - docs/Windsurf_ChatGPT_NOTES.md  
 >   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 任務：T-0013 zh-tw-to-zh-cn-pipeline-design（docs first）
-
-- 更新檔案：
-  - `docs/PROJECT_TODO.md`：將 zh-TW→zh-CN pipeline 條目改為 umbrella，新增 T-0013 並標記為完成。
-  - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`：補齊欄位白名單、資料來源/輸出目錄假設、CLI 規格、繁簡轉換策略（僅 docs）。
-- 測試：僅文檔更新，無額外測試。
-- commit: 5e7d235
-變更檔案（含 RAW 連結）：
+## 2025-12-12 隞餃?嚗-0013 zh-tw-to-zh-cn-pipeline-design嚗ocs first嚗?
+- ?湔瑼?嚗?  - `docs/PROJECT_TODO.md`嚗? zh-TW?h-CN pipeline 璇?寧 umbrella嚗憓?T-0013 銝行?閮摰???  - `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`嚗?朣?雿?????皞?頛詨?桅??身?LI 閬??蝪∟????伐???docs嚗?- 皜祈岫嚗????湔嚗憿?皜祈岫??- commit: 5e7d235
+霈瑼?嚗 RAW ???嚗?
 
 - docs/PROJECT_TODO.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
@@ -108,26 +66,17 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-> 參考 RAW 連結：
->
+> ??RAW ???嚗?>
 > - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
 >   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
 >
 > - docs/Windsurf_ChatGPT_NOTES.md  
 >   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 任務：T-0014 zh-tw-to-zh-cn-pipeline-core-and-cli-skeleton
+## 2025-12-12 隞餃?嚗-0014 zh-tw-to-zh-cn-pipeline-core-and-cli-skeleton
 
-- 更新檔案：
-  - `package.json`：新增 `convert:zh-cn` 腳本與 opencc-js 依賴。
-  - `src/i18n/zh-tw-to-zh-cn.ts`：`convertToZhCn` utility（opencc-js）。
-  - `tests/i18n/zh-tw-to-zh-cn.spec.ts`：基本轉換測試。
-  - `tools/convert/generate-zh-cn-from-zh-tw.ts`：CLI skeleton，支援 `--input` / `--output` / `--dry-run`，可寫出 zh-cn JSON。
-  - `docs/PROJECT_TODO.md`：新增 T-0014 條目並標記完成。
-  - `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次任務與 RAW 連結。
-- 測試：新增單元測試（convertToZhCn）；未跑整套，僅 skeleton。
-- commit: fde0a7a
-變更檔案（含 RAW 連結）：
+- ?湔瑼?嚗?  - `package.json`嚗憓?`convert:zh-cn` ?單??opencc-js 靘陷??  - `src/i18n/zh-tw-to-zh-cn.ts`嚗convertToZhCn` utility嚗pencc-js嚗?  - `tests/i18n/zh-tw-to-zh-cn.spec.ts`嚗?祈??葫閰艾?  - `tools/convert/generate-zh-cn-from-zh-tw.ts`嚗LI skeleton嚗??`--input` / `--output` / `--dry-run`嚗撖怠 zh-cn JSON??  - `docs/PROJECT_TODO.md`嚗憓?T-0014 璇銝行?閮???  - `docs/Windsurf_ChatGPT_NOTES.md`嚗??甈∩遙?? RAW ?????- 皜祈岫嚗憓?葫閰佗?convertToZhCn嚗??芾??游?嚗? skeleton??- commit: fde0a7a
+霈瑼?嚗 RAW ???嚗?
 
 - package.json  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/package.json
@@ -147,17 +96,11 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 任務：T-0015 zh-tw-to-zh-cn-pipeline-write-json
+## 2025-12-12 隞餃?嚗-0015 zh-tw-to-zh-cn-pipeline-write-json
 
-- 更新檔案：
-  - `src/i18n/zh-tw-to-zh-cn-pipeline.ts`：`transformAnycontentZhTwToZhCn` 實作（白名單轉換、language=zh-cn）。
-  - `tools/convert/generate-zh-cn-from-zh-tw.ts`：CLI 寫檔（dry-run / write 支援）。
-- `tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`：覆蓋 transform。
-- `docs/PROJECT_TODO.md`：新增 T-0015 條目並標記完成。
-- `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次任務與 RAW。
-- 測試：`npx vitest tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`
+- ?湔瑼?嚗?  - `src/i18n/zh-tw-to-zh-cn-pipeline.ts`嚗transformAnycontentZhTwToZhCn` 撖虫?嚗?頧??anguage=zh-cn嚗?  - `tools/convert/generate-zh-cn-from-zh-tw.ts`嚗LI 撖急?嚗ry-run / write ?舀嚗?- `tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`嚗???transform??- `docs/PROJECT_TODO.md`嚗憓?T-0015 璇銝行?閮???- `docs/Windsurf_ChatGPT_NOTES.md`嚗??甈∩遙?? RAW??- 皜祈岫嚗npx vitest tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts`
 - commit: 9b146f4
-變更檔案（含 RAW 連結）：
+霈瑼?嚗 RAW ???嚗?
 
 - src/i18n/zh-tw-to-zh-cn-pipeline.ts  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/i18n/zh-tw-to-zh-cn-pipeline.ts
@@ -174,14 +117,9 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 任務：T-0016 zh-cn-health-check-tool（登記 TODO）
-
-- 更新檔案：
-  - `docs/PROJECT_TODO.md`：新增 T-0016 條目（zh-TW/zh-CN JSON 健康檢查 CLI）。
-  - `docs/Windsurf_ChatGPT_NOTES.md`：記錄新增 TODO 與 RAW。
-- 測試：純文檔更新，未執行程式。
-- commit: (pending push)
-變更檔案（含 RAW 連結）：
+## 2025-12-12 隞餃?嚗-0016 zh-cn-health-check-tool嚗閮?TODO嚗?
+- ?湔瑼?嚗?  - `docs/PROJECT_TODO.md`嚗憓?T-0016 璇嚗h-TW/zh-CN JSON ?亙熒瑼Ｘ CLI嚗?  - `docs/Windsurf_ChatGPT_NOTES.md`嚗??憓?TODO ??RAW??- 皜祈岫嚗????湔嚗?瑁?蝔???- commit: (pending push)
+霈瑼?嚗 RAW ???嚗?
 
 - docs/PROJECT_TODO.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
@@ -189,15 +127,9 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 任務：T-0017 html-to-markdown-rules-cleanup
+## 2025-12-12 隞餃?嚗-0017 html-to-markdown-rules-cleanup
 
-- 更新檔案：
-  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`：重寫共用規則、圖片策略、各 post_type 注意事項與驗收檢查。
-  - `docs/PROJECT_TODO.md`：新增 T-0017 條目並標記完成。
-  - `docs/Windsurf_ChatGPT_NOTES.md`：記錄任務摘要與 RAW 連結。
-- 測試：純文檔更新，未執行程式。
-- commits: 9b669a4（初版重寫）、c3e4c3d（結構調整與後續微調）
-變更檔案（含 RAW 連結）：
+- ?湔瑼?嚗?  - `docs/HTML_TO_MARKDOWN_RULES_V4.md`嚗?撖怠?刻??????乓? post_type 瘜冽?鈭????嗆炎?乓?  - `docs/PROJECT_TODO.md`嚗憓?T-0017 璇銝行?閮???  - `docs/Windsurf_ChatGPT_NOTES.md`嚗??遙??閬? RAW ?????- 皜祈岫嚗????湔嚗?瑁?蝔???- commits: 9b669a4嚗???撖恬??3e4c3d嚗?瑽矽?渲?敺?敺株矽嚗?霈瑼?嚗 RAW ???嚗?
 
 - docs/HTML_TO_MARKDOWN_RULES_V4.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/HTML_TO_MARKDOWN_RULES_V4.md
@@ -208,16 +140,10 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 任務：T-0018 meta-instr-and-status-structure
+## 2025-12-12 隞餃?嚗-0018 meta-instr-and-status-structure
 
-- 更新檔案：
-  - 新增 `docs/INSTR/` 目錄並搬移 INSTR 檔，統一命名規則 `INSTR-T-xxxx-<slug>.md`（跨任務通用以 0000 表示）。
-  - 新增 `docs/INSTR/README.md`（用途、命名規則、現有列表）與 `docs/INSTR/INSTR-TEMPLATE.md`（新增 INSTR 的模板）。
-  - 更新 `docs/PROJECT_TODO.md`：新增 T-0018 條目並標記完成。
-  - 更新 `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次 INSTR 整理與 RAW 連結。
-- 測試：純文檔更新，未執行程式。
-- commit: c3e4c3d
-變更檔案（含 RAW 連結）：
+- ?湔瑼?嚗?  - ?啣? `docs/INSTR/` ?桅?銝行蝘?INSTR 瑼?蝯曹??賢?閬? `INSTR-T-xxxx-<slug>.md`嚗楊隞餃??隞?0000 銵函內嚗?  - ?啣? `docs/INSTR/README.md`嚗??????銵剁???`docs/INSTR/INSTR-TEMPLATE.md`嚗憓?INSTR ?芋?選???  - ?湔 `docs/PROJECT_TODO.md`嚗憓?T-0018 璇銝行?閮???  - ?湔 `docs/Windsurf_ChatGPT_NOTES.md`嚗??甈?INSTR ?渡???RAW ?????- 皜祈岫嚗????湔嚗?瑁?蝔???- commit: c3e4c3d
+霈瑼?嚗 RAW ???嚗?
 
 - docs/INSTR/README.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/README.md
@@ -246,16 +172,10 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 任務：T-0019 enforce-utf8-encoding
+## 2025-12-12 隞餃?嚗-0019 enforce-utf8-encoding
 
-- 更新檔案：
-  - 新增 `.editorconfig`、`.gitattributes`，強制文字檔 UTF-8 + LF。
-  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`：新增編碼/行尾提醒。
-  - `docs/PROJECT_TODO.md`：新增 T-0019 條目並標記完成。
-  - `docs/Windsurf_ChatGPT_NOTES.md`：記錄本次任務與 RAW 連結。
-- 測試：純文檔/設定更新，未執行程式。
-- commit: 95d9a13
-變更檔案（含 RAW 連結）：
+- ?湔瑼?嚗?  - ?啣? `.editorconfig`?.gitattributes`嚗撥?嗆?摮? UTF-8 + LF??  - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`嚗憓楊蝣?銵偏????  - `docs/PROJECT_TODO.md`嚗憓?T-0019 璇銝行?閮???  - `docs/Windsurf_ChatGPT_NOTES.md`嚗??甈∩遙?? RAW ?????- 皜祈岫嚗???/閮剖??湔嚗?瑁?蝔???- commit: 95d9a13
+霈瑼?嚗 RAW ???嚗?
 
 - .editorconfig  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.editorconfig
@@ -272,16 +192,11 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 任務：T-0044 cleanup-project_todo-header-and-structure
+## 2025-12-12 隞餃?嚗-0044 cleanup-project_todo-header-and-structure
 
-- 目的：整理 `docs/PROJECT_TODO.md` 檔頭亂碼與結構，維持各 T 條目有標題與狀態行、格式較一致。
-- 內容：
-  - 檔頭改寫為簡短說明（GitHub/main 為真相、細節看 notes/INSTR）。
-  - 清掉重複的 T-0013 區塊、補上缺失的狀態行（以「請參考 notes」標示），並保持原有文字不改寫。
-- 測試 / 建置：本次僅 docs 更新，未執行 `npm test` / `npm run build` / `npm run check:zh-cn`。
-- commit: 5e7684b
+- ?桃?嚗??`docs/PROJECT_TODO.md` 瑼鈭Ⅳ??瑽?蝬剜???T 璇??憿?????撘?銝?氬?- ?批捆嚗?  - 瑼?孵神?箇陛?剛牧??GitHub/main ?箇??詻敦蝭??notes/INSTR嚗?  - 皜?????T-0013 ?憛?銝撩憭梁????嚗誑????notes??蝷綽?嚗蒂靽?????銝撖怒?- 皜祈岫 / 撱箇蔭嚗甈∪? docs ?湔嚗?瑁? `npm test` / `npm run build` / `npm run check:zh-cn`??- commit: 5e7684b
 
-變更檔案（含 RAW 連結）：
+霈瑼?嚗 RAW ???嚗?
 
 - docs/PROJECT_TODO.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
@@ -289,20 +204,11 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-12 任務：T-0045 magazine-meta-from-legacy-v1
+## 2025-12-12 隞餃?嚗-0045 magazine-meta-from-legacy-v1
 
-- 目的：讓 magazine AnyContent 的期別與出版日期 meta 可由 legacy HTML 自動解析（v1）。
-- 主要變更：
-  - `src/adapters/magazine-from-legacy.ts`：新增 `parseMagazineMetaFromHtml`，解析「日期：YYYY-MM-DD　期別：第 N 期」，填入 `ct_magazine_issue(_raw)`、`ct_magazine_pub_date(_raw)`。
-  - `src/types/anycontent-magazine.ts`：補齊上述欄位型別（issue/pub_date），保留既有 legacy 欄位。
-  - `docs/CONTENT_SCHEMA_V1.md`：magazine meta 加入 issue/pub_date 欄位說明（v1）。
-  - `tests/adapters/magazine-from-legacy.spec.ts`：新增 issue/date 測試案例並調整 skeleton 期望。
-- 測試 / 建置：
-  - `npm test`（通過）
-  - `npm run build`（通過）
-- commit: 8c74c29
+- ?桃?嚗? magazine AnyContent ???亥??箇??交? meta ?舐 legacy HTML ?芸?閫??嚗1嚗?- 銝餉?霈嚗?  - `src/adapters/magazine-from-legacy.ts`嚗憓?`parseMagazineMetaFromHtml`嚗圾???YYYY-MM-DD??嚗洵 N ??憛怠 `ct_magazine_issue(_raw)`?ct_magazine_pub_date(_raw)`??  - `src/types/anycontent-magazine.ts`嚗?朣?餈唳?雿??伐?issue/pub_date嚗?靽??Ｘ? legacy 甈???  - `docs/CONTENT_SCHEMA_V1.md`嚗agazine meta ? issue/pub_date 甈?隤芣?嚗1嚗?  - `tests/adapters/magazine-from-legacy.spec.ts`嚗憓?issue/date 皜祈岫獢?銝西矽??skeleton ????- 皜祈岫 / 撱箇蔭嚗?  - `npm test`嚗?嚗?  - `npm run build`嚗?嚗?- commit: 8c74c29
 
-變更檔案（含 RAW 連結）：
+霈瑼?嚗 RAW ???嚗?
 
 - src/adapters/magazine-from-legacy.ts  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/src/adapters/magazine-from-legacy.ts
@@ -317,18 +223,11 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-13 任務：T-0080 security-hardening-and-public-repo-safety
+## 2025-12-13 隞餃?嚗-0080 security-hardening-and-public-repo-safety
 
-- 目的：新增安全守則，避免 secrets 進入公開 repo，並建立可執行的 security scan。
-- 主要變更：
-  - workflow 新增 Security 小節（禁止 secrets、交接只用 TEMP zip、deploy/importer 任務必跑 `npm run security:scan`）。
-  - 新增 `scripts/quality/security-scan.js` + `npm run security:scan`，掃描工作樹與近期 git history，預設將 SiteGround/placeholder 命中視為警告。
-  - 新增 `docs/QA/SECURITY_AUDIT.md` 記錄本次掃描結果；.gitignore 補 .env/.env.*、*.pem、*.key。
-  - PROJECT_TODO 開頭提醒 deploy/importer 任務必跑 security:scan；新增 T-0080 條目；IMPROVEMENT_BACKLOG 新增安全條目完成。
-- 測試 / 檢查：`npm run security:scan`（無阻斷，僅關鍵字警告）；`npm test` / `npm run build` / `npm run check:zh-cn` 依前一任務狀態通過（本次未變動程式邏輯）。
-- commits: 9d1ac8a
+- ?桃?嚗憓??典????踹? secrets ?脣?祇? repo嚗蒂撱箇??臬銵? security scan??- 銝餉?霈嚗?  - workflow ?啣? Security 撠?嚗?甇?secrets?漱?亙??TEMP zip?eploy/importer 隞餃?敹? `npm run security:scan`嚗?  - ?啣? `scripts/quality/security-scan.js` + `npm run security:scan`嚗??極雿邦????git history嚗?閮剖? SiteGround/placeholder ?賭葉閬霅血???  - ?啣? `docs/QA/SECURITY_AUDIT.md` 閮??祆活??蝯?嚗?gitignore 鋆?.env/.env.*??.pem??.key??  - PROJECT_TODO ??? deploy/importer 隞餃?敹? security:scan嚗憓?T-0080 璇嚗MPROVEMENT_BACKLOG ?啣?摰璇摰???- 皜祈岫 / 瑼Ｘ嚗npm run security:scan`嚗?餅嚗??摮郎??嚗npm test` / `npm run build` / `npm run check:zh-cn` 靘?銝隞餃????嚗甈⊥霈?蝔??摩嚗?- commits: 9d1ac8a
 
-變更檔案（含 RAW 連結）：
+霈瑼?嚗 RAW ???嚗?
 - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
 - docs/QA/SECURITY_AUDIT.md  
@@ -346,21 +245,11 @@
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
-## 2025-12-16 任務：T-0082 security-scan-strictness-and-gitignore-env-example-exceptions
+## 2025-12-16 隞餃?嚗-0082 security-scan-strictness-and-gitignore-env-example-exceptions
 
-- 目的：強化安全掃描與 .env example 規則，減少誤判，同時在嚴格模式下攔截歷史紀錄中的敏感資訊。
-- 主要變更：
-  - .gitignore 允許 .env*.example、.env.*.example 做為示例檔案，不被忽略。
-  - scripts/quality/security-scan.js 支援 --strict / SECURITY_SCAN_STRICT=1；git history 命中在 strict 下視為 fail，並對 docs placeholder / process.env 以警告處理。
-  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md 補充 security:scan 可用 strict；PROJECT_TODO / IMPROVEMENT_BACKLOG 登記 T-0082。
-- 測試 / 檢查：
-pm run check:no-bom、
-pm run security:scan（warning 為 docs placeholder）、
-pm run security:scan -- --strict（因 git history 命中預期以 fail 呈現，嚴格模式生效）。
-- commits: 6a8ab2d
-- 交接包：docs/TEMP/TEMP_20251216_T-0082_6a8ab2d.zip（含 MANIFEST，task_id=T-0082）
-
-變更檔案（含 RAW 連結）：
+- ?桃?嚗撥???冽??? .env example 閬?嚗?撠炊?歹????典?潭芋撘??甇瑕蝝?葉????閮?- 銝餉?霈嚗?  - .gitignore ?迂 .env*.example??env.*.example ?蝷箔?瑼?嚗?鋡怠蕭?乓?  - scripts/quality/security-scan.js ?舀 --strict / SECURITY_SCAN_STRICT=1嚗it history ?賭葉??strict 銝???fail嚗蒂撠?docs placeholder / process.env 隞亥郎????  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md 鋆? security:scan ?舐 strict嚗ROJECT_TODO / IMPROVEMENT_BACKLOG ?餉? T-0082??- 皜祈岫 / 瑼Ｘ嚗?pm run check:no-bom??pm run security:scan嚗arning ??docs placeholder嚗?pm run security:scan -- --strict嚗? git history ?賭葉??隞?fail ?嚗?潭芋撘?????- commits: 6a8ab2d
+- 鈭斗??docs/TEMP/TEMP_20251216_T-0082_6a8ab2d.zip嚗 MANIFEST嚗ask_id=T-0082嚗?
+霈瑼?嚗 RAW ???嚗?
 - .gitignore  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.gitignore
 - scripts/quality/security-scan.js  
@@ -373,23 +262,23 @@ pm run security:scan -- --strict（因 git history 命中預期以 fail 呈現�
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
-## 2025-12-16 ���ȡGT-0088-v2 poc-100-pages-metrics-and-ci-fixes
+## 2025-12-16 任務：T-0088-v2 poc-100-pages-metrics-and-ci-fixes
 
-- �ت��G���� POC 100 ��u�P CI �`���i�B��A�íץ� canonical pipeline �����]�w�� v1 pipeline + health check�^�C
-- �D�n�ܧ�G
-  - docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md �е��w�� v1 pipeline �P 
-pm run check:zh-cn�A�@�������s����@�u�ۡC
-  - �T�{ ci-self-proof workflow �ϥ� ci-summary �� --check ...=pass �ѼƮ榡�Fscripts/quality/ci-summary.js ESM ���ҥi���`����C
-- ���� / �ˬd�G
-pm test�B
-pm run build�B
-pm run check:zh-cn�B
-pm run check:no-bom�B
-pm run security:scan�]�� placeholder warnings�^�C
-- commits: <��J���� commit hash>
-- �汵�]�Gdocs/TEMP/TEMP_20251216_T-0088_v2_<commit>.zip�]�t MANIFEST�Atask_id=T-0088�^
+- 目的：維持 POC 100 基線與 CI 總結可運行，並修正 canonical pipeline 說明（已有 v1 pipeline + health check）。
+- 主要變更：
+  - docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md 標註已有 v1 pipeline 與 
+pm run check:zh-cn，作為持續更新的單一真相。
+  - 確認 ci-self-proof workflow 使用 ci-summary 的 --check ...=pass 參數格式；scripts/quality/ci-summary.js ESM 環境可正常執行。
+- 測試 / 檢查：
+pm test、
+pm run build、
+pm run check:zh-cn、
+pm run check:no-bom、
+pm run security:scan（僅 placeholder warnings）。
+- commits: 3b4fdd3
+- 交接包：docs/TEMP/TEMP_20251216_T-0088_3b4fdd3.zip（含 MANIFEST，task_id=T-0088）
 
-�ܧ��ɮס]�t RAW �s���^�G
+變更檔案（含 RAW 連結）：
 - docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md
 - .github/workflows/ci-self-proof.yml  
@@ -400,3 +289,4 @@ pm run security:scan�]�� placeholder warnings�^�C
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+
