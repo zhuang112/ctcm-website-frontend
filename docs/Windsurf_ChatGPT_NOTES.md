@@ -338,8 +338,8 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
   - `docs/QA/CRAWL_FAILS.md` 保持摘要，jsonl 空檔可正常 append。
   - `docs/PROJECT_TODO.md` T-0085/T-0089 段落文字修正；notes 新增本任務。
 - 測試 / 檢查：`npm test`、`npm run build`、`npm run check:zh-cn`、`npm run check:no-bom`、`npm run security:scan`。
-- commits: 88ff6cb
-- 交接包：`docs/TEMP/TEMP_20251216_T-0091_38876c3.zip`（含 MANIFEST，task_id=T-0091）
+- commits: 8344a4d
+- 交接包：`docs/TEMP/TEMP_20251216_T-0091_8344a4d.zip`（含 MANIFEST，task_id=T-0091）
 
 變更檔案（含 RAW 連結）：
 - tools/crawl/crawl-ctworld.ts  
