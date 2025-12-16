@@ -373,3 +373,30 @@ pm run security:scan -- --strictï¼ˆå›  git history å‘½ä¸­é æœŸä»¥ fail å‘ˆç¾ï¼
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md
 - docs/Windsurf_ChatGPT_NOTES.md  
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+## 2025-12-16 ¥ô°È¡GT-0088-v2 poc-100-pages-metrics-and-ci-fixes
+
+- ¥Øªº¡Gºû«ù POC 100 °ò½u»P CI Á`µ²¥i¹B¦æ¡A¨Ã­×¥¿ canonical pipeline »¡©ú¡]¤w¦³ v1 pipeline + health check¡^¡C
+- ¥D­nÅÜ§ó¡G
+  - docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md ¼Ğµù¤w¦³ v1 pipeline »P 
+pm run check:zh-cn¡A§@¬°«ùÄò§ó·sªº³æ¤@¯u¬Û¡C
+  - ½T»{ ci-self-proof workflow ¨Ï¥Î ci-summary ªº --check ...=pass °Ñ¼Æ®æ¦¡¡Fscripts/quality/ci-summary.js ESM Àô¹Ò¥i¥¿±`°õ¦æ¡C
+- ´ú¸Õ / ÀË¬d¡G
+pm test¡B
+pm run build¡B
+pm run check:zh-cn¡B
+pm run check:no-bom¡B
+pm run security:scan¡]¶È placeholder warnings¡^¡C
+- commits: <¶ñ¤J¥»¦¸ commit hash>
+- ¥æ±µ¥]¡Gdocs/TEMP/TEMP_20251216_T-0088_v2_<commit>.zip¡]§t MANIFEST¡Atask_id=T-0088¡^
+
+ÅÜ§óÀÉ®×¡]§t RAW ³sµ²¡^¡G
+- docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md
+- .github/workflows/ci-self-proof.yml  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/.github/workflows/ci-self-proof.yml
+- scripts/quality/ci-summary.js  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/scripts/quality/ci-summary.js
+- docs/PROJECT_TODO.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md  
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md

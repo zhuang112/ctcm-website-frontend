@@ -1,7 +1,7 @@
 # ZH_TW_TO_ZH_CN_PIPELINE（canonical）
 
-> 版本：2025-12-16（docs first，尚未實作程式）  
-> 目的：定義 zh-TW → zh-CN 繁簡轉換的欄位白名單、資料流、CLI 規格與 QA 報表，作為單一真相。其他舊稿請改讀本檔。
+> 版本：2025-12-16（docs first，但已有 v1 pipeline＋health check 可運行）  
+> 目的：定義 zh-TW → zh-CN 繁簡轉換的欄位白名單、資料流、CLI 規格與 QA 報表，作為單一真相；目前已有 v1 pipeline（含 `npm run check:zh-cn`），本檔持續對齊與更新，其他舊稿請改讀本檔。
 
 ---
 
