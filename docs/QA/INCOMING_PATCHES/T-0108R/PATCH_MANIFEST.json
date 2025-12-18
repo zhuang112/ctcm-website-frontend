@@ -1,0 +1,22 @@
+{
+    "patch_id": "PATCH_20251218_T-0108R_antigravity_r1",
+    "author": "Antigravity",
+    "date": "2025-12-18",
+    "files": [
+        {
+            "file": "_TEMPLATE_INSTR_WITH_AI_ROUTING.md",
+            "destination": "docs/INSTR/_TEMPLATE_INSTR_WITH_AI_ROUTING.md",
+            "description": "New template for INSTR files including AI routing matrix."
+        },
+        {
+            "file": "WORKFLOW_1_24_AI_ROUTING_MATRIX.md",
+            "destination": "docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md",
+            "description": "Content to be appended to section 1.24 of the workflow doc."
+        },
+        {
+            "file": "APPLY_INSTRUCTIONS.md",
+            "destination": "root",
+            "description": "Instructions for applying this patch."
+        }
+    ]
+}

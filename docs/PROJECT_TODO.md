@@ -23,3 +23,16 @@
   - [x] WORKFLOW 1.x 增補 AI 路由與 reviewer 指派小節。
   - [x] 新增 `docs/INSTR/_TEMPLATE_INSTR_WITH_AI_ROUTING.md`，內含 front-matter 與 3 個範例。
   - [x] notes 記錄 T-0108 小節與 RAW 連結。
+### T-0109 land-antigravity-patch-and-finalize-routing-matrix：落地 1.24 路由矩陣與 Patch Mode
+
+> 狀態：✅ 已完成（2025-12-18）
+
+- 目標：
+  - 將 Antigravity 產出的 T-0108R patch 落地到 Git repo（workflow 1.24 + INSTR template）。
+  - 建立 INCOMING_PATCHES 收件匣，保存 patch metadata（APPLY_INSTRUCTIONS / PATCH_MANIFEST）。
+  - 在 addendum 中保留「無 Git Patch 模式」說明，確保後續 landing 有依據。
+- 驗收方式：
+  - [x] WORKFLOW 已包含 1.24 AI 路由矩陣與 reviewer 指派。
+  - [x] `docs/INSTR/_TEMPLATE_INSTR_WITH_AI_ROUTING.md` 為最新模板且可讀。
+  - [x] `docs/QA/INCOMING_PATCHES/README.md` 與 `docs/QA/INCOMING_PATCHES/T-0108R/*` 已落地 patch metadata。
+  - [x] notes 記錄 T-0109 小節與 RAW 連結。
