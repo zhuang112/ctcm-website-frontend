@@ -16,6 +16,7 @@
     "convert:zh-cn": "ts-node tools/convert/generate-zh-cn-from-zh-tw.ts",
     "check:zh-cn": "ts-node tools/convert/check-zh-cn-health.ts",
     "check:utf8": "node tools/qa/check-utf8.mjs",
+    "check:mojibake": "node tools/qa/check-mojibake.mjs",
     "directus:up": "docker compose -f apps/directus/docker-compose.yml up -d",
     "directus:down": "docker compose -f apps/directus/docker-compose.yml down",
     "directus:schema:snapshot": "node tools/directus-schema/snapshot.mjs",

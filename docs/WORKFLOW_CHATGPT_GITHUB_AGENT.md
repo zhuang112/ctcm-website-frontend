@@ -559,3 +559,14 @@ ChatGPT ??ZIP ????????????????????? ZIP??
   3) 提供 reviewer prompt（Gemini/Grok/ChatGPT/Claude）。
   4) 報告寫入 `docs/QA/DEBUG_V3/REPORTS/<T-ID>/...`（可多份）。
   5) 若有 bug/疑慮，依 workflow 開 bugfix/validation；修後再跑 self-check。
+### 1.25 編碼防護與禁令（mojibake 防線）
+
+- 禁止在 Windows PowerShell 5.1 使用 > / Out-File / Set-Content 產改 md（除非明確加 -Encoding utf8）。
+- 終端顯示亂碼時，不得直接重存檔；先跑 
+pm run check:utf8 + 
+pm run check:mojibake，確認檔案乾淨後再處理。
+- 無 Git 環境只能產 Patch/報告，不得直接改 canonical docs（必由有 Git 的 Execution Agent 落地、commit、push、handoff）。
+- docs 自證（尤其 docs-only 任務）請跑：
+pm run check:no-bom、
+pm run check:utf8、
+pm run check:mojibake。

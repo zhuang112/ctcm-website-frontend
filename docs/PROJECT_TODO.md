@@ -36,3 +36,17 @@
   - [x] `docs/INSTR/_TEMPLATE_INSTR_WITH_AI_ROUTING.md` 為最新模板且可讀。
   - [x] `docs/QA/INCOMING_PATCHES/README.md` 與 `docs/QA/INCOMING_PATCHES/T-0108R/*` 已落地 patch metadata。
   - [x] notes 記錄 T-0109 小節與 RAW 連結。
+### T-0111 encoding-hardening-precommit-mojibake：編碼防護、pre-commit、自動檢查
+
+> 狀態：✅ 已完成（2025-12-19）
+
+- 目標：
+  - 新增 `check:mojibake`（檢測 BOM、U+FFFD、問號異常比例）。
+  - package.json 加入 check:mojibake，docs 自證流程需包含。
+  - workflow 補上編碼禁令（PS5.1 禁用 >/Out-File/Set-Content 無編碼、看到亂碼先檢查、非 Git 環境不得改 canonical docs）。
+  - （若需要）pre-commit hook 執行 no-bom / utf8 / mojibake。
+- 驗收方式：
+  - [x] `tools/qa/check-mojibake.mjs` 可運行，檢查 docs/**/*.md 無 BOM、無 U+FFFD、問號比例正常。
+  - [x] `npm run check:mojibake` script 已加入。
+  - [x] workflow 有編碼防護新條目。
+  - [x] notes 記錄 T-0111 小節與 RAW 連結。
