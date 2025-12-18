@@ -1,117 +1,58 @@
 # RULES_CROSSCHECK_NOTES_V1
 
-> 任務：T-0047 規則文件一致性檢查（第一輪，筆記用，非正式規範）  
-> 日期：2025-12-12  
-> 參考文件（只讀）：workflow / schema / HTML→Markdown / zh-CN pipeline / TODO / NOTES / INSTR 系列
+> 隞餃?嚗-0047 閬??辣銝?湔扳炎?伐?蝚砌?頛迎?蝑??剁??迤撘?蝭?  
+> ?交?嚗?025-12-12  
+> ??隞塚??芾?嚗?workflow / schema / HTML?arkdown / zh-CN pipeline / TODO / NOTES / INSTR 蝟餃?
 
 ---
 
-## 核心參考文件
-- Workflow / 協作：`WORKFLOW_CHATGPT_GITHUB_AGENT.md`、`TOOLS_ROLES_AND_BOUNDARIES.md`、`SESSION_CHECKLIST.md`、`AI_COLLAB_SUMMARY.md`、`COMPLETE_PROJECT_WORKFLOW.md`、`PENDING_DECISIONS.md`
-- Schema / 內容規則：`CONTENT_SCHEMA_V1.md`、`CONTENT_SCHEMA.md`
-- HTML→Markdown：`HTML_TO_MARKDOWN_RULES_V4.md`
-- zh-TW→zh-CN：`ZH_TW_TO_ZH_CN_PIPELINE.md`
-- 任務與歷史：`PROJECT_TODO.md`、`Windsurf_ChatGPT_NOTES.md`（2025-12-10 之後的 T-0017～T-0046）
-- INSTR 系統：`INSTR/README.md`、`INSTR/INSTR-TEMPLATE.md`、`INSTR/INSTR-T-0018-meta-instr-and-status-structure.md`
+## ?詨???隞?- Workflow / ??嚗WORKFLOW_CHATGPT_GITHUB_AGENT.md`?TOOLS_ROLES_AND_BOUNDARIES.md`?SESSION_CHECKLIST.md`?AI_COLLAB_SUMMARY.md`?COMPLETE_PROJECT_WORKFLOW.md`?PENDING_DECISIONS.md`
+- Schema / ?批捆閬?嚗CONTENT_SCHEMA_V1.md`?CONTENT_SCHEMA.md`
+- HTML?arkdown嚗HTML_TO_MARKDOWN_RULES_V4.md`
+- zh-TW?h-CN嚗ZH_TW_TO_ZH_CN_PIPELINE.md`
+- 隞餃??風?莎?`PROJECT_TODO.md`?Windsurf_ChatGPT_NOTES.md`嚗?025-12-10 銋???T-0017嚚-0046嚗?- INSTR 蝟餌絞嚗INSTR/README.md`?INSTR/INSTR-TEMPLATE.md`?INSTR/INSTR-T-0018-meta-instr-and-status-structure.md`
 
 ---
 
-## Cross-check 主題整理
+## Cross-check 銝駁??渡?
 
-### 1) Workflow / 協作流程
-- ✅ 一致重點：
-  - 單一真相：GitHub main + notes；snapshot 只是備援（workflow 1.7/RAW、小節補充）。
-  - 安全等級：code/tools/tests/data 任務需 `npm test` + `npm run build`；涉 zh-CN 要 `npm run check:zh-cn`；docs-only 可不跑，但需在 notes 說明。
-  - 分工：使用者決策+轉貼、ChatGPT 設計/規則、實作 Agent（Codex）執行；回報走 notes + RAW。
-  - INSTR 規則：列檔案清單、禁止 citation、長規格放 docs。
-- ⚠️ 待統一/重複：
-  - Workflow vs COMPLETE_PROJECT_WORKFLOW：前者偏日常協作，後者偏 roadmap，有些流程（如 snapshot、分支）描述重複，可考慮集中於 workflow。
-  - SESSION_CHECKLIST 的收工條目（test/build/check:zh-cn）與 workflow 安全小節，語氣略不同，可在下輪同步字眼。
-- 📌 建議未來 T（候選）：
-  - `T-00xx consolidate-workflow-docs`: 把流程/安全/RAW/snapshot 相關說明集中到 workflow + checklist，減少重複。
-
+### 1) Workflow / ??瘚?
+- ??銝?湧?暺?
+  - ?桐??嚗itHub main + notes嚗napshot ?芣?嚗orkflow 1.7/RAW??蝭鋆?嚗?  - 摰蝑?嚗ode/tools/tests/data 隞餃?? `npm test` + `npm run build`嚗? zh-CN 閬?`npm run check:zh-cn`嚗ocs-only ?臭?頝?雿???notes 隤芣???  - ?極嚗蝙?刻捱蝑?頧票?hatGPT 閮剛?/閬??祕雿?Agent嚗odex嚗銵??韏?notes + RAW??  - INSTR 閬?嚗?瑼?皜??甇?citation?閬??docs??- ?? 敺絞銝/??嚗?  - Workflow vs COMPLETE_PROJECT_WORKFLOW嚗????亙虜??嚗??? roadmap嚗?鈭?蝔?憒?snapshot???荔??膩??嚗??葉??workflow??  - SESSION_CHECKLIST ?撌交??殷?test/build/check:zh-cn嚗? workflow 摰撠?嚗?瘞?銝?嚗?其?頛芸?甇亙??潦?- ?? 撱箄降?芯? T嚗嚗?
+  - `T-00xx consolidate-workflow-docs`: ??蝔?摰/RAW/snapshot ?賊?隤芣??葉??workflow + checklist嚗?撠?銴?
 ### 2) CONTENT_SCHEMA / AnyContent V1
-- ✅ 一致重點：
-  - V1 schema 主要在 `CONTENT_SCHEMA_V1.md`；`CONTENT_SCHEMA.md` 指向 V1 草稿。
-  - teaching/news/magazine 基本欄位、`has_unclassified_content`/`unclassified_notes` 已在 schema + adapter/test 實作（news/teaching/magazine v1）。
-  - Magazine meta issue/pub_date 已在 schema V1 + adapter（T-0045）對齊。
-- ⚠️ 待統一/缺口：
-  - `CONTENT_SCHEMA.md` 仍帶有部分舊描述（少量）；需確保後續只維護 V1 或明確標註版本。
-  - SEO、多語（multilingual）尚未實作，文件提到但缺少實際任務。
-- 📌 建議未來 T（候選）：
-  - `T-00xx schema-v1-single-source`: 明確指定 `CONTENT_SCHEMA_V1.md` 為唯一 schema 文件，舊 `CONTENT_SCHEMA.md` 精簡成導覽/版本說明。
-  - `T-00xx schema-seo-multilingual-plan`: 針對 SEO / multilingual 欄位補規格與實作計畫。
+- ??銝?湧?暺?
+  - V1 schema 銝餉???`CONTENT_SCHEMA_V1.md`嚗CONTENT_SCHEMA.md` ?? V1 ?阮??  - teaching/news/magazine ?箸甈??has_unclassified_content`/`unclassified_notes` 撌脣 schema + adapter/test 撖虫?嚗ews/teaching/magazine v1嚗?  - Magazine meta issue/pub_date 撌脣 schema V1 + adapter嚗-0045嚗?朣?- ?? 敺絞銝/蝻箏嚗?  - `CONTENT_SCHEMA.md` 隞葆????膩嚗???嚗?蝣箔?敺??芰雁霅?V1 ??蝣箸?閮餌??研?  - SEO??隤?multilingual嚗??芸祕雿??辣?雿撩撠祕?遙??- ?? 撱箄降?芯? T嚗嚗?
+  - `T-00xx schema-v1-single-source`: ?Ⅱ?? `CONTENT_SCHEMA_V1.md` ?箏銝 schema ?辣嚗? `CONTENT_SCHEMA.md` 蝎曄陛??閬??隤芣???  - `T-00xx schema-seo-multilingual-plan`: ?? SEO / multilingual 甈?鋆??潸?撖虫?閮??
+### 3) HTML?arkdown 閬?
+- ??銝?湧?暺?
+  - V4 (`HTML_TO_MARKDOWN_RULES_V4.md`) ?箇銵蜓瑼?????挾?賬?亙摰?fallback嚗??unclassified flags嚗?  - Adapter ??芰?批捆嚗???`body_markdown`嚗?閬? set `meta.has_unclassified_content` + `meta.unclassified_notes`??  - compare ???unclassified badge/filter嚗歇??T-0036 蝑牧????- ?? 敺???
+  - ?? V2/V3 ?乩?摮嚗璅酉甇瑕??蝘餃 archive嚗?? V4 瘛瑟???  - V4 ???鈭畾見?選?憒?index_page?閮?class嚗 adapter 銝剜摰閬?嚗?閬??批祕雿???- ?? 撱箄降?芯? T嚗嚗?
+  - `T-00xx clean-up-old-html-to-md-v2v3`: 撠?V2/V3 璅酉?箸風?脫?蝘餉 archive??  - `T-00xx html-to-md-gap-review`: 璇喟? V4 閬? vs 撖虫??賢榆嚗畾?銵?璅?嚗???鋆撥??adapter/test??
+### 4) zh-TW ??zh-CN pipeline
+- ??銝?湧?暺?
+  - ?賢??格?雿? pipeline 閮剛???`ZH_TW_TO_ZH_CN_PIPELINE.md`嚗摨瑟炎??CLI (`npm run check:zh-cn`) ?瑼Ｘ?撌脣神??workflow/checklist??  - T-0038/0039 ?膩 health check嚗炎?交?撠?祆?雿?post_type/slug/old_url/language嚗頧?甈?摮?扼?- ?? 敺?嚗?  - Pipeline 閬 vs CLI 撖虫?嚗??雿?靘? SEO/?典? meta嚗??芣項??亙熒瑼Ｘ?梯”嚗???朣???  - zh-CN ?Ｗ/?梯”?澆?隞?蝪∪嚗??舐蜇/?? WARN?撓?箸?閬?- ?? 撱箄降?芯? T嚗嚗?
+  - `T-00xx extend-zh-cn-health-check`: ?游? health check 甈?嚗 SEO/meta嚗????游??游銵具?  - `T-00xx pipeline-impl-progress`: ?日? pipeline 閬 vs 撌脣祕雿?transform/CLI嚗??蝻箏??
+### 5) INSTR 蝟餌絞
+- ??銝?湧?暺?
+  - ?賢?閬???獢?蝵柴芋?選?INSTR-TEMPLATE嚗eta-instr 蝯?撌脣 INSTR/README + T-0018 隤芣???  - INSTR 閬??策 ChatGPT review ??獢??柴??citation?閬??docs??- ?? ??/???嚗?  - workflow 銋??啣神 INSTR ?釣??????INSTR/README ?批捆?典???嚗??葉??- ?? 撱箄降?芯? T嚗嚗?
+  - `T-00xx align-instr-guidelines`: ?蔥/鈭文?撘 workflow ??INSTR/README嚗??啣神閬??桐?靘???
+### 6) HTML?arkdown 撖虫??賢榆?日?嚗-0049嚗?- ??撌脣?朣?
+  - 璅?/畾菔/??嚗html-to-markdown.ts` + `tests/html/html-to-markdown.spec.ts` 閬?銝??`<h1>`~`<h6>`?<p>`??祆?銵???? `<br>` 憯葬銵嚗? V4 銝餉????氬?  - ??/blockquote嚗eaching adapter ?? V4 ??隤?????銵?`>`嚗葫閰西??蜓頝臬?嚗utra ?菜葫??隤?雿???  - ?芸?憿?fallback嚗orkflow + V4 + schema 銝?湛?撖虫??? unclassified flags嚗eaching/news/magazine嚗璅?嚗ompare 鈭行??badge/filter??- ?? 敺?/撠摰閬?嚗?  - ??/?牧嚗4 ? featured/gallery/fallback嚗祕雿???賜洵銝撘萇 featured?擗?gallery_items嚗??芸??刻撖血?隤芥?蝯?蝯? JSON ??甈????渡??伐?鈭西? schema 銝??典?朣???  - 皜嚗?撅??寞? class ???閬???餈堆?雿祕雿?皜祈岫銝餉?閬?銝??UL/OL嚗撩撠??見?選?靘?撣?icon/?芾? class嚗?瑼ａ???  - index_page/?寞?璅?嚗4 ???桅?/??蝑見?選??桀? adapter/HTML?D ?芣?撖虫??葫閰佗?撖阡??璅??撠撽???  - ?芰?批捆璅?嚗???flags 璈嚗??芸??斗隞?鈭箏極嚗?靘???璅?嚗?閬?銝剜?????皜祆???挾???芾?啜?- ?? 撱箄降?芯? T嚗?獢?嚗?  - `T-00xx html-to-md-gap-fix-images-gallery`: ?賢祕 V4 ??/?牧蝑嚗eatured vs gallery??隤芾暺chema 撠?嚗?鋆葫閰艾?  - `T-00xx html-to-md-gap-fix-lists-special`: ??憭惜/?寞? class list ??index_page/?寞?璅?鋆祕雿?皜祈岫??  - `T-00xx html-to-md-unclassified-detection`: ?Ｙ揣?芸?/???閮???批捆嚗?撠犖撌亥身摰?  - T-0050嚗ocs-only嚗歇??V4/Schema 鋆???閬?嚗?蝥祕雿?迨?圾?箔???T??
+---
 
-### 3) HTML→Markdown 規則
-- ✅ 一致重點：
-  - V4 (`HTML_TO_MARKDOWN_RULES_V4.md`) 為現行主檔；包含圖片、段落、未知內容 fallback（搭配 unclassified flags）。
-  - Adapter 遇到未知內容：保留 `body_markdown`，必要時 set `meta.has_unclassified_content` + `meta.unclassified_notes`。
-  - compare 頁支援 unclassified badge/filter（已在 T-0036 等說明）。
-- ⚠️ 待清理：
-  - 舊版 V2/V3 若仍存在，可標註歷史參考或移到 archive，避免與 V4 混淆。
-  - V4 提到的某些特殊樣板（如 index_page、自訂 class）在 adapter 中未完全覆蓋，需要對照實作狀態。
-- 📌 建議未來 T（候選）：
-  - `T-00xx clean-up-old-html-to-md-v2v3`: 將 V2/V3 標註為歷史或移至 archive。
-  - `T-00xx html-to-md-gap-review`: 梳理 V4 規則 vs 實作落差（特殊列表/樣板），列出需補強的 adapter/test。
-
-### 4) zh-TW → zh-CN pipeline
-- ✅ 一致重點：
-  - 白名單欄位與 pipeline 設計在 `ZH_TW_TO_ZH_CN_PIPELINE.md`；健康檢查 CLI (`npm run check:zh-cn`) 及其檢查項目已寫入 workflow/checklist。
-  - T-0038/0039 描述 health check：檢查成對、基本欄位（post_type/slug/old_url/language）、可轉換欄位存在性。
-- ⚠️ 待補：
-  - Pipeline 規格 vs CLI 實作：部分欄位（例如 SEO/部分 meta）尚未涵蓋於健康檢查報表；需再對齊白名單。
-  - zh-CN 產出/報表格式仍偏簡單，可考慮匯總/分類 WARN、輸出摘要。
-- 📌 建議未來 T（候選）：
-  - `T-00xx extend-zh-cn-health-check`: 擴充 health check 欄位（含 SEO/meta），提供更完整報表。
-  - `T-00xx pipeline-impl-progress`: 盤點 pipeline 規格 vs 已實作（transform/CLI），列出缺口。
-
-### 5) INSTR 系統
-- ✅ 一致重點：
-  - 命名規則、檔案位置、模板（INSTR-TEMPLATE）、meta-instr 結構已在 INSTR/README + T-0018 說明。
-  - INSTR 要列「給 ChatGPT review 的檔案清單」、避免 citation、長規格放 docs。
-- ⚠️ 重複/需提醒：
-  - workflow 也有撰寫 INSTR 的注意事項；與 INSTR/README 內容部分重疊，可考慮集中。
-- 📌 建議未來 T（候選）：
-  - `T-00xx align-instr-guidelines`: 合併/交叉引用 workflow 與 INSTR/README，讓撰寫規則單一來源。
-
-### 6) HTML→Markdown 實作落差盤點（T-0049）
-- ✅ 已對齊：
-  - 標題/段落/換行：`html-to-markdown.ts` + `tests/html/html-to-markdown.spec.ts` 覆蓋一般 `<h1>`~`<h6>`、`<p>`、基本換行/連續 `<br>` 壓縮行為，與 V4 主規則一致。
-  - 偈語/blockquote：teaching adapter 透過 V4 的偈語規則轉成多行 `>`，測試覆蓋主路徑（sutra 偵測、偈語欄位）。
-  - 未分類 fallback：workflow + V4 + schema 一致，實作透過 unclassified flags（teaching/news/magazine）可標記，compare 亦支援 badge/filter。
-- ⚠️ 待補/尚未完全覆蓋：
-  - 圖片/圖說：V4 提到 featured/gallery/fallback；實作目前僅抽第一張為 featured、其餘 gallery_items，尚未完全落實圖說、圖組分組與 JSON 圖片欄位的完整策略（亦與 schema 不完全對齊）。
-  - 清單：多層/特殊 class 的處理在規則有描述，但實作/測試主要覆蓋一般 UL/OL，缺少複合樣板（例如帶 icon/自訂 class）的檢驗。
-  - index_page/特殊樣板：V4 提及目錄/分欄等樣板；目前 adapter/HTML→MD 未有實作或測試，實際頁面樣式尚未驗證。
-  - 未知內容標記：雖有 flags 機制，但自動判斷仍偏人工（多依靠手動標記），規則中提及的「自動偵測未分類片段」尚未落地。
-- 📌 建議未來 T（草案）：
-  - `T-00xx html-to-md-gap-fix-images-gallery`: 落實 V4 圖片/圖說策略（featured vs gallery、圖說落點、schema 對齊），補測試。
-  - `T-00xx html-to-md-gap-fix-lists-special`: 針對多層/特殊 class list 與 index_page/特殊樣板補實作與測試。
-  - `T-00xx html-to-md-unclassified-detection`: 探索自動/半自動標記未分類內容，減少人工設定。
-  - T-0050（docs-only）已在 V4/Schema 補充圖片規則；後續實作可據此拆解為上列 T。
+## 撱箄降?桐???辣
+- Workflow / ??瘚? ??`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`嚗hecklist/?嗡?瑼??迨嚗?- AnyContent V1 schema ??`docs/CONTENT_SCHEMA_V1.md`嚗CONTENT_SCHEMA.md` 雿撠汗/?隤芣?嚗?- HTML?arkdown 閬? ??`docs/HTML_TO_MARKDOWN_RULES_V4.md`
+- zh-TW?h-CN pipeline ??`docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
+- INSTR 閬? ??`docs/INSTR/README.md` + `docs/INSTR/INSTR-TEMPLATE.md`
+- 隞餃?甇瑕 / ?祕?????`docs/Windsurf_ChatGPT_NOTES.md`
+- 隞餃?皜 ??`docs/PROJECT_TODO.md`
 
 ---
 
-## 建議單一真相文件
-- Workflow / 協作流程 → `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`（checklist/其他檔指向此）
-- AnyContent V1 schema → `docs/CONTENT_SCHEMA_V1.md`（`CONTENT_SCHEMA.md` 作為導覽/版本說明）
-- HTML→Markdown 規則 → `docs/HTML_TO_MARKDOWN_RULES_V4.md`
-- zh-TW→zh-CN pipeline → `docs/ZH_TW_TO_ZH_CN_PIPELINE.md`
-- INSTR 規則 → `docs/INSTR/README.md` + `docs/INSTR/INSTR-TEMPLATE.md`
-- 任務歷史 / 真實狀態 → `docs/Windsurf_ChatGPT_NOTES.md`
-- 任務清單 → `docs/PROJECT_TODO.md`
+## ??芯? T 憿嚗?獢?
+- `T-00xx consolidate-workflow-docs`: ?港蔥 workflow / checklist / COMPLETE_PROJECT_WORKFLOW ??畾菔嚗??銝瑼???- `T-00xx schema-v1-single-source`: ?Ⅱ?? CONTENT_SCHEMA_V1 ?箏銝 schema嚗?瑼撅?閬賬?- `T-00xx clean-up-old-html-to-md-v2v3`: 撠???HTML?D 閬?璅酉甇瑕?宏??archive??- `T-00xx html-to-md-gap-review`: 璇喟? V4 閬? vs adapter/test 撖虫??撩???- `T-00xx extend-zh-cn-health-check`: ?游? health check ?梯”?炎?交?雿???SEO/meta嚗?- `T-00xx align-instr-guidelines`: 撠?INSTR ?啣神閬??葉?箏銝靘?嚗orkflow vs INSTR/README嚗?### T-0054 圖片 / gallery schema 補充
 
----
-
-## 候選未來 T 題目（草案）
-- `T-00xx consolidate-workflow-docs`: 整併 workflow / checklist / COMPLETE_PROJECT_WORKFLOW 重複段落，指向單一檔案。
-- `T-00xx schema-v1-single-source`: 明確指定 CONTENT_SCHEMA_V1 為唯一 schema，舊檔退居導覽。
-- `T-00xx clean-up-old-html-to-md-v2v3`: 將舊版 HTML→MD 規則標註歷史或移至 archive。
-- `T-00xx html-to-md-gap-review`: 梳理 V4 規則 vs adapter/test 實作的缺口。
-- `T-00xx extend-zh-cn-health-check`: 擴充 health check 報表與檢查欄位（含 SEO/meta）。
-- `T-00xx align-instr-guidelines`: 將 INSTR 撰寫規則集中為單一來源（workflow vs INSTR/README）。
-### T-0054 �Ϥ� / gallery schema �ɥR
-
-- schema�G`CONTENT_SCHEMA_V1.md` �w�w�d `default_gallery_style`�B`gallery_blocks` �H�䴩�h gallery �϶��P�˦��мg�F�ثe adapter ���Ȳ��X `featured_image` / `gallery_items`�C
-- �W�h�G`HTML_TO_MARKDOWN_RULES_V4.md` ���� layout / multi-gallery �|���� extractor ���X�A���ջP�˦��ݫ��� T ��@�C
-- �����ĳ�G���ӭY�n�ҥ� multi-gallery�A�ݦP�ɧ�s adapter/importer/frontend�A�æb crosscheck / TODO / notes �n�O���� T�C
+- schema：`CONTENT_SCHEMA_V1.md` 已預留 `default_gallery_style`、`gallery_blocks` 以支援多 gallery 區塊與樣式覆寫；目前 adapter 仍僅產出 `featured_image` / `gallery_items`。
+- 規則：`HTML_TO_MARKDOWN_RULES_V4.md` 註明 layout / multi-gallery 尚未由 extractor 產出，分組與樣式需後續 T 實作。
+- 後續建議：未來若要啟用 multi-gallery，需同時更新 adapter/importer/frontend，並在 crosscheck / TODO / notes 登記對應 T。
