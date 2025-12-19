@@ -16,6 +16,7 @@
     "convert:zh-cn": "ts-node tools/convert/generate-zh-cn-from-zh-tw.ts",
     "check:zh-cn": "ts-node tools/convert/check-zh-cn-health.ts",
     "check:utf8": "node tools/qa/check-utf8.mjs",
+    "check:mojibake": "node tools/qa/check-mojibake.mjs",
     "directus:up": "docker compose -f apps/directus/docker-compose.yml up -d",
     "directus:down": "docker compose -f apps/directus/docker-compose.yml down",
     "directus:schema:snapshot": "node tools/directus-schema/snapshot.mjs",
@@ -30,7 +31,8 @@
     "handoff:tempzip": "node scripts/handoff/build-temp-zip.js",
     "check:no-bom": "node scripts/quality/check-no-bom.js",
     "security:scan": "node scripts/quality/security-scan.js",
-    "debug:poc-100": "ts-node tools/debug/poc-run-100.ts"
+    "debug:poc-100": "ts-node tools/debug/poc-run-100.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "cheerio": "^1.1.2",
@@ -55,6 +57,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "husky": "^9.1.7",
     "ts-node": "^10.9.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",

@@ -507,3 +507,9 @@ ChatGPT ??ZIP ?????撖?????謅?ㄜ??????? ZIP??
 
 ## 1.20 UI Gemini ZIP 鈭斗閬?
 - UIZIP 頝臬?嚗docs/QA/INCOMING_UI/`嚗??`UIZIP_<YYYYMMDD>_<page_or_feature>_<rev>.zip`嚗? `UIZIP_20251216_homepage_r1.zip`嚗?- ZIP ?批???`UI_HANDOFF.md`嚗神?????辣皜??獢?瑽???repo 頝臬?嚗?憒?`apps/astro/src/components|layouts|pages|styles/...`嚗?瑁?撽?嚗ev/build/URL嚗歇?仿??嗚?- 蝳迫嚗node_modules/`?之???脖?蝝?嚗???閬身閮阮/?芸??喳??- Agent 雿平嚗? `UI_HANDOFF.md` mapping ?賣?敺?隞?璅? handoff ?Ｙ? `docs/TEMP/TEMP_<date>_T-0099_<HEAD7>.zip`嚗ANIFEST.source_commit=HEAD嚗?- 閬死撽嚗?璈?撟單/????撘菜????`docs/QA/UI_SNAPSHOTS/<T-XXXX>/`嚗????
+## Encoding guardrails & quarantine (T-0017)
+- `.gitattributes`: `* text=auto eol=lf`A`rɦWj LFF`/zip аO binaryC
+- `.editorconfig`:  UTF-8 + LF]wsbAʤe^C
+- a commit eGHusky `pre-commit`  `npm run check:no-bom` / `npm run check:utf8` / `npm run check:mojibake`AѧY commitC
+- GitHub ActionsG`.github/workflows/encoding-check.yml`  docs/tools/package.json |ܧ]PTˬdC
+- Yo{æýXɡG `docs/QA/ENCODING_QUARANTINE/YYYYMMDD/`AOӷPgAAH GitHub RAW b٭FקKл\ canonical docsC

@@ -657,3 +657,13 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
 
 
 
+## 2025-12-19 ȡGT-0017 encoding-hardening-v2
+- Gchore/T-0017-encoding-hardening-v2] origin/main^
+- DnܧG
+  - `.gitattributes` j text=auto eol=lfA`rɦW LFA`/zip  binaryC
+  - sW Husky pre-commitGcheck:no-bom + check:utf8 + check:mojibakeC
+  - sW GitHub ActionsG`.github/workflows/encoding-check.yml` ]Tˬd]docs/tools/package.json ܧĲo^C
+  - sW `docs/QA/ENCODING_QUARANTINE/README.md`]æýXjAл\ canonical docs^C
+  - `package.json` [J husky devDep]prepare w^C
+- ChecksGno-bom=PASSButf8=PASSBmojibake=PASSBnpm test=PASSBnpm run build=PASS
+- HandoffG`docs/TEMP/TEMP_20251219_T-0017_<HEAD7>.zip`]ظmᲣ͡AMANIFEST.source_commit  HEAD^

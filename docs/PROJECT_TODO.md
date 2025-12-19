@@ -34,3 +34,7 @@
 
 
 
+### T-0017 encoding-hardening-v2: gitattributes + husky + CI + quarantine
+> AG? w]chore/T-0017-encoding-hardening-v2^
+- eGsW `.gitattributes` LF/binary WhBHusky pre-commit Tˬd]no-bom/utf8/mojibake^Bencoding-check GitHub ActionsBH `docs/QA/ENCODING_QUARANTINE/README.md` y{C
+- 禬Gcheck:no-bom / check:utf8 / check:mojibake / npm test / npm run build qLC
