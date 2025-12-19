@@ -342,3 +342,8 @@ pm run security:scan -- --strict
   - [x] `docs/QA/INCOMING_UI/` 目錄存在並載明命名規則。
   - [x] Workflow/notes 說明 UI handoff 流程與 RAW/ZIP 優先順序。
   - [x] T-0099 記錄於 notes，並產生對應 TEMP zip。
+
+### T-TEST-0001RR agent-trial-dry-run-ai-review（試跑題）
+> 狀態：✅ 已完成（dry-run）
+- 目標：在 trial 分支上新增 ai-review dry-run 工具與報告樣板，無外部 API，供執行者自證流程使用。
+

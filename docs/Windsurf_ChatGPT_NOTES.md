@@ -476,3 +476,26 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
   RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+
+## 2025-12-19 T-TEST-0001RR agent-trial-dry-run-ai-review (dry-run)
+- OLD_COMMIT: f27fa4b1e6e963cd87c27270602e8451ce7f9416
+- Branch: trial/T-TEST-0001
+- 主要產出：
+  - 新增 dry-run reviewer 工具與指令：`tools/ai-review-dryrun/review.mjs`、`tools/ai-review-dryrun/README.md`、`npm run ai:review:dryrun`
+  - 乾跑報告：`docs/QA/DEBUG_V3/REPORTS/T-TEST-0001/AI_DEBUG_DRYRUN_20251219.md`
+- Checks：check:no-bom=PASS，check:utf8=PASS，check:mojibake=N/A（script 未定義），npm test=PASS，npm run build=PASS
+- Handoff：`npm run handoff:tempzip -- --task_id T-TEST-0001RR`（會在本分支 HEAD 後執行；ZIP 放 `docs/TEMP/`，不納入 git）
+- commit: <push 後填入 HEAD>
+- 變更檔案（含 RAW 連結）：
+  - docs/PROJECT_TODO.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  - docs/Windsurf_ChatGPT_NOTES.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
+  - tools/ai-review-dryrun/review.mjs  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/ai-review-dryrun/review.mjs
+  - tools/ai-review-dryrun/README.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/tools/ai-review-dryrun/README.md
+  - docs/QA/DEBUG_V3/REPORTS/T-TEST-0001/AI_DEBUG_DRYRUN_20251219.md  
+    RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/REPORTS/T-TEST-0001/AI_DEBUG_DRYRUN_20251219.md

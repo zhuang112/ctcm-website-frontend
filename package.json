@@ -26,6 +26,7 @@
     "deploy:progress-dashboard": "node scripts/deploy/deploy-progress-dashboard-to-siteground.js",
     "wp:import:dry-run": "ts-node tools/wp-import/wp-import-from-anycontent.ts --language=zh-tw --post-type=teaching,news,magazine --dry-run",
     "wp:import:push": "ts-node tools/wp-import/wp-import-push.ts --dry-run",
+    "ai:review:dryrun": "node tools/ai-review-dryrun/review.mjs --task T-TEST-0001 --reviewers gemini,grok,claude,chatgpt --mode cheap",
     "handoff:tempzip": "node scripts/handoff/build-temp-zip.js",
     "check:no-bom": "node scripts/quality/check-no-bom.js",
     "security:scan": "node scripts/quality/security-scan.js",
