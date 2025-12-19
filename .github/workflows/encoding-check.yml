@@ -1,0 +1,32 @@
+﻿name: encoding-check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**/*.md"
+      - "tools/**/*.mjs"
+      - "package.json"
+      - ".gitattributes"
+      - ".editorconfig"
+  pull_request:
+    branches: [main]
+    paths:
+      - "docs/**/*.md"
+      - "tools/**/*.mjs"
+      - "package.json"
+      - ".gitattributes"
+      - ".editorconfig"
+
+jobs:
+  encoding:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+      - run: npm run check:no-bom
+      - run: npm run check:utf8
+      - run: npm run check:mojibake
