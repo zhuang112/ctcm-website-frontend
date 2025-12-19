@@ -1,56 +1,57 @@
-# INSTR Template（含 AI 路由欄位）
+# INSTR Template (with AI routing)
 
-## Front-matter（請貼在每個 INSTR 開頭，務必填寫）
-- T-ID：`T-____`
-- Task Type：`UI | Conversion | Importer | Crawler | DB/Security | Docs`
-- Risk：`High | Medium | Low`
-- Execution Agent：`Codex | Claude Desktop | Antigravity | Gemini Desktop | (other)`（同一 T 只指派 1 位執行者）
-- External Debug Required：`YES/NO`
-- External Debug Reviewers（若 YES）：`Gemini / Grok / ChatGPT / Claude`（至少 1 位）
-- Prompts to use：`debug_review.md / bugfix_validation.md / Gemini UIZIP template ...`
-- Report destination：`docs/QA/DEBUG_V3/REPORTS/<T-ID>/...`
-- Handoff：`docs/TEMP/TEMP_<date>_<T-ID>_<HEAD7>.zip`（含 MANIFEST，source_commit==HEAD）
+## Front-matter (fill at top of every INSTR)
+- Task ID: `P2-____` (Phase 2 default; if using legacy T-xxxx, state the mapping)
+- Branch: `phase2/<task_id>-<slug>`
+- Task Type: `UI | Conversion | Importer | Crawler | DB/Security | Docs`
+- Risk: `High | Medium | Low`
+- Execution Agent: `Codex | Claude Desktop | Antigravity | Gemini Desktop | (other)` (one primary executor)
+- External Debug Required: `YES/NO`
+- External Debug Reviewers (if YES): `Gemini / Grok / ChatGPT / Claude` (>=1)
+- Prompts to use: `debug_review.md / bugfix_validation.md / Gemini UIZIP template ...`
+- Report destination: `docs/QA/DEBUG_V3/REPORTS/<task_id>/...`
+- Handoff: `docs/TEMP/TEMP_<date>_<task_id>_<HEAD7>.zip` (MANIFEST.source_commit==HEAD)
+- Canonical repo / workdir: `zhuang112/ctcm-website-frontend` @ `F:\ctcm-website-frontend_phase2`
+- Budget / ETA (optional): `<amount or hours>` / `<date>`
 
-## 若 External Debug Required=YES，請在 INSTR 內加入「外部 debug 流程」小節
-1) Machine self-check：`npm run check:no-bom`、`npm run check:utf8`、`npm test`、`npm run build`、`npm run security:scan`（若允許略過需明寫）。
-2) 產生 versioned TEMP zip（source_commit==HEAD）。
-3) 提供 reviewer prompt（Gemini/Grok/ChatGPT/Claude）。
-4) 報告寫入 `docs/QA/DEBUG_V3/REPORTS/<T-ID>/...`（可多份）。
-5) 若有 bug/疑慮，依 workflow 開 bugfix/validation；修後再跑 self-check。
+## If External Debug Required = YES
+1) Self-check: `npm run check:no-bom`, `npm run check:utf8`, `npm run check:mojibake`, `npm test`, `npm run build`, `npm run security:scan` (when allowed)
+2) Produce versioned TEMP zip (source_commit==HEAD)
+3) Attach reviewer prompt (Gemini/Grok/ChatGPT/Claude)
+4) Put reports under `docs/QA/DEBUG_V3/REPORTS/<task_id>/...` (multiple files allowed)
+5) Handle bug/blockers via workflow bugfix/validation, then self-check again
 
 ---
 
-## 範例 1：UI 類任務（必送 Gemini + Grok）
-- T-ID：`T-0xxx`
-- Task Type：UI
-- Risk：High
-- Execution Agent：Codex（唯一）
-- External Debug Required：YES
-- External Debug Reviewers：Gemini, Grok, ChatGPT
-- Prompts to use：`docs/QA/DEBUG_V3/PROMPTS/debug_review.md`
-- Report destination：`docs/QA/DEBUG_V3/REPORTS/T-0xxx/AI_DEBUG_*.md`
-- Handoff：`docs/TEMP/TEMP_<date>_T-0xxx_<HEAD7>.zip`
-- 外部 debug 流程：照上方 1)~5)。
+## Example 1: UI task (Gemini + Grok required)
+- Task ID: `P2-0xxx`
+- Task Type: UI
+- Risk: High
+- Execution Agent: Codex (sole)
+- External Debug Required: YES
+- External Debug Reviewers: Gemini, Grok, ChatGPT
+- Prompts: `docs/QA/DEBUG_V3/PROMPTS/debug_review.md`
+- Report: `docs/QA/DEBUG_V3/REPORTS/<task_id>/AI_DEBUG_*.md`
+- Handoff: `docs/TEMP/TEMP_<date>_<task_id>_<HEAD7>.zip`
 
-## 範例 2：Importer / 資料寫入任務（Grok + ChatGPT）
-- T-ID：`T-0yyy`
-- Task Type：Importer
-- Risk：High
-- Execution Agent：Codex（唯一）
-- External Debug Required：YES
-- External Debug Reviewers：Grok, ChatGPT
-- Prompts to use：`docs/QA/DEBUG_V3/PROMPTS/debug_review.md`
-- Report destination：`docs/QA/DEBUG_V3/REPORTS/T-0yyy/AI_DEBUG_*.md`
-- Handoff：`docs/TEMP/TEMP_<date>_T-0yyy_<HEAD7>.zip`
-- 外部 debug 流程：照上方 1)~5)。
+## Example 2: Importer / data-writer task (Grok + ChatGPT)
+- Task ID: `P2-0yyy`
+- Task Type: Importer
+- Risk: High
+- Execution Agent: Codex (sole)
+- External Debug Required: YES
+- External Debug Reviewers: Grok, ChatGPT
+- Prompts: `docs/QA/DEBUG_V3/PROMPTS/debug_review.md`
+- Report: `docs/QA/DEBUG_V3/REPORTS/<task_id>/AI_DEBUG_*.md`
+- Handoff: `docs/TEMP/TEMP_<date>_<task_id>_<HEAD7>.zip`
 
-## 範例 3：Docs-only（可免外部 debug）
-- T-ID：`T-0zzz`
-- Task Type：Docs
-- Risk：Low
-- Execution Agent：Codex（唯一）
-- External Debug Required：NO
-- External Debug Reviewers：N/A（若高風險可補 ChatGPT）
-- Prompts to use：N/A
-- Report destination：`docs/QA/DEBUG_V3/REPORTS/T-0zzz/`（如有需要）
-- Handoff：`docs/TEMP/TEMP_<date>_T-0zzz_<HEAD7>.zip`（仍建議保留版本化交接包）
+## Example 3: Docs-only (external debug optional)
+- Task ID: `P2-0zzz`
+- Task Type: Docs
+- Risk: Low
+- Execution Agent: Codex (sole)
+- External Debug Required: NO (can optionally ask ChatGPT if riskier)
+- External Debug Reviewers: N/A
+- Prompts: N/A
+- Report: `docs/QA/DEBUG_V3/REPORTS/<task_id>/`
+- Handoff: `docs/TEMP/TEMP_<date>_<task_id>_<HEAD7>.zip` (still recommended)

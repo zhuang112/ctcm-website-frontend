@@ -38,3 +38,9 @@
 > AG? w]chore/T-0017-encoding-hardening-v2^
 - eGsW `.gitattributes` LF/binary WhBHusky pre-commit T邠d]no-bom/utf8/mojibake^Bencoding-check GitHub ActionsBH `docs/QA/ENCODING_QUARANTINE/README.md` y{C
 - 蝳故check:no-bom / check:utf8 / check:mojibake / npm test / npm run build qLC
+
+### P2-0001 workflow-phase2-taskid-canonicalization
+> 狀態：? 已完成（Phase 2 任務採用 P2-xxxx 命名，2025-12-19）
+- 目標：將 Phase 2 工作流程統一為 P2-xxxx 任務 ID，固定 branch / handoff / report 命名；舊 T-0015~T-0018 系列標記為 Deprecated 並指向 P2 檔案。
+- 驗收：workflow / INSTR template 已更新；T-0018 檔案有 DEPRECATED 提示並提供 P2-0002 別名；TODO / notes 已記錄。
+

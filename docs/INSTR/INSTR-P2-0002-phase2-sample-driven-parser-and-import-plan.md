@@ -1,5 +1,3 @@
-[DEPRECATED] Phase 2 please use docs/INSTR/INSTR-P2-0002-phase2-sample-driven-parser-and-import-plan.md
-
 # INSTR-T-0018-meta-instr-and-status-structure
 
 ???瑁???撖虫? Agent嚗? Codex嚗?隞餃?嚗-0018 meta-instr-and-status-structure

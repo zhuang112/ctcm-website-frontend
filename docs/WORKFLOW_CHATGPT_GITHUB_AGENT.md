@@ -513,3 +513,11 @@ ChatGPT ??ZIP ?????æ’–?????è¬…?ã„œ??????? ZIP??
 - a commit eGHusky `pre-commit`  `npm run check:no-bom` / `npm run check:utf8` / `npm run check:mojibake`AÑ§Y commitC
 - GitHub ActionsG`.github/workflows/encoding-check.yml`  docs/tools/package.json |Ü§]PTË¬dC
 - Yo{Ã¦Ã½XÉ¡G `docs/QA/ENCODING_QUARANTINE/YYYYMMDD/`AOÓ·PgAAH GitHub RAW bÙ­F×§KÐ»\ canonical docsC
+
+## 1.21 Phase 2 task ID / branch / handoff ©R¦W¡]P2-0001¡^
+- Phase 2 ¥H **P2-xxxx** ¬°¥ô°È ID¡F­Y¤´´£¨ìÂÂ T-xxxx¡A°È¥²¦b workflow / TODO / notes ¼Ð©ú¹ïÀ³ªº P2¡C
+- Branch ¼Ð·Ç¡Gphase2/<P2-id>-<slug>¡AÁ×§K¦A¨Ï¥Î¥¼©R¦Wªº¤u§@¾ð¡C
+- Handoff ZIP¡Gdocs/TEMP/TEMP_<YYYYMMDD>_<P2-id>_<HEAD7>.zip¡AMANIFEST.source_commit ¥²¶·µ¥©ó HEAD¡C
+- Report / notes¡Gdocs/Windsurf_ChatGPT_NOTES.md¡A­Y¦³¥~³¡ debug¡A³ø§i¸m©ó docs/QA/DEBUG_V3/REPORTS/<P2-id>/...¡A¨Ã¦b notes/WORKFLOW µù©ú reviewer AI¡C
+- snapshot ¤´¶È¬°³Æ´©¡GGitHub main + notes ¬°¯u¬Û¡Fhandoff zip »Ý«O¯d­ì©l¸ô®|¡B¤£¥i«ó¥­¤Æ¡C
+
