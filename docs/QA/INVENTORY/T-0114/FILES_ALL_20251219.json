@@ -1,0 +1,1017 @@
+[
+  {
+    "path": ".editorconfig",
+    "bytes": 119,
+    "ext": "(none)"
+  },
+  {
+    "path": ".env.siteground.example",
+    "bytes": 366,
+    "ext": "example"
+  },
+  {
+    "path": ".env.wp.example",
+    "bytes": 110,
+    "ext": "example"
+  },
+  {
+    "path": ".gitattributes",
+    "bytes": 338,
+    "ext": "(none)"
+  },
+  {
+    "path": ".github/workflows/ci-self-proof.yml",
+    "bytes": 1214,
+    "ext": "yml"
+  },
+  {
+    "path": ".github/workflows/deploy-pages.yml",
+    "bytes": 927,
+    "ext": "yml"
+  },
+  {
+    "path": ".gitignore",
+    "bytes": 515,
+    "ext": "(none)"
+  },
+  {
+    "path": ".windsurf/rules/windsurfrules.md",
+    "bytes": 5092,
+    "ext": "md"
+  },
+  {
+    "path": ".windsurf/workflows/windsurfrworkflows.md",
+    "bytes": 3882,
+    "ext": "md"
+  },
+  {
+    "path": "apps/astro/.env.example",
+    "bytes": 65,
+    "ext": "example"
+  },
+  {
+    "path": "apps/astro/src/components/ArticleCard.astro",
+    "bytes": 2737,
+    "ext": "astro"
+  },
+  {
+    "path": "apps/astro/src/lib/directus.ts",
+    "bytes": 2603,
+    "ext": "ts"
+  },
+  {
+    "path": "apps/astro/src/pages/[lang]/[type]/index.astro",
+    "bytes": 2773,
+    "ext": "astro"
+  },
+  {
+    "path": "apps/astro/src/pages/[lang]/[type]/[slug].astro",
+    "bytes": 723,
+    "ext": "astro"
+  },
+  {
+    "path": "apps/directus/.env.example",
+    "bytes": 246,
+    "ext": "example"
+  },
+  {
+    "path": "apps/directus/db/migrations/001_any_content_constraints_and_indexes.sql",
+    "bytes": 671,
+    "ext": "sql"
+  },
+  {
+    "path": "apps/directus/docker-compose.yml",
+    "bytes": 874,
+    "ext": "yml"
+  },
+  {
+    "path": "apps/directus/README.md",
+    "bytes": 1750,
+    "ext": "md"
+  },
+  {
+    "path": "apps/directus/schema/snapshot.json",
+    "bytes": 2207,
+    "ext": "json"
+  },
+  {
+    "path": "ARCHITECTURE.md",
+    "bytes": 7140,
+    "ext": "md"
+  },
+  {
+    "path": "content_model/ctworld_home_content_model.md",
+    "bytes": 14251,
+    "ext": "md"
+  },
+  {
+    "path": "ctworld-docroot/foo/test.htm",
+    "bytes": 84,
+    "ext": "htm"
+  },
+  {
+    "path": "data/anycontent/zh-cn/magazine/sample-001.json",
+    "bytes": 1375,
+    "ext": "json"
+  },
+  {
+    "path": "data/anycontent/zh-cn/news/sample-001.json",
+    "bytes": 1302,
+    "ext": "json"
+  },
+  {
+    "path": "data/anycontent/zh-cn/teaching/sample-001.json",
+    "bytes": 1600,
+    "ext": "json"
+  },
+  {
+    "path": "data/anycontent/zh-tw/magazine/sample-001.json",
+    "bytes": 1375,
+    "ext": "json"
+  },
+  {
+    "path": "data/anycontent/zh-tw/news/sample-001.json",
+    "bytes": 1302,
+    "ext": "json"
+  },
+  {
+    "path": "data/anycontent/zh-tw/teaching/sample-001.json",
+    "bytes": 1600,
+    "ext": "json"
+  },
+  {
+    "path": "data/compare/index.json",
+    "bytes": 1479,
+    "ext": "json"
+  },
+  {
+    "path": "data/crawl/all-files.csv",
+    "bytes": 85,
+    "ext": "csv"
+  },
+  {
+    "path": "data/crawl/all-files.json",
+    "bytes": 111,
+    "ext": "json"
+  },
+  {
+    "path": "data/crawl/crawled-urls.csv",
+    "bytes": 3734,
+    "ext": "csv"
+  },
+  {
+    "path": "data/crawl/crawled-urls.json",
+    "bytes": 7055,
+    "ext": "json"
+  },
+  {
+    "path": "data/crawl/extra-from-crawl.csv",
+    "bytes": 5240,
+    "ext": "csv"
+  },
+  {
+    "path": "data/crawl/missing-from-crawl.csv",
+    "bytes": 116,
+    "ext": "csv"
+  },
+  {
+    "path": "data/legacy-magazine/sample-001.html",
+    "bytes": 813,
+    "ext": "html"
+  },
+  {
+    "path": "data/legacy-news/sample-001.html",
+    "bytes": 785,
+    "ext": "html"
+  },
+  {
+    "path": "data/legacy-teaching/sample-001.html",
+    "bytes": 765,
+    "ext": "html"
+  },
+  {
+    "path": "dev/progress-dashboard/ctworld-progress-dashboard.html",
+    "bytes": 4790,
+    "ext": "html"
+  },
+  {
+    "path": "dev/static-homepage/app.js",
+    "bytes": 2537,
+    "ext": "js"
+  },
+  {
+    "path": "dev/static-homepage/index.html",
+    "bytes": 9901,
+    "ext": "html"
+  },
+  {
+    "path": "dev/static-homepage/README.md",
+    "bytes": 1209,
+    "ext": "md"
+  },
+  {
+    "path": "dev/static-homepage/styles.css",
+    "bytes": 8941,
+    "ext": "css"
+  },
+  {
+    "path": "docs/00_chatGPT_start_rules.docx",
+    "bytes": 30834,
+    "ext": "docx"
+  },
+  {
+    "path": "docs/00_windsurf-task-html-to-markdown.md",
+    "bytes": 12716,
+    "ext": "md"
+  },
+  {
+    "path": "docs/AI_COLLAB_SUMMARY.md",
+    "bytes": 2592,
+    "ext": "md"
+  },
+  {
+    "path": "docs/ARCHITECTURE_DIRECTUS_ASTRO.md",
+    "bytes": 2283,
+    "ext": "md"
+  },
+  {
+    "path": "docs/ARCHIVE/HTML_TO_MARKDOWN_RULES_V3-ARCHIVE.md",
+    "bytes": 5841,
+    "ext": "md"
+  },
+  {
+    "path": "docs/ARCHIVE/HTML_TO_MARKDOWN_RULES_V3.md",
+    "bytes": 5841,
+    "ext": "md"
+  },
+  {
+    "path": "docs/AUDITS/FIELD_COVERAGE/ARCHIVE/FIELD_COVERAGE_SAMPLING_2025-12-13_v1.md",
+    "bytes": 1309,
+    "ext": "md"
+  },
+  {
+    "path": "docs/AUDITS/FIELD_COVERAGE/FIELD_COVERAGE_SAMPLING.md",
+    "bytes": 3016,
+    "ext": "md"
+  },
+  {
+    "path": "docs/AUDITS/FIELD_COVERAGE/URL_QUEUE.md",
+    "bytes": 314,
+    "ext": "md"
+  },
+  {
+    "path": "docs/CODING_GUIDELINES.md",
+    "bytes": 765,
+    "ext": "md"
+  },
+  {
+    "path": "docs/COMPLETE_PROJECT_WORKFLOW.md",
+    "bytes": 3033,
+    "ext": "md"
+  },
+  {
+    "path": "docs/CONTENT_SCHEMA.md",
+    "bytes": 6971,
+    "ext": "md"
+  },
+  {
+    "path": "docs/CONTENT_SCHEMA_V1.md",
+    "bytes": 7667,
+    "ext": "md"
+  },
+  {
+    "path": "docs/CONVENTIONS.md",
+    "bytes": 607,
+    "ext": "md"
+  },
+  {
+    "path": "docs/crawl-and-inventory.md",
+    "bytes": 8500,
+    "ext": "md"
+  },
+  {
+    "path": "docs/CRAWL_TOOLS_SETUP.md",
+    "bytes": 4268,
+    "ext": "md"
+  },
+  {
+    "path": "docs/DESIGN/ctworld-progress-dashboard.html",
+    "bytes": 4790,
+    "ext": "html"
+  },
+  {
+    "path": "docs/DESIGN/WP_CONTENT_MODEL_V1.md",
+    "bytes": 6625,
+    "ext": "md"
+  },
+  {
+    "path": "docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md",
+    "bytes": 4749,
+    "ext": "md"
+  },
+  {
+    "path": "docs/ENV/STEP_BY_STEP_ENV_SETUP_DIRECTUS_ASTRO.md",
+    "bytes": 1958,
+    "ext": "md"
+  },
+  {
+    "path": "docs/HANDOFF/HANDOFF_SUMMARY_2025-12-16_ctworld_next_chat.md",
+    "bytes": 5284,
+    "ext": "md"
+  },
+  {
+    "path": "docs/HTML_TO_MARKDOWN_RULES_V4.md",
+    "bytes": 14056,
+    "ext": "md"
+  },
+  {
+    "path": "docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md",
+    "bytes": 1944,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/INSTR-T-0000-fix-communication-rules-no-citations.md",
+    "bytes": 3824,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/INSTR-T-0000-update-workflow-full-access-rules.md",
+    "bytes": 5381,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/INSTR-T-0016-zh-cn-health-check-tool-todo.md",
+    "bytes": 3768,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/INSTR-T-0017-html-to-markdown-rules-cleanup.md",
+    "bytes": 7919,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md",
+    "bytes": 2891,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/INSTR-T-0019-enforce-utf8-encoding.md",
+    "bytes": 7293,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/INSTR-T-0020-teaching-end-to-end-sample.md",
+    "bytes": 10234,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/INSTR-T-0047-docs-rules-consistency-review-phase-1.md",
+    "bytes": 4901,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/INSTR-T-0049-html-to-md-gap-review.md",
+    "bytes": 6283,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/INSTR-TEMPLATE.md",
+    "bytes": 2188,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/README.md",
+    "bytes": 1255,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/T-0046 fix-instr-encoding-and-snapshot-rules.md",
+    "bytes": 1488,
+    "ext": "md"
+  },
+  {
+    "path": "docs/INSTR/_TEMPLATE_INSTR_WITH_AI_ROUTING.md",
+    "bytes": 2611,
+    "ext": "md"
+  },
+  {
+    "path": "docs/OPS/BACKUP_RESTORE_DIRECTUS_POSTGRES.md",
+    "bytes": 812,
+    "ext": "md"
+  },
+  {
+    "path": "docs/PENDING_DECISIONS.md",
+    "bytes": 4268,
+    "ext": "md"
+  },
+  {
+    "path": "docs/PROJECT_STATUS.md",
+    "bytes": 6191,
+    "ext": "md"
+  },
+  {
+    "path": "docs/PROJECT_TODO.md",
+    "bytes": 5013,
+    "ext": "md"
+  },
+  {
+    "path": "docs/PROJECT_TODO_TEMPLATE.md",
+    "bytes": 4758,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/CRAWL_FAILS.jsonl",
+    "bytes": 0,
+    "ext": "jsonl"
+  },
+  {
+    "path": "docs/QA/CRAWL_FAILS.md",
+    "bytes": 221,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/GOLDENS/HTML/.gitkeep",
+    "bytes": 0,
+    "ext": "(none)"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/GOLDENS/JSON/.gitkeep",
+    "bytes": 0,
+    "ext": "(none)"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/GUIDES/DEBUG_GUIDE_FOR_TEMP_ZIPS_T0066_TO_T0091.md",
+    "bytes": 9644,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/GUIDES/DEVTOOLS_UI_PARAMS_CHECKLIST.md",
+    "bytes": 1265,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/PROMPTS/bugfix_validation.md",
+    "bytes": 388,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/PROMPTS/debug_review.md",
+    "bytes": 414,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/README.md",
+    "bytes": 1671,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/REPORTS/.gitkeep",
+    "bytes": 0,
+    "ext": "(none)"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/REPORTS/CHECKLIST_2025-12-16_POC100.md",
+    "bytes": 1154,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/REPORTS/POC_100_2025-12-16_2ef9415.md",
+    "bytes": 1677,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/REPORTS/T-0105/AI_DEBUG_TEMP_20251216_T-0105_5d73c65_20251217.md",
+    "bytes": 386,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/REPORTS/T-0105/AI_DEBUG_TEMP_placeholder.md",
+    "bytes": 82,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/REPORTS/_ADVICE/AI_ADVICE_Directus_DB_Hardening_20251217.md",
+    "bytes": 533,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/TEMPLATES/BUG_REPORT_TEMPLATE.md",
+    "bytes": 306,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/TEMPLATES/CHECKLIST_TEMPLATE.md",
+    "bytes": 514,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/TEMPLATES/DEBUG_REPORT_TEMPLATE_SAMPLE.md",
+    "bytes": 1781,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_BUGFIX_VALIDATION.md",
+    "bytes": 1203,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/TEMPLATES/EXTERNAL_AI_PROMPT_DEBUG_REVIEW_PACK.md",
+    "bytes": 1206,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/TEMPLATES/GOLDENS_POLICY.md",
+    "bytes": 617,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/TEMPLATES/URL_QUEUE_TEMPLATE.md",
+    "bytes": 175,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/DEBUG_V3/URL_QUEUE.md",
+    "bytes": 865,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/INCOMING_PATCHES/README.md",
+    "bytes": 1046,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/INCOMING_PATCHES/T-0108R/APPLY_INSTRUCTIONS.md",
+    "bytes": 1226,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/INCOMING_PATCHES/T-0108R/PATCH_MANIFEST.json",
+    "bytes": 782,
+    "ext": "json"
+  },
+  {
+    "path": "docs/QA/INCOMING_UI/GEMINI_UIZIP_INPUT_TEMPLATE.md",
+    "bytes": 858,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/INCOMING_UI/README.md",
+    "bytes": 403,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/SECURITY_AUDIT.md",
+    "bytes": 829,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/UI_SNAPSHOTS/README.md",
+    "bytes": 121,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/UI_SNAPSHOTS/T-0105/desktop.png",
+    "bytes": 67,
+    "ext": "png"
+  },
+  {
+    "path": "docs/QA/UI_SNAPSHOTS/T-0105/DEVTOOLS_PARAMS.md",
+    "bytes": 801,
+    "ext": "md"
+  },
+  {
+    "path": "docs/QA/UI_SNAPSHOTS/T-0105/mobile.png",
+    "bytes": 67,
+    "ext": "png"
+  },
+  {
+    "path": "docs/QA/UI_SNAPSHOTS/T-0105/tablet.png",
+    "bytes": 67,
+    "ext": "png"
+  },
+  {
+    "path": "docs/RULES_CROSSCHECK_NOTES_V1.md",
+    "bytes": 9337,
+    "ext": "md"
+  },
+  {
+    "path": "docs/SECURITY/DIRECTUS_TOKENS_AND_ROLES.md",
+    "bytes": 873,
+    "ext": "md"
+  },
+  {
+    "path": "docs/SESSION_CHECKLIST.md",
+    "bytes": 1019,
+    "ext": "md"
+  },
+  {
+    "path": "docs/STRATEGY/STRATEGY_Directus_Astro_Migration_ctworld.md",
+    "bytes": 10515,
+    "ext": "md"
+  },
+  {
+    "path": "docs/terminal_logs/T-0001_teaching-from-legacy_vitest_fail.txt",
+    "bytes": 560,
+    "ext": "txt"
+  },
+  {
+    "path": "docs/terminal_logs/T-0001_teaching-from-legacy_vitest_pass.txt",
+    "bytes": 406,
+    "ext": "txt"
+  },
+  {
+    "path": "docs/terminal_logs/T-0002_anycontent_types_tsc_pass.txt",
+    "bytes": 80,
+    "ext": "txt"
+  },
+  {
+    "path": "docs/terminal_logs/T-0003_news-from-legacy_vitest_pass.txt",
+    "bytes": 307,
+    "ext": "txt"
+  },
+  {
+    "path": "docs/terminal_logs/T-0004_magazine-from-legacy_tsc_pass.txt",
+    "bytes": 80,
+    "ext": "txt"
+  },
+  {
+    "path": "docs/terminal_logs/T-0004_magazine-from-legacy_vitest_pass.txt",
+    "bytes": 327,
+    "ext": "txt"
+  },
+  {
+    "path": "docs/terminal_logs/T-0005_news-from-legacy_vitest_fail.txt",
+    "bytes": 633,
+    "ext": "txt"
+  },
+  {
+    "path": "docs/terminal_logs/T-0005_news-from-legacy_vitest_pass.txt",
+    "bytes": 399,
+    "ext": "txt"
+  },
+  {
+    "path": "docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt",
+    "bytes": 1461,
+    "ext": "txt"
+  },
+  {
+    "path": "docs/TOOLS_ROLES_AND_BOUNDARIES.md",
+    "bytes": 1943,
+    "ext": "md"
+  },
+  {
+    "path": "docs/UNRESOLVED_ISSUES.md",
+    "bytes": 300,
+    "ext": "md"
+  },
+  {
+    "path": "docs/windsurfrules.md",
+    "bytes": 5092,
+    "ext": "md"
+  },
+  {
+    "path": "docs/windsurfrworkflows.md",
+    "bytes": 3813,
+    "ext": "md"
+  },
+  {
+    "path": "docs/Windsurf_ChatGPT_NOTES.md",
+    "bytes": 54734,
+    "ext": "md"
+  },
+  {
+    "path": "docs/WORKFLOW/ADDENDUMS/guides/PLAN_T0108R_antigravity_no_git_patch_flow.md",
+    "bytes": 2992,
+    "ext": "md"
+  },
+  {
+    "path": "docs/WORKFLOW/ADDENDUMS/WORKFLOW_ADDENDUM_MULTI_AI_DEBUG_AND_CLEAN_SLATE.md",
+    "bytes": 3834,
+    "ext": "md"
+  },
+  {
+    "path": "docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md",
+    "bytes": 51533,
+    "ext": "md"
+  },
+  {
+    "path": "docs/ZH_TW_TO_ZH_CN_PIPELINE.md",
+    "bytes": 301,
+    "ext": "md"
+  },
+  {
+    "path": "eslint.config.js",
+    "bytes": 616,
+    "ext": "js"
+  },
+  {
+    "path": "index.html",
+    "bytes": 370,
+    "ext": "html"
+  },
+  {
+    "path": "package-lock.json",
+    "bytes": 188966,
+    "ext": "json"
+  },
+  {
+    "path": "package.json",
+    "bytes": 2861,
+    "ext": "json"
+  },
+  {
+    "path": "public/vite.svg",
+    "bytes": 1497,
+    "ext": "svg"
+  },
+  {
+    "path": "README.md",
+    "bytes": 3528,
+    "ext": "md"
+  },
+  {
+    "path": "README_CTWorld_AI_WORKFLOW.md",
+    "bytes": 1240,
+    "ext": "md"
+  },
+  {
+    "path": "scripts/deploy/deploy-progress-dashboard-to-siteground.js",
+    "bytes": 2659,
+    "ext": "js"
+  },
+  {
+    "path": "scripts/handoff/build-temp-zip.js",
+    "bytes": 5608,
+    "ext": "js"
+  },
+  {
+    "path": "scripts/quality/check-no-bom.js",
+    "bytes": 1834,
+    "ext": "js"
+  },
+  {
+    "path": "scripts/quality/ci-summary.js",
+    "bytes": 2163,
+    "ext": "js"
+  },
+  {
+    "path": "scripts/quality/security-scan.js",
+    "bytes": 4893,
+    "ext": "js"
+  },
+  {
+    "path": "src/adapters/magazine-from-legacy.ts",
+    "bytes": 4675,
+    "ext": "ts"
+  },
+  {
+    "path": "src/adapters/news-from-legacy.ts",
+    "bytes": 5186,
+    "ext": "ts"
+  },
+  {
+    "path": "src/adapters/teaching-from-legacy.ts",
+    "bytes": 3891,
+    "ext": "ts"
+  },
+  {
+    "path": "src/App.css",
+    "bytes": 606,
+    "ext": "css"
+  },
+  {
+    "path": "src/App.tsx",
+    "bytes": 4818,
+    "ext": "tsx"
+  },
+  {
+    "path": "src/assets/react.svg",
+    "bytes": 4126,
+    "ext": "svg"
+  },
+  {
+    "path": "src/dev/VisualComparePage.tsx",
+    "bytes": 17840,
+    "ext": "tsx"
+  },
+  {
+    "path": "src/html/html-to-markdown.ts",
+    "bytes": 8571,
+    "ext": "ts"
+  },
+  {
+    "path": "src/html/legacy-html-types.ts",
+    "bytes": 1344,
+    "ext": "ts"
+  },
+  {
+    "path": "src/i18n/zh-tw-to-zh-cn-pipeline.ts",
+    "bytes": 2208,
+    "ext": "ts"
+  },
+  {
+    "path": "src/i18n/zh-tw-to-zh-cn.ts",
+    "bytes": 413,
+    "ext": "ts"
+  },
+  {
+    "path": "src/index.css",
+    "bytes": 1154,
+    "ext": "css"
+  },
+  {
+    "path": "src/main.tsx",
+    "bytes": 520,
+    "ext": "tsx"
+  },
+  {
+    "path": "src/types/anycontent-magazine.ts",
+    "bytes": 1584,
+    "ext": "ts"
+  },
+  {
+    "path": "src/types/anycontent-news.ts",
+    "bytes": 1043,
+    "ext": "ts"
+  },
+  {
+    "path": "src/types/anycontent-teaching.ts",
+    "bytes": 1501,
+    "ext": "ts"
+  },
+  {
+    "path": "src/types/anycontent.ts",
+    "bytes": 350,
+    "ext": "ts"
+  },
+  {
+    "path": "src/utils/parse-date.ts",
+    "bytes": 2205,
+    "ext": "ts"
+  },
+  {
+    "path": "src/wp/import/anycontent-to-wp.ts",
+    "bytes": 3219,
+    "ext": "ts"
+  },
+  {
+    "path": "src/wp/import/types.ts",
+    "bytes": 943,
+    "ext": "ts"
+  },
+  {
+    "path": "src/wp/rest/client.ts",
+    "bytes": 1512,
+    "ext": "ts"
+  },
+  {
+    "path": "sync_to_github.bat",
+    "bytes": 450,
+    "ext": "bat"
+  },
+  {
+    "path": "tests/adapters/magazine-from-legacy.spec.ts",
+    "bytes": 2322,
+    "ext": "ts"
+  },
+  {
+    "path": "tests/adapters/news-from-legacy.spec.ts",
+    "bytes": 3163,
+    "ext": "ts"
+  },
+  {
+    "path": "tests/adapters/teaching-from-legacy.spec.ts",
+    "bytes": 3244,
+    "ext": "ts"
+  },
+  {
+    "path": "tests/html/html-to-markdown.spec.ts",
+    "bytes": 3523,
+    "ext": "ts"
+  },
+  {
+    "path": "tests/i18n/zh-tw-to-zh-cn-pipeline.spec.ts",
+    "bytes": 1243,
+    "ext": "ts"
+  },
+  {
+    "path": "tests/i18n/zh-tw-to-zh-cn.spec.ts",
+    "bytes": 473,
+    "ext": "ts"
+  },
+  {
+    "path": "tools/convert/check-zh-cn-health.ts",
+    "bytes": 5948,
+    "ext": "ts"
+  },
+  {
+    "path": "tools/convert/generate-zh-cn-from-zh-tw.ts",
+    "bytes": 2472,
+    "ext": "ts"
+  },
+  {
+    "path": "tools/convert/teaching-html-to-anycontent.ts",
+    "bytes": 2996,
+    "ext": "ts"
+  },
+  {
+    "path": "tools/crawl/crawl-ctworld.ts",
+    "bytes": 11795,
+    "ext": "ts"
+  },
+  {
+    "path": "tools/crawl/diff-crawl-vs-files.ts",
+    "bytes": 4473,
+    "ext": "ts"
+  },
+  {
+    "path": "tools/crawl/filesystem-inventory.ts",
+    "bytes": 3401,
+    "ext": "ts"
+  },
+  {
+    "path": "tools/debug/poc-run-100.ts",
+    "bytes": 4604,
+    "ext": "ts"
+  },
+  {
+    "path": "tools/directus-import/import.mjs",
+    "bytes": 4783,
+    "ext": "mjs"
+  },
+  {
+    "path": "tools/directus-import/README.md",
+    "bytes": 898,
+    "ext": "md"
+  },
+  {
+    "path": "tools/directus-schema/apply.mjs",
+    "bytes": 1997,
+    "ext": "mjs"
+  },
+  {
+    "path": "tools/directus-schema/README.md",
+    "bytes": 1075,
+    "ext": "md"
+  },
+  {
+    "path": "tools/directus-schema/snapshot.mjs",
+    "bytes": 1207,
+    "ext": "mjs"
+  },
+  {
+    "path": "tools/docs-snapshot/make-docs-snapshot.ts",
+    "bytes": 4289,
+    "ext": "ts"
+  },
+  {
+    "path": "tools/inventory/filesystem-inventory.mjs",
+    "bytes": 4554,
+    "ext": "mjs"
+  },
+  {
+    "path": "tools/inventory/README.md",
+    "bytes": 570,
+    "ext": "md"
+  },
+  {
+    "path": "tools/qa/check-mojibake.mjs",
+    "bytes": 1827,
+    "ext": "mjs"
+  },
+  {
+    "path": "tools/qa/check-utf8.mjs",
+    "bytes": 1287,
+    "ext": "mjs"
+  },
+  {
+    "path": "tools/wp-import/wp-import-from-anycontent.ts",
+    "bytes": 3922,
+    "ext": "ts"
+  },
+  {
+    "path": "tools/wp-import/wp-import-push.ts",
+    "bytes": 4101,
+    "ext": "ts"
+  },
+  {
+    "path": "tsconfig.app.json",
+    "bytes": 732,
+    "ext": "json"
+  },
+  {
+    "path": "tsconfig.json",
+    "bytes": 119,
+    "ext": "json"
+  },
+  {
+    "path": "tsconfig.node.json",
+    "bytes": 653,
+    "ext": "json"
+  },
+  {
+    "path": "vite.config.ts",
+    "bytes": 260,
+    "ext": "ts"
+  }
+]

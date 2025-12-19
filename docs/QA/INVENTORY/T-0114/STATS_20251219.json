@@ -1,0 +1,326 @@
+{
+  "total_files": 203,
+  "total_bytes": 869076,
+  "by_ext": {
+    "(none)": {
+      "count": 6,
+      "bytes": 972
+    },
+    "example": {
+      "count": 4,
+      "bytes": 787
+    },
+    "yml": {
+      "count": 3,
+      "bytes": 3015
+    },
+    "md": {
+      "count": 89,
+      "bytes": 397724
+    },
+    "astro": {
+      "count": 3,
+      "bytes": 6233
+    },
+    "ts": {
+      "count": 33,
+      "bytes": 103477
+    },
+    "sql": {
+      "count": 1,
+      "bytes": 671
+    },
+    "json": {
+      "count": 16,
+      "bytes": 213519
+    },
+    "htm": {
+      "count": 1,
+      "bytes": 84
+    },
+    "csv": {
+      "count": 4,
+      "bytes": 9175
+    },
+    "html": {
+      "count": 7,
+      "bytes": 22214
+    },
+    "js": {
+      "count": 7,
+      "bytes": 20310
+    },
+    "css": {
+      "count": 3,
+      "bytes": 10701
+    },
+    "docx": {
+      "count": 1,
+      "bytes": 30834
+    },
+    "jsonl": {
+      "count": 1,
+      "bytes": 0
+    },
+    "png": {
+      "count": 3,
+      "bytes": 201
+    },
+    "txt": {
+      "count": 9,
+      "bytes": 4253
+    },
+    "svg": {
+      "count": 2,
+      "bytes": 5623
+    },
+    "tsx": {
+      "count": 3,
+      "bytes": 23178
+    },
+    "bat": {
+      "count": 1,
+      "bytes": 450
+    },
+    "mjs": {
+      "count": 6,
+      "bytes": 15655
+    }
+  },
+  "by_top_dir": {
+    ".editorconfig": 1,
+    ".env.siteground.example": 1,
+    ".env.wp.example": 1,
+    ".gitattributes": 1,
+    ".github": 2,
+    ".gitignore": 1,
+    ".windsurf": 2,
+    "apps": 10,
+    "ARCHITECTURE.md": 1,
+    "content_model": 1,
+    "ctworld-docroot": 1,
+    "data": 16,
+    "dev": 5,
+    "docs": 97,
+    "eslint.config.js": 1,
+    "index.html": 1,
+    "package-lock.json": 1,
+    "package.json": 1,
+    "public": 1,
+    "README.md": 1,
+    "README_CTWorld_AI_WORKFLOW.md": 1,
+    "scripts": 5,
+    "src": 21,
+    "sync_to_github.bat": 1,
+    "tests": 6,
+    "tools": 19,
+    "tsconfig.app.json": 1,
+    "tsconfig.json": 1,
+    "tsconfig.node.json": 1,
+    "vite.config.ts": 1
+  },
+  "top_ext": [
+    {
+      "ext": "md",
+      "count": 89,
+      "bytes": 397724
+    },
+    {
+      "ext": "ts",
+      "count": 33,
+      "bytes": 103477
+    },
+    {
+      "ext": "json",
+      "count": 16,
+      "bytes": 213519
+    },
+    {
+      "ext": "txt",
+      "count": 9,
+      "bytes": 4253
+    },
+    {
+      "ext": "html",
+      "count": 7,
+      "bytes": 22214
+    },
+    {
+      "ext": "js",
+      "count": 7,
+      "bytes": 20310
+    },
+    {
+      "ext": "(none)",
+      "count": 6,
+      "bytes": 972
+    },
+    {
+      "ext": "mjs",
+      "count": 6,
+      "bytes": 15655
+    },
+    {
+      "ext": "example",
+      "count": 4,
+      "bytes": 787
+    },
+    {
+      "ext": "csv",
+      "count": 4,
+      "bytes": 9175
+    },
+    {
+      "ext": "yml",
+      "count": 3,
+      "bytes": 3015
+    },
+    {
+      "ext": "astro",
+      "count": 3,
+      "bytes": 6233
+    },
+    {
+      "ext": "css",
+      "count": 3,
+      "bytes": 10701
+    },
+    {
+      "ext": "png",
+      "count": 3,
+      "bytes": 201
+    },
+    {
+      "ext": "tsx",
+      "count": 3,
+      "bytes": 23178
+    },
+    {
+      "ext": "svg",
+      "count": 2,
+      "bytes": 5623
+    },
+    {
+      "ext": "sql",
+      "count": 1,
+      "bytes": 671
+    },
+    {
+      "ext": "htm",
+      "count": 1,
+      "bytes": 84
+    },
+    {
+      "ext": "docx",
+      "count": 1,
+      "bytes": 30834
+    },
+    {
+      "ext": "jsonl",
+      "count": 1,
+      "bytes": 0
+    }
+  ],
+  "largest": [
+    {
+      "path": "package-lock.json",
+      "bytes": 188966,
+      "ext": "json"
+    },
+    {
+      "path": "docs/Windsurf_ChatGPT_NOTES.md",
+      "bytes": 54734,
+      "ext": "md"
+    },
+    {
+      "path": "docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md",
+      "bytes": 51533,
+      "ext": "md"
+    },
+    {
+      "path": "docs/00_chatGPT_start_rules.docx",
+      "bytes": 30834,
+      "ext": "docx"
+    },
+    {
+      "path": "src/dev/VisualComparePage.tsx",
+      "bytes": 17840,
+      "ext": "tsx"
+    },
+    {
+      "path": "content_model/ctworld_home_content_model.md",
+      "bytes": 14251,
+      "ext": "md"
+    },
+    {
+      "path": "docs/HTML_TO_MARKDOWN_RULES_V4.md",
+      "bytes": 14056,
+      "ext": "md"
+    },
+    {
+      "path": "docs/00_windsurf-task-html-to-markdown.md",
+      "bytes": 12716,
+      "ext": "md"
+    },
+    {
+      "path": "tools/crawl/crawl-ctworld.ts",
+      "bytes": 11795,
+      "ext": "ts"
+    },
+    {
+      "path": "docs/STRATEGY/STRATEGY_Directus_Astro_Migration_ctworld.md",
+      "bytes": 10515,
+      "ext": "md"
+    },
+    {
+      "path": "docs/INSTR/INSTR-T-0020-teaching-end-to-end-sample.md",
+      "bytes": 10234,
+      "ext": "md"
+    },
+    {
+      "path": "dev/static-homepage/index.html",
+      "bytes": 9901,
+      "ext": "html"
+    },
+    {
+      "path": "docs/QA/DEBUG_V3/GUIDES/DEBUG_GUIDE_FOR_TEMP_ZIPS_T0066_TO_T0091.md",
+      "bytes": 9644,
+      "ext": "md"
+    },
+    {
+      "path": "docs/RULES_CROSSCHECK_NOTES_V1.md",
+      "bytes": 9337,
+      "ext": "md"
+    },
+    {
+      "path": "dev/static-homepage/styles.css",
+      "bytes": 8941,
+      "ext": "css"
+    },
+    {
+      "path": "src/html/html-to-markdown.ts",
+      "bytes": 8571,
+      "ext": "ts"
+    },
+    {
+      "path": "docs/crawl-and-inventory.md",
+      "bytes": 8500,
+      "ext": "md"
+    },
+    {
+      "path": "docs/INSTR/INSTR-T-0017-html-to-markdown-rules-cleanup.md",
+      "bytes": 7919,
+      "ext": "md"
+    },
+    {
+      "path": "docs/CONTENT_SCHEMA_V1.md",
+      "bytes": 7667,
+      "ext": "md"
+    },
+    {
+      "path": "docs/INSTR/INSTR-T-0019-enforce-utf8-encoding.md",
+      "bytes": 7293,
+      "ext": "md"
+    }
+  ]
+}
