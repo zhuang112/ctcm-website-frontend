@@ -676,8 +676,35 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
   - docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md
   - docs/PROJECT_TODO.md  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
   - docs/Windsurf_ChatGPT_NOTES.md  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
-- commit: 844f947 
+- commit: 844f947
 - handoff: docs/TEMP/TEMP_20251219_P2-0001_844f947.zip
+
+## 2025-12-20 P2-0004 claude-code-exec-pilot-docs-only
+- Summary:
+  - Pilot task executed by Claude Code (claude-opus-4-5-20251101) to verify execution capability
+  - Created Claude Code Execution Agent rules document
+  - Created execution log with full command/check documentation
+  - Updated PROJECT_TODO and notes
+- Changed files:
+  - docs/WORKFLOW/CLAUDE_CODE_EXECUTION_AGENT.md (NEW)
+  - docs/QA/DEBUG_V3/REPORTS/P2-0004/EXECUTION_LOG.md (NEW)
+  - docs/PROJECT_TODO.md (MODIFIED)
+  - docs/Windsurf_ChatGPT_NOTES.md (MODIFIED)
+- Checks: npm run check:no-bom, npm run check:utf8, npm run check:mojibake (pending)
+- Branch: phase2/P2-0004-claude-code-exec-pilot
+- Base commit: 0facb4bf10709f967612f47eb95eb203f6b676f2
+- Final commit: (pending)
+- Handoff: docs/TEMP/TEMP_20251220_P2-0004_<HEAD7>.zip (pending)
+
+RAW links (after merge):
+- docs/WORKFLOW/CLAUDE_CODE_EXECUTION_AGENT.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW/CLAUDE_CODE_EXECUTION_AGENT.md
+- docs/QA/DEBUG_V3/REPORTS/P2-0004/EXECUTION_LOG.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/QA/DEBUG_V3/REPORTS/P2-0004/EXECUTION_LOG.md
+- docs/PROJECT_TODO.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+- docs/Windsurf_ChatGPT_NOTES.md
+  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
 
 
 

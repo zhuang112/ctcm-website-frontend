@@ -499,3 +499,31 @@
   - [x] notes 中有 T-0059 小節與 RAW 連結；
 pm test、
 pm run build 通過。
+
+---
+
+## Phase 2 Tasks
+
+### P2-0004 claude-code-exec-pilot-docs-only
+
+> Status: COMPLETED (2025-12-20)
+
+- Objective: Pilot task to verify Claude Code can execute docs-only tasks in canonical repo with proper branch, checks, and handoff.
+- Deliverables:
+  - [x] docs/WORKFLOW/CLAUDE_CODE_EXECUTION_AGENT.md - Claude Code execution agent rules
+  - [x] docs/QA/DEBUG_V3/REPORTS/P2-0004/EXECUTION_LOG.md - Execution log
+  - [x] PROJECT_TODO.md updated
+  - [x] Windsurf_ChatGPT_NOTES.md updated
+- Checks: check:no-bom / check:utf8 / check:mojibake - PASS
+
+### P2-0005 fix-legacy-mojibake
+
+> Status: COMPLETED (2025-12-20)
+
+- Objective: Fix pre-existing mojibake/encoding corruption in docs files.
+- Restored files:
+  - [x] docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md (from 53483a3)
+  - [x] docs/PROJECT_TODO.md (from 6fb5d48)
+  - [x] docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md (from 77070bd)
+  - [x] Deleted docs/INSTR/INSTR-P2-0002-... (had wrong content)
+- Checks: check:no-bom / check:utf8 / check:mojibake - PASS
