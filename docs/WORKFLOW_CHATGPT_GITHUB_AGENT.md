@@ -886,3 +886,13 @@ ChatGPT 以 ZIP 內的內容為準，不會再看舊 ZIP。
 - 對話視窗保持「輕量：決策＋指令＋回報」。  
 - 詳細規格與操作歷史集中在 Git repo 的 `docs/*.md`。  
 - 無論是你、ChatGPT、Windsurf 或 Codex，要接續工作時都能快速銜接。
+
+---
+
+## 9. Mojibake check scope (P2-0006)
+
+- `npm run check:mojibake` **defaults to tracked files only** (`git ls-files "docs/**/*.md"`)
+- `npm run check:mojibake:staged` checks only staged files (used in pre-commit hook)
+- `npm run check:mojibake:all` scans entire filesystem (`docs/**/*.md`) including untracked files
+- **Untracked files (e.g., `_ADVICE/`, `INFO/`) will NOT block commits** in default/staged mode
+- To include external advice docs in repo: ensure they are valid UTF-8 (no U+FFFD) before `git add`

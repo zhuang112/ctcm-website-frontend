@@ -496,6 +496,26 @@
 - 驗收：
   - [x] src/wp/import/anycontent-to-wp.ts 提供轉換函式；src/wp/import/types.ts 定義 WPImportRecord。
   - [x] 	ools/wp-import/wp-import-from-anycontent.ts 可掃描 data/anycontent，產生 dry-run 計畫檔；npm script wp:import:dry-run 可執行。
-  - [x] notes 中有 T-0059 小節與 RAW 連結；
-pm test、
-pm run build 通過。
+  - [x] notes 中有 T-0059 小節與 RAW 連結；npm test、npm run build 通過。
+
+---
+
+## Phase 2 Tasks (P2-xxxx)
+
+> Phase 2 任務使用 P2-xxxx 編號，branch 格式為 `phase2/<P2-id>-<slug>`。
+
+### P2-0006 mojibake-scope-decision-memos
+
+> 狀態：✅ 已完成（2025-12-21）
+
+- 目標：
+  - 讓 `check:mojibake` 預設只檢查 tracked/staged 檔案，untracked 檔案不阻擋 commit
+  - 建立決策文件歸檔規範（DECISION memo template + INFO folder README）
+- 驗收：
+  - [x] `tools/qa/check-mojibake.mjs` 支援 tracked/staged/all 模式
+  - [x] `package.json` 新增 `check:mojibake:staged` / `check:mojibake:all` scripts
+  - [x] `.husky/pre-commit` 使用 `check:mojibake:staged`
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 新增 § 9 說明 mojibake scope
+  - [x] `docs/QA/DEBUG_V3/REPORTS/INFO/README.md` 說明 INFO 資料夾用途
+  - [x] `docs/QA/DEBUG_V3/REPORTS/_TEMPLATE_DECISION_MEMO.md` 提供決策 memo 模板
+  - [x] 三檢查 + test + build 通過

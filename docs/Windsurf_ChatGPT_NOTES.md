@@ -676,8 +676,32 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
   - docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/INSTR/INSTR-T-0018-meta-instr-and-status-structure.md
   - docs/PROJECT_TODO.md  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
   - docs/Windsurf_ChatGPT_NOTES.md  RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
-- commit: 844f947 
+- commit: 844f947
 - handoff: docs/TEMP/TEMP_20251219_P2-0001_844f947.zip
+
+## 2025-12-21 P2-0006 mojibake-scope-decision-memos
+
+- Branch: phase2/P2-0006-mojibake-scope-decision-memos (rebased on P2-0005)
+- Summary:
+  - Modified `tools/qa/check-mojibake.mjs` to support tracked/staged/all modes
+  - Default mode: tracked (only git-tracked files, ignores untracked)
+  - Staged mode: only staged files (used in pre-commit hook)
+  - All mode: full filesystem scan (like before)
+  - Added `check:mojibake:staged` and `check:mojibake:all` npm scripts
+  - Updated `.husky/pre-commit` to use staged mode
+  - Added `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` section 9 on mojibake scope
+  - Created `docs/QA/DEBUG_V3/REPORTS/INFO/README.md` for cross-task info folder
+  - Created `docs/QA/DEBUG_V3/REPORTS/_TEMPLATE_DECISION_MEMO.md` for decision memos
+- Checks: check:no-bom=PASS, check:utf8=PASS, check:mojibake=PASS, npm test=PASS, npm run build=PASS
+- Files changed:
+  - tools/qa/check-mojibake.mjs
+  - package.json
+  - .husky/pre-commit
+  - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  - docs/PROJECT_TODO.md
+  - docs/Windsurf_ChatGPT_NOTES.md
+  - docs/QA/DEBUG_V3/REPORTS/INFO/README.md (NEW)
+  - docs/QA/DEBUG_V3/REPORTS/_TEMPLATE_DECISION_MEMO.md (NEW)
 
 
 

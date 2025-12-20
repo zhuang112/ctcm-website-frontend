@@ -1,1 +1,1 @@
-npm run check:no-bom && npm run check:utf8 && npm run check:mojibake
+npm run check:no-bom && npm run check:utf8 && npm run check:mojibake:staged
