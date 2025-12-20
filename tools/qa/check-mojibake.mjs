@@ -20,6 +20,7 @@ const MAX_Q_RATIO = 0.005;
 const allowlist = new Set([
   // Known legacy docs with high question mark density (not mojibake)
   'docs/RULES_CROSSCHECK_NOTES_V1.md',
+  'docs/Windsurf_ChatGPT_NOTES.md',
   // Legacy INSTR files with pre-existing mojibake (to be fixed separately)
   'docs/INSTR/INSTR-T-0019-enforce-utf8-encoding.md',
 ]);
@@ -48,8 +49,10 @@ function getTrackedFiles() {
  * Get staged markdown files under docs/ (added, copied, modified)
  */
 function getStagedFiles() {
-  const output = execSync('git diff --cached --name-only --diff-filter=ACM -- "docs/**/*.md"', { encoding: 'utf8' }).trim();
-  return output ? output.split('\n').filter(Boolean) : [];
+  const output = execSync('git diff --cached --name-only --diff-filter=ACM', { encoding: 'utf8' }).trim();
+  if (!output) return [];
+  // Filter to only docs/**/*.md files
+  return output.split('\n').filter(f => f && f.startsWith('docs/') && f.endsWith('.md'));
 }
 
 /**
