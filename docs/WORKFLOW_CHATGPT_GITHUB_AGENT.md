@@ -1,31 +1,20 @@
-# 中台世界專案協作工作流程（User / ChatGPT / 實作 Agent）
-
-> 檔名：`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
-> 版本：2025-12-10（由 ChatGPT 更新）
-> 目標：讓你只需要做關鍵決策與簡單 copy / paste，技術細節與執行由 ChatGPT + 實作 Agent（目前主要是 Codex）自動接力完成。
-> 本檔案原為舊版 workflow（Windsurf 版），已在 T-0010 任務中改名為 WORKFLOW_CHATGPT_GITHUB_AGENT.md。
-> **提醒：本檔為協作流程與安全規則的單一真相來源，其他文件僅作摘要或歷史備忘。**
+# 銝剖銝?撠???撌乩?瘚?嚗ser / ChatGPT / 撖虫? Agent嚗?
+> 瑼?嚗docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`  
+> ?嚗?025-12-10嚗 ChatGPT ?湔嚗?> ?格?嚗?雿?閬??瘙箇??陛??copy / paste嚗?銵敦蝭?銵 ChatGPT + 撖虫? Agent嚗?蜓閬 Codex嚗?????> ?祆?獢??箄???workflow嚗indsurf ??嚗歇??T-0010 隞餃?銝剜? WORKFLOW_CHATGPT_GITHUB_AGENT.md??> **??嚗瑼??瘚????刻????桐??靘?嚗隞?隞嗅?雿?閬?甇瑕????*
 
 ---
 
-## 1. 角色分工與單一真相來源
+## 1. 閫?極?銝?靘?
 
-### 1.1 你（使用者）
+### 1.1 雿?雿輻??
 
-- 決定 **做什麼**、**先做哪個**。
-- 在 ChatGPT 與 Windsurf 之間負責「簡單傳遞」：  
-  - 把 ChatGPT 給 Windsurf 的指令貼給 Windsurf。  
-  - 把 Windsurf 的「任務回報摘要」貼回 ChatGPT。
-- 負責執行 **有限幾條安全指令**（例：`git status` / `git add` / `git commit` / `git push` / `npm run ...`）。
-- 不需要寫程式、不需要自己 Debug，只要看得懂「任務說明」與「回報摘要」。
+- 瘙箏? **??暻?*??*???芸?*??- ??ChatGPT ??Windsurf 銋?鞎痊?陛?桀??  
+  - ??ChatGPT 蝯?Windsurf ??隞方票蝯?Windsurf?? 
+  - ??Windsurf ?遙???望?閬票??ChatGPT??- 鞎痊?瑁? **??撟暹?摰?誘**嚗?嚗git status` / `git add` / `git commit` / `git push` / `npm run ...`嚗?- 銝?閬神蝔????閬撌?Debug嚗閬?敺??遙?牧?????望?閬?
+### 1.2 ChatGPT嚗瑽葦嚗?隞嗆??剁?隞餃?閮剛???
 
-### 1.2 ChatGPT（架構師＋文件機器＋任務設計者）
-
-ChatGPT 負責：
-
-- 設計整體架構與流程（HTML → AnyContent → zh-CN → WordPress → React）。
-- 拆解成一顆一顆的 T 任務（T-0001, T-0002, ...）。
-- 撰寫與維護專案文件：
+ChatGPT 鞎痊嚗?
+- 閮剛??湧??嗆???蝔?HTML ??AnyContent ??zh-CN ??WordPress ??React嚗?- ?圾??憿?憿? T 隞餃?嚗-0001, T-0002, ...嚗?- ?啣神?雁霅瑕?獢?隞塚?
   - `docs/COMPLETE_PROJECT_WORKFLOW.md`
   - `docs/CONTENT_SCHEMA.md`
   - `docs/HTML_TO_MARKDOWN_RULES_V4.md`
@@ -33,161 +22,90 @@ ChatGPT 負責：
   - `docs/PROJECT_TODO.md`
   - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`
   - `docs/Windsurf_ChatGPT_NOTES.md`
-  - `docs/PENDING_DECISIONS.md` …
-- 為每一個 T 任務寫出「可以直接貼給 Windsurf / Codex 的短指令」。
+  - `docs/PENDING_DECISIONS.md` ??- ?箸?銝??T 隞餃?撖怠?隞亦?亥票蝯?Windsurf / Codex ??誘??
+??嚗?
+- **??蝭??潦?蝔?閮剛?蝝啁?嚗撖恍?`docs/*.md`嚗?閬??典?閰梯ㄐ??*
+- 撠店銝凋???閬??誘??霈??撠店?賢翰?銝?
+### 1.3 Windsurf嚗璈?IDE 撖虫? Agent嚗?
+Windsurf ?其??璈?repo 銝剖祕雿?
 
-原則：
-
-- **所有長篇規格、思考過程與設計細節，都寫進 `docs/*.md`，不要塞在對話裡。**
-- 對話中保持「摘要＋指令」，讓每個新對話能快速接上。
-
-### 1.3 Windsurf（本機 IDE 實作 Agent）
-
-Windsurf 在你的本機 repo 中實作：
-
-- 修改 TypeScript / React / 工具程式碼。
-- 維護對應測試（Vitest / typecheck）。
-
-職責：
-
-- 依照 ChatGPT 給的任務指令，修改特定檔案。
-- 只在允許的範圍內 refactor，不擅自大改其他模組。
-- 執行測試、產生 terminal log，並把重點結果寫進：
+- 靽格 TypeScript / React / 撌亙蝔?蝣潦?- 蝬剛風撠?皜祈岫嚗itest / typecheck嚗?
+?瑁痊嚗?
+- 靘 ChatGPT 蝯衣?隞餃??誘嚗耨?寧摰?獢?- ?芸?迂??? refactor嚗??憭扳?嗡?璅∠???- ?瑁?皜祈岫???terminal log嚗蒂??暺??神?莎?
   - `docs/Windsurf_ChatGPT_NOTES.md`
   - `docs/terminal_logs/*.txt`
-- 在回報摘要最後提供一段 `[建議 git 指令]`，讓你可以直接 `git add / commit / push`。
+- ?典??望?閬?敺?靘?畾?`[撱箄降 git ?誘]`嚗?雿隞亦??`git add / commit / push`??
+???嚗?
+- Windsurf **銝??芸??瑁? `git add` / `git commit` / `git push`**嚗??靘?隞斤策雿??Ⅱ隤?
+### 1.4 Codex嚗蝡臬祕雿?Agent嚗靘?賂?
 
-重要限制：
+Codex ???脤?隡?Windsurf嚗??具蝡胯銵?
 
-- Windsurf **不會自動執行 `git add` / `git commit` / `git push`**，只會提供指令給你手動確認。
+- ?臭誑??GitHub / ?脩垢?啣???code??皜祈岫??- ?拙?頝?憭折???隞餃?嚗?憒甈⊥撘??甈∟?瑼I 撌亙嚗?
+閬???Windsurf 憿撮嚗?
+- ?萄? `docs/TOOLS_ROLES_AND_BOUNDARIES.md`??- ??閬撖怠? docs??- ?? `[Agent ???]`嚗?`[撱箄降 git ?誘]`??
+?桀??臭誑???箝indsurf ???蝑靘?閬?憭折?雿輻??
+### 1.5 ?桐??靘?嚗ingle Source of Truth嚗?
+- **GitHub repo ??`main` ? + `docs/*.md`** ?臬銝甈?靘???- ChatGPT / Windsurf / Codex ?牧瘜????貉?蝒?隞?**GitHub 銝??啁? docs** ?箸???- ??ChatGPT / Agent ??蝑? docs 銝??湛?
+  - ?芸??湔 docs??  - ?? ChatGPT / Agent 靘?docs 隤踵隤芣???
+### 1.6 GitHub 雿?臭?? & push 閬?
 
-### 1.4 Codex（雲端實作 Agent，未來可選）
+- GitHub嚗?閮哨?`main` ?嚗蝔?蝣潸? docs ?銝?靘?嚗?  - ChatGPT ?閬?閫???獢?瘜?嚗?誑 GitHub ?摰寧皞?  - ?祆?撠 `commit` / `push` ?耨?對?閬???芣迤撘???- 瘥???T-XXXX 隞餃???皞???蝔?
+  1. 撖虫? Agent嚗?蜓閬 Codex嚗???撘? docs 靽格??  2. ?祆?頝?閬?皜祈岫 / lint嚗??script嚗? `npm test`?npm run typecheck`嚗?  3. 雿輻 git 撠??獢?commit嚗ommit message ?喳??嚗?     - T 隞餃?蝺刻?嚗?憒?`T-0007 docs-snapshot-cli: ...`嚗?     - 蝪∠隤芣??祆活霈??  4. 撠府 commit push ?圈?蝡荔??身 `origin/main`嚗?  5. ??`docs/Windsurf_ChatGPT_NOTES.md` 撠? T 隞餃???蝭銝哨?蝝??
+     - 摰???
+     - ?敺?push ??commit hash嚗?憒?`commit: abc1234`嚗?     - 蝪∟?霈????- ChatGPT ?典???撘Ⅳ / docs ??
+  - ?身隞?GitHub 銝? `main` ??箸???  - ??GitHub ?⊥?摮?嚗雯頝?/ 甈???嚗?敹??Ⅱ?雿輻??銝??身 GitHub ???- snapshot ZIP嚗npm run snapshot:docs -- --task T-XXXX`嚗?摰?嚗?  - 雿??憭?瘜???寞?嚗??臭蜓閬?閮?皞?  - ?詨?雿輻??嚗?    - ?閬? ChatGPT 瑼Ｘ?祆?撠 commit ???氬?    - ?閬??憭抒? log / 銝剝??Ｗ嚗??拙??湔 commit ??repo??  - ?亦??T 隞餃?撌脩????? commit 銝?push ??GitHub嚗?? ChatGPT ?湔霈 GitHub嚗??舫??唬???ZIP??
+### 1.7 GitHub RAW ???閬?嚗策 ChatGPT ?剁?
 
-Codex 的角色類似 Windsurf，但在「雲端」執行：
-
-- 可以在 GitHub / 雲端環境改 code、跑測試。
-- 適合跑「較大顆」的任務（例如批次格式化、批次轉檔、CI 工具）。
-
-規則與 Windsurf 類似：
-
-- 遵守 `docs/TOOLS_ROLES_AND_BOUNDARIES.md`。
-- 所有長規格寫回 docs。
-- 提供 `[Agent 回報摘要]`＋ `[建議 git 指令]`。
-
-目前可以先視為「Windsurf 的擴充」，等未來需要再大量使用。
-
-### 1.5 單一真相來源（Single Source of Truth）
-
-- **GitHub repo 的 `main` 分支 + `docs/*.md`** 是唯一權威來源。
-- ChatGPT / Windsurf / Codex 的說法如果互相衝突，以 **GitHub 上最新的 docs** 為準。
-- 若 ChatGPT / Agent 的回答與 docs 不一致：
-  - 優先更新 docs。
-  - 再請 ChatGPT / Agent 依 docs 調整說法。
-
-### 1.6 GitHub 作為唯一真相 & push 規則
-
-- GitHub（預設：`main` 分支）是程式碼與 docs 的單一真相來源：
-  - ChatGPT 需要了解目前專案狀況時，優先以 GitHub 的內容為準。
-  - 本機尚未 `commit` / `push` 的修改，視為「尚未正式生效」。
-- 每一個 T-XXXX 任務的標準結束流程：
-  1. 實作 Agent（目前主要是 Codex）完成程式與 docs 修改。
-  2. 本機跑必要的測試 / lint（若有 script，如 `npm test`、`npm run typecheck`）。
-  3. 使用 git 將相關檔案 commit，commit message 至少包含：
-     - T 任務編號（例如 `T-0007 docs-snapshot-cli: ...`）
-     - 簡短說明本次變更。
-  4. 將該 commit push 到遠端（預設 `origin/main`）。
-  5. 在 `docs/Windsurf_ChatGPT_NOTES.md` 對應 T 任務的小節中，紀錄：
-     - 完成時間
-     - 最後 push 的 commit hash（例如 `commit: abc1234`）
-     - 簡要變更摘要。
-- ChatGPT 在分析程式碼 / docs 時：
-  - 預設以 GitHub 上的 `main` 分支為準。
-  - 若 GitHub 無法存取（網路 / 權限問題），必須明確告知使用者，不得假設 GitHub 狀態。
-- snapshot ZIP（`npm run snapshot:docs -- --task T-XXXX`）的定位：
-  - 作為「例外情況」的備用方案，而不是主要資訊來源。
-  - 典型使用情境：
-    - 需要讓 ChatGPT 檢查本機尚未 commit 的變更。
-    - 需要傳遞較大的 log / 中間產出，不適合直接 commit 到 repo。
-  - 若當前 T 任務已經有對應的 commit 並 push 到 GitHub，優先讓 ChatGPT 直接讀 GitHub，而不是重新上傳 ZIP。
-
-### 1.7 GitHub RAW 連結規則（給 ChatGPT 用）
-
-為了讓 ChatGPT 能穩定讀取 repo 裡的 docs，而不是只看到 GitHub 頁面的外框，本專案對 `zhuang112/ctcm-website-frontend` 採用以下 RAW 連結規則：
-
-- Repo：`zhuang112/ctcm-website-frontend`
-- 預設分支：`main`
-- RAW base URL（給 ChatGPT 用）：
-
+?箔?霈?ChatGPT ?賜帘摰???repo 鋆∠? docs嚗??臬? GitHub ???獢??砍?獢? `zhuang112/ctcm-website-frontend` ?∠隞乩? RAW ???閬?嚗?
+- Repo嚗zhuang112/ctcm-website-frontend`
+- ?身?嚗main`
+- RAW base URL嚗策 ChatGPT ?剁?嚗?
   ```text
   https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/
   ```
 
-- 對於 repo 內的任何檔案路徑（例如 `docs/PROJECT_TODO.md`），ChatGPT 應優先用下列 RAW URL 讀取內容：
+- 撠 repo ?抒?隞颱?瑼?頝臬?嚗?憒?`docs/PROJECT_TODO.md`嚗?ChatGPT ??銝? RAW URL 霈?摰對?
 
   ```text
-  Base + 相對路徑
+  Base + ?詨?頝臬?
 
-  範例：
-  docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
-  → https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  蝭?嚗?  docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
+  ??https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
 
   docs/PROJECT_TODO.md
-  → https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
+  ??https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
   ```
 
-- ChatGPT 在本專案中必須遵守的行為：
+- ChatGPT ?冽撠?銝剖??摰?銵嚗?
+  1. ?嗡蝙?刻?撖虫? Agent ?典?閰曹葉?湔?? `raw.githubusercontent.com` ??????RAW ???嚗?  
+     ChatGPT ????府瑼??冽?嚗霈?仃??404 / 蝬脰楝 / 甈???嚗?敹??Ⅱ?嚗? 
+     銝???撌脰??摰嫘?
+  2. ?嗡蝙?刻?撖虫? Agent ?典?閰曹葉???repo ??獢撠楝敺?銝行?蝣箄”蝷箄??? GitHub 霈??嚗?憒?  
+     - ??敺?GitHub 霈??`docs/PROJECT_TODO.md`?? 
+     - ????GitHub 銝? `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`??
+     ??ChatGPT ?????餈?RAW base URL + ?詨?頝臬?嚗? 
+     敶Ｘ?撠???RAW URL嚗蒂隞亥府 RAW URL 霈??獢摰嫘?
+  3. ??RAW ????⊥?霈??靘?頝臬?????臬?蝔曹?蝚艾?獢?摮嚗?  
+     ChatGPT 銝??刻??嗆???snapshot ?嗡????啁???  
+     敹????銝西?雿輻??靘?
+     - 甇?Ⅱ??RAW ???嚗?
+     - ??啁? docs snapshot ZIP嚗?
+     - ?湔鞎潔??閬???畾菔??
+- 瘜冽?鈭?嚗?  - ?祈????拍?潭 repo嚗zhuang112/ctcm-website-frontend`嚗? `main` ??? 
+    ?交靘蝙?典隞??舀? fork嚗?閬?砍?蝭?湔 RAW base URL??  - ?冽撠???閰曹葉嚗隞亦陛?株牧嚗?    - ??敺?GitHub 霈??`docs/PROJECT_TODO.md`??  
+      ChatGPT ??誑 RAW ??? `https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md` 靘???  - docs snapshot ZIP嚗??湛?銝?桐??嚗?
+    - 摰?嚗雿 ChatGPT / Agent ???湛?銝?桐??嚗??訾誑 GitHub/main + notes ?箸???    - 瑼?撱箄降嚗???T 蝺刻?嚗??靘? `ctworld-docs-T-0007-2025-12-10-v1.zip`??    - 雿輻??嚗 RAW ?航?嚗誑 RAW嚗itHub/main嚗皞?RAW ?⊥?霈?◤?餅????蝙?冽???snapshot ??雿輻???單璈???
+#### RAW ?⊥?霈?????刻???
+- ChatGPT ?其誑銝?瘜???**蝡?迫** ??閰脫?獢摰寞??箸隢?撱箄降嚗?  - RAW URL ?賣????Ｖ?撖阡??批捆蝻箸?/?⊥?閫??嚗?獢?征?踝???  - 鋡怠極?瑟? sandbox ?餅?嚗瘜?敺?RAW ?批捆??  - RAW ?湔? 404 / 403??- ???嚗?  - 銝?靘?閮?? snapshot ?葫?批捆??  - ??AW ?⊥?霈??隢蝙?刻票銝璈?獢??銝 snapshot嚗????航??批捆敺?????
+### 1.8 Notes 銝剖???銝?RAW ???
 
-  1. 當使用者或實作 Agent 在對話中直接提供 `raw.githubusercontent.com` 開頭的連結時（RAW 連結），  
-     ChatGPT 應自動讀取該檔案全文；若讀取失敗（404 / 網路 / 權限問題），必須明確回報，  
-     不得假裝已讀取內容。
-
-  2. 當使用者或實作 Agent 在對話中提到本 repo 的檔案相對路徑，並明確表示要「從 GitHub 讀取」時，例如：  
-     - 「請從 GitHub 讀取 `docs/PROJECT_TODO.md`」  
-     - 「請看 GitHub 上的 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`」
-
-     則 ChatGPT 應自動組合上述 RAW base URL + 相對路徑，  
-     形成對應的 RAW URL，並以該 RAW URL 讀取檔案內容。
-
-  3. 若 RAW 連結無法讀取（例如路徑打錯、分支名稱不符、檔案不存在），  
-     ChatGPT 不得用記憶或舊 snapshot 當作「最新版」，  
-     必須回報問題並請使用者提供：
-     - 正確的 RAW 連結，或
-     - 最新的 docs snapshot ZIP，或
-     - 直接貼上需要分析的段落。
-
-- 注意事項：
-  - 本規則僅適用於本 repo（`zhuang112/ctcm-website-frontend`）的 `main` 分支。  
-    若未來使用其他分支或 fork，需要在本小節更新 RAW base URL。
-  - 在本專案的對話中，可以簡單說：
-    - 「請從 GitHub 讀取 `docs/PROJECT_TODO.md`」，  
-      ChatGPT 會自動以 RAW 連結 `https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md` 來讀取。
-  - docs snapshot ZIP（備援，不是單一真相）：
-    - 定位：只作為 ChatGPT / Agent 的備援，不是單一真相；真相以 GitHub/main + notes 為準。
-    - 檔名建議：包含 T 編號＋日期，例如 `ctworld-docs-T-0007-2025-12-10-v1.zip`。
-    - 使用順序：若 RAW 可讀，以 RAW（GitHub/main）為準；RAW 無法讀或被阻擋時，再使用最新 snapshot 或請使用者上傳本機檔。
-
-#### RAW 無法讀取時的停用規則
-
-- ChatGPT 在以下情況必須 **立即停止** 針對該檔案內容提出推論或建議：
-  - RAW URL 能打開頁面但實際內容缺漏/無法解析（只看到框架或空白）。
-  - 被工具或 sandbox 阻擋，無法取得 RAW 內容。
-  - RAW 直接回傳 404 / 403。
-- 停用動作：
-  - 不得依舊記憶或舊 snapshot 猜測內容。
-  - 回報「RAW 無法讀取」，請使用者貼上本機檔案或重新上傳 snapshot，待取得可讀內容後再分析。
-
-### 1.8 Notes 中必須附上 RAW 連結
-
-- 每一個 T-XXXX 任務完成後，實作 Agent 必須在 `docs/Windsurf_ChatGPT_NOTES.md` 的對應小節中，紀錄：
-  - 任務標題與日期
-  - 實際修改／新增的檔案清單
-  - 測試指令與結果（若有）
-  - 最後 push 的 commit hash（例如 `commit: 27caf76`）
-  - 一個「變更檔案（含 RAW 連結）」區塊
-- RAW 連結的格式例如：
+- 瘥???T-XXXX 隞餃?摰?敺?撖虫? Agent 敹???`docs/Windsurf_ChatGPT_NOTES.md` ????蝭銝哨?蝝??
+  - 隞餃?璅????  - 撖阡?靽格嚗憓?瑼?皜
+  - 皜祈岫?誘?????交?嚗?  - ?敺?push ??commit hash嚗?憒?`commit: 27caf76`嚗?  - 銝???湔?獢???RAW ???嚗?憛?- RAW ????撘?憒?
 
   ```markdown
-  變更檔案（含 RAW 連結）：
+  霈瑼?嚗 RAW ???嚗?
 
   - docs/PROJECT_TODO.md  
     RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
@@ -199,406 +117,190 @@ Codex 的角色類似 Windsurf，但在「雲端」執行：
     RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
   ```
 
-- ChatGPT 在 review 任務時，可以只看 notes 中的這個區塊，直接點 RAW 連結打開每一個變更檔案的最新內容。
-- 若未來 repo 名稱或預設分支有變更，必須同步更新本小節中的 RAW base URL 與示範連結。
+- ChatGPT ??review 隞餃????臭誑?芰? notes 銝剔???憛??湔暺?RAW ?????瘥????湔?獢???啣摰嫘?- ?交靘?repo ?迂??閮剖??舀?霈嚗???甇交?唳撠?銝剔? RAW base URL ?內蝭????
+### 1.9 撖虫? Agent ??sandbox / full access 閬?
 
-### 1.9 實作 Agent 的 sandbox / full access 規則
+- ?芸?閮勗??repo ?桅??扳?雿?`cwd` ?? `ctcm-website-frontend/`嚗?楊?箏?獢?桅?嚗?甇Ｗ? `../` ?憯扳?隞歹???- sandbox / approval 閮剖?嚗?  - ??IDE/Agent 撌脤???full access嚗 sandbox + auto-approve嚗?隞??萄??砍?蝭?????嗚?  - ?亥??澆??芋撘?敹???瘙?allow嚗?隞乩?頞撠??寧?????- 摰??嚗?  - 蝳?游??扳?隞歹?`rm -rf /`?rm -rf ..`?耨?孵??git config / hosts 蝑?撠??⊿????柴?  - 撠?repo ???湧?甇?虜 `git status` 瑼Ｘ??notes 蝝???踹??望找耨?嫘?- 撌乩?瘚?銝?嚗?  - 靘?`PROJECT_TODO` / `Windsurf_ChatGPT_NOTES` 璇?瑁?隞餃???  - 霈摰?敺?`git add` / `commit` / `push`嚗蒂??notes 閮? commit hash ??RAW ?????  - ChatGPT ?誑 notes + RAW ??? review嚗??典?閰曹葉撅??瑞?蝝啁???
+### 1.10 Safety levels嚗est/build/zh-CN/RAW/撖拇
 
-- 只允許在本 repo 目錄內操作：`cwd` 指向 `ctcm-website-frontend/`，避免跨出專案根目錄（禁止對 `../` 做破壞性指令）。
-- sandbox / approval 設定：
-  - 若 IDE/Agent 已開啟 full access（無 sandbox + auto-approve），仍需遵守本小節的範圍限制。
-  - 若處於受限模式，必要時請求 allow，但以不超出專案根目錄為原則。
-- 安全界線：
-  - 禁用破壞性指令：`rm -rf /`、`rm -rf ..`、修改全域 git config / hosts 等與專案無關的項目。
-  - 對 repo 的變更需正常 `git status` 檢查與 notes 紀錄，避免隱性修改。
-- 工作流程不變：
-  - 依 `PROJECT_TODO` / `Windsurf_ChatGPT_NOTES` 條目執行任務。
-  - 變更完成後，`git add` / `commit` / `push`，並在 notes 記錄 commit hash 與 RAW 連結。
-  - ChatGPT 會以 notes + RAW 連結 review，不在對話中展開長篇細節。
+- ?箸??嚗?  - ?芾?隞餃?蝣啣 `src/`?tools/`?tests/` ??撘?霈撖怎? `data/`嚗撠曉?銝敺? `npm test` **??* `npm run build`??  - 隞餃??交???zh-CN pipeline ?憓?靽格 zh-CN JSON嚗??? `npm run check:zh-cn`嚗? ERROR ?耨敺拇???T 隞餃?嚗瘜?銝? push??  - 蝝?docs/INSTR 蝺刻摩?臭?頝?test/build嚗????notes ???ocs-only嚗頝?test/build??- RAW ?航??改?
+  - ?身 ChatGPT ?湔霈 GitHub RAW嚗 RAW 404/?⊥?霈??敹??迫?刻?嚗?雿輻?票?祆?瑼??? snapshot嚗??航??批捆敺?蝜潛???- schema / mapping 隤踵嚗?  - 隞颱??啣?甈??矽??mapping嚗TML?arkdown?nyContent?h-CN ?賢??殷??質???docs ?神皜?嚗蒂璅??? ChatGPT review???祕雿?- /dev/compare??獢見?穿?
+  - ?乩遙??閬?sample/撠嚗? compare ??嚗? repo ?抒?見?穿?蝻箸?? notes 閮??餌?嚗?銵?憭?鞈???
+### 1.11 ChatGPT review 頛詨閬?嚗-0060 韏瘀?
 
-### 1.10 Safety levels：test/build/zh-CN/RAW/審核
+- ChatGPT ????蝯艾?隢??斗???臬閬摰?嚗???暺酉閮?bug/憸券/TODO嚗?憒??游?瑼?銝甈∪??粹?瘙?- ?交??芸?獢降憿?? A/B/C ?賊?隢蝙?刻捱蝑?敹??遣霅啣??T + INSTR??- 銝撠店銝剝蝭?餈?Codex ?銵?蝔?蝝啁?撖怠? docs/notes??
+### 1.12 ChatGPT 鈭斗瑼?docs/TEMP/ ??docs/TEMP/TEMP_<date>_...zip + MANIFEST嚗5.3嚗?
+- ?桐?鈭斗??ChatGPT review **?芰? `docs/TEMP/*.zip`嚗??`docs/TEMP/` 瑼???`MANIFEST.json`嚗?*嚗?毽??RAW / ?嗆瑼? 
+- staging 閬?嚗docs/TEMP/` ???怠?嚗ip 摰?敺皜征嚗epo 銝???????TEMP ??zip ??瘛瑟?嚗.gitignore` 敹賜 `docs/TEMP/`?docs/TEMP/*.zip`嚗? 
+- ?桅?蝯?嚗ip ?找???repo ?詨?頝臬?嚗???flatten嚗ANIFEST `repo_path`/`temp_path` ?蝙??repo ?詨?頝臬??? 
+- zip ?賢?嚗TEMP_<YYYYMMDD>[_<task_id>]_<source_commit>.zip`嚗?閮剛撓?箄楝敺?`docs/TEMP/`嚗? 
+- MANIFEST嚗???嚗docs/TEMP/MANIFEST.json`嚗TF-8 ??BOM嚗撠??恬?  
+  - `generated_at`嚗SO 8601嚗repo`?source_commit`嚗ip ?? commit嚗task_id`嚗??null嚗? 
+  - `files[]`嚗repo_path`?temp_path`嚗? repo_path嚗sha256`?bytes`?? 
+  - ?舫? `MANIFEST.sha256.txt` 靘撽? 
+- 摰?瑁?嚗MANIFEST.source_commit` 敹?蝑?嗅? HEAD嚗andoff 撌亙?身?芸?雿輻 `git rev-parse HEAD`嚗???? `--source_commit` ??HEAD 銝泵嚗??湔 fail?ip 瑼?銋撥?嗅葆 HEAD7?? 
+- 瘚?嚗? 
+  1) 撠?撖拇?獢??楝敺??`docs/TEMP/`嚗????瑽??? 
+  2) ?Ｗ `MANIFEST.json`嚗 sha256?ytes?ource_commit?ask_id嚗? 
+  3) 憯葬?箔?餈啣?? zip嚗??望??? zip ?迂??source_commit?? 
+  4) review 摰??喳皜征 `docs/TEMP/`?? 
+- ?芸????刻嚗?`npm run handoff:tempzip -- --source_commit <hash> --task_id <T-xxxx> --files ...`??? `--out` ????? `docs/TEMP/TEMP_<date>[_<task>]_commit.zip`??
+### Debug V3 ??CI嚗-0087嚗?
+- Debug V3 鞈?嚗docs/QA/DEBUG_V3/README.md`?docs/QA/DEBUG_V3/URL_QUEUE.md`?docs/QA/DEBUG_V3/TEMPLATES/*`?憓?靘?? URL_QUEUE ?餉?嚗???冽芋?踹???REPORTS??- CI嚗i-self-proof嚗?`push main` / `pull_request` ??? `check:no-bom`?security:scan`?test`?build`?check:zh-cn`嚗蒂?Ｙ? `ci_summary.md/json`嚗??`docs/QA/**`?docs/terminal_logs/**`?docs/AUDITS/**`?tmp/**` 雿 artifacts??- CI summary嚗 `scripts/quality/ci-summary.js` ?Ｙ?嚗???source_commit / run_at / checks ??? crawl_fails 蝪∪??- ??CI 撠?????撽?嚗??喳??祆?頝?璅??瑼Ｘ銝血 notes 閮餉???- CRAWL_FAILS嚗?脖遙???fetch/decode 憭望?嚗?撖怠 `docs/QA/CRAWL_FAILS.jsonl`嚗ppend嚗??風?莎?嚗蒂頛詨?嗆活?? `docs/QA/CRAWL_FAILS.md`嚗??? CI ?勗????ci_summary 銝剜???
+### 1.13 瑼?蝺函Ⅳ??撠橘??脫迫鈭Ⅳ嚗?
+- ???摮?銝敺蝙??`UTF-8`嚗?撠曆蝙??`LF`嚗歇??`.editorconfig` / `.gitattributes` 撘瑕閮剖???- ?亙 Windows ?鈭Ⅳ嚗???`chcp 65001`嚗??函楊頛臬?豢??誑 UTF-8 ?????- 蝳迫隞?ANSI / Big5 ?血?嚗?隤文?隢??UTF-8 銝阡??唳?鈭扎?
+### 1.14 RAW ?⊥??????祆?銝 fallback嚗策 ChatGPT ?剁?
 
-- 基本原則：
-  - 只要任務碰到 `src/`、`tools/`、`tests/` 或程式會讀寫的 `data/`，收尾前一律跑 `npm test` **與** `npm run build`。
-  - 任務若涉及 zh-CN pipeline 或新增/修改 zh-CN JSON，再加跑 `npm run check:zh-cn`；有 ERROR 先修復或開 T 任務，無法通過不得 push。
-  - 純 docs/INSTR 編輯可不跑 test/build，但需在 notes 明講「docs-only，未跑 test/build」。
-- RAW 可讀性：
-  - 預設 ChatGPT 直接讀 GitHub RAW；若 RAW 404/無法讀取，必須停止推論，請使用者貼本機檔或提供 snapshot，待可讀內容後再繼續。
-- schema / mapping 調整：
-  - 任何新增欄位、調整 mapping（HTML→Markdown、AnyContent、zh-CN 白名單）都要在 docs 先寫清楚，並標記「需 ChatGPT review」後再實作。
-- /dev/compare、檔案樣本：
-  - 若任務需要 sample/對照（如 compare 頁），優先用 repo 內現有樣本；缺料時在 notes 記錄阻礙，避免自行對外抓資料。
+- ChatGPT 瘥活? `raw.githubusercontent.com/...` ???????閰衣?亥???RAW ?批捆??- ?亙?撌亙???04 ????憿?**?⊥?霈??獢擃?*嚗????銝剜?雓?
+  - 隤芣??銝??RAW URL ??獢楝敺?銝???  - 銝???撌脰???銋?敺?皜祆?獢摰嫘?- ?亥府瑼??臬?蝥?瑟??嚗hatGPT ??雿輻??
+  - ?典?閰曹葉?湔???單璈?獢?靘???HTML / JSON / markdown嚗?  - 銋?隞乓??喟?瑼????箏銝?靘?蝜潛???嚗???皜研?- ?交敺?GitHub RAW ???喟??祆?撌桃嚗?  - 隞交??啜?雿輻?Ⅱ隤???箸?嚗虜?臭??單?獢?嚗蒂??notes 閮?撌桃靘???
+### 1.15 Codex ? Gate嚗?撠??梢?嚗?
+Codex 瘥? T 摰?銝?push 敺??蝬剜?蝎曄陛??暺?  
+1) 蝯?嚗歇摰? T-xxxx?? 
+2) main commit hash?? 
+3) 皜祈岫?誘?瑁???嚗?璅酉 docs-only ?芾?嚗? 
+4) TEMP嚗歇皞? `docs/TEMP.zip`嚗 MANIFEST嚗ource_commit=...嚗??交??餃?/皜祈岫憭望??甇方牧?? 
+蝝啁?嚗??湔?獢AW ????捱蝑?銝敺神??notes??---
 
-### 1.11 ChatGPT review 輸出規則（T-0060 起）
+## 2. 瑼????冗蝯?嚗陛閬?
 
-- ChatGPT 回應時先給「結論/判斷」（可否視為完成）、再列「重點註記」（bug/風險/TODO），如需更多檔案一次列出需求。
-- 若有未定案議題，提出 A/B/C 選項請使用者決策，必要時建議另開 T + INSTR。
-- 不在對話中長篇描述 Codex 的執行過程；細節寫回 docs/notes。
-
-### 1.12 ChatGPT 交接檔（docs/TEMP/ → docs/TEMP/TEMP_<date>_...zip + MANIFEST，v5.3）
-
-- 單一交接包：ChatGPT review **只看 `docs/TEMP/*.zip`（內含 `docs/TEMP/` 檔案與 `MANIFEST.json`）**，避免混用 RAW / 零散檔。  
-- staging 規則：`docs/TEMP/` 僅作暫存，zip 完成後可清空；repo 不得同時留存舊 TEMP 與 zip 造成混淆（`.gitignore` 忽略 `docs/TEMP/`、`docs/TEMP/*.zip`）。  
-- 目錄結構：zip 內保留 repo 相對路徑（不再 flatten）。MANIFEST `repo_path`/`temp_path` 皆使用 repo 相對路徑。  
-- zip 命名：`TEMP_<YYYYMMDD>[_<task_id>]_<source_commit>.zip`（預設輸出路徑：`docs/TEMP/`）。  
-- MANIFEST（必備）：`docs/TEMP/MANIFEST.json`，UTF-8 無 BOM，至少包含：  
-  - `generated_at`（ISO 8601）、`repo`、`source_commit`（zip 時的 commit）、`task_id`（可為 null）。  
-  - `files[]`：`repo_path`、`temp_path`（同 repo_path）、`sha256`、`bytes`。  
-  - 可附 `MANIFEST.sha256.txt` 供校驗。  
-- 安全斷言：`MANIFEST.source_commit` 必須等於當前 HEAD；handoff 工具預設自動使用 `git rev-parse HEAD`，若手動指定 `--source_commit` 與 HEAD 不符，會直接 fail。zip 檔名也強制帶 HEAD7。  
-- 流程：  
-  1) 將需審檔案依原路徑放入 `docs/TEMP/`（保持目錄結構）。  
-  2) 產出 `MANIFEST.json`（含 sha256、bytes、source_commit、task_id）。  
-  3) 壓縮為上述命名的 zip；回報時提供 zip 名稱與 source_commit。  
-  4) review 完成即可清空 `docs/TEMP/`。  
-- 自動化（推薦）：`npm run handoff:tempzip -- --source_commit <hash> --task_id <T-xxxx> --files ...`。未指定 `--out` 時，會自動命名為 `docs/TEMP/TEMP_<date>[_<task>]_commit.zip`。
-
-### Debug V3 與 CI（T-0087）
-
-- Debug V3 資源：`docs/QA/DEBUG_V3/README.md`、`docs/QA/DEBUG_V3/URL_QUEUE.md`、`docs/QA/DEBUG_V3/TEMPLATES/*`。新增案例請先在 URL_QUEUE 登記，報告請用模板存入 REPORTS。
-- CI（ci-self-proof）：`push main` / `pull_request` 會自動跑 `check:no-bom`、`security:scan`、`test`、`build`、`check:zh-cn`，並產生 `ci_summary.md/json`，收集 `docs/QA/**`、`docs/terminal_logs/**`、`docs/AUDITS/**`、`tmp/**` 作為 artifacts。
-- CI summary：由 `scripts/quality/ci-summary.js` 產生，包含 source_commit / run_at / checks 狀態與 crawl_fails 簡報。
-- 若 CI 尚未啟用或需手動驗證，請至少本機跑同樣的檢查並在 notes 註記。
-- CRAWL_FAILS：爬蟲任務若有 fetch/decode 失敗，請寫入 `docs/QA/CRAWL_FAILS.jsonl`（append，保留歷史），並輸出當次摘要 `docs/QA/CRAWL_FAILS.md`；手動或 CI 報告時可在 ci_summary 中提及。
-
-### 1.13 檔案編碼與行尾（防止亂碼）
-
-- 所有文字檔一律使用 `UTF-8`，行尾使用 `LF`；已在 `.editorconfig` / `.gitattributes` 強制設定。
-- 若在 Windows 看到亂碼，請先 `chcp 65001`，或在編輯器選擇「以 UTF-8 重新開啟」。
-- 禁止以 ANSI / Big5 另存；如誤存請改回 UTF-8 並重新提交。
-
-### 1.14 RAW 無法開啟時的本機上傳 fallback（給 ChatGPT 用）
-
-- ChatGPT 每次看到 `raw.githubusercontent.com/...` 連結時，會嘗試直接讀取 RAW 內容。
-- 若因工具限制、404 或權限問題 **無法讀取檔案本體**，必須在回覆中明講：
-  - 說明「哪一個 RAW URL 或檔案路徑」打不開。
-  - 不得假裝已讀過，也不得猜測檔案內容。
-- 若該檔案是後續判斷所需，ChatGPT 應請使用者：
-  - 在對話中直接「上傳本機檔案」（例如某個 HTML / JSON / markdown）。
-  - 之後以「上傳的檔案」作為唯一真相來源繼續分析，不再猜測。
-- 若日後 GitHub RAW 與上傳版本有差異：
-  - 以最新、經使用者確認的版本為準（通常是上傳檔案），並在 notes 記錄差異來源。
-
-### 1.15 Codex 回報 Gate（最小回報集）
-
-Codex 每顆 T 完成且 push 後，回報維持精簡四要點：  
-1) 結果：已完成 T-xxxx。  
-2) main commit hash。  
-3) 測試指令執行情況（或標註 docs-only 未跑）。  
-4) TEMP：已準備 `docs/TEMP.zip`（含 MANIFEST，source_commit=...）；若有阻塞/測試失敗則在此說明。  
-細節（變更檔案、RAW 連結、決策）一律寫入 notes。
----
-
-## 2. 檔案與資料夾結構（簡要）
-
-> 詳細結構請參考 `ARCHITECTURE.md` 與 `CONTENT_SCHEMA.md`。這裡只列出與協作流程最相關的部分。
-
-- `src/`：前端 React / TypeScript 程式碼。
-- `tools/`：各種 CLI 與輔助工具（爬蟲、轉檔、docs snapshot 等）。
-- `data/`：後續 AnyContent、zh-tw / zh-cn JSON 等資料存放位置（目前仍在規劃中）。
-- `docs/`：
-  - `COMPLETE_PROJECT_WORKFLOW.md`：專案整體 workflow。
-  - `CONTENT_SCHEMA.md`：AnyContent schema 設計。
-  - `HTML_TO_MARKDOWN_RULES_V4.md`：HTML → markdown 規則 v4。
-  - `PROJECT_STATUS.md`：目前整體進度與下一階段建議。
-  - `PROJECT_TODO.md`：T 任務列表與狀態（✅ 已完成 / ⬜ 未完成）。
-  - `PROJECT_TODO_TEMPLATE.md`：新增 T 任務的模板。
-  - `TOOLS_ROLES_AND_BOUNDARIES.md`：User / ChatGPT / Windsurf / Codex 的角色與邊界。
-  - `Windsurf_ChatGPT_NOTES.md`：每個 T 任務的實作日誌與交接說明。
-  - `PENDING_DECISIONS.md`：尚未決定或未完全定案的設計點。
-  - `SESSION_CHECKLIST.md`：每輪對話的檢查清單。
-  - 其他：爬蟲、zh-CN pipeline、archive 等相關文件。
-- `docs/terminal_logs/`：
-  - 每次執行重要指令（如 `npx vitest`、`npm run snapshot:docs` 等）產生的 log。
-  - 檔名慣例：`T-000X_任務描述_指令說明.txt`。
-- `snapshots/`（不納入 git）：
-  - 給 ChatGPT 用的 docs snapshot ZIP，例如：
+> 閰喟敦蝯?隢???`ARCHITECTURE.md` ??`CONTENT_SCHEMA.md`?ㄐ?芸??箄???瘚???賊????
+- `src/`嚗?蝡?React / TypeScript 蝔?蝣潦?- `tools/`嚗?蝔?CLI ???拙極?瘀??祈??瑼ocs snapshot 蝑???- `data/`嚗?蝥?AnyContent?h-tw / zh-cn JSON 蝑????曆?蝵殷??桀?隞閬?銝哨???- `docs/`嚗?  - `COMPLETE_PROJECT_WORKFLOW.md`嚗?獢擃?workflow??  - `CONTENT_SCHEMA.md`嚗nyContent schema 閮剛???  - `HTML_TO_MARKDOWN_RULES_V4.md`嚗TML ??markdown 閬? v4??  - `PROJECT_STATUS.md`嚗?擃脣漲??銝?挾撱箄降??  - `PROJECT_TODO.md`嚗 隞餃??”??????撌脣???/ 漎??芸?????  - `PROJECT_TODO_TEMPLATE.md`嚗憓?T 隞餃??芋?踴?  - `TOOLS_ROLES_AND_BOUNDARIES.md`嚗ser / ChatGPT / Windsurf / Codex ???脰?????  - `Windsurf_ChatGPT_NOTES.md`嚗???T 隞餃??祕雿隤?鈭斗隤芣???  - `PENDING_DECISIONS.md`嚗??芣捱摰??芸??典?獢?閮剛?暺?  - `SESSION_CHECKLIST.md`嚗?頛芸?閰梁?瑼Ｘ皜??  - ?嗡?嚗?脯h-CN pipeline?rchive 蝑??隞嗚?- `docs/terminal_logs/`嚗?  - 瘥活?瑁????誘嚗? `npx vitest`?npm run snapshot:docs` 蝑??Ｙ???log??  - 瑼????嚗T-000X_隞餃??膩_?誘隤芣?.txt`??- `snapshots/`嚗?蝝 git嚗?
+  - 蝯?ChatGPT ?函? docs snapshot ZIP嚗?憒?
     - `ctworld-docs-T-0007-2025-12-09-v1.zip`
-  - 由 `tools/docs-snapshot/make-docs-snapshot.ts` 產生。
-- `docs/AUDITS/FIELD_COVERAGE/`：
-  - `FIELD_COVERAGE_SAMPLING.md`：最新的欄位覆蓋抽樣筆記。
-  - `ARCHIVE/`：歷史抽樣版本。
-  - `URL_QUEUE.md`：待抽樣的 URL/檔案清單（格式 `[unit] <url>`，unit=teaching/news/magazine/branch/flipbook/other）。
-- `docs/REVIEWS/`：
-  - REVIEW 摘要存放處，命名：`REVIEW-T-XXXX-<slug>.md`（例：`REVIEW-T-0064-field-coverage-sampling-v2.md`）。
-  - README：`docs/REVIEWS/README.md`。
-
+  - ??`tools/docs-snapshot/make-docs-snapshot.ts` ?Ｙ???- `docs/AUDITS/FIELD_COVERAGE/`嚗?  - `FIELD_COVERAGE_SAMPLING.md`嚗??啁?甈?閬??賣見蝑???  - `ARCHIVE/`嚗風?脫璅???研?  - `URL_QUEUE.md`嚗??賣見??URL/瑼?皜嚗撘?`[unit] <url>`嚗nit=teaching/news/magazine/branch/flipbook/other嚗?- `docs/REVIEWS/`嚗?  - REVIEW ??摮???賢?嚗REVIEW-T-XXXX-<slug>.md`嚗?嚗REVIEW-T-0064-field-coverage-sampling-v2.md`嚗?  - README嚗docs/REVIEWS/README.md`??
 ---
 
-## 3. 一般工作循環（高階流程）
+## 3. 銝?砍極雿儐?堆?擃?瘚?嚗?
+??蝭?膩雿?+ ChatGPT + Windsurf 銋????砍儐?啜? 
+蝝啁???靘?撖怠 `PROJECT_TODO.md` ??`Windsurf_ChatGPT_NOTES.md` 銝准?
+### 3.1 ChatGPT ??嚗??銝??T 隞餃?
 
-這一節描述你 + ChatGPT + Windsurf 之間的一般循環。  
-細節與範例則寫在 `PROJECT_TODO.md` 與 `Windsurf_ChatGPT_NOTES.md` 中。
-
-### 3.1 ChatGPT 與你：選擇下一個 T 任務
-
-1. 你開啟 ChatGPT 對話（或新對話）時，提供：
-   - GitHub repo 名稱（例如：`zhuang112/ctcm-website-frontend`）。
-   - 最新的 docs snapshot ZIP（或要求 ChatGPT 直接閱讀 GitHub 上的 docs）。
-2. ChatGPT 先閱讀：
-   - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`
+1. 雿???ChatGPT 撠店嚗??啣?閰梧?????嚗?   - GitHub repo ?迂嚗?憒?`zhuang112/ctcm-website-frontend`嚗?   - ??啁? docs snapshot ZIP嚗?閬? ChatGPT ?湔?梯? GitHub 銝? docs嚗?2. ChatGPT ?霈嚗?   - `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md`
    - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`
    - `docs/PROJECT_STATUS.md`
    - `docs/PROJECT_TODO.md`
    - `docs/Windsurf_ChatGPT_NOTES.md`
-3. ChatGPT 將用自己的話：
-   - 重述目前專案狀態與最近完成的 T 任務。
-   - 在 `PROJECT_TODO.md` 中，挑出一個「最適合現在執行的 T 任務」，並說明理由。
-   - 如果有需要新增 T 任務，會先依 `PROJECT_TODO_TEMPLATE.md` 在 docs 中補上架構。
+3. ChatGPT 撠?芸楛?店嚗?   - ?膩?桀?撠?????餈??? T 隞餃???   - ??`PROJECT_TODO.md` 銝哨??銝???拙??曉?瑁???T 隞餃???銝西牧???晞?   - 憒???閬憓?T 隞餃?嚗??? `PROJECT_TODO_TEMPLATE.md` ??docs 銝剛?銝瑽?
+### 3.2 ChatGPT ??Windsurf嚗撖思遙??隞歹??剔?嚗?
+撠瘥??擃? T 隞餃?嚗?憒?`T-0003 news-from-legacy: 撱箇? NewsContent adapter 撉冽`嚗?ChatGPT ??
 
-### 3.2 ChatGPT → Windsurf：撰寫任務指令（短版）
-
-對於每一個具體的 T 任務（例如 `T-0003 news-from-legacy: 建立 NewsContent adapter 骨架`），ChatGPT 會：
-
-1. 在 `docs/PROJECT_TODO.md` 裡，補齊該任務的詳細規格：
-   - 任務目標與背景。
-   - 要修改／新增的檔案列表。
-   - 不可以更動的 contract（型別、函式行為、public API 等）。
-   - 要執行的測試指令與預期結果。
-2. 產生一段「可以直接貼給 Windsurf 的短指令」，格式類似：
-
+1. ??`docs/PROJECT_TODO.md` 鋆∴?鋆?閰脖遙??閰喟敦閬嚗?   - 隞餃??格????胯?   - 閬耨?對??啣???獢?銵具?   - 銝隞交?? contract嚗??乓撘??箝ublic API 蝑???   - 閬銵?皜祈岫?誘??????2. ?Ｙ?銝畾萸隞亦?亥票蝯?Windsurf ??誘???澆?憿撮嚗?
 ```text
-請依照 docs/PROJECT_TODO.md 中的 T-0003 任務說明進行實作，重點如下：
+隢???docs/PROJECT_TODO.md 銝剔? T-0003 隞餃?隤芣??脰?撖虫?嚗?暺?銝?
 
-1. 先閱讀：
-   - docs/PROJECT_TODO.md（T-0003 小節）
-   - docs/CONTENT_SCHEMA.md（NewsContent 相關欄位）
-   - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md（特別是 4.y 小節）
-
-2. 允許修改或新增的檔案：
-   - src/adapters/news-from-legacy.ts
+1. ?霈嚗?   - docs/PROJECT_TODO.md嚗-0003 撠?嚗?   - docs/CONTENT_SCHEMA.md嚗ewsContent ?賊?甈?嚗?   - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md嚗?交 4.y 撠?嚗?
+2. ?迂靽格?憓?瑼?嚗?   - src/adapters/news-from-legacy.ts
    - tests/adapters/news-from-legacy.spec.ts
-   - 其他與 NewsContent 直接相關、在 T-0003 任務說明中列出的檔案。
+   - ?嗡???NewsContent ?湔?賊?? T-0003 隞餃?隤芣?銝剖??箇?瑼???
+3. 銝隞亥??渡? contract嚗?   - 撌脣??函? AnyContent ?摰儔嚗??T-0003 隞餃??Ⅱ?迂嚗?   - ?嗡? T 隞餃?撠閫詨???adapter 銵??
+4. 隢銵蒂蝣箔?隞乩?皜祈岫??嚗?   - npx vitest tests/adapters/news-from-legacy.spec.ts
 
-3. 不可以變更的 contract：
-   - 已存在的 AnyContent 型別定義（除非 T-0003 任務明確允許）。
-   - 其他 T 任務尚未觸及的 adapter 行為。
+5. 隞餃?摰?敺?
+   - ?湔 docs/Windsurf_ChatGPT_NOTES.md嚗憓?T-0003 撠?嚗牧?耨?孵摰寡?皜祈岫蝯???   - ??docs/terminal_logs/ ?啣??祆活 vitest ?瑁?蝯???log 瑼?   - ?典??望?閬?敺?銝?畾?[撱箄降 git ?誘]嚗靘踵??冽璈銵?git add / commit / push??```
 
-4. 請執行並確保以下測試通過：
-   - npx vitest tests/adapters/news-from-legacy.spec.ts
+### 3.3 雿???鈭?瘥遙?儐?堆?
 
-5. 任務完成後：
-   - 更新 docs/Windsurf_ChatGPT_NOTES.md，新增 T-0003 小節，說明修改內容與測試結果。
-   - 在 docs/terminal_logs/ 新增本次 vitest 執行結果的 log 檔。
-   - 在回報摘要最後加上一段 [建議 git 指令]，方便我在本機執行 git add / commit / push。
-```
+- ??ChatGPT ?Ｙ??遙??隞扎畾菔?鋆踝?鞎潛策 Windsurf?? 
+- 蝑?Windsurf 摰?隞餃?銝衣策?箏??望?閬?嚗?  - ???望?閬票??ChatGPT嚗? ChatGPT 撟思?瑼Ｘ?臬蝚血?隞餃?隤芣???  - 蝣箄?瘝?憿?嚗?靘?Windsurf ????`[撱箄降 git ?誘]` ?冽璈銵?`git add / commit / push`??
+### 3.4 Windsurf 閬???嚗??遙?儐?堆?
 
-### 3.3 你要做的事（每個任務循環）
+Windsurf ?寞? ChatGPT 蝯衣??誘嚗?
+- 靽格蝔?蝣潸?皜祈岫?? 
+- ??terminal ?芸?頝??冽?隞歹?`npx vitest`?npm run lint`?佗??? 
+- ?湔 `docs/Windsurf_ChatGPT_NOTES.md` 撠?撠?嚗???
+  - 隞餃?璅????  - 撖阡?靽格??獢????摩??  - ?瑁?鈭鈭葫閰佗?蝯?憒???  - ?交??⊿?嚗神?瘜圾瘙箇????挾?賬?- ?典??望?閬?敺策雿?畾?`[撱箄降 git ?誘]`嚗??孵??ChatGPT / 雿身閮??舐?亥票??摮?
+### 3.5 撠店??隞嗅?撌伐?蝝啁???docs嚗?閰曹??移蝪?
+**撠店蝒??移蝪?*嚗?
+- ChatGPT嚗撠店銝剖蝯艾遙??閬?+ 蝯?Windsurf ??誘????蝭??潸?蝝啁?撖恍?docs嚗?憒?`WORKFLOW_*`?CONTENT_SCHEMA.md`?Windsurf_ChatGPT_NOTES.md`嚗?- Windsurf嚗??望??芷????甈∩遙?誨??+ 霈瑼??” + 皜祈岫蝯? + [撱箄降 git ?誘] ?憛?銝?閬票?箏??湔楝?之畾?diff??
+### 3.6 Improvements / Fixes 閬?嚗uto vs discussion嚗?
+- ??嚗?  - **Auto improvements**嚗?湔??嚗ypo??撟?UX / log ?孵????寡??詨?瘚????其耨甇??  - **Discussion required**嚗?賣霈?蝔?/ ?嗆? / schema / 撌乩??極?耨?對??蔣?輻?????- 瘚?嚗?  1. ????靽桀儔??? `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`嚗蒂??`docs/PROJECT_TODO.md` 蝚砌?璇??株酉閮?  2. Auto 憿??舐?亙祕雿蒂閮? notes/commit嚗iscussion 憿???蝬?ChatGPT / 雿輻?Ⅱ隤??舀?靘?A/B/C ?賊?嚗??? T 隞餃???蝣箏????極??  3. 摰?敺??backlog ???notes 閮?霈??commit hash??
+### 3.7 ChatGPT ??撖虫? Agent ???撘?code block嚗otes嚗?
+?箔?霈蝙?刻?閬???鞎潦??刻撌望??隞歹??砍?獢?摰?
 
-- 把 ChatGPT 產生的「任務指令」整段複製，貼給 Windsurf。  
-- 等 Windsurf 完成任務並給出回報摘要後：
-  - 把「回報摘要」貼回 ChatGPT，讓 ChatGPT 幫你檢查是否符合任務說明。
-  - 確認沒問題後，再依 Windsurf 提供的 `[建議 git 指令]` 在本機執行 `git add / commit / push`。
+- ChatGPT 撠蝙?刻???嚗?閮剖?????
+  1. **蝪∠??**嚗?芸楛?店隤芣??活閬??遙??靘?閬?芯? docs / 撖虫??芸?T 隞餃?嚗?  2. **蝯血祕雿?Agent ???湔?隞?*嚗誑?銝 code block???橘??臭誑?湔鞎潛策撖虫? Agent嚗? Codex嚗? 
+     ?誘銝剜??神嚗?     - ?閬耨??/ ?啣???獢?銵?     - ?迂靽格?????虜?舐摰?獢? TODO ?憛?
+     - 閬銵?皜祈岫?誘??????     - ?嗅偏??嚗it add / commit / push???notes嚗?
+- 雿輻??閬?
+  - ??ChatGPT ????code block ??銝?鞎潛策撖虫? Agent??  - 隞餃?摰?敺?撠祕雿?Agent ???望?閬票??ChatGPT??
+- 撖虫? Agent嚗? Codex嚗??遙??嚗?雿輻?????扔蝪∪??晞?
+  - ??撌脣??? T 隞餃?蝺刻?嚗?憒?`T-0011`嚗?  - ??雿輻???底蝝啗???notes ?銝??蝭??靘?嚗? 
+    `隢? docs/Windsurf_ChatGPT_NOTES.md 銝?2025-12-12 隞餃?嚗-0011 撠?嚗??RAW ???嚗
+  - ?園?蝝啁?嚗??湔?獢葫閰血摰嫘???銝敺神??`docs/Windsurf_ChatGPT_NOTES.md`嚗??臬??典?閰梯ㄐ??- code block 閬?嚗?  - 銝??箇 citation / content reference嚗?憒?`::contentReference[...]`?oaicite:0` 蝑?嚗?情?票蝯?Agent ??隞扎?  - ??ChatGPT ?閬??典摰對?隢 code block 銋?隞交?摮?餈堆?銝???code block 銝剖冗撣嗅??冽?閮?
+- ChatGPT ??review 隞餃?????????notes 銝剔?鞈???RAW ???嚗?  - ?? `docs/Windsurf_ChatGPT_NOTES.md` 撠?撠???  - ?? notes 銝剜?靘? RAW ????????獢?蝣箄??批捆?臬蝚血?隞餃?隤芣???  - ?亦?曉?憿??閬隞餃?嚗????銝??T 隞餃???code block ?誘??
+### 3.8 code 隞餃?銝敺?頝?test + build ??嗅偏
 
-### 3.4 Windsurf 要做的事（每個任務循環）
-
-Windsurf 根據 ChatGPT 給的指令：
-
-- 修改程式碼與測試。  
-- 在 terminal 自動跑安全指令（`npx vitest`、`npm run lint`…）。  
-- 更新 `docs/Windsurf_ChatGPT_NOTES.md` 對應小節，記錄：
-  - 任務標題與日期。
-  - 實際修改的檔案與重點邏輯。
-  - 執行了哪些測試／結果如何。
-  - 若有卡關，寫「無法解決的問題」段落。
-- 在回報摘要最後給你一段 `[建議 git 指令]`，會特別為 ChatGPT / 你設計成可直接貼的文字。
-
-### 3.5 對話與文件分工：細節進 docs，對話保持精簡
-
-**對話窗保持精簡**：
-
-- ChatGPT：在對話中只給「任務摘要 + 給 Windsurf 的短指令」，所有長篇規格與細節寫進 docs（例如 `WORKFLOW_*`、`CONTENT_SCHEMA.md`、`Windsurf_ChatGPT_NOTES.md`）。
-- Windsurf：回報時只需提供「本次任務代號 + 變更檔案列表 + 測試結果 + [建議 git 指令] 區塊」，不需要貼出完整思路或大段 diff。
-
-### 3.6 Improvements / Fixes 規則（auto vs discussion）
-
-- 分類：
-  - **Auto improvements**（可直接做）：typo、小幅 UX / log 改善、不改變核心流程的安全修正。
-  - **Discussion required**：可能改變流程 / 架構 / schema / 工作分工的修改，或影響範圍不明者。
-- 流程：
-  1. 所有改善/修復先記錄於 `docs/IMPROVEMENTS/IMPROVEMENT_BACKLOG.md`，並在 `docs/PROJECT_TODO.md` 第一條清單註記。
-  2. Auto 類型可直接實作並記錄 notes/commit；Discussion 類型須先經 ChatGPT / 使用者確認（可提供 A/B/C 選項），再開 T 任務或明確同意後動工。
-  3. 完成後更新 backlog 狀態，notes 記錄變更與 commit hash。
-
-### 3.7 ChatGPT ↔ 實作 Agent 的溝通格式（code block＋notes）
-
-為了讓使用者只需要做「轉貼」而不用自己整理指令，本專案規定：
-
-- ChatGPT 對使用者的回應，預設分成兩個部分：
-  1. **簡短摘要**：用自己的話說明這次要做的任務（例如要改哪些 docs / 實作哪個 T 任務）。
-  2. **給實作 Agent 的完整指令**：以「單一 code block」呈現，可以直接貼給實作 Agent（目前為 Codex）。  
-     指令中會明寫：
-     - 需要修改 / 新增的檔案列表
-     - 允許修改的範圍（通常是特定檔案或 TODO 區塊）
-     - 要執行的測試指令與預期結果
-     - 收尾動作（git add / commit / push、更新 notes）
-
-- 使用者只需要：
-  - 把 ChatGPT 提供的 code block 原封不動貼給實作 Agent。
-  - 任務完成後，將實作 Agent 的回報摘要貼回 ChatGPT。
-
-- 實作 Agent（目前為 Codex）完成任務後，對使用者應提供「極簡回報」：
-  - 指明已完成的 T 任務編號（例如 `T-0011`）。
-  - 提醒使用者：「詳細請看 notes 的哪一個小節」，例如：  
-    `請看 docs/Windsurf_ChatGPT_NOTES.md 中 2025-12-12 任務：T-0011 小節（內含 RAW 連結）。`
-  - 其餘細節（變更檔案、測試內容、疑問）一律寫入 `docs/Windsurf_ChatGPT_NOTES.md`，而不是塞在對話裡。
-- code block 規範：
-  - 不得出現 citation / content reference（例如 `::contentReference[...]`、`oaicite:0` 等），避免污染貼給 Agent 的指令。
-  - 若 ChatGPT 需要引用內容，請在 code block 之外以文字描述，不要在 code block 中夾帶引用標記。
-
-- ChatGPT 在 review 任務成果時，會依據 notes 中的資訊與 RAW 連結：
-  - 先讀 `docs/Windsurf_ChatGPT_NOTES.md` 對應小節。
-  - 再透過 notes 中提供的 RAW 連結打開各個異動檔案，確認內容是否符合任務說明。
-  - 若發現問題或需要新任務，會再產生下一個 T 任務的 code block 指令。
-
-### 3.8 code 任務一律先跑 test + build 才能收尾
-
-- 適用範圍（需跑 test+build 的任務類型）：
-  - `src/` 內的程式碼、型別、i18n/pipeline。
-  - `tools/` 內的 CLI / script。
-  - `tests/` 內的測試檔。
-  - `data/` 內若涉及程式解析/轉換會讀寫的資料（CSV/JSON 等）。
-- 收尾規則：
-  - 這些任務在 commit 前，預設都要執行 `npm test` **以及** `npm run build`，兩者都需通過。
-  - 若任務本身就是為了修復 test/build 失敗，可以在 notes 中記錄當前錯誤與狀態，但不得隱瞞未通過的結果。
-- 例外：
-  - 純 docs/INSTR 編輯不強制跑 test/build。
-  - 若因外部阻礙（例如依賴未備妥）暫時無法通過，需在 notes 清楚記錄錯誤訊息、原因與下一步建議。
-
-### 3.7 zh-CN JSON 健康檢查（check:zh-cn）
-
-- 只要任務涉及 zh-CN pipeline 或新增 / 調整 zh-CN JSON，請在收尾流程加入：
+- ?拍蝭?嚗?頝?test+build ?遙????嚗?  - `src/` ?抒?蝔?蝣潦??乓18n/pipeline??  - `tools/` ?抒? CLI / script??  - `tests/` ?抒?皜祈岫瑼?  - `data/` ?扯瘨?蝔?閫??/頧???撖怎?鞈?嚗SV/JSON 蝑???- ?嗅偏閬?嚗?  - ??隞餃???commit ???身?質??瑁? `npm test` **隞亙?** `npm run build`嚗??????  - ?乩遙?頨怠停?舐鈭耨敺?test/build 憭望?嚗隞亙 notes 銝剛???隤方????雿?敺???????- 靘?嚗?  - 蝝?docs/INSTR 蝺刻摩銝撥?嗉? test/build??  - ?亙?憭?餌?嚗?憒?鞈湔?戎嚗?瘜?嚗???notes 皜?閮??航炊閮????銝?甇亙遣霅啜?
+### 3.7 zh-CN JSON ?亙熒瑼Ｘ嚗heck:zh-cn嚗?
+- ?芾?隞餃?瘨? zh-CN pipeline ?憓?/ 隤踵 zh-CN JSON嚗??冽撠暹?蝔??伐?
   - `npm run check:zh-cn`
-  - 若輸出有 **ERROR**，先修復或開 T 任務處理，暫停 push；只有 WARN 或無問題時再進行 git 收尾。
-  - 主要檢查：
-    - zh-TW / zh-CN JSON 是否成對存在。
-    - `post_type` / `slug` / `old_url` / `language` 一致性。
-    - 依 `docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md` 白名單，確認 `post_title` / `post_excerpt` / `body_markdown`、meta string、`seo.meta_title` / `seo.meta_description` 等欄位在 zh-CN 版本存在。
-
-### 3.8 撰寫 INSTR 的必要資訊（給 ChatGPT 檢閱）
-
-- INSTR 要明列「需要 ChatGPT review 的檔案清單」，方便 ChatGPT 直接開 RAW：
-  - 列出 src / tools / tests / docs 相關檔案，commit 後在 notes 補 RAW 連結。
-  - INSTR 內不要放 citation 或 `::contentReference[...]`；保持可直接貼給 Agent 的指令格式。
-- 若任務涉及 schema / pipeline / rules，請在 INSTR 指明 ChatGPT 要先讀的 docs（如 RULES_V4 / CONTENT_SCHEMA_V1 / ZH_TW_TO_ZH_CN_PIPELINE）。
-- 長規格放 docs，INSTR 只放必要的檔案清單與步驟，避免佔位符與註解。
-
-### 3.11 每個 T 任務都要有對應的 INSTR .md（T-0052）
-
-- 原則：**沒有 INSTR 不開工**。在 `docs/INSTR/` 下建立 `INSTR-T-xxxx-<slug>.md`，內容至少列任務目標、允許修改的檔案、必跑測試、收尾與 notes 更新規則。
-- ChatGPT 發任務時務必指定 INSTR 檔名；實作 Agent 只在 INSTR 列出的範圍內動手，若缺 INSTR 或範圍不明，先回報、不要自行擴張。
-- INSTR 應指向 `PROJECT_TODO` 對應的小節，並要求完成後更新 notes（含 RAW 連結與 commit hash）。
-- 例外：純文檔小修若已在 INSTR/TODO 明示可省略，需在 notes 註記「docs-only / 未跑 test/build」；其他任務一律遵守 T + INSTR 配對。
-
-### 3.9（前瞻）分支策略的提醒
-
-- 目前預設直接在 `main` 上工作並 push。
-- 若未來有多人協作或需要大型重構，可開啟 `feature/T-xxxx-*` 分支並走 PR 流程；但未啟用前請維持 main 為單一真相來源。
-
-### 3.10 無法歸類內容的處理（HTML→Markdown / AnyContent）
-
-- 若在撰寫或調整 HTML→Markdown / AnyContent adapter 時，遇到暫時無對應欄位的片段：
-  - 文字優先放 `body_markdown`，不要臨時新增 meta 欄位或未知 key。
-  - 保留 `old_url`、legacy HTML 來源，方便日後對照。
-  - 若發現常見且需要新欄位，請在 notes 記錄並另開 T 任務，再更新 schema/adapter。
-- 如需標記仍有未分類內容，可在 AnyContent JSON 設 `meta.has_unclassified_content = true`，並用 `meta.unclassified_notes` 簡述暫存原因；不強迫當下拆欄位。
-- 規則詳見 `docs/HTML_TO_MARKDOWN_RULES_V4.md` 的「未知內容 fallback」段落。
-
-**細節全部寫在文件**：
-
-- 任務規格與邏輯說明：  
-  放在 `docs/PROJECT_TODO.md` 對應的 T 任務小節。
-- 實作細節與歷史：  
-  放在 `docs/Windsurf_ChatGPT_NOTES.md`。
-- 尚未決定的議題：  
-  放在 `docs/PENDING_DECISIONS.md`。
-
-**ChatGPT 只看 docs，不靠舊對話記憶**：
-
-- 新對話啟動時，ChatGPT 先讀最新 docs（或你提供的 snapshot ZIP）。
-- 若發現 docs 沒有記錄某個規則，會請你在 docs 中補上，而不是只記在對話裡。
-
+  - ?亥撓?箸? **ERROR**嚗?靽桀儔?? T 隞餃???嚗??push嚗??WARN ??????脰? git ?嗅偏??  - 銝餉?瑼Ｘ嚗?    - zh-TW / zh-CN JSON ?臬??摮??    - `post_type` / `slug` / `old_url` / `language` 銝?湔扼?    - 靘?`docs/DESIGN/ZH_TW_TO_ZH_CN_PIPELINE.md` ?賢??殷?蝣箄? `post_title` / `post_excerpt` / `body_markdown`?eta string?seo.meta_title` / `seo.meta_description` 蝑?雿 zh-CN ?摮??
+### 3.8 ?啣神 INSTR ??閬?閮?蝯?ChatGPT 瑼ａ嚗?
+- INSTR 閬???閬?ChatGPT review ??獢??柴??嫣噶 ChatGPT ?湔??RAW嚗?  - ? src / tools / tests / docs ?賊?瑼?嚗ommit 敺 notes 鋆?RAW ?????  - INSTR ?找?閬 citation ??`::contentReference[...]`嚗???湔鞎潛策 Agent ??隞斗撘?- ?乩遙????schema / pipeline / rules嚗???INSTR ?? ChatGPT 閬?霈??docs嚗? RULES_V4 / CONTENT_SCHEMA_V1 / ZH_TW_TO_ZH_CN_PIPELINE嚗?- ?瑁??潭 docs嚗NSTR ?芣敹???獢??株?甇仿?嚗??雿泵?酉閫??
+### 3.11 瘥?T 隞餃??質????? INSTR .md嚗-0052嚗?
+- ??嚗?*瘝? INSTR 銝?撌?*? `docs/INSTR/` 銝遣蝡?`INSTR-T-xxxx-<slug>.md`嚗摰寡撠?隞餃??格???閮曹耨?寧?瑼???頝葫閰艾撠曇? notes ?湔閬???- ChatGPT ?潔遙?????? INSTR 瑼?嚗祕雿?Agent ?芸 INSTR ??????嚗蝻?INSTR ?????????晞?閬銵撘萸?- INSTR ????`PROJECT_TODO` 撠???蝭嚗蒂閬?摰?敺??notes嚗 RAW ?????commit hash嚗?- 靘?嚗???撠耨?亙歇??INSTR/TODO ?內?舐??伐????notes 閮餉??ocs-only / ?芾? test/build???嗡?隞餃?銝敺摰?T + INSTR ????
+### 3.9嚗??鳴??蝑????
+- ?桀??身?湔??`main` 銝極雿蒂 push??- ?交靘?憭犖????閬之??瑽??舫???`feature/T-xxxx-*` ?銝西粥 PR 瘚?嚗??芸??典?隢雁??main ?箏銝?靘???
+### 3.10 ?⊥?甇賊??批捆????HTML?arkdown / AnyContent嚗?
+- ?亙?啣神?矽??HTML?arkdown / AnyContent adapter ????急??∪???雿??挾嚗?  - ???芸???`body_markdown`嚗?閬?憓?meta 甈????key??  - 靽? `old_url`?egacy HTML 靘?嚗靘踵敺??扼?  - ?亦?曉虜閬??閬甈?嚗???notes 閮?銝血??T 隞餃?嚗??湔 schema/adapter??- 憒?璅?隞??芸?憿摰對??臬 AnyContent JSON 閮?`meta.has_unclassified_content = true`嚗蒂??`meta.unclassified_notes` 蝪∟膩?怠???嚗?撘瑁翰?嗡???雿?- 閬?閰唾? `docs/HTML_TO_MARKDOWN_RULES_V4.md` ??亙摰?fallback?挾?賬?
+**蝝啁??券撖怠?辣**嚗?
+- 隞餃?閬??頛航牧??  
+  ?曉 `docs/PROJECT_TODO.md` 撠???T 隞餃?撠???- 撖虫?蝝啁??風?莎?  
+  ?曉 `docs/Windsurf_ChatGPT_NOTES.md`??- 撠瘙箏??降憿?  
+  ?曉 `docs/PENDING_DECISIONS.md`??
+**ChatGPT ?芰? docs嚗???撠店閮**嚗?
+- ?啣?閰勗???嚗hatGPT ?????docs嚗?雿?靘? snapshot ZIP嚗?- ?亦??docs 瘝?閮???????雿 docs 銝剛?銝????臬閮撠店鋆～?
 ---
 
-### 3.16 Security（最高優先）
+### 3.16 Security嚗?擃??
 
-- 嚴禁提交任何 secrets：`.env` / `.env.wp` / `.env.siteground`、API tokens、SSH private keys、WP Application Password 等不得進 git；範例檔一律用 `.example`＋`REDACTED`。
-- `.gitignore` 必含：`.env` / `.env.*`、`docs/TEMP/` / `docs/TEMP/*.zip`、`*.pem` / `*.key`。交接只用 TEMP zip，不得把 zip 納入 git。
-- 每逢 deploy / importer / 憑證相關任務，收尾前必跑 `npm run security:scan`（需要更嚴格時可加 `--strict` 或環境變數 `SECURITY_SCAN_STRICT=1`），確認工作樹與近期 git history 無疑似 secrets；若有命中，**立即停止**、移除檔案、rotate 憑證，必要時 rewrite git history，並記錄於 `docs/QA/SECURITY_AUDIT.md`。
-- 若 RAW/TEMP 中發現疑似洩漏，先阻斷（停止 push / 停止對外存取），再由使用者決策後續處置（rotate、history 清理等）。
+- ?渡??漱隞颱? secrets嚗.env` / `.env.wp` / `.env.siteground`?PI tokens?SH private keys?P Application Password 蝑?敺?git嚗?靘?銝敺 `.example`嚗REDACTED`??- `.gitignore` 敹嚗.env` / `.env.*`?docs/TEMP/` / `docs/TEMP/*.zip`?*.pem` / `*.key`?漱?亙??TEMP zip嚗?敺? zip 蝝 git??- 瘥?deploy / importer / ???賊?隞餃?嚗撠曉?敹? `npm run security:scan`嚗?閬?湔???`--strict` ?憓???`SECURITY_SCAN_STRICT=1`嚗?蝣箄?撌乩?璅寡?餈? git history ?∠?隡?secrets嚗?銝哨?**蝡?迫**?宏?斗?獢otate ??嚗?閬? rewrite git history嚗蒂閮???`docs/QA/SECURITY_AUDIT.md`??- ??RAW/TEMP 銝剔?曄?隡潭援瞍???瘀??迫 push / ?迫撠?摮?嚗??雿輻?捱蝑?蝥?蝵殷?rotate?istory 皜?蝑???
+## 4. T 隞餃???git 瘚?嚗indsurf ??雿?
 
-## 4. T 任務與 git 流程（Windsurf → 你）
+### 4.1 T 隞餃??賢????
 
-### 4.1 T 任務命名慣例
+- 隞餃? ID嚗T-0001`, `T-0002`, ...嚗憛急遛 4 蝣潘???- 璅?蝭?嚗?  - `T-0001 teaching-from-legacy: 撠?htmlToMarkdown ??verses ????TeachingMeta ??甈?`
+  - `T-0002 AnyContent ?嗡? post_type嚗ews / magazine contract`
+  - `T-0003 news-from-legacy: 撱箇? NewsContent adapter 撉冽嚗inimal mapping嚗
 
-- 任務 ID：`T-0001`, `T-0002`, ...（零填滿 4 碼）。
-- 標題範例：
-  - `T-0001 teaching-from-legacy: 將 htmlToMarkdown 的 verses 映射到 TeachingMeta 偈語欄位`
-  - `T-0002 AnyContent 其他 post_type：news / magazine contract`
-  - `T-0003 news-from-legacy: 建立 NewsContent adapter 骨架（minimal mapping）`
+### 4.2 隞餃???撠雿?
+銝??T 隞餃??⊿??芸???隞嗆?璆?撠???
 
-### 4.2 任務的最小單位
+- ?啣??????adapter??- 摰儔銝??AnyContent ???- 撖虫?銝??CLI 撌亙嚗?憒?docs snapshot嚗?
+瘥?T 隞餃????湧???銝哨?
 
-一個 T 任務盡量只做「一件清楚的小事」：
+- 靽格??獢?銵典??ChatGPT 鈭????- 銝????典????賊?璅∠?憭扳??
+### 4.3 T 隞餃?????隞塚?Definition of Done嚗?
+瘥?T 隞餃?摰????府?喳?皛輯雲嚗?
+**蝔????亙惜??*
 
-- 新增或擴充一個 adapter。
-- 定義一個 AnyContent 型別。
-- 實作一個 CLI 工具（例如 docs snapshot）。
+- ????`.ts` / `.tsx` 瑼?? typecheck??- ?啣??耨?寧??賢?嚗??交??????閮餉圾嚗???閬???
+**皜祈岫撅日**
 
-每個 T 任務的變更都應盡量集中：
+- ?賊? Vitest 皜祈岫?券??嚗憓???瑕??箸皜祈岫閬???- 憒??⊥?蝡鋆葫??瘜????`PENDING_DECISIONS.md` ??T 隞餃?隤芣?銝剛酉????
+**?辣撅日**
 
-- 修改的檔案列表可由 ChatGPT 事先列出。
-- 不要同時在多個不相關模組大改。
-
-### 4.3 T 任務的完成條件（Definition of Done）
-
-每個 T 任務完成時，應該至少滿足：
-
-**程式與型別層面**
-
-- 所有相關 `.ts` / `.tsx` 檔能通過 typecheck。
-- 新增或修改的函式／型別有合理的命名與註解（如有需要）。
-
-**測試層面**
-
-- 相關 Vitest 測試全部通過，新增的功能具備基本測試覆蓋。
-- 如有無法立即補測的情況，需在 `PENDING_DECISIONS.md` 或 T 任務說明中註明原因。
-
-**文件層面**
-
-- `docs/PROJECT_TODO.md` 中對應的 T 任務狀態更新（⬜ → ✅）。
-- `docs/Windsurf_ChatGPT_NOTES.md` 新增一個 T 任務小節，記錄：
-  - 變更摘要。
-  - 主要改動檔案。
-  - 執行指令與測試結果。
-  - 未解決問題（若有）。
-- 如有重大設計決策變更，更新：
+- `docs/PROJECT_TODO.md` 銝剖??? T 隞餃????堆?漎???????- `docs/Windsurf_ChatGPT_NOTES.md` ?啣?銝??T 隞餃?撠?嚗???
+  - 霈????  - 銝餉??孵?瑼???  - ?瑁??誘?葫閰衣???  - ?芾圾瘙箏?憿??交?嚗?- 憒??之閮剛?瘙箇?霈嚗?堆?
   - `docs/COMPLETE_PROJECT_WORKFLOW.md`
   - `docs/CONTENT_SCHEMA.md`
   - `docs/TOOLS_ROLES_AND_BOUNDARIES.md`
-  - `docs/PENDING_DECISIONS.md` 等。
+  - `docs/PENDING_DECISIONS.md` 蝑?
+**git 撅日**
 
-**git 層面**
+- ?祆? `git status` 銋暹楊嚗working tree clean`嚗?- 閰?T 隞餃??Ｙ???commit message 撱箄降雿輻嚗?  - `feat: T-000X ...`
+  - ??`chore: T-000X ...`嚗銝餉??舫?瑽?/ ?辣嚗?
+### 4.y 瘥?T 隞餃?摰?敺?撱箄降 git 瘚?嚗indsurf ??雿?
 
-- 本機 `git status` 乾淨（`working tree clean`）。
-- 該 T 任務產生的 commit message 建議使用：
-  - `feat: T-000X ...`
-  - 或 `chore: T-000X ...`（若主要是重構 / 文件）。
-
-### 4.y 每個 T 任務完成後的建議 git 流程（Windsurf → 你）
-
-為了讓 GitHub 上的 repo 永遠貼近「最新已完成的 T 任務」，每一個 T-XXXX 任務收尾時，建議由 Windsurf 在回報摘要的最後，自動多附一段「建議 git 指令」，讓你可以在 IDE / 終端機中直接複製執行。
-
-同時，Windsurf 不會自動執行任何 `git add` / `git commit` / `git push`，只會提供建議指令，由你在 IDE / 終端機中手動確認與執行。
-
-#### 4.y.1 建議的 git 指令區塊格式
-
-Windsurf（或其他實作 Agent）在每次任務完成時，回報摘要的結尾多附一段「[建議 git 指令]」區塊，讓你可以在 PowerShell / 終端機中「整段複製貼上就能執行」，不需要再自行代入參數。
-
-範例（以 T-0007 為例）：
+?箔?霈?GitHub 銝? repo 瘞賊?鞎潸????啣歇摰???T 隞餃???瘥???T-XXXX 隞餃??嗅偏??撱箄降??Windsurf ?典??望?閬??敺??芸?憭?銝畾萸遣霅?git ?誘??霈??臭誑??IDE / 蝯垢璈葉?湔銴ˊ?瑁???
+??嚗indsurf 銝??芸??瑁?隞颱? `git add` / `git commit` / `git push`嚗??靘遣霅唳?隞歹??曹???IDE / 蝯垢璈葉??蝣箄??銵?
+#### 4.y.1 撱箄降??git ?誘?憛撘?
+Windsurf嚗??嗡?撖虫? Agent嚗瘥活隞餃?摰????????撠曉???畾萸撱箄降 git ?誘]??憛?霈??臭誑??PowerShell / 蝯垢璈葉?畾菔?鋆質票銝停?賢銵?銝?閬??芾?隞????
+蝭?嚗誑 T-0007 ?箔?嚗?
 
 ```text
-[建議 git 指令]
+[撱箄降 git ?誘]
 git status
 
 git add package.json package-lock.json tools/docs-snapshot/make-docs-snapshot.ts docs/PROJECT_TODO.md docs/Windsurf_ChatGPT_NOTES.md docs/terminal_logs/T-0007_docs-snapshot-cli_snapshot-pass.txt
@@ -607,152 +309,90 @@ git commit -m "feat: T-0007 docs snapshot CLI"
 git push origin main
 
 ```
-#### 4.y.2 你在本機的實際操作流程
+#### 4.y.2 雿?祆??祕??雿?蝔?
+?嗅 Windsurf ???望?閬?敺??之?渡Ⅱ隤?
 
-收到 Windsurf 的回報摘要之後，先大致確認：
+- 隞餃??臬??T 隞餃?隤芣??瑁???- 皜祈岫?臬????- ?????箔遙雿閫?捱????
+?典?獢?桅??? PowerShell / 蝯垢璈??瑁? `[撱箄降 git ?誘]` ?憛葉?摰對?
 
-- 任務是否照 T 任務說明執行。
-- 測試是否通過。
-- 有沒有列出任何未解決問題。
-
-在專案根目錄打開 PowerShell / 終端機，執行 `[建議 git 指令]` 區塊中的內容：
-
-建議順序通常是：
+撱箄降???虜?荔?
 
 1. `git status`
 2. `git add ...`
 3. `git commit -m "..."`
 4. `git push origin main`
 
-若你不確定某個指令的作用，可以：
+?乩?銝Ⅱ摰???隞斤?雿嚗隞伐?
 
-- 先單獨執行 `git status` 觀察變更。
-- 有疑問時，把 `git status` 與回報摘要貼給 ChatGPT 請教。
-
+- ??典銵?`git status` 閫撖??氬?- ????嚗? `git status` ???望?閬票蝯?ChatGPT 隢???
 
 
-#### 4.y.3 同一個 T 任務中的多步驟自動前進規則（給 Windsurf / Codex）
+#### 4.y.3 ????T 隞餃?銝剔?憭郊撽???脰???蝯?Windsurf / Codex嚗?
+??頛之?極雿?????銝憿?T 隞餃?銝?銝??葡 step??靘? step01 / step02 / step03嚗? 
+?箔?皜?雿銝剝?銝?港??票?誘嚗閬?**隞餃?隤芣?鋆⊥??Ⅱ?甇仿????函???*嚗祕雿?Agent ?臭誑?典?銝憿?T 隞餃??扼??銝?甇乓?雿??摰誑銝???
 
-有些較大的工作會拆成「同一顆 T 任務下的一連串 step」（例如 step01 / step02 / step03）。  
-為了減少你在中間一直來回貼指令，只要 **任務說明裡有明確列出步驟與安全範圍**，實作 Agent 可以在同一顆 T 任務內「自動往下一步」，但必須遵守以下原則：
+**Agent ?臭誑?芸??脣銝???step ????**
 
-**Agent 可以自動前進到下一個 step 的前提：**
+- ?嗅? step ?遙?牧?歇摰?嚗?嚗?  - ??閰?step 隞餃?隤芣?銝剖??箇?皜祈岫?ypecheck ?誘?券????  - 瘝??啣??芾圾瘙箇??航炊??憭?靘?皜祈岫蝝?雿◤敹賜嚗?  - 銝?閬???冽 T 隞餃??迂靽格皜銝剔?瑼???  - 銝?閬??schema / public API 蝑楊憭? T 隞餃????contract??- ?嗅? step ?交?閬??湔 docs嚗歇摰?嚗?  - `docs/PROJECT_TODO.md`嚗?銝??step 撌脣????膩嚗?閬??湔 T 隞餃??????  - `docs/Windsurf_ChatGPT_NOTES.md`嚗??T 隞餃???蝭?改??啣?銝畾菜?餈啁??step ?耨?寡?皜祈岫蝯?嚗?  - `docs/PENDING_DECISIONS.md`嚗????銝剔??摰???敺Ⅱ隤降憿???
+?其?餈唳?隞園皛輯雲??Agent **?臭誑?湔蝜潛??瑁?銝???step**嚗?敹?銝撠郊?賢?銝?蝑?ChatGPT ??蝣箄???
+**Agent 敹???銝? & ?????嚗?*
 
-- 當前 step 的任務說明已完成，且：
-  - 所有在該 step 任務說明中列出的測試、typecheck 指令全部通過。
-  - 沒有新增未解決的錯誤或例外（例如測試紅燈但被忽略）。
-  - 不需要更動「不在本 T 任務允許修改清單中的檔案」。
-  - 不需要更動 schema / public API 等「跨多顆 T 任務的共用 contract」。
-- 當前 step 若有要求更新 docs，已完成：
-  - `docs/PROJECT_TODO.md`（補上當前 step 已完成的描述，必要時更新 T 任務狀態）。
-  - `docs/Windsurf_ChatGPT_NOTES.md`（在本 T 任務的小節內，新增一段描述目前 step 的修改與測試結果）。
-  - `docs/PENDING_DECISIONS.md`（如果在過程中產生新的「暫定規則」或待確認議題）。
-
-在上述條件都滿足時，Agent **可以直接繼續執行下一個 step**，不必每一小步都停下來等 ChatGPT 或你確認。
-
-**Agent 必須「停下來 & 回報」的情況：**
-
-- 任一測試 / typecheck 失敗，且不是 trivially fixable 的 typo。
-- 發現必須修改：
-  - 不在本 T 任務允許清單中的檔案，或
-  - 其他 T 任務負責的模組、全域設定。
-- 發現 schema / workflow / contract 層級的設計問題，需要：
-  - 更新 `CONTENT_SCHEMA.md`、`COMPLETE_PROJECT_WORKFLOW.md`、`TOOLS_ROLES_AND_BOUNDARIES.md` 等。
-- 遇到無法確認的業務規則（例如某欄位要不要 nullable、某種 HTML 是否要支援）。
-- 任務說明中明寫「執行到 step N 就暫停，請回報」。
-
-這些情況下，Agent 應該：
-
-- 先停止繼續後續 step。
-- 在 `docs/Windsurf_ChatGPT_NOTES.md` 對應 T 任務的小節中：
-  - 增加「未解決問題」或「卡關說明」段落。
-- 在 `[Agent 回報摘要]` 中清楚說明：
-  - 已完成到哪一個 step。
-  - 哪些測試已通過。
-  - 卡在哪裡、需要 ChatGPT / 你幫忙決定什麼。
-- （選用）若問題較多，也可更新 `docs/PENDING_DECISIONS.md` 或 `docs/UNRESOLVED_ISSUES.md` 做集中列表。
-
-> 特別說明：  
-> - Agent **絕對不能自行開啟「全新 T 任務」或決定 T-號碼**。  
->   若要新增 T 任務，必須由 ChatGPT 先在 `PROJECT_TODO.md` 設計並命名。  
-> - Agent 允許自動前進的範圍，只限於「同一顆 T 任務內、ChatGPT 已事先規劃好的 step01 / step02 / step03」。
-
+- 隞颱?皜祈岫 / typecheck 憭望?嚗?銝 trivially fixable ??typo??- ?潛敹?靽格嚗?  - 銝??T 隞餃??迂皜銝剔?瑼?嚗?
+  - ?嗡? T 隞餃?鞎痊?芋蝯?身摰?- ?潛 schema / workflow / contract 撅斤??身閮?憿??閬?
+  - ?湔 `CONTENT_SCHEMA.md`?COMPLETE_PROJECT_WORKFLOW.md`?TOOLS_ROLES_AND_BOUNDARIES.md` 蝑?- ??⊥?蝣箄??平????靘???雿?銝? nullable??蝔?HTML ?臬閬?湛???- 隞餃?隤芣?銝剜?撖怒銵 step N 撠望??隢??晞?
+????銝?Agent ?府嚗?
+- ??甇Ｙ匱蝥?蝥?step??- ??`docs/Windsurf_ChatGPT_NOTES.md` 撠? T 隞餃???蝭銝哨?
+  - 憓??閫?捱??????牧?挾?賬?- ??`[Agent ???]` 銝剜?璆牧??
+  - 撌脣???芯???step??  - ?芯?皜祈岫撌脤???  - ?∪?芾ㄐ??閬?ChatGPT / 雿鼠敹捱摰?暻潦?- 嚗?剁??亙?憿?憭?銋?湔 `docs/PENDING_DECISIONS.md` ??`docs/UNRESOLVED_ISSUES.md` ??銝剖?銵具?
+> ?孵隤芣?嚗? 
+> - Agent **蝯?銝?芾??????T 隞餃???瘙箏? T-?Ⅳ**?? 
+>   ?亥??啣? T 隞餃?嚗?? ChatGPT ? `PROJECT_TODO.md` 閮剛?銝血?? 
+> - Agent ?迂?芸??脩?蝭?嚗???銝憿?T 隞餃??扼hatGPT 撌脖????末??step01 / step02 / step03??
 ---
 
-## 5. `Windsurf_ChatGPT_NOTES.md` 與 `PROJECT_TODO.md` 的搭配
+## 5. `Windsurf_ChatGPT_NOTES.md` ??`PROJECT_TODO.md` ???
+### 5.1 `PROJECT_TODO.md`嚗遙???株????
+瘥?T 隞餃???`docs/PROJECT_TODO.md` 鋆⊥??嚗?
+- 璅?嚗 T 蝺刻?嚗?- ?????/ 漎???- 隞餃?隤芣?嚗璅??荔???- 閬耨?寧?瑼??”??- 銝?游???contract??- 撽璇辣嚗葫閰佗?瑼Ｘ?嚗?
+ChatGPT ?刻???銝甇交?嚗??芸??梯??遢皜??
+### 5.2 `Windsurf_ChatGPT_NOTES.md`嚗祕雿隤?鈭斗
 
-### 5.1 `PROJECT_TODO.md`：任務清單與狀態
+瘥活 Windsurf 摰?銝??T 隞餃?嚗???`docs/Windsurf_ChatGPT_NOTES.md` ????蝭嚗?
+- `YYYY-MM-DD T-000X 隞餃??迂`
 
-每個 T 任務在 `docs/PROJECT_TODO.md` 裡應包含：
-
-- 標題（含 T 編號）。
-- 狀態（✅ / ⬜）。
-- 任務說明（目標、背景）。
-- 要修改的檔案列表。
-- 不可更動的 contract。
-- 驗收條件（測試／檢查項目）。
-
-ChatGPT 在規劃下一步時，會優先閱讀這份清單。
-
-### 5.2 `Windsurf_ChatGPT_NOTES.md`：實作日誌與交接
-
-每次 Windsurf 完成一個 T 任務，應在 `docs/Windsurf_ChatGPT_NOTES.md` 加一個小節：
-
-- `YYYY-MM-DD T-000X 任務名稱`
-
-小節內容包含：
-
-- 修改檔案列表。
-- 關鍵改動說明（例如：新增哪些欄位、修改哪些映射）。
-- 執行指令與結果（簡要；詳細 log 在 `docs/terminal_logs/`）。
-- 未解決問題與後續建議（若有）。
-
-### 5.3 ChatGPT 如何利用這兩份文件
-
-ChatGPT 在每次新對話開始時會：
-
-1. 讀取 `docs/PROJECT_TODO.md`：
-   - 確認哪些 T 任務已完成（✅）。
-   - 找出目前開著但未做完的項目（⬜）。
-2. 讀取 `docs/Windsurf_ChatGPT_NOTES.md`：
-   - 理解最近幾次 T 任務的實作細節。
-   - 找出是否有遺留問題或需要 follow-up 的點。
-
-綜合判斷後，提出「下一個建議的 T 任務」，並給出理由。
-
+撠??批捆?嚗?
+- 靽格瑼??”??- ??孵?隤芣?嚗?憒??啣??芯?甈??耨?孵鈭?撠???- ?瑁??誘????蝪∟?嚗底蝝?log ??`docs/terminal_logs/`嚗?- ?芾圾瘙箏?憿?敺?撱箄降嚗????
+### 5.3 ChatGPT 憒??拍?隞賣?隞?
+ChatGPT ?冽?甈⊥撠店????嚗?
+1. 霈??`docs/PROJECT_TODO.md`嚗?   - 蝣箄??芯? T 隞餃?撌脣???????   - ?曉?桀???雿?????殷?漎???2. 霈??`docs/Windsurf_ChatGPT_NOTES.md`嚗?   - ?圾?餈嗾甈?T 隞餃??祕雿敦蝭??   - ?曉?臬???憿??閬?follow-up ????
+蝬??斗敺????銝?遣霅啁? T 隞餃???銝衣策?箇??晞?
 ---
 
-## 6. ChatGPT 開新對話：什麼時候開、怎麼開？
+## 6. ChatGPT ?撠店嚗?暻潭????獐??
 
-### 6.1 什麼時候建議開新 ChatGPT 對話？
+### 6.1 隞暻潭??遣霅圈???ChatGPT 撠店嚗?
+?嗅?曆??Ｖ遙銝蝔格?瘜?嚗遣霅啜????閰梧??????ChatGPT 撠店??霈?ChatGPT ?隞?docs ?箏皞??嚗??舐匱蝥敞蝛?靘???撠店甇瑕嚗?
+- 閬箏????＊霈???????憪????? 
+- ?祈憚撌脩?摰? 1嚚? ??T 隞餃?嚗docs/PROJECT_TODO.md`?docs/Windsurf_ChatGPT_NOTES.md` 撌脫??＊?湔?? 
+- 撠店鋆∪歇蝬票鈭之??log / code / ?瑟?隞歹??芸楛銋?憪?銝?璆?典隢銝畾萸? 
+- 皞????唳?蜓憿?靘?嚗? html-to-markdown 閬?嚗??隢?zh-tw ??zh-cn pipeline嚗?
+?具???撠店 ???撠店????撱箄降?萄?隞乩?瘚?嚗?
+**隢祕雿?Agent ?嗅偏銝行??docs**
 
-當出現下面任一種情況時，建議「結束目前對話，開一個新的 ChatGPT 對話」，讓 ChatGPT 重新以 docs 為基準冷啟動，而不是繼續累積越來越重的對話歷史：
-
-- 覺得回應明顯變慢、卡頓，或回應開始「答非所問」。  
-- 本輪已經完成 1～2 個 T 任務，`docs/PROJECT_TODO.md`、`docs/Windsurf_ChatGPT_NOTES.md` 已有明顯更新。  
-- 對話裡已經貼了大量 log / code / 長指令，自己也開始搞不清楚現在在談哪一段。  
-- 準備切換到新的主題（例如：從 html-to-markdown 規則，改成討論 zh-tw → zh-cn pipeline）。
-
-在「關掉舊對話 → 開新對話」之前，建議遵守以下流程：
-
-**請實作 Agent 收尾並更新 docs**
-
-- 確認本輪 T 任務的變更已寫入：
-  - `docs/PROJECT_TODO.md`
+- 蝣箄??祈憚 T 隞餃????游歇撖怠嚗?  - `docs/PROJECT_TODO.md`
   - `docs/Windsurf_ChatGPT_NOTES.md`
-  - （如有需要）`docs/PENDING_DECISIONS.md`
-- 若有測試或工具輸出，關鍵 log 已存成：
+  - 嚗???閬?`docs/PENDING_DECISIONS.md`
+- ?交?皜祈岫?極?瑁撓?綽?? log 撌脣???
   - `docs/terminal_logs/T-xxxx_*.txt`
 
-**你在本機手動做的事**
+**雿?祆?????鈭?*
 
-在專案根目錄執行：
-
+?典?獢?桅??瑁?嚗?
 ```bash
 git status
 ```
 
-依照 `[建議 git 指令]` 區塊執行：
+靘 `[撱箄降 git ?誘]` ?憛銵?
 
 ```bash
 git add ...
@@ -760,98 +400,66 @@ git commit -m "..."
 git push origin main
 ```
 
-執行前先檢查 `[建議 git 指令]`：
+?瑁???瑼Ｘ `[撱箄降 git ?誘]`嚗?
+- 銝?箇 `<...>`?[...]` ??雿?蝚佗?銋??賢?誘銵??`#`?//` 閮餉圾??- ?交?嚗?隢祕雿?Agent ??Ｙ?銝??湔?瑁???隞扎?
+**?Ｙ??啁? docs snapshot嚗策銝?頛?ChatGPT ?剁?**
 
-- 不能出現 `<...>`、`[...]` 這類佔位符，也不能在指令行內加 `#`、`//` 註解。
-- 若有，先請實作 Agent 重新產生一版可直接執行的指令。
-
-**產生新的 docs snapshot（給下一輪 ChatGPT 用）**
-
-在本機執行（依實際任務代號填寫）：
-
+?冽璈銵?靘祕?遙?誨?‵撖恬?嚗?
 ```bash
 npm run snapshot:docs -- --task T-xxxx
 ```
 
-這會在 `snapshots/` 底下產生一個新的 ZIP，例如：
+????`snapshots/` 摨??Ｙ?銝???ZIP嚗?憒?
 
 - `snapshots/ctworld-docs-T-0007-YYYY-MM-DD-v1.zip`
 
-`snapshots/` 資料夾與 ZIP 保持未加入 git，只在本機用來傳給 ChatGPT。
+`snapshots/` 鞈?憭曇? ZIP 靽??芸???git嚗?冽璈靘蝯?ChatGPT??
+**皞?憟賬撠店?鞈???*
 
-**準備好「新對話開場資訊」**
+?撠店??隢??單??啁? docs snapshot ZIP嚗??? GitHub ???commit / ?嚗?銝衣陛?株牧??
 
-開新對話時，請上傳最新的 docs snapshot ZIP（或指向 GitHub 最新 commit / 分支），並簡單說明：
-
-- 這是「中台世界舊站 → Headless CMS」專案。
-- 希望 ChatGPT 先閱讀的檔案清單。
-- 最近完成的是哪幾個 T 任務（可以引用 `Windsurf_ChatGPT_NOTES.md` 的標題）。
-
-### 6.2 建議的開新對話開場模板
-
-未來你在 ChatGPT 開新對話，可以這樣開場（可自行調整）：
+- ??葉?唬???蝡???Headless CMS??獢?- 撣? ChatGPT ?霈??獢??柴?- ?餈????臬撟曉?T 隞餃?嚗隞亙???`Windsurf_ChatGPT_NOTES.md` ??憿???
+### 6.2 撱箄降???啣?閰梢??湔芋??
+?芯?雿 ChatGPT ?撠店嚗隞仿見?嚗?芾?隤踵嚗?
 
 ```text
-這是「中台世界舊站 → Headless CMS」專案。
+??葉?唬???蝡???Headless CMS??獢?
+撠? repo嚗tcm-website-frontend
 
-專案 repo：ctcm-website-frontend
-
-請先閱讀這些檔案（如果存在）：
-- docs/COMPLETE_PROJECT_WORKFLOW.md
+隢??梯???瑼?嚗????剁?嚗?- docs/COMPLETE_PROJECT_WORKFLOW.md
 - docs/CONTENT_SCHEMA.md
 - docs/HTML_TO_MARKDOWN_RULES_V4.md
 - docs/PROJECT_TODO.md
 - docs/Windsurf_ChatGPT_NOTES.md
 - docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md
 
-目前最新任務小節是：
-- docs/Windsurf_ChatGPT_NOTES.md 裡的「YYYY-MM-DD 任務：...」（以及之後的任務，如果有）。
-
-如果我有另外提供 docs snapshot ZIP，請以 ZIP 內的檔案為準，不要再使用舊的 snapshot 或舊版本 docs。
-
-請你：
-1. 用自己的話重述目前專案狀態與最近幾次實作 Agent（Windsurf / Codex）的修改重點。
-2. 根據 docs/PROJECT_TODO.md 與 notes，幫我挑一個「最適合現在進行」的 T 任務，並說明理由。
-3. 為這個 T 任務產生一段「可以直接貼給實作 Agent 的任務指令」（用 code block 包起來），內容包含：
-   - 要閱讀的 docs / 章節。
-   - 要修改或新增的檔案路徑。
-   - 不可以改動的型別／規則（contract）。
-   - 要執行的測試指令與預期結果。
-4. 之後每一輪新任務，也都用同樣模式提供「簡短任務摘要 + 給實作 Agent 的指令」即可，把所有細節寫回 docs。
-```
+?桀???唬遙??蝭?荔?
+- docs/Windsurf_ChatGPT_NOTES.md 鋆∠??YYY-MM-DD 隞餃?嚗?..??隞亙?銋??遙??憒?????
+憒????血??? docs snapshot ZIP嚗?隞?ZIP ?抒?瑼??箸?嚗?閬?雿輻?? snapshot ??? docs??
+隢?嚗?1. ?刻撌梁?閰梢?餈啁??獢????餈嗾甈∪祕雿?Agent嚗indsurf / Codex嚗?靽格????2. ?寞? docs/PROJECT_TODO.md ??notes嚗鼠??銝???拙??曉?脰??? T 隞餃?嚗蒂隤芣????3. ?粹?T 隞餃??Ｙ?銝畾萸隞亦?亥票蝯血祕雿?Agent ?遙??隞扎???code block ?絲靘?嚗摰孵??恬?
+   - 閬霈??docs / 蝡???   - 閬耨?寞??啣???獢楝敺?   - 銝隞交???嚗???contract嚗?   - 閬銵?皜祈岫?誘??????4. 銋?瘥?頛芣隞餃?嚗??賜?見璅∪????陛?凋遙??閬?+ 蝯血祕雿?Agent ??隞扎?荔????敦蝭撖怠? docs??```
 
 ---
 
-## 7. ChatGPT 可見範圍與 docs snapshot / ZIP 交接
+## 7. ChatGPT ?航?蝭???docs snapshot / ZIP 鈭斗
 
-### 7.1 ChatGPT 能看到什麼？
+### 7.1 ChatGPT ?賜??唬?暻潘?
 
-ChatGPT 能看到：
+ChatGPT ?賜??堆?
 
-- 你在對話中打的文字。
-- 你上傳的檔案（ZIP / `.md` / `.txt` / `.ts` / `.tsx` / `.json` 等）。
-- 公開的 GitHub repo（或透過 connector 提供的存取）。
+- 雿撠店銝剜???摮?- 雿??喟?瑼?嚗IP / `.md` / `.txt` / `.ts` / `.tsx` / `.json` 蝑???- ?祇???GitHub repo嚗??? connector ????????
+ChatGPT ???堆?
 
-ChatGPT 看不到：
+- 雿璈? `F:\` 鞈?憭橘??日?雿?蝮格? ZIP 銝嚗?- 撠 push ?璈??湛??芸??冽 working tree ?耨?對???
+### 7.2 撖虫? Agent 摰?隞餃?敺???暻潘?
 
-- 你本機的 `F:\` 資料夾（除非你壓縮成 ZIP 上傳）。
-- 尚未 push 的本機變更（只存在於 working tree 的修改）。
+Windsurf / Codex ?冽璈?/ ?脩垢?孵? code 銋?嚗?閰莎?
 
-### 7.2 實作 Agent 完成任務後要做什麼？
+- ?湔 `docs/PROJECT_TODO.md`嚗 隞餃????隤芣?嚗?- ?湔 `docs/Windsurf_ChatGPT_NOTES.md`嚗祕雿隤???- ??`docs/terminal_logs/` ?啣??瑁??誘??log 瑼?- ?典??望?閬葉?? `[撱箄降 git ?誘]`??
+### 7.3 憒?霈?ChatGPT ?摰霈嚗?
+**GitHub 頝舐?**
 
-Windsurf / Codex 在本機 / 雲端改完 code 之後，應該：
-
-- 更新 `docs/PROJECT_TODO.md`（T 任務狀態與說明）。
-- 更新 `docs/Windsurf_ChatGPT_NOTES.md`（實作日誌）。
-- 在 `docs/terminal_logs/` 新增執行指令的 log 檔。
-- 在回報摘要中附上 `[建議 git 指令]`。
-
-### 7.3 如何讓 ChatGPT 看到完整變更？
-
-**GitHub 路線**
-
-你在本機執行建議的 git 指令：
-
+雿?祆??瑁?撱箄降??git ?誘嚗?
 ```bash
 git status
 git add ...
@@ -859,34 +467,30 @@ git commit -m "..."
 git push origin main
 ```
 
-ChatGPT 在新對話中直接閱讀 GitHub 上的 docs / 程式碼。
+ChatGPT ?冽撠店銝剔?仿霈 GitHub 銝? docs / 蝔?蝣潦?
+**docs snapshot ZIP 頝舐?**
 
-**docs snapshot ZIP 路線**
-
-在本機執行：
+?冽璈銵?
 
 ```bash
 npm run snapshot:docs -- --task T-xxxx
 ```
 
-得到一個新的 snapshot ZIP，在新對話中上傳給 ChatGPT。
-
-ChatGPT 以 ZIP 內的內容為準，不會再看舊 ZIP。
-
+敺銝???snapshot ZIP嚗?啣?閰曹葉銝蝯?ChatGPT??
+ChatGPT 隞?ZIP ?抒??批捆?箸?嚗????? ZIP??
 ---
 
-## 8. 總結
+## 8. 蝮賜?
 
-- 你：決定方向＋複製貼上＋偶爾 `git` / `npm install`。  
-- ChatGPT：設計架構規格＋拆任務＋寫 docs（大改時提供 ZIP）。  
-- Windsurf / Codex：實作程式＋跑測試＋寫 `Windsurf_ChatGPT_NOTES.md`＋輸出回報摘要與 `[建議 git 指令]`。  
+- 雿?瘙箏??孵?嚗?鋆質票銝??嗥 `git` / `npm install`?? 
+- ChatGPT嚗身閮瑽??潘??遙??撖?docs嚗之?寞??? ZIP嚗? 
+- Windsurf / Codex嚗祕雿?撘?頝葫閰佗?撖?`Windsurf_ChatGPT_NOTES.md`嚗撓?箏??望?閬? `[撱箄降 git ?誘]`?? 
 
-只要三方都照這份工作流程走：
+?芾?銝?賜?遢撌乩?瘚?韏堆?
 
-- 對話視窗保持「輕量：決策＋指令＋回報」。  
-- 詳細規格與操作歷史集中在 Git repo 的 `docs/*.md`。  
-- 無論是你、ChatGPT、Windsurf 或 Codex，要接續工作時都能快速銜接。
-
+- 撠店閬?靽?????瘙箇?嚗?隞歹???? 
+- 閰喟敦閬??雿風?脤?銝剖 Git repo ??`docs/*.md`?? 
+- ?∟??臭??hatGPT?indsurf ??Codex嚗??亦?撌乩???賢翰???乓?
 ---
 
 ## 9. Mojibake check scope (P2-0006)
@@ -896,3 +500,9 @@ ChatGPT 以 ZIP 內的內容為準，不會再看舊 ZIP。
 - `npm run check:mojibake:all` scans entire filesystem (`docs/**/*.md`) including untracked files
 - **Untracked files (e.g., `_ADVICE/`, `INFO/`) will NOT block commits** in default/staged mode
 - To include external advice docs in repo: ensure they are valid UTF-8 (no U+FFFD) before `git add`
+
+## Phase 2 Rulebook 入口（P2-0007）
+- Phase 2 的 AI 協作 / routing / budget / decision memo / handoff 單一真相：docs/WORKFLOW/PHASE2/AI_PLAYBOOK_PHASE2.md。
+- WORKFLOW 其他條目如與 Playbook 衝突，以 Playbook 為準（但仍需在 TODO / NOTES 紀錄對應任務）。
+
+

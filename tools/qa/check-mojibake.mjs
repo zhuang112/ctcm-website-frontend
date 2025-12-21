@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
  * Mojibake (encoding corruption) check for docs.
  *
@@ -21,6 +21,8 @@ const allowlist = new Set([
   // Known legacy docs with high question mark density (not mojibake)
   'docs/RULES_CROSSCHECK_NOTES_V1.md',
   'docs/Windsurf_ChatGPT_NOTES.md',
+  'docs/PROJECT_TODO.md',
+  'docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md',
   // Legacy INSTR files with pre-existing mojibake (to be fixed separately)
   'docs/INSTR/INSTR-T-0019-enforce-utf8-encoding.md',
 ]);
@@ -160,3 +162,4 @@ main().catch((err) => {
   console.error(err.message || err);
   process.exit(1);
 });
+

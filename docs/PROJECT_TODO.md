@@ -1,521 +1,201 @@
-# PROJECT_TODO：中台世界 Headless 專案任務列表
+# PROJECT_TODO嚗葉?唬???Headless 撠?隞餃??”
 
-> 說明：本檔列出本專案各個 T-xxxx 任務的狀態與簡要說明。  
-> - 所有實作與測試狀態以 GitHub/main 為準。  
-> - 每顆 T 的詳細過程與 RAW 連結請參考 `docs/Windsurf_ChatGPT_NOTES.md`。  
-> - 新任務請依 `docs/INSTR/INSTR-TEMPLATE.md` 撰寫 INSTR，再由 ChatGPT 產生任務內容。
-
+> 隤芣?嚗瑼??箸撠???T-xxxx 隞餃?????蝪∟?隤芣??? 
+> - ??祕雿?皜祈岫??誑 GitHub/main ?箸??? 
+> - 瘥? T ?底蝝圈?蝔? RAW ???隢???`docs/Windsurf_ChatGPT_NOTES.md`?? 
+> - ?唬遙??靘?`docs/INSTR/INSTR-TEMPLATE.md` ?啣神 INSTR嚗???ChatGPT ?Ｙ?隞餃??批捆??
 ---
 
-## TODO 列表（原始三項）
+## TODO ?”嚗?憪???
 
-### 1. crawl / inventory：舊站網址與檔案盤點
-> 狀態：✅ 已完成（V1 盤點）
-- 工具：`tools/crawl/crawl-ctworld.ts`、`tools/crawl/filesystem-inventory.ts`、`tools/crawl/diff-crawl-vs-files.ts`。
-- 輸出：`data/crawl/*.json/csv`（網址清單、檔案清單、差異報表）。
-- 說明：用於比對舊站與本機檔案結構差異，後續可再針對特定目錄細化。
-
-### 2. HTML → AnyContent：teaching
-> 狀態：✅ 已完成（V1 教學轉換與測試）
-- 工具：`src/adapters/teaching-from-legacy.ts`、`tools/convert/teaching-html-to-anycontent.ts`。
-- 規則：`docs/HTML_TO_MARKDOWN_RULES_V4.md`、`docs/CONTENT_SCHEMA_V1.md`。
-- 說明：從 legacy teaching HTML 轉成 AnyContentTeaching JSON，偈語與欄位 mapping 已有測試覆蓋。
-
-### 3. zh-TW → zh-CN pipeline（umbrella）
-> 狀態：⏳ 拆解中（由 T-0013 等子任務處理）
-- 規格：`docs/ZH_TW_TO_ZH_CN_PIPELINE.md`、`docs/CONTENT_SCHEMA_V1.md`。
-- 說明：整體 pipeline 拆成多顆 T（T-0013 docs 規格、T-0014/15/16/27 等程式任務），以 docs/notes 狀態為準。
-
+### 1. crawl / inventory嚗?蝡雯???獢暺?> ?????撌脣???V1 ?日?嚗?- 撌亙嚗tools/crawl/crawl-ctworld.ts`?tools/crawl/filesystem-inventory.ts`?tools/crawl/diff-crawl-vs-files.ts`??- 頛詨嚗data/crawl/*.json/csv`嚗雯?皜??獢??柴榆?啣銵剁???- 隤芣?嚗?潭?撠?蝡??祆?瑼?蝯?撌桃嚗?蝥??撠摰?敦??
+### 2. HTML ??AnyContent嚗eaching
+> ?????撌脣???V1 ?飛頧??葫閰佗?
+- 撌亙嚗src/adapters/teaching-from-legacy.ts`?tools/convert/teaching-html-to-anycontent.ts`??- 閬?嚗docs/HTML_TO_MARKDOWN_RULES_V4.md`?docs/CONTENT_SCHEMA_V1.md`??- 隤芣?嚗? legacy teaching HTML 頧? AnyContentTeaching JSON嚗?隤?甈? mapping 撌脫?皜祈岫閬???
+### 3. zh-TW ??zh-CN pipeline嚗mbrella嚗?> ??????圾銝哨???T-0013 蝑?隞餃???嚗?- 閬嚗docs/ZH_TW_TO_ZH_CN_PIPELINE.md`?docs/CONTENT_SCHEMA_V1.md`??- 隤芣?嚗擃?pipeline ??憭? T嚗-0013 docs 閬?-0014/15/16/27 蝑?撘遙??嚗誑 docs/notes ??皞?
 ---
 
-## T 系列任務（依 ChatGPT 產生）
-
-> 狀態與細節以 `docs/Windsurf_ChatGPT_NOTES.md` 為準（如有出入，以 notes 最新記錄為主）。
-
-### T-0001 teaching-from-legacy：teaching verses 與 meta 映射
-> 狀態：✅ 已完成（v1，詳見 notes）
-- 目標：建立 teaching-from-legacy adapter，支援偈語欄位與基本 meta。
-
-### T-0002 anycontent-types：定義 AnyContent 型別（teaching/news/magazine）
-> 狀態：✅ 已完成（v1 型別與 contract）
-- 目標：整理 AnyContent 共用與各 post_type 型別，並通過 typecheck。
-
-### T-0003 news-from-legacy：NewsContent minimal mapping
-> 狀態：✅ 已完成（v1，含日期/地點 basic mapping）
-- 目標：news adapter 能從 legacy HTML 產出基本內容與 meta。
-
-### T-0004 magazine-from-legacy：MagazineContent minimal mapping
-> 狀態：✅ 已完成（v1 骨架）
-- 目標：magazine adapter 具備基本欄位與圖片處理，進階 meta 另開任務。
-
-### T-0005 news-from-legacy meta：news meta 日期/地點 mapping v1
-> 狀態：✅ 已完成（2025-12-10 驗證）
-- 目標：解析 news meta 的日期、地點並填入對應欄位。
-
-### T-0006 legacy-data-root：設定 CTWORLD_LEGACY_ROOT（舊站備份）
-> 狀態：⛔ blocked（待完整備份）
-- 目標：取得完整舊站備份並設定 docroot，方可進一步盤點與轉換。
-
-### T-0007 docs-snapshot-cli：產生 docs snapshot ZIP
-> 狀態：✅ 已完成
-- 目標：`npm run snapshot:docs -- --task T-0007` 產生 `snapshots/ctworld-docs-<task>-<date>.zip`（僅 docs/* 與 docs/terminal_logs/*）。
-
-### T-0010 rename-workflow-file：workflow 改為 Agent 中立命名
-> 狀態：✅ 已完成
-- 目標：workflow 檔案改名為 `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 並更新引用。
-
-### T-0011 fix-corrupted-docs：修復亂碼 docs（UTF-8）
-> 狀態：✅ 已完成
-- 目標：將既有亂碼 docs 改為 UTF-8 正常內容，記錄於 notes。
-
-### T-0012 sync-status-docs：對齊 PROJECT_TODO / PROJECT_STATUS 與實際進度
-> 狀態：✅ 已完成
-- 目標：更新 TODO / STATUS，使描述與程式現況一致。
-
-### T-0013 zh-tw-to-zh-cn-pipeline-design：docs 規格設計
-> 狀態：✅ 已完成（docs-first）
-- 目標：在 pipeline 文檔中列出欄位白名單、CLI 參數與輸入/輸出結構。
-
+## T 蝟餃?隞餃?嚗? ChatGPT ?Ｙ?嚗?
+> ???蝝啁?隞?`docs/Windsurf_ChatGPT_NOTES.md` ?箸?嚗???伐?隞?notes ??啗??銝鳴???
+### T-0001 teaching-from-legacy嚗eaching verses ??meta ??
+> ?????撌脣???v1嚗底閬?notes嚗?- ?格?嚗遣蝡?teaching-from-legacy adapter嚗?游?隤?雿??箸 meta??
+### T-0002 anycontent-types嚗?蝢?AnyContent ?嚗eaching/news/magazine嚗?> ?????撌脣???v1 ???contract嚗?- ?格?嚗??AnyContent ?梁?? post_type ?嚗蒂?? typecheck??
+### T-0003 news-from-legacy嚗ewsContent minimal mapping
+> ?????撌脣???v1嚗?交?/?圈? basic mapping嚗?- ?格?嚗ews adapter ?賢? legacy HTML ?Ｗ?箸?批捆??meta??
+### T-0004 magazine-from-legacy嚗agazineContent minimal mapping
+> ?????撌脣???v1 撉冽嚗?- ?格?嚗agazine adapter ?瑕??箸甈????????脤? meta ?阡?隞餃???
+### T-0005 news-from-legacy meta嚗ews meta ?交?/?圈? mapping v1
+> ?????撌脣???2025-12-10 撽?嚗?- ?格?嚗圾??news meta ??暺蒂憛怠撠?甈???
+### T-0006 legacy-data-root嚗身摰?CTWORLD_LEGACY_ROOT嚗?蝡?隞踝?
+> ?????blocked嚗?摰?遢嚗?- ?格?嚗?敺??渲?蝡?隞賭蒂閮剖? docroot嚗?舫脖?甇亦暺?頧???
+### T-0007 docs-snapshot-cli嚗??docs snapshot ZIP
+> ?????撌脣???- ?格?嚗npm run snapshot:docs -- --task T-0007` ?Ｙ? `snapshots/ctworld-docs-<task>-<date>.zip`嚗? docs/* ??docs/terminal_logs/*嚗?
+### T-0010 rename-workflow-file嚗orkflow ?寧 Agent 銝剔??賢?
+> ?????撌脣???- ?格?嚗orkflow 瑼??孵???`docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 銝行?啣??具?
+### T-0011 fix-corrupted-docs嚗耨敺拐?蝣?docs嚗TF-8嚗?> ?????撌脣???- ?格?嚗??Ｘ?鈭Ⅳ docs ?寧 UTF-8 甇?虜?批捆嚗?? notes??
+### T-0012 sync-status-docs嚗?朣?PROJECT_TODO / PROJECT_STATUS ?祕?脣漲
+> ?????撌脣???- ?格?嚗??TODO / STATUS嚗蝙?膩??撘瘜??氬?
+### T-0013 zh-tw-to-zh-cn-pipeline-design嚗ocs 閬閮剛?
+> ?????撌脣???docs-first嚗?- ?格?嚗 pipeline ??銝剖??箸?雿??LI ??撓??頛詨蝯???
 ### T-0014 zh-tw-to-zh-cn-pipeline-core-and-cli-skeleton
-> 狀態：請參考 notes（歷史條目）
-- 目標：建立繁簡轉換 utility 與 CLI skeleton（含 dry-run）。
-
+> ???隢???notes嚗風?脫??殷?
+- ?格?嚗遣蝡?蝪∟???utility ??CLI skeleton嚗 dry-run嚗?
 ### T-0015 zh-tw-to-zh-cn-pipeline-write-json
-> 狀態：請參考 notes（歷史條目）
-- 目標：將 AnyContent zh-TW JSON 轉出 zh-CN JSON（含 dry-run/transform）。
-
-### T-0016 zh-cn-health-check-tool：zh-TW / zh-CN JSON 健康檢查 CLI
-> 狀態：請參考 notes（歷史條目）
-- 目標：檢查 zh-TW/zh-CN JSON 成對與欄位一致性。
-
-### T-0017 html-to-markdown-rules-cleanup：HTML→Markdown 規則整理
-> 狀態：✅ 已完成（V4 規則重寫）
-- 目標：整理共用規則、圖片策略與各 post_type 注意事項。
-
-### T-0018 meta-instr-and-status-structure：INSTR 目錄與模板
-> 狀態：✅ 已完成
-- 目標：建立 `docs/INSTR/` README、模板，統一 INSTR 命名。
-
-### T-0019 enforce-utf8-encoding：強制 UTF-8 + LF
-> 狀態：✅ 已完成
-- 目標：加入 `.editorconfig`、`.gitattributes` 並在 workflow 提醒編碼/行尾。
-
-### T-0025 legacy-new-visual-compare-tool：三欄視覺比對工具（構想）
-> 狀態：✅ 已完成（需求登記與規格）
-- 目標：規劃左/中/右三欄比對 legacy HTML、AnyContent、New/WP 頁面，含 index 總表。
-
+> ???隢???notes嚗風?脫??殷?
+- ?格?嚗? AnyContent zh-TW JSON 頧 zh-CN JSON嚗 dry-run/transform嚗?
+### T-0016 zh-cn-health-check-tool嚗h-TW / zh-CN JSON ?亙熒瑼Ｘ CLI
+> ???隢???notes嚗風?脫??殷?
+- ?格?嚗炎??zh-TW/zh-CN JSON ????雿??湔扼?
+### T-0017 html-to-markdown-rules-cleanup嚗TML?arkdown 閬??渡?
+> ?????撌脣???V4 閬??神嚗?- ?格?嚗??刻??????亥???post_type 瘜冽?鈭???
+### T-0018 meta-instr-and-status-structure嚗NSTR ?桅??芋??> ?????撌脣???- ?格?嚗遣蝡?`docs/INSTR/` README?芋?選?蝯曹? INSTR ?賢???
+### T-0019 enforce-utf8-encoding嚗撥??UTF-8 + LF
+> ?????撌脣???- ?格?嚗???`.editorconfig`?.gitattributes` 銝血 workflow ??蝺函Ⅳ/銵偏??
+### T-0025 legacy-new-visual-compare-tool嚗?甈?閬箸?撠極?瘀?瑽嚗?> ?????撌脣????瘙閮?閬嚗?- ?格?嚗??椰/銝??喃?甈?撠?legacy HTML?nyContent?ew/WP ?嚗 index 蝮質”??
 ### T-0026 implement-visual-compare-tool-v1
-> 狀態：請參考 notes（dev/compare 實作進度）
-- 目標：在 `/dev/compare` 提供 index + 左右欄對照，先支援 sample。
-
-### T-0027 fix-opencc-types-and-build：opencc-js 型別修正
-> 狀態：請參考 notes（歷史條目）
-- 目標：修正 opencc-js 型別/建置問題，讓 build 可通過。
-
-### T-0029 news-sample-and-visual-compare：news sample end-to-end
-> 狀態：請參考 notes
-- 目標：建立 news sample-001（legacy→zh-tw→zh-cn）並掛入 /dev/compare。
-
-### T-0030 magazine-sample-and-visual-compare：magazine sample end-to-end
-> 狀態：請參考 notes
-- 目標：建立 magazine sample-001（legacy→zh-tw→zh-cn）並掛入 /dev/compare。
-
-### T-0031 define-anycontent-v1-schema-v1-draft：AnyContent V1 schema 草稿
-> 狀態：✅ 已完成
-- 目標：彙整 teaching/news/magazine 的 V1 schema 文件並更新 CONTENT_SCHEMA。
-
-### T-0032 refine-anycontent-v1-schema-details：補齊 V1 schema 細節
-> 狀態：✅ 已完成
-- 目標：補充各 post_type 欄位細節與樣本，持續對齊程式。
-
+> ???隢???notes嚗ev/compare 撖虫??脣漲嚗?- ?格?嚗 `/dev/compare` ?? index + 撌血甈??改????sample??
+### T-0027 fix-opencc-types-and-build嚗pencc-js ?靽格迤
+> ???隢???notes嚗風?脫??殷?
+- ?格?嚗耨甇?opencc-js ?/撱箇蔭??嚗? build ?舫???
+### T-0029 news-sample-and-visual-compare嚗ews sample end-to-end
+> ???隢???notes
+- ?格?嚗遣蝡?news sample-001嚗egacy?h-tw?h-cn嚗蒂? /dev/compare??
+### T-0030 magazine-sample-and-visual-compare嚗agazine sample end-to-end
+> ???隢???notes
+- ?格?嚗遣蝡?magazine sample-001嚗egacy?h-tw?h-cn嚗蒂? /dev/compare??
+### T-0031 define-anycontent-v1-schema-v1-draft嚗nyContent V1 schema ?阮
+> ?????撌脣???- ?格?嚗???teaching/news/magazine ??V1 schema ?辣銝行??CONTENT_SCHEMA??
+### T-0032 refine-anycontent-v1-schema-details嚗?朣?V1 schema 蝝啁?
+> ?????撌脣???- ?格?嚗??? post_type 甈?蝝啁??見?穿???撠?蝔???
 ### T-0033 plan-future-branch-gallery-index_page templates
-> 狀態：⏳ 尚未啟動（僅登記未來規劃）
-- 目標：預留 branch/gallery/index_page 的 inventory＋schema 模板方向。
-
-### T-0034 unknown-content-handling-rule：未知內容暫存規則
-> 狀態：✅ 已完成
-- 目標：明定無欄位對應的內容暫留 `body_markdown`，必要時標記 unclassified flags。
-
-### T-0035 add-unclassified-content-flags：新增未分類旗標欄位
-> 狀態：✅ 已完成
-- 目標：在 schema/workflow 中加入 `meta.has_unclassified_content` 與 `meta.unclassified_notes`。
-
-### T-0036 compare-unclassified-flag：/dev/compare 顯示未分類旗標
-> 狀態：✅ 已完成
-- 目標：在 compare index/右欄顯示 has_unclassified_content，提供篩選與提示。
-
-### T-0037 sync-html-to-markdown-unknown-content：補回未知內容段落
-> 狀態：✅ 已完成
-- 目標：在 RULES_V4 補充未知內容 fallback 段落，與 schema/workflow 對齊。
-
-### T-0038 zh-cn-health-check-cli：實作 zh-TW / zh-CN JSON 健康檢查工具
-> 狀態：✅ 已完成
-- 目標：`tools/convert/check-zh-cn-health.ts` + `npm run check:zh-cn`。
-
-### T-0039 zh-cn-health-check-in-workflow：將檢查流程寫入 workflow/checklist
-> 狀態：✅ 已完成
-- 目標：在 workflow / SESSION_CHECKLIST 加入 `npm run check:zh-cn` 規則。
-
-### T-0040 instr-template-files-for-chatgpt：INSTR 模板加上檔案清單提醒
-> 狀態：✅ 已完成
-- 目標：INSTR 模板與 workflow 提醒列出檔案清單、避免 citation。
-
-### T-0041 teaching-batch-from-crawl-pilot：crawl 教學小批次暫停
-> 狀態：⛔ blocked（缺少教學頁 HTML）
-- 目標：取得 3–5 篇實際教學 HTML 後，再進行 batch 轉換與 compare。
-
-### T-0043 workflow-safety-level-note：補充 workflow 安全等級
-> 狀態：✅ 已完成
-- 目標：說明 test/build/check:zh-cn 的執行規則、RAW 停用條件、審核要求。
-
-### T-0044 cleanup-project_todo-header-and-structure：整理 PROJECT_TODO 檔頭與結構
-> 狀態：✅ 已完成
-- 目標：清理檔頭亂碼、整理段落格式，使狀態對齊 notes。
-
-### T-0045 magazine-meta-from-legacy-v1：雜誌期別與出版日期 meta 映射 v1
-
-> 狀態：✅ 已完成（magazine-from-legacy 新增 issue / publish date 映射，2025-12-12）
-
-- 目標：
-  - 在雜誌 adapter 中，從 legacy HTML 解析期別與出版日期，灌入 AnyContent magazine meta。
-  - 確保 `CONTENT_SCHEMA_V1`、TypeScript 型別與 sample JSON 在這些欄位上對齊。
-- 驗收：
-  - [x] `src/adapters/magazine-from-legacy.ts` 具備 issue/date 解析與映射邏輯。
-  - [x] `tests/adapters/magazine-from-legacy.spec.ts` 新增 issue/date 測試並通過 `npm test`。
-  - [x] `npm run build` 通過。
-
-### T-0049 html-to-md-gap-review：HTML→Markdown 規則 vs 實作落差盤點
-
-> 狀態：✅ 已完成（整理落差筆記至 RULES_CROSSCHECK_NOTES_V1，2025-12-12）
-
-- 目標：
-  - 盤點 `HTML_TO_MARKDOWN_RULES_V4.md` 與實作/測試的差異，僅寫筆記，不改程式碼。
-  - 在 `RULES_CROSSCHECK_NOTES_V1.md` 條列：✅ 已對齊、⚠️ 待補、📌 未來 T 建議。
-- 驗收：
-  - [x] RULES_CROSSCHECK_NOTES_V1.md 新增 HTML→Markdown 落差小節。
-  - [x] 未改動 src/tools/tests/data；純 docs。
-  - [x] notes 記錄本次任務。
-
-### T-0050 html-image-gallery-rules-v1-design：HTML 圖片 / 圖說 / Gallery 規則 V1 設計（docs-only）
-
-> 狀態：✅ 已完成（圖片規則 V1 文檔化，2025-12-12）
-
-- 目標：
-  - 在 `HTML_TO_MARKDOWN_RULES_V4.md` 補充圖片/圖說/gallery 專章，標示已實作 vs 未實作。
-  - 在 `CONTENT_SCHEMA_V1.md` 補齊 `featured_image` / `featured_image_caption` / `gallery_items` 欄位說明與轉換備註。
-  - 在 `RULES_CROSSCHECK_NOTES_V1.md` 更新圖片相關落差與未來 T 建議。
-- 驗收：
-  - [x] V4 文件有清楚的圖片/圖說/gallery V1 行為，並標示實作狀態。
-  - [x] Schema V1 補上圖片欄位定義與繁簡轉換說明。
-  - [x] Crosscheck 筆記更新圖片缺口與後續 T 建議；未改動程式碼。
-
-### T-0051 teaching-image-gallery-impl-v1：Teaching 圖片 / 圖說 / Gallery V1 實作
-
-> 狀態：✅ 已完成（教學圖片拆解與 sample 更新，2025-12-12）
-
-- 目標：
-  - teaching 從 legacy HTML 拆出封面圖與 gallery，填入 `featured_image` / `featured_image_caption` / `gallery_items`。
-  - 圖片順序與 alt 保留，caption 以 alt 為主（缺少則為 null）。
-  - 教學 sample（legacy HTML、zh-tw / zh-cn JSON、/dev/compare index）同步展示圖片欄位，便於驗收。
-
-- 驗收：
-  - [x] `teaching-from-legacy` 以第一張圖為封面，其餘為 gallery，caption 取自 alt（無則 null）。
-  - [x] `npm test`、`npm run build` 通過；若觸及 zh-CN JSON，亦執行 `npm run check:zh-cn`。
-  - [x] `data/legacy-teaching/sample-001.html`、`data/anycontent/zh-tw|zh-cn/teaching/sample-001.json`、`data/compare/index.json` 同步更新，包含封面與 gallery 圖片。
-  - [x] notes 記錄本次變更與 RAW 連結。
-
-### T-0052 workflow-instr-for-all-tasks：每個 T 任務必須配對 INSTR（workflow 規則）
-
-> 狀態：✅ 已完成（workflow / INSTR-TEMPLATE / TODO / notes 已更新，2025-12-12）
-
-- 目標：
-  - 在 workflow 寫明「沒有 INSTR 不開工」，每顆 T 任務都要有 `docs/INSTR/INSTR-T-xxxx-<slug>.md`。
-  - 更新 INSTR-TEMPLATE，強調要列允許修改檔案、必跑測試（docs-only 可註記未跑 test/build）、禁用 citation。
-  - 在 TODO / notes 登記本規則，方便後續查閱。
-
-- 驗收：
-  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 新增「每個 T 任務需對應 INSTR .md」規則。
-  - [x] `docs/INSTR/INSTR-TEMPLATE.md` 反映上述規則與 docs-only 測試註記。
-  - [x] `docs/PROJECT_TODO.md` 新增並標記完成 T-0052；notes 有對應小節與 RAW 連結。
-
-### T-0053 news-magazine-image-gallery-impl-v1：news / magazine 圖片 / 圖說 / Gallery V1 實作
-
-> 狀態：✅ 已完成（news / magazine 圖片欄位與 sample 更新，2025-12-12）
-
-- 目標：
-  - news / magazine 從 legacy HTML 拆出封面圖與 gallery，填入 `featured_image` / `featured_image_caption` / `gallery_items`（caption 取 alt，缺則 null）。
-  - 更新 sample（legacy HTML、zh-tw / zh-cn JSON）展示封面 + 至少 2 張 gallery 圖，compare 可對照。
-  - 測試覆蓋 news / magazine 的圖片拆解與 meta 行為。
-
-- 驗收：
-  - [x] `news-from-legacy` / `magazine-from-legacy` 以第一張圖為封面、其餘為 gallery，caption 取 alt。
-  - [x] `npm test`、`npm run build`、`npm run check:zh-cn` 通過（觸及 zh-CN JSON）。
-  - [x] Sample 同步：`data/legacy-news|magazine/sample-001.html`、`data/anycontent/zh-tw|zh-cn/news|magazine/sample-001.json` 含封面與 gallery；compare index 保持可瀏覽。
-  - [x] notes 記錄本次變更與 RAW 連結。
-
-### T-0054 layout-and-multi-gallery-schema-design：gallery 樣式與多 gallery schema（docs-only）
-
-> 狀態：✅ 已完成（設計 schema / 規則，未實作程式，2025-12-12）
-
-- 目標：
-  - 在 `CONTENT_SCHEMA_V1.md` 預留 `default_gallery_style`、`gallery_blocks` 欄位，支援未來多 gallery 區塊與樣式覆寫。
-  - 在 `HTML_TO_MARKDOWN_RULES_V4.md` 標註 layout / multi-gallery 尚未由 extractor 產出，暫維持 `featured_image` + `gallery_items`。
-  - 在 crosscheck / notes 紀錄此設計，便於後續 T（adapter / importer / frontend）實作時參考。
-
-- 驗收：
-  - [x] `CONTENT_SCHEMA_V1.md` 增列 `default_gallery_style`、`gallery_blocks` 欄位與欄位意義。
-  - [x] `HTML_TO_MARKDOWN_RULES_V4.md` 註明 layout / multi-gallery 尚未產出，需未來 T 實作。
-  - [x] `RULES_CROSSCHECK_NOTES_V1.md`、`PROJECT_TODO.md`、`Windsurf_ChatGPT_NOTES.md` 有對應 T-0054 紀錄；本次為 docs-only，未跑測試。
-
-### T-0055 teaching-news-magazine-gallery-adapter-v2：gallery style/block 輸出與 sample 更新
-
-> 狀態：✅ 已完成（teaching/news/magazine adapter v2，2025-12-12）
-
-- 目標：
-  - teaching / news / magazine adapter 輸出 `meta.default_gallery_style`（預設：teaching=`grid-2`，news/magazine=`grid-3`），並新增 `gallery_blocks`（main_gallery 對應全部 gallery_items）。
-  - sample JSON（zh-tw / zh-cn）改為有效 UTF-8，帶 main_gallery block；compare dev page 可看到 default_gallery_style / gallery_blocks 指標。
-  - 仍保留既有 `featured_image` / `featured_image_caption` / `gallery_items` 行為。
-- 驗收：
-  - [x] 三個 adapter 皆輸出 `meta.default_gallery_style` 與 `gallery_blocks`，且未破壞既有圖片欄位。
-  - [x] teaching/news/magazine sample JSON（zh-tw / zh-cn）更新，/dev/compare 可顯示新的欄位摘要。
-  - [x] `npm test`、`npm run build`、`npm run check:zh-cn` 通過；notes 有 T-0055 小節與 RAW 連結。
-
-### T-0046 fix-instr-encoding-and-snapshot-rules：修正 INSTR 編碼與補強 snapshot 規則
-> 狀態：✅ 已完成（2025-12-12）
-- 目標：確保指定 INSTR/README/PROJECT_TODO 為 UTF-8，並在 workflow 補充 docs snapshot 使用規則。
-
-### T-0056 progress-dashboard-daily-update：每日更新進度儀表板
-
-> 狀態：✅ 已完成（2025-12-12；dev/docs-only）
-
-- 目標：
-  - 建立可手動每日更新的進度儀表板（docs/DESIGN/ctworld-progress-dashboard.html），以 tasks 陣列呈現當日完成的 T 任務與描述。
-  - 由 Codex 依 PROJECT_TODO / Windsurf_ChatGPT_NOTES 補齊最新完成度，更新 Timeline 與 checkbox。
-- 驗收：
-  - [x] 儀表板頁可顯示日期分組、完成度百分比與 checkbox 狀態。
-  - [x] 已填入近期任務（例如 T-0054、T-0055），並標記完成。
-  - [x] notes 中有 T-0056 小節與 RAW 連結；本次為 dev/docs-only。
-
-### T-0057 deploy-progress-dashboard-to-siteground：部署儀表板到 SiteGround（dev script）
-
-> 狀態：✅ 已完成（2025-12-12；dev-only）
-
-- 目標：
-  - 提供一個 SFTP 部署腳本，將 dev/progress-dashboard/ctworld-progress-dashboard.html 上傳到 SiteGround 指定路徑。
-  - 以 .env.siteground 管理站台憑證，不將密碼/金鑰寫入 repo。
-- 驗收：
-  - [x] scripts/deploy/deploy-progress-dashboard-to-siteground.js 可讀取環境變數並上傳 HTML。
-  - [x] .env.siteground.example 提供 placeholders；新增 npm script deploy:progress-dashboard。
-  - [x] notes 中有 T-0057 小節與 RAW 連結；本次為 dev/docs-only，未實際佈署。
-
-### T-0058 wordpress-gallery-importer-schema-and-mapping：WordPress content model & importer mapping（docs-only）
-
-> 狀態：✅ 已完成（2025-12-12；docs-only）
-
-- 目標：
-  - 定義 AnyContent teaching/news/magazine 與 WordPress post type / taxonomy / meta / ACF 欄位的對應（含 gallery_blocks / default_gallery_style）。
-  - 建立 `docs/DESIGN/WP_CONTENT_MODEL_V1.md`，供 importer / ACF / 後台 UI 後續實作參考。
-- 驗收：
-  - [x] 新增 content model 文檔並涵蓋三個 post_type mapping。
-  - [x] 在 CONTENT_SCHEMA_V1 補充 cross-link，方便查找 WordPress 對應文件。
-  - [x] notes 中有 T-0058 小節與 RAW 連結；本次為 docs-only，未執行測試。
-
-### T-0060 workflow-review-and-temp-files：ChatGPT review 規則與 TEMP 檔交接
-
-> 狀態：✅ 已完成（2025-12-12；workflow/docs-only）
-
-- 目標：
-  - 在 workflow 中寫清 ChatGPT review 決策與輸出規則（結論→重點註記→需要的檔案清單）。
-  - 定義 `docs/TEMP/` 暫存交接流程（路徑以 `__` 取代 `/`，review 後可清空），並忽略於 git。
-- 驗收：
-  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 更新 review 規則與 `docs/TEMP/` 流程。
-  - [x] `.gitignore` 忽略 `docs/TEMP/`；TODO/notes 登記 T-0060 完成。
-  - [x] notes 中有 T-0060 小節與 RAW 連結；本次為 docs-only，未跑測試。
-
-### T-0061 gallery-default-style-strategy-docs-only：gallery 預設樣式與 WP 內容欄位策略（docs-only）
-
-> 狀態：? 已完成（2025-12-12；docs-only）
-
-- 目標：
-  - 在 `PENDING_DECISIONS.md` 明確記錄 gallery 預設樣式 A/B/C 案（目前真相：A 案由 adapter 設置 `meta.default_gallery_style`；teaching=`grid-2`，news/mag=`grid-3`；importer 不補 fallback）。
-  - 補充 WordPress 內容欄位策略：dry-run 將 `body_markdown` 暫存於 `wp_content_html`，預期 v2 匯入前轉 HTML。
-  - 讓 schema 與 WP content model 反映上述策略並交叉連結。
-- 驗收：
-  - [x] `PENDING_DECISIONS.md` 有 gallery default style 策略與 wp_content_html/markdown 記錄。
-  - [x] `CONTENT_SCHEMA_V1.md` / `DESIGN/WP_CONTENT_MODEL_V1.md` 更新並 cross-link，描述現行策略與未來變化需另開 T。
-  - [x] notes 有 T-0061 小節與 RAW 連結；本次為 docs-only，未執行測試。
-
-### T-0062 workflow-v5.2-single-source-temp-zip-and-hash-manifest：交接包單一來源 + MANIFEST（docs-only）
-
-> 狀態：? 已完成（2025-12-12；workflow/docs-only）
-
-- 目標：
-  - 將 ChatGPT review 交接統一為 `docs/TEMP.zip` + `MANIFEST.json`，避免混用 RAW / 零散檔；`MANIFEST` 必列 source_commit + sha256。
-  - 在 workflow 寫明 Codex 回報 Gate（四要點）：完成狀態、commit hash、測試狀態、TEMP.zip 就緒（含 source_commit）。
-  - `.gitignore` 確認忽略 `docs/TEMP/` 與 `docs/TEMP.zip`。
-- 驗收：
-  - [x] workflow 更新 TEMP.zip + MANIFEST 規則，以及 Codex 最小回報集。
-  - [x] `.gitignore` 忽略 `docs/TEMP/` 與 `docs/TEMP.zip`。
-  - [x] notes 有 T-0062 小節與 RAW 連結；本次為 docs-only，未執行測試。
-
-### T-0063 temp-zip-manifest-cleanup-and-staging-folder：TEMP.zip + MANIFEST 流程強化與工具化
-
-> 狀態：? 已完成（2025-12-12；workflow/docs-only）
-
-- 目標：
-  - 明確寫死：交接只交 `docs/TEMP.zip`（內含 `MANIFEST.json`），`docs/TEMP/` 只作 staging，zip 後可清空，不得同時保留舊 TEMP 與 ZIP。
-  - `MANIFEST.json` 規格：UTF-8（無 BOM）、必含 `source_commit` / `generated_at` / `repo` / `task_id` / `files[]`（`repo_path`、`temp_path`、`sha256`、`bytes`），路徑不得出現 `docs/docs/...` 等重複。
-  - 新增 handoff 工具：`scripts/handoff/build-temp-zip.js`，以及 npm script `handoff:tempzip`，自動生成 staging + MANIFEST + ZIP 並清理 staging。
-- 驗收：
-  - [x] workflow 更新 TEMP.zip + MANIFEST 規範與 staging 清理說明，指向 npm script。
-  - [x] 新增 `scripts/handoff/build-temp-zip.js` 與 `npm run handoff:tempzip`，執行後會輸出 zip/manifest 並清空 staging。
-  - [x] notes 有 T-0063 小節與 RAW 連結；本次為 docs-only，未執行測試。
-
-### T-0064 field-coverage-sampling-audit-and-schema-gaps：樣本覆蓋度審查與缺口清單（docs-only）
-
-> 狀態：? 已完成（2025-12-12；docs-only）
-
-- 目標：
-  - 以現有 sample-001（teaching/news/magazine）進行欄位覆蓋審查，記錄缺口（日期 ROC/區間、flipbook/branch 缺料、encoding fallback、caption 策略等）。
-  - 建立 `docs/AUDITS/FIELD_COVERAGE/FIELD_COVERAGE_SAMPLING.md`（最新版本）與 `ARCHIVE/`，並提供 `URL_QUEUE.md` 供後續抽樣。
-  - 在 PENDING_DECISIONS 或 crosscheck/notes 紀錄缺口，並在 TODO 登記 T-0064 完成。
-- 驗收：
-  - [x] 新增 `FIELD_COVERAGE_SAMPLING.md`（最新）與 `ARCHIVE`，涵蓋至少 teaching/news/magazine/flipbook/branch 樣本狀態與缺口建議。
-  - [x] `URL_QUEUE.md` 提供待抽樣的 URL 填寫入口。
-  - [x] PENDING_DECISIONS 或 crosscheck 記錄編碼/日期/圖說對齊等待決策項目。
-  - [x] notes 有 T-0064 小節與 RAW 連結；本次為 docs-only，未執行測試。
-
-### T-0065 date-parsing-roc-year-and-range：news/magazine ROC 年與區間日期解析
-
-> 狀態：✅ 已完成（2025-12-12）
-
-- 目標：
-  - 支援 news/magazine 的 ROC 年、區間日期解析，保留 raw；若 end 無年份則沿用 start 年。
-  - 新增 date parsing util 並更新 tests；確保 zh-CN pipeline 檢查通過。
-  - schema/types 註記可選 `ct_event_date_range`，保留原始字串。
-- 驗收：
-  - [x] `news-from-legacy` 解析 ROC 與區間，`ct_event_date_range` 輸出 start/end/raw。
-  - [x] `magazine-from-legacy` 解析 ROC 出版日期，raw 與 ISO 同步更新。
-  - [x] `npm test` / `npm run build` / `npm run check:zh-cn` 通過；notes 有 T-0065 小節與 RAW 連結。
-
-### T-0066 crawler-encoding-fallback-and-qa-fail-list：爬蟲編碼 fallback 與 QA 失敗清單
-
-> 狀態：✅ 已完成（2025-12-13）
-
-- 目標：
-  - crawler fetch/decode 支援簡易編碼 fallback（依 charset、utf-8、big5 等）；失敗時記錄 QA。
-  - 建立 `docs/QA/CRAWL_FAILS.md`，自動覆寫紀錄 fetch/decode 失敗。
-  - decode/fetch 失敗時可觀測，不破壞既有輸出。
-- 驗收：
-  - [x] 爬蟲支援編碼 fallback，失敗寫入 QA；未破壞既有輸出。
-  - [x] `docs/QA/CRAWL_FAILS.md` 存在並會被 crawler 更新。
-  - [x] `npm test` / `npm run build` / `npm run check:zh-cn` 通過；notes 有 T-0066 小節與 RAW 連結。
-
-### T-0067 gallery-caption-extraction-and-alt-strategy：圖說 caption / alt 策略調整
-
-> 狀態：✅ 已完成（2025-12-13）
-
-- 目標：
-  - 空白 `alt` 視為 `null`，不要誤填 caption；caption 以可靠來源為先，缺乏來源時保留 `null`。
-  - teaching/news/magazine gallery 欄位持續對齊 V4 規則，避免亂生圖說。
-  - 規則文件補充空白 alt → null 的處理。
-- 驗收：
-  - [x] `htmlToMarkdown` 收集圖片時會將空白 `alt` 正規化為 `undefined` / `null`。
-  - [x] adapter 產出的 featured / gallery caption 不會出現空字串；測試涵蓋空白 alt 案例。
-  - [x] `docs/HTML_TO_MARKDOWN_RULES_V4.md` 記載空白 alt 視為 null；notes 有 T-0067 小節與 RAW 連結。
-
-### T-0068 teaching-anchor-preservation-and-structure：保留 teaching / sutra anchors
-
-> 狀態：✅ 已完成（2025-12-13）
-
-- 目標：
-  - 將所有 `<a name="...">` / `<a id="...">` 在 `body_markdown` 中保留為 `<a id="..."></a>`，即使沒有 `href`。
-  - teaching / sutra 頁面仍可使用 anchors 進行深連結，並在結果 anchors[] 列出。
-  - 規則文件（HTML_TO_MARKDOWN_RULES_V4）補充 anchor preservation。
-- 驗收：
-  - [x] `htmlToMarkdown` 對無 `href` 的 anchors 會輸出 `<a id="..."></a>`，文字內容保持。
-  - [x] 測試覆蓋 teaching anchor 案例；`anchors[]` 收錄 id/name。
-  - [x] `docs/HTML_TO_MARKDOWN_RULES_V4.md` 補充 anchor preservation；notes 有 T-0068 小節與 RAW 連結。
-
-### T-0070 magazine-flipbook-images-and-pdf-attachments-design：雜誌 flipbook/PDF/頁圖設計稿（docs-only）
-
-> 狀態：✅ 已完成（2025-12-13）
-
-- 目標：
-  - 在 schema / WP content model 中設計 `magazine_issue_attachments`：支援 flipbook、pdf、page_image_set，含 url/pages/is_visible/source/notes。
-  - 說明用途：舊站 flipbook、PDF 下載、page images 預覽；`is_visible` 控制前端是否顯示。
-- 驗收：
-  - [x] `docs/CONTENT_SCHEMA_V1.md` 新增 `magazine_issue_attachments` 欄位定義。
-  - [x] `docs/DESIGN/WP_CONTENT_MODEL_V1.md` 對應 ACF mapping（repeater attachments）。
-  - [x] notes 有 T-0070 小節與 RAW 連結；本次為 docs-only，未跑程式測試。
-
-### T-0074 remove-utf8-bom-and-add-bom-check：移除 BOM 並加入檢查工具（最高優先）
-
-> 狀態：✅ 已完成（2025-12-13）
-
-- 目標：
-  - 清除 repo 內現有 UTF-8 BOM（至少：`PROJECT_TODO` / `PENDING_DECISIONS` / `Windsurf_ChatGPT_NOTES` / `WORKFLOW_CHATGPT_GITHUB_AGENT` 等）。
-  - 新增檢查腳本與 npm 指令，避免未來再出現 BOM。
-- 驗收：
-  - [x] `npm run check:no-bom` 執行通過，repo 掃描無 BOM。
-  - [x] 新增 `scripts/quality/check-no-bom.js`、`npm run check:no-bom`。
-  - [x] notes 有 T-0074 小節與 RAW 連結；本次為 docs/tools-only，未跑其他測試。
-
-### T-0072 handoff-zip-versioned-filenames-taskid-and-docs-nobom：交接 ZIP 版本化與 docs 無 BOM（workflow + handoff tool）
-
-> 狀態：? 已完成（2025-12-12）
-
-- 目標：
-  - 手動/自動生成的交接包必須：zip 名含日期+source_commit（可含 task_id），zip 內保留 repo 路徑，MANIFEST UTF-8 無 BOM。
-  - handoff 工具支援 `--task_id`，zip 預設命名 `TEMP_<date>[_<task>]_<commit>.zip`，MANIFEST `task_id` 可為 null。
-  - docs 清點 BOM 風險並調整 workflow 交接章節；新增 REVIEW 檔案放置規則。
-- 驗收：
-  - [x] `scripts/handoff/build-temp-zip.js` 支援 task_id、zip 目錄結構與預設命名，MANIFEST 無 BOM。
-  - [x] workflow 說明 zip 命名、目錄結構、MANIFEST 欄位；`.gitignore` 忽略 `docs/TEMP/*.zip` 等。
-  - [x] 新增 `docs/REVIEWS/README.md` 說明 review 檔案命名；notes 有 T-0072 小節與 RAW 連結。
-
-### T-0057 deploy-progress-dashboard-to-siteground：部署儀表板到 SiteGround（dev script）
-
-> 狀態：✅ 已完成（2025-12-12；dev-only）
-
-- 目標：
-  - 提供一個 SFTP 部署腳本，將 dev/progress-dashboard/ctworld-progress-dashboard.html 上傳到 SiteGround 指定路徑。
-  - 以 .env.siteground 管理站台憑證，不將密碼/金鑰寫入 repo。
-- 驗收：
-  - [x] scripts/deploy/deploy-progress-dashboard-to-siteground.js 可讀取環境變數並上傳 HTML。
-  - [x] .env.siteground.example 提供 placeholders；新增 npm script deploy:progress-dashboard。
-  - [x] notes 中有 T-0057 小節與 RAW 連結；本次為 dev/docs-only，未實際佈署。
-
-### T-0059 wordpress-gallery-importer-cli-v1：AnyContent→WP 匯入 dry-run CLI
-
-> 狀態：✅ 已完成（2025-12-12；CLI dry-run）
-
-- 目標：
-  - 依 WP content model 產出 dry-run CLI，將 AnyContent JSON 轉為 WP 匯入 payload 並輸出 JSON 計畫檔（不呼叫 WP）。
-  - 保留圖片與 gallery 欄位（featured_image、gallery_items、gallery_blocks、default_gallery_style）與 meta。
-- 驗收：
-  - [x] src/wp/import/anycontent-to-wp.ts 提供轉換函式；src/wp/import/types.ts 定義 WPImportRecord。
-  - [x] 	ools/wp-import/wp-import-from-anycontent.ts 可掃描 data/anycontent，產生 dry-run 計畫檔；npm script wp:import:dry-run 可執行。
-  - [x] notes 中有 T-0059 小節與 RAW 連結；npm test、npm run build 通過。
-
+> ?????撠??嚗??餉??芯?閬?嚗?- ?格?嚗???branch/gallery/index_page ??inventory嚗chema 璅⊥?孵???
+### T-0034 unknown-content-handling-rule嚗?亙摰寞摮???> ?????撌脣???- ?格?嚗?摰甈?撠??摰寞??`body_markdown`嚗?閬?璅? unclassified flags??
+### T-0035 add-unclassified-content-flags嚗憓????甈?
+> ?????撌脣???- ?格?嚗 schema/workflow 銝剖???`meta.has_unclassified_content` ??`meta.unclassified_notes`??
+### T-0036 compare-unclassified-flag嚗?dev/compare 憿舐內?芸?憿?璅?> ?????撌脣???- ?格?嚗 compare index/?單?憿舐內 has_unclassified_content嚗?靘祟?貉??內??
+### T-0037 sync-html-to-markdown-unknown-content嚗???亙摰寞挾??> ?????撌脣???- ?格?嚗 RULES_V4 鋆??芰?批捆 fallback 畾菔嚗? schema/workflow 撠???
+### T-0038 zh-cn-health-check-cli嚗祕雿?zh-TW / zh-CN JSON ?亙熒瑼Ｘ撌亙
+> ?????撌脣???- ?格?嚗tools/convert/check-zh-cn-health.ts` + `npm run check:zh-cn`??
+### T-0039 zh-cn-health-check-in-workflow嚗?瑼Ｘ瘚?撖怠 workflow/checklist
+> ?????撌脣???- ?格?嚗 workflow / SESSION_CHECKLIST ? `npm run check:zh-cn` 閬???
+### T-0040 instr-template-files-for-chatgpt嚗NSTR 璅⊥??瑼?皜??
+> ?????撌脣???- ?格?嚗NSTR 璅⊥??workflow ???瑼?皜???citation??
+### T-0041 teaching-batch-from-crawl-pilot嚗rawl ?飛撠甈⊥??> ?????blocked嚗撩撠?摮賊? HTML嚗?- ?格?嚗?敺?3?? 蝭祕??摮?HTML 敺??脰? batch 頧???compare??
+### T-0043 workflow-safety-level-note嚗???workflow 摰蝑?
+> ?????撌脣???- ?格?嚗牧??test/build/check:zh-cn ?銵??AW ?璇辣?祟?貉?瘙?
+### T-0044 cleanup-project_todo-header-and-structure嚗??PROJECT_TODO 瑼??瑽?> ?????撌脣???- ?格?嚗????凋?蝣潦?挾?賣撘?雿輻???朣?notes??
+### T-0045 magazine-meta-from-legacy-v1嚗?隤??亥??箇??交? meta ?? v1
+
+> ?????撌脣???magazine-from-legacy ?啣? issue / publish date ??嚗?025-12-12嚗?
+- ?格?嚗?  - ?券?隤?adapter 銝哨?敺?legacy HTML 閫???????? AnyContent magazine meta??  - 蝣箔? `CONTENT_SCHEMA_V1`?ypeScript ???sample JSON ?券?甈?銝?朣?- 撽嚗?  - [x] `src/adapters/magazine-from-legacy.ts` ?瑕? issue/date 閫????撠?頛胯?  - [x] `tests/adapters/magazine-from-legacy.spec.ts` ?啣? issue/date 皜祈岫銝阡? `npm test`??  - [x] `npm run build` ????
+### T-0049 html-to-md-gap-review嚗TML?arkdown 閬? vs 撖虫??賢榆?日?
+
+> ?????撌脣????渡??賢榆蝑???RULES_CROSSCHECK_NOTES_V1嚗?025-12-12嚗?
+- ?格?嚗?  - ?日? `HTML_TO_MARKDOWN_RULES_V4.md` ?祕雿?皜祈岫?榆?堆??神蝑?嚗??寧?撘Ⅳ??  - ??`RULES_CROSSCHECK_NOTES_V1.md` 璇?嚗? 撌脣?朣?儭?敺?????芯? T 撱箄降??- 撽嚗?  - [x] RULES_CROSSCHECK_NOTES_V1.md ?啣? HTML?arkdown ?賢榆撠???  - [x] ?芣??src/tools/tests/data嚗? docs??  - [x] notes 閮??祆活隞餃???
+### T-0050 html-image-gallery-rules-v1-design嚗TML ?? / ?牧 / Gallery 閬? V1 閮剛?嚗ocs-only嚗?
+> ?????撌脣?????閬? V1 ????2025-12-12嚗?
+- ?格?嚗?  - ??`HTML_TO_MARKDOWN_RULES_V4.md` 鋆???/?牧/gallery 撠?嚗?蝷箏歇撖虫? vs ?芸祕雿?  - ??`CONTENT_SCHEMA_V1.md` 鋆? `featured_image` / `featured_image_caption` / `gallery_items` 甈?隤芣?????閮颯?  - ??`RULES_CROSSCHECK_NOTES_V1.md` ?湔???賊??賢榆?靘?T 撱箄降??- 撽嚗?  - [x] V4 ?辣??璆???/?牧/gallery V1 銵嚗蒂璅內撖虫????  - [x] Schema V1 鋆???甈?摰儔??蝪∟??牧??  - [x] Crosscheck 蝑??湔??蝻箏??蝥?T 撱箄降嚗?孵?蝔?蝣潦?
+### T-0051 teaching-image-gallery-impl-v1嚗eaching ?? / ?牧 / Gallery V1 撖虫?
+
+> ?????撌脣????飛???圾??sample ?湔嚗?025-12-12嚗?
+- ?格?嚗?  - teaching 敺?legacy HTML ?撠?? gallery嚗‵??`featured_image` / `featured_image_caption` / `gallery_items`??  - ??????alt 靽?嚗aption 隞?alt ?箔蜓嚗撩撠???null嚗?  - ?飛 sample嚗egacy HTML?h-tw / zh-cn JSON??dev/compare index嚗?甇亙?蝷箏???雿?靘踵撽??
+- 撽嚗?  - [x] `teaching-from-legacy` 隞亦洵銝撘萄??箏??ｇ??園???gallery嚗aption ? alt嚗??null嚗?  - [x] `npm test`?npm run build` ??嚗閫詨? zh-CN JSON嚗漲?瑁? `npm run check:zh-cn`??  - [x] `data/legacy-teaching/sample-001.html`?data/anycontent/zh-tw|zh-cn/teaching/sample-001.json`?data/compare/index.json` ?郊?湔嚗??怠??Ｚ? gallery ????  - [x] notes 閮??祆活霈??RAW ?????
+### T-0052 workflow-instr-for-all-tasks嚗???T 隞餃?敹??? INSTR嚗orkflow 閬?嚗?
+> ?????撌脣???workflow / INSTR-TEMPLATE / TODO / notes 撌脫?堆?2025-12-12嚗?
+- ?格?嚗?  - ??workflow 撖急?????INSTR 銝?撌乓?瘥? T 隞餃??質???`docs/INSTR/INSTR-T-xxxx-<slug>.md`??  - ?湔 INSTR-TEMPLATE嚗撥隤輯???閮曹耨?寞?獢?頝葫閰佗?docs-only ?航酉閮頝?test/build嚗???citation??  - ??TODO / notes ?餉??祈????嫣噶敺??仿??
+- 撽嚗?  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` ?啣?????T 隞餃??撠? INSTR .md????  - [x] `docs/INSTR/INSTR-TEMPLATE.md` ??銝膩閬???docs-only 皜祈岫閮餉???  - [x] `docs/PROJECT_TODO.md` ?啣?銝行?閮???T-0052嚗otes ????蝭??RAW ?????
+### T-0053 news-magazine-image-gallery-impl-v1嚗ews / magazine ?? / ?牧 / Gallery V1 撖虫?
+
+> ?????撌脣???news / magazine ??甈???sample ?湔嚗?025-12-12嚗?
+- ?格?嚗?  - news / magazine 敺?legacy HTML ?撠?? gallery嚗‵??`featured_image` / `featured_image_caption` / `gallery_items`嚗aption ??alt嚗撩??null嚗?  - ?湔 sample嚗egacy HTML?h-tw / zh-cn JSON嚗?蝷箏???+ ?喳? 2 撘?gallery ??compare ?臬??扼?  - 皜祈岫閬? news / magazine ????閫?? meta 銵??
+- 撽嚗?  - [x] `news-from-legacy` / `magazine-from-legacy` 隞亦洵銝撘萄??箏??Ｕ擗 gallery嚗aption ??alt??  - [x] `npm test`?npm run build`?npm run check:zh-cn` ??嚗孛??zh-CN JSON嚗?  - [x] Sample ?郊嚗data/legacy-news|magazine/sample-001.html`?data/anycontent/zh-tw|zh-cn/news|magazine/sample-001.json` ?怠??Ｚ? gallery嚗ompare index 靽??舐汗??  - [x] notes 閮??祆活霈??RAW ?????
+### T-0054 layout-and-multi-gallery-schema-design嚗allery 璅???? gallery schema嚗ocs-only嚗?
+> ?????撌脣???閮剛? schema / 閬?嚗撖虫?蝔?嚗?025-12-12嚗?
+- ?格?嚗?  - ??`CONTENT_SCHEMA_V1.md` ?? `default_gallery_style`?gallery_blocks` 甈?嚗?湔靘? gallery ?憛?璅??閬神??  - ??`HTML_TO_MARKDOWN_RULES_V4.md` 璅酉 layout / multi-gallery 撠??extractor ?Ｗ嚗蝬剜? `featured_image` + `gallery_items`??  - ??crosscheck / notes 蝝?迨閮剛?嚗噶?澆?蝥?T嚗dapter / importer / frontend嚗祕雿???
+- 撽嚗?  - [x] `CONTENT_SCHEMA_V1.md` 憓? `default_gallery_style`?gallery_blocks` 甈???雿?蝢押?  - [x] `HTML_TO_MARKDOWN_RULES_V4.md` 閮餅? layout / multi-gallery 撠?Ｗ嚗??芯? T 撖虫???  - [x] `RULES_CROSSCHECK_NOTES_V1.md`?PROJECT_TODO.md`?Windsurf_ChatGPT_NOTES.md` ????T-0054 蝝???祆活??docs-only嚗頝葫閰艾?
+### T-0055 teaching-news-magazine-gallery-adapter-v2嚗allery style/block 頛詨??sample ?湔
+
+> ?????撌脣???teaching/news/magazine adapter v2嚗?025-12-12嚗?
+- ?格?嚗?  - teaching / news / magazine adapter 頛詨 `meta.default_gallery_style`嚗?閮哨?teaching=`grid-2`嚗ews/magazine=`grid-3`嚗?銝行憓?`gallery_blocks`嚗ain_gallery 撠??券 gallery_items嚗?  - sample JSON嚗h-tw / zh-cn嚗?箸???UTF-8嚗葆 main_gallery block嚗ompare dev page ?舐???default_gallery_style / gallery_blocks ????  - 隞????`featured_image` / `featured_image_caption` / `gallery_items` 銵??- 撽嚗?  - [x] 銝?adapter ?撓??`meta.default_gallery_style` ??`gallery_blocks`嚗??芰憯????雿?  - [x] teaching/news/magazine sample JSON嚗h-tw / zh-cn嚗?堆?/dev/compare ?舫＊蝷箸??雿?閬?  - [x] `npm test`?npm run build`?npm run check:zh-cn` ??嚗otes ??T-0055 撠???RAW ?????
+### T-0046 fix-instr-encoding-and-snapshot-rules嚗耨甇?INSTR 蝺函Ⅳ??撘?snapshot 閬?
+> ?????撌脣???2025-12-12嚗?- ?格?嚗Ⅱ靽?摰?INSTR/README/PROJECT_TODO ??UTF-8嚗蒂??workflow 鋆? docs snapshot 雿輻閬???
+### T-0056 progress-dashboard-daily-update嚗??交?圈脣漲?銵冽
+
+> ?????撌脣???2025-12-12嚗ev/docs-only嚗?
+- ?格?嚗?  - 撱箇??舀????交?啁??脣漲?銵冽嚗ocs/DESIGN/ctworld-progress-dashboard.html嚗?隞?tasks ?????嗆摰???T 隞餃???餈啜?  - ??Codex 靘?PROJECT_TODO / Windsurf_ChatGPT_NOTES 鋆???啣??漲嚗??Timeline ??checkbox??- 撽嚗?  - [x] ?銵冽?憿舐內?交??????漲?曉?瘥? checkbox ???  - [x] 撌脣‵?亥??遙??靘? T-0054?-0055嚗?銝行?閮???  - [x] notes 銝剜? T-0056 撠???RAW ???嚗甈∠ dev/docs-only??
+### T-0057 deploy-progress-dashboard-to-siteground嚗蝵脣?銵冽??SiteGround嚗ev script嚗?
+> ?????撌脣???2025-12-12嚗ev-only嚗?
+- ?格?嚗?  - ??銝??SFTP ?函蔡?單嚗? dev/progress-dashboard/ctworld-progress-dashboard.html 銝??SiteGround ??頝臬???  - 隞?.env.siteground 蝞∠?蝡??嚗?撠?蝣??撖怠 repo??- 撽嚗?  - [x] scripts/deploy/deploy-progress-dashboard-to-siteground.js ?航??憓??訾蒂銝 HTML??  - [x] .env.siteground.example ?? placeholders嚗憓?npm script deploy:progress-dashboard??  - [x] notes 銝剜? T-0057 撠???RAW ???嚗甈∠ dev/docs-only嚗撖阡?雿蔡??
+### T-0058 wordpress-gallery-importer-schema-and-mapping嚗ordPress content model & importer mapping嚗ocs-only嚗?
+> ?????撌脣???2025-12-12嚗ocs-only嚗?
+- ?格?嚗?  - 摰儔 AnyContent teaching/news/magazine ??WordPress post type / taxonomy / meta / ACF 甈???????gallery_blocks / default_gallery_style嚗?  - 撱箇? `docs/DESIGN/WP_CONTENT_MODEL_V1.md`嚗? importer / ACF / 敺 UI 敺?撖虫???- 撽嚗?  - [x] ?啣? content model ??銝行項????post_type mapping??  - [x] ??CONTENT_SCHEMA_V1 鋆? cross-link嚗靘踵??WordPress 撠??辣??  - [x] notes 銝剜? T-0058 撠???RAW ???嚗甈∠ docs-only嚗?瑁?皜祈岫??
+### T-0060 workflow-review-and-temp-files嚗hatGPT review 閬???TEMP 瑼漱??
+> ?????撌脣???2025-12-12嚗orkflow/docs-only嚗?
+- ?格?嚗?  - ??workflow 銝剖神皜?ChatGPT review 瘙箇??撓?箄???蝯???暺酉閮??閬?瑼?皜嚗?  - 摰儔 `docs/TEMP/` ?怠?鈭斗瘚?嚗楝敺誑 `__` ?誨 `/`嚗eview 敺皜征嚗?銝血蕭?交 git??- 撽嚗?  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` ?湔 review 閬???`docs/TEMP/` 瘚???  - [x] `.gitignore` 敹賜 `docs/TEMP/`嚗ODO/notes ?餉? T-0060 摰???  - [x] notes 銝剜? T-0060 撠???RAW ???嚗甈∠ docs-only嚗頝葫閰艾?
+### T-0061 gallery-default-style-strategy-docs-only嚗allery ?身璅????WP ?批捆甈?蝑嚗ocs-only嚗?
+> ???? 撌脣???2025-12-12嚗ocs-only嚗?
+- ?格?嚗?  - ??`PENDING_DECISIONS.md` ?Ⅱ閮? gallery ?身璅?? A/B/C 獢??桀??嚗 獢 adapter 閮剔蔭 `meta.default_gallery_style`嚗eaching=`grid-2`嚗ews/mag=`grid-3`嚗mporter 銝? fallback嚗?  - 鋆? WordPress ?批捆甈?蝑嚗ry-run 撠?`body_markdown` ?怠???`wp_content_html`嚗???v2 ?臬?? HTML??  - 霈?schema ??WP content model ??銝膩蝑銝虫漱?????- 撽嚗?  - [x] `PENDING_DECISIONS.md` ??gallery default style 蝑??wp_content_html/markdown 閮???  - [x] `CONTENT_SCHEMA_V1.md` / `DESIGN/WP_CONTENT_MODEL_V1.md` ?湔銝?cross-link嚗?餈啁銵??亥??芯?霈???阡? T??  - [x] notes ??T-0061 撠???RAW ???嚗甈∠ docs-only嚗?瑁?皜祈岫??
+### T-0062 workflow-v5.2-single-source-temp-zip-and-hash-manifest嚗漱?亙??桐?靘? + MANIFEST嚗ocs-only嚗?
+> ???? 撌脣???2025-12-12嚗orkflow/docs-only嚗?
+- ?格?嚗?  - 撠?ChatGPT review 鈭斗蝯曹???`docs/TEMP.zip` + `MANIFEST.json`嚗?毽??RAW / ?嗆瑼?`MANIFEST` 敹? source_commit + sha256??  - ??workflow 撖急? Codex ? Gate嚗?閬?嚗?摰???ommit hash?葫閰衣??EMP.zip 撠梁?嚗 source_commit嚗?  - `.gitignore` 蝣箄?敹賜 `docs/TEMP/` ??`docs/TEMP.zip`??- 撽嚗?  - [x] workflow ?湔 TEMP.zip + MANIFEST 閬?嚗誑??Codex ?撠??梢???  - [x] `.gitignore` 敹賜 `docs/TEMP/` ??`docs/TEMP.zip`??  - [x] notes ??T-0062 撠???RAW ???嚗甈∠ docs-only嚗?瑁?皜祈岫??
+### T-0063 temp-zip-manifest-cleanup-and-staging-folder嚗EMP.zip + MANIFEST 瘚?撘瑕??極?瑕?
+
+> ???? 撌脣???2025-12-12嚗orkflow/docs-only嚗?
+- ?格?嚗?  - ?Ⅱ撖急香嚗漱?亙鈭?`docs/TEMP.zip`嚗??`MANIFEST.json`嚗?`docs/TEMP/` ?芯? staging嚗ip 敺皜征嚗?敺????? TEMP ??ZIP??  - `MANIFEST.json` 閬嚗TF-8嚗 BOM嚗???`source_commit` / `generated_at` / `repo` / `task_id` / `files[]`嚗repo_path`?temp_path`?sha256`?bytes`嚗?頝臬?銝??箇 `docs/docs/...` 蝑?銴?  - ?啣? handoff 撌亙嚗scripts/handoff/build-temp-zip.js`嚗誑??npm script `handoff:tempzip`嚗????staging + MANIFEST + ZIP 銝行???staging??- 撽嚗?  - [x] workflow ?湔 TEMP.zip + MANIFEST 閬???staging 皜?隤芣?嚗???npm script??  - [x] ?啣? `scripts/handoff/build-temp-zip.js` ??`npm run handoff:tempzip`嚗銵??撓??zip/manifest 銝行?蝛?staging??  - [x] notes ??T-0063 撠???RAW ???嚗甈∠ docs-only嚗?瑁?皜祈岫??
+### T-0064 field-coverage-sampling-audit-and-schema-gaps嚗見?祈??漲撖拇?撩????殷?docs-only嚗?
+> ???? 撌脣???2025-12-12嚗ocs-only嚗?
+- ?格?嚗?  - 隞亦??sample-001嚗eaching/news/magazine嚗脰?甈?閬?撖拇嚗??撩????交? ROC/??lipbook/branch 蝻箸??ncoding fallback?aption 蝑蝑???  - 撱箇? `docs/AUDITS/FIELD_COVERAGE/FIELD_COVERAGE_SAMPLING.md`嚗??啁??穿???`ARCHIVE/`嚗蒂?? `URL_QUEUE.md` 靘?蝥璅??  - ??PENDING_DECISIONS ??crosscheck/notes 蝝?撩???銝血 TODO ?餉? T-0064 摰???- 撽嚗?  - [x] ?啣? `FIELD_COVERAGE_SAMPLING.md`嚗??堆???`ARCHIVE`嚗項?撠?teaching/news/magazine/flipbook/branch 璅????蝻箏撱箄降??  - [x] `URL_QUEUE.md` ??敺璅?? URL 憛怠神?亙??  - [x] PENDING_DECISIONS ??crosscheck 閮?蝺函Ⅳ/?交?/?牧撠?蝑?瘙箇????  - [x] notes ??T-0064 撠???RAW ???嚗甈∠ docs-only嚗?瑁?皜祈岫??
+### T-0065 date-parsing-roc-year-and-range嚗ews/magazine ROC 撟渲????圾??
+> ?????撌脣???2025-12-12嚗?
+- ?格?嚗?  - ?舀 news/magazine ??ROC 撟氬???圾??靽? raw嚗 end ?∪僑隞賢?瘝輻 start 撟氬?  - ?啣? date parsing util 銝行??tests嚗Ⅱ靽?zh-CN pipeline 瑼Ｘ????  - schema/types 閮餉??舫 `ct_event_date_range`嚗???憪?銝脯?- 撽嚗?  - [x] `news-from-legacy` 閫?? ROC ????`ct_event_date_range` 頛詨 start/end/raw??  - [x] `magazine-from-legacy` 閫?? ROC ?箇??交?嚗aw ??ISO ?郊?湔??  - [x] `npm test` / `npm run build` / `npm run check:zh-cn` ??嚗otes ??T-0065 撠???RAW ?????
+### T-0066 crawler-encoding-fallback-and-qa-fail-list嚗?脩楊蝣?fallback ??QA 憭望?皜
+
+> ?????撌脣???2025-12-13嚗?
+- ?格?嚗?  - crawler fetch/decode ?舀蝪⊥?蝺函Ⅳ fallback嚗? charset?tf-8?ig5 蝑?嚗仃??閮? QA??  - 撱箇? `docs/QA/CRAWL_FAILS.md`嚗??撖怎???fetch/decode 憭望???  - decode/fetch 憭望??閫皜穿?銝憯?撓?箝?- 撽嚗?  - [x] ?祈?舀蝺函Ⅳ fallback嚗仃?神??QA嚗?游??Ｘ?頛詨??  - [x] `docs/QA/CRAWL_FAILS.md` 摮銝行?鋡?crawler ?湔??  - [x] `npm test` / `npm run build` / `npm run check:zh-cn` ??嚗otes ??T-0066 撠???RAW ?????
+### T-0067 gallery-caption-extraction-and-alt-strategy嚗?隤?caption / alt 蝑隤踵
+
+> ?????撌脣???2025-12-13嚗?
+- ?格?嚗?  - 蝛箇 `alt` 閬 `null`嚗?閬炊憛?caption嚗aption 隞亙??皞??蝻箔?靘?????`null`??  - teaching/news/magazine gallery 甈???撠? V4 閬?嚗????隤芥?  - 閬??辣鋆?蝛箇 alt ??null ????- 撽嚗?  - [x] `htmlToMarkdown` ?園?????撠征??`alt` 甇??? `undefined` / `null`??  - [x] adapter ?Ｗ??featured / gallery caption 銝??箇蝛箏?銝莎?皜祈岫瘨菔?蝛箇 alt 獢???  - [x] `docs/HTML_TO_MARKDOWN_RULES_V4.md` 閮?蝛箇 alt 閬 null嚗otes ??T-0067 撠???RAW ?????
+### T-0068 teaching-anchor-preservation-and-structure嚗???teaching / sutra anchors
+
+> ?????撌脣???2025-12-13嚗?
+- ?格?嚗?  - 撠???`<a name="...">` / `<a id="...">` ??`body_markdown` 銝凋?? `<a id="..."></a>`嚗雿踵???`href`??  - teaching / sutra ?隞雿輻 anchors ?脰?瘛梢??嚗蒂?函???anchors[] ???  - 閬??辣嚗TML_TO_MARKDOWN_RULES_V4嚗???anchor preservation??- 撽嚗?  - [x] `htmlToMarkdown` 撠 `href` ??anchors ?撓??`<a id="..."></a>`嚗?摮摰嫣???  - [x] 皜祈岫閬? teaching anchor 獢?嚗anchors[]` ?園? id/name??  - [x] `docs/HTML_TO_MARKDOWN_RULES_V4.md` 鋆? anchor preservation嚗otes ??T-0068 撠???RAW ?????
+### T-0070 magazine-flipbook-images-and-pdf-attachments-design嚗?隤?flipbook/PDF/??閮剛?蝔選?docs-only嚗?
+> ?????撌脣???2025-12-13嚗?
+- ?格?嚗?  - ??schema / WP content model 銝剛身閮?`magazine_issue_attachments`嚗??flipbook?df?age_image_set嚗 url/pages/is_visible/source/notes??  - 隤芣??券??? flipbook?DF 銝??age images ?汗嚗is_visible` ?批?垢?臬憿舐內??- 撽嚗?  - [x] `docs/CONTENT_SCHEMA_V1.md` ?啣? `magazine_issue_attachments` 甈?摰儔??  - [x] `docs/DESIGN/WP_CONTENT_MODEL_V1.md` 撠? ACF mapping嚗epeater attachments嚗?  - [x] notes ??T-0070 撠???RAW ???嚗甈∠ docs-only嚗頝?撘葫閰艾?
+### T-0074 remove-utf8-bom-and-add-bom-check嚗宏??BOM 銝血??交炎?亙極?瘀??擃??
+
+> ?????撌脣???2025-12-13嚗?
+- ?格?嚗?  - 皜 repo ?抒??UTF-8 BOM嚗撠?`PROJECT_TODO` / `PENDING_DECISIONS` / `Windsurf_ChatGPT_NOTES` / `WORKFLOW_CHATGPT_GITHUB_AGENT` 蝑???  - ?啣?瑼Ｘ?單??npm ?誘嚗?靘??箇 BOM??- 撽嚗?  - [x] `npm run check:no-bom` ?瑁???嚗epo ????BOM??  - [x] ?啣? `scripts/quality/check-no-bom.js`?npm run check:no-bom`??  - [x] notes ??T-0074 撠???RAW ???嚗甈∠ docs/tools-only嚗頝隞葫閰艾?
+### T-0072 handoff-zip-versioned-filenames-taskid-and-docs-nobom嚗漱??ZIP ??? docs ??BOM嚗orkflow + handoff tool嚗?
+> ???? 撌脣???2025-12-12嚗?
+- ?格?嚗?  - ??/?芸????漱?亙?敹?嚗ip ??交?+source_commit嚗??task_id嚗?zip ?找???repo 頝臬?嚗ANIFEST UTF-8 ??BOM??  - handoff 撌亙?舀 `--task_id`嚗ip ?身?賢? `TEMP_<date>[_<task>]_<commit>.zip`嚗ANIFEST `task_id` ?舐 null??  - docs 皜? BOM 憸券銝西矽??workflow 鈭斗蝡?嚗憓?REVIEW 瑼??曄蔭閬???- 撽嚗?  - [x] `scripts/handoff/build-temp-zip.js` ?舀 task_id?ip ?桅?蝯???閮剖??MANIFEST ??BOM??  - [x] workflow 隤芣? zip ?賢????瑽ANIFEST 甈?嚗.gitignore` 敹賜 `docs/TEMP/*.zip` 蝑?  - [x] ?啣? `docs/REVIEWS/README.md` 隤芣? review 瑼??賢?嚗otes ??T-0072 撠???RAW ?????
+### T-0057 deploy-progress-dashboard-to-siteground嚗蝵脣?銵冽??SiteGround嚗ev script嚗?
+> ?????撌脣???2025-12-12嚗ev-only嚗?
+- ?格?嚗?  - ??銝??SFTP ?函蔡?單嚗? dev/progress-dashboard/ctworld-progress-dashboard.html 銝??SiteGround ??頝臬???  - 隞?.env.siteground 蝞∠?蝡??嚗?撠?蝣??撖怠 repo??- 撽嚗?  - [x] scripts/deploy/deploy-progress-dashboard-to-siteground.js ?航??憓??訾蒂銝 HTML??  - [x] .env.siteground.example ?? placeholders嚗憓?npm script deploy:progress-dashboard??  - [x] notes 銝剜? T-0057 撠???RAW ???嚗甈∠ dev/docs-only嚗撖阡?雿蔡??
+### T-0059 wordpress-gallery-importer-cli-v1嚗nyContent?P ?臬 dry-run CLI
+
+> ?????撌脣???2025-12-12嚗LI dry-run嚗?
+- ?格?嚗?  - 靘?WP content model ?Ｗ dry-run CLI嚗? AnyContent JSON 頧 WP ?臬 payload 銝西撓??JSON 閮瑼?銝??WP嚗?  - 靽?????gallery 甈?嚗eatured_image?allery_items?allery_blocks?efault_gallery_style嚗? meta??- 撽嚗?  - [x] src/wp/import/anycontent-to-wp.ts ??頧??賢?嚗rc/wp/import/types.ts 摰儔 WPImportRecord??  - [x] 	ools/wp-import/wp-import-from-anycontent.ts ?舀???data/anycontent嚗??dry-run 閮瑼?npm script wp:import:dry-run ?臬銵?  - [x] notes 銝剜? T-0059 撠???RAW ???嚗pm test?pm run build ????
 ---
 
 ## Phase 2 Tasks (P2-xxxx)
 
-> Phase 2 任務使用 P2-xxxx 編號，branch 格式為 `phase2/<P2-id>-<slug>`。
-
+> Phase 2 隞餃?雿輻 P2-xxxx 蝺刻?嚗ranch ?澆???`phase2/<P2-id>-<slug>`??
 ### P2-0006 mojibake-scope-decision-memos
 
-> 狀態：✅ 已完成（2025-12-21）
+> ?????撌脣???2025-12-21嚗?
+- ?格?嚗?  - 霈?`check:mojibake` ?身?芣炎??tracked/staged 瑼?嚗ntracked 瑼?銝??commit
+  - 撱箇?瘙箇??辣甇豢?閬?嚗ECISION memo template + INFO folder README嚗?- 撽嚗?  - [x] `tools/qa/check-mojibake.mjs` ?舀 tracked/staged/all 璅∪?
+  - [x] `package.json` ?啣? `check:mojibake:staged` / `check:mojibake:all` scripts
+  - [x] `.husky/pre-commit` 雿輻 `check:mojibake:staged`
+  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` ?啣? 禮 9 隤芣? mojibake scope
+  - [x] `docs/QA/DEBUG_V3/REPORTS/INFO/README.md` 隤芣? INFO 鞈?憭曄??  - [x] `docs/QA/DEBUG_V3/REPORTS/_TEMPLATE_DECISION_MEMO.md` ??瘙箇? memo 璅⊥
+  - [x] 銝炎??+ test + build ??
 
-- 目標：
-  - 讓 `check:mojibake` 預設只檢查 tracked/staged 檔案，untracked 檔案不阻擋 commit
-  - 建立決策文件歸檔規範（DECISION memo template + INFO folder README）
-- 驗收：
-  - [x] `tools/qa/check-mojibake.mjs` 支援 tracked/staged/all 模式
-  - [x] `package.json` 新增 `check:mojibake:staged` / `check:mojibake:all` scripts
-  - [x] `.husky/pre-commit` 使用 `check:mojibake:staged`
-  - [x] `docs/WORKFLOW_CHATGPT_GITHUB_AGENT.md` 新增 § 9 說明 mojibake scope
-  - [x] `docs/QA/DEBUG_V3/REPORTS/INFO/README.md` 說明 INFO 資料夾用途
-  - [x] `docs/QA/DEBUG_V3/REPORTS/_TEMPLATE_DECISION_MEMO.md` 提供決策 memo 模板
-  - [x] 三檢查 + test + build 通過
+### P2-0007 phase2-rulebook-and-decision-memo-sop
+> 狀態：? 已完成（統一 Phase 2 rulebook / decision memo SOP，2025-12-21）
+- 目標：將 AI routing / budget / handoff / decision-memo 報告路徑集中到單一 Playbook，並標記舊 AI router INSTR 為 Deprecated。
+- 驗收：docs/WORKFLOW/PHASE2/AI_PLAYBOOK_PHASE2.md 為唯一入口；workflow 有索引連結；P2-0007 INSTR 完成，舊 INSTR-P2-0007 標記 replaced-by；notes 已記錄。
+
+
