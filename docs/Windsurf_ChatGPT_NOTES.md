@@ -740,3 +740,13 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
 - commit: e4b1c42
 - handoff: docs/TEMP/TEMP_20251221_P2-0007_9c89cfc.zip
 
+## 2025-12-21 任務：PHASE2_CONTEXT handoff + DOWNLOAD_INBOX samples
+- Branch: phase2/PHASE2-context-pack（source_commit=d7e5a76）
+- 產出：
+  - PHASE2_CONTEXT：docs/TEMP/TEMP_20251221_PHASE2_CONTEXT_d7e5a76.zip（MANIFEST.source_commit=d7e5a76）
+  - DOWNLOAD_INBOX_SAMPLES：docs/HANDOFF/SAMPLES/DOWNLOAD_INBOX_SAMPLES_20251221.zip（RAW：ADVICE/INFO/DEBUG 報告 + ZIP 範例，檔名未改）
+- Workflow：加入 closeout 必產兩包 ZIP 的規則（Phase 2 區塊）；PROJECT_TODO 增加 closeout 通用條目。
+- 檢查：check:no-bom / check:utf8 / check:mojibake:staged / npm test / npm run build
+- commit: <待填>
+
+- 備註：main 尚未有 INSTR-P2-0008，context pack 以現有檔案為準。

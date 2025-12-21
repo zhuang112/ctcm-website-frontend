@@ -504,5 +504,12 @@ ChatGPT 隞?ZIP ?抒??批捆?箸?嚗????? ZIP??
 ## Phase 2 Rulebook 入口（P2-0007）
 - Phase 2 的 AI 協作 / routing / budget / decision memo / handoff 單一真相：docs/WORKFLOW/PHASE2/AI_PLAYBOOK_PHASE2.md。
 - WORKFLOW 其他條目如與 Playbook 衝突，以 Playbook 為準（但仍需在 TODO / NOTES 紀錄對應任務）。
+### Phase 2 closeout：每次對話收尾必產兩包 ZIP（加上標準 handoff）
+- 標準 handoff：`npm run handoff:tempzip -- --task_id <TASK_ID> --source_commit <HEAD>`，MANIFEST.source_commit 必等於 HEAD。
+- 額外必產兩包（保留原始路徑結構，存放於 docs/）：
+  1) `TEMP_<YYYYMMDD>_PHASE2_CONTEXT_<HEAD7>.zip`（source_commit=HEAD，含 package(.lock) / .gitattributes / .editorconfig / .husky/** / tools/qa/** / tools/ai-review-dryrun/** / WORKFLOW+Playbook+INSTR 模板 / PROJECT_TODO / Windsurf_ChatGPT_NOTES / REPORTS 結構與模板）。
+  2) `HANDOFF/SAMPLES/DOWNLOAD_INBOX_SAMPLES_<YYYYMMDD>.zip`（RAW/ 資料夾；至少含 1 個 ADVICE、1 個 INFO、1 個 debug/review 報告、1 個常見 ZIP/patch 範例；檔名不更動）。
+- 兩包生成後，把路徑與 source_commit 寫入 notes（Windsurf_ChatGPT_NOTES.md），確保後續對話可直接下載。
+
 
 

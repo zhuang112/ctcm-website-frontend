@@ -4,6 +4,7 @@
 > - ??祕雿?皜祈岫??誑 GitHub/main ?箸??? 
 > - 瘥? T ?底蝝圈?蝔? RAW ???隢???`docs/Windsurf_ChatGPT_NOTES.md`?? 
 > - ?唬遙??靘?`docs/INSTR/INSTR-TEMPLATE.md` ?啣神 INSTR嚗???ChatGPT ?Ｙ?隞餃??批捆??
+- 每次對話 closeout 必做：標準 handoff（source_commit=HEAD）+ 兩包 ZIP：TEMP_<date>_PHASE2_CONTEXT_<HEAD7>.zip（規則/工具/模板），以及 HANDOFF/SAMPLES/DOWNLOAD_INBOX_SAMPLES_<date>.zip（RAW/樣本，含 ADVICE/INFO/REPORT/ZIP 範例）。
 ---
 
 ## TODO ?”嚗?憪???
