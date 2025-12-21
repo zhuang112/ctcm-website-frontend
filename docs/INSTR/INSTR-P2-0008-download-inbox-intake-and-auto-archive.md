@@ -13,20 +13,20 @@
 ---
 
 ## 1. Definition of Done (DoD)
-- [ ] 新增目錄：`docs/QA/INCOMING_DOWNLOADS/`（含 `_INBOX/_QUARANTINE/_PROCESSED/_LOGS`）與 README
-- [ ] 新增工具：`tools/qa/intake-downloads.mjs`
-- [ ] `package.json` 新增 script：`qa:intake-downloads`
-- [ ] Workflow 文件新增 Step 0（Download Intake）
-- [ ] 工具至少支援：`.zip .md .docx .pdf .png .jpg .json`
-- [ ] 工具有 log：JSONL + Markdown 摘要
-- [ ] 無法分類 → quarantine（而不是猜）
-- [ ] 跑過：
-  - [ ] `npm run check:no-bom`
-  - [ ] `npm run check:utf8`
-  - [ ] `npm run check:mojibake`（staged mode）
-  - [ ] `npm test`
-  - [ ] `npm run build`
-- [ ] 產出 handoff zip：`docs/TEMP/TEMP_<YYYYMMDD>_P2-0008_<HEAD7>.zip`（含 MANIFEST）
+- [x] 新增目錄：`docs/QA/INCOMING_DOWNLOADS/`（含 `_INBOX/_QUARANTINE/_PROCESSED/_LOGS`）與 README
+- [x] 新增工具：`tools/qa/intake-downloads.mjs`
+- [x] `package.json` 新增 script：`qa:intake-downloads`
+- [x] Workflow 文件新增 Step 0（Download Intake）
+- [x] 工具至少支援：`.zip .md .docx .pdf .png .jpg .json`
+- [x] 工具有 log：JSONL + Markdown 摘要
+- [x] 無法分類 → quarantine（而不是猜）
+- [x] 跑過：
+  - [x] `npm run check:no-bom`
+  - [x] `npm run check:utf8`
+  - [x] `npm run check:mojibake`（staged mode）
+  - [x] `npm test`
+  - [x] `npm run build`
+- [x] 產出 handoff zip：`docs/TEMP/TEMP_<YYYYMMDD>_P2-0008_<HEAD7>.zip`（含 MANIFEST）
 
 ---
 
