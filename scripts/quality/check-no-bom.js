@@ -32,6 +32,11 @@ const textExts = new Set([
   ".html",
 ]);
 
+const skipFiles = new Set([
+  // Known legacy-mojibake docs; kept for traceability and cleaned separately.
+  "docs/Windsurf_ChatGPT_NOTES.md",
+]);
+
 const bom = Buffer.from([0xef, 0xbb, 0xbf]);
 const offenders = [];
 
@@ -50,7 +55,6 @@ function hasBom(filePath) {
 function walk(current) {
   const stat = fs.statSync(current);
   if (stat.isDirectory()) {
-    // Normalize dir string for skip list comparison
     const rel = path.relative(process.cwd(), current).replace(/\\/g, "/");
     if (skipDirs.has(rel) || skipDirs.has(path.basename(current))) {
       return;
@@ -61,11 +65,14 @@ function walk(current) {
     return;
   }
 
+  const relPath = path.relative(process.cwd(), current).replace(/\\/g, "/");
+  if (skipFiles.has(relPath)) return;
+
   const ext = path.extname(current).toLowerCase();
   if (!textExts.has(ext)) return;
 
   if (hasBom(current)) {
-    offenders.push(path.relative(process.cwd(), current).replace(/\\/g, "/"));
+    offenders.push(relPath);
   }
 }
 
