@@ -747,6 +747,6 @@ pm test??pm run build??pm run check:zh-cn??pm run check:no-bom??pm run security:
   - DOWNLOAD_INBOX_SAMPLES：docs/HANDOFF/SAMPLES/DOWNLOAD_INBOX_SAMPLES_20251221.zip（RAW：ADVICE/INFO/DEBUG 報告 + ZIP 範例，檔名未改）
 - Workflow：加入 closeout 必產兩包 ZIP 的規則（Phase 2 區塊）；PROJECT_TODO 增加 closeout 通用條目。
 - 檢查：check:no-bom / check:utf8 / check:mojibake:staged / npm test / npm run build
-- commit: 10ef342
+- commit: 1016a9c
 
 - 備註：main 尚未有 INSTR-P2-0008，context pack 以現有檔案為準。
