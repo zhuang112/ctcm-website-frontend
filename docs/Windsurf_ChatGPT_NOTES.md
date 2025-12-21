@@ -775,5 +775,5 @@ pm run qa:intake-downloads??  - WORKFLOW 憓? Step 0嚗ownload Intake嚗�
     RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/PROJECT_TODO.md
   - docs/Windsurf_ChatGPT_NOTES.md
     RAW: https://raw.githubusercontent.com/zhuang112/ctcm-website-frontend/main/docs/Windsurf_ChatGPT_NOTES.md
-- commit: c60e66a
-- handoff: docs/TEMP/TEMP_20251221_P2-0008_c60e66a.zip
+- commit: 2280361
+- handoff: docs/TEMP/TEMP_20251221_P2-0008_2280361.zip
