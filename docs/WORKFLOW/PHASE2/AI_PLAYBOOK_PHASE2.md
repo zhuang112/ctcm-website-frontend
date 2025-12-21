@@ -1,4 +1,4 @@
-﻿# AI_PLAYBOOK_PHASE2
+# AI_PLAYBOOK_PHASE2
 
 > Phase 2 單一真相的 AI 協作規則（routing / budget / reports / handoff）。
 > Canonical repo/workdir：F:\\ctcm-website-frontend_phase2（僅此一份）；分支一律 phase2/<task>。
